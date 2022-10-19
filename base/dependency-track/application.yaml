@@ -1,0 +1,144 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dependency-track
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+  source:
+    chart: dependency-track
+    repoURL: https://evryfs.github.io/helm-charts
+    targetRevision: 1.4.1
+
+    helm:
+      values: |
+        frontend:
+          enabled: true
+          replicaCount: 1
+
+          # https://docs.dependencytrack.org/getting-started/configuration/
+          env:
+            - name: API_BASE_URL
+              value: ""
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 101
+
+          emptyDir:
+            sizeLimit: 8Gi
+
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+              
+          serviceAccount:
+            create: true
+
+          livenessProbe:
+            enabled: true
+            path: "/"
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            enabled: true
+            path: "/"
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+
+        apiserver:
+          enabled: true
+          replicaCount: 1
+          
+          persistentVolume:
+            accessModes:
+            - ReadWriteOnce
+            enabled: true
+            size: 8Gi
+
+          podSecurityContext:
+            fsGroup: 1000
+
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 1000
+
+          emptyDir:
+            sizeLimit: 8Gi
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 10000Mi
+              
+          serviceAccount:
+            create: true
+
+          livenessProbe:
+            enabled: true
+            path: "/api/version"
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            enabled: true
+            path: "/"
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+
+        ingress:
+          enabled: true
+          tls:
+            enabled: true
+            secretName: "dependency-track-tls"
+          annotations:
+            external-dns.alpha.kubernetes.io/hostname: dependency.cloud.feddema.dev
+            external-dns.alpha.kubernetes.io/ttl: "120"
+            ingress-class: nginx
+            ingress.kubernetes.io/rewrite-target: /
+            cert-manager.io/cluster-issuer: letsencrypt
+            nginx.ingress.kubernetes.io/proxy-body-size: 10m
+          host: dependency.cloud.feddema.dev
+
+        postgresql:
+          enabled: false
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dependency-track
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
