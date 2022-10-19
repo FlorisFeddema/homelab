@@ -15,7 +15,7 @@ spec:
 
     helm:
       valueFiles:
-      - base/external-dns/values/values.yaml
+      - values/values.yaml
 
   destination:
     server: https://kubernetes.default.svc
