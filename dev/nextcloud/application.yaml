@@ -1,0 +1,152 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+  source:
+    chart: nextcloud
+    repoURL: https://nextcloud.github.io/helm
+    targetRevision: 3.1.2
+
+    helm:
+      values: |
+        replicaCount: 1
+
+        phpClientHttpsFix:
+          enabled: true
+          protocol: https
+
+        ingress:
+          enabled: true
+          annotations: 
+            nginx.ingress.kubernetes.io/proxy-body-size: 4G
+            external-dns.alpha.kubernetes.io/hostname: drive.cloud.feddema.dev
+            external-dns.alpha.kubernetes.io/ttl: "120"
+            ingress-class: nginx
+            cert-manager.io/cluster-issuer: letsencrypt
+            nginx.ingress.kubernetes.io/server-snippet: |-
+              server_tokens off;
+              proxy_hide_header X-Powered-By;
+
+              rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+              rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+              rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json;
+              location = /.well-known/carddav {
+                return 301 $scheme://$host/remote.php/dav;
+              }
+              location = /.well-known/caldav {
+                return 301 $scheme://$host/remote.php/dav;
+              }
+              location = /robots.txt {
+                allow all;
+                log_not_found off;
+                access_log off;
+              }
+              location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+                deny all;
+              }
+              location ~ ^/(?:autotest|occ|issue|indie|db_|console) {
+                deny all;
+              }
+
+          tls:
+            - secretName: nextcloud-tls
+              hosts:
+                - drive.cloud.feddema.dev
+
+        nextcloud:
+          host: drive.cloud.feddema.dev
+
+          existingSecret:
+            enabled: true
+            secretName: nextcloud-credentials
+            usernameKey: username
+            passwordKey: password
+
+          mail:
+            enabled: false
+
+          resources:
+            limits:
+            cpu: 400m
+            memory: 256Mi
+            requests:
+            cpu: 100m
+            memory: 128Mi
+
+        internalDatabase:
+          enabled: false
+
+        externalDatabase:
+          enabled: true
+          type: postgresql
+          host: postgresql.postgresql.svc.cluster.local
+          database: nextcloud
+
+          existingSecret:
+            enabled: true
+            secretName: nextcloud-credentials
+            usernameKey: postgres-username
+            passwordKey: postgres-password
+
+        redis:
+          enabled: false
+
+        cronjob:
+          enabled: false
+
+        persistence:
+          enabled: true
+          accessMode: ReadWriteOnce
+          size: 16Gi
+
+        resources:
+          limits:
+            cpu: 400m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+
+        livenessProbe:
+          enabled: true
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          enabled: true
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+
+        rbac:
+          enabled: true
+          serviceaccount:
+            create: true
+            name: nextcloud-serviceaccount
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nextcloud
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
