@@ -13,8 +13,8 @@ spec:
     targetRevision: HEAD
     path: base/external-dns
 
-    directory:
-      recurse: false
+    # directory:
+    #   recurse: false
 
   destination:
     server: https://kubernetes.default.svc
