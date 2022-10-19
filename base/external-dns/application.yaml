@@ -12,11 +12,10 @@ spec:
     chart: external-dns
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: 6.5.5
-    path: base/external-dns
 
     helm:
       valueFiles:
-      - values/values.yaml
+      - base/external-dns/values/values.yaml
 
   destination:
     server: https://kubernetes.default.svc
