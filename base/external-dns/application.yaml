@@ -86,7 +86,7 @@ spec:
             memory: 50Mi
           requests:
             cpu: 10m
-            memory: 50Mi
+            memory: 30Mi
 
         livenessProbe:
           enabled: true
