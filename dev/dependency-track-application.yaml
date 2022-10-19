@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/dependency-track
+    path: dev/dependency-track
 
   destination:
     server: https://kubernetes.default.svc
