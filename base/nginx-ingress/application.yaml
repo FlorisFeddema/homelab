@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    chart: nginx-ingress
+    chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx
     targetRevision: 4.1.1
 
