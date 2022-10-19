@@ -1,0 +1,217 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+  source:
+    chart: nginx-ingress
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.1.1
+
+    helm:
+      values: |
+        controller:
+          name: controller
+          image:
+            pullPolicy: IfNotPresent
+            runAsUser: 101
+            allowPrivilegeEscalation: true
+
+          containerName: controller
+
+          containerPort:
+            http: 80
+            https: 443
+
+          dnsPolicy: ClusterFirst
+          reportNodeInternalIp: false
+          watchIngressWithoutClass: false
+          ingressClassByName: false
+          allowSnippetAnnotations: true
+          hostNetwork: false
+
+          hostPort:
+            enabled: true
+            http: 80
+            https: 443
+
+          ingressClassResource:
+            name: nginx
+            enabled: true
+            default: true
+            controllerValue: "k8s.io/ingress-nginx"
+
+          publishService:
+            enabled: true
+
+          kind: DaemonSet
+
+          minReadySeconds: 0
+
+          terminationGracePeriodSeconds: 300
+
+          startupProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: "/healthz"
+              port: 10254
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          healthCheckPath: "/healthz"
+
+          replicaCount: 1
+          minAvailable: 1
+          resources:
+            limits:
+              cpu: 100m
+              memory: 90Mi
+            requests:
+              cpu: 80m
+              memory: 90Mi
+
+          enableMimalloc: true
+
+          service:
+            enabled: true
+            appProtocol: true
+
+            enableHttp: true
+            enableHttps: true
+
+            ports:
+              http: 80
+              https: 443
+
+            targetPorts:
+              http: http
+              https: https
+
+            type: LoadBalancer
+
+            externalIPs: 
+              - 31.201.251.186
+
+            loadBalancerIP: "31.201.251.186"
+
+            external:
+              enabled: true
+
+            internal:
+              enabled: false
+
+          admissionWebhooks:
+            enabled: true
+
+          metrics:
+            enabled: false
+
+        revisionHistoryLimit: 10
+
+        defaultBackend:
+          enabled: true
+
+          name: defaultbackend
+          image:
+            registry: k8s.gcr.io
+            image: defaultbackend-amd64
+            tag: "1.5"
+            pullPolicy: IfNotPresent
+            runAsUser: 65534
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+
+          serviceAccount:
+            create: true
+            automountServiceAccountToken: true
+
+          port: 8080
+
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 6
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
+
+          replicaCount: 1
+
+          minAvailable: 1
+
+          resources: 
+            limits:
+              cpu: 10m
+              memory: 20Mi
+            requests:
+              cpu: 10m
+              memory: 20Mi
+
+          autoscaling:
+            enabled: false
+
+          service:
+            servicePort: 80
+            type: ClusterIP
+
+        rbac:
+          create: true
+          scope: false
+
+        podSecurityPolicy:
+          enabled: false
+
+        serviceAccount:
+          create: true
+          automountServiceAccountToken: true
+
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nginx-ingresss
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
