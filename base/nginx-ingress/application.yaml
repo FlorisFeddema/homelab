@@ -201,7 +201,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: nginx-ingresss
+    namespace: nginx-ingress
 
   syncPolicy:
     automated:
