@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: calico
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+  source:
+    chart: tigera-operator
+    repoURL: https://docs.projectcalico.org/charts
+    targetRevision: v3.23.1
+
+    helm:
+      values: |
+        installation:
+          enabled: true
+
+        apiServer:
+          enabled: true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: calico
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
