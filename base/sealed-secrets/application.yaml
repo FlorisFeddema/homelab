@@ -1,0 +1,81 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sealed-secrets
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: default
+  source:
+    chart: sealed-secrets
+    repoURL: https://bitnami-labs.github.io/sealed-secrets
+    targetRevision: 2.1.8
+
+    helm:
+      values: |
+        createController: true
+
+        secretName: "sealed-secrets-key"
+
+        fullnameOverride: "sealed-secrets-controller"
+
+        podSecurityContext:
+          enabled: true
+          fsGroup: 65534
+          
+        containerSecurityContext:
+          enabled: true
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1001
+          
+        service:
+          type: ClusterIP
+          port: 8080
+
+        ingress:
+          enabled: false
+          pathType: ImplementationSpecific
+          hostname: sealed-secrets.local
+          path: /v1/cert.pem
+          annotations:
+            kubernetes.io/ingress.class: nginx
+            cert-manager.io/cluster-issuer: letsencrypt
+
+          tls: []
+          
+        networkPolicy:
+          enabled: false
+
+        serviceAccount:
+          create: true
+          
+        rbac:
+          create: true
+          pspEnabled: false
+
+        metrics:
+          serviceMonitor:
+            enabled: false
+            
+          dashboards:
+            create: false 
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sealed-secrets
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
