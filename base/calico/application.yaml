@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: default
+  project: no-sync
   source:
     chart: tigera-operator
     repoURL: https://docs.projectcalico.org/charts
