@@ -100,7 +100,7 @@ spec:
           enableMimalloc: true
 
           service:
-            enabled: true
+            enabled: false
             appProtocol: true
 
             enableHttp: true
@@ -122,7 +122,7 @@ spec:
             loadBalancerIP: "31.201.251.186"
 
             external:
-              enabled: true
+              enabled: false
 
             internal:
               enabled: false
