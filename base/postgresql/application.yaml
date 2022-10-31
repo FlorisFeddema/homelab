@@ -96,58 +96,6 @@ spec:
 
             size: 8Gi
 
-        readReplicas:
-          replicaCount: 1
-
-          livenessProbe:
-            enabled: true
-            initialDelaySeconds: 30
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 6
-            successThreshold: 1
-
-          readinessProbe:
-            enabled: true
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 6
-            successThreshold: 1
-
-          startupProbe:
-            enabled: false
-
-          resources:
-            limits:
-              memory: 256Mi
-              cpu: 250m
-            requests:
-              memory: 128Mi
-              cpu: 50m
-
-          podSecurityContext:
-            enabled: true
-            fsGroup: 1001
-
-          containerSecurityContext:
-            enabled: true
-            runAsUser: 1001
-
-          service:
-            type: ClusterIP
-            ports:
-              postgresql: 5432
-
-          persistence:
-            enabled: true
-            mountPath: /bitnami/postgresql
-
-            accessModes:
-              - ReadWriteOnce
-
-            size: 8Gi
-
         networkPolicy:
           enabled: false
 
