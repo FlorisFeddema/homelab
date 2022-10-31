@@ -1,0 +1,88 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  source:
+    chart: tigera-operator
+    repoURL: https://metallb.github.io/metallb
+    targetRevision: 0.13.7
+
+    helm:
+      values: |
+        rbac:
+          create: true
+
+        prometheus:
+          podMonitor:
+            enabled: false
+
+          serviceMonitor:
+            enabled: false
+
+          prometheusRule:
+            enabled: false
+
+        controller:
+          enabled: true
+          logLevel: info
+
+          serviceAccount:
+            create: true
+
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 65534
+            fsGroup: 65534
+
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+
+          livenessProbe:
+            enabled: true
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            enabled: true
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+
+        speaker:
+          enabled: false
+
+        crds:
+          enabled: true
+          validationFailurePolicy: Fail
+
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: metallb
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
