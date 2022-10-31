@@ -19,18 +19,6 @@ spec:
           enabled: true
           replicaCount: 1
 
-          # https://docs.dependencytrack.org/getting-started/configuration/
-          env:
-            - name: API_BASE_URL
-              value: ""
-
-          securityContext:
-            allowPrivilegeEscalation: false
-            runAsUser: 101
-
-          emptyDir:
-            sizeLimit: 8Gi
-
           resources:
             requests:
               cpu: 50m
@@ -38,77 +26,40 @@ spec:
             limits:
               cpu: 100m
               memory: 128Mi
-              
-          serviceAccount:
-            create: true
-
-          livenessProbe:
-            enabled: true
-            path: "/"
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 3
-          readinessProbe:
-            enabled: true
-            path: "/"
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 3
 
         apiserver:
           enabled: true
-          replicaCount: 1
+          
+          env:
+            - name: ALPINE_DATABASE_MODE
+              value: "external"
+            - name: ALPINE_DATABASE_DRIVER
+              value: "org.postgresql.Driver"
+            - name: ALPINE_DATABASE_URL
+              value: jdbc:postgresql://postgresql.postgresql.svc.cluster.local/dependencytrack
+            - name: ALPINE_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: dependency-track-credentials
+                  key: postgresql-password
+            - name: ALPINE_DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: dependency-track-credentials
+                  key: postgresql-username
           
           persistentVolume:
-            accessModes:
-            - ReadWriteOnce
             enabled: true
             size: 8Gi
-
-          podSecurityContext:
-            fsGroup: 1000
-
-          securityContext:
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            runAsGroup: 1000
-
-          emptyDir:
-            sizeLimit: 8Gi
-
+            
           resources:
             requests:
-              cpu: 100m
+              cpu: 50m
               memory: 512Mi
             limits:
               cpu: 500m
               memory: 10000Mi
               
-          serviceAccount:
-            create: true
-
-          livenessProbe:
-            enabled: true
-            path: "/api/version"
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 3
-          readinessProbe:
-            enabled: true
-            path: "/"
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            timeoutSeconds: 2
-            successThreshold: 1
-            failureThreshold: 3
-
         ingress:
           enabled: true
           tls:
