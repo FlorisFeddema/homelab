@@ -1,0 +1,108 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: velero
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  source:
+    chart: velero
+    repoURL: https://vmware-tanzu.github.io/helm-charts
+    targetRevision: 2.30.1
+
+    helm:
+      values: |
+        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 300m
+            memory: 1024Mi
+
+        initContainers:
+          - name: velero-plugin-for-csi
+            image: velero/velero-plugin-for-csi:v0.3.0
+            volumeMounts:
+              - mountPath: /target
+                name: plugins
+          - name: velero-plugin-for-azure
+            image: velero/velero-plugin-for-microsoft-azure:v1.5.0
+            volumeMounts:
+              - mountPath: /target
+                name: plugins
+
+        metrics:
+          enabled: false
+
+        upgradeCRDs: true
+
+        cleanUpCRDs: false
+
+        configuration:
+          provider: azure
+          backupStorageLocation:
+            name: backup
+            bucket: backup #blob store name
+            default: true
+            config:
+             resourceGroup: kubernetes_backups
+             subscriptionId: d6b524dd-32ef-4b34-a63c-12a0d389e4bf
+             storageAccount: feddemadevbackups
+
+          volumeSnapshotLocation:
+            name: volumes
+            config:
+              apiTimeout: 2m0s
+              resourceGroup: kubernetes_backups
+              subscriptionId: d6b524dd-32ef-4b34-a63c-12a0d389e4bf
+
+          features: EnableCSI
+
+        rbac:
+          create: true
+          clusterAdministrator: true
+          clusterAdministratorName: cluster-admin
+
+        credentials:
+          useSecret: true
+          existingSecret: azure-storageaccount-credentials
+
+        backupsEnabled: true
+        snapshotsEnabled: true
+
+        deployRestic: false
+
+        logLevel: info
+
+        schedules:
+          weekly:
+            disabled: false
+            schedule: "0 4 * * 0" #At 04:00 on every Sunday
+            useOwnerReferencesInBackup: true
+            template:
+              ttl: "240h"
+              includedNamespaces:
+              - '*'
+              includedResources:
+              - '*'
+              includeClusterResources: true
+              snapshotVolumes: true
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: velero
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
