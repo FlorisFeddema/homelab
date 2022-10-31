@@ -28,13 +28,13 @@ spec:
         primary:
           name: primary
 
-            resources:
-              limits:
-                cpu: 250m
-                memory: 256Mi
-              requests:
-                cpu: 50m
-                memory: 128Mi
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
 
           persistence:
             enabled: true
