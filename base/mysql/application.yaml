@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  source:
+    chart: mysql
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 9.3.4
+
+    helm:
+      values: |
+        image:
+          tag: 8.0.30-debian-11-r15
+          debug: false
+
+        architecture: standalone
+
+        auth:
+          createDatabase: false
+          existingSecret: "mysql-credentials"
+
+        primary:
+          name: primary
+
+          persistence:
+            enabled: true
+            accessModes:
+              - ReadWriteOnce
+            size: 8Gi
+
+        serviceAccount:
+          create: true
+
+        metrics:
+          enabled: false
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mysql
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+
