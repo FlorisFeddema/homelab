@@ -44,7 +44,7 @@ spec:
 
         dryRun: false
         triggerLoopOnEvent: false
-        interval: "1m"
+        interval: "5m"
         logLevel: info
         logFormat: text
         policy: sync
