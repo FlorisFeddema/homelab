@@ -94,7 +94,7 @@ spec:
             accessModes:
               - ReadWriteOnce
 
-            size: 8Gi
+            size: 16Gi
 
         networkPolicy:
           enabled: false
