@@ -90,17 +90,17 @@ spec:
           replicaCount: 1
           minAvailable: 1
           resources:
-            # limits:
-            #   cpu: 100m
-            #   memory: 90Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
             requests:
-              cpu: 100m
-              memory: 90Mi
+              cpu: 30m
+              memory: 50Mi
 
           enableMimalloc: true
 
           service:
-            enabled: false
+            enabled: true
             appProtocol: true
 
             enableHttp: true
@@ -116,13 +116,8 @@ spec:
 
             type: LoadBalancer
 
-            externalIPs: 
-              - 31.201.251.186
-
-            loadBalancerIP: "31.201.251.186"
-
             external:
-              enabled: false
+              enabled: true
 
             internal:
               enabled: false
