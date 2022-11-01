@@ -68,6 +68,7 @@ spec:
 
         redis:
           enabled: true
+          architecture: standalone
 
         checkDeprecation: true
 
