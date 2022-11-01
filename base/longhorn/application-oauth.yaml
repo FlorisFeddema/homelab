@@ -19,16 +19,8 @@ spec:
           configFile: |-
             email_domains = [ "*" ]
             upstreams = [ "file:///dev/null" ]
-
-        alphaConfig:
-          enabled: false
-
-        authenticatedEmailsFile:
-          enabled: false
-
-        service:
-          type: ClusterIP
-          portNumber: 80
+            provider = "keycloak-oidc"
+            oidc_issuer_url = "https://auth.cloud.feddema.dev/auth/realms/master
 
         serviceAccount:
           enabled: true
