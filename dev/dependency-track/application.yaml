@@ -24,7 +24,6 @@ spec:
               cpu: 50m
               memory: 64Mi
             limits:
-              cpu: 100m
               memory: 128Mi
 
         apiserver:
@@ -57,7 +56,6 @@ spec:
               cpu: 50m
               memory: 512Mi
             limits:
-              cpu: 500m
               memory: 10000Mi
               
         ingress:
