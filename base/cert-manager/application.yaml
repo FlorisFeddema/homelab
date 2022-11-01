@@ -27,10 +27,6 @@ spec:
           podSecurityPolicy:
             enabled: false
 
-        image:
-          repository: quay.io/jetstack/cert-manager-controller
-          pullPolicy: IfNotPresent
-
         serviceAccount:
           create: true
           automountServiceAccountToken: true
@@ -61,24 +57,6 @@ spec:
             capabilities:
               drop:
               - ALL
-              
-          livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 60
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 1
-
-          readinessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            successThreshold: 1
-            timeoutSeconds: 1
-
-          image:
-            repository: quay.io/jetstack/cert-manager-webhook
-            pullPolicy: IfNotPresent
 
           serviceAccount:
             create: true
@@ -100,10 +78,6 @@ spec:
               drop:
               - ALL
 
-          image:
-            repository: quay.io/jetstack/cert-manager-cainjector
-            pullPolicy: IfNotPresent
-
           serviceAccount:
             create: true
             automountServiceAccountToken: true
@@ -121,10 +95,6 @@ spec:
             helm.sh/hook-weight: "1"
             helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
 
-          image:
-            repository: quay.io/jetstack/cert-manager-ctl
-            pullPolicy: IfNotPresent
-
           rbac:
             annotations:
               helm.sh/hook: post-install
@@ -140,7 +110,6 @@ spec:
               helm.sh/hook-weight: "-5"
               helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
 
-
   destination:
     server: https://kubernetes.default.svc
     namespace: cert-manager
@@ -155,4 +124,3 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
-
