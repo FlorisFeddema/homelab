@@ -65,11 +65,16 @@ spec:
 
         sessionStorage:
           type: redis
+          redis:
+            clientType: "standalone"
+            password: secret
 
         redis:
           enabled: true
           architecture: standalone
-          auth.enabled: false
+          auth:
+            enabled: true
+            password: secret
 
         checkDeprecation: true
 
