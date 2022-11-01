@@ -82,38 +82,13 @@ spec:
           
         resources:
           limits:
-            cpu: 50m
             memory: 50Mi
           requests:
             cpu: 10m
             memory: 30Mi
 
-        livenessProbe:
-          enabled: true
-          initialDelaySeconds: 10
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 2
-          successThreshold: 1
-        readinessProbe:
-          enabled: true
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 6
-          successThreshold: 1
-        startupProbe:
-          enabled: true
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 6
-          successThreshold: 1
-
         metrics:
           enabled: false
-          serviceMonitor:
-            enabled: false
 
   destination:
     server: https://kubernetes.default.svc
@@ -129,4 +104,3 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
-
