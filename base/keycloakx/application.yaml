@@ -43,8 +43,6 @@ spec:
 
         enableServiceLinks: true
 
-        podManagementPolicy: OrderedReady
-
         serviceAccount:
           create: true
           allowReadPods: false
@@ -58,35 +56,11 @@ spec:
           runAsUser: 1000
           runAsNonRoot: true
 
-        livenessProbe: |
-          httpGet:
-            path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}/'
-            port: http
-          initialDelaySeconds: 0
-          timeoutSeconds: 5
-
-        readinessProbe: |
-          httpGet:
-            path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}/realms/master'
-            port: http
-          initialDelaySeconds: 10
-          timeoutSeconds: 1
-
-        startupProbe: |
-          httpGet:
-            path: '{{ tpl .Values.http.relativePath $ | trimSuffix "/" }}/'
-            port: http
-          initialDelaySeconds: 15
-          timeoutSeconds: 1
-          failureThreshold: 60
-          periodSeconds: 5
-
         resources:
           requests:
             cpu: 50m
             memory: 256Mi
           limits:
-            cpu: 300m
             memory: 1024Mi
 
         ingress:
@@ -126,7 +100,6 @@ spec:
               cpu: 20m
               memory: 32Mi
             limits:
-              cpu: 20m
               memory: 32Mi
 
         database:
