@@ -83,11 +83,12 @@ spec:
         ingress:
           enabled: true
           host: longhorn.cloud.feddema.dev
-          tls: true
+          tls: false
           tlsSecret: longhorn-tls
           annotations:
             nginx.ingress.kubernetes.io/auth-url: "https://longhorn.cloud.feddema.dev/oauth2/auth"
             nginx.ingress.kubernetes.io/auth-signin: "https://longhorn.cloud.feddema.dev/oauth2/start?rd=$escaped_request_uri"
+
 
         enablePSP: false
 
@@ -105,3 +106,4 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
+
