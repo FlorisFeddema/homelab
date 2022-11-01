@@ -64,10 +64,10 @@ spec:
         httpScheme: http
 
         sessionStorage:
-          type: cookie
+          type: redis
 
         redis:
-          enabled: false
+          enabled: true
 
         checkDeprecation: true
 
