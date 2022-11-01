@@ -21,6 +21,7 @@ spec:
             upstreams = [ "file:///dev/null" ]
             provider = "keycloak-oidc"
             oidc_issuer_url = "https://auth.cloud.feddema.dev/realms/master"
+            redirect_url=https://longhorn.cloud.feddema.dev/oauth2/callback
 
         serviceAccount:
           enabled: true
