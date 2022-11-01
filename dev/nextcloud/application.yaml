@@ -27,7 +27,6 @@ spec:
             nginx.ingress.kubernetes.io/proxy-body-size: 4G
             external-dns.alpha.kubernetes.io/hostname: drive.cloud.feddema.dev
             external-dns.alpha.kubernetes.io/ttl: "120"
-            ingress-class: nginx
             cert-manager.io/cluster-issuer: letsencrypt
             nginx.ingress.kubernetes.io/server-snippet: |-
               server_tokens off;

@@ -88,7 +88,6 @@ spec:
           annotations:
             external-dns.alpha.kubernetes.io/hostname: longhorn.cloud.feddema.dev
             external-dns.alpha.kubernetes.io/ttl: "120"
-            ingress-class: nginx
             ingress.kubernetes.io/rewrite-target: /
             cert-manager.io/cluster-issuer: letsencrypt
 
