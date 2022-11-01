@@ -59,10 +59,10 @@ spec:
           minAvailable: 1
           resources:
             limits:
-              memory: 100Mi
+              memory: 256Mi
             requests:
               cpu: 30m
-              memory: 50Mi
+              memory: 128Mi
 
           enableMimalloc: true
 
