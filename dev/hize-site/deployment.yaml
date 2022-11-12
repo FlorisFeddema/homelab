@@ -23,9 +23,9 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
+#          securityContext:
+#            allowPrivilegeEscalation: false
+#            readOnlyRootFilesystem: true
+#            runAsNonRoot: true
+#            runAsUser: 1000
       serviceAccountName: hize-site
