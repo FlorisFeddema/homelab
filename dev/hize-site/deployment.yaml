@@ -27,5 +27,5 @@ spec:
             allowPrivilegeEscalation: false
 #            readOnlyRootFilesystem: true
             runAsNonRoot: true
-            runAsUser: 1000
+#            runAsUser: 1000
       serviceAccountName: hize-site
