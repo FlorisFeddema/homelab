@@ -14,7 +14,213 @@ spec:
     targetRevision: 15.17.0
 
     helm:
-      values: |
+      values: |  
+        alertmanager:
+          enabled: true
+          useClusterRole: true
+
+          baseURL: "https://alert.cloud.feddema.dev"
+
+          ingress:
+            enabled: true
+
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: alert.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              ingress.kubernetes.io/rewrite-target: /
+              cert-manager.io/cluster-issuer: letsencrypt
+
+            hosts:
+              - alert.cloud.feddema.dev
+
+            tls:
+              - secretName: alert-tls
+                hosts:
+                  - alert.cloud.feddema.dev
+
+          persistentVolume:
+            enabled: true
+            size: 8Gi
+
+          replicaCount: 1
+
+          statefulSet:
+            enabled: false
+
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
+
+        kubeStateMetrics:
+          enabled: true
+
+        kube-state-metrics:
+          prometheusScrape: true
+          replicas: 1
+
+          # List of additional cli arguments to configure kube-state-metrics
+          # for example: --enable-gzip-encoding, --log-file, etc.
+          # all the possible args can be found here: https://github.com/kubernetes/kube-state-metrics/blob/master/docs/cli-arguments.md
+          extraArgs: [ ]
+
+          hostNetwork: false
+
+          rbac:
+            create: true
+
+          serviceAccount:
+            create: true
+
+          prometheus:
+            monitor:
+              enabled: false
+              additionalLabels: { }
+              namespace: ""
+              jobLabel: ""
+              interval: ""
+              ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
+              ##
+              sampleLimit: 0
+
+              ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
+              ##
+              targetLimit: 0
+
+              ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+              ##
+              labelLimit: 0
+
+              ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+              ##
+              labelNameLengthLimit: 0
+
+              ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
+              ##
+              labelValueLengthLimit: 0
+              scrapeTimeout: ""
+              proxyUrl: ""
+              selectorOverride: { }
+              honorLabels: false
+              metricRelabelings: [ ]
+              relabelings: [ ]
+              scheme: ""
+              tlsConfig: { }
+
+          collectors:
+            - certificatesigningrequests
+            - configmaps
+            - cronjobs
+            - daemonsets
+            - deployments
+            - endpoints
+            - horizontalpodautoscalers
+            - ingresses
+            - jobs
+            - leases
+            - limitranges
+            - mutatingwebhookconfigurations
+            - namespaces
+            - networkpolicies
+            - nodes
+            - persistentvolumeclaims
+            - persistentvolumes
+            - poddisruptionbudgets
+            - pods
+            - replicasets
+            - replicationcontrollers
+            - resourcequotas
+            - secrets
+            - services
+            - statefulsets
+            - storageclasses
+            - validatingwebhookconfigurations
+            - volumeattachments
+
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi
+
+          # Enable self metrics configuration for service and Service Monitor
+          # Default values for telemetry configuration can be overridden
+          # If you set telemetryNodePort, you must also set service.type to NodePort
+          selfMonitor:
+            enabled: false
+            # telemetryHost: 0.0.0.0
+            # telemetryPort: 8081
+            # telemetryNodePort: 0
+
+        nodeExporter:
+          enabled: true
+          hostNetwork: true
+          hostPID: true
+          hostRootfs: true
+
+          resources:
+            limits:
+              memory: 50Mi
+            requests:
+              cpu: 50m
+              memory: 30Mi
+
+          service:
+            annotations:
+              prometheus.io/scrape: "true"
+
+        server:
+          enabled: true
+          enableServiceLinks: true
+
+          baseURL: "https://prometheus.cloud.feddema.dev"
+
+          configPath: /etc/config/prometheus.yml
+
+          global:
+            scrape_interval: 1m
+            scrape_timeout: 10s
+            evaluation_interval: 1m
+
+          ingress:
+            enabled: true
+
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: prometheus.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              ingress.kubernetes.io/rewrite-target: /
+              cert-manager.io/cluster-issuer: letsencrypt
+
+            hosts:
+              - prometheus.cloud.feddema.dev
+
+            tls:
+              - secretName: prometheus-tls
+                hosts:
+                  - prometheus.cloud.feddema.dev
+
+          persistentVolume:
+            enabled: true
+            mountPath: /data
+
+            size: 100Gi
+
+          replicaCount: 1
+
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+
+          retention: "15d"
+
+        pushgateway:
+          enabled: false
 
   destination:
     server: https://kubernetes.default.svc
