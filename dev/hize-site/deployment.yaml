@@ -22,13 +22,13 @@ spec:
           name: hize-site
           livenessProbe:
             httpGet:
-              path: /index
+              path: /
               port: 80
             failureThreshold: 2
-            periodSeconds: 10
+            periodSeconds: 30
           readinessProbe:
             httpGet:
-              path: /index
+              path: /
               port: 80
             failureThreshold: 2
             initialDelaySeconds: 5
