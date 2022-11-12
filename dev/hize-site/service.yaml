@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hize-site
+  namespace: hize-site
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+  selector:
+    app.kubernetes.io/instance: hize-site
+    app.kubernetes.io/name: hize-site
+  type: ClusterIP
