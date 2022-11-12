@@ -20,6 +20,19 @@ spec:
       containers:
         - image: 'ghcr.io/hize-bv/hize_website:1be38cc4acad4cf3192eaac4daab0fec95ab0278'
           name: hize-site
+          livenessProbe:
+            httpGet:
+              path: /index
+              port: 80
+            failureThreshold: 2
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /index
+              port: 80
+            failureThreshold: 2
+            initialDelaySeconds: 5
+            periodSeconds: 10
           ports:
             - containerPort: 80
               protocol: TCP
