@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/hize-site
+    path: dev/hize-site
 
   destination:
     server: https://kubernetes.default.svc
