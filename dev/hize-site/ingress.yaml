@@ -16,7 +16,6 @@ spec:
               service:
                 name: hize-site
                 port:
-                  name: http
                   number: 80
             path: /
             pathType: ImplementationSpecific
