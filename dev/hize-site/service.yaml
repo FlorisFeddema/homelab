@@ -7,7 +7,6 @@ spec:
   ports:
     - name: http
       port: 80
-      protocol: TCP
       targetPort: http
   selector:
     app.kubernetes.io/instance: hize-site
