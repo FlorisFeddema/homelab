@@ -37,6 +37,7 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
+              name: http
           resources:
             requests:
               memory: 20Mi
