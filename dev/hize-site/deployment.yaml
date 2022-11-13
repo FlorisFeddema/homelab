@@ -18,8 +18,9 @@ spec:
       imagePullSecrets:
         - name: github-registry-credentials
       containers:
-        - image: 'ghcr.io/hize-bv/hize_website:1be38cc4acad4cf3192eaac4daab0fec95ab0278'
+        - image: 'ghcr.io/hize-bv/hize_website:5e29ecc1459864196e35c9f00bafabb394152614'
           name: hize-site
+          imagePullPolicy: Always
           livenessProbe:
             httpGet:
               path: /
