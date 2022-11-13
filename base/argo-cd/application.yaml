@@ -212,7 +212,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: calico
+    namespace: argocd
 
   syncPolicy:
     automated:
