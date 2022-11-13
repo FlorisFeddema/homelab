@@ -16,7 +16,7 @@ spec:
               service:
                 name: hize-site
                 port:
-                  number: 80
+                  name: http
             path: /
             pathType: ImplementationSpecific
   tls:
