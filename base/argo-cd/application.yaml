@@ -1,0 +1,227 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-cd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  source:
+    chart: argo-cd
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 5.13.8
+
+    helm:
+      values: |
+        createAggregateRoles: false
+        
+        crds:
+          install: true
+          keep: true
+        
+        global:
+          logging:
+            format: text
+            level: info
+        
+        configs:
+          secret:
+            createSecret: false
+        
+          params:
+            controller.status.processors: 20
+            controller.operation.processors: 10
+            controller.self.heal.timeout.seconds: 5
+            controller.repo.server.timeout.seconds: 60
+            reposerver.parallelism.limit: 0
+            server.insecure: true
+        
+        controller:
+          replicas: 1
+        
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+        
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+        
+          serviceAccount:
+            create: true
+            name: argocd-application-controller
+            automountServiceAccountToken: true
+        
+          metrics:
+            enabled: false
+        
+          clusterAdminAccess:
+            enabled: true
+        
+          clusterRoleRules:
+            enabled: false
+        
+        dex:
+          enabled: false
+        
+        redis:
+          enabled: true
+        
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 80m
+              memory: 64Mi
+        
+        redis-ha:
+          enabled: false
+        
+        server:
+          replicas: 1
+        
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+        
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+        
+          metrics:
+            enabled: false
+        
+          serviceAccount:
+            create: true
+            name: argocd-server
+            automountServiceAccountToken: true
+        
+          ingress:
+            enabled: true
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: argocd.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              cert-manager.io/cluster-issuer: letsencrypt
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+            hosts:
+              - argocd.cloud.feddema.dev
+            paths:
+              - /
+            pathType: Prefix
+            tls:
+              - secretName: argocd-tls
+                hosts:
+                  - argocd.cloud.feddema.dev
+        
+          ingressGrpc:
+            enabled: true
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: grpc.argocd.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              cert-manager.io/cluster-issuer: letsencrypt
+              ingress-class: nginx
+              nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+            hosts:
+              - grpc.argocd.cloud.feddema.dev
+        
+            paths:
+              - /
+            pathType: Prefix
+            tls:
+              - secretName: argocd-grpc-tls
+                hosts:
+                  - grpc.argocd.cloud.feddema.dev
+        
+          configEnabled: false
+        
+          rbacConfigCreate: false
+        
+          clusterAdminAccess:
+            enabled: true
+        
+          extensions:
+            enabled: false
+        
+        repoServer:
+          name: repo-server
+          replicas: 1
+        
+          readinessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+        
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 128Mi
+        
+          metrics:
+            enabled: false
+        
+          clusterAdminAccess:
+            enabled: false
+        
+          serviceAccount:
+            create: true
+            automountServiceAccountToken: true
+        
+        applicationSet:
+          enabled: false
+        
+        notifications:
+          enabled: false
+
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: calico
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
+

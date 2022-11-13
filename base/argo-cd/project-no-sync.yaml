@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: no-sync
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Autosync is disabled
+
+  sourceRepos:
+    - '*'
+
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  destinations:
+    - namespace: '*'
+      server: '*'
+
+  syncWindows:
+    - kind: deny
+      schedule: '0 0 * * *' # We do not want autosync, but do not have a way to describe this
+      duration: 24h
+      manualSync: true
+      applications:
+        - '*'
+      namespaces:
+        - '*'
+      clusters:
+        - '*'
