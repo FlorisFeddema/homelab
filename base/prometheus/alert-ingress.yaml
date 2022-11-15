@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oauth-alert-oauth2-proxy
+  namespace: prometheus
+spec:
+  rules:
+    - host: alert.cloud.feddema.dev
+      http:
+        paths:
+          - backend:
+              service:
+                name: oauth-prometheus-oauth2-proxy
+                port:
+                  number: 80
+            path: /oauth2
+            pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - alert.cloud.feddema.dev
+      secretName: alert-tls
