@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: always-sync
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Autosync is always enabled
+
+  sourceRepos:
+    - '*'
+
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+
+  destinations:
+    - namespace: '*'
+      server: '*'
+
+  syncWindows:
+    - kind: allow
+      schedule: '0 0 * * *'
+      duration: 24h
+      manualSync: true
+      applications:
+        - '*'
+      namespaces:
+        - '*'
+      clusters:
+        - '*'
