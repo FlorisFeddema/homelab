@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: no-sync
+  project: always-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
