@@ -191,6 +191,9 @@ spec:
             annotations:
               nginx.ingress.kubernetes.io/auth-url: "https://prometheus.cloud.feddema.dev/oauth2/auth"
               nginx.ingress.kubernetes.io/auth-signin: "https://prometheus.cloud.feddema.dev/oauth2/start?rd=$escaped_request_uri"
+              external-dns.alpha.kubernetes.io/hostname: prometheus.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              cert-manager.io/cluster-issuer: letsencrypt
 
             hosts:
               - prometheus.cloud.feddema.dev
