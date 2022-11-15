@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/Hize-bv/gitops.git
     targetRevision: HEAD
-    path: ''
+    path: '/'
 
   destination:
     server: https://kubernetes.default.svc
