@@ -25,8 +25,8 @@ spec:
             enabled: true
 
             annotations:
-              nginx.ingress.kubernetes.io/auth-url: "https://alert.cloud.feddema.dev/oauth2/auth"
-              nginx.ingress.kubernetes.io/auth-signin: "https://alert.cloud.feddema.dev/oauth2/start?rd=$escaped_request_uri"
+              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
               external-dns.alpha.kubernetes.io/hostname: alert.cloud.feddema.dev
               external-dns.alpha.kubernetes.io/ttl: "120"
               ingress.kubernetes.io/rewrite-target: /

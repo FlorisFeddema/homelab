@@ -30,10 +30,14 @@ spec:
           path: /oauth2
           hosts:
             - prometheus.cloud.feddema.dev
+            - alert.cloud.feddema.dev
           tls:
             - secretName: prometheus-tls
               hosts:
                 - prometheus.cloud.feddema.dev
+            - secretName: alert-tls
+              hosts:
+                - alert.cloud.feddema.dev
 
         resources:
           limits:
