@@ -29,11 +29,6 @@ spec:
         ingress:
           enabled: true
           path: /oauth2
-          annotations:
-            external-dns.alpha.kubernetes.io/hostname: longhorn.cloud.feddema.dev
-            external-dns.alpha.kubernetes.io/ttl: "120"
-            ingress.kubernetes.io/rewrite-target: /
-            cert-manager.io/cluster-issuer: letsencrypt
           hosts:
             - longhorn.cloud.feddema.dev
           tls:
