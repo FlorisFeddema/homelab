@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hzie-gitops
+  name: hize-gitops
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/Hize-bv/gitops.git
     targetRevision: HEAD
-    path: '/'
+    path: 'kubernetes'
 
   destination:
     server: https://kubernetes.default.svc
