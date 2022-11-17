@@ -33,6 +33,12 @@ To create a new encrypted secret run the following command:
 kubeseal --controller-namespace sealed-secrets -o yaml <INPUT.yaml >OUTPUT.yaml
 ```
 
+To encrypt a single value run the following command:
+
+```shell
+echo -n <VALUE> | kubeseal --controller-namespace sealed-secrets --raw --namespace <NAMESPACE> --name <NAME>
+```
+
 ### PostgreSQL
 
 PostgreSQL can be assed via port 5432 on the following DNS name from withing the cluster:
