@@ -22,7 +22,7 @@ spec:
       selfHeal: true
       allowEmpty: false
     retry:
-      limit: 3
+      limit: 5
       backoff:
         duration: 5s
         factor: 5
