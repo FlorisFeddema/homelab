@@ -8,15 +8,15 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   url: https://argocd.cloud.feddema.dev
-
+  statusbadge.enabled: "true"
+  
   users.anonymous.enabled: "false"
   users.session.duration: "24h"
-  passwordPattern: "^.{8,32}$"
 
   kustomize.enabled: "true"
   jsonnet.enabled: "true"
-
   helm.enabled: "true"
+  
   helm.valuesFileSchemes: http, https
 
   admin.enabled: "false"
@@ -27,8 +27,9 @@ data:
 
   server.rbac.log.enforce.enable: "false"
 
-  exec.enabled: "false"
-
+  exec.enabled: "true"
+  exec.shells: "bash,sh,powershell,cmd"
+  
   oidc.tls.insecure.skip.verify: "false"
   oidc.config: |
     name: Keycloak
