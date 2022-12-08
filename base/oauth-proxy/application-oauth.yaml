@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
     chart: oauth2-proxy
     repoURL: https://oauth2-proxy.github.io/manifests

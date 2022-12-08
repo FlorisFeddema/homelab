@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
     chart: velero
     repoURL: https://vmware-tanzu.github.io/helm-charts

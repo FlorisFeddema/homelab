@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
     chart: external-dns
     repoURL: https://charts.bitnami.com/bitnami
