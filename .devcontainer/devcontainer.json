@@ -17,7 +17,7 @@
     "ghcr.io/rio/features/k9s:1": {}
   },
   "hostRequirements": {
-    "cpus": 2,
+    "cpus": 4,
     "memory": "8gb",
     "storage": "16gb" 
   }
