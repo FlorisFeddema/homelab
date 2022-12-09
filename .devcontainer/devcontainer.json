@@ -21,5 +21,5 @@
     "memory": "8gb",
     "storage": "16gb" 
   },
-  "onCreateCommand": "mkdir ${HOME}/.kube && echo $KUBECONFIG > ${HOME}/.kube/config"
+  "postStartCommand": "mkdir ${HOME}/.kube && echo $KUBECONFIG > ${HOME}/.kube/config"
 }
