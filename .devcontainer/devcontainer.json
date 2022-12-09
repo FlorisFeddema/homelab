@@ -11,6 +11,6 @@
     "ghcr.io/devcontainers/features/powershell:1": {},
     "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
     "ghcr.io/eitsupi/devcontainer-features/jq-likes:0": {},
-"ghcr.io/rio/features/k9s:1": {},
+    "ghcr.io/rio/features/k9s:1": {}
   }
 }
