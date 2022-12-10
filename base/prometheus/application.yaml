@@ -22,7 +22,7 @@ spec:
           baseURL: "https://alert.cloud.feddema.dev"
 
           ingress:
-            enabled: true
+            enabled: false
 
             annotations:
               nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
@@ -56,7 +56,7 @@ spec:
               memory: 32Mi
 
         kube-state-metrics:
-          enabled: true
+          enabled: false
           prometheusScrape: true
           replicas: 1
 
@@ -130,7 +130,7 @@ spec:
             enabled: false
 
         prometheus-node-exporter:
-          enabled: true
+          enabled: false
           hostNetwork: true
           hostPID: true
           hostRootFsMount:
@@ -143,9 +143,12 @@ spec:
             requests:
               cpu: 50m
               memory: 30Mi
-
+        
+        configmapReload:
+          prometheus:
+            enabled: false
+        
         server:
-          enabled: true
           enableServiceLinks: true
 
           baseURL: "https://prometheus.cloud.feddema.dev"
@@ -178,7 +181,6 @@ spec:
           persistentVolume:
             enabled: true
             mountPath: /data
-
             size: 100Gi
 
           replicaCount: 1
