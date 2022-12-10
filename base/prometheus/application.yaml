@@ -11,7 +11,7 @@ spec:
   source:
     chart: prometheus
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 15.17.0
+    targetRevision: 19.0.1
 
     helm:
       values: |  
@@ -56,17 +56,10 @@ spec:
               cpu: 10m
               memory: 32Mi
 
-        kubeStateMetrics:
-          enabled: true
-
         kube-state-metrics:
+          enabled: true
           prometheusScrape: true
           replicas: 1
-
-          # List of additional cli arguments to configure kube-state-metrics
-          # for example: --enable-gzip-encoding, --log-file, etc.
-          # all the possible args can be found here: https://github.com/kubernetes/kube-state-metrics/blob/master/docs/cli-arguments.md
-          extraArgs: [ ]
 
           hostNetwork: false
 
@@ -157,7 +150,7 @@ spec:
             # telemetryPort: 8081
             # telemetryNodePort: 0
 
-        nodeExporter:
+        prometheus-node-exporter:
           enabled: true
           hostNetwork: true
           hostPID: true
