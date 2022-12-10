@@ -42,14 +42,11 @@ spec:
                 hosts:
                   - alert.cloud.feddema.dev
 
-          persistentVolume:
+          persistence:
             enabled: true
             size: 8Gi
 
           replicaCount: 1
-
-          statefulSet:
-            enabled: false
 
           resources:
             limits:
@@ -78,24 +75,10 @@ spec:
               namespace: ""
               jobLabel: ""
               interval: ""
-              ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
-              ##
               sampleLimit: 0
-
-              ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
-              ##
               targetLimit: 0
-
-              ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-              ##
               labelLimit: 0
-
-              ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-              ##
               labelNameLengthLimit: 0
-
-              ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-              ##
               labelValueLengthLimit: 0
               scrapeTimeout: ""
               proxyUrl: ""
@@ -143,31 +126,23 @@ spec:
               cpu: 50m
               memory: 32Mi
 
-          # Enable self metrics configuration for service and Service Monitor
-          # Default values for telemetry configuration can be overridden
-          # If you set telemetryNodePort, you must also set service.type to NodePort
           selfMonitor:
             enabled: false
-            # telemetryHost: 0.0.0.0
-            # telemetryPort: 8081
-            # telemetryNodePort: 0
 
         prometheus-node-exporter:
           enabled: true
           hostNetwork: true
           hostPID: true
-          hostRootfs: true
-
+          hostRootFsMount:
+            enabled: true
+            mountPropagation: HostToContainer
+        
           resources:
             limits:
               memory: 50Mi
             requests:
               cpu: 50m
               memory: 30Mi
-
-          service:
-            annotations:
-              prometheus.io/scrape: "true"
 
         server:
           enabled: true
@@ -217,7 +192,7 @@ spec:
 
           retention: "15d"
 
-        pushgateway:
+        prometheus-pushgateway:
           enabled: false
 
   destination:
