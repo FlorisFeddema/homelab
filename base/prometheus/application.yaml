@@ -34,7 +34,9 @@ spec:
 
             hosts:
               - alert.cloud.feddema.dev
-
+                paths:
+                  - path: /
+                    pathType: ImplementationSpecific
             tls:
               - secretName: alert-tls
                 hosts:
