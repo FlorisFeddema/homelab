@@ -16,13 +16,13 @@ spec:
     helm:
       values: |  
         alertmanager:
-          enabled: true
+          enabled: false
           useClusterRole: true
 
           baseURL: "https://alert.cloud.feddema.dev"
 
           ingress:
-            enabled: false
+            enabled: true
 
             annotations:
               nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
