@@ -131,7 +131,7 @@ spec:
             resources:
                requests:
                  memory: 50Mi
-                  cpu: 30m
+                 cpu: 30m
         
             securityContext:
               runAsGroup: 2000
