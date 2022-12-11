@@ -50,7 +50,6 @@ spec:
           rbac:
             create: true
         
-        
         alertmanager:
           enabled: true
           createAggregateClusterRoles: true
@@ -128,14 +127,6 @@ spec:
             retention: 120h
         
             externalUrl: "https://alert.cloud.feddema.dev"
-        
-            resources:
-              resources:
-                limits:
-                  memory: 64Mi
-                requests:
-                  cpu: 10m
-                  memory: 32Mi
         
             securityContext:
               runAsGroup: 2000
