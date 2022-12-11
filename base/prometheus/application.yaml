@@ -9,9 +9,9 @@ metadata:
 spec:
   project: no-sync
   source:
-    chart: prometheus
+    chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 19.0.1
+    targetRevision: 42.3.0
 
     helm:
       values: |
@@ -97,7 +97,7 @@ spec:
               - '/etc/alertmanager/config/*.tmpl'
         
           ingress:
-            enabled: false
+            enabled: true
             annotations:
               nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
               nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
