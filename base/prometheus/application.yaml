@@ -321,10 +321,10 @@ spec:
         
           resources:
             limits:
-              memory: 64Mi
+              memory: 128Mi
             requests:
               cpu: 30m
-              memory: 32Mi
+              memory: 64Mi
         
           prometheusConfigReloader:
             resources:
@@ -387,7 +387,6 @@ spec:
                       storage: 100Gi
         
         cleanPrometheusOperatorObjectNames: true
-
 
   destination:
     server: https://kubernetes.default.svc
