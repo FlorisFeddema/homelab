@@ -129,9 +129,11 @@ spec:
             externalUrl: "https://alert.cloud.feddema.dev"
         
             resources:
-               requests:
-                 memory: 50Mi
-                 cpu: 30m
+              limits:
+                memory: 64Mi
+              requests:
+                cpu: 10m
+                memory: 32Mi
         
             securityContext:
               runAsGroup: 2000
