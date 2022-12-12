@@ -52,10 +52,93 @@ spec:
               memory: 32Mi
         
         kube-state-metrics:
-          enabled: false
+          enabled: true
+          prometheusScrape: true
+          replicas: 1
+
+          hostNetwork: false
+
+          rbac:
+            create: true
+
+          serviceAccount:
+            create: true
+
+          prometheus:
+            monitor:
+              enabled: false
+              additionalLabels: { }
+              namespace: ""
+              jobLabel: ""
+              interval: ""
+              sampleLimit: 0
+              targetLimit: 0
+              labelLimit: 0
+              labelNameLengthLimit: 0
+              labelValueLengthLimit: 0
+              scrapeTimeout: ""
+              proxyUrl: ""
+              selectorOverride: { }
+              honorLabels: false
+              metricRelabelings: [ ]
+              relabelings: [ ]
+              scheme: ""
+              tlsConfig: { }
+
+          collectors:
+            - certificatesigningrequests
+            - configmaps
+            - cronjobs
+            - daemonsets
+            - deployments
+            - endpoints
+            - horizontalpodautoscalers
+            - ingresses
+            - jobs
+            - leases
+            - limitranges
+            - mutatingwebhookconfigurations
+            - namespaces
+            - networkpolicies
+            - nodes
+            - persistentvolumeclaims
+            - persistentvolumes
+            - poddisruptionbudgets
+            - pods
+            - replicasets
+            - replicationcontrollers
+            - resourcequotas
+            - secrets
+            - services
+            - statefulsets
+            - storageclasses
+            - validatingwebhookconfigurations
+            - volumeattachments
+
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi
+
+          selfMonitor:
+            enabled: false
         
         prometheus-node-exporter:
-          enabled: false
+          enabled: true
+          hostNetwork: true
+          hostPID: true
+          hostRootFsMount:
+            enabled: true
+            mountPropagation: HostToContainer
+        
+          resources:
+            limits:
+              memory: 50Mi
+            requests:
+              cpu: 50m
+              memory: 30Mi
         
         configmapReload:
           prometheus:
@@ -100,7 +183,7 @@ spec:
 
           resources:
             limits:
-              memory: 512Mi
+              memory: 768Mi
             requests:
               cpu: 100m
               memory: 512Mi
