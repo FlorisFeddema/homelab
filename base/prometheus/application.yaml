@@ -24,21 +24,19 @@ spec:
           ingress:
             enabled: true
             annotations:
-              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-              external-dns.alpha.kubernetes.io/hostname: alert.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/hostname: alertmanager.cloud.feddema.dev
               external-dns.alpha.kubernetes.io/ttl: "120"
               ingress.kubernetes.io/rewrite-target: /
               cert-manager.io/cluster-issuer: letsencrypt
             hosts:
-              - host: alert.cloud.feddema.dev
+              - host: alertmanager.cloud.feddema.dev
                 paths:
                   - path: /
                     pathType: ImplementationSpecific
             tls:
-              - secretName: alert-tls
+              - secretName: alertmanager-aaaaa-tls
                 hosts:
-                  - alert.cloud.feddema.dev
+                  - alertmanager.cloud.feddema.dev
         
           persistence:
             enabled: true
