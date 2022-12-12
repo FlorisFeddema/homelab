@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   source:
     chart: prometheus
     repoURL: https://prometheus-community.github.io/helm-charts
