@@ -13,7 +13,7 @@
     "ghcr.io/devcontainers/features/common-utils:1": {},
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
-    "ghcr.io/eitsupi/devcontainer-features/jq-likes:0": {},
+    "ghcr.io/eitsupi/devcontainer-features/jq-likes:1": {},
     "ghcr.io/rio/features/k9s:1": {}
   },
   "hostRequirements": {
@@ -21,5 +21,5 @@
     "memory": "8gb",
     "storage": "16gb" 
   },
-  "postStartCommand": "mkdir ${HOME}/.kube && echo $KUBE_CONFIG > ${HOME}/.kube/config"
+  "postStartCommand": "mkdir ${HOME}/.kube && echo $KUBE_CONFIG | base64 --decode > ${HOME}/.kube/config"
 }
