@@ -43,7 +43,7 @@ spec:
                   - alert.cloud.feddema.dev
 
           persistence:
-            enabled: true
+            enabled: false
             size: 8Gi
 
           replicaCount: 1
