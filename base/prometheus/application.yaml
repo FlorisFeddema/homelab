@@ -7,279 +7,136 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
-    chart: kube-prometheus-stack
+    chart: prometheus
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 42.3.0
+    targetRevision: 19.0.1
 
     helm:
       values: |
-        defaultRules:
-          create: true
-          rules:
-            alertmanager: true
-            etcd: true
-            configReloaders: true
-            general: true
-            k8s: true
-            kubeApiserverAvailability: true
-            kubeApiserverBurnrate: true
-            kubeApiserverHistogram: true
-            kubeApiserverSlos: true
-            kubeControllerManager: true
-            kubelet: true
-            kubeProxy: true
-            kubePrometheusGeneral: true
-            kubePrometheusNodeRecording: true
-            kubernetesApps: true
-            kubernetesResources: true
-            kubernetesStorage: true
-            kubernetesSystem: true
-            kubeSchedulerAlerting: true
-            kubeSchedulerRecording: true
-            kubeStateMetrics: true
-            network: true
-            node: true
-            nodeExporterAlerting: true
-            nodeExporterRecording: true
-            prometheus: true
-            prometheusOperator: true
-        
-        global:
-          rbac:
-            create: true
-        
         alertmanager:
-          enabled: true
-          createAggregateClusterRoles: true
-          serviceAccount:
-            create: true
-        
-          config:
-            global:
-              resolve_timeout: 5m
-            inhibit_rules:
-              - source_matchers:
-                  - 'severity = critical'
-                target_matchers:
-                  - 'severity =~ warning|info'
-                equal:
-                  - 'namespace'
-                  - 'alertname'
-              - source_matchers:
-                  - 'severity = warning'
-                target_matchers:
-                  - 'severity = info'
-                equal:
-                  - 'namespace'
-                  - 'alertname'
-              - source_matchers:
-                  - 'alertname = InfoInhibitor'
-                target_matchers:
-                  - 'severity = info'
-                equal:
-                  - 'namespace'
-            route:
-              group_by: ['namespace']
-              group_wait: 30s
-              group_interval: 5m
-              repeat_interval: 12h
-              receiver: 'null'
-              routes:
-                - receiver: 'null'
-                  matchers:
-                    - alertname =~ "InfoInhibitor|Watchdog"
-            receivers:
-              - name: 'null'
-            templates:
-              - '/etc/alertmanager/config/*.tmpl'
-        
+          enabled: false
+          useClusterRole: true
+
+          baseURL: "https://alert.cloud.feddema.dev"
+
           ingress:
             enabled: true
+
             annotations:
+              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
               external-dns.alpha.kubernetes.io/hostname: alert.cloud.feddema.dev
               external-dns.alpha.kubernetes.io/ttl: "120"
               ingress.kubernetes.io/rewrite-target: /
               cert-manager.io/cluster-issuer: letsencrypt
-        
+
             hosts:
               - alert.cloud.feddema.dev
-        
-            pathType: ImplementationSpecific
-            paths:
-              - /
-        
+                paths:
+                  - path: /
+                    pathType: ImplementationSpecific
             tls:
               - secretName: alert-tls
                 hosts:
                   - alert.cloud.feddema.dev
-        
-          serviceMonitor:
-            selfMonitor: true
-        
-          alertmanagerSpec:
-            useExistingSecret: false
-        
-            replicas: 1
-            retention: 120h
-        
-            externalUrl: "https://alert.cloud.feddema.dev"
-        
-            resources:
-              limits:
-                memory: 64Mi
-              requests:
-                cpu: 10m
-                memory: 32Mi
-        
-            securityContext:
-              runAsGroup: 2000
-              runAsNonRoot: true
-              runAsUser: 1000
-              fsGroup: 2000
-        
-        ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
-        grafana:
-          enabled: true
-          replicas: 1
-          defaultDashboardsEnabled: true
-          defaultDashboardsTimezone: Europe/Amsterdam
-        
-          admin:
-            existingSecret: "grafana-credentials"
-            userKey: username
-            passwordKey: password
 
-          resources: 
+          persistence:
+            enabled: true
+            size: 8Gi
+
+          replicaCount: 1
+
+          resources:
             limits:
-              memory: 128Mi
-            requests:
-              cpu: 50m
               memory: 64Mi
-        
-          ingress:
-            enabled: true
-        
-            annotations:
-              external-dns.alpha.kubernetes.io/hostname: grafana.cloud.feddema.dev
-              external-dns.alpha.kubernetes.io/ttl: "120"
-              ingress.kubernetes.io/rewrite-target: /
-              cert-manager.io/cluster-issuer: letsencrypt
-        
-            hosts:
-              - grafana.cloud.feddema.dev
-        
-            path: /
-        
-            tls:
-              - secretName: grafana-tls
-                hosts:
-                  - grafana.cloud.feddema.dev
-        
-          sidecar:
-            dashboards:
-              enabled: true
-              multicluster:
-                global:
-                  enabled: false
-                etcd:
-                  enabled: false
-              provider:
-                allowUiUpdates: false
-            datasources:
-              enabled: true
-              defaultDatasourceEnabled: true
-              uid: prometheus
-              url: http://prometheus-stack-prometheus:9090/
-        
-          service:
-            portName: http-web
-        
-          serviceMonitor:
-            enabled: true
-            path: "/metrics"
-        
-        kubeApiServer:
-          enabled: true
-          tlsConfig:
-            serverName: kubernetes
-            insecureSkipVerify: true
-        
-        kubelet:
-          enabled: true
-          namespace: kube-system
-          serviceMonitor:
-            https: false
-            cAdvisor: true
-            probes: true
-            resource: false
-            resourcePath: "/metrics/resource"
-        
-        kubeControllerManager:
-          enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
-        
-        coreDns:
-          enabled: true
-        
-        kubeEtcd:
-          enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
-        
-        kubeScheduler:
-          enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
-        
-        kubeProxy:
-          enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-        
-        kubeStateMetrics:
-          enabled: true
-        
+            requests:
+              cpu: 10m
+              memory: 32Mi
+
         kube-state-metrics:
+          enabled: false
+          prometheusScrape: true
+          replicas: 1
+
+          hostNetwork: false
+
           rbac:
             create: true
+
+          serviceAccount:
+            create: true
+
           prometheus:
             monitor:
-              enabled: true
-          selfMonitor:
-            enabled: false
-          
+              enabled: false
+              additionalLabels: { }
+              namespace: ""
+              jobLabel: ""
+              interval: ""
+              sampleLimit: 0
+              targetLimit: 0
+              labelLimit: 0
+              labelNameLengthLimit: 0
+              labelValueLengthLimit: 0
+              scrapeTimeout: ""
+              proxyUrl: ""
+              selectorOverride: { }
+              honorLabels: false
+              metricRelabelings: [ ]
+              relabelings: [ ]
+              scheme: ""
+              tlsConfig: { }
+
+          collectors:
+            - certificatesigningrequests
+            - configmaps
+            - cronjobs
+            - daemonsets
+            - deployments
+            - endpoints
+            - horizontalpodautoscalers
+            - ingresses
+            - jobs
+            - leases
+            - limitranges
+            - mutatingwebhookconfigurations
+            - namespaces
+            - networkpolicies
+            - nodes
+            - persistentvolumeclaims
+            - persistentvolumes
+            - poddisruptionbudgets
+            - pods
+            - replicasets
+            - replicationcontrollers
+            - resourcequotas
+            - secrets
+            - services
+            - statefulsets
+            - storageclasses
+            - validatingwebhookconfigurations
+            - volumeattachments
+
           resources:
             limits:
               memory: 64Mi
             requests:
               cpu: 50m
               memory: 32Mi
-        
-        nodeExporter:
-          enabled: true
-        
+
+          selfMonitor:
+            enabled: false
+
         prometheus-node-exporter:
-          extraArgs:
-            - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
-            - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
-          prometheus:
-            monitor:
-              enabled: true
-          
+          enabled: false
+          hostNetwork: true
+          hostPID: true
+          hostRootFsMount:
+            enabled: true
+            mountPropagation: HostToContainer
+        
           resources:
             limits:
               memory: 50Mi
@@ -287,108 +144,64 @@ spec:
               cpu: 50m
               memory: 30Mi
         
-        prometheusOperator:
-          enabled: true
+        configmapReload:
+          prometheus:
+            enabled: false
         
-          tls:
-            enabled: true
-            tlsMinVersion: VersionTLS13
-        
-          admissionWebhooks:
-            enabled: true
-            patch:
-              enabled: true
-              resources:
-                limits:
-                  memory: 64Mi
-                requests:
-                  cpu: 30m
-                  memory: 32Mi
-        
-            certManager:
-              enabled: false
-        
-          kubeletService:
-            enabled: true
-            namespace: kube-system
-        
-          serviceMonitor:
-            selfMonitor: true
-        
-          resources:
-            limits:
-              memory: 128Mi
-            requests:
-              cpu: 30m
-              memory: 64Mi
-        
-          prometheusConfigReloader:
-            resources:
-              limits:
-                memory: 64Mi
-              requests:
-                cpu: 10m
-                memory: 32Mi
-        
-        prometheus:
-          enabled: true
-        
+        server:
+          enableServiceLinks: true
+
+          baseURL: "https://prometheus.cloud.feddema.dev"
+
+          configPath: /etc/config/prometheus.yml
+
+          global:
+            scrape_interval: 1m
+            scrape_timeout: 10s
+            evaluation_interval: 1m
+
           ingress:
             enabled: true
-        
+
             annotations:
+              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
               external-dns.alpha.kubernetes.io/hostname: prometheus.cloud.feddema.dev
               external-dns.alpha.kubernetes.io/ttl: "120"
               cert-manager.io/cluster-issuer: letsencrypt
-        
+
             hosts:
               - prometheus.cloud.feddema.dev
-        
-            paths:
-              - /
-        
+
             tls:
               - secretName: prometheus-tls
                 hosts:
                   - prometheus.cloud.feddema.dev
-        
-          serviceMonitor:
-            selfMonitor: true
-        
-          prometheusSpec:
-            enableAdminAPI: false
-        
-            externalUrl: "https://prometheus.cloud.feddema.dev"
-        
-            retention: 15d
-            replicas: 1
-        
-            logLevel: info
-            
-            resources:
-              limits:
-                memory: 512Mi
-              requests:
-                cpu: 80m
-                memory: 512Mi
-        
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  accessModes: ["ReadWriteOnce"]
-                  resources:
-                    requests:
-                      storage: 100Gi
-        
-        cleanPrometheusOperatorObjectNames: true
+
+          persistentVolume:
+            enabled: true
+            mountPath: /data
+            size: 100Gi
+
+          replicaCount: 1
+
+          resources:
+            limits:
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
+
+          retention: "15d"
+
+        prometheus-pushgateway:
+          enabled: false
 
   destination:
     server: https://kubernetes.default.svc
     namespace: prometheus
 
   syncPolicy:
-    syncOptions:
-      - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
