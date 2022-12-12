@@ -7,23 +7,96 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   source:
-    chart: prometheus
+    chart: kube-prometheus-stack
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 15.17.0
+    targetRevision: 42.3.0
 
     helm:
-      values: |  
+      values: |
+        defaultRules:
+          create: true
+          rules:
+            alertmanager: true
+            etcd: true
+            configReloaders: true
+            general: true
+            k8s: true
+            kubeApiserverAvailability: true
+            kubeApiserverBurnrate: true
+            kubeApiserverHistogram: true
+            kubeApiserverSlos: true
+            kubeControllerManager: true
+            kubelet: true
+            kubeProxy: true
+            kubePrometheusGeneral: true
+            kubePrometheusNodeRecording: true
+            kubernetesApps: true
+            kubernetesResources: true
+            kubernetesStorage: true
+            kubernetesSystem: true
+            kubeSchedulerAlerting: true
+            kubeSchedulerRecording: true
+            kubeStateMetrics: true
+            network: true
+            node: true
+            nodeExporterAlerting: true
+            nodeExporterRecording: true
+            prometheus: true
+            prometheusOperator: true
+        
+        global:
+          rbac:
+            create: true
+        
         alertmanager:
           enabled: true
-          useClusterRole: true
-
-          baseURL: "https://alert.cloud.feddema.dev"
-
+          createAggregateClusterRoles: true
+          serviceAccount:
+            create: true
+        
+          config:
+            global:
+              resolve_timeout: 5m
+            inhibit_rules:
+              - source_matchers:
+                  - 'severity = critical'
+                target_matchers:
+                  - 'severity =~ warning|info'
+                equal:
+                  - 'namespace'
+                  - 'alertname'
+              - source_matchers:
+                  - 'severity = warning'
+                target_matchers:
+                  - 'severity = info'
+                equal:
+                  - 'namespace'
+                  - 'alertname'
+              - source_matchers:
+                  - 'alertname = InfoInhibitor'
+                target_matchers:
+                  - 'severity = info'
+                equal:
+                  - 'namespace'
+            route:
+              group_by: ['namespace']
+              group_wait: 30s
+              group_interval: 5m
+              repeat_interval: 12h
+              receiver: 'null'
+              routes:
+                - receiver: 'null'
+                  matchers:
+                    - alertname =~ "InfoInhibitor|Watchdog"
+            receivers:
+              - name: 'null'
+            templates:
+              - '/etc/alertmanager/config/*.tmpl'
+        
           ingress:
             enabled: true
-
             annotations:
               nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
               nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
@@ -31,205 +104,297 @@ spec:
               external-dns.alpha.kubernetes.io/ttl: "120"
               ingress.kubernetes.io/rewrite-target: /
               cert-manager.io/cluster-issuer: letsencrypt
-
+        
             hosts:
               - alert.cloud.feddema.dev
-
+        
+            pathType: ImplementationSpecific
+            paths:
+              - /
+        
             tls:
               - secretName: alert-tls
                 hosts:
                   - alert.cloud.feddema.dev
+        
+          serviceMonitor:
+            selfMonitor: true
+        
+          alertmanagerSpec:
+            useExistingSecret: false
+        
+            replicas: 1
+            retention: 120h
+        
+            externalUrl: "https://alert.cloud.feddema.dev"
+        
+            resources:
+              limits:
+                memory: 64Mi
+              requests:
+                cpu: 10m
+                memory: 32Mi
+        
+            securityContext:
+              runAsGroup: 2000
+              runAsNonRoot: true
+              runAsUser: 1000
+              fsGroup: 2000
+        
+        ## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+        grafana:
+          enabled: true
+          replicas: 1
+          defaultDashboardsEnabled: true
+          defaultDashboardsTimezone: Europe/Amsterdam
+        
+          admin:
+            existingSecret: "grafana-credentials"
+            userKey: username
+            passwordKey: password
 
-          persistentVolume:
-            enabled: true
-            size: 8Gi
-
-          replicaCount: 1
-
-          statefulSet:
-            enabled: false
-
-          resources:
+          resources: 
             limits:
-              memory: 64Mi
+              memory: 128Mi
             requests:
-              cpu: 10m
-              memory: 32Mi
-
+              cpu: 50m
+              memory: 64Mi
+        
+          ingress:
+            enabled: true
+        
+            annotations:
+              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+              external-dns.alpha.kubernetes.io/hostname: grafana.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              ingress.kubernetes.io/rewrite-target: /
+              cert-manager.io/cluster-issuer: letsencrypt
+        
+            hosts:
+              - grafana.cloud.feddema.dev
+        
+            path: /
+        
+            tls:
+              - secretName: grafana-tls
+                hosts:
+                  - grafana.cloud.feddema.dev
+        
+          sidecar:
+            dashboards:
+              enabled: true
+              multicluster:
+                global:
+                  enabled: false
+                etcd:
+                  enabled: false
+              provider:
+                allowUiUpdates: false
+            datasources:
+              enabled: true
+              defaultDatasourceEnabled: true
+              uid: prometheus
+              url: http://prometheus-stack-prometheus:9090/
+        
+          service:
+            portName: http-web
+        
+          serviceMonitor:
+            enabled: true
+            path: "/metrics"
+        
+        kubeApiServer:
+          enabled: true
+          tlsConfig:
+            serverName: kubernetes
+            insecureSkipVerify: true
+        
+        kubelet:
+          enabled: true
+          namespace: kube-system
+          serviceMonitor:
+            https: false
+            cAdvisor: true
+            probes: true
+            resource: false
+            resourcePath: "/metrics/resource"
+        
+        kubeControllerManager:
+          enabled: true
+          service:
+            enabled: true
+          serviceMonitor:
+            enabled: true
+            insecureSkipVerify: true
+        
+        coreDns:
+          enabled: true
+        
+        kubeEtcd:
+          enabled: true
+          service:
+            enabled: true
+          serviceMonitor:
+            enabled: true
+            insecureSkipVerify: true
+        
+        kubeScheduler:
+          enabled: true
+          service:
+            enabled: true
+          serviceMonitor:
+            enabled: true
+            insecureSkipVerify: true
+        
+        kubeProxy:
+          enabled: true
+          service:
+            enabled: true
+          serviceMonitor:
+            enabled: true
+        
         kubeStateMetrics:
           enabled: true
-
+        
         kube-state-metrics:
-          prometheusScrape: true
-          replicas: 1
-
-          # List of additional cli arguments to configure kube-state-metrics
-          # for example: --enable-gzip-encoding, --log-file, etc.
-          # all the possible args can be found here: https://github.com/kubernetes/kube-state-metrics/blob/master/docs/cli-arguments.md
-          extraArgs: [ ]
-
-          hostNetwork: false
-
           rbac:
             create: true
-
-          serviceAccount:
-            create: true
-
           prometheus:
             monitor:
-              enabled: false
-              additionalLabels: { }
-              namespace: ""
-              jobLabel: ""
-              interval: ""
-              ## SampleLimit defines per-scrape limit on number of scraped samples that will be accepted.
-              ##
-              sampleLimit: 0
-
-              ## TargetLimit defines a limit on the number of scraped targets that will be accepted.
-              ##
-              targetLimit: 0
-
-              ## Per-scrape limit on number of labels that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-              ##
-              labelLimit: 0
-
-              ## Per-scrape limit on length of labels name that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-              ##
-              labelNameLengthLimit: 0
-
-              ## Per-scrape limit on length of labels value that will be accepted for a sample. Only valid in Prometheus versions 2.27.0 and newer.
-              ##
-              labelValueLengthLimit: 0
-              scrapeTimeout: ""
-              proxyUrl: ""
-              selectorOverride: { }
-              honorLabels: false
-              metricRelabelings: [ ]
-              relabelings: [ ]
-              scheme: ""
-              tlsConfig: { }
-
-          collectors:
-            - certificatesigningrequests
-            - configmaps
-            - cronjobs
-            - daemonsets
-            - deployments
-            - endpoints
-            - horizontalpodautoscalers
-            - ingresses
-            - jobs
-            - leases
-            - limitranges
-            - mutatingwebhookconfigurations
-            - namespaces
-            - networkpolicies
-            - nodes
-            - persistentvolumeclaims
-            - persistentvolumes
-            - poddisruptionbudgets
-            - pods
-            - replicasets
-            - replicationcontrollers
-            - resourcequotas
-            - secrets
-            - services
-            - statefulsets
-            - storageclasses
-            - validatingwebhookconfigurations
-            - volumeattachments
-
+              enabled: true
+          selfMonitor:
+            enabled: false
+          
           resources:
             limits:
               memory: 64Mi
             requests:
               cpu: 50m
               memory: 32Mi
-
-          # Enable self metrics configuration for service and Service Monitor
-          # Default values for telemetry configuration can be overridden
-          # If you set telemetryNodePort, you must also set service.type to NodePort
-          selfMonitor:
-            enabled: false
-            # telemetryHost: 0.0.0.0
-            # telemetryPort: 8081
-            # telemetryNodePort: 0
-
+        
         nodeExporter:
           enabled: true
-          hostNetwork: true
-          hostPID: true
-          hostRootfs: true
-
+        
+        prometheus-node-exporter:
+          extraArgs:
+            - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+            - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
+          prometheus:
+            monitor:
+              enabled: true
+          
           resources:
             limits:
               memory: 50Mi
             requests:
               cpu: 50m
               memory: 30Mi
-
-          service:
-            annotations:
-              prometheus.io/scrape: "true"
-
-        server:
+        
+        prometheusOperator:
           enabled: true
-          enableServiceLinks: true
-
-          baseURL: "https://prometheus.cloud.feddema.dev"
-
-          configPath: /etc/config/prometheus.yml
-
-          global:
-            scrape_interval: 1m
-            scrape_timeout: 10s
-            evaluation_interval: 1m
-
+        
+          tls:
+            enabled: true
+            tlsMinVersion: VersionTLS13
+        
+          admissionWebhooks:
+            enabled: true
+            patch:
+              enabled: true
+              resources:
+                limits:
+                  memory: 64Mi
+                requests:
+                  cpu: 30m
+                  memory: 32Mi
+        
+            certManager:
+              enabled: false
+        
+          kubeletService:
+            enabled: true
+            namespace: kube-system
+        
+          serviceMonitor:
+            selfMonitor: true
+        
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 30m
+              memory: 64Mi
+        
+          prometheusConfigReloader:
+            resources:
+              limits:
+                memory: 64Mi
+              requests:
+                cpu: 10m
+                memory: 32Mi
+        
+        prometheus:
+          enabled: true
+        
           ingress:
             enabled: true
-
+        
             annotations:
               nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
               nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
               external-dns.alpha.kubernetes.io/hostname: prometheus.cloud.feddema.dev
               external-dns.alpha.kubernetes.io/ttl: "120"
               cert-manager.io/cluster-issuer: letsencrypt
-
+        
             hosts:
               - prometheus.cloud.feddema.dev
-
+        
+            paths:
+              - /
+        
             tls:
               - secretName: prometheus-tls
                 hosts:
                   - prometheus.cloud.feddema.dev
-
-          persistentVolume:
-            enabled: true
-            mountPath: /data
-
-            size: 100Gi
-
-          replicaCount: 1
-
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 512Mi
-
-          retention: "15d"
-
-        pushgateway:
-          enabled: false
+        
+          serviceMonitor:
+            selfMonitor: true
+        
+          prometheusSpec:
+            enableAdminAPI: false
+        
+            externalUrl: "https://prometheus.cloud.feddema.dev"
+        
+            retention: 15d
+            replicas: 1
+        
+            logLevel: info
+            
+            resources:
+              limits:
+                memory: 512Mi
+              requests:
+                cpu: 80m
+                memory: 512Mi
+        
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 100Gi
+        
+        cleanPrometheusOperatorObjectNames: true
 
   destination:
     server: https://kubernetes.default.svc
     namespace: prometheus
 
   syncPolicy:
+    syncOptions:
+      - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
