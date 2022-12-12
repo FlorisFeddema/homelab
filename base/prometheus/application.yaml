@@ -16,8 +16,41 @@ spec:
     helm:
       values: |
         alertmanager:
-          enabled: false
-        
+          enabled: true
+          useClusterRole: true
+          baseURL: "https://alert.cloud.feddema.dev"
+          replicaCount: 1
+
+          ingress:
+            enabled: true
+            annotations:
+              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+              external-dns.alpha.kubernetes.io/hostname: alert.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              ingress.kubernetes.io/rewrite-target: /
+              cert-manager.io/cluster-issuer: letsencrypt
+            hosts:
+              - alert.cloud.feddema.dev
+                paths:
+                  - path: /
+                    pathType: ImplementationSpecific
+            tls:
+              - secretName: alert-tls
+                hosts:
+                  - alert.cloud.feddema.dev
+
+          persistence:
+            enabled: true
+            size: 8Gi
+
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
+
         kube-state-metrics:
           enabled: false
         
