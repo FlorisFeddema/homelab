@@ -21,6 +21,17 @@ spec:
           baseURL: "https://alert.cloud.feddema.dev"
           replicaCount: 1
 
+          persistence:
+            enabled: true
+            size: 8Gi
+
+          resources:
+            limits:
+              memory: 64Mi
+            requests:
+              cpu: 10m
+              memory: 32Mi
+        
         kube-state-metrics:
           enabled: false
         
