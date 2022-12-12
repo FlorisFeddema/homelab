@@ -24,19 +24,19 @@ spec:
           ingress:
             enabled: true
             annotations:
-              external-dns.alpha.kubernetes.io/hostname: alertmanager.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/hostname: alert.cloud.feddema.dev
               external-dns.alpha.kubernetes.io/ttl: "120"
               ingress.kubernetes.io/rewrite-target: /
               cert-manager.io/cluster-issuer: letsencrypt
             hosts:
-              - host: alertmanager.cloud.feddema.dev
+              - host: alert.cloud.feddema.dev
                 paths:
                   - path: /
                     pathType: ImplementationSpecific
             tls:
-              - secretName: alertmanager-aaaaa-tls
+              - secretName: alert-tls
                 hosts:
-                  - alertmanager.cloud.feddema.dev
+                  - alert.cloud.feddema.dev
         
           persistence:
             enabled: true
