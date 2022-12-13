@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
     chart: prometheus
     repoURL: https://prometheus-community.github.io/helm-charts
@@ -157,24 +157,9 @@ spec:
             evaluation_interval: 1m
 
           ingress:
-            enabled: true
+            enabled: false
 
-            annotations:
-              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-              external-dns.alpha.kubernetes.io/hostname: prometheus.cloud.feddema.dev
-              external-dns.alpha.kubernetes.io/ttl: "120"
-              cert-manager.io/cluster-issuer: letsencrypt
-
-            hosts:
-              - prometheus.cloud.feddema.dev
-
-            tls:
-              - secretName: prometheus-tls
-                hosts:
-                  - prometheus.cloud.feddema.dev
-
-          persistentVolume:
+          persistentVolume:s
             enabled: true
             mountPath: /data
             size: 100Gi
