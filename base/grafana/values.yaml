@@ -1,0 +1,93 @@
+rbac:
+  create: true
+  pspEnabled: false
+
+serviceAccount:
+  create: true
+
+replicas: 1
+
+testFramework:
+  enabled: true
+
+createConfigmap: true
+
+ingress:
+  enabled: true
+
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: grafana.cloud.feddema.dev
+    external-dns.alpha.kubernetes.io/ttl: "120"
+    ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt
+
+  path: /
+
+  pathType: ImplementationSpecific
+
+  hosts:
+    - grafana.cloud.feddema.dev
+
+  tls:
+    - hosts:
+        - grafana.cloud.feddema.dev
+      secretName: "grafana-tls"
+
+resources:
+  limits:
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+persistence:
+  type: pvc
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 16Gi
+
+initChownData:
+  enabled: true
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 20m
+      memory: 32
+
+admin:
+  existingSecret: "grafana-credentials"
+  userKey: admin-user
+  passwordKey: admin-password
+
+## Configure grafana datasources
+## ref: http://docs.grafana.org/administration/provisioning/#datasources
+##
+datasources: {}
+#  datasources.yaml:
+#    apiVersion: 1
+#    datasources:
+#    - name: Prometheus
+#      type: prometheus
+#      url: http://prometheus-prometheus-server
+#      access: proxy
+#      isDefault: true
+
+## Grafana's primary configuration
+## NOTE: values in map will be converted to ini format
+## ref: http://docs.grafana.org/installation/configuration/
+grafana.ini:
+  paths:
+    data: /var/lib/grafana
+    logs: /var/log/grafana
+    plugins: /var/lib/grafana/plugins
+    provisioning: /etc/grafana/provisioning
+  analytics:
+    check_for_updates: true
+  log:
+    mode: console
+  grafana_net:
+    url: https://grafana.net
+  server:
+    domain: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"

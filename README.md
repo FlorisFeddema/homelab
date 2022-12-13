@@ -21,6 +21,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: database-credentials
+  namespace: default
 type: Opaque
 stringData:
   username: admin
