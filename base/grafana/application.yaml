@@ -98,10 +98,29 @@ spec:
              revision: 2
              datasource: Prometheus
 
-        ## Grafana's primary configuration
-        ## NOTE: values in map will be converted to ini format
+        extraSecretMounts:
+        - name: auth-generic-oauth-secret-mount
+          secretName: grafana-oauth-credentials
+          defaultMode: 0440
+          mountPath: /etc/secrets/auth_generic_oauth
+          readOnly: true
+        
         ## ref: http://docs.grafana.org/installation/configuration/
         grafana.ini:
+          auth:
+            generic_oauth:
+              enabled: true
+              name: Keycloak
+              allow_sign_up: true
+              scopes: openid email profile offline_access roles
+              email_attribute_path: email
+              login_attribute_path: username
+              name_attribute_path: full_name
+              auth_url = https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/auth
+              token_url = https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/token
+              api_url = https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/userinfo
+              client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+              client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
           paths:
             data: /var/lib/grafana
             logs: /var/log/grafana
