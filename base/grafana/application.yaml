@@ -81,16 +81,16 @@ spec:
         ## Configure grafana datasources
         ## ref: http://docs.grafana.org/administration/provisioning/#datasources
         ##
-        datasources: {}
-        #  datasources.yaml:
-        #    apiVersion: 1
-        #    datasources:
-        #    - name: Prometheus
-        #      type: prometheus
-        #      url: http://prometheus-prometheus-server
-        #      access: proxy
-        #      isDefault: true
-        
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+            - name: Prometheus
+              type: prometheus
+              url: http://prometheus-server.prometheus.svc.cluster.local
+              access: proxy
+              isDefault: true
+
         ## Grafana's primary configuration
         ## NOTE: values in map will be converted to ini format
         ## ref: http://docs.grafana.org/installation/configuration/
