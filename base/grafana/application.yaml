@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
@@ -90,6 +90,13 @@ spec:
               url: http://prometheus-server.prometheus.svc.cluster.local
               access: proxy
               isDefault: true
+        
+        dashboards:
+         default:
+           prometheus-stats:
+             gnetId: 2
+             revision: 2
+             datasource: Prometheus
 
         ## Grafana's primary configuration
         ## NOTE: values in map will be converted to ini format
