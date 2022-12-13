@@ -109,9 +109,9 @@ spec:
               email_attribute_path: email
               login_attribute_path: username
               name_attribute_path: full_name
-              auth_url = https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/auth
-              token_url = https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/token
-              api_url = https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/userinfo
+              auth_url: https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/auth
+              token_url: https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/token
+              api_url: https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/userinfo
               client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
               client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
           paths:
