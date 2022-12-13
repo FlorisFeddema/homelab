@@ -90,13 +90,6 @@ spec:
               url: http://prometheus-server.prometheus.svc.cluster.local
               access: proxy
               isDefault: true
-        
-        dashboards:
-         default:
-           prometheus-stats:
-             gnetId: 2
-             revision: 2
-             datasource: Prometheus
 
         extraSecretMounts:
         - name: auth-generic-oauth-secret-mount
