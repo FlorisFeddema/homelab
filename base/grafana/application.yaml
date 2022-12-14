@@ -114,7 +114,7 @@ spec:
               client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
               client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
               allow_assign_grafana_admin: true
-              role_attribute_path: contains(roles[*], 'admins') && 'admins'
+              role_attribute_path: contains(roles[*], 'admins') && 'Admin'
           paths:
             data: /var/lib/grafana
             logs: /var/log/grafana
