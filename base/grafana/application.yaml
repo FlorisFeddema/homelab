@@ -105,15 +105,17 @@ spec:
               enabled: true
               name: Keycloak
               allow_sign_up: true
-              scopes: openid email profile offline_access roles
+              scopes: "openid email profile offline_access roles"
               email_attribute_path: email
               login_attribute_path: username
               name_attribute_path: full_name
-              auth_url: https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/auth
-              token_url: https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/token
-              api_url: https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/userinfo
+              auth_url: "https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/auth"
+              token_url: "https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/token"
+              api_url: "https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/userinfo"
               client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
               client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+              allow_assign_grafana_admin: true
+              role_attribute_path = contains(roles[*], 'admins') && 'admins'
           paths:
             data: /var/lib/grafana
             logs: /var/log/grafana
@@ -126,7 +128,8 @@ spec:
           grafana_net:
             url: https://grafana.net
           server:
-            domain: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
+            domain: "https://grafana.cloud.feddema.dev"
+            root_url: "https://grafana.cloud.feddema.dev"
 
   destination:
     server: https://kubernetes.default.svc
