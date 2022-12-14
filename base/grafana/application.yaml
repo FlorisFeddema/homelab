@@ -100,6 +100,8 @@ spec:
         
         ## ref: http://docs.grafana.org/installation/configuration/
         grafana.ini:
+          users:
+            auto_assign_org_role: GrafanaAdmin
           auth.generic_oauth:
               enabled: true
               name: Keycloak
@@ -114,7 +116,7 @@ spec:
               client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
               client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
               allow_assign_grafana_admin: true
-              role_attribute_path: role
+              role_attribute_path: "GrafanaAdmin"
           paths:
             data: /var/lib/grafana
             logs: /var/log/grafana
