@@ -159,7 +159,7 @@ spec:
           ingress:
             enabled: false
 
-          persistentVolume:s
+          persistentVolume:
             enabled: true
             mountPath: /data
             size: 100Gi
