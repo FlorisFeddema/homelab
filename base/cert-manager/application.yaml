@@ -42,7 +42,7 @@ spec:
             - ALL
 
         prometheus:
-          enabled: false
+          enabled: true
 
         webhook:
           replicaCount: 1
