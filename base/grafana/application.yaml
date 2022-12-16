@@ -77,10 +77,90 @@ spec:
           existingSecret: "grafana-credentials"
           userKey: admin-user
           passwordKey: admin-password
+
+        dashboardProviders: 
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+            - name: 'default'
+              orgId: 1
+              folder: ''
+              type: file
+              disableDeletion: false
+              editable: true
+              options:
+                path: /var/lib/grafana/dashboards/default
         
-        ## Configure grafana datasources
-        ## ref: http://docs.grafana.org/administration/provisioning/#datasources
-        ##
+        dashboards:
+          prometheus:
+            gnetId: 2
+            revision: 2
+            datasource: Prometheus
+          kube-state-metrics-v2:
+            gnetId: 6417
+            revision: 2
+            datasource: Prometheus
+          cert-manager:
+            gnetId: 741
+            revision: 1
+            datasource: Prometheus
+          poostgresql:
+            gnetId: 9628
+            revision: 2
+            datasource: Prometheus
+          nginx-ingress-controller:
+            gnetId: 9614
+            revision: 2
+            datasource: Prometheus
+          longhorn:
+            gnetId: 16888
+            revision: 1 
+            datasource: Prometheus
+          kubernetes-apiserver:
+            gnetId: 12006
+            revision: 3
+            datasource: Prometheus
+          keycloak:
+            gnetId: 10441
+            revision: 1
+            datasource: Prometheus
+          external-dns:
+            gnetId: 15038
+            revision: 1
+            datasource: Prometheus
+          etcd:
+            gnetId: 3070
+            revision: 2
+            datasource: Prometheus
+          coredns:
+            gnetId: 14981
+            revision: 1
+            datasource: Prometheus
+          cluster-monitoring:
+            gnetId: 10000
+            revision: 1
+            datasource: Prometheus
+          argocd:
+            gnetId: 14584
+            revision: 2
+            datasource: Prometheus
+          nextcloud:
+            gnetId: 9632
+            revision: 1
+            datasource: Prometheus
+          calico:
+            gnetId: 3244
+            revision: 1
+            datasource: Prometheus
+          metallb:
+            gnetId: 14127
+            revision: 1
+            datasource: Prometheus
+          velero:
+            gnetId: 15469
+            revision: 1
+            datasource: Prometheus
+
         datasources:
           datasources.yaml:
             apiVersion: 1
