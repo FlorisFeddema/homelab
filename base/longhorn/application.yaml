@@ -47,7 +47,7 @@ spec:
           defaultDataPath: ~
           defaultDataLocality: ~
           replicaAutoBalance: ~
-          storageOverProvisioningPercentage: 50%
+          storageOverProvisioningPercentage: 10
           storageMinimalAvailablePercentage: ~
           upgradeChecker: ~
           defaultReplicaCount: 1
