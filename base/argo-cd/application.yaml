@@ -126,6 +126,11 @@ spec:
         
           metrics:
             enabled: true
+          
+          podAnnotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: /metrics
+            prometheus.io/port: "8083"
         
           serviceAccount:
             create: true
