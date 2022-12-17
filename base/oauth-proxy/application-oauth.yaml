@@ -30,15 +30,11 @@ spec:
           path: /oauth2
           hosts:
             - alert.cloud.feddema.dev
-            - prometheus.cloud.feddema.dev
             - longhorn.cloud.feddema.dev
           tls:
             - secretName: alert-tls
               hosts:
                 - alert.cloud.feddema.dev
-            - secretName: prometheus-tls
-              hosts:
-                - prometheus.cloud.feddema.dev
             - secretName: longhorn-tls
               hosts:
                 - longhorn.cloud.feddema.dev
