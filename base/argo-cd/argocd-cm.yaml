@@ -27,9 +27,8 @@ data:
 
   server.rbac.log.enforce.enable: "false"
 
-  exec.enabled: "true"
-  exec.shells: "bash,sh,powershell,cmd"
-  
+  exec.enabled: "false"
+
   oidc.tls.insecure.skip.verify: "false"
   oidc.config: |
     name: Keycloak

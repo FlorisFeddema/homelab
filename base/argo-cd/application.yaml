@@ -67,7 +67,7 @@ spec:
             automountServiceAccountToken: true
         
           metrics:
-            enabled: false
+            enabled: true
         
           clusterAdminAccess:
             enabled: true
@@ -87,6 +87,16 @@ spec:
             requests:
               cpu: 80m
               memory: 64Mi
+        
+          metrics:
+            enabled: true
+        
+          resources:
+           limits:
+             memory: 64Mi
+           requests:
+             cpu: 10m
+             memory: 32Mi
         
         redis-ha:
           enabled: false
@@ -115,7 +125,7 @@ spec:
               memory: 128Mi
         
           metrics:
-            enabled: false
+            enabled: true
         
           serviceAccount:
             create: true
@@ -194,7 +204,7 @@ spec:
               memory: 128Mi
         
           metrics:
-            enabled: false
+            enabled: true
         
           clusterAdminAccess:
             enabled: false
@@ -208,7 +218,6 @@ spec:
         
         notifications:
           enabled: false
-
 
   destination:
     server: https://kubernetes.default.svc
