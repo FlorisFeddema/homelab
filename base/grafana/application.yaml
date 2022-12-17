@@ -100,7 +100,7 @@ spec:
             gnetId: 6417
             revision: 2
             datasource: Prometheus
-          poostgresql:
+          postgresql:
             gnetId: 9628
             revision: 2
             datasource: Prometheus
@@ -118,15 +118,11 @@ spec:
             datasource: Prometheus
           keycloak:
             gnetId: 10441
-            revision: 1
+            revision: 2
             datasource: Prometheus
           external-dns:
             gnetId: 15038
             revision: 1
-            datasource: Prometheus
-          etcd:
-            gnetId: 3070
-            revision: 2
             datasource: Prometheus
           coredns:
             gnetId: 14981
