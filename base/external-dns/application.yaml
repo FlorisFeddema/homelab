@@ -87,8 +87,11 @@ spec:
             cpu: 10m
             memory: 30Mi
 
-        metrics:
-          enabled: false
+        podAnnotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/path: /metrics
+          prometheus.io/port: "7979"
+  
 
   destination:
     server: https://kubernetes.default.svc
