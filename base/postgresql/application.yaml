@@ -27,6 +27,7 @@ spec:
           replicationUsername: repl_user
           existingSecret: postgresql-credentials
           usePasswordFiles: true
+          database: test
 
         architecture: standalone
 
