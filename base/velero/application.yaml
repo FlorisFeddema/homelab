@@ -24,12 +24,12 @@ spec:
 
         initContainers:
           - name: velero-plugin-for-csi
-            image: velero/velero-plugin-for-csi:v0.3.0
+            image: velero/velero-plugin-for-csi:v0.3.3
             volumeMounts:
               - mountPath: /target
                 name: plugins
           - name: velero-plugin-for-azure
-            image: velero/velero-plugin-for-microsoft-azure:v1.5.0
+            image: velero/velero-plugin-for-microsoft-azure:v1.5.3
             volumeMounts:
               - mountPath: /target
                 name: plugins
