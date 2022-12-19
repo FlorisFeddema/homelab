@@ -1,0 +1,18 @@
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: velero-daily
+  namespace: velero
+spec:
+  schedule: "0 6 * * *" #At 06:00 on everyday
+  template:
+    includeClusterResources: true
+    includedNamespaces:
+      - '*'
+    includedResources:
+      - '*'
+    snapshotVolumes: true
+    ttl: "48h"
+  useOwnerReferencesInBackup: true
+status:
+  phase: Enabled

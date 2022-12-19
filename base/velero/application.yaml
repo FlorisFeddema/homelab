@@ -96,18 +96,6 @@ spec:
               - '*'
               includeClusterResources: true
               snapshotVolumes: true
-          daily:
-            disabled: false
-            schedule: "0 6 * * *" #At 06:00 on everyday
-            useOwnerReferencesInBackup: true
-            template:
-              ttl: "48h"
-              includedNamespaces:
-              - '*'
-              includedResources:
-              - '*'
-              includeClusterResources: true
-              snapshotVolumes: true
 
   destination:
     server: https://kubernetes.default.svc
