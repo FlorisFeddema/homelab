@@ -2,19 +2,8 @@
 
 This repository will be used for the configuration of the feddema.dev Kubernetes Cluster. Different GitOps principles will be applied in this repository.
 
-## Infrastructure
 
-- [Calico](https://www.tigera.io/project-calico/)
-- [Linkerd2](https://linkerd.io/)
-- [NGINX Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
-- [External Dns](https://github.com/kubernetes-sigs/external-dns)
-- [Cert-manager](https://cert-manager.io/)
-- [Argocd](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd)
-- [Longhorn](https://github.com/longhorn/charts/tree/master/charts/longhorn)
-- [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets)
-- [Kubernetes-dashboard](https://github.com/kubernetes/dashboard/tree/master/aio/deploy/helm-chart/kubernetes-dashboard)
-
-### Kubeseal
+## Kubeseal
 
 ```yaml
 apiVersion: v1
@@ -40,7 +29,7 @@ To encrypt a single value run the following command:
 echo -n <VALUE> | kubeseal --controller-namespace sealed-secrets --raw --namespace <NAMESPACE> --name <NAME>
 ```
 
-### PostgreSQL
+## PostgreSQL
 
 PostgreSQL can be assed via port 5432 on the following DNS name from withing the cluster:
 
@@ -66,7 +55,7 @@ Or the connect form outside the cluster run:
 kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
 ```
 
-### Mysql
+## Mysql
 
 ```bash
 export MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace mysql mysql-credentials -o jsonpath="{.data.mysql-root-password}" | base64 -d)
@@ -80,14 +69,19 @@ kubectl run mysql-client --rm --tty -i --restart='Never' --image  docker.io/bitn
 mysql -h mysql.mysql.svc.cluster.local -uroot -p "$MYSQL_ROOT_PASSWORD"
 ```
 
+## Velero
 
-### Velero
-
-Velero is used to create backups, it works in combination with the snapshotcontroller and CSI capabilities of longhorn.
+Velero is used to create backups, it works in combination with the snapshotcontroller and CSI capabilities of Longhorn.
 
 These snapshots will be saved in Azure.
 
-To excude a resource from the backups ad the folowing label: ```velero.io/exclude-from-backup=true```.
+To exclude a resource from the backups ad the following label: ```velero.io/exclude-from-backup=true```.
+
+Creating a backup is done by running the following command:
+
+```bash
+velero backup create --from-schedule example-schedule
+```
 
 ## Node setup
 
