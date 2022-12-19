@@ -35,7 +35,13 @@ spec:
                 name: plugins
 
         metrics:
-          enabled: false
+          enabled: true
+        
+          service:
+            annotations: 
+              prometheus.io/scrape: "true"
+              prometheus.io/port: "8085"
+              prometheus.io/path: "/metrics"
 
         upgradeCRDs: true
 
