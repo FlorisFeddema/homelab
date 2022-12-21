@@ -27,7 +27,8 @@ data:
 
   server.rbac.log.enforce.enable: "false"
 
-  exec.enabled: "false"
+  exec.enabled: "true"
+  exec.shells: "bash,sh,powershell,cmd"
 
   oidc.tls.insecure.skip.verify: "false"
   oidc.config: |

@@ -27,6 +27,8 @@ spec:
             level: info
         
         configs:
+          cm.exec.enabled: true
+
           secret:
             createSecret: false
         
