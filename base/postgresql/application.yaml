@@ -27,7 +27,6 @@ spec:
           replicationUsername: repl_user
           existingSecret: postgresql-credentials
           usePasswordFiles: true
-          database: test
 
         architecture: standalone
 
@@ -92,19 +91,7 @@ spec:
           create: false
 
         metrics:
-          enabled: true
-          resources:
-            limits:
-              memory: 64Mi
-            requests:
-              memory: 32Mi
-              cpu: 10m
-          image:
-          service:
-            annotations:
-              prometheus.io/scrape: "true"
-              prometheus.io/path: /metrics
-              prometheus.io/port: "9187"
+          enabled: false
 
   destination:
     server: https://kubernetes.default.svc
