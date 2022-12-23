@@ -13,7 +13,7 @@ spec:
     repoURL: https://oauth2-proxy.github.io/manifests
     targetRevision: 6.5.0
     helm:
-      values:
+      values: |
         config:
           existingSecret: oauth-proxy-credentials
           configFile: |-
