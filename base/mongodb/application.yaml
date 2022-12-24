@@ -11,7 +11,7 @@ spec:
   source:
     chart: mongodb
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 13.6.2z
+    targetRevision: 13.6.2
 
     helm:
       values: |
