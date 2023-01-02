@@ -11,7 +11,7 @@ spec:
   source:
     chart: external-dns
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 6.12.1
+    targetRevision: 6.12.2
 
     helm:
       values: |
