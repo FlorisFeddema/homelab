@@ -79,7 +79,7 @@ spec:
         backupsEnabled: true
         snapshotsEnabled: true
 
-        deployRestic: false
+        deployNodeAgent: false
 
         logLevel: info
 
