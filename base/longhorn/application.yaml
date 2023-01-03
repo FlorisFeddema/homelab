@@ -11,7 +11,7 @@ spec:
   source:
     chart: longhorn
     repoURL: https://charts.longhorn.io
-    targetRevision: 1.3.2
+    targetRevision: 1.4.0
 
     helm:
       values: |
@@ -47,7 +47,7 @@ spec:
           defaultDataPath: ~
           defaultDataLocality: ~
           replicaAutoBalance: ~
-          storageOverProvisioningPercentage: 50%
+          storageOverProvisioningPercentage: 10
           storageMinimalAvailablePercentage: ~
           upgradeChecker: ~
           defaultReplicaCount: 1
@@ -93,6 +93,11 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
 
         enablePSP: false
+        
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/path: /metrics
+          prometheus.io/port: "9500"
 
   destination:
     server: https://kubernetes.default.svc

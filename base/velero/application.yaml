@@ -11,7 +11,7 @@ spec:
   source:
     chart: velero
     repoURL: https://vmware-tanzu.github.io/helm-charts
-    targetRevision: 2.32.4
+    targetRevision: 3.0.0
 
     helm:
       values: |
@@ -24,18 +24,24 @@ spec:
 
         initContainers:
           - name: velero-plugin-for-csi
-            image: velero/velero-plugin-for-csi:v0.3.0
+            image: velero/velero-plugin-for-csi:v0.4.0
             volumeMounts:
               - mountPath: /target
                 name: plugins
           - name: velero-plugin-for-azure
-            image: velero/velero-plugin-for-microsoft-azure:v1.5.0
+            image: velero/velero-plugin-for-microsoft-azure:v1.6.0
             volumeMounts:
               - mountPath: /target
                 name: plugins
 
         metrics:
-          enabled: false
+          enabled: true
+        
+          service:
+            annotations: 
+              prometheus.io/scrape: "true"
+              prometheus.io/port: "8085"
+              prometheus.io/path: "/metrics"
 
         upgradeCRDs: true
 
@@ -73,7 +79,7 @@ spec:
         backupsEnabled: true
         snapshotsEnabled: true
 
-        deployRestic: false
+        deployNodeAgent: false
 
         logLevel: info
 

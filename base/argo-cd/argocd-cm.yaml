@@ -20,7 +20,7 @@ data:
   helm.valuesFileSchemes: http, https
 
   admin.enabled: "false"
-  accounts.alice.enabled: "false"
+  accounts.codespaces: apiKey
 
   timeout.reconciliation: 180s
   cluster.inClusterEnabled: "true"
@@ -29,7 +29,7 @@ data:
 
   exec.enabled: "true"
   exec.shells: "bash,sh,powershell,cmd"
-  
+
   oidc.tls.insecure.skip.verify: "false"
   oidc.config: |
     name: Keycloak

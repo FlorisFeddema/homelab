@@ -11,7 +11,7 @@ spec:
   source:
     chart: argo-cd
     repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: 5.16.2
+    targetRevision: 5.16.13
 
     helm:
       values: |
@@ -27,6 +27,8 @@ spec:
             level: info
         
         configs:
+          cm.exec.enabled: true
+
           secret:
             createSecret: false
         
@@ -67,7 +69,12 @@ spec:
             automountServiceAccountToken: true
         
           metrics:
-            enabled: false
+            enabled: true
+        
+          podAnnotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: /metrics
+            prometheus.io/port: "8082"
         
           clusterAdminAccess:
             enabled: true
@@ -87,6 +94,16 @@ spec:
             requests:
               cpu: 80m
               memory: 64Mi
+        
+          metrics:
+            enabled: true
+        
+          resources:
+           limits:
+             memory: 64Mi
+           requests:
+             cpu: 10m
+             memory: 32Mi
         
         redis-ha:
           enabled: false
@@ -115,7 +132,12 @@ spec:
               memory: 128Mi
         
           metrics:
-            enabled: false
+            enabled: true
+          
+          podAnnotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: /metrics
+            prometheus.io/port: "8083"
         
           serviceAccount:
             create: true
@@ -194,7 +216,12 @@ spec:
               memory: 128Mi
         
           metrics:
-            enabled: false
+            enabled: true
+        
+          podAnnotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: /metrics
+            prometheus.io/port: "8084"
         
           clusterAdminAccess:
             enabled: false
@@ -208,7 +235,6 @@ spec:
         
         notifications:
           enabled: false
-
 
   destination:
     server: https://kubernetes.default.svc

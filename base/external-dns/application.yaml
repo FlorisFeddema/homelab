@@ -11,7 +11,7 @@ spec:
   source:
     chart: external-dns
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 6.12.1
+    targetRevision: 6.12.2
 
     helm:
       values: |
@@ -87,8 +87,11 @@ spec:
             cpu: 10m
             memory: 30Mi
 
-        metrics:
-          enabled: false
+        podAnnotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/path: /metrics
+          prometheus.io/port: "7979"
+  
 
   destination:
     server: https://kubernetes.default.svc

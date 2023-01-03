@@ -11,7 +11,7 @@ spec:
   source:
     chart: ingress-nginx
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.4.0
+    targetRevision: 4.4.2
 
     helm:
       values: |
@@ -93,7 +93,12 @@ spec:
             enabled: true
 
           metrics:
-            enabled: false
+            enabled: true
+            service:
+              annotations:
+                prometheus.io/scrape: "true"
+                prometheus.io/path: /metrics
+                prometheus.io/port: "10254"
 
         revisionHistoryLimit: 10
 

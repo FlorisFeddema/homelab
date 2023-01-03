@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
@@ -42,7 +42,7 @@ spec:
             - ALL
 
         prometheus:
-          enabled: false
+          enabled: true
 
         webhook:
           replicaCount: 1

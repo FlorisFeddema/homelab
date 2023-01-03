@@ -11,7 +11,7 @@ spec:
   source:
     chart: postgresql
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 11.6.16
+    targetRevision: 12.1.6
 
     helm:
       values: |
@@ -77,9 +77,6 @@ spec:
 
         networkPolicy:
           enabled: false
-
-          metrics:
-            enabled: false
 
         volumePermissions:
           enabled: false
