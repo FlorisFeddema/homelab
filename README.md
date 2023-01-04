@@ -83,6 +83,59 @@ Creating a backup is done by running the following command:
 velero backup create --from-schedule example-schedule
 ```
 
+## Upgrade kubernetes
+
+To upgrade the cluster to a new version, follow this steps.
+
+**!!! Make sure to check whether all applications are compatible with the new Kubernetes version !!!**
+
+Check which Kubernetes version you want to upgrade to.
+Run the following commands on a node:
+
+```bash
+sudo apt update
+sudo apt-cache madison kubeadm
+```
+
+Now upgrade the control plane nodes:
+
+```bash
+sudo apt-mark unhold kubeadm
+sudo apt-get update
+sudo apt-get install -y kubeadm=<KUBE_VERSION>
+sudo apt-mark hold kubeadm
+```
+
+Confirm that kubeadm is running on the new version and plan the upgrade:
+
+```bash
+sudo kubeadm version
+sudo kubeadm upgrade plan <KUBE_VERSION>
+```
+
+When upgrading kubeadm automatically renews the API certificates, to opt out of this add `--certificate-renewal=false` to the command:
+
+```bash
+sudo kubeadm version
+sudo kubeadm upgrade apply <KUBE_VERSION>
+```
+
+If u did renew the API certificates save them so you can connect to the cluster. It is located at `/etc/kubernetes/admin.conf`
+
+Now upgrade the kubelet on the node:
+
+```bash
+kubectl drain <NODE_NAME> --ignore-daemonsets --delete-emptydir-data
+sudo apt-mark unhold kubelet kubectl
+sudo apt-get update
+sudo apt-get install -y kubelet=<KUBE_VERSION> kubectl=<KUBE_VERSION>
+sudo apt-mark hold kubelet kubectl
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+kubectl uncordon <NODE_NAME>
+```
+
+
 ## Node setup
 
 1. passwd
