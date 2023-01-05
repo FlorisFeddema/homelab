@@ -182,6 +182,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: prometheus
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

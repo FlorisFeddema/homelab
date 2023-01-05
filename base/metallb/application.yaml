@@ -59,6 +59,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: metallb
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

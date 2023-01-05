@@ -101,6 +101,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: velero
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

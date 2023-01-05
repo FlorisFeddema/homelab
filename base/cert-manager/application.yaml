@@ -114,6 +114,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: cert-manager
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

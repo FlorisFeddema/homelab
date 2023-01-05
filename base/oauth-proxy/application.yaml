@@ -83,6 +83,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: oauth-proxy
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

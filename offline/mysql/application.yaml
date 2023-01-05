@@ -51,6 +51,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: mysql
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

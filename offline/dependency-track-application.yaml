@@ -17,6 +17,7 @@
 #     server: https://kubernetes.default.svc
 #     namespace: dependency-track
 
+#   revisionHistoryLimit: 2
 #   syncPolicy:
 #     automated:
 #       prune: true

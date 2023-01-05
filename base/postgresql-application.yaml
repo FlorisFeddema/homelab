@@ -17,6 +17,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: postgresql
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

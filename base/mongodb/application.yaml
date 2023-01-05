@@ -87,6 +87,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: mongodb
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

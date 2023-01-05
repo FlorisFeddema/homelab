@@ -206,6 +206,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: grafana
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

@@ -17,6 +17,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: nextcloud
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true

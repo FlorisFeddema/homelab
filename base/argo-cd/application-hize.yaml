@@ -16,11 +16,11 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
 
+  revisionHistoryLimit: 2
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-      allowEmpty: false
     retry:
       limit: 5
       backoff:
