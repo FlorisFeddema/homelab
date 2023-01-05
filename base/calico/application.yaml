@@ -26,6 +26,8 @@ spec:
     namespace: calico
 
   syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
