@@ -18,7 +18,7 @@ spec:
         diagnosticMode:
           enabled: false
 
-        image
+        image:
           debug: false
 
         auth:
