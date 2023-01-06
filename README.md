@@ -135,6 +135,18 @@ sudo systemctl restart kubelet
 kubectl uncordon <NODE_NAME>
 ```
 
+## Upgrade postgresql
+
+```bash
+k port-forward -n postgresql postgresql-0 5432:5432
+pg_dumpall -U postgres -h localhost -p 5432 > dump.sql
+```
+
+Remove pvc from Longhorn and update the container to the ner Postgresql version.
+
+```bash
+psql -h localhost -p 5432 -U postgres < dump.sql
+```
 
 ## Node setup
 
