@@ -55,6 +55,27 @@ Or the connect form outside the cluster run:
 kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
 ```
 
+### Create user and database
+
+```psql
+CREATE DATABASE <NAME>;
+CREATE USER <NAME> WITH ENCRYPTED PASSWORD '<PASSWORD>';
+GRANT ALL PRIVILEGES ON DATABASE <NAME> TO <NAME>
+```
+
+### Upgrade
+
+```bash
+k port-forward -n postgresql postgresql-0 5432:5432
+pg_dumpall -U postgres -h localhost -p 5432 > dump.sql
+```
+
+Remove pvc from Longhorn and update the container to the ner Postgresql version.
+
+```bash
+psql -h localhost -p 5432 -U postgres < dump.sql
+```
+
 ## Mysql
 
 ```bash
@@ -133,19 +154,6 @@ sudo apt-mark hold kubelet kubectl
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 kubectl uncordon <NODE_NAME>
-```
-
-## Upgrade postgresql
-
-```bash
-k port-forward -n postgresql postgresql-0 5432:5432
-pg_dumpall -U postgres -h localhost -p 5432 > dump.sql
-```
-
-Remove pvc from Longhorn and update the container to the ner Postgresql version.
-
-```bash
-psql -h localhost -p 5432 -U postgres < dump.sql
 ```
 
 ## Node setup
