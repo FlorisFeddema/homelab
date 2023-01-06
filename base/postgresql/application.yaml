@@ -19,7 +19,6 @@ spec:
           enabled: false
 
         image:
-          tag: 14.4.0-debian-11-r9
           debug: false
 
         auth:
