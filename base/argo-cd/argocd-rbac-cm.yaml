@@ -9,5 +9,6 @@ metadata:
 data:
   policy.csv: |
     g, admins, role:admin
+    g, codespaces, role:admin
 
   policy.default: role:readonly
