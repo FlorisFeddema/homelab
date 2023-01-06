@@ -18,8 +18,7 @@ spec:
         diagnosticMode:
           enabled: false
 
-        image:
-          tag: 14.4.0-debian-11-r9
+        image
           debug: false
 
         auth:
