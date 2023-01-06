@@ -16,7 +16,7 @@ spec:
     helm:
       values: |
         diagnosticMode:
-          enabled: false
+          enabled: true
 
         image:
           tag: 14.4.0-debian-11-r9
