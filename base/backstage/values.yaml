@@ -1,0 +1,32 @@
+diagnosticMode:
+  enabled: false
+
+ingress:
+  enabled: false
+  annotations: {}
+  host: ""
+  tls:
+    enabled: false
+    secretName: ""
+
+
+backstage:
+  extraEnvVars:
+  - POSTGRES_HOST: 
+  - POSTGRES_PORT: 
+  - POSTGRES_USER: 
+  extraEnvVarsSecrets:
+  - POSTGRES_PASSWORD: 
+  resources:
+    limits:
+      memory: 512Mi
+    requests:
+      memory: 128Mi
+      cpu: 50m
+
+postgresql:
+  enabled: false
+
+serviceAccount:
+  create: true
+  automountServiceAccountToken: true
