@@ -2,27 +2,40 @@ diagnosticMode:
   enabled: false
 
 ingress:
-  enabled: false
-  annotations: {}
-  host: ""
+  enabled: true
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: backstage.cloud.feddema.dev
+    external-dns.alpha.kubernetes.io/ttl: "120"
+    ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt
+  host: "backstage.cloud.feddema.dev"
   tls:
-    enabled: false
-    secretName: ""
-
+    enabled: true
+    secretName: "backstage-tls"
 
 backstage:
   extraEnvVars:
-  - POSTGRES_HOST: 
-  - POSTGRES_PORT: 
-  - POSTGRES_USER: 
+    - name: POSTGRES_HOST
+      value: "postgresql.postgresql.svc.cluster.local"
+    - name: POSTGRES_PORT
+      value: "5342"
+    - name: POSTGRES_USER
+      value: "backstage"
   extraEnvVarsSecrets:
-  - POSTGRES_PASSWORD: 
+  - backstage-credentials
   resources:
     limits:
       memory: 512Mi
     requests:
       memory: 128Mi
       cpu: 50m
+
+  appConfig:
+    app:
+      title: Backstage
+      baseUrl: https://backstage.cloud.feddema.dev
+    organization:
+      name: Feddemadev
 
 postgresql:
   enabled: false

@@ -5,18 +5,18 @@
 #   namespace: argocd
 #   finalizers:
 #     - resources-finalizer.argocd.argoproj.io
-
+#
 # spec:
 #   project: no-sync
 #   source:
 #     repoURL: https://github.com/florisfeddema/cloud-gitops.git
 #     targetRevision: HEAD
 #     path: base/backstage
-
+#
 #   destination:
 #     server: https://kubernetes.default.svc
 #     namespace: backstage
-
+#
 #   revisionHistoryLimit: 2
 #   syncPolicy:
 #     automated:
