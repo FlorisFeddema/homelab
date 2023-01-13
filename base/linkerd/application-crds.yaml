@@ -20,6 +20,8 @@ spec:
 
   revisionHistoryLimit: 2
   syncPolicy:
+    syncOptions:
+    - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
