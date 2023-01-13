@@ -54,13 +54,20 @@ spec:
           enabled: true
           validationFailurePolicy: Fail
 
-
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb
 
+  ignoreDifferences:
+  - group: "apiextensions.k8s.io"
+    kind: "CustomResourceDefinition"
+    jsonPointers:
+    - /spec/conversion/webhook/clientConfig/caBundle
+
   revisionHistoryLimit: 2
   syncPolicy:
+    syncOptions:
+    - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true
