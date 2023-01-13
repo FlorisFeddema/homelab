@@ -26,6 +26,8 @@ spec:
 
   revisionHistoryLimit: 2
   syncPolicy:
+    syncOptions:
+    - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true
