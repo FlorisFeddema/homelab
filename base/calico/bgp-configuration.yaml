@@ -5,3 +5,11 @@ metadata:
 spec:
   serviceLoadBalancerIPs:
     - cidr: 31.201.251.186/32
+---
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  serviceLoadBalancerIPs:
+    - cidr: 31.201.251.186/32
