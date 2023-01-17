@@ -15,63 +15,32 @@ spec:
 
     helm:
       values: |
-        service:
-          ui:
-            type: ClusterIP
-          manager:
-            type: ClusterIP
-
         persistence:
           defaultClass: true
           defaultFsType: ext4
           defaultClassReplicaCount: 1
           reclaimPolicy: Retain
-          recurringJobSelector:
-            enable: false
-            jobList: []
-          backingImage:
-            enable: false
 
         csi:
-          kubeletRootDir: ~
           attacherReplicaCount: 1
           provisionerReplicaCount: 1
           resizerReplicaCount: 1
           snapshotterReplicaCount: 1
 
         defaultSettings:
-          backupTarget: ~
-          backupTargetCredentialSecret: ~
-          allowRecurringJobWhileVolumeDetached: ~
-          createDefaultDiskLabeledNodes: ~
-          defaultDataPath: ~
-          defaultDataLocality: ~
-          replicaAutoBalance: ~
-          storageOverProvisioningPercentage: 10
-          storageMinimalAvailablePercentage: ~
-          upgradeChecker: ~
           defaultReplicaCount: 1
-          backupstorePollInterval: ~
-          taintToleration: ~
-          systemManagedComponentsNodeSelector: ~
-          autoSalvage: ~
-          autoDeletePodWhenVolumeDetachedUnexpectedly: ~
-          disableSchedulingOnCordonedNode: ~
-          nodeDownPodDeletionPolicy: ~
-          allowNodeDrainWithLastHealthyReplica: ~
-          mkfsExt4Parameters: ~
-          disableReplicaRebuild: ~
-          replicaReplenishmentWaitInterval: ~
-          concurrentReplicaRebuildPerNodeLimit: ~
-          disableRevisionCounter: ~
-          systemManagedPodsImagePullPolicy: ~
-          allowVolumeCreationWithDegradedAvailability: ~
-          autoCleanupSystemGeneratedSnapshot: ~
-          concurrentAutomaticEngineUpgradePerNodeLimit: ~
-          backingImageCleanupWaitInterval: ~
-          backingImageRecoveryWaitInterval: ~
-          guaranteedEngineManagerCPU: ~
-          guaranteedReplicaManagerCPU: ~
+
+        longhornUI:
+          replicas: 1
+
+        longhornConversionWebhook:
+          replicas: 1
+
+        longhornAdmissionWebhook:
+          replicas: 1
+
+        longhornRecoveryBackend:
+          replicas: 1
 
         resources: 
           limits:
@@ -92,8 +61,6 @@ spec:
             external-dns.alpha.kubernetes.io/ttl: "120"
             cert-manager.io/cluster-issuer: letsencrypt
 
-        enablePSP: false
-        
         annotations:
           prometheus.io/scrape: "true"
           prometheus.io/path: /metrics

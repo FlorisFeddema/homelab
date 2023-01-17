@@ -12,6 +12,9 @@ spec:
     kind: VolumeSnapshotClass
     listKind: VolumeSnapshotClassList
     plural: volumesnapshotclasses
+    shortNames:
+    - vsclass
+    - vsclasses
     singular: volumesnapshotclass
   scope: Cluster
   versions:
