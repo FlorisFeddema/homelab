@@ -11,7 +11,7 @@ spec:
   source:
     chart: prometheus
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 19.2.2
+    targetRevision: 19.3.1
 
     helm:
       values: |
