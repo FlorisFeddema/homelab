@@ -3,7 +3,8 @@
     "dockerfile": "Dockerfile",
     "args": {
       "BASE_IMAGE_VERSION": "2",
-      "KUBESEAL_VERION": "0.19.2"
+      "KUBESEAL_VERION": "0.19.2",
+      "VELERO_VERION": "1.9.5"
     }
   },
   "features": {
