@@ -1,8 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: oauth-proxy-application
+  name: oauth-proxy-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
