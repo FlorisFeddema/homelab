@@ -59,10 +59,10 @@ spec:
         
           resources:
             limits:
-              memory: 512Mi
+              memory: 1024Mi
             requests:
-              cpu: 120m
-              memory: 256Mi
+              cpu: 160m
+              memory: 512Mi
         
           serviceAccount:
             create: true
