@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-application
+  name: calico-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/grafana
+    path: base/calico
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: grafana
+    namespace: calico
 
   revisionHistoryLimit: 2
   syncPolicy:

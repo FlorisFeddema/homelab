@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx-application
+  name: metrics-server-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/ingress-nginx
+    path: base/metrics-server
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
+    namespace: metrics-server
 
   revisionHistoryLimit: 2
   syncPolicy:

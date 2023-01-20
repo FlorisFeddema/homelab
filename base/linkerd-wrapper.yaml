@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets-application
+  name: linkerd-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/sealed-secrets
+    path: base/linkerd
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: sealed-secrets
+    namespace: linkerd
 
   revisionHistoryLimit: 2
   syncPolicy:

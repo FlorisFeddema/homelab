@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: longhorn-application
+  name: external-dns-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/longhorn
+    path: base/external-dns
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: longhorn-system
+    namespace: external-dns
 
   revisionHistoryLimit: 2
   syncPolicy:

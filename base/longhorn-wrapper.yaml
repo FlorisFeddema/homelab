@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: calico-application
+  name: longhorn-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/calico
+    path: base/longhorn
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: calico
+    namespace: longhorn-system
 
   revisionHistoryLimit: 2
   syncPolicy:

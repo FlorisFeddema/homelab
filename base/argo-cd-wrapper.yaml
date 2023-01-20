@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metallb-application
+  name: argo-cd-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/metallb
+    path: base/argo-cd
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: metallb
+    namespace: argocd
 
   revisionHistoryLimit: 2
   syncPolicy:

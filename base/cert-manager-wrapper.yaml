@@ -1,19 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argo-cd-application
+  name: cert-manager-wrapper
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
   source:
     repoURL: https://github.com/florisfeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: base/argo-cd
+    path: base/cert-manager
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: cert-manager
 
   revisionHistoryLimit: 2
   syncPolicy:
