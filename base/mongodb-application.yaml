@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: mongodb-application
   namespace: argocd
-  finalizers: []
+
 spec:
   project: always-sync
   source:
