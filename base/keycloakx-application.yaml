@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: keycloakx-application
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync

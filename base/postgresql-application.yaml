@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: postgresql-application
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync

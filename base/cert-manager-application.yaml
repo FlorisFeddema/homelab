@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: cert-manager-application
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
