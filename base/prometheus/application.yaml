@@ -162,7 +162,7 @@ spec:
           persistentVolume:
             enabled: true
             mountPath: /data
-            size: 100Gi
+            size: 300Gi
 
           replicaCount: 1
 
