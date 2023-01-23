@@ -345,7 +345,7 @@ spec:
             replicas: 1
             shards: 1
             
-            scrapeInterval: "30s"
+            scrapeInterval: "15s"
 
             resources:
               limits:
