@@ -344,6 +344,8 @@ spec:
             retention: 21d
             replicas: 1
             shards: 1
+            
+            scrapeInterval: "30s"
 
             resources:
               limits:
