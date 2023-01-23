@@ -109,7 +109,7 @@ spec:
             tls:
               - secretName: alert-tls
                 hosts:
-                  - alert.cloud.feddema.devd.
+                  - alert.cloud.feddema.dev
             hosts:
               - alert.cloud.feddema.dev
             paths:
