@@ -292,7 +292,7 @@ spec:
               argocd.argoproj.io/hook: PreSync
               argocd.argoproj.io/hook-delete-policy: HookSucceeded
             patch:
-              enabled: true
+              enabled: false
               annotations:
                 argocd.argoproj.io/hook: PreSync
                 argocd.argoproj.io/hook-delete-policy: HookSucceeded
