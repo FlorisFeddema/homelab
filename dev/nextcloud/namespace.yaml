@@ -2,3 +2,5 @@ kind: Namespace
 apiVersion: v1
 metadata:
   name: nextcloud
+  annotations:
+    linkerd.io/inject: enabled
