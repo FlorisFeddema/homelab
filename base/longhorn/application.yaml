@@ -18,7 +18,7 @@ spec:
         persistence:
           defaultClass: true
           defaultFsType: ext4
-          defaultClassReplicaCount: 1
+          defaultClassReplicaCount: 2
           reclaimPolicy: Retain
 
         csi:
