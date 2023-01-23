@@ -159,6 +159,13 @@ spec:
                   - grafana.cloud.feddema.dev
                 secretName: "grafana-tls"
 
+          extraSecretMounts:
+            - name: auth-generic-oauth-secret-mount
+              secretName: grafana-oauth-credentials
+              defaultMode: 0440
+              mountPath: /etc/secrets/auth_generic_oauth
+              readOnly: true
+          
           grafana.ini:
             auth.generic_oauth:
                 enabled: true
