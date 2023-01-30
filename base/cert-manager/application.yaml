@@ -43,6 +43,8 @@ spec:
 
         prometheus:
           enabled: true
+          servicemonitor:
+            enabled: true
 
         webhook:
           replicaCount: 1
