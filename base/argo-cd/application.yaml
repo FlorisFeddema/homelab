@@ -93,7 +93,7 @@ spec:
             limits:
               memory: 128Mi
             requests:
-              cpu: 80m
+              cpu: 50m
               memory: 64Mi
         
           metrics:
