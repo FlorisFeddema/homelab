@@ -357,7 +357,6 @@ spec:
             retention: 90d
             replicas: 1
             shards: 1
-            externalUrl: "prom.cloud.feddema.dev"
             
             scrapeInterval: "30s"
         
