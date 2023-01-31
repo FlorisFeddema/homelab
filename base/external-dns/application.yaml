@@ -60,7 +60,7 @@ spec:
           create: false
           
         service:
-          enabled: false
+          enabled: true
           type: ClusterIP
           ports:
             http: 7979
@@ -86,11 +86,13 @@ spec:
           requests:
             cpu: 10m
             memory: 30Mi
-
-        podAnnotations:
-          prometheus.io/scrape: "true"
-          prometheus.io/path: /metrics
-          prometheus.io/port: "7979"
+        
+        metrics:
+          enabled: true
+          serviceMonitor:
+            enabled: true
+            namespace: Prometheus
+        
   
 
   destination:
