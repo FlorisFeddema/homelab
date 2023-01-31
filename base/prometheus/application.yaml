@@ -236,7 +236,7 @@ spec:
           namespace: kube-system
 
         kubeControllerManager:
-          enabled: false
+          enabled: true
           service:
             enabled: true
           serviceMonitor:
