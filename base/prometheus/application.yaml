@@ -343,7 +343,7 @@ spec:
               ingress.kubernetes.io/rewrite-target: /
               cert-manager.io/cluster-issuer: letsencrypt
             tls:
-              - secretName: alert-tls
+              - secretName: prometheus-tls
                 hosts:
                   - prometheus.cloud.feddema.dev
             hosts:
