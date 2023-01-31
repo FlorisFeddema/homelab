@@ -344,7 +344,7 @@ spec:
                 hosts:
                   - prom.cloud.feddema.dev
             hosts:
-              - pprom.cloud.feddema.dev
+              - prom.cloud.feddema.dev
             paths:
               - /
 
