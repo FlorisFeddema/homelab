@@ -99,13 +99,6 @@ spec:
           metrics:
             enabled: true
         
-          resources:
-           limits:
-             memory: 64Mi
-           requests:
-             cpu: 10m
-             memory: 32Mi
-        
         redis-ha:
           enabled: false
         
