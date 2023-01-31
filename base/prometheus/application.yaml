@@ -289,9 +289,7 @@ spec:
           enabled: true
 
           tls:
-            enabled: true
-            tlsMinVersion: VersionTLS13
-            internalPort: 10250
+            enabled: false
 
           admissionWebhooks:
             enabled: true
@@ -345,7 +343,7 @@ spec:
             replicas: 1
             shards: 1
             
-            scrapeInterval: "15s"
+            scrapeInterval: "30s"
 
             resources:
               limits:
@@ -355,12 +353,12 @@ spec:
                 memory: 512Mi
 
             storageSpec:
-            volumeClaimTemplate:
-              spec:
-                accessModes: ["ReadWriteOnce"]
-                resources:
-                  requests:
-                    storage: 300Gi
+              volumeClaimTemplate:
+                spec:
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 300Gi
 
         cleanPrometheusOperatorObjectNames: true
 
