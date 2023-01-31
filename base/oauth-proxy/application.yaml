@@ -31,6 +31,7 @@ spec:
           hosts:
             - alert.cloud.feddema.dev
             - longhorn.cloud.feddema.dev
+            - prometheus.cloud.feddema.dev
           tls:
             - secretName: alert-tls
               hosts:
@@ -38,6 +39,9 @@ spec:
             - secretName: longhorn-tls
               hosts:
                 - longhorn.cloud.feddema.dev
+            - secretName: prometheus-tls
+              hosts:
+                - prometheus.cloud.feddema.dev
 
         resources:
           limits:
