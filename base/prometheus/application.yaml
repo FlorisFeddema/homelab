@@ -332,6 +332,24 @@ spec:
 
         prometheus:
           enabled: true
+        
+          ingress:
+            enabled: true
+            annotations:
+              nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+              nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+              external-dns.alpha.kubernetes.io/hostname: prometheus.cloud.feddema.dev
+              external-dns.alpha.kubernetes.io/ttl: "120"
+              ingress.kubernetes.io/rewrite-target: /
+              cert-manager.io/cluster-issuer: letsencrypt
+            tls:
+              - secretName: alert-tls
+                hosts:
+                  - prometheus.cloud.feddema.dev
+            hosts:
+              - prometheus.cloud.feddema.dev
+            paths:
+              - /
 
           serviceAccount:
             create: true
@@ -342,9 +360,10 @@ spec:
             retention: 90d
             replicas: 1
             shards: 1
+            externalUrl: "prometheus.cloud.feddema.dev"
             
             scrapeInterval: "30s"
-
+        
             resources:
               limits:
                 memory: 768Mi
