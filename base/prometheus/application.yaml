@@ -294,6 +294,8 @@ spec:
 
           tls:
             enabled: false
+            tlsMinVersion: VersionTLS13
+            internalPort: 10250
 
           admissionWebhooks:
             enabled: true
