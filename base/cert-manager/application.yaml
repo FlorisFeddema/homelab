@@ -46,6 +46,7 @@ spec:
           servicemonitor:
             enabled: true
             namespace: prometheus
+            honorLabels: true
 
         webhook:
           replicaCount: 1
