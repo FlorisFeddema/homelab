@@ -59,9 +59,9 @@ spec:
         
           resources:
             limits:
-              memory: 1024Mi
+              memory: 2048Mi
             requests:
-              cpu: 160m
+              cpu: 130m
               memory: 512Mi
         
           serviceAccount:
@@ -122,7 +122,7 @@ spec:
             limits:
               memory: 512Mi
             requests:
-              cpu: 100m
+              cpu: 70m
               memory: 128Mi
         
           metrics:
