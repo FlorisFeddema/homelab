@@ -236,11 +236,12 @@ spec:
           namespace: kube-system
 
         kubeControllerManager:
-          enabled: true
+          enabled: false
           service:
             enabled: true
           serviceMonitor:
             enabled: true
+            insecureSkipVerify: true
 
         coreDns:
           enabled: true
@@ -251,6 +252,7 @@ spec:
             enabled: true
           serviceMonitor:
             enabled: true
+            insecureSkipVerify: tru
 
         kubeScheduler:
           enabled: true
@@ -258,6 +260,7 @@ spec:
             enabled: true
           serviceMonitor:
             enabled: true
+            insecureSkipVerify: tru
 
         kubeProxy:
           enabled: true
@@ -265,6 +268,7 @@ spec:
             enabled: true
           serviceMonitor:
             enabled: true
+            insecureSkipVerify: tru
 
         kubeStateMetrics:
           enabled: true
@@ -358,6 +362,8 @@ spec:
             replicas: 1
             shards: 1
             
+            serviceMonitorSelector: {}
+            serviceMonitorNamespaceSelector: {}
             scrapeInterval: "30s"
         
             resources:
