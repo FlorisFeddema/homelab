@@ -339,7 +339,7 @@ spec:
             selfMonitor: true
 
           prometheusSpec:
-            retention: 21d
+            retention: 90d
             replicas: 1
             shards: 1
             
