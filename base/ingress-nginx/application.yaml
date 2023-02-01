@@ -94,11 +94,8 @@ spec:
 
           metrics:
             enabled: true
-            service:
-              annotations:
-                prometheus.io/scrape: "true"
-                prometheus.io/path: /metrics
-                prometheus.io/port: "10254"
+            serviceMonitor:
+              enabled: true
 
         revisionHistoryLimit: 10
 

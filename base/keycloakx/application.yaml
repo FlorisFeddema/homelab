@@ -117,16 +117,16 @@ spec:
           mode: edge
 
         metrics:
-          enabled: false
+          enabled: true
+
+        serviceMonitor:
+          enabled: true
 
         health:
           enabled: true
 
         http:
           relativePath: "/"
-
-        serviceMonitor:
-          enabled: false
 
   destination:
     server: https://kubernetes.default.svc

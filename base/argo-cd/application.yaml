@@ -71,11 +71,8 @@ spec:
         
           metrics:
             enabled: true
-        
-          podAnnotations:
-            prometheus.io/scrape: "true"
-            prometheus.io/path: /metrics
-            prometheus.io/port: "8082"
+            serviceMonitor:
+              enabled: true
         
           clusterAdminAccess:
             enabled: true
@@ -98,6 +95,8 @@ spec:
         
           metrics:
             enabled: true
+            serviceMonitor:
+              enabled: true
         
         redis-ha:
           enabled: false
@@ -127,11 +126,8 @@ spec:
         
           metrics:
             enabled: true
-          
-          podAnnotations:
-            prometheus.io/scrape: "true"
-            prometheus.io/path: /metrics
-            prometheus.io/port: "8083"
+            serviceMonitor:
+              enabled: true
         
           serviceAccount:
             create: true
@@ -211,11 +207,8 @@ spec:
         
           metrics:
             enabled: true
-        
-          podAnnotations:
-            prometheus.io/scrape: "true"
-            prometheus.io/path: /metrics
-            prometheus.io/port: "8084"
+            serviceMonitor:
+              enabled: true
         
           clusterAdminAccess:
             enabled: false
