@@ -25,6 +25,8 @@ spec:
           - "--hostname-strict-https=false"
 
         extraEnv: |
+          - name: KEYCLOAK_STATISTICS
+            value: all
           - name: JAVA_OPTS_APPEND
             value: >-
               -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
