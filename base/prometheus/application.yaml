@@ -237,38 +237,18 @@ spec:
 
         kubeControllerManager:
           enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
 
         coreDns:
           enabled: true
 
         kubeEtcd:
           enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
 
         kubeScheduler:
           enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
 
         kubeProxy:
           enabled: true
-          service:
-            enabled: true
-          serviceMonitor:
-            enabled: true
-            insecureSkipVerify: true
 
         kubeStateMetrics:
           enabled: true
