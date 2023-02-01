@@ -65,6 +65,8 @@ spec:
         
         metrics:
           enabled: true
+          serviceMonitor:
+            enabled: true
           resources:
             limits:
               memory: 64Mi

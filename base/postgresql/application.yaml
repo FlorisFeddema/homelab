@@ -90,7 +90,9 @@ spec:
           create: false
 
         metrics:
-          enabled: false
+          enabled: true
+          serviceMonitor:
+            enabled: true
 
   destination:
     server: https://kubernetes.default.svc

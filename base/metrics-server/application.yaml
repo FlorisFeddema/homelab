@@ -42,10 +42,10 @@ spec:
           port: 443
           
         metrics:
-          enabled: false
+          enabled: true
 
         serviceMonitor:
-          enabled: false
+          enabled: true
 
   destination:
     server: https://kubernetes.default.svc

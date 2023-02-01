@@ -61,11 +61,6 @@ spec:
             external-dns.alpha.kubernetes.io/ttl: "120"
             cert-manager.io/cluster-issuer: letsencrypt
 
-        annotations:
-          prometheus.io/scrape: "true"
-          prometheus.io/path: /metrics
-          prometheus.io/port: "9500"
-
   destination:
     server: https://kubernetes.default.svc
     namespace: longhorn-system

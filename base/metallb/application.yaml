@@ -23,10 +23,10 @@ spec:
             enabled: false
 
           serviceMonitor:
-            enabled: false
+            enabled: true
 
           prometheusRule:
-            enabled: false
+            enabled: true
 
         controller:
           enabled: true

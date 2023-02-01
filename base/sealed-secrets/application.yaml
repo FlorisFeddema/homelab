@@ -58,10 +58,10 @@ spec:
 
         metrics:
           serviceMonitor:
-            enabled: false
+            enabled: true
             
           dashboards:
-            create: false 
+            create: true 
 
   destination:
     server: https://kubernetes.default.svc
