@@ -19,14 +19,10 @@ spec:
           create: true
 
         prometheus:
-          podMonitor:
-            enabled: false
-
+          serviceAccount: "metallb"
           serviceMonitor:
             enabled: true
-
-          prometheusRule:
-            enabled: true
+          namespace: "metallb"
 
         controller:
           enabled: true
