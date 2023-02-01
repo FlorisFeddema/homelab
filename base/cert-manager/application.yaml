@@ -45,7 +45,6 @@ spec:
           enabled: true
           servicemonitor:
             enabled: true
-            prometheusInstance: prometheus
 
         webhook:
           replicaCount: 1

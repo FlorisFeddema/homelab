@@ -91,9 +91,6 @@ spec:
           enabled: true
           serviceMonitor:
             enabled: true
-            namespace: prometheus
-        
-  
 
   destination:
     server: https://kubernetes.default.svc
