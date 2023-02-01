@@ -252,7 +252,7 @@ spec:
             enabled: true
           serviceMonitor:
             enabled: true
-            insecureSkipVerify: tru
+            insecureSkipVerify: true
 
         kubeScheduler:
           enabled: true
@@ -260,7 +260,7 @@ spec:
             enabled: true
           serviceMonitor:
             enabled: true
-            insecureSkipVerify: tru
+            insecureSkipVerify: true
 
         kubeProxy:
           enabled: true
@@ -268,7 +268,7 @@ spec:
             enabled: true
           serviceMonitor:
             enabled: true
-            insecureSkipVerify: tru
+            insecureSkipVerify: true
 
         kubeStateMetrics:
           enabled: true
