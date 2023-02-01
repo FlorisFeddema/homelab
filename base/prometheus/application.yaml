@@ -293,7 +293,7 @@ spec:
           enabled: true
 
           tls:
-            enabled: false
+            enabled: true
             tlsMinVersion: VersionTLS13
             internalPort: 10250
 
