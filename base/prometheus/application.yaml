@@ -303,13 +303,13 @@ spec:
               argocd.argoproj.io/hook: PreSync
               argocd.argoproj.io/hook-delete-policy: HookSucceeded
             patch:
-              enabled: false
+              enabled: true
               annotations:
                 argocd.argoproj.io/hook: PreSync
                 argocd.argoproj.io/hook-delete-policy: HookSucceeded
                 
             certManager:
-              enabled: false
+              enabled: true
 
           serviceAccount:
             create: true
