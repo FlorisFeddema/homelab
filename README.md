@@ -43,7 +43,7 @@ Get the database password by running the following command:
 export POSTGRES_PASSWORD=$(kubectl get secret --namespace postgresql postgresql-credentials -o jsonpath="{.data.postgres-password}" | base64 -d)
 ```
 
-The connect to the database run the following command: 
+To connect to the database run the following command: 
 
 ```bash
 kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace postgresql --image docker.io/bitnami/postgresql:14.4.0-debian-11-r9 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgresql -U postgres -d postgres -p 5432

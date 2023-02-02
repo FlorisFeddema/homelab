@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: enphase-envoy-prometheus-exporter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: always-sync
+  source:
+    chart: enphase-envoy-prometheus-exporter
+    repoURL: https://florisfeddema.github.io/enphase-envoy-prometheus-exporter/
+    targetRevision: 0.0.3
+
+    helm:
+      values: |
+        replicaCount: 1
+        
+        existingSecret: 'enphase-envoy-prometheus-exporter-credentials'
+        
+        resources:
+          limits:
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 16Mi
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: external-dns
+
+  revisionHistoryLimit: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
