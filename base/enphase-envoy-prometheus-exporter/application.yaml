@@ -28,7 +28,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-dns
+    namespace: enphase-envoy-prometheus-exporter
 
   revisionHistoryLimit: 2
   syncPolicy:
