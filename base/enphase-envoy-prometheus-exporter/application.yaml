@@ -11,7 +11,7 @@ spec:
   source:
     chart: enphase-envoy-prometheus-exporter
     repoURL: https://florisfeddema.github.io/enphase-envoy-prometheus-exporter/
-    targetRevision: 0.0.6
+    targetRevision: 0.0.7
 
     helm:
       values: |
