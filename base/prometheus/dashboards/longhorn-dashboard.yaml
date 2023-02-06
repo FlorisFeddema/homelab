@@ -8,41 +8,81 @@ metadata:
 data:
   alert-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS-LONGHORN",
+          "label": "prometheus-longhorn",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
+      "__requires": [
+        {
+          "type": "grafana",
+          "id": "grafana",
+          "name": "Grafana",
+          "version": "7.1.5"
+        },
+        {
+          "type": "panel",
+          "id": "graph",
+          "name": "Graph",
+          "version": ""
+        },
+        {
+          "type": "datasource",
+          "id": "prometheus",
+          "name": "Prometheus",
+          "version": "1.0.0"
+        },
+        {
+          "type": "panel",
+          "id": "stat",
+          "name": "Stat",
+          "version": ""
+        },
+        {
+          "type": "panel",
+          "id": "table",
+          "name": "Table",
+          "version": ""
+        },
+        {
+          "type": "panel",
+          "id": "text",
+          "name": "Text",
+          "version": "7.1.0"
+        }
+      ],
       "annotations": {
         "list": [
           {
             "builtIn": 1,
-            "datasource": {
-              "type": "prometheus",
-              "uid": "prometheus"
-            },
+            "datasource": "-- Grafana --",
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
-            "target": {
-              "limit": 100,
-              "matchAny": false,
-              "tags": [],
-              "type": "dashboard"
-            },
             "type": "dashboard"
           }
         ]
       },
-      "description": "Longhorn metrics",
+      "description": "An example dashboard for Longhorn v1.4.0",
       "editable": true,
-      "fiscalYearStartMonth": 0,
       "gnetId": 17626,
       "graphTooltip": 0,
-      "id": 183,
+      "id": null,
       "links": [],
-      "liveNow": true,
       "panels": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -52,34 +92,22 @@ data:
           },
           "id": 6,
           "options": {
-            "code": {
-              "language": "plaintext",
-              "showLineNumbers": false,
-              "showMiniMap": false
-            },
             "content": "<div class=\"dashboard-header text-center\">\n<span>NODES</span>\n</div>",
             "mode": "html"
           },
-          "pluginVersion": "9.3.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "refId": "A"
-            }
-          ],
+          "pluginVersion": "7.1.0",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
           "transparent": true,
           "type": "text"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "The total number of nodes in the Longhorn storage system",
           "fieldConfig": {
             "defaults": {
+              "custom": {},
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -114,28 +142,26 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "avg(longhorn_node_count_total) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Total Number Of Nodes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Disabled nodes are nodes that are disabled by the user.  When users disable a node, Longhorn will not use the node's storage for replica scheduling. Note that Longhorn can still attach a volume to disabled nodes because the actual data of the volume could be on a different node.",
           "fieldConfig": {
             "defaults": {
+              "custom": {},
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -174,18 +200,17 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_node_status{condition=\"allowScheduling\"}==0) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Disabled Nodes",
           "type": "stat"
         },
@@ -194,10 +219,14 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -222,11 +251,8 @@ data:
           "lines": true,
           "linewidth": 1,
           "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
           "percentage": false,
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -236,9 +262,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "(longhorn_node_storage_usage_bytes/longhorn_node_storage_capacity_bytes) * 100",
               "interval": "",
               "legendFormat": "{{node}}",
@@ -246,7 +269,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Node Storage Usage/Capacity",
           "tooltip": {
             "shared": true,
@@ -255,7 +280,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -263,27 +290,33 @@ data:
             {
               "$$hashKey": "object:530",
               "format": "percent",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:531",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Schedulable nodes are nodes that Longhorn can use their storage for replica scheduling.",
           "fieldConfig": {
             "defaults": {
+              "custom": {},
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -322,28 +355,26 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "(count(longhorn_node_status{condition=\"schedulable\"}==1) OR on() vector(0)) - (count(longhorn_node_status{condition=\"allowScheduling\"}==0) OR on() vector(0))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Schedulable Nodes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Failed Nodes are nodes that Longhorn cannot attach volumes to and cannot schedule replicas onto. e.g: when the nodes went down.",
           "fieldConfig": {
             "defaults": {
+              "custom": {},
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -382,31 +413,27 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "(avg(longhorn_node_count_total) OR on() vector(0)) - (count(longhorn_node_status{condition=\"ready\"}==1) OR on() vector(0))",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Failed Nodes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "",
           "fieldConfig": {
             "defaults": {
               "custom": {
-                "displayMode": "auto",
-                "inspect": false
+                "align": null
               },
               "decimals": 1,
               "mappings": [],
@@ -445,21 +472,11 @@ data:
           },
           "id": 23,
           "options": {
-            "footer": {
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
             "showHeader": true
           },
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_node_storage_capacity_bytes",
               "format": "table",
               "instant": true,
@@ -468,6 +485,8 @@ data:
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Node Capacity",
           "transformations": [
             {
@@ -497,10 +516,14 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "decimals": 0,
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -523,11 +546,8 @@ data:
           "lines": true,
           "linewidth": 1,
           "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
           "percentage": false,
-          "pluginVersion": "9.3.1",
+          "pluginVersion": "7.1.5",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -537,9 +557,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count by (node) (longhorn_volume_state==2)",
               "interval": "",
               "legendFormat": "{{node}}",
@@ -547,7 +564,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Number of Volumes Per Node",
           "tooltip": {
             "shared": true,
@@ -556,7 +575,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -565,24 +586,34 @@ data:
               "$$hashKey": "object:422",
               "decimals": 0,
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:423",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
+          "datasource": null,
+          "fieldConfig": {
+            "defaults": {
+              "custom": {}
+            },
+            "overrides": []
           },
           "gridPos": {
             "h": 3,
@@ -592,24 +623,13 @@ data:
           },
           "id": 17,
           "options": {
-            "code": {
-              "language": "plaintext",
-              "showLineNumbers": false,
-              "showMiniMap": false
-            },
             "content": "<div class=\"dashboard-header text-center\">\n<span>DISKS</span>\n</div>",
             "mode": "html"
           },
-          "pluginVersion": "9.3.1",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "refId": "A"
-            }
-          ],
+          "pluginVersion": "7.1.0",
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
           "transparent": true,
           "type": "text"
         },
@@ -618,9 +638,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "The capacity of each Longhorn volume",
           "fieldConfig": {
             "defaults": {
@@ -663,9 +681,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "(longhorn_disk_usage_bytes/longhorn_disk_capacity_bytes)*100",
               "interval": "",
               "legendFormat": "{{disk}}",
@@ -673,7 +688,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Disk Space Usage",
           "tooltip": {
             "shared": true,
@@ -682,7 +699,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -690,28 +709,35 @@ data:
             {
               "$$hashKey": "object:530",
               "format": "percent",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:531",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "",
           "fieldConfig": {
             "defaults": {
-              "custom": {},
+              "custom": {
+                "align": null
+              },
               "decimals": 1,
               "mappings": [],
               "min": 0,
@@ -719,7 +745,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -753,9 +780,6 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_disk_capacity_bytes",
               "format": "table",
               "instant": true,
@@ -764,6 +788,8 @@ data:
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Disk Capacity",
           "transformations": [
             {
@@ -791,10 +817,7 @@ data:
           "type": "table"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
+          "datasource": null,
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -813,22 +836,14 @@ data:
             "mode": "html"
           },
           "pluginVersion": "7.1.0",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "refId": "A"
-            }
-          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
           "transparent": true,
           "type": "text"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "The total number of volumes in the Longhorn storage system",
           "fieldConfig": {
             "defaults": {
@@ -838,7 +853,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               }
@@ -869,22 +885,19 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_volume_capacity_bytes) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Total Number Of Volumes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Healthy volumes are volumes that are attaching to a node and have the number of healthy replicas equals to the expected number of replicas.",
           "fieldConfig": {
             "defaults": {
@@ -894,7 +907,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "red"
+                    "color": "red",
+                    "value": null
                   },
                   {
                     "color": "green",
@@ -929,37 +943,35 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_volume_robustness==1) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Healthy Volumes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "The capacity of each Longhorn volume",
           "fieldConfig": {
             "defaults": {
               "custom": {
+                "align": null,
                 "displayMode": "auto"
               },
               "decimals": 1,
               "mappings": [
                 {
-                  "options": {
-                    "": {
-                      "text": ""
-                    }
-                  },
-                  "type": "value"
+                  "from": "",
+                  "id": 0,
+                  "text": "",
+                  "to": "",
+                  "type": 1,
+                  "value": ""
                 }
               ],
               "min": 0,
@@ -967,7 +979,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   }
                 ]
               },
@@ -1015,9 +1028,6 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "avg by (volume) (longhorn_volume_capacity_bytes)",
               "format": "table",
               "instant": true,
@@ -1027,6 +1037,8 @@ data:
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Volume Capacity",
           "transformations": [
             {
@@ -1045,9 +1057,7 @@ data:
           "type": "table"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Degraded volumes are volumes that have the number of healthy replicas smaller than the expected number of replicas. e.g. User creates a volume with 2 replicas but 1 replicas is failed.",
           "fieldConfig": {
             "defaults": {
@@ -1057,7 +1067,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "orange",
@@ -1092,22 +1103,19 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_volume_robustness==2) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Degraded Volumes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Fault volumes are volumes that doesn't have any healthy replica.",
           "fieldConfig": {
             "defaults": {
@@ -1117,7 +1125,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1152,15 +1161,14 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_volume_robustness==3) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Fault Volumes",
           "type": "stat"
         },
@@ -1169,9 +1177,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Note that Longhorn volume actual size is not the size of the filesystem inside a Longhorn volume.  See more at : https://longhorn.io/docs/1.0.2/volumes-and-nodes/volume-size/#volume-actual-size",
           "fieldConfig": {
             "defaults": {
@@ -1214,9 +1220,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "( (avg by (volume) (longhorn_volume_actual_size_bytes))/ (avg by (volume) (longhorn_volume_capacity_bytes)) ) *100",
               "interval": "",
               "legendFormat": "{{volume}}",
@@ -1234,7 +1237,9 @@ data:
               "yaxis": "left"
             }
           ],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Volume Actual Size/Capacity",
           "tooltip": {
             "shared": true,
@@ -1243,7 +1248,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1251,24 +1258,29 @@ data:
             {
               "$$hashKey": "object:476",
               "format": "percent",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:477",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Attached volumes are volumes that are currently attaching to a node",
           "fieldConfig": {
             "defaults": {
@@ -1278,7 +1290,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "red"
+                    "color": "red",
+                    "value": null
                   },
                   {
                     "color": "green",
@@ -1313,22 +1326,19 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_volume_state==2) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Attached Volumes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Detached volumes are volumes that aren't currently attaching to a node",
           "fieldConfig": {
             "defaults": {
@@ -1338,7 +1348,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "yellow",
@@ -1373,23 +1384,19 @@ data:
           "pluginVersion": "7.1.5",
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "count(longhorn_volume_state==3) OR on() vector(0)",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
+          "timeFrom": null,
+          "timeShift": null,
           "title": "Number Of Detached Volumes",
           "type": "stat"
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
+          "datasource": null,
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1408,15 +1415,9 @@ data:
             "mode": "html"
           },
           "pluginVersion": "7.1.0",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "refId": "A"
-            }
-          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
           "transparent": true,
           "type": "text"
         },
@@ -1425,9 +1426,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1467,9 +1466,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_volume_write_throughput",
               "interval": "",
               "legendFormat": "",
@@ -1477,7 +1473,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Write Throughput",
           "tooltip": {
             "shared": true,
@@ -1486,7 +1484,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1494,6 +1494,7 @@ data:
             {
               "$$hashKey": "object:75",
               "format": "Bps",
+              "label": null,
               "logBase": 1,
               "max": "250000000",
               "min": "0",
@@ -1502,12 +1503,16 @@ data:
             {
               "$$hashKey": "object:76",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -1515,9 +1520,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1557,9 +1560,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_volume_read_throughput",
               "interval": "",
               "legendFormat": "",
@@ -1567,7 +1567,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Read Throughput",
           "tooltip": {
             "shared": true,
@@ -1576,7 +1578,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1584,6 +1588,7 @@ data:
             {
               "$$hashKey": "object:887",
               "format": "Bps",
+              "label": null,
               "logBase": 1,
               "max": "250000000",
               "min": "0",
@@ -1592,12 +1597,16 @@ data:
             {
               "$$hashKey": "object:888",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -1605,9 +1614,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1647,9 +1654,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_volume_write_iops",
               "interval": "",
               "legendFormat": "",
@@ -1657,7 +1661,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Write IOPS",
           "tooltip": {
             "shared": true,
@@ -1666,7 +1672,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1674,6 +1682,7 @@ data:
             {
               "$$hashKey": "object:166",
               "format": "iops",
+              "label": null,
               "logBase": 1,
               "max": "1000",
               "min": "0",
@@ -1682,12 +1691,16 @@ data:
             {
               "$$hashKey": "object:167",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -1695,9 +1708,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1737,9 +1748,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_volume_read_iops",
               "interval": "",
               "legendFormat": "",
@@ -1747,7 +1755,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Write IOPS",
           "tooltip": {
             "shared": true,
@@ -1756,7 +1766,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1764,6 +1776,7 @@ data:
             {
               "$$hashKey": "object:956",
               "format": "iops",
+              "label": null,
               "logBase": 1,
               "max": "1000",
               "min": "0",
@@ -1772,12 +1785,16 @@ data:
             {
               "$$hashKey": "object:957",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -1785,9 +1802,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1827,9 +1842,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_volume_write_latency",
               "interval": "",
               "legendFormat": "",
@@ -1837,7 +1849,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Write Latency",
           "tooltip": {
             "shared": true,
@@ -1846,7 +1860,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1854,6 +1870,7 @@ data:
             {
               "$$hashKey": "object:257",
               "format": "ns",
+              "label": null,
               "logBase": 1,
               "max": "10000000",
               "min": "0",
@@ -1862,12 +1879,16 @@ data:
             {
               "$$hashKey": "object:258",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -1875,9 +1896,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1917,9 +1936,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_volume_read_latency",
               "interval": "",
               "legendFormat": "",
@@ -1927,7 +1943,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Read Latency",
           "tooltip": {
             "shared": true,
@@ -1936,7 +1954,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -1944,6 +1964,7 @@ data:
             {
               "$$hashKey": "object:1147",
               "format": "ns",
+              "label": null,
               "logBase": 1,
               "max": "10000000",
               "min": "0",
@@ -1952,19 +1973,20 @@ data:
             {
               "$$hashKey": "object:1148",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
+          "datasource": null,
           "fieldConfig": {
             "defaults": {
               "custom": {}
@@ -1983,15 +2005,9 @@ data:
             "mode": "html"
           },
           "pluginVersion": "7.1.0",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "prometheus"
-              },
-              "refId": "A"
-            }
-          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "",
           "transparent": true,
           "type": "text"
         },
@@ -2000,9 +2016,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2044,9 +2058,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "(longhorn_node_cpu_usage_millicpu / longhorn_node_cpu_capacity_millicpu) * 100",
               "interval": "",
               "legendFormat": "{{node}}",
@@ -2064,7 +2075,9 @@ data:
               "yaxis": "left"
             }
           ],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Node CPU Usage/Capacity",
           "tooltip": {
             "shared": true,
@@ -2073,7 +2086,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -2082,18 +2097,25 @@ data:
               "$$hashKey": "object:865",
               "decimals": 0,
               "format": "percent",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:866",
               "format": "none",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -2101,9 +2123,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "",
           "fieldConfig": {
             "defaults": {
@@ -2145,9 +2165,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "( longhorn_node_memory_usage_bytes / longhorn_node_memory_capacity_bytes ) * 100",
               "interval": "",
               "legendFormat": "{{node}}",
@@ -2165,7 +2182,9 @@ data:
               "yaxis": "left"
             }
           ],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Node Memory Usage/Capacity",
           "tooltip": {
             "shared": true,
@@ -2174,7 +2193,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -2183,18 +2204,25 @@ data:
               "$$hashKey": "object:865",
               "decimals": 0,
               "format": "percent",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:866",
               "format": "none",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -2202,9 +2230,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "decimals": 0,
           "description": "Longhorn manager pods manage the control plane of the Longhorn system. e.g. Volume scheduling, attaching, detaching, backup, etc,..",
           "fieldConfig": {
@@ -2246,9 +2272,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_manager_cpu_usage_millicpu",
               "interval": "",
               "legendFormat": "{{manager}}",
@@ -2256,7 +2279,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Longhorn Manager CPU Usage",
           "tooltip": {
             "shared": true,
@@ -2265,7 +2290,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -2274,18 +2301,25 @@ data:
               "$$hashKey": "object:1500",
               "decimals": 0,
               "format": "milicpu",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:1501",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -2293,9 +2327,8 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
+          "decimals": null,
           "description": "Longhorn manager pods manage the control plane of the Longhorn system. e.g. Volume scheduling, attaching, detaching, backup, etc,..",
           "fieldConfig": {
             "defaults": {
@@ -2336,9 +2369,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_manager_memory_usage_bytes",
               "interval": "",
               "legendFormat": "{{manager}}",
@@ -2346,7 +2376,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Longhorn Manager Memory Usage",
           "tooltip": {
             "shared": true,
@@ -2355,26 +2387,36 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "$$hashKey": "object:1500",
+              "decimals": null,
               "format": "bytes",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:1501",
               "format": "short",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -2382,9 +2424,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "decimals": 0,
           "description": "Instance managers are pods that contains the engine and replica processes of Longhorn volumes. See more at https://longhorn.io/docs/1.0.2/concepts/#11-the-longhorn-manager-and-the-longhorn-engine ",
           "fieldConfig": {
@@ -2427,9 +2467,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_instance_manager_cpu_usage_millicpu",
               "interval": "",
               "legendFormat": "{{instance_manager}}",
@@ -2437,7 +2474,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Instance Manager CPU Usage",
           "tooltip": {
             "shared": true,
@@ -2446,7 +2485,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -2455,18 +2496,25 @@ data:
               "$$hashKey": "object:865",
               "decimals": 0,
               "format": "milicpu",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:866",
               "format": "none",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -2474,9 +2522,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Instance managers are pods that contains the engine and replica processes of Longhorn volumes. See more at https://longhorn.io/docs/1.0.2/concepts/#11-the-longhorn-manager-and-the-longhorn-engine ",
           "fieldConfig": {
             "defaults": {
@@ -2518,9 +2564,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "(longhorn_instance_manager_cpu_usage_millicpu/longhorn_instance_manager_cpu_requests_millicpu)*100",
               "interval": "",
               "legendFormat": "{{instance_manager}}",
@@ -2538,7 +2581,9 @@ data:
               "yaxis": "left"
             }
           ],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Instance Manager CPU Usage/Request",
           "tooltip": {
             "shared": true,
@@ -2547,7 +2592,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -2556,18 +2603,25 @@ data:
               "$$hashKey": "object:865",
               "decimals": 0,
               "format": "percent",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:866",
               "format": "none",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         },
         {
@@ -2575,9 +2629,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS-LONGHORN}"
-          },
+          "datasource": "${DS_PROMETHEUS-LONGHORN}",
           "description": "Instance managers are pods that contains the engine and replica processes of Longhorn volumes. See more at https://longhorn.io/docs/1.0.2/concepts/#11-the-longhorn-manager-and-the-longhorn-engine ",
           "fieldConfig": {
             "defaults": {
@@ -2619,9 +2671,6 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS-LONGHORN}"
-              },
               "expr": "longhorn_instance_manager_memory_usage_bytes",
               "interval": "",
               "legendFormat": "{{instance_manager}}",
@@ -2629,7 +2678,9 @@ data:
             }
           ],
           "thresholds": [],
+          "timeFrom": null,
           "timeRegions": [],
+          "timeShift": null,
           "title": "Instance Manager Memory Usage",
           "tooltip": {
             "shared": true,
@@ -2638,7 +2689,9 @@ data:
           },
           "type": "graph",
           "xaxis": {
+            "buckets": null,
             "mode": "time",
+            "name": null,
             "show": true,
             "values": []
           },
@@ -2646,23 +2699,30 @@ data:
             {
               "$$hashKey": "object:865",
               "format": "bytes",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             },
             {
               "$$hashKey": "object:866",
               "format": "none",
+              "label": null,
               "logBase": 1,
+              "max": null,
+              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false
+            "align": false,
+            "alignLevel": null
           }
         }
       ],
       "refresh": "5s",
-      "schemaVersion": 37,
+      "schemaVersion": 26,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -2687,9 +2747,7 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Longhorn",
+      "title": "Longhorn Example v1.4.0",
       "uid": "2BCgsldGz",
-      "version": 1,
-      "weekStart": ""
+      "version": 22
     }
-
