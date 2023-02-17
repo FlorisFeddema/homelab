@@ -29,7 +29,7 @@ spec:
 
         defaultSettings:
           defaultReplicaCount: 1
-          backupTarget: s://longhorn-backups@backups.westeurope.azurecontainer.io:9000
+          backupTarget: s3://longhorn-backups@backups.westeurope.azurecontainer.io:9000
           backupTargetCredentialSecret: backup-credentials
 
         longhornUI:
