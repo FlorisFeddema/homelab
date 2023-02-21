@@ -4,7 +4,7 @@ metadata:
   name: weekly-backup-job
   namespace: longhorn-system
 spec:
-  cron: 0 4 * * 0" #At 04:00 on every Sunday
+  cron: 0 5 * * 3" #At 04:00 on every Sunday
   task: "backup"
   groups:
     - default
