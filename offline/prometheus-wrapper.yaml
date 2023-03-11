@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: prometheus-wrapper
   namespace: argocd
-  annotations:
-    cloud.feddema.dev/helm-updater-skip: 'true'
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 

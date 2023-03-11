@@ -4,7 +4,7 @@ metadata:
   name: mysql
   namespace: argocd
   annotations:
-    cloud.feddema.dev/helm-updater-skip: true
+    cloud.feddema.dev/helm-updater-skip: "true"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
