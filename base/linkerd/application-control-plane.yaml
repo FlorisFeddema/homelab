@@ -11,7 +11,7 @@ spec:
   source:
     chart: linkerd-control-plane
     repoURL: https://helm.linkerd.io/stable
-    targetRevision: 1.9.5
+    targetRevision: 1.9.6
     helm:
       values: |
         identity:
