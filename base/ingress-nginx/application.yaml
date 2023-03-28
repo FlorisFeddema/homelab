@@ -49,13 +49,13 @@ spec:
           publishService:
             enabled: true
 
-          kind: Deployment
+          kind: DeamonSet
 
           minReadySeconds: 0
 
           terminationGracePeriodSeconds: 300
 
-          replicaCount: 2
+          replicaCount: 1
           minAvailable: 1
           resources:
             limits:
