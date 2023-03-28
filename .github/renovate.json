@@ -1,6 +1,6 @@
 {
   "extends": [
-    "github>florisfeddema/renovate-config:default.json",
+    "github>florisfeddema/renovate-config:default.json"
   ],
   "ignorePaths": ["offline/**"],
   "argocd": {
