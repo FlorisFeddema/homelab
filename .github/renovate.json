@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "github>florisfeddema/renovate-config:default.json",
+  ],
+  "ignorePaths": ["offline/**"],
+  "argocd": {
+    "fileMatch": ["\\.yaml$"]
+  }
+}
