@@ -49,7 +49,7 @@ spec:
           publishService:
             enabled: true
 
-          kind: DeamonSet
+          kind: DaemonSet
 
           minReadySeconds: 0
 
