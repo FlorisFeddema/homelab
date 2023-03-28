@@ -30,10 +30,9 @@ data:
           }
         ]
       },
-      "editable": true,
+      "editable": false,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 1059,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -406,7 +405,8 @@ data:
                     "value": null
                   }
                 ]
-              }
+              },
+              "unit": "watt"
             },
             "overrides": []
           },
@@ -537,11 +537,18 @@ data:
         "to": "now"
       },
       "timepicker": {
-        "hidden": false
+        "hidden": false,
+        "refresh_intervals": [
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m"
+        ]
       },
       "timezone": "",
-      "title": "Envoy Solarpanels ",
+      "title": "Envoy Solarpanels",
       "uid": "fI005ff4k",
-      "version": 6,
+      "version": 7,
       "weekStart": ""
     }
