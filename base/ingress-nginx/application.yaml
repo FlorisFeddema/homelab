@@ -49,13 +49,13 @@ spec:
           publishService:
             enabled: true
 
-          kind: DaemonSet
+          kind: Deployment
 
           minReadySeconds: 0
 
           terminationGracePeriodSeconds: 300
 
-          replicaCount: 1
+          replicaCount: 2
           minAvailable: 1
           resources:
             limits:
