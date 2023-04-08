@@ -49,20 +49,13 @@ spec:
           publishService:
             enabled: true
 
-          kind: Deployment
+          kind: DaemonSet
 
           minReadySeconds: 0
 
           terminationGracePeriodSeconds: 300
 
-          replicaCount: 2
-          minAvailable: 0
-
-          updateStrategy:
-            rollingUpdate:
-              maxUnavailable: 1
-            type: RollingUpdate
-
+          replicaCount: 1
           resources:
             limits:
               memory: 512Mi
