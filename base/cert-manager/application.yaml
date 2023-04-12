@@ -106,7 +106,6 @@ spec:
           serviceAccount:
             create: true
             automountServiceAccountToken: true
-            
 
   destination:
     server: https://kubernetes.default.svc
