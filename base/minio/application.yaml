@@ -1,0 +1,113 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  source:
+    chart: minio
+    repoURL: https://charts.min.io
+    targetRevision: 5.0.7
+    helm:
+      values: |
+        mode: distributed
+        
+        ## Use existing Secret that store following variables:
+        ##
+        ## | Chart var             | .data.<key> in Secret    |
+        ## |:----------------------|:-------------------------|
+        ## | rootUser              | rootUser                 |
+        ## | rootPassword          | rootPassword             |
+        ##
+        ## All mentioned variables will be ignored in values file.
+        ## .data.rootUser and .data.rootPassword are mandatory,
+        ## others depend on enabled status of corresponding sections.
+        existingSecret: ""
+        
+        drivesPerNode: 1
+        replicas: 1
+        pools: 1
+        
+        persistence:
+          enabled: true
+          accessMode: ReadWriteOnce
+          size: 500Gi
+        
+        service:
+          type: ClusterIP
+          clusterIP: ~
+          port: "9000"
+        
+        ingress:
+          enabled: false
+        
+        consoleService:
+          type: ClusterIP
+          clusterIP: ~
+          port: "9001"
+          nodePort: 32001
+        
+        consoleIngress:
+          enabled: true
+          path: /
+          hosts:
+            - minio.cloud.feddema.dev
+          tls: []
+            - secretName: minio-tls
+              hosts:
+                - minio.cloud.feddema.dev
+        
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 100m
+        
+        users:
+        ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
+        #- accessKey: externalSecret
+        #  existingSecret: my-secret
+        #  existingSecretKey: password
+        #  policy: readonly
+        
+        buckets:
+        # - name: bucket1
+        #   Policy [none|download|upload|public]
+        #   policy: none
+        #   purge: false
+        #   versioning: false
+        #   objectlocking: false
+        
+        oidc: #something with environment variables
+          enabled: false
+          configUrl: "https://identity-provider-url/.well-known/openid-configuration"
+          clientId: "minio"
+          clientSecret: ""
+          claimName: "policy"
+          scopes: "openid,profile,email"
+          redirectUri: "https://console-endpoint-url/oauth_callback"
+        
+        metrics:
+          serviceMonitor:
+            enabled: true
+            includeNode: true
+            public: false
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: minio
+
+  revisionHistoryLimit: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
