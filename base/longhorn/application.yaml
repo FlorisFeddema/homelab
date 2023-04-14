@@ -18,7 +18,7 @@ spec:
         persistence:
           defaultClass: true
           defaultFsType: ext4
-          defaultClassReplicaCount: 2
+          defaultClassReplicaCount: 1
           reclaimPolicy: Retain
 
         csi:
@@ -29,7 +29,7 @@ spec:
 
         defaultSettings:
           defaultReplicaCount: 1
-          backupTarget: s3://longhorn-backups@weu-01/
+          backupTarget: s3://longhorn-backups@default/
           backupTargetCredentialSecret: backup-credentials
 
         longhornUI:
