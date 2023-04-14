@@ -78,7 +78,7 @@ spec:
     - group: "monitoring.coreos.com"
       kind: "Probe"
       jsonPointers:
-        - /spec/staticConfig/bearerTokenSecret
+        - /spec/targets/staticConfig/bearerTokenSecret
 
   revisionHistoryLimit: 2
   syncPolicy:
