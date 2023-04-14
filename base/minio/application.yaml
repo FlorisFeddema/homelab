@@ -67,11 +67,18 @@ spec:
         metrics:
           serviceMonitor:
             enabled: true
+            includeNode: true
             public: false
 
   destination:
     server: https://kubernetes.default.svc
     namespace: minio
+
+  ignoreDifferences:
+    - group: "monitoring.coreos.com"
+      kind: "Probe"
+      jsonPointers:
+        - /spec/staticConfig/bearerTokenSecret
 
   revisionHistoryLimit: 2
   syncPolicy:
