@@ -36,6 +36,11 @@ spec:
         
         consoleIngress:
           enabled: true
+          annotations: 
+            external-dns.alpha.kubernetes.io/hostname: minio.cloud.feddema.dev
+            external-dns.alpha.kubernetes.io/ttl: "120"
+            cert-manager.io/cluster-issuer: letsencrypt
+            nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
           path: /
           hosts:
             - minio.cloud.feddema.dev
