@@ -55,17 +55,16 @@ spec:
             cpu: 50m
         
         # users:
-        ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
         #- accessKey: externalSecret
         #  existingSecret: my-secret
-        #  existingSecretKey: password
-        #  policy: readonly
+        #  existingSecretKey: secretKey
+        #  policy: readwrite
         
-        buckets:
-         - name: test
-           policy: none
-           purge: false
-           versioning: false
+        # buckets:
+        #  - name: test
+        #    policy: none
+        #    purge: false
+        #    versioning: false
         
         metrics:
           serviceMonitor:
