@@ -34,11 +34,6 @@ spec:
         ingress:
           enabled: false
         
-        consoleService:
-          type: ClusterIP
-          clusterIP: ~
-          port: "9001"
-        
         consoleIngress:
           enabled: true
           path: /
