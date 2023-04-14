@@ -54,7 +54,7 @@ spec:
             memory: 256Mi
             cpu: 50m
         
-        users:
+        # users:
         ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
         #- accessKey: externalSecret
         #  existingSecret: my-secret
