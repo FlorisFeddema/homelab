@@ -39,7 +39,7 @@ spec:
           path: /
           hosts:
             - minio.cloud.feddema.dev
-          tls: []
+          tls:
             - secretName: minio-tls
               hosts:
                 - minio.cloud.feddema.dev
