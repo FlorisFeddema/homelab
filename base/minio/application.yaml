@@ -15,18 +15,7 @@ spec:
     helm:
       values: |
         mode: distributed
-        
-        ## Use existing Secret that store following variables:
-        ##
-        ## | Chart var             | .data.<key> in Secret    |
-        ## |:----------------------|:-------------------------|
-        ## | rootUser              | rootUser                 |
-        ## | rootPassword          | rootPassword             |
-        ##
-        ## All mentioned variables will be ignored in values file.
-        ## .data.rootUser and .data.rootPassword are mandatory,
-        ## others depend on enabled status of corresponding sections.
-        existingSecret: ""
+        existingSecret: "minio-credentials"
         
         drivesPerNode: 1
         replicas: 1
@@ -49,7 +38,6 @@ spec:
           type: ClusterIP
           clusterIP: ~
           port: "9001"
-          nodePort: 32001
         
         consoleIngress:
           enabled: true
@@ -64,7 +52,7 @@ spec:
         resources:
           requests:
             memory: 256Mi
-            cpu: 100m
+            cpu: 50m
         
         users:
         ## Default policies are [readonly|readwrite|writeonly|consoleAdmin|diagnostics]
@@ -80,15 +68,6 @@ spec:
         #   purge: false
         #   versioning: false
         #   objectlocking: false
-        
-        oidc: #something with environment variables
-          enabled: false
-          configUrl: "https://identity-provider-url/.well-known/openid-configuration"
-          clientId: "minio"
-          clientSecret: ""
-          claimName: "policy"
-          scopes: "openid,profile,email"
-          redirectUri: "https://console-endpoint-url/oauth_callback"
         
         metrics:
           serviceMonitor:
