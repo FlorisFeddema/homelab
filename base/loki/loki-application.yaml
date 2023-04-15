@@ -81,7 +81,7 @@ spec:
         
         gateway:
           enabled: true
-          replicas: 2
+          replicas: 1
           resources: {}
 
   destination:
