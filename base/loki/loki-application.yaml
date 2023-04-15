@@ -60,7 +60,7 @@ spec:
           resources: {}
           persistence:
             size: 10Gi
-          envFrom: 
+          extraEnvFrom: 
             - name: S3_SECRET_KEY
               valueFrom:
                 secretKeyRef:
@@ -77,7 +77,7 @@ spec:
           resources: {}
           persistence:
             size: 10Gi
-          envFrom: 
+          extraEnvFrom: 
             - name: S3_SECRET_KEY
               valueFrom:
                 secretKeyRef:
