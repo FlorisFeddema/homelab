@@ -84,7 +84,7 @@ spec:
           verboseLogging: false
           replicas: 2
           resources: {}
-          affinity: {}
+          affinity: null
 
   destination:
     server: https://kubernetes.default.svc
