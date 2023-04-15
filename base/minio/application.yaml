@@ -61,15 +61,15 @@ spec:
             policy: readwrite
         
         buckets:
-          - name: minio-chunks
+          - name: loki-chunks
             policy: none
             purge: false
             versioning: false
-          - name: minio-rules
+          - name: loki-rules
             policy: none
             purge: false
             versioning: false
-          - name: minio-admin
+          - name: loki-admin
             policy: none
             purge: false
             versioning: false
