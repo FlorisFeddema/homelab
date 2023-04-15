@@ -76,19 +76,7 @@ spec:
           extraEnvFrom: 
             - secretRef:
                 name: loki-s3-credentials
-        
-        backend:
-          replicas: 2
-          resources: {}
-          persistence:
-            size: 10Gi
-        
-        singleBinary:
-          replicas: 0
-        
-        ingress:
-          enabled: false
-        
+
         gateway:
           enabled: true
           verboseLogging: false
