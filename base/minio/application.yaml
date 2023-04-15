@@ -60,11 +60,19 @@ spec:
         #  existingSecretKey: secretKey
         #  policy: readwrite
         
-        # buckets:
-        #  - name: test
-        #    policy: none
-        #    purge: false
-        #    versioning: false
+         buckets:
+          - name: minio-chunks
+            policy: none
+            purge: false
+            versioning: false
+          - name: minio-rules
+            policy: none
+            purge: false
+            versioning: false
+          - name: minio-admin
+            policy: none
+            purge: false
+            versioning: false
         
         metrics:
           serviceMonitor:
