@@ -17,7 +17,7 @@ spec:
       values: |
         loki:
           revisionHistoryLimit: 2
-          auth_enabled: true
+          auth_enabled: false
           storage:
             bucketNames:
               chunks: loki-chunks
