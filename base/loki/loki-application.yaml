@@ -56,19 +56,19 @@ spec:
             enabled: true
         
         write:
-          replicas: 1
+          replicas: 2
           resources: {}
           persistence:
             size: 10Gi
         
         read:
-          replicas: 1
+          replicas: 2
           resources: {}
           persistence:
             size: 10Gi
         
         backend:
-          replicas: 1
+          replicas: 2
           resources: {}
           persistence:
             size: 10Gi
@@ -81,6 +81,7 @@ spec:
         
         gateway:
           enabled: true
+          replicas: 2
           resources: {}
 
   destination:

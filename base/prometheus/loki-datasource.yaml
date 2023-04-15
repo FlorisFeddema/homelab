@@ -13,4 +13,4 @@ data:
         type: loki
         access: proxy
         uid: loki
-        url: http://loki-read.loki:3100/
+        url: http://loki.loki:3100/
