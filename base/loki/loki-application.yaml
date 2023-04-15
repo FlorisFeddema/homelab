@@ -60,12 +60,34 @@ spec:
           resources: {}
           persistence:
             size: 10Gi
+          envFrom: 
+            - name: S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: loki-s3-credentials
+                  key: S3_SECRET_KEY
+            - name: S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: loki-s3-credentials
+                  key: S3_ACCESS_KEY
         
         read:
           replicas: 1
           resources: {}
           persistence:
             size: 10Gi
+          envFrom: 
+            - name: S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: loki-s3-credentials
+                  key: S3_SECRET_KEY
+            - name: S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: loki-s3-credentials
+                  key: S3_ACCESS_KEY
         
         backend:
           replicas: 2
