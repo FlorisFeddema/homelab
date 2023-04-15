@@ -54,11 +54,11 @@ spec:
             memory: 256Mi
             cpu: 50m
         
-        # users:
-        #- accessKey: externalSecret
-        #  existingSecret: my-secret
-        #  existingSecretKey: secretKey
-        #  policy: readwrite
+        users:
+          - accessKey: loki
+            existingSecret: loki-credentials
+            existingSecretKey: secretKey
+            policy: readwrite
         
         buckets:
           - name: minio-chunks
