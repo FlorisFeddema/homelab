@@ -36,8 +36,7 @@ spec:
               rules_directory: /var/loki/rules
         
         test:
-          enabled: true
-          prometheusAddress: "http://prometheus-kube-prometheus-prometheus.prometheus:9090"
+          enabled: false
         
         monitoring:
           dashboards:
@@ -53,7 +52,7 @@ spec:
             grafanaAgent:
               installOperator: true
           lokiCanary:
-            enabled: true
+            enabled: false
         
         write:
           replicas: 1
