@@ -17,6 +17,7 @@ spec:
       values: |
         loki:
           revisionHistoryLimit: 2
+          auth_enabled: true
           storage:
             bucketNames:
               chunks: loki-chunks
@@ -24,7 +25,7 @@ spec:
               admin: loki-admin
             type: s3
             s3:
-              s3: http://minio.minio
+              s3: s3://minio.minio
               endpoint: http://minio.minio
               region: eu
               secretAccessKey: ${S3_SECRET_KEY}
