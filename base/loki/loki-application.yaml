@@ -61,7 +61,7 @@ spec:
           persistence:
             size: 10Gi
           extraArgs:
-            - config.expand-env: true
+            - '-config.expand-env=true'
           extraEnvFrom: 
             - secretRef:
                 name: loki-s3-credentials
@@ -72,7 +72,7 @@ spec:
           persistence:
             size: 10Gi
           extraArgs:
-            - config.expand-env: true
+            - '-config.expand-env=true'
           extraEnvFrom: 
             - secretRef:
                 name: loki-s3-credentials
