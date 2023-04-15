@@ -93,7 +93,7 @@ spec:
         gateway:
           enabled: true
           verboseLogging: false
-          replicas: 1
+          replicas: 2
           resources: {}
           affinity: null
           extraArgs:
