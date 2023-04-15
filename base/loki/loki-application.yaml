@@ -18,6 +18,8 @@ spec:
         loki:
           revisionHistoryLimit: 2
           auth_enabled: false
+          commonConfig:
+            replication_factor: 1
           storage:
             bucketNames:
               chunks: loki-chunks
@@ -93,7 +95,7 @@ spec:
         gateway:
           enabled: true
           verboseLogging: false
-          replicas: 2
+          replicas: 1
           resources: {}
           affinity: null
           extraArgs:
