@@ -47,11 +47,7 @@ spec:
           serviceMonitor:
             enabled: true
           selfMonitoring:
-            enabled: true
-            tenant:
-              name: "self-monitoring"
-            grafanaAgent:
-              installOperator: true
+            enabled: false
           lokiCanary:
             enabled: false
         

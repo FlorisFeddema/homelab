@@ -65,7 +65,7 @@ spec:
             policy: none
             purge: false
             versioning: false
-          - name: loki-rules
+          - name: loki-ruler
             policy: none
             purge: false
             versioning: false
