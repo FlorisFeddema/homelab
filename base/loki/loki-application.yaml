@@ -78,9 +78,8 @@ spec:
         gateway:
           enabled: true
           verboseLogging: false
-          replicas: 2
+          replicas: 1
           resources: {}
-          affinity: null
 
   destination:
     server: https://kubernetes.default.svc
