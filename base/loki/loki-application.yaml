@@ -58,6 +58,7 @@ spec:
           resources: {}
           persistence:
             size: 10Gi
+          affinity: null
           extraArgs:
             - '-config.expand-env=true'
           extraEnvFrom: 
@@ -66,9 +67,23 @@ spec:
         
         read:
           replicas: 1
+          legacyReadTarget: false
           resources: {}
           persistence:
             size: 10Gi
+          affinity: null
+          extraArgs:
+            - '-config.expand-env=true'
+          extraEnvFrom: 
+            - secretRef:
+                name: loki-s3-credentials
+        
+        backend:
+          replicas: 1
+          resources: {}
+          persistence:
+            size: 10Gi
+          affinity: null
           extraArgs:
             - '-config.expand-env=true'
           extraEnvFrom: 
@@ -81,6 +96,11 @@ spec:
           replicas: 1
           resources: {}
           affinity: null
+          extraArgs:
+            - '-config.expand-env=true'
+          extraEnvFrom: 
+            - secretRef:
+                name: loki-s3-credentials
 
   destination:
     server: https://kubernetes.default.svc
