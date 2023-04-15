@@ -1,0 +1,100 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  source:
+    chart: loki
+    repoURL: https://grafana.github.io/helm-charts
+    targetRevision: 2.9.10
+
+    helm:
+      values: |
+        loki:
+          revisionHistoryLimit: 2
+          storage:
+            bucketNames:
+              chunks: loki-chunks
+              ruler: loki-ruler
+              admin: loki-admin
+            type: s3
+            s3:
+              s3: http://minio.minio
+              endpoint: http://minio.minio
+              region: eu
+              secretAccessKey: ${S3_SECRET_KEY}
+              accessKeyId: ${S3_ACCESS_KEY}
+              s3ForcePathStyle: false
+              insecure: true
+            filesystem:
+              chunks_directory: /var/loki/chunks
+              rules_directory: /var/loki/rules
+        
+        test:
+          enabled: true
+          prometheusAddress: "http://prometheus-kube-prometheus-prometheus.prometheus:9090"
+        
+        monitoring:
+          dashboards:
+            enabled: true
+            labels:
+              grafana_dashboard: "1"
+          serviceMonitor:
+            enabled: true
+          selfMonitoring:
+            enabled: true
+            tenant:
+              name: "self-monitoring"
+            grafanaAgent:
+              installOperator: true
+          lokiCanary:
+            enabled: true
+        
+        write:
+          replicas: 1
+          resources: {}
+          persistence:
+            size: 10Gi
+        
+        read:
+          replicas: 1
+          resources: {}
+          persistence:
+            size: 10Gi
+        
+        backend:
+          replicas: 1
+          resources: {}
+          persistence:
+            size: 10Gi
+        
+        singleBinary:
+          replicas: 0
+        
+        ingress:
+          enabled: false
+        
+        gateway:
+          enabled: true
+          resources: {}
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: loki
+
+  revisionHistoryLimit: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
