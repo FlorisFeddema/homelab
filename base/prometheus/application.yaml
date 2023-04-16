@@ -141,7 +141,18 @@ spec:
           enabled: true
           defaultDashboardsEnabled: true
           defaultDashboardsTimezone: Europe/Amsterdam
-
+        
+          datasources:
+            loki-datasource.yaml:
+              apiVersion: 1
+              datasources:
+                - name: Loki
+                  type: loki
+                  access: proxy
+                  uid: loki
+                  url: http://loki-gateway.loki.svc.cluster.local
+                  editable: false
+        
           replicas: 1
 
           ingress:
@@ -205,15 +216,6 @@ spec:
               defaultDatasourceEnabled: true
               isDefaultDatasource: true
               uid: prometheus
-        
-          additionalDataSources:
-            - name: Loki
-              type: loki
-              access: proxy
-              orgId: 0
-              version: 1
-              uid: loki
-              url: http://loki-gateway.loki.svc.cluster.local
 
           serviceMonitor:
             enabled: true
