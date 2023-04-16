@@ -205,6 +205,15 @@ spec:
               defaultDatasourceEnabled: true
               isDefaultDatasource: true
               uid: prometheus
+        
+          additionalDataSources:
+            - name: Loki
+              type: loki
+              access: proxy
+              orgId: 1
+              version: 1
+              uid: loki
+              url: http://loki-gateway.loki.svc.cluster.local
 
           serviceMonitor:
             enabled: true
