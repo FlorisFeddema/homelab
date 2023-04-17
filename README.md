@@ -172,7 +172,7 @@ EOF
 19. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 20. sudo apt update
 21. sudo apt install containerd.io -y
-22. sudo nano /etc/containerd/config.toml
+22. sudo containerd config default > /etc/containerd/config.toml
 23. sudo systemctl restart containerd
 24. sudo systemctl enable containerd
 25. sudo kubeadm config images pull
