@@ -155,7 +155,7 @@ kubectl uncordon <NODE_NAME>
 9. sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 10. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 11. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-12. sudo apt -y install kubelet=1.24.7-00 kubeadm=1.24.7-00 kubectl=1.24.7-00
+12. sudo apt -y install kubelet=1.27.1-00 kubeadm=1.27.1-00 kubectl=1.27.1-00
 13. sudo apt-mark hold kubelet kubeadm kubectl
 14. cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
@@ -181,6 +181,6 @@ EOF
 28. mkdir -p $HOME/.kube
 29. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
 30. sudo chown $(id -u):$(id -g) $HOME/.kube/config
-31. kubectl taint nodes --all node-role.kubernetes.io/control-plane- node-role.kubernetes.io/master-
+31. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 32. sudo apt install open-iscsi jq nfs-common -y
 33. curl -sSfL https://raw.githubusercontent.com/longhorn/longhorn/v1.2.4/scripts/environment_check.sh | bash
