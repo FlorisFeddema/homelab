@@ -50,6 +50,7 @@ spec:
         monitoring:
           dashboards:
             enabled: true
+            namespace: prometheus
             labels:
               grafana_dashboard: "1"
           serviceMonitor:
