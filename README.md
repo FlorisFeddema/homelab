@@ -90,20 +90,6 @@ kubectl run mysql-client --rm --tty -i --restart='Never' --image  docker.io/bitn
 mysql -h mysql.mysql.svc.cluster.local -uroot -p "$MYSQL_ROOT_PASSWORD"
 ```
 
-## Velero
-
-Velero is used to create backups, it works in combination with the snapshotcontroller and CSI capabilities of Longhorn.
-
-These snapshots will be saved in Azure.
-
-To exclude a resource from the backups ad the following label: ```velero.io/exclude-from-backup=true```.
-
-Creating a backup is done by running the following command:
-
-```bash
-velero backup create --from-schedule example-schedule
-```
-
 ## Upgrade kubernetes
 
 To upgrade the cluster to a new version, follow this steps.
