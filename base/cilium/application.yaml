@@ -15,6 +15,20 @@ spec:
 
     helm:
       values: |
+        resources:
+          limits:
+            memory: 1500Mi
+          request:
+            memory: 512Mi
+            cpu: 100m
+        
+        hubble:
+          metrics:
+            serviceMonitor:
+              enabled: trie
+            dashboards:
+              enabled: true
+        
         operator:
           replicas: 1
 
