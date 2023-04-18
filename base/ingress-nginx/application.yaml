@@ -40,12 +40,14 @@ spec:
             enabled: true
 
           kind: Deployment
+          replicaCount: 2
+          autoscaling:
+            enabled: false
 
           minReadySeconds: 0
 
           terminationGracePeriodSeconds: 300
 
-          replicaCount: 2
           resources:
             limits:
               memory: 512Mi
