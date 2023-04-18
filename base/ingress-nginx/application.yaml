@@ -41,6 +41,8 @@ spec:
 
           kind: Deployment
           replicaCount: 2
+          minAvailable: 0
+          maxUnavailable: 2
           autoscaling:
             enabled: false
 
