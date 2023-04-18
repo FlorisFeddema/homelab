@@ -151,7 +151,8 @@ kubectl uncordon <NODE_NAME>
 5. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
 6. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools -y
 7. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
-8. sudo hostnamectl set-hostname targon
+8. sudo hostnamectl set-hostname targon 
+9. sudo touch /etc/cloud/cloud-init.disabled
 9. sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 10. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 11. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
@@ -168,10 +169,7 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
 EOF
 17. sudo sysctl --system
-18. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-19. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-20. sudo apt update
-21. sudo apt install containerd.io -y
+21. sudo apt install containerd -y
 22. sudo containerd config default > /etc/containerd/config.toml
 23. sudo systemctl restart containerd
 24. sudo systemctl enable containerd

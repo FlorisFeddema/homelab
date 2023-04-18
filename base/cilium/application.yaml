@@ -1,34 +1,29 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: calico
+  name: cilium
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   source:
-    chart: tigera-operator
-    repoURL: https://docs.projectcalico.org/charts
-    targetRevision: v3.25.1
+    chart: cilium
+    repoURL: https://helm.cilium.io/
+    targetRevision: 1.13.2
 
     helm:
       values: |
-        installation:
-          enabled: true
-
-        apiServer:
-          enabled: true
+        operator:
+          replicas: 1
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: calico
+    namespace: kube-system
 
   revisionHistoryLimit: 2
   syncPolicy:
-    syncOptions:
-    - ServerSideApply=true
     automated:
       prune: true
       selfHeal: true
@@ -38,4 +33,3 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
-
