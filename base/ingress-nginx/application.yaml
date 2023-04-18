@@ -36,7 +36,7 @@ spec:
           hostNetwork: false
 
           hostPort:
-            enabled: true
+            enabled: false
             http: 80
             https: 443
 
