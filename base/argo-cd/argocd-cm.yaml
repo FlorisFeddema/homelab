@@ -25,6 +25,14 @@ data:
   timeout.reconciliation: 180s
   cluster.inClusterEnabled: "true"
 
+  resource.exclusions: |
+    - apiGroups:
+        - cilium.io
+      kinds:
+        - CiliumIdentity
+      clusters:
+        - "*"
+
   server.rbac.log.enforce.enable: "false"
 
   exec.enabled: "true"
