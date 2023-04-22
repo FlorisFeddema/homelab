@@ -2,6 +2,19 @@
 
 This repository will be used for the configuration of the feddema.dev Kubernetes Cluster. Different GitOps principles will be applied in this repository.
 
+<!-- TOC -->
+* [cloud-gitops](#cloud-gitops)
+  * [Kubeseal](#kubeseal)
+    * [Restore key in new cluster](#restore-key-in-new-cluster)
+  * [PostgreSQL](#postgresql)
+    * [Create user and database](#create-user-and-database)
+    * [Upgrade](#upgrade)
+  * [Mysql](#mysql)
+  * [Upgrade kubernetes](#upgrade-kubernetes)
+  * [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
+  * [Node setup](#node-setup)
+  * [Install load balancer](#install-load-balancer)
+<!-- TOC -->
 
 ## Kubeseal
 
@@ -28,6 +41,14 @@ To encrypt a single value run the following command:
 ```shell
 echo -n <VALUE> | kubeseal --controller-namespace sealed-secrets --raw --namespace <NAMESPACE> --name <NAME>
 ```
+
+### Restore key in new cluster
+
+1. kubectl get secrets -n sealed-secrets -o yaml > out.yaml
+2. !! UPDATE KEY AND CRT !!
+3. kubectl apply -f out.yaml
+4. rm out.yaml
+5. kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
 
 ## PostgreSQL
 
@@ -142,43 +163,58 @@ sudo systemctl restart kubelet
 kubectl uncordon <NODE_NAME>
 ```
 
+## Install ArgoCD applications by hand
+
+```bash
+sh ./install.sh base/external-dns
+```
+
 ## Node setup
 
-1. passwd
-2. sudo usermod -aG sudo localadmin
-3. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
-4. cat ~/.ssh/id_ed25519.pub | ssh localadmin@targon.feddema.dev -p 6022 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+1. cat ~/.ssh/id_ed25519.pub | ssh localadmin@targon.feddema.dev -p 6022 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+2. passwd
+3. sudo usermod -aG sudo localadmin
+4. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
 5. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-6. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools -y
+6. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools sudo apt install open-iscsi jq nfs-common -y
 7. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
-8. sudo hostnamectl set-hostname targon 
-9. sudo touch /etc/cloud/cloud-init.disabled
-9. sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-10. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-11. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-12. sudo apt -y install kubelet=1.27.1-00 kubeadm=1.27.1-00 kubectl=1.27.1-00
-13. sudo apt-mark hold kubelet kubeadm kubectl
-14. cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-overlay
-br_netfilter
-EOF
+8. sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
+9. sudo install -m 0755 -d /etc/apt/keyrings
+10. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+11. sudo chmod a+r /etc/apt/keyrings/docker.gpg
+12. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+13. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+14. sudo apt install containerd.io
+    cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+    overlay
+    br_netfilter
+    EOF
 15. sudo modprobe overlay && sudo modprobe br_netfilter
 16. cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
-EOF
+    net.bridge.bridge-nf-call-iptables  = 1
+    net.bridge.bridge-nf-call-ip6tables = 1
+    net.ipv4.ip_forward                 = 1
+    EOF
 17. sudo sysctl --system
-21. sudo apt install containerd -y
-22. sudo containerd config default > /etc/containerd/config.toml
-23. sudo systemctl restart containerd
-24. sudo systemctl enable containerd
-25. sudo kubeadm config images pull
-26. nano config.yaml
-27. sudo kubeadm init --config config.yaml
-28. mkdir -p $HOME/.kube
-29. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
-30. sudo chown $(id -u):$(id -g) $HOME/.kube/config
-31. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
-32. sudo apt install open-iscsi jq nfs-common -y
-33. curl -sSfL https://raw.githubusercontent.com/longhorn/longhorn/v1.2.4/scripts/environment_check.sh | bash
+18. sudo containerd config default > /etc/containerd/config.toml
+19. !! CHANGE SystemdCgroup = true IN \[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] !!
+20. sudo systemctl restart containerd
+21. sudo systemctl enable containerd
+22. sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+23. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+24. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+25. sudo apt -y install kubelet=1.26.4-00 kubeadm=1.26.4-00 kubectl=1.26.4-00
+26. sudo apt-mark hold kubelet kubeadm kubectl
+27. nano config.yaml
+28. sudo kubeadm init --config config.yaml
+29. mkdir -p $HOME/.kube
+30. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+31. sudo chown $(id -u):$(id -g) $HOME/.kube/config
+32. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+
+## Install load balancer
+
+1. sudo apt install nginx
+2. sudo rm /etc/nginx/nginx.conf
+3. sudo nano /etc/nginx/nginx.conf
+4. systemctl reboot

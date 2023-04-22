@@ -4,31 +4,33 @@ basePath=$1
 
 if [ -z "$basePath" ]; then
     echo "no path"
+    exit 1
 fi
 
-applicationPath=$basePath/application.yaml
-valuesPath=$basePath/values.yaml
-namespacePath=$basePath/namespace.yaml
+applicationFile=$basePath/application.yaml
+valuesFile=$basePath/values.yaml
+namespaceFile=$basePath/namespace.yaml
+applyFile=$basePath/apply.yaml
 files=$(find $basePath -type f | grep ".yaml" | grep -v "application.yaml" | grep -v "values.yaml" | grep -v "namespace.yaml")
 
-namespace=$(yq '.spec.destination.namespace' $applicationPath )
-chart=$(yq '.spec.source.chart' $applicationPath )
-repo=$(yq '.spec.source.repoURL' $applicationPath )
-version=$(yq '.spec.source.targetRevision' $applicationPath )
-name=$(yq '.metadata.name' $applicationPath )
+namespace=$(yq '.spec.destination.namespace' $applicationFile )
+chart=$(yq '.spec.source.chart' $applicationFile )
+repo=$(yq '.spec.source.repoURL' $applicationFile )
+version=$(yq '.spec.source.targetRevision' $applicationFile )
+name=$(yq '.metadata.name' $applicationFile )
 
-yq '.spec.source.helm.values' $applicationPath > $valuesPath
+yq '.spec.source.helm.values' $applicationFile > $valuesFile
 
 helm repo add temp $repo
 helm repo update
 
-kubectl apply -f $namespacePath
+kubectl apply -f $namespaceFile
 
 echo "$files" | while read line ; do
    kubectl apply -f $line
 done
 
-command="helm upgrade --install $name temp/$chart --namespace $namespace --values $valuesPath --version $version"
+command="helm upgrade --install $name temp/$chart --namespace $namespace --values $valuesFile --version $version"
 
 echo "*********************"
 echo $command
@@ -37,4 +39,5 @@ echo "*********************"
 eval $command
 
 helm repo remove temp
+rm $valuesFile
 
