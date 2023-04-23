@@ -28,9 +28,6 @@ spec:
         serviceMonitor:
           enabled: true
         
-        initContainer:
-          enabled: true
-        
         config:
           logLevel: info
           serverPort: 3101
