@@ -30,7 +30,6 @@ spec:
         
         initContainer:
           enabled: true
-          fsInotifyMaxUserInstances: 128
         
         config:
           logLevel: info
