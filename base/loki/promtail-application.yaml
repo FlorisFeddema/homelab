@@ -28,6 +28,10 @@ spec:
         serviceMonitor:
           enabled: true
         
+        initContainer:
+          enabled: true
+          fsInotifyMaxUserInstances: 128
+        
         config:
           logLevel: info
           serverPort: 3101
