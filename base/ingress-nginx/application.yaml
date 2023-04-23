@@ -8,126 +8,16 @@ metadata:
 
 spec:
   project: no-sync
-  source:
-    chart: ingress-nginx
-    repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.6.0
-
-    helm:
-      values: |
-        controller:
-          containerPort:
-            http: 80
-            https: 443
-
-          dnsPolicy: ClusterFirst
-          reportNodeInternalIp: false
-          watchIngressWithoutClass: false
-          ingressClassByName: false
-          allowSnippetAnnotations: true
-          hostNetwork: false
-
-          hostPort:
-            enabled: false
-
-          ingressClassResource:
-            name: nginx
-            enabled: true
-            default: true
-            controllerValue: "k8s.io/ingress-nginx"
-
-          publishService:
-            enabled: true
-
-          kind: Deployment
-          replicaCount: 2
-          minAvailable: 0
-          maxUnavailable: 2
-          autoscaling:
-            enabled: false
-
-          minReadySeconds: 0
-
-          terminationGracePeriodSeconds: 300
-
-          resources:
-            limits:
-              memory: 512Mi
-            requests:
-              cpu: 50m
-              memory: 256Mi
-
-          enableMimalloc: true
-
-          service:
-            enabled: true
-            appProtocol: true
-
-            enableHttp: true
-            enableHttps: true
-
-            ports:
-              http: 80
-              https: 443
-
-            targetPorts:
-              http: http
-              https: https
-
-            type: LoadBalancer
-
-            external:
-              enabled: true
-
-            internal:
-              enabled: false
-
-          admissionWebhooks:
-            enabled: true
-
-          metrics:
-            enabled: true
-            serviceMonitor:
-              enabled: true
-
-        revisionHistoryLimit: 10
-
-        defaultBackend:
-          enabled: true
-
-          serviceAccount:
-            create: true
-            automountServiceAccountToken: true
-
-          port: 8080
-
-          replicaCount: 1
-          minAvailable: 1
-
-          resources: 
-            limits:
-              memory: 20Mi
-            requests:
-              cpu: 10m
-              memory: 10Mi
-
-          autoscaling:
-            enabled: false
-
-          service:
-            servicePort: 80
-            type: ClusterIP
-
-        rbac:
-          create: true
-          scope: false
-
-        podSecurityPolicy:
-          enabled: false
-
-        serviceAccount:
-          create: true
-          automountServiceAccountToken: true
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: ingress-nginx
+      repoURL: https://kubernetes.github.io/ingress-nginx
+      targetRevision: 4.6.0
+      helm:
+        valueFiles:
+          - $repo/base/ingress-nginx/values.yaml
 
   destination:
     server: https://kubernetes.default.svc

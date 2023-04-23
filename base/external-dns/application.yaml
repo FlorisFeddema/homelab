@@ -8,89 +8,16 @@ metadata:
 
 spec:
   project: always-sync
-  source:
-    chart: external-dns
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 6.18.0
-
-    helm:
-      values: |
-        sources:
-          - ingress
-
-        provider: cloudflare
-
-        containerPorts:
-          http: 7979
-          
-        combineFQDNAnnotation: false
-        ignoreHostnameAnnotation: false
-        publishInternalServices: false
-        publishHostIP: false
-        serviceTypeFilter: []
-
-        cloudflare:
-          secretName: "cloudflare-api-token"
-          proxied: false
-
-        domainFilters: []
-        excludeDomains: []
-        regexDomainFilter: ""
-        regexDomainExclusion: ""
-        zoneNameFilters: []
-        zoneIdFilters: []
-        annotationFilter: ""
-        labelFilter: ""
-
-        dryRun: false
-        triggerLoopOnEvent: false
-        interval: "1m"
-        logLevel: info
-        logFormat: text
-        policy: sync
-
-        registry: "txt"
-        txtPrefix: ""
-        txtSuffix: ""
-        txtOwnerId: ""
-        forceTxtOwnerId: false
-        replicaCount: 1
-
-        crd:
-          create: false
-          
-        service:
-          enabled: true
-          type: ClusterIP
-          ports:
-            http: 7979
-            
-        serviceAccount:
-          create: true
-          automountServiceAccountToken: true
-
-        rbac:
-          create: true
-          clusterRole: true
-          apiVersion: v1
-          pspEnabled: false
-
-        podSecurityContext:
-          enabled: true
-          fsGroup: 1001
-          runAsUser: 1001
-          
-        resources:
-          limits:
-            memory: 50Mi
-          requests:
-            cpu: 10m
-            memory: 30Mi
-        
-        metrics:
-          enabled: true
-          serviceMonitor:
-            enabled: true
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: external-dns
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 6.18.0
+      helm:
+        valueFiles:
+          - $repo/base/external-dns/values.yaml
 
   destination:
     server: https://kubernetes.default.svc

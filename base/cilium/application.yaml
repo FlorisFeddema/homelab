@@ -8,29 +8,16 @@ metadata:
 
 spec:
   project: always-sync
-  source:
-    chart: cilium
-    repoURL: https://helm.cilium.io/
-    targetRevision: 1.13.2
-
-    helm:
-      values: |
-        resources:
-          limits:
-            memory: 1500Mi
-          requests:
-            memory: 512Mi
-            cpu: 100m
-        
-        hubble:
-          metrics:
-            serviceMonitor:
-              enabled: trie
-            dashboards:
-              enabled: true
-        
-        operator:
-          replicas: 1
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: cilium
+      repoURL: https://helm.cilium.io/
+      targetRevision: 1.13.2
+      helm:
+        valueFiles:
+          - $repo/base/cilium/values.yaml
 
   destination:
     server: https://kubernetes.default.svc
