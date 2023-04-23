@@ -92,6 +92,7 @@ spec:
           resources: {}
           persistence:
             size: 10Gi
+            enableStatefulSetAutoDeletePVC: false
           affinity: null
           extraArgs:
             - '-config.expand-env=true'
