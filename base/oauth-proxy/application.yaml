@@ -16,7 +16,7 @@ spec:
       repoURL: https://oauth2-proxy.github.io/manifests
       targetRevision: 6.11.0
       helm:
-        valuesFiles:
+        valueFiles:
           - $repo/base/oauth-proxy/values.yaml
 
   destination:
