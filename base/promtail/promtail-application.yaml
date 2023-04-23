@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio
+  name: promtail
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -12,22 +12,16 @@ spec:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: minio
-      repoURL: https://charts.min.io
-      targetRevision: 5.0.8
+    - chart: promtail
+      repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 6.11.0
       helm:
         valueFiles:
-          - $repo/base/minio/values.yaml
+          - $repo/base/promtail/values.yaml
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: minio
-
-  ignoreDifferences:
-    - group: "monitoring.coreos.com"
-      kind: "Probe"
-      jsonPointers:
-        - /spec/targets/staticConfig/bearerTokenSecret
+    namespace: loki
 
   revisionHistoryLimit: 2
   syncPolicy:

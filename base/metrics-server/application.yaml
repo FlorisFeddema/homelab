@@ -19,7 +19,6 @@ spec:
         valueFiles:
           - $repo/base/metrics-server/values.yaml
 
-
   destination:
     server: https://kubernetes.default.svc
     namespace: metrics-server

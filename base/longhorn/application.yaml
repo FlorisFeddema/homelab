@@ -8,60 +8,16 @@ metadata:
 
 spec:
   project: no-sync
-  source:
-    chart: longhorn
-    repoURL: https://charts.longhorn.io
-    targetRevision: 1.4.1
-
-    helm:
-      values: |
-        persistence:
-          defaultClass: true
-          defaultFsType: ext4
-          defaultClassReplicaCount: 1
-          reclaimPolicy: Retain
-
-        csi:
-          attacherReplicaCount: 1
-          provisionerReplicaCount: 1
-          resizerReplicaCount: 1
-          snapshotterReplicaCount: 1
-
-        defaultSettings:
-          defaultReplicaCount: 1
-          backupTarget: s3://longhorn-backups@default/
-          backupTargetCredentialSecret: backup-credentials
-
-        longhornUI:
-          replicas: 1
-
-        longhornConversionWebhook:
-          replicas: 1
-
-        longhornAdmissionWebhook:
-          replicas: 1
-
-        longhornRecoveryBackend:
-          replicas: 1
-
-        resources: 
-          limits:
-           memory: 256Mi
-          requests:
-           cpu: 50m
-           memory: 128Mi
-
-        ingress:
-          enabled: true
-          host: longhorn.cloud.feddema.dev
-          tls: true
-          tlsSecret: longhorn-tls
-          annotations:
-            nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-            nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-            external-dns.alpha.kubernetes.io/hostname: longhorn.cloud.feddema.dev
-            external-dns.alpha.kubernetes.io/ttl: "120"
-            cert-manager.io/cluster-issuer: letsencrypt
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: longhorn
+      repoURL: https://charts.longhorn.io
+      targetRevision: 1.4.1
+      helm:
+        valueFiles:
+          - $repo/base/longhorn/values.yaml
 
   destination:
     server: https://kubernetes.default.svc

@@ -1,0 +1,34 @@
+rbac:
+  create: true
+
+prometheus:
+  serviceAccount: "metallb"
+  serviceMonitor:
+    enabled: true
+  namespace: "metallb"
+
+controller:
+  enabled: true
+  logLevel: info
+
+  serviceAccount:
+    create: true
+
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65534
+    fsGroup: 65534
+
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      cpu: 30m
+      memory: 100Mi
+
+speaker:
+  enabled: false
+
+crds:
+  enabled: true
+  validationFailurePolicy: Fail

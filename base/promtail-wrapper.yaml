@@ -1,27 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: promtail-wrapper
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
-  sources:
-    - repoURL: https://github.com/florisfeddema/cloud-gitops
-      targetRevision: main
-      ref: repo
-    - chart: loki
-      repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 5.2.0
-      helm:
-        valueFiles:
-          - $repo/base/loki/values.yaml
+  source:
+    repoURL: https://github.com/florisfeddema/cloud-gitops.git
+    targetRevision: HEAD
+    path: base/promtail
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: loki
+    namespace: promtail
 
   revisionHistoryLimit: 2
   syncPolicy:

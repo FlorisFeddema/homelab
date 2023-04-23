@@ -1,0 +1,96 @@
+loki:
+  revisionHistoryLimit: 2
+  auth_enabled: false
+  commonConfig:
+    replication_factor: 1
+  limits_config:
+    per_stream_rate_limit: 512M
+    per_stream_rate_limit_burst: 1024M
+    cardinality_limit: 200000
+    ingestion_burst_size_mb: 1000
+    ingestion_rate_mb: 10000
+  storage:
+    bucketNames:
+      chunks: loki-chunks
+      ruler: loki-ruler
+      admin: loki-admin
+    type: s3
+    s3:
+      s3: s3://minio.minio:9000
+      endpoint: http://minio.minio:9000
+      region: eu
+      secretAccessKey: ${S3_SECRET_KEY}
+      accessKeyId: ${S3_ACCESS_KEY}
+      s3ForcePathStyle: true
+      insecure: true
+    filesystem:
+      chunks_directory: /var/loki/chunks
+      rules_directory: /var/loki/rules
+
+test:
+  enabled: false
+
+monitoring:
+  dashboards:
+    enabled: true
+    namespace: prometheus
+    labels:
+      grafana_dashboard: "1"
+  serviceMonitor:
+    enabled: true
+  selfMonitoring:
+    enabled: false
+    grafanaAgent:
+      installOperator: false
+  lokiCanary:
+    enabled: false
+
+write:
+  replicas: 1
+  resources: {}
+  persistence:
+    size: 10Gi
+  affinity: null
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnvFrom:
+    - secretRef:
+        name: loki-s3-credentials
+
+read:
+  replicas: 1
+  legacyReadTarget: false
+  resources: {}
+  persistence:
+    size: 10Gi
+  affinity: null
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnvFrom:
+    - secretRef:
+        name: loki-s3-credentials
+
+backend:
+  replicas: 1
+  resources: {}
+  persistence:
+    size: 10Gi
+    enableStatefulSetAutoDeletePVC: false
+  affinity: null
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnvFrom:
+    - secretRef:
+        name: loki-s3-credentials
+
+gateway:
+  enabled: true
+  verboseLogging: false
+  replicas: 1
+  resources: {}
+  affinity: null
+  extraArgs:
+    - '-config.expand-env=true'
+  extraEnvFrom:
+    - secretRef:
+        name: loki-s3-credentials
