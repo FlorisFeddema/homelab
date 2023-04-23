@@ -211,6 +211,7 @@ sh ./install.sh base/external-dns
 30. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
 31. sudo chown $(id -u):$(id -g) $HOME/.kube/config
 32. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+33. sudo sysctl -w fs.inotify.max_user_instances=512
 
 ## Install load balancer
 
