@@ -8,10 +8,10 @@ metadata:
 
 spec:
   project: always-sync
-  source:
-    repoURL: https://github.com/florisfeddema/cloud-gitops.git
-    targetRevision: HEAD
-    path: base/prometheus/dashboards
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/prometheus/dashboards
 
   destination:
     server: https://kubernetes.default.svc
