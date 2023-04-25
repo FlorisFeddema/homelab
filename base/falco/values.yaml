@@ -31,13 +31,13 @@ falcosidekick:
     ingress:
       enabled: true
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: test.falco.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/hostname: falco.cloud.feddema.dev
         external-dns.alpha.kubernetes.io/ttl: "120"
         cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
       hosts:
-        - host: test.falco.cloud.feddema.dev
+        - host: falco.cloud.feddema.dev
           paths:
           - path: /
       tls:
