@@ -43,7 +43,7 @@ falcosidekick:
       tls:
        - secretName: falco-tls
          hosts:
-           - test.falco.cloud.feddema.dev
+           - falco.cloud.feddema.dev
     
     resources:
       limits:
