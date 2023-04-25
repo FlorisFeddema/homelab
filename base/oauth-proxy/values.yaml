@@ -15,6 +15,7 @@ ingress:
   hosts:
     - alert.cloud.feddema.dev
     - longhorn.cloud.feddema.dev
+    - falco.cloud.feddema.dev
   tls:
     - secretName: alert-tls
       hosts:
@@ -22,6 +23,9 @@ ingress:
     - secretName: longhorn-tls
       hosts:
         - longhorn.cloud.feddema.dev
+    - secretName: falco-tls
+      hosts:
+        - falco.cloud.feddema.dev
 
 resources:
   limits:

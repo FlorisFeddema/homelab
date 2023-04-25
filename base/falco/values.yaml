@@ -1,0 +1,64 @@
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+  limits:
+    memory: 1024Mi
+
+collectors:
+  docker:
+    enabled: false
+  crio:
+    enabled: false
+
+falcosidekick:
+  enabled: true
+  replicaCount: 1
+    
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 20m
+      memory: 64Mi
+
+  webui:
+    enabled: true
+    replicaCount: 1
+    loglevel: "info"
+    ttl: 0
+    
+    ingress:
+      enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: test.falco.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+      hosts:
+        - host: test.falco.cloud.feddema.dev
+          paths:
+          - path: /
+      tls:
+       - secretName: falco-tls
+         hosts:
+           - test.falco.cloud.feddema.dev
+    
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 20m
+        memory: 32Mi
+        
+    redis:
+      enabled: true
+      storageEnabled: true
+      
+      resources: 
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 10m
+          memory: 32Mi

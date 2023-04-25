@@ -3,17 +3,17 @@
 This repository will be used for the configuration of the feddema.dev Kubernetes Cluster. Different GitOps principles will be applied in this repository.
 
 <!-- TOC -->
-* [cloud-gitops](#cloud-gitops)
-  * [Kubeseal](#kubeseal)
-    * [Restore key in new cluster](#restore-key-in-new-cluster)
-  * [PostgreSQL](#postgresql)
-    * [Create user and database](#create-user-and-database)
-    * [Upgrade](#upgrade)
-  * [Mysql](#mysql)
-  * [Upgrade kubernetes](#upgrade-kubernetes)
-  * [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
-  * [Node setup](#node-setup)
-  * [Install load balancer](#install-load-balancer)
+- [cloud-gitops](#cloud-gitops)
+  - [Kubeseal](#kubeseal)
+    - [Restore key in new cluster](#restore-key-in-new-cluster)
+  - [PostgreSQL](#postgresql)
+    - [Create user and database](#create-user-and-database)
+    - [Upgrade](#upgrade)
+  - [Mysql](#mysql)
+  - [Upgrade kubernetes](#upgrade-kubernetes)
+  - [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
+  - [Node setup](#node-setup)
+  - [Install load balancer](#install-load-balancer)
 <!-- TOC -->
 
 ## Kubeseal
@@ -211,7 +211,8 @@ sh ./install.sh base/external-dns
 30. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
 31. sudo chown $(id -u):$(id -g) $HOME/.kube/config
 32. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
-33. sudo sysctl -w fs.inotify.max_user_instances=512
+33. echo "fs.inotify.max_user_instances=512" | sudo tee -a /etc/sysctl.conf
+34. echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
 
 ## Install load balancer
 
