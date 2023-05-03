@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: minio
       repoURL: https://charts.min.io
-      targetRevision: 5.0.8
+      targetRevision: 5.0.9
       helm:
         valueFiles:
           - $repo/base/minio/values.yaml
