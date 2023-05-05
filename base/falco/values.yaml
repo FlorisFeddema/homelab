@@ -14,7 +14,6 @@ collectors:
 driver:
   kind: ebpf
   ebpf:
-    leastPrivileged: true
     hostNetwork: true
 
 falcosidekick:
