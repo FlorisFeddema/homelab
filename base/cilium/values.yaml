@@ -8,7 +8,7 @@ resources:
 hubble:
   metrics:
     serviceMonitor:
-      enabled: trie
+      enabled: true
     dashboards:
       enabled: true
 
