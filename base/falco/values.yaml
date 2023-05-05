@@ -15,6 +15,7 @@ driver:
   kind: ebpf
   ebpf:
     hostNetwork: true
+    leastPrivileged: false
 
 falcosidekick:
   enabled: true
