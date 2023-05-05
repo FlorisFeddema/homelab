@@ -10,7 +10,13 @@ collectors:
     enabled: false
   crio:
     enabled: false
-
+    
+driver:
+  kind: ebpf
+  ebpf:
+    hostNetwork: true
+    leastPrivileged: true
+    
 falcosidekick:
   enabled: true
   replicaCount: 1
