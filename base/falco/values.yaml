@@ -17,6 +17,9 @@ driver:
     hostNetwork: true
     leastPrivileged: false
 
+falco:
+  log_level: warning
+
 falcosidekick:
   enabled: true
   replicaCount: 1
