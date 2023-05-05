@@ -14,9 +14,9 @@ collectors:
 driver:
   kind: ebpf
   ebpf:
-    hostNetwork: true
     leastPrivileged: true
-    
+    hostNetwork: true
+
 falcosidekick:
   enabled: true
   replicaCount: 1
