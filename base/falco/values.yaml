@@ -12,10 +12,7 @@ collectors:
     enabled: false
     
 driver:
-  kind: ebpf
-  ebpf:
-    hostNetwork: true
-    leastPrivileged: false
+  kind: modern-bpf
 
 falco:
   log_level: warning
