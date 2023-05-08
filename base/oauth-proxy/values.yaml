@@ -22,6 +22,9 @@ ingress:
     - secretName: falco-tls
       hosts:
         - falco.cloud.feddema.dev
+    - secretName: hubble-tls
+      hosts:
+        - hubble.cloud.feddema.dev
 
 resources:
   limits:
