@@ -6,19 +6,19 @@ falco:
   grpcTimeout: 2m
 
 securityContext:
- capabilities:
-   drop:
-   - ALL
- readOnlyRootFilesystem: true
- runAsNonRoot: true
- runAsUser: 1000
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
 
 resources:
-   limits:
-     memory: 64Mi
-   requests:
-     cpu: 10m
-   memory: 32Mi
+  limits:
+    memory: 64Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi
 
 serviceMonitor:
   enabled: true
