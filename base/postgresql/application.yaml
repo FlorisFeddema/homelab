@@ -13,7 +13,7 @@ spec:
       targetRevision: main
       ref: repo
     - chart: postgresql
-      repoURL: https://charts.bitnami.com/bitnami
+      repoURL: registry-1.docker.io/bitnamicharts
       targetRevision: 12.4.2
       helm:
         valueFiles:
