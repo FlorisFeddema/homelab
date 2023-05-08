@@ -11,7 +11,7 @@ hubble:
     serviceMonitor:
       enabled: true
     dashboards:
-      enabled: true
+      enabled: false
 
   relay:
     enabled: true
