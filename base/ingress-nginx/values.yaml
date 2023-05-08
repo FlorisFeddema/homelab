@@ -1,37 +1,13 @@
 controller:
-  containerPort:
-    http: 80
-    https: 443
-
-  dnsPolicy: ClusterFirst
-  reportNodeInternalIp: false
-  watchIngressWithoutClass: false
-  ingressClassByName: false
-  allowSnippetAnnotations: true
-  hostNetwork: false
-
-  hostPort:
-    enabled: false
-
+  config:
+    custom-http-errors: 401,403,404,500,501,502,503
   ingressClassResource:
-    name: nginx
-    enabled: true
     default: true
-    controllerValue: "k8s.io/ingress-nginx"
-
-  publishService:
-    enabled: true
 
   kind: Deployment
   replicaCount: 2
   minAvailable: 0
   maxUnavailable: 2
-  autoscaling:
-    enabled: false
-
-  minReadySeconds: 0
-
-  terminationGracePeriodSeconds: 300
 
   resources:
     limits:
@@ -40,74 +16,26 @@ controller:
       cpu: 50m
       memory: 256Mi
 
-  enableMimalloc: true
-
-  service:
-    enabled: true
-    appProtocol: true
-
-    enableHttp: true
-    enableHttps: true
-
-    ports:
-      http: 80
-      https: 443
-
-    targetPorts:
-      http: http
-      https: https
-
-    type: LoadBalancer
-
-    external:
-      enabled: true
-
-    internal:
-      enabled: false
-
-  admissionWebhooks:
-    enabled: true
-
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
 
-revisionHistoryLimit: 10
+revisionHistoryLimit: 2
 
 defaultBackend:
   enabled: true
-
-  serviceAccount:
-    create: true
-    automountServiceAccountToken: true
-
-  port: 8080
-
-  replicaCount: 1
-  minAvailable: 1
-
+  image:
+    repository: ghcr.io/tarampampam/error-pages
+    tag: 2.24.0
+  extraEnvs:
+  - name: TEMPLATE_NAME
+    value: ghost
+  - name: SHOW_DETAILS
+    value: 'true'
   resources:
     limits:
       memory: 20Mi
     requests:
       cpu: 10m
       memory: 10Mi
-
-  autoscaling:
-    enabled: false
-
-  service:
-    servicePort: 80
-    type: ClusterIP
-
-rbac:
-  create: true
-  scope: false
-
-podSecurityPolicy:
-  enabled: false
-
-serviceAccount:
-  create: true
-  automountServiceAccountToken: true
