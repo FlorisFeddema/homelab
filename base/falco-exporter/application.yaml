@@ -21,7 +21,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: falco
+    namespace: falco-exporter
 
   revisionHistoryLimit: 2
   syncPolicy:
