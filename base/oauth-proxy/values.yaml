@@ -15,6 +15,7 @@ ingress:
   hosts:
     - longhorn.cloud.feddema.dev
     - falco.cloud.feddema.dev
+    - hubble.cloud.feddema.dev
   tls:
     - secretName: longhorn-tls
       hosts:
