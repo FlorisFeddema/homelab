@@ -46,8 +46,6 @@ falcosidekick:
         cert-manager.io/cluster-issuer: letsencrypt
         nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
         nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-        nginx.ingress.kubernetes.io/configuration-snippet: |
-          proxy_set_header Authorization "Basic YWRtaW46YWRtaW4=";
       hosts:
         - host: falco.cloud.feddema.dev
           paths:
