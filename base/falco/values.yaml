@@ -15,7 +15,7 @@ driver:
   kind: modern-bpf
 
 falco:
-  log_level: warning
+  log_level: info
   grpc:
     enabled: true
   grpc_output:
