@@ -16,6 +16,10 @@ driver:
 
 falco:
   log_level: warning
+  grpc:
+    enabled: true
+  grpc_output:
+    enabled: true
 
 falcosidekick:
   enabled: true
