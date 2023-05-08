@@ -3,7 +3,7 @@ service:
 
 falco:
   grpcUnixSocketPath: "unix:///run/falco/falco.sock"
-  grpcTimeout: 2m
+  grpcTimeout: 30s
 
 securityContext:
   capabilities:
