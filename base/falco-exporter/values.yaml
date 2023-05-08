@@ -1,5 +1,5 @@
 service:
-  annotations: {}
+  annotations: null
 
 falco:
   grpcUnixSocketPath: "unix:///run/falco/falco.sock"
