@@ -1,14 +1,3 @@
-createAggregateRoles: false
-
-crds:
-  install: true
-  keep: true
-
-global:
-  logging:
-    format: text
-    level: info
-
 configs:
   cm:
     exec.enabled: true
@@ -16,29 +5,8 @@ configs:
   secret:
     createSecret: false
 
-  params:
-    controller.status.processors: 20
-    controller.operation.processors: 10
-    controller.self.heal.timeout.seconds: 5
-    controller.repo.server.timeout.seconds: 60
-    reposerver.parallelism.limit: 0
-    server.insecure: true
-
 controller:
   replicas: 1
-
-  readinessProbe:
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
-  livenessProbe:
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
 
   resources:
     limits:
@@ -47,21 +15,12 @@ controller:
       cpu: 130m
       memory: 512Mi
 
-  serviceAccount:
-    create: true
-    name: argocd-application-controller
-    automountServiceAccountToken: true
-
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
-
-  clusterAdminAccess:
-    enabled: true
-
-  clusterRoleRules:
-    enabled: false
+    rules:
+      enabled: true
 
 dex:
   enabled: false
@@ -76,29 +35,22 @@ redis:
       cpu: 50m
       memory: 64Mi
 
+  exporter:
+    enabled: true
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+
   metrics:
     enabled: true
     serviceMonitor:
       enabled: true
 
-redis-ha:
-  enabled: false
-
 server:
   replicas: 1
-
-  readinessProbe:
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
-  livenessProbe:
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
 
   resources:
     limits:
@@ -112,11 +64,6 @@ server:
     serviceMonitor:
       enabled: true
 
-  serviceAccount:
-    create: true
-    name: argocd-server
-    automountServiceAccountToken: true
-
   ingress:
     enabled: true
     annotations:
@@ -127,9 +74,6 @@ server:
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     hosts:
       - argocd.cloud.feddema.dev
-    paths:
-      - /
-    pathType: Prefix
     tls:
       - secretName: argocd-tls
         hosts:
@@ -145,10 +89,6 @@ server:
       nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
     hosts:
       - grpc.argocd.cloud.feddema.dev
-
-    paths:
-      - /
-    pathType: Prefix
     tls:
       - secretName: argocd-grpc-tls
         hosts:
@@ -158,28 +98,8 @@ server:
 
   rbacConfigCreate: false
 
-  clusterAdminAccess:
-    enabled: true
-
-  extensions:
-    enabled: false
-
 repoServer:
-  name: repo-server
   replicas: 1
-
-  readinessProbe:
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
-  livenessProbe:
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
 
   resources:
     limits:
@@ -192,13 +112,6 @@ repoServer:
     enabled: true
     serviceMonitor:
       enabled: true
-
-  clusterAdminAccess:
-    enabled: false
-
-  serviceAccount:
-    create: true
-    automountServiceAccountToken: true
 
 applicationSet:
   enabled: false
