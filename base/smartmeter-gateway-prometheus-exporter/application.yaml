@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: smartmeter-gateway-prometheus-exporter
       repoURL: https://florisfeddema.github.io/smartmeter-gateway-prometheus-exporter/
-      targetRevision: 0.0.5
+      targetRevision: 0.0.9
       helm:
         valueFiles:
           - $repo/base/smartmeter-gateway-prometheus-exporter/values.yaml
