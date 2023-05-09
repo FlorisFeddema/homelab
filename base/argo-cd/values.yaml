@@ -5,7 +5,7 @@ configs:
   secret:
     createSecret: false
 
-  param:
+  params:
     server.insecure: true
 
 controller:
