@@ -19,6 +19,11 @@ spec:
         valueFiles:
           - $repo/base/cilium/values.yaml
 
+  ignoreDifferences:
+    - group: batch
+      kind: Job
+      name: hubble-generate-certs-*
+
   destination:
     server: https://kubernetes.default.svc
     namespace: kube-system
