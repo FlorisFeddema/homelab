@@ -19,8 +19,6 @@ controller:
     enabled: true
     serviceMonitor:
       enabled: true
-    rules:
-      enabled: true
 
 dex:
   enabled: false
