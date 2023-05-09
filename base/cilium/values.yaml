@@ -5,6 +5,9 @@ resources:
     memory: 512Mi
     cpu: 100m
 
+certgen:
+  ttlSecondsAfterFinished: null
+
 hubble:
   enabled: true
 
