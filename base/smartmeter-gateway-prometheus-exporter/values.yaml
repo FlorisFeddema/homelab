@@ -8,4 +8,4 @@ resources:
     memory: 16Mi
 
 config:
-  gatewayAddress: '192.168.1.193:83'
+  gatewayAddress: '192.168.1.193:82'
