@@ -64,7 +64,13 @@ controller:
     enabled: false
 
 dex:
-  enabled: false
+  enabled: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+      resources: {}
 
 redis:
   enabled: true
