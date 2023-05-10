@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: falco
       repoURL: https://falcosecurity.github.io/charts
-      targetRevision: 3.1.4
+      targetRevision: 3.1.5
       helm:
         valueFiles:
           - $repo/base/falco/values.yaml
