@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: falco-exporter
       repoURL: https://falcosecurity.github.io/charts
-      targetRevision: 0.9.3
+      targetRevision: 0.9.5
       helm:
         valueFiles:
           - $repo/base/falco-exporter/values.yaml
