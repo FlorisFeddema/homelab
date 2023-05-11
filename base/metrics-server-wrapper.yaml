@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metrics-server-wrapper
+  name: metrics-server
   namespace: argocd
-  finalizers: []
+#  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
