@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metallb
+  name: longhorn
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
@@ -12,27 +12,22 @@ spec:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: metallb
-      repoURL: https://metallb.github.io/metallb
-      targetRevision: 0.13.9
+    - chart: longhorn
+      repoURL: https://charts.longhorn.io
+      targetRevision: 1.4.1
       helm:
         valueFiles:
-          - $repo/base/metallb/values.yaml
+          - $repo/base/longhorn/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/longhorn
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: metallb
-
-  ignoreDifferences:
-  - group: "apiextensions.k8s.io"
-    kind: "CustomResourceDefinition"
-    jsonPointers:
-    - /spec/conversion/webhook/clientConfig/caBundle
+    namespace: longhorn-system
 
   revisionHistoryLimit: 2
   syncPolicy:
-    syncOptions:
-    - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true
@@ -42,4 +37,3 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
-

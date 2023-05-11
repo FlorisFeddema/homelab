@@ -1,17 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metallb-wrapper
+  name: metallb
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
-  source:
-    repoURL: https://github.com/florisfeddema/cloud-gitops.git
-    targetRevision: HEAD
-    path: base/metallb
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: metallb
+      repoURL: https://metallb.github.io/metallb
+      targetRevision: 0.13.9
+      helm:
+        valueFiles:
+          - $repo/base/metallb/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/metallb
 
   destination:
     server: https://kubernetes.default.svc
