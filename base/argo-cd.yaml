@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager-wrapper
+  name: argo-cd
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
@@ -12,19 +12,19 @@ spec:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: cert-manager
-      repoURL: https://charts.jetstack.io
-      targetRevision: v1.11.2
+    - chart: argo-cd
+      repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 5.33.1
       helm:
         valueFiles:
-          - $repo/base/cert-manager/values.yaml
+          - $repo/base/argo-cd/values.yaml
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
-      path: base/cert-manager
+      path: base/argo-cd
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: cert-manager
+    namespace: argocd
 
   revisionHistoryLimit: 2
   syncPolicy:
