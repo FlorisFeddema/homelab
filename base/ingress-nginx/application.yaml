@@ -7,7 +7,7 @@ metadata:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   sources:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
@@ -18,9 +18,6 @@ spec:
       helm:
         valueFiles:
           - $repo/base/ingress-nginx/values.yaml
-    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
-      targetRevision: HEAD
-      path: base/ingress-nginx
 
   destination:
     server: https://kubernetes.default.svc
@@ -37,3 +34,4 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
+
