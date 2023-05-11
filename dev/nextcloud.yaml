@@ -18,6 +18,9 @@ spec:
       helm:
         valueFiles:
           - $repo/dev/nextcloud/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: dev/nextcloud
 
   destination:
     server: https://kubernetes.default.svc
