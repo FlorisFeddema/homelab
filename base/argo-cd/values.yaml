@@ -31,10 +31,10 @@ redis:
 
   resources:
     limits:
-      memory: 128Mi
+      memory: 256Mi
     requests:
       cpu: 50m
-      memory: 64Mi
+      memory: 128Mi
 
   exporter:
     enabled: true
