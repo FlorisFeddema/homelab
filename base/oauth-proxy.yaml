@@ -1,27 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgresql
+  name: oauth-proxy
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   sources:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
-      targetRevision: main
+      targetRevision: HEAD
       ref: repo
-    - chart: postgresql
-      repoURL: registry-1.docker.io/bitnamicharts
-      targetRevision: 12.4.3
+    - chart: oauth2-proxy
+      repoURL: https://oauth2-proxy.github.io/manifests
+      targetRevision: 6.12.0
       helm:
         valueFiles:
-          - $repo/base/postgresql/values.yaml
+          - $repo/base/oauth-proxy/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/oauth-proxy
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: postgresql
+    namespace: oauth-proxy
 
   revisionHistoryLimit: 2
   syncPolicy:
@@ -34,4 +37,3 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
-

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: minio
+  name: postgresql
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
@@ -12,22 +12,19 @@ spec:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: minio
-      repoURL: https://charts.min.io
-      targetRevision: 5.0.9
+    - chart: postgresql
+      repoURL: registry-1.docker.io/bitnamicharts
+      targetRevision: 12.4.3
       helm:
         valueFiles:
-          - $repo/base/minio/values.yaml
+          - $repo/base/postgresql/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/postgresql
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: minio
-
-  ignoreDifferences:
-    - group: "monitoring.coreos.com"
-      kind: "Probe"
-      jsonPointers:
-        - /spec/targets/staticConfig/bearerTokenSecret
+    namespace: postgresql
 
   revisionHistoryLimit: 2
   syncPolicy:

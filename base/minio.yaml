@@ -1,21 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: oauth-proxy-wrapper
+  name: minio
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: always-sync
-  source:
-    repoURL: https://github.com/florisfeddema/cloud-gitops.git
-    targetRevision: HEAD
-    path: base/oauth-proxy
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: minio
+      repoURL: https://charts.min.io
+      targetRevision: 5.0.9
+      helm:
+        valueFiles:
+          - $repo/base/minio/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/minio
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: minio
 
   revisionHistoryLimit: 2
   syncPolicy:

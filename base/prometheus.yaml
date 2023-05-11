@@ -19,6 +19,9 @@ spec:
         skipCrds: true
         valueFiles:
           - $repo/base/prometheus/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/prometheus
 
   destination:
     server: https://kubernetes.default.svc
