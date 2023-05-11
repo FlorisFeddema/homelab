@@ -9,6 +9,11 @@ controller:
   minAvailable: 0
   maxUnavailable: 2
 
+  service:
+    nodePorts:
+      http: 32080
+      https: 32443
+
   resources:
     limits:
       memory: 512Mi
