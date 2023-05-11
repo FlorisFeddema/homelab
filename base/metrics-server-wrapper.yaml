@@ -8,10 +8,16 @@ metadata:
 
 spec:
   project: always-sync
-  source:
-    repoURL: https://github.com/florisfeddema/cloud-gitops.git
-    targetRevision: HEAD
-    path: base/metrics-server
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: HEAD
+      ref: repo
+    - chart: metrics-server
+      repoURL: https://kubernetes-sigs.github.io/metrics-server/
+      targetRevision: 3.10.0
+      helm:
+        valueFiles:
+          - $repo/base/metrics-server/values.yaml
 
   destination:
     server: https://kubernetes.default.svc
