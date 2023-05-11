@@ -1,32 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cilium
+  name: external-dns
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   sources:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: cilium
-      repoURL: https://helm.cilium.io/
-      targetRevision: 1.13.2
+    - chart: external-dns
+      repoURL: registry-1.docker.io/bitnamicharts
+      targetRevision: 6.20.1
       helm:
         valueFiles:
-          - $repo/base/cilium/values.yaml
-
-  ignoreDifferences:
-    - group: batch
-      kind: Job
-      name: hubble-generate-certs-*
+          - $repo/base/external-dns/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/external-dns
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: kube-system
+    namespace: external-dns
 
   revisionHistoryLimit: 2
   syncPolicy:
