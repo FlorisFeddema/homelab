@@ -1,27 +1,30 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-nginx
+  name: falco-exporter
   namespace: argocd
 #  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   sources:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: ingress-nginx
-      repoURL: https://kubernetes.github.io/ingress-nginx
-      targetRevision: 4.6.1
+    - chart: falco-exporter
+      repoURL: https://falcosecurity.github.io/charts
+      targetRevision: 0.9.5
       helm:
         valueFiles:
-          - $repo/base/ingress-nginx/values.yaml
+          - $repo/base/falco-exporter/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/falco-exporter
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: ingress-nginx
+    namespace: falco-exporter
 
   revisionHistoryLimit: 2
   syncPolicy:
@@ -34,4 +37,3 @@ spec:
         duration: 5s
         factor: 5
         maxDuration: 10m
-
