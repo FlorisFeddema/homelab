@@ -8,10 +8,19 @@ metadata:
 
 spec:
   project: always-sync
-  source:
-    repoURL: https://github.com/florisfeddema/cloud-gitops.git
-    targetRevision: HEAD
-    path: base/cert-manager
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: cert-manager
+      repoURL: https://charts.jetstack.io
+      targetRevision: v1.11.2
+      helm:
+        valueFiles:
+          - $repo/base/cert-manager/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/cert-manager
 
   destination:
     server: https://kubernetes.default.svc
