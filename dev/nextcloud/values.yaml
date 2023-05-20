@@ -79,7 +79,7 @@ redis:
   enabled: false
 
 cronjob:
-  enabled: false
+  enabled: true
 
 persistence:
   enabled: true
