@@ -1,0 +1,37 @@
+
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno-policies
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: always-sync
+  sources:
+    - chart: kyverno-policies
+      repoURL: https://kyverno.github.io/kyverno/
+      targetRevision: 2.5.5
+      helm:
+        values: |
+          podSecurityStandard: baseline
+          podSecuritySeverity: medium
+          validationFailureAction: audit
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kyverno
+
+  revisionHistoryLimit: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
