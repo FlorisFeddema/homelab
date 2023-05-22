@@ -10,6 +10,7 @@ data:
   url: https://argocd.cloud.feddema.dev
   statusbadge.enabled: "true"
   
+  application.resourceTrackingMethod: annotation
   users.anonymous.enabled: "false"
   users.session.duration: "24h"
 
