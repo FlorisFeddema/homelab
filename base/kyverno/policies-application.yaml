@@ -13,7 +13,7 @@ spec:
   sources:
     - chart: kyverno-policies
       repoURL: https://kyverno.github.io/kyverno/
-      targetRevision: 2.5.5
+      targetRevision: 2.7.3
       helm:
         values: |
           podSecurityStandard: baseline
