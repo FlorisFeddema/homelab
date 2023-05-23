@@ -24,21 +24,21 @@ ui:
       cpu: 5m
       
   ingress:
-    enabled: false
+    enabled: true
     annotations:
-      external-dns.alpha.kubernetes.io/hostname: kyverno.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/hostname: policy.cloud.feddema.dev
       external-dns.alpha.kubernetes.io/ttl: "120"
       cert-manager.io/cluster-issuer: letsencrypt
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     hosts:
-      - host: kyverno.cloud.feddema.dev
+      - host: policy.cloud.feddema.dev
         paths:
           - path: /
             pathType: ImplementationSpecific
     tls:
-      - secretName: kyverno-tls
+      - secretName: policy-tls
         hosts:
-          - kyverno.cloud.feddema.dev
+          - policy.cloud.feddema.dev
 
 kyvernoPlugin:
   enabled: true
