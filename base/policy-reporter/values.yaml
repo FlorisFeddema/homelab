@@ -32,8 +32,7 @@ ui:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     hosts:
       - host: kyverno.cloud.feddema.dev
-        paths:
-        - /
+        paths: []
     tls:
       - secretName: kyverno-tls
         hosts:
