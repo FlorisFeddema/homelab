@@ -1,0 +1,62 @@
+replicaCount: 1
+worker: 5
+
+resources:
+  limits:
+    memory: 100Mi
+  requests:
+    memory: 30Mi
+    cpu: 5m
+
+metrics:
+  enabled: true
+  mode: detailed 
+
+ui:
+  enabled: true
+  replicaCount: 1
+
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      memory: 30Mi
+      cpu: 5m
+      
+  ingress:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: kyverno.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      cert-manager.io/cluster-issuer: letsencrypt
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    hosts:
+      - host: kyverno.cloud.feddema.dev
+        paths:
+        - /
+    tls:
+      - secretName: kyverno-tls
+        hosts:
+          - kyverno.cloud.feddema.dev
+
+kyvernoPlugin:
+  enabled: true
+  replicaCount: 1
+
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      memory: 30Mi
+      cpu: 5m
+      
+monitoring:
+  enabled: true
+
+database:
+  type: "postgres"
+  secretRef: "policy-reporter-credentials"
+
+global:
+  plugins:
+    kyverno: true
