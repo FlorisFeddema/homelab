@@ -14,16 +14,9 @@ spec:
       targetRevision: 2.7.3
       helm:
         values: |
-          podSecurityStandard: baseline
-          podSecuritySeverity: medium
+          podSecurityStandard: restricted
+          podSecuritySeverity: high
           validationFailureAction: audit
-    - repoURL: https://github.com/kyverno/policies
-      targetRevision: 1d04b0502915f3b210f862f2aeea9eda70d8a211
-      path: argo
-      directory:
-        recurse: true
-        exclude: 'artifacthub-pkg.yml'
-
 
   destination:
     server: https://kubernetes.default.svc
