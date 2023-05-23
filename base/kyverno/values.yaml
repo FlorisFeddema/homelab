@@ -49,7 +49,7 @@ admissionController:
   container:
     resources:
       limits:
-        memory: 384Mi
+        memory: 512Mi
       requests:
         cpu: 50m
         memory: 128Mi
