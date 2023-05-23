@@ -24,7 +24,7 @@ ui:
       cpu: 5m
       
   ingress:
-    enabled: +Fgq4y7zkFufH/PfPDvxE5bF43Qm8FEVr8pPOMQN8GlowsAHDDjw8FHlW6Or5YXmuU6gZhBPggmSm0m9w0EQzYDFis3tm1Hjkt2RpH8oWaDbK13TS90Pg8NhqfWnAqLmLBd64EkHwySg4LMPUBDW7eTg7VNOe7JkFZoNHq7fLcNxvNQLpl1cAUUEt63zGCj
+    enabled: false
     annotations:
       external-dns.alpha.kubernetes.io/hostname: kyverno.cloud.feddema.dev
       external-dns.alpha.kubernetes.io/ttl: "120"
