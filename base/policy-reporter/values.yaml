@@ -52,10 +52,6 @@ kyvernoPlugin:
 monitoring:
   enabled: true
 
-database:
-  type: "postgres"
-  secretRef: "policy-reporter-credentials"
-
 global:
   plugins:
     kyverno: true
