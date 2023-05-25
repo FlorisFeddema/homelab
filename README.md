@@ -220,3 +220,7 @@ sh ./install.sh base/external-dns
 2. sudo rm /etc/nginx/nginx.conf
 3. sudo nano /etc/nginx/nginx.conf
 4. systemctl reboot
+
+## Known issues
+
+- https://longhorn.io/kb/troubleshooting-volume-with-multipath/
