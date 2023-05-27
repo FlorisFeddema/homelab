@@ -17,10 +17,10 @@ spec:
       targetRevision: 0.1.0
       helm:
         valueFiles:
-          - $repo/base/enphase-envoy-prometheus-exporter/values.yaml
+          - $repo/dev/enphase-envoy-prometheus-exporter/values.yaml
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
-      path: base/enphase-envoy-prometheus-exporter
+      path: dev/enphase-envoy-prometheus-exporter
 
   destination:
     server: https://kubernetes.default.svc

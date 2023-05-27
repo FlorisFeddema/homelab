@@ -17,10 +17,10 @@ spec:
       targetRevision: 0.1.1
       helm:
         valueFiles:
-          - $repo/base/smartmeter-gateway-prometheus-exporter/values.yaml
+          - $repo/dev/smartmeter-gateway-prometheus-exporter/values.yaml
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
-      path: base/smartmeter-gateway-prometheus-exporter
+      path: dev/smartmeter-gateway-prometheus-exporter
 
   destination:
     server: https://kubernetes.default.svc
