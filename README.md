@@ -3,17 +3,18 @@
 This repository will be used for the configuration of the feddema.dev Kubernetes Cluster. Different GitOps principles will be applied in this repository.
 
 <!-- TOC -->
-- [cloud-gitops](#cloud-gitops)
-  - [Kubeseal](#kubeseal)
-    - [Restore key in new cluster](#restore-key-in-new-cluster)
-  - [PostgreSQL](#postgresql)
-    - [Create user and database](#create-user-and-database)
-    - [Upgrade](#upgrade)
-  - [Mysql](#mysql)
-  - [Upgrade kubernetes](#upgrade-kubernetes)
-  - [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
-  - [Node setup](#node-setup)
-  - [Install load balancer](#install-load-balancer)
+* [cloud-gitops](#cloud-gitops)
+  * [Kubeseal](#kubeseal)
+    * [Restore key in new cluster](#restore-key-in-new-cluster)
+  * [PostgreSQL](#postgresql)
+    * [Create user and database](#create-user-and-database)
+    * [Upgrade](#upgrade)
+  * [Mysql](#mysql)
+  * [Upgrade kubernetes](#upgrade-kubernetes)
+  * [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
+  * [Node setup](#node-setup)
+  * [Install load balancer](#install-load-balancer)
+  * [Known issues](#known-issues)
 <!-- TOC -->
 
 ## Kubeseal
@@ -67,7 +68,7 @@ export POSTGRES_PASSWORD=$(kubectl get secret --namespace postgresql postgresql-
 To connect to the database run the following command: 
 
 ```bash
-kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace postgresql --image docker.io/bitnami/postgresql:14.4.0-debian-11-r9 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgresql -U postgres -d postgres -p 5432
+kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace postgresql --image docker.io/bitnami/postgresql:latest --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgresql -U postgres -d postgres -p 5432
 ```
 
 Or the connect form outside the cluster run:
@@ -81,7 +82,7 @@ kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 PGPASSWORD=
 ```psql
 CREATE DATABASE <NAME>;
 CREATE USER <NAME> WITH ENCRYPTED PASSWORD '<PASSWORD>';
-GRANT ALL PRIVILEGES ON DATABASE <NAME> TO <NAME>
+GRANT ALL PRIVILEGES ON DATABASE <NAME> TO <NAME>;
 ```
 
 ### Upgrade

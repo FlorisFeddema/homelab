@@ -1,0 +1,145 @@
+expose:
+  type: ingress
+  tls:
+    enabled: true
+    certSource: secret
+    auto:
+    secret:
+      secretName: "harbor-tls"
+  ingress:
+    hosts:
+      core: registry.cloud.feddema.dev
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      cert-manager.io/cluster-issuer: letsencrypt
+    harbor:
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: registry.cloud.feddema.dev
+
+externalURL: https://registry.cloud.feddema.dev
+
+internalTLS:
+  enabled: false
+
+ipFamily:
+  ipv6:
+    enabled: false
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      size: 50Gi
+    jobservice:
+      jobLog:
+        size: 2Gi
+
+
+existingSecretAdminPassword: harbor-credentials
+existingSecretAdminPasswordKey: harborAdminPassword
+
+existingSecretSecretKey: harbor-credentials
+
+portal:
+  replicas: 1
+  revisionHistoryLimit: 2
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 20m
+    limits:
+      memory: 128Mi
+
+core:
+  replicas: 1
+  revisionHistoryLimit: 2
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 20m
+    limits:
+      memory: 256Mi
+
+jobservice:
+  replicas: 1
+  revisionHistoryLimit: 2
+  resources:
+    requests:
+      memory: 32Mi
+      cpu: 20m
+    limits:
+      memory: 128Mi
+
+registry:
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 20m
+    limits:
+      memory: 256Mi
+  controller:
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 20m
+      limits:
+        memory: 256Mi
+  replicas: 1
+  revisionHistoryLimit: 2
+  credentials:
+    username: "registry_admin"
+    existingSecret: "harbor-credentials"
+
+trivy:
+  enabled: true
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 1Gi
+
+notary:
+  enabled: false
+
+database:
+  type: external
+  external:
+    host: "postgresql.postgresql.svc.cluster.local"
+    port: "5432"
+    username: "harbor"
+    coreDatabase: "harbor"
+    existingSecret: "harbor-credentials"
+
+redis:
+  type: internal
+  internal:
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 20m
+      limits:
+        memory: 256Mi
+
+exporter:
+  replicas: 1
+  revisionHistoryLimit: 2
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 20m
+    limits:
+      memory: 256Mi
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+
+cache:
+  enabled: true
+  expireHours: 12
