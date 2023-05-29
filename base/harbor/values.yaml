@@ -88,7 +88,7 @@ registry:
       limits:
         memory: 256Mi
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   credentials:
     username: "registry_admin"
     existingSecret: "harbor-credentials"
