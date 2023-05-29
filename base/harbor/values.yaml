@@ -90,7 +90,6 @@ registry:
   replicas: 1
   revisionHistoryLimit: 2
   credentials:
-    username: "registry_admin"
     existingSecret: "harbor-credentials"
 
 trivy:
