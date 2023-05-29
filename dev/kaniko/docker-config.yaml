@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: docker-config
+  namespace: kaniko
+spec:
+  encryptedData:
+    config.json: AgAJ2b1vy6kHtKICr6cnc9E7oCG7niJRrDjG7e7r4lAUnXuaDvteYyEodm83Wgag/7EF2gJf+/tT7c+Xe747zR9kvqeuoY6gDNDsgFuTji4lSD1YXWt0VLV22/Ue5v3Nm1I/7ik+ugpGXX+X0QaSz/IMP/Fu8kn3oaJsx45fuS4edy+L+p01QQb9sDjceULQNGbfGyNs5/1MyjQJnEHWDn9jZ9SwsomlNM0ymG95a+Lnzub5TdQP+AyZziN3CWpVpaYEKjReF3d77c8Apb6w3yQmUYJdVlb3TeOxwTiByThap9Btvymrg2GliZljuA9JBF5kavjW2xVHE95riA9Ej0kQGSeaXfduxLIIseCooYdpL+ev9bA5tbEyM4hNdWuKmFCTxqbqZD9l3eQZplJ5ixFTrZh2fYhULYML3Yps/Nvqgt54uo/nwrnz6bsz/zv84hd8spg8noqjZairJ3mrOIZMaUII3zfXBnaSpqbqSiiX9ePa7AY6JuUqojcI6/zT5QNx14rhPWy19LqSUljg55w3h13LvgWZ3zzEJrAwofjkHfp8To+XwgkLpibX1OO54dlCa+AHtU1x2b/EbcgET9oYf34236O604jUMUaBTPU+tNOo0KF+I3lMNs/Z8ZgmDj6DmUVaSHRf0UunFApGAi85SuGxGKzhBrMU85HD6jah5nlrSz/yj+jWQUk6+j6CLiPlUdxayGHX/qDMrc1fm2K07eua/YPFZ2Ek2sOBGuTb8/q9m/6dOqY2mAVXWBebUjSqUJlJ7iOcF2b1LzQ39mrcKQTyc4lHXG7fqyBO1dqPDv7mILffA4gzna5GLBb70sYGpXFWmkhjVGfJBjMvcQ5kzjY45PUN6Chaa7T4MLBiJjHYkDEbcKGhrcxztuWfzblW3ZrwXcPAaD6ju4ptUpbj5n9q7FWHtfyeU3YeeM86tgTruEk+FQXGjfZhihU9dDSq26+TxYlKU9yCsfBbOdMDteB8lqM=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: docker-config
+      namespace: kaniko
+
