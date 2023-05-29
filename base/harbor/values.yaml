@@ -12,10 +12,6 @@ expose:
     annotations:
       external-dns.alpha.kubernetes.io/ttl: "120"
       cert-manager.io/cluster-issuer: letsencrypt
-      ingress.kubernetes.io/ssl-redirect: "true"
-      ingress.kubernetes.io/proxy-body-size: "0"
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
       nginx.ingress.kubernetes.io/custom-http-errors: "418"
     harbor:
       annotations:
@@ -90,11 +86,11 @@ registry:
       limits:
         memory: 256Mi
   replicas: 1
-#  relativeurls: true
+  relativeurls: true
   revisionHistoryLimit: 0
-#  credentials:
-#    username: "registry_admin"
-#    existingSecret: "harbor-credentials"
+  credentials:
+    username: "registry_admin"
+    existingSecret: "harbor-credentials"
 
 trivy:
   enabled: true
