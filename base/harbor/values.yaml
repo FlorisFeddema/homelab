@@ -12,6 +12,10 @@ expose:
     annotations:
       external-dns.alpha.kubernetes.io/ttl: "120"
       cert-manager.io/cluster-issuer: letsencrypt
+      ingress.kubernetes.io/ssl-redirect: "true"
+      ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
     harbor:
       annotations:
         external-dns.alpha.kubernetes.io/hostname: registry.cloud.feddema.dev
