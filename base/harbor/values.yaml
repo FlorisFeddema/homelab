@@ -45,7 +45,7 @@ existingSecretSecretKey: harbor-credentials
 
 portal:
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   resources:
     requests:
       memory: 32Mi
@@ -55,7 +55,7 @@ portal:
 
 core:
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   resources:
     requests:
       memory: 128Mi
@@ -65,7 +65,7 @@ core:
 
 jobservice:
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   resources:
     requests:
       memory: 32Mi
@@ -127,7 +127,7 @@ redis:
 
 exporter:
   replicas: 1
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
   resources:
     requests:
       memory: 128Mi
