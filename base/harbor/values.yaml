@@ -90,9 +90,9 @@ registry:
   replicas: 1
   relativeurls: true
   revisionHistoryLimit: 0
-  credentials:
-    username: "registry_admin"
-    existingSecret: "harbor-credentials"
+#  credentials:
+#    username: "registry_admin"
+#    existingSecret: "harbor-credentials"
 
 trivy:
   enabled: true
