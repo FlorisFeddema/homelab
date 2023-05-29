@@ -10,8 +10,6 @@ expose:
     hosts:
       core: registry.cloud.feddema.dev
     annotations:
-      nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
       external-dns.alpha.kubernetes.io/ttl: "120"
       cert-manager.io/cluster-issuer: letsencrypt
     harbor:
@@ -36,7 +34,6 @@ persistence:
     jobservice:
       jobLog:
         size: 2Gi
-
 
 existingSecretAdminPassword: harbor-credentials
 existingSecretAdminPasswordKey: harborAdminPassword
@@ -88,7 +85,7 @@ registry:
       limits:
         memory: 256Mi
   replicas: 1
-  relativeurls: true
+#  relativeurls: true
   revisionHistoryLimit: 0
 #  credentials:
 #    username: "registry_admin"
