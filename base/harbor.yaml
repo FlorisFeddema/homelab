@@ -26,8 +26,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: harbor
 
+  ignoreDifferences:
+    - kind: Secret
+      name: harbor-registry
+      jsonPointers:
+        - /data/REGISTRY_HTTP_SECRET
+
   revisionHistoryLimit: 2
   syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true
