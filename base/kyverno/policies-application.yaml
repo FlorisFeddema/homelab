@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: no-sync
+  project: always-sync
   sources:
     - chart: kyverno-policies
       repoURL: https://kyverno.github.io/kyverno/
