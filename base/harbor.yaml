@@ -31,6 +31,17 @@ spec:
       name: harbor-registry
       jsonPointers:
         - /data/REGISTRY_HTTP_SECRET
+    - kind: Secret
+      name: harbor-jobservice
+      jsonPointers:
+        - /data/JOBSERVICE_SECRET
+    - kind: Secret
+      name: harbor-core
+      jsonPointers:
+        - /data/CSRF_KEY
+        - /data/secret
+        - /data/tls.crt
+        - /data/tls.key
 
   revisionHistoryLimit: 2
   syncPolicy:
