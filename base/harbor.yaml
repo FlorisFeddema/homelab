@@ -42,6 +42,12 @@ spec:
         - /data/secret
         - /data/tls.crt
         - /data/tls.key
+    - kind: Deployment
+      group: apps
+      name: harbor-core
+      jsonPointers:
+        - /spec/template/metadata/annotations/checksum/secret
+        - /spec/template/metadata/annotations/checksum/secret-jobservice
 
   revisionHistoryLimit: 2
   syncPolicy:
