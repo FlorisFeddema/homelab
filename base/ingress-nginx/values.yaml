@@ -1,6 +1,6 @@
 controller:
   config:
-    custom-http-errors: 401,403,404,500,501,502,503
+#     custom-http-errors: 401,403,404,500,501,502,503
     use-forwarded-headers: "true"
   ingressClassResource:
     default: true
