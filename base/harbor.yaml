@@ -46,8 +46,8 @@ spec:
       group: apps
       name: harbor-core
       jsonPointers:
-        - /spec/template/metadata/annotations/checksum/secret
-        - /spec/template/metadata/annotations/checksum/secret-jobservice
+        - /spec/template/metadata/annotations/checksum~1secret
+        - /spec/template/metadata/annotations/checksum~1secret-jobservice
 
   revisionHistoryLimit: 2
   syncPolicy:
