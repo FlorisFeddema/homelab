@@ -9,7 +9,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 
 spec:
-  project: always-sync
+  project: no-sync
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
