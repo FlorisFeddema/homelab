@@ -45,9 +45,10 @@ postgresql:
   enabled: false
 
 externalPostgresql:
+  existingSecret: "kutt-credentials"
   auth:
-    database: kutt
     existingSecret: "kutt-credentials"
+    database: kutt
     username: kutt
     userPasswordKey: "password"
   hostname: "postgresql.postgresql.svc.cluster.local"
