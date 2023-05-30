@@ -1,13 +1,6 @@
 crds:
   install: true
 
-resources:
-  limits:
-    memory: 1Gi
-  requests:
-    cpu: 50m
-    memory: 128Mi
-
 config:
   create: true
   enableDefaultRegistryMutation: false
@@ -49,7 +42,7 @@ admissionController:
   container:
     resources:
       limits:
-        memory: 512Mi
+        memory: 1Gi
       requests:
         cpu: 50m
         memory: 128Mi
