@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: policy-reporter
       repoURL: https://kyverno.github.io/policy-reporter/
-      targetRevision: 2.19.1
+      targetRevision: 2.19.2
       helm:
         valueFiles:
           - $repo/base/policy-reporter/values.yaml
