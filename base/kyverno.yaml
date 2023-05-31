@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: kyverno
       repoURL: https://kyverno.github.io/kyverno/
-      targetRevision: 3.0.0
+      targetRevision: 3.0.1
       helm:
         valueFiles:
           - $repo/base/kyverno/values.yaml
