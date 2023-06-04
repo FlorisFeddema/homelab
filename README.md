@@ -178,7 +178,7 @@ sh ./install.sh base/external-dns
 3. sudo usermod -aG sudo localadmin
 4. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
 5. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-6. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools sudo apt install open-iscsi jq nfs-common -y
+6. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
 7. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
 8. sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
 9. sudo install -m 0755 -d /etc/apt/keyrings
@@ -186,8 +186,8 @@ sh ./install.sh base/external-dns
 11. sudo chmod a+r /etc/apt/keyrings/docker.gpg
 12. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 13. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-14. sudo apt install containerd.io
-    cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+14. sudo apt install containerd.io 
+15. cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
     overlay
     br_netfilter
     EOF
@@ -202,7 +202,7 @@ sh ./install.sh base/external-dns
 19. !! CHANGE SystemdCgroup = true IN \[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] !!
 20. sudo systemctl restart containerd
 21. sudo systemctl enable containerd
-22. sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+22. curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 23. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 24. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
 25. sudo apt -y install kubelet=1.26.4-00 kubeadm=1.26.4-00 kubectl=1.26.4-00
