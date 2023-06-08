@@ -35,7 +35,7 @@ global:
     createAggregateClusterRoles: false
 
 alertmanager:
-  enabled: false
+  enabled: true
 
 grafana:
   enabled: true
