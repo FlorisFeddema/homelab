@@ -13,7 +13,7 @@ spec:
       targetRevision: main
       ref: repo
     - chart: vpa
-      repoURL: ttps://charts.fairwinds.com/stable
+      repoURL: https://charts.fairwinds.com/stable
       targetRevision: 1.7.5
       helm:
         valueFiles:
