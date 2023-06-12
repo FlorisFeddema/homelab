@@ -38,7 +38,7 @@ admissionController:
       # admissionController.certGen.image.repository -- An image that contains certgen for creating certificates. Only used if admissionController.generateCertificate is true
       repository: quay.io/reactiveops/ci-images
       # admissionController.certGen.image.tag -- An image tag for the admissionController.certGen.image.repository image. Only used if admissionController.generateCertificate is true
-      tag: v11-alpine
+      tag: v12-alpine
       # admissionController.certGen.image.pullPolicy -- The pull policy for the certgen image. Recommend not changing this
       pullPolicy: Always
     # admissionController.certGen.env -- Additional environment variables to be added to the certgen container. Format is KEY: Value format
