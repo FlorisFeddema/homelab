@@ -6,7 +6,6 @@ recommender:
     pod-recommendation-min-memory-mb: 10
     prometheus-address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
     storage: prometheus
-    prometheus-cadvisor-job-name: kubelet
     pod-namespace-label: namespace
     pod-name-label: pod
     container-namespace-label: namespace
