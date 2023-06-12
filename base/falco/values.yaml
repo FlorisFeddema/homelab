@@ -20,6 +20,8 @@ falco:
     enabled: true
   grpc_output:
     enabled: true
+  http_output:
+    insecure: true
 
 falcosidekick:
   enabled: true
