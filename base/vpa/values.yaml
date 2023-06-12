@@ -4,9 +4,14 @@ recommender:
     v: "4"
     pod-recommendation-min-cpu-millicores: 5
     pod-recommendation-min-memory-mb: 10
-    prometheus-address: |
-      http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+    prometheus-address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
     storage: prometheus
+    prometheus-cadvisor-job-name: kubelet
+    pod-namespace-label: namespace
+    pod-name-label: pod
+    container-namespace-label: namespace
+    container-pod-name-label: pod
+    container-name-label: container
   replicaCount: 1
   resources:
     limits:
