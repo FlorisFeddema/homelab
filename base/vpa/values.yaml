@@ -35,3 +35,10 @@ admissionController:
     requests:
       cpu: 50m
       memory: 128Mi
+  tlsSecretKeys:
+    - key: ca.crt
+      path: caCert.pem
+    - key: tls.crt
+      path: serverCert.pem
+    - key: tls.key
+      path: serverKey.pem
