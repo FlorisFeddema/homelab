@@ -6,11 +6,6 @@ recommender:
     pod-recommendation-min-memory-mb: 10
     prometheus-address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
     storage: prometheus
-    pod-namespace-label: namespace
-    pod-name-label: pod
-    container-namespace-label: namespace
-    container-pod-name-label: pod
-    container-name-label: container
   replicaCount: 1
   resources:
     limits:
@@ -31,27 +26,7 @@ updater:
 
 admissionController:
   enabled: false
-  # admissionController.generateCertificate -- If true and admissionController is enabled, a pre-install hook will run to create the certificate for the webhook
   generateCertificate: true
-  certGen:
-    image:
-      # admissionController.certGen.image.repository -- An image that contains certgen for creating certificates. Only used if admissionController.generateCertificate is true
-      repository: quay.io/reactiveops/ci-images
-      # admissionController.certGen.image.tag -- An image tag for the admissionController.certGen.image.repository image. Only used if admissionController.generateCertificate is true
-      tag: v11-alpine
-      # admissionController.certGen.image.pullPolicy -- The pull policy for the certgen image. Recommend not changing this
-      pullPolicy: Always
-    # admissionController.certGen.env -- Additional environment variables to be added to the certgen container. Format is KEY: Value format
-    env: {}
-    # admissionController.certGen.resources -- The resources block for the certgen pod
-    resources: {}
-    # admissionController.certGen.securityContext -- The securityContext block for the certgen pod
-    securityContext: {}
-    nodeSelector: {}
-    tolerations: []
-    affinity: {}
-  cleanupOnDelete:
-    enabled: true
   replicaCount: 1
   resources:
     limits:
@@ -59,11 +34,3 @@ admissionController:
     requests:
       cpu: 50m
       memory: 128Mi
-  # admissionController.tlsSecretKeys -- The keys in the vpa-tls-certs secret to map in to the admission controller
-  tlsSecretKeys: []
-    # - key: ca.crt
-    #   path: caCert.pem
-    # - key: tls.crt
-    #   path: serverCert.pem
-    # - key: tls.key
-  #   path: serverKey.pem
