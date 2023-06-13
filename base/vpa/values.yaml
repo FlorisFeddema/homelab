@@ -25,9 +25,9 @@ updater:
       memory: 128Mi
 
 admissionController:
-  enabled: false
+  enabled: true
   generateCertificate: false
-  secretName: vpa-webhook-secret
+  secretName: vpa-admission-controller-secret
   replicaCount: 1
   resources:
     limits:
