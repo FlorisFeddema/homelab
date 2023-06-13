@@ -42,3 +42,6 @@ admissionController:
       path: serverCert.pem
     - key: tls.key
       path: serverKey.pem
+  mutatingWebhookConfiguration:
+    annotations:
+      cert-manager.io/inject-ca-from: vpa/vpa-admission-controller-secret
