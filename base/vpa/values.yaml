@@ -26,8 +26,8 @@ updater:
 
 admissionController:
   enabled: true
-  generateCertificate: false
-  secretName: vpa-admission-controller-secret
+  generateCertificate: true
+  # secretName: vpa-admission-controller-secret
   replicaCount: 1
   resources:
     limits:
@@ -35,13 +35,13 @@ admissionController:
     requests:
       cpu: 50m
       memory: 128Mi
-  tlsSecretKeys:
-    - key: ca.crt
-      path: caCert.pem
-    - key: tls.crt
-      path: serverCert.pem
-    - key: tls.key
-      path: serverKey.pem
-  mutatingWebhookConfiguration:
-    annotations:
-      cert-manager.io/inject-ca-from: vpa/vpa-admission-controller-secret
+  # tlsSecretKeys:
+  #   - key: ca.crt
+  #     path: caCert.pem
+  #   - key: tls.crt
+  #     path: serverCert.pem
+  #   - key: tls.key
+  #     path: serverKey.pem
+  # mutatingWebhookConfiguration:
+  #   annotations:
+  #     cert-manager.io/inject-ca-from: vpa/vpa-admission-controller-secret
