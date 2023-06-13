@@ -15,7 +15,7 @@ recommender:
       memory: 128Mi
 
 updater:
-  enabled: false
+  enabled: true
   replicaCount: 1
   resources:
     limits:
@@ -26,7 +26,8 @@ updater:
 
 admissionController:
   enabled: false
-  generateCertificate: true
+  generateCertificate: false
+  secretName: vpa-webhook-secret
   replicaCount: 1
   resources:
     limits:
