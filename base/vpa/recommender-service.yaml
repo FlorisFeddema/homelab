@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: vpa-recommender
   namespace: vpa
-  type: ClusterIP
   labels:
     app.kubernetes.io/component: recommender
     app.kubernetes.io/instance: vpa
     app.kubernetes.io/name: vpa
 spec:
+  type: ClusterIP
   ports:
     - name: metrics
       port: 8942
