@@ -1,0 +1,15 @@
+
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vpa-webhook-certificate
+  namespace: vpa
+spec:
+  dnsNames:
+    - vpa-admission-controller.vpa
+    - vpa-admission-controller.vpa.svc
+    - vpa-admission-controller.vpa.svc.cluster.local
+  issuerRef:
+    kind: Issuer
+    name: vpa-issuer
+  secretName: vpa-webhook-secret
