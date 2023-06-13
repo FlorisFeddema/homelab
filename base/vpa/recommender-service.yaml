@@ -8,6 +8,7 @@ metadata:
     app.kubernetes.io/component: recommender
     app.kubernetes.io/instance: vpa
     app.kubernetes.io/name: vpa
+spec:
   ports:
     - name: metrics
       port: 8942
