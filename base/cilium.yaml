@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: cilium
       repoURL: https://helm.cilium.io/
-      targetRevision: 1.13.3
+      targetRevision: 1.13.4
       helm:
         valueFiles:
           - $repo/base/cilium/values.yaml
