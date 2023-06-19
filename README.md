@@ -205,7 +205,7 @@ sh ./install.sh base/external-dns
 22. curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 23. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 24. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-25. sudo apt -y install kubelet=1.26.4-00 kubeadm=1.26.4-00 kubectl=1.26.4-00
+25. sudo apt -y install kubelet=1.27.3-00 kubeadm=1.27.3-00 kubectl=1.27.3-00
 26. sudo apt-mark hold kubelet kubeadm kubectl
 27. nano config.yaml
 28. sudo kubeadm init --config config.yaml
