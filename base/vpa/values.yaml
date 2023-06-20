@@ -10,6 +10,7 @@ recommender:
   resources:
     limits:
       memory: 256Mi
+      cpu: null
     requests:
       cpu: 50m
       memory: 128Mi
@@ -20,6 +21,7 @@ updater:
   resources:
     limits:
       memory: 256Mi
+      cpu: null
     requests:
       cpu: 50m
       memory: 128Mi
@@ -32,6 +34,7 @@ admissionController:
   resources:
     limits:
       memory: 256Mi
+      cpu: null
     requests:
       cpu: 50m
       memory: 128Mi
