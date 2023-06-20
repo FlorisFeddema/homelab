@@ -1,13 +1,17 @@
 #!/bin/bash
 
-basePath=$1
+path=$1
+app=$2
+oci=$3
+
+basePath=$path/$app
 
 if [ -z "$basePath" ]; then
     echo "no path"
     exit 1
 fi
 
-applicationFile=$basePath/application.yaml
+applicationFile=$path/$app.yaml
 valuesFile=$basePath/values.yaml
 namespaceFile=$basePath/namespace.yaml
 applyFile=$basePath/apply.yaml
@@ -29,6 +33,12 @@ echo "$files" | while read line ; do
 done
 
 command="helm upgrade --install $name temp/$chart --namespace $namespace --values $valuesFile --version $version"
+
+
+if [ -n "$oci" ]; then
+    command="helm upgrade --install $name oci://$repo/$chart --namespace $namespace --values $valuesFile --version $version"
+fi
+
 
 echo "*********************"
 echo $command

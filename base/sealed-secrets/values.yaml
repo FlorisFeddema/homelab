@@ -1,6 +1,7 @@
 createController: true
 
 secretName: "sealed-secrets-key"
+keyrenewperiod: "0"
 
 fullnameOverride: "sealed-secrets-controller"
 
