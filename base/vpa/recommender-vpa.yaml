@@ -7,6 +7,6 @@ spec:
   targetRef:
     apiVersion: "apps/v1"
     kind:       Deployment
-    name:       recommender-vpa
+    name:       vpa-recommender
   updatePolicy:
     updateMode: "Auto"

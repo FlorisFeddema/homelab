@@ -7,6 +7,6 @@ spec:
   targetRef:
     apiVersion: "apps/v1"
     kind:       Deployment
-    name:       updater-vpa
+    name:       vpa-updater
   updatePolicy:
     updateMode: "Auto"
