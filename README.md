@@ -168,6 +168,12 @@ kubectl uncordon <NODE_NAME>
 ## Install ArgoCD applications by hand
 
 ```bash
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus-crds prometheus-community/prometheus-operator-crds
+```
+
+```bash
 sh ./install.sh base/external-dns
 ```
 
