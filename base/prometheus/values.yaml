@@ -78,6 +78,8 @@ grafana:
       readOnly: true
 
   grafana.ini:
+    auth:
+      oauth_allow_insecure_email_lookup: true
     auth.generic_oauth:
       enabled: true
       name: Keycloak
