@@ -14,7 +14,6 @@ fi
 applicationFile=$path/$app.yaml
 valuesFile=$basePath/values.yaml
 namespaceFile=$basePath/namespace.yaml
-applyFile=$basePath/apply.yaml
 files=$(find $basePath -type f | grep ".yaml" | grep -v "application.yaml" | grep -v "values.yaml" | grep -v "namespace.yaml")
 
 namespace=$(yq '.spec.destination.namespace' $applicationFile )
