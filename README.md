@@ -227,7 +227,7 @@ sh ./install.sh base/external-dns
 1. sudo apt install nginx
 2. sudo rm /etc/nginx/nginx.conf
 3. sudo nano /etc/nginx/nginx.conf
-4. systemctl reboot
+4.  systemctl restart nginx
 
 ## Known issues
 
