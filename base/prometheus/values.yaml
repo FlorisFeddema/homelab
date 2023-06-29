@@ -130,7 +130,7 @@ grafana:
       memory: 64Mi
 
   persistence:
-    type: StateFulSet
+    type: StatefulSet
     enabled: true
     accessModes:
       - ReadWriteOnce
