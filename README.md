@@ -224,10 +224,11 @@ sh ./install.sh base/external-dns
 
 ## Install load balancer
 
-1. sudo apt install nginx
-2. sudo rm /etc/nginx/nginx.conf
-3. sudo nano /etc/nginx/nginx.conf
-4.  systemctl restart nginx
+1. apk add nginx
+2. apk add nginx-mod-stream
+3. rm /etc/nginx/nginx.conf
+4. nano /etc/nginx/nginx.conf
+6. service nginx start
 
 ## Known issues
 
