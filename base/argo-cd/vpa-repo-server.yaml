@@ -1,12 +1,12 @@
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: loki-write-vpa
-  namespace: loki
+  name: argo-cd-argocd-repo-server-vpa
+  namespace: argocd
 spec:
   targetRef:
     apiVersion: "apps/v1"
-    kind:       StatefulSet
-    name:       loki-write
+    kind:       Deployment
+    name:       argo-cd-argocd-repo-server
   updatePolicy:
     updateMode: "Off"
