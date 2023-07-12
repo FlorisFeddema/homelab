@@ -7,6 +7,6 @@ spec:
   targetRef:
     apiVersion: "apps/v1"
     kind:       StatefulSet
-    name:       ingress-controller
+    name:       ingress-nginx-controller
   updatePolicy:
     updateMode: "Off"
