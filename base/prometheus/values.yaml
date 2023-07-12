@@ -1,3 +1,6 @@
+crds:
+  enabled: false
+
 defaultRules:
   create: true
   rules:
