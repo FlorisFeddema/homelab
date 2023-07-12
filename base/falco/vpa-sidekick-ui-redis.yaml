@@ -6,7 +6,7 @@ metadata:
 spec:
   targetRef:
     apiVersion: "apps/v1"
-    kind:       Deployment
+    kind:       StatefulSet
     name:       falco-falcosidekick-ui-redis
   updatePolicy:
     updateMode: "Auto"
