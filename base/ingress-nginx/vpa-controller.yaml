@@ -6,7 +6,7 @@ metadata:
 spec:
   targetRef:
     apiVersion: "apps/v1"
-    kind:       StatefulSet
+    kind:       Deployment
     name:       ingress-nginx-controller
   updatePolicy:
     updateMode: "Off"
