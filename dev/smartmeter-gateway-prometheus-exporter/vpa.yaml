@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: smartmeter-gateway-prometheus-exporter-vpa
+  namespace: smartmeter-gateway-prometheus-exporter
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       smartmeter-gateway-prometheus-exporter
+  updatePolicy:
+    updateMode: "Off"

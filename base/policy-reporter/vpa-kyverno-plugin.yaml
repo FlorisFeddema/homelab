@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: policy-reporter-kyverno-plugin-vpa
+  namespace: policy-reporter
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       policy-reporter-kyverno-plugin
+  updatePolicy:
+    updateMode: "Off"
