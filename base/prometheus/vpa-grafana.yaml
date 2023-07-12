@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       prometheus-grafana
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

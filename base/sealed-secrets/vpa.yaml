@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       sealed-secrets-controller
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

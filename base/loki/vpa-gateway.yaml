@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       loki-gateway
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

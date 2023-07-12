@@ -9,4 +9,4 @@ spec:
     kind:       DaemonSet
     name:       prometheus-prometheus-node-exporter
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

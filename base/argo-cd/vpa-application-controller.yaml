@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       argo-cd-argocd-application-controller
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

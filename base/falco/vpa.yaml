@@ -9,4 +9,4 @@ spec:
     kind:       DaemonSet
     name:       falco
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

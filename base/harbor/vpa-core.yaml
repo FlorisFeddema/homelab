@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       harbor-core
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

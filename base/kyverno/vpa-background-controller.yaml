@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       kyverno-background-controller
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

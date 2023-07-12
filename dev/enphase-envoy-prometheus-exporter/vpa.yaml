@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       enphase-envoy-prometheus-exporter
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

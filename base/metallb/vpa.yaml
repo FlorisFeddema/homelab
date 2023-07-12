@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       metallb-controller
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

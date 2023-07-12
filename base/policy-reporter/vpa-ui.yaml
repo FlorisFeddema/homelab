@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       policy-reporter-ui
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

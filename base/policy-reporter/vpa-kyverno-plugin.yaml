@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       policy-reporter-kyverno-plugin
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

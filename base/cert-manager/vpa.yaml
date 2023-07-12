@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       cert-manager
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

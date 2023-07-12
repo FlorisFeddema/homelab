@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       loki-read
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

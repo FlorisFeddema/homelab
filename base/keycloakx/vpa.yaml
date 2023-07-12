@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       keycloakx
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

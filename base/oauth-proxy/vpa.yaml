@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       oauth-proxy-oauth2-proxy
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

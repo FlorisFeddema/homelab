@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       argo-cd-argocd-server
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

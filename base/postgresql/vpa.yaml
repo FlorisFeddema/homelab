@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       postgresql
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       oauth-proxy-redis-master
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

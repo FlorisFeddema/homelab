@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       prometheus-kube-state-metrics
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"

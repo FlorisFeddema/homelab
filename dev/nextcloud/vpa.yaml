@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       nextcloud
   updatePolicy:
-    updateMode: "Off"
+    updateMode: "Auto"
