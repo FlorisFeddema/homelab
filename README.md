@@ -233,3 +233,7 @@ sh ./install.sh base/external-dns
 ## Known issues
 
 - https://longhorn.io/kb/troubleshooting-volume-with-multipath/
+
+## Sources
+
+- [GPU Passthrough](https://3os.org/infrastructure/proxmox/gpu-passthrough/igpu-passthrough-to-vm/#linux-virtual-machine-igpu-passthrough-configuration)
