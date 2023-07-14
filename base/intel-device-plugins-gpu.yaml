@@ -28,6 +28,12 @@ spec:
     server: https://kubernetes.default.svc
     namespace: intel-device-plugins-gpu
 
+  ignoreDifferences:
+    - group: "deviceplugin.intel.com"
+      kind: "GpuDevicePlugin"
+      jsonPointers:
+        - /spec/resourceManager
+
   revisionHistoryLimit: 2
   syncPolicy:
     automated:

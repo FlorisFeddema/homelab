@@ -2,7 +2,6 @@ name: intel-device-plugins-gpu
 
 sharedDevNum: 1
 logLevel: 2
-resourceManager: false
 enableMonitoring: true
 allocationPolicy: "none"
 
