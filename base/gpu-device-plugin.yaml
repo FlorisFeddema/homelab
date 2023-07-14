@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gpu-device-plugin
+  name: intel-gpu-device-plugin
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -12,22 +12,22 @@ spec:
     - repoURL: https://github.com/florisfeddema/cloud-gitops
       targetRevision: main
       ref: repo
-    - chart: device-plugin-operator
+    - chart: intel-device-plugin-operator
       repoURL: https://intel.github.io/helm-charts/
       targetRevision: 0.27.1
-    - chart: gpu-device-plugin
+    - chart: intel-gpu-device-plugin
       repoURL: https://intel.github.io/helm-charts/
       targetRevision: 0.27.1
       helm:
         valueFiles:
-          - $repo/base/gpu-device-plugin/values.yaml
+          - $repo/base/intel-gpu-device-plugin/values.yaml
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
-      path: base/gpu-device-plugin
+      path: base/intel-gpu-device-plugin
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: gpu-device-plugin
+    namespace: intel-gpu-device-plugin
 
   revisionHistoryLimit: 2
   syncPolicy:
