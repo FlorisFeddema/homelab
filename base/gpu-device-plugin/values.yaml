@@ -1,0 +1,12 @@
+name: gpu-device-plugin
+
+sharedDevNum: 1
+logLevel: 2
+resourceManager: false
+enableMonitoring: true
+allocationPolicy: "none"
+
+nodeSelector:
+  intel.feature.node.kubernetes.io/gpu: 'true'
+
+nodeFeatureRule: true
