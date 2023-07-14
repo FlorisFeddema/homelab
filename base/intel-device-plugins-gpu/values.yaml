@@ -1,4 +1,4 @@
-name: intel-gpu-device-plugin
+name: intel-device-plugins-gpu
 
 sharedDevNum: 1
 logLevel: 2

@@ -1,4 +1,4 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: intel-gpu-device-plugin
+  name: intel-device-plugins-gpu
