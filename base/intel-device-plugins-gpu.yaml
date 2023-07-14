@@ -26,7 +26,7 @@ spec:
       path: base/intel-device-plugins-gpu
   destination:
     server: https://kubernetes.default.svc
-    namespace: intel-gpu-device-plugin
+    namespace: intel-device-plugins-gpu
 
   revisionHistoryLimit: 2
   syncPolicy:
