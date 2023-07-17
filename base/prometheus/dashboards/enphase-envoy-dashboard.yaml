@@ -33,6 +33,7 @@ data:
       "editable": false,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
+      "id": 966,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -58,7 +59,7 @@ data:
                   }
                 ]
               },
-              "unit": "kwatth"
+              "unit": "watth"
             },
             "overrides": []
           },
@@ -71,7 +72,7 @@ data:
           "id": 2,
           "options": {
             "colorMode": "value",
-            "graphMode": "area",
+            "graphMode": "none",
             "justifyMode": "auto",
             "orientation": "auto",
             "reduceOptions": {
@@ -84,7 +85,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.8",
+          "pluginVersion": "10.0.1",
           "targets": [
             {
               "datasource": {
@@ -92,7 +93,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum by(job) (envoy_production_watthours_today / 1000)",
+              "expr": "max by(job) (envoy_production_watthours_today)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -100,6 +101,7 @@ data:
           ],
           "title": "Today",
           "transformations": [],
+          "transparent": true,
           "type": "stat"
         },
         {
@@ -113,7 +115,7 @@ data:
                 "fixedColor": "light-orange",
                 "mode": "fixed"
               },
-              "decimals": 0,
+              "decimals": 3,
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -128,7 +130,7 @@ data:
                   }
                 ]
               },
-              "unit": "Kwh"
+              "unit": "watth"
             },
             "overrides": []
           },
@@ -153,7 +155,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.8",
+          "pluginVersion": "10.0.1",
           "targets": [
             {
               "datasource": {
@@ -161,13 +163,14 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "max by(job) (envoy_production_watthours_lifetime / 1000)",
+              "expr": "max by(job) (envoy_production_watthours_lifetime)",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
             }
           ],
           "title": "Lifetime",
+          "transparent": true,
           "type": "stat"
         },
         {
@@ -217,7 +220,7 @@ data:
             "showThresholdLabels": false,
             "showThresholdMarkers": true
           },
-          "pluginVersion": "9.3.8",
+          "pluginVersion": "10.0.1",
           "targets": [
             {
               "datasource": {
@@ -225,7 +228,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "code",
-              "expr": "sum by(job) (envoy_production_watts_now)",
+              "expr": "max by(job) (envoy_production_watts_now)",
               "instant": false,
               "legendFormat": "__auto",
               "range": true,
@@ -234,6 +237,7 @@ data:
           ],
           "title": "Current",
           "transformations": [],
+          "transparent": true,
           "type": "gauge"
         },
         {
@@ -353,6 +357,7 @@ data:
             }
           ],
           "title": "Production",
+          "transparent": true,
           "type": "timeseries"
         },
         {
@@ -445,7 +450,69 @@ data:
             }
           ],
           "title": "Production per panel",
+          "transparent": true,
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "watth"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 16
+          },
+          "id": 13,
+          "options": {
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true
+          },
+          "pluginVersion": "10.0.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus"
+              },
+              "editorMode": "code",
+              "expr": "increase(envoy_production_watthours_lifetime[$__range])",
+              "instant": false,
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Production over time",
+          "transparent": true,
+          "type": "gauge"
         },
         {
           "datasource": {
@@ -489,8 +556,8 @@ data:
           "gridPos": {
             "h": 8,
             "w": 12,
-            "x": 12,
-            "y": 16
+            "x": 0,
+            "y": 24
           },
           "id": 12,
           "options": {
@@ -507,7 +574,7 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "9.3.8",
+          "pluginVersion": "10.0.1",
           "targets": [
             {
               "datasource": {
@@ -522,18 +589,21 @@ data:
             }
           ],
           "title": "Cloud connection",
+          "transparent": true,
           "type": "stat"
         }
       ],
       "refresh": "5s",
-      "schemaVersion": 37,
+      "schemaVersion": 38,
       "style": "dark",
-      "tags": [],
+      "tags": [
+        "Energy"
+      ],
       "templating": {
         "list": []
       },
       "time": {
-        "from": "now-12h",
+        "from": "now-24h",
         "to": "now"
       },
       "timepicker": {
@@ -549,6 +619,6 @@ data:
       "timezone": "",
       "title": "Envoy Solarpanels",
       "uid": "fI005ff4k",
-      "version": 7,
+      "version": 2,
       "weekStart": ""
     }

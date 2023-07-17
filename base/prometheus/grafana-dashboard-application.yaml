@@ -12,6 +12,9 @@ spec:
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
       path: base/prometheus/dashboards
+    - path: ./
+      repoURL: https://github.com/dotdc/grafana-dashboards-kubernetes
+      targetRevision: HEAD
 
   destination:
     server: https://kubernetes.default.svc
