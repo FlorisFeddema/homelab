@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: percona-pg-operator
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+spec:
+  project: no-sync
+  sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: pg-operator
+      repoURL: https://percona.github.io/percona-helm-charts/
+      targetRevision: 2.2.0
+      helm:
+        valueFiles:
+          - $repo/base/percona-pg-operator/values.yaml
+    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+      targetRevision: HEAD
+      path: base/percona-pg-operator
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: percona-pg-operator
+
+  revisionHistoryLimit: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
