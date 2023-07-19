@@ -37,11 +37,11 @@ primary:
       cpu: 50m
 
   podSecurityContext:
-    enabled: true
+    enabled: false
     fsGroup: 1001
 
   containerSecurityContext:
-    enabled: true
+    enabled: false
     runAsUser: 1001
 
   service:
