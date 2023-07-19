@@ -1,0 +1,57 @@
+apiVersion: pgv2.percona.com/v2
+kind: PerconaPGCluster
+metadata:
+  name: postgres-main
+  namespace: percona-pg
+spec:
+  crVersion: 2.2.0
+  image: 'percona/percona-postgresql-operator:2.2.0-ppg15-postgres'
+  postgresVersion: 15
+  port: 5432
+
+  users: []
+
+  expose:
+    type: ClusterIP
+
+  instances:
+    - name: postgres-main
+      replicas: 2
+      resources:
+        limits:
+          memory: 512Mi
+        requests:
+          memory: 256Mi
+          cpu: 50m
+      dataVolumeClaimSpec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 64Gi
+      walVolumeClaimSpec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+
+  proxy:
+    pgBouncer:
+      replicas: 2
+      image: 'percona/percona-postgresql-operator:2.2.0-ppg15-pgbouncer'
+      exposeSuperusers: false
+
+      resources:
+        limits:
+          memory: 128Mi
+        requests:
+          cpu: 30m
+          memory: 64Mi
+
+      expose:
+        type: ClusterIP
+
+  backups:
+    pgbackrest:
+      repos: []

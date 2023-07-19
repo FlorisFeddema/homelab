@@ -9,15 +9,6 @@ metadata:
 spec:
   project: no-sync
   sources:
-    - repoURL: https://github.com/florisfeddema/cloud-gitops
-      targetRevision: main
-      ref: repo
-    - chart: pg-db
-      repoURL: https://percona.github.io/percona-helm-charts/
-      targetRevision: 2.2.2
-      helm:
-        valueFiles:
-          - $repo/base/percona-pg/values.yaml
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
       path: base/percona-pg
