@@ -54,4 +54,14 @@ spec:
 
   backups:
     pgbackrest:
-      repos: []
+      repos:
+        - name: repo1
+          schedules:
+            full: "0 0 * * 6"
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
