@@ -41,7 +41,7 @@ primary:
     fsGroup: 1001
 
   containerSecurityContext:
-    enabled: false
+    enabled: true
     runAsUser: 1001
 
   service:
