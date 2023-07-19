@@ -38,9 +38,6 @@ instances:
       requests:
         storage: 64Gi
 
-backups:
-  pgbackrest: null
-
 proxy:
   pgBouncer:
     replicas: 1
