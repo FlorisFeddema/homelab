@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: pg-operator
       repoURL: https://percona.github.io/percona-helm-charts/
-      targetRevision: 2.2.0
+      targetRevision: 2.2.1
       helm:
         valueFiles:
           - $repo/base/percona-pg-operator/values.yaml
