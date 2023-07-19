@@ -14,7 +14,7 @@ pause: false
 #   type: LoadBalancer
 
 instances:
-- name: instance1
+- name: postgres-main
   replicas: 2
 
   resources:
@@ -38,7 +38,7 @@ instances:
       requests:
         storage: 64Gi
 
-backups: {}
+backups: null
 
 proxy:
   pgBouncer:
