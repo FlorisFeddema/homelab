@@ -42,7 +42,8 @@ primary:
 
   containerSecurityContext:
     enabled: true
-    runAsUser: 1001
+    runAsUser: 0
+    runAsNoNRoot: false
 
   service:
     ports:
