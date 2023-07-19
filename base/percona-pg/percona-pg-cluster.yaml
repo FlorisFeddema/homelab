@@ -6,6 +6,7 @@ metadata:
 spec:
   crVersion: 2.2.0
   image: 'percona/percona-postgresql-operator:2.2.0-ppg15-postgres'
+  imagePullPolicy: Always
   postgresVersion: 15
   port: 5432
 
@@ -54,6 +55,11 @@ spec:
 
   backups:
     pgbackrest:
+      image: percona/percona-postgresql-operator:2.2.0-ppg15-pgbackrest
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
       repos:
         - name: repo1
           schedules:
@@ -65,3 +71,10 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+      restore:
+        enabled: false
+        repoName: repo1
+
+  pmm:
+    enabled: false
+    image: percona/pmm-client:2.37.0
