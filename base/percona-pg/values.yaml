@@ -20,8 +20,10 @@ instances:
   resources:
     limits:
       memory: 512Mi
+      cpu: null
     requests:
       memory: 256Mi
+      cpu: 50m
 
   walVolumeClaimSpec:
     accessModes:
@@ -40,11 +42,14 @@ instances:
 proxy:
   pgBouncer:
     replicas: 1
-#    exposeSuperusers: true
-#    resources:
-#      limits:
-#        cpu: 200m
-#        memory: 128Mi
+    exposeSuperusers: false
+    resources:
+      limits:
+        cpu: null
+        memory: 128Mi
+      requests:
+        cpu: 30m
+        memory: 64Mi
 #
 #      expose:
 #        annotations:
