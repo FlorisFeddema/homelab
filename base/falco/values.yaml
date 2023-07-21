@@ -70,7 +70,7 @@ falcosidekick:
       
       resources: 
         limits:
-          memory: 1024Mi
+          memory: 2048Mi
         requests:
           cpu: 10m
           memory: 512Mi
