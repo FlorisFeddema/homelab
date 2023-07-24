@@ -21,27 +21,13 @@ postgresql:
       memory: 128Mi
       cpu: 50m
 
-  username: postgres
-  password: ""
-  database: ""
-  existingSecret: ""
-  ## @param postgresql.postgresPassword PostgreSQL password for the `postgres` user when `username` is not `postgres`
-  ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-user-on-first-run (see note!)
-  postgresPassword: ""
-  upgradeRepmgrExtension: true
-
-  ## @param postgresql.repmgrUsername PostgreSQL Repmgr username
-  ## @param postgresql.repmgrPassword PostgreSQL Repmgr password
-  ## @param postgresql.repmgrDatabase PostgreSQL Repmgr database
-  repmgrUsername: repmgr
-  repmgrPassword: ""
-  repmgrDatabase: repmgr
+  existingSecret: "postgresql-credentials"
 
 witness:
   create: false
 
 pgpool:
-  existingSecret: ""
+  existingSecret: "pgpool-credentials"
   replicaCount: 1
 
   podSecurityContext:
