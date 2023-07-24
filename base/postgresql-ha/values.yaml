@@ -1,0 +1,83 @@
+diagnosticMode:
+  enabled: false
+
+postgresql:
+  replicaCount: 3
+
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsNonRoot: true
+    readOnlyRootFilesystem: true
+
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      memory: 128Mi
+      cpu: 50m
+
+  username: postgres
+  password: ""
+  database: ""
+  existingSecret: ""
+  ## @param postgresql.postgresPassword PostgreSQL password for the `postgres` user when `username` is not `postgres`
+  ## ref: https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-user-on-first-run (see note!)
+  postgresPassword: ""
+  upgradeRepmgrExtension: true
+
+  ## @param postgresql.repmgrUsername PostgreSQL Repmgr username
+  ## @param postgresql.repmgrPassword PostgreSQL Repmgr password
+  ## @param postgresql.repmgrDatabase PostgreSQL Repmgr database
+  repmgrUsername: repmgr
+  repmgrPassword: ""
+  repmgrDatabase: repmgr
+
+witness:
+  create: false
+
+pgpool:
+  existingSecret: ""
+  replicaCount: 1
+
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsNonRoot: true
+    readOnlyRootFilesystem: true
+
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      memory: 128Mi
+      cpu: 50m
+
+  adminUsername: admin
+  adminPassword: ""
+
+metrics:
+  enabled: true
+  resources:
+    limits: {} # TODO: add this after
+    requests: {} # TODO: add this after
+
+  annotations: {}
+
+  serviceMonitor:
+    enabled: true
+
+volumePermissions:
+  enabled: true
+
+persistence:
+  enabled: true
+  size: 64Gi

@@ -78,12 +78,3 @@ operator:
       enabled: true
   dashboards:
     enabled: true
-
-ingressController:
-  enabled: true
-  loadbalancerMode: shared
-  enforceHttps: true
-
-  service:
-    insecureNodePort: 32300
-    secureNodePort: 32301
