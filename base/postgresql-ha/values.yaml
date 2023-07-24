@@ -2,7 +2,7 @@ diagnosticMode:
   enabled: false
 
 postgresql:
-  replicaCount: 3
+  replicaCount: 2
 
   podSecurityContext:
     enabled: true
@@ -27,7 +27,7 @@ witness:
 
 pgpool:
   existingSecret: "pgpool-credentials"
-  replicaCount: 1
+  replicaCount: 2
 
   podSecurityContext:
     enabled: true
