@@ -2,7 +2,7 @@ diagnosticMode:
   enabled: false
 
 postgresql:
-  replicaCount: 2
+  replicaCount: 3
 
   podSecurityContext:
     enabled: true
