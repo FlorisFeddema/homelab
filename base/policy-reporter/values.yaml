@@ -54,7 +54,7 @@ kyvernoPlugin:
       cpu: 5m
 
 database:
-  type: postgresql
+  type: postgres
   secretRef: policy-reporter-credentials
       
 monitoring:
