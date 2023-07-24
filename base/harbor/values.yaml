@@ -109,7 +109,7 @@ notary:
 database:
   type: external
   external:
-    host: "postgresql-ha-pgpool.postgresql-ha.svc.cluster.local"
+    host: "postgresql.postgresql.svc.cluster.local"
     port: "5432"
     username: "harbor"
     coreDatabase: "harbor"
