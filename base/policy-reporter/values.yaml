@@ -52,6 +52,10 @@ kyvernoPlugin:
     requests:
       memory: 30Mi
       cpu: 5m
+
+database:
+  type: postgresql
+  secretRef: policy-reporter-credentials
       
 monitoring:
   enabled: true
