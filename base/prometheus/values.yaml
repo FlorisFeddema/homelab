@@ -39,10 +39,22 @@ global:
 
 alertmanager:
   enabled: true
-  alertmanagerSpec:
-    useExistingSecret: true
 
-    configSecret: 'alertmanager-prometheus-kube-prometheus'
+  config:
+    global:
+      scrape_interval: 15s
+      resolve_timeout: 5m
+    route:
+      group_by: [ 'namespace' ]
+      receiver: slack
+
+    receivers:
+      - name: slack
+        slack_configs:
+          - api_url_file: /etc/secrets/slack-api-url
+
+  alertmanagerSpec:
+    secrets: ['slack-api-url']
 
 grafana:
   enabled: true
