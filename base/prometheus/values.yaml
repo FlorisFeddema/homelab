@@ -41,7 +41,8 @@ alertmanager:
   enabled: true
   alertmanagerSpec:
     useExistingSecret: true
-    configSecret: 'alertmanager-config-secret'
+
+    configSecret: 'alertmanager-prometheus-kube-prometheus'
 
 grafana:
   enabled: true
