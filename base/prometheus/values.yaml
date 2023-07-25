@@ -41,9 +41,8 @@ alertmanager:
   enabled: true
 
   config:
-#    route:
-#      group_by: [ 'namespace' ]
-#      receiver: slack
+    route:
+      receiver: slack
 #
     receivers:
       - name: slack
