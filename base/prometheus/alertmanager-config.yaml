@@ -1,0 +1,17 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: alertmanager-prometheus-kube-prometheus
+  namespace: prometheus
+spec:
+  encryptedData:
+    alertmanager.yaml: AgCcXl6lgRhrplHTN4dimZ9IIqrcMARhX5zq3vKlsotXG1NTQkuPH5Q4zTf3xiEqU99ORTEHxkcmnnXctcOrWqE3V39MNWDOb6m/Szg4HwvlUig1nO8pypG1eDqP1KD656G/ct8me+rT2awJL5LyjyRWy2LI9Sc6jRNB5LguLOHwHCTxaaXIXy0FGZWie+DsTwFyJe1uiaKSQ/k+yp/dUnHOwRezHJXWPkylUm7z2qdKFuL/W5MUwMeT5x7JDj6brm22bR3WZ0gRho72MCG8wSAOUgvbhI89cjnOkYd/1u5qg1JJ+4DvudD/PYhMRETOe02GlRlVbcMOWfEZ9d/d6BCL4muH3x/+H0zTQl7k4FClWld/+oulQ9KN4QkVLsPIty1YntU1R7aSmoLTTv/KQN5LIw/FXgHnvioebBZC2b7C/oyDoYfEP/zn2ojbzPf81MsACaVicNwe4MCw6io0V6LRe0eTXsRoEWNP83ucox8iUJ0l3iNkC4JDkXHzvZi0k1jF42dsbjwwW8PNt/Hn6c5RJJ+0D7CqGAgnuJUT3zGCmrd3M8OCgSo+UP97nKDyWUP4RRYVnjTUTP8NXeoNvb3S/TIP3RT1jjKUSSVcknujZoh+Z7gsI4sRrY+q5QDMzU5MWWWkQbzJa/C36IGrGrXcjK2itkwPhCNw6Pdo+m72D7YuUr/QlAc79ko/K7a5StaDyurTA7GSgVDhoPmoWy/iSeqMBZ8sWgilYPutpEP0NTCslrV5JhRrqw1iEnIHJEmO0u5d6uSBABUq848skNk+hL33wI/CL1ceXdRE/vM7l4kxlsP4cRBeMP0gm1z5+oydRJyOs+TWsdClzuk1jvnMbSKD+g7HNm47O6ZJlY6ICSevowq/xgcQo6eXJs63UDPvD2bh1mJSZF1g7lkeBmNfetEM6o1Zyq6aABq3xH6bqEeabG6X2PAAZqLUcw1IrrdJ8wb5+BBatcb50+RCIhFp+mRTItDiITIxkGaFgXM+hzdcTJ2N9nHamDciiykMCiBlvPR4VW9W5kdaZQpq2LSppnXItgFCqkg=
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kube-prometheus-stack-alertmanager
+      name: alertmanager-prometheus-kube-prometheus
+      namespace: prometheus
+
