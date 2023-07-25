@@ -41,7 +41,7 @@ alertmanager:
   enabled: true
   alertmanagerSpec:
     useExistingSecret: true
-    secrets: ['alertmanager-config-secret']
+    configSecret: 'alertmanager-config-secret'
 
 grafana:
   enabled: true
