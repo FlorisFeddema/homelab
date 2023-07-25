@@ -40,7 +40,7 @@ global:
 alertmanager:
   enabled: true
   alertmanagerSpec:
-    useExistingSecret: false
+    useExistingSecret: true
     secrets: ['alertmanager-config-secret']
 
 grafana:
