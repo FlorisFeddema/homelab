@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: alertmanager-config-secret
+  namespace: prometheus
+spec:
+  encryptedData:
+    alertmanager.yml: AgDtLc4WP4QoRbtOsB5/c+pdZHuavnSdwLh8gBzEm/NLXSL+oCJyL8yBB9d78C4ib+6yp8IjC4eEYBl6cEeUcM4BGaeGPzrYf8NLLbpSmVgDD9o/qNttDTAVsOhM54ZlDWLi412+z21FI/g102yiPJXdflv/TyhehtT0KW13DtQ2BAou25cdJzanQtKYEFBcugVACyZaDkE+zkpatZTmnRWVrldgbGBUEbdKM4U7dhAQ4iiKyhbGMNaN44H5Feb76iEK09s7hoDD2kjwCHrh5qDJDkCKPlt1GPS+lWYIRXWUyhwzkbN91NGFjZegNVE+TH5F2l0S3KfV30Lrp/O2DwI/ODs2EMrjralKmd2kr6C+tD4qILeIvpf/RvA5NhuDSku4n4DwTFltJOsK9NC3by9ru03sIN1JY69tRPgVzLEZeJF0GeNjee2Pcffe7lWgzc95CYx/1qXOYzIF1uJ8uViXCVK8oxxJreJ+cEA+Z7DAmbgqsbZ5VokkTHJO19FoXiGtRBiDeuBN9kQDDidCK56dmvu2wn2G7YHFxfC1SLUpfF0QeUVtbKe9BERrDzZlIO3M/wFAyS+bcqpIP2xazgZx4T6uAWX6StXRsGEPLQOsxWLoIg1TAdjWU/RU95kW0EXQ46lxky5AR76z1/m9RAzw7t3w6ozY56LYQmybzFH/zrUR/vX+EQe5qlAKA9SUfom5pNiodSOK2qrrUTsraFTSA+GGKq0fBo6mDqJ5sJY8wqpnegDEm0XsBIKekhAOhJjL9/d217/bf0HKd6SPluIKYhBVqFViTLH1crLQvQYTI32QkN3LpB4Easf6SGYWIACJRQMcvCbnI6FxlSk76n3lH8iTQuq++FoULI0OxwR/53BxIPxySPOXXCBTIFq18I4A9UqNlLuwrCyu9xvsOZu8pYI1vGdMlDa05n2qn144zfNwuGBYi7qViLVN+a+i+wdGew9whr69DsUSPgFT/759ZYnkP/bo67UHwf0k2XEn371KSGe77C8IXeV9f3ij5lVxlRoAa0Il08q6kVOXGC+fdCx/m++23YL5mgu41vi4jvAFhlTSt+pwBv45lFfJMTu7EvSH1OlzQyvK7vEj010k
+  template:
+    metadata:
+      creationTimestamp: null
+      name: alertmanager-config-secret
+      namespace: prometheus
+
