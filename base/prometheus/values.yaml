@@ -41,9 +41,6 @@ alertmanager:
   enabled: true
 
   config:
-    global:
-      scrape_interval: 15s
-      resolve_timeout: 5m
     route:
       group_by: [ 'namespace' ]
       receiver: slack
