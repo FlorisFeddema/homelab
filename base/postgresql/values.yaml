@@ -38,11 +38,11 @@ primary:
 
   podSecurityContext:
     enabled: false
-    fsGroup: 1001
 
   containerSecurityContext:
     enabled: true
     runAsUser: 0
+    runAsGroup: 0
     runAsNonRoot: false
     allowPrivilegeEscalation: true
 
