@@ -43,7 +43,7 @@ primary:
   containerSecurityContext:
     enabled: true
     runAsUser: 0
-    runAsNoNRoot: false
+    runAsNonRoot: false
 
   service:
     ports:
