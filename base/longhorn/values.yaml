@@ -13,20 +13,14 @@ csi:
   snapshotterReplicaCount: 1
 
 defaultSettings:
-  defaultReplicaCount: 1
+  defaultReplicaCount: 2
   backupTarget: s3://longhorn-backups@default/
   backupTargetCredentialSecret: backup-credentials
-
+  defaultLonghornStaticStorageClass: longhorn
+  backupConcurrentLimit: 4
+  restoreConcurrentLimit: 4
+  
 longhornUI:
-  replicas: 1
-
-longhornConversionWebhook:
-  replicas: 1
-
-longhornAdmissionWebhook:
-  replicas: 1
-
-longhornRecoveryBackend:
   replicas: 1
 
 resources:
