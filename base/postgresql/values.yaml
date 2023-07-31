@@ -45,6 +45,8 @@ primary:
     runAsGroup: 0
     runAsNonRoot: false
     allowPrivilegeEscalation: true
+    seccompProfile:
+      type: RuntimeDefault
 
   service:
     ports:
