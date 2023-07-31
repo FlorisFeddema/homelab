@@ -44,6 +44,7 @@ primary:
     enabled: true
     runAsUser: 0
     runAsNonRoot: true
+    allowPrivilegeEscalation: true
 
   service:
     ports:
