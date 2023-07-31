@@ -67,6 +67,7 @@ falcosidekick:
     redis:
       enabled: true
       storageEnabled: true
+      storageSize: "16Gi"
       
       resources: 
         limits:
