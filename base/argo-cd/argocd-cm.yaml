@@ -20,8 +20,7 @@ data:
   
   helm.valuesFileSchemes: http, https
 
-  admin.enabled: "false"
-  accounts.codespaces: apiKey
+  admin.enabled: "true"
 
   timeout.reconciliation: 180s
   cluster.inClusterEnabled: "true"
