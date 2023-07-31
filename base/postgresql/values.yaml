@@ -48,8 +48,7 @@ primary:
     seccompProfile:
       type: RuntimeDefault
     capabilities:
-      drop:
-        - ALL
+      drop: []
 
   service:
     ports:
