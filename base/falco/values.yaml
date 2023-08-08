@@ -38,7 +38,7 @@ falcosidekick:
     enabled: true
     replicaCount: 1
     loglevel: "info"
-    ttl: 0
+    ttl: 5
     
     ingress:
       enabled: true
