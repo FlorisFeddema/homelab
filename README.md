@@ -237,3 +237,17 @@ sh ./install.sh base/external-dns
 ## Sources
 
 - [GPU Passthrough](https://3os.org/infrastructure/proxmox/gpu-passthrough/igpu-passthrough-to-vm/#linux-virtual-machine-igpu-passthrough-configuration)
+
+## Disk install
+
+sudo mkdir /mnt/ssd1
+lsblk -f
+sudo fdisk -l
+sudo gdisk /dev/sdb
+-> n
+-> ENTER TILL THE END
+-> w
+sudo mkfs.ext4 /dev/sdb1
+lsblk -f
+echo "UUID=cc6e1738-feaf-481b-9e3a-97317f83a0f9 /mnt/ssd1 ext4 defaults 0 0" >>/etc/fstab
+sudo reboot
