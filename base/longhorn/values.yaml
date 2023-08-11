@@ -7,27 +7,27 @@ persistence:
   defaultReplicaAutoBalance: best-effort 
 
 csi:
-  attacherReplicaCount: 1
-  provisionerReplicaCount: 1
-  resizerReplicaCount: 1
-  snapshotterReplicaCount: 1
+  attacherReplicaCount: 2
+  provisionerReplicaCount: 2
+  resizerReplicaCount: 2
+  snapshotterReplicaCount: 2
 
 defaultSettings:
   defaultReplicaCount: 2
   backupTarget: s3://longhorn-backups@default/
   backupTargetCredentialSecret: backup-credentials
   defaultLonghornStaticStorageClass: longhorn
-  backupConcurrentLimit: 4
-  restoreConcurrentLimit: 4
+  backupConcurrentLimit: 2
+  restoreConcurrentLimit: 2
   
 longhornUI:
-  replicas: 1
+  replicas: 2
 
 resources:
   limits:
-    memory: 256Mi
+    memory: 512Mi
   requests:
-    cpu: 50m
+    cpu: 100m
     memory: 128Mi
 
 ingress:
