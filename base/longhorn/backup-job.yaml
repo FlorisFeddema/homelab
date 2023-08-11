@@ -9,5 +9,5 @@ spec:
   groups:
     - default
   retain: 1
-  concurrency: 4
+  concurrency: 1
 
