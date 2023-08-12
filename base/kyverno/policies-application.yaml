@@ -11,7 +11,7 @@ spec:
   sources:
     - chart: kyverno-policies
       repoURL: https://kyverno.github.io/kyverno/
-      targetRevision: 3.0.3
+      targetRevision: 3.0.4
       helm:
         values: |
           podSecurityStandard: restricted
