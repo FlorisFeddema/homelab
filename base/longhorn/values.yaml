@@ -14,7 +14,6 @@ csi:
 
 defaultSettings:
   defaultReplicaCount: 2
-  #  backupTarget: s3://longhorn-backups@default/
   backupTarget: azblob://longhorn@core.windows.net/
   backupTargetCredentialSecret: azure-credentials
   defaultLonghornStaticStorageClass: longhorn
