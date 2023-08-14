@@ -1,0 +1,57 @@
+kind: PrometheusRule
+apiVersion: monitoring.coreos.com/v1
+metadata:
+  name: alerting-rules
+  namespace: prometheus
+spec:
+  groups:
+    - name: longhorn.cloud.feddema.dev
+      rules:
+        - alert: LonghornVolumeActualSpaceUsedWarning
+          labels:
+            severity: critical
+          annotations:
+            description: The actual space used by Longhorn volume {{$labels.volume}} on {{$labels.node}} is at {{$value}}% capacity.
+            summary: The actual used space of Longhorn volume is over 90% of the capacity.
+          expr: (longhorn_volume_actual_size_bytes / longhorn_volume_capacity_bytes) * 100 > 90
+          for: 5m
+        - alert: LonghornVolumeStatusCritical
+          annotations:
+            description: Longhorn volume {{$labels.volume}} on {{$labels.node}} is Fault.
+            summary: Longhorn volume {{$labels.volume}} is Fault
+          expr: longhorn_volume_robustness == 3
+          for: 5m
+          labels:
+            severity: critical
+        - alert: LonghornVolumeStatusWarning
+          annotations:
+            description: Longhorn volume {{$labels.volume}} on {{$labels.node}} is Degraded.
+            summary: Longhorn volume {{$labels.volume}} is Degraded
+          expr: longhorn_volume_robustness == 2
+          for: 15m
+          labels:
+            severity: critical
+        - alert: LonghornNodeStorageWarning
+          annotations:
+            description: The used storage of node {{$labels.node}} is at {{$value}}% capacity.
+            summary:  The used storage of node is over 80% of the capacity.
+          expr: (longhorn_node_storage_usage_bytes / longhorn_node_storage_capacity_bytes) * 100 > 80
+          for: 5m
+          labels:
+            severity: critical
+        - alert: LonghornDiskStorageWarning
+          annotations:
+            description: The used storage of disk {{$labels.disk}} on node {{$labels.node}} is at {{$value}}% capacity.
+            summary:  The used storage of disk is over 80% of the capacity.
+          expr: (longhorn_disk_usage_bytes / longhorn_disk_capacity_bytes) * 100 > 80
+          for: 5m
+          labels:
+            severity: critical
+        - alert: LonghornNodeDown
+          annotations:
+            description: There are {{$value}} Longhorn nodes which have been offline for more than 5 minutes.
+            summary: Longhorn nodes is offline
+          expr: (avg(longhorn_node_count_total) or on() vector(0)) - (count(longhorn_node_status{condition="ready"} == 1) or on() vector(0)) > 0
+          for: 5m
+          labels:
+            severity: critical
