@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       hubble-ui
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

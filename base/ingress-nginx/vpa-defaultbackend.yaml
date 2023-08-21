@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       ingress-nginx-defaultbackend
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

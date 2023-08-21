@@ -237,15 +237,3 @@ sudo mkfs.ext4 /dev/sdb1
 lsblk -f
 echo "UUID=b5d85b8f-4860-4e31-a80c-53ce7d88840a /mnt/ssd1 ext4 defaults 0 0" >>/etc/fstab
 sudo reboot
-
-kubectl create ns prometheus
-kubectl create ns postgresql
-kubectl create ns minio
-kubectl create ns harbor
-kubectl create ns oauth-proxy
-kubectl create ns policy-reporter
-kubectl create ns loki
-kubectl create ns kyverno
-kubectl create ns keycloakx
-kubectl create ns falco
-kubectl create ns falco-exporter

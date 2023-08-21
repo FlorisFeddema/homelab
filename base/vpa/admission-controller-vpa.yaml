@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       vpa-admission-controller
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

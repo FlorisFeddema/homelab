@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       falco-falcosidekick-ui
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

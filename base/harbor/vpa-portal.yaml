@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       harbor-portal
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

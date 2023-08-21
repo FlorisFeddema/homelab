@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       harbor-jobservice
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

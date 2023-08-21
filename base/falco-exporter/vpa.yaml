@@ -9,4 +9,4 @@ spec:
     kind:       DaemonSet
     name:       falco-exporter
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       kyverno-cleanup-controller
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

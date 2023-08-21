@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       kyverno-admission-controller
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

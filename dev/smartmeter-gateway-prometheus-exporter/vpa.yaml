@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       smartmeter-gateway-prometheus-exporter
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

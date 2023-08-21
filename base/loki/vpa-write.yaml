@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       loki-write
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

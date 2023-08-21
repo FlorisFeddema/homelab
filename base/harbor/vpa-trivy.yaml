@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       harbor-trivy
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

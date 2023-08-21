@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       vpa-recommender
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

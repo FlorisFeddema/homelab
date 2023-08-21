@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       cilium-operator
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

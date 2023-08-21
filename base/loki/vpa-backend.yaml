@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       loki-backend
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

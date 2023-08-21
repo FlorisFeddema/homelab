@@ -9,4 +9,4 @@ spec:
     kind:       DaemonSet
     name:       promtail
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

@@ -9,4 +9,4 @@ spec:
     kind:       StatefulSet
     name:       harbor-redis
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       longhorn-ui
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"

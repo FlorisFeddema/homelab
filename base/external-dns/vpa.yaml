@@ -9,4 +9,4 @@ spec:
     kind:       Deployment
     name:       external-dns
   updatePolicy:
-    updateMode: "Auto"
+    updateMode: "Off"
