@@ -2,7 +2,6 @@
 
 path=$1
 app=$2
-oci=$3
 
 basePath=$path/$app
 
@@ -31,13 +30,11 @@ echo "$files" | while read line ; do
    kubectl apply -f $line
 done
 
-command="helm upgrade --install $name temp/$chart --namespace $namespace --values $valuesFile --version $version"
-
-
-if [ -n "$oci" ]; then
+if [[ "$repo" == *"https://"* ]]; then
+    command="helm upgrade --install $name temp/$chart --namespace $namespace --values $valuesFile --version $version"
+else
     command="helm upgrade --install $name oci://$repo/$chart --namespace $namespace --values $valuesFile --version $version"
 fi
-
 
 echo "*********************"
 echo $command

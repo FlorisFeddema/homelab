@@ -99,20 +99,6 @@ Remove pvc from Longhorn and update the container to the ner Postgresql version.
 psql -h localhost -p 5432 -U postgres < dump.sql
 ```
 
-## Mysql
-
-```bash
-export MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace mysql mysql-credentials -o jsonpath="{.data.mysql-root-password}" | base64 -d)
-```
-
-```bash
-kubectl run mysql-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.30-debian-11-r15 --namespace mysql --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
-```
-
-```bash
-mysql -h mysql.mysql.svc.cluster.local -uroot -p "$MYSQL_ROOT_PASSWORD"
-```
-
 ## Upgrade kubernetes
 
 To upgrade the cluster to a new version, follow this steps.
@@ -174,61 +160,61 @@ helm install prometheus-crds prometheus-community/prometheus-operator-crds
 ```
 
 ```bash
-sh ./install.sh base/external-dns
+bash ./install.sh base external-dns
 ```
 
 ## Node setup
 
 1. cat ~/.ssh/id_ed25519.pub | ssh localadmin@targon.feddema.dev -p 6022 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
-2. passwd
-3. sudo usermod -aG sudo localadmin
-4. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
-5. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-6. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
-7. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
-8. sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
-9. sudo install -m 0755 -d /etc/apt/keyrings
-10. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-11. sudo chmod a+r /etc/apt/keyrings/docker.gpg
-12. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-13. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-14. sudo apt install containerd.io 
-15. cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+0. passwd
+0. sudo usermod -aG sudo localadmin
+0. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
+0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+0. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
+0. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
+0. sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
+0. echo "fs.inotify.max_user_instances=512" | sudo tee -a /etc/sysctl.conf
+0. echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
+0. sudo install -m 0755 -d /etc/apt/keyrings
+0. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+0. sudo chmod a+r /etc/apt/keyrings/docker.gpg
+0. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+0. sudo apt install containerd.io 
+0. cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
     overlay
     br_netfilter
     EOF
-15. sudo modprobe overlay && sudo modprobe br_netfilter
-16. cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+0. sudo modprobe overlay && sudo modprobe br_netfilter
+0. cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
     net.bridge.bridge-nf-call-iptables  = 1
     net.bridge.bridge-nf-call-ip6tables = 1
     net.ipv4.ip_forward                 = 1
     EOF
-17. sudo sysctl --system
-18. sudo containerd config default > /etc/containerd/config.toml
-19. !! CHANGE SystemdCgroup = true IN \[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] !!
-20. sudo systemctl restart containerd
-21. sudo systemctl enable containerd
-22. curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-23. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-24. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-25. sudo apt -y install kubelet=1.27.3-00 kubeadm=1.27.3-00 kubectl=1.27.3-00
-26. sudo apt-mark hold kubelet kubeadm kubectl
-27. nano config.yaml
-28. sudo kubeadm init --config config.yaml
-29. mkdir -p $HOME/.kube
-30. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
-31. sudo chown $(id -u):$(id -g) $HOME/.kube/config
-32. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
-33. echo "fs.inotify.max_user_instances=512" | sudo tee -a /etc/sysctl.conf
-34. echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
+0. sudo sysctl --system
+0. sudo containerd config default > /etc/containerd/config.toml
+0. !! CHANGE SystemdCgroup = true IN \[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] !!
+0. sudo systemctl restart containerd
+0. sudo systemctl enable containerd
+0. curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+0. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+0. sudo apt -y install kubelet=1.27.3-00 kubeadm=1.27.3-00 kubectl=1.27.3-00
+0. sudo apt-mark hold kubelet kubeadm kubectl
+0. nano config.yaml
+0. sudo kubeadm init --config config.yaml --skip-phases=addon/kube-proxy --upload-certs
+0. mkdir -p $HOME/.kube
+0. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+0. sudo chown $(id -u):$(id -g) $HOME/.kube/config
+0. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 ## Install load balancer
 
 1. apk add nginx
-2. apk add nginx-mod-stream
-3. rm /etc/nginx/nginx.conf
-4. nano /etc/nginx/nginx.conf
-6. service nginx start
+0. apk add nginx-mod-stream
+0. rm /etc/nginx/nginx.conf
+0. nano /etc/nginx/nginx.conf
+0. service nginx start
 
 ## Known issues
 
@@ -249,5 +235,17 @@ sudo gdisk /dev/sdb
 -> w
 sudo mkfs.ext4 /dev/sdb1
 lsblk -f
-echo "UUID=cc6e1738-feaf-481b-9e3a-97317f83a0f9 /mnt/ssd1 ext4 defaults 0 0" >>/etc/fstab
+echo "UUID=b5d85b8f-4860-4e31-a80c-53ce7d88840a /mnt/ssd1 ext4 defaults 0 0" >>/etc/fstab
 sudo reboot
+
+kubectl create ns prometheus
+kubectl create ns postgresql
+kubectl create ns minio
+kubectl create ns harbor
+kubectl create ns oauth-proxy
+kubectl create ns policy-reporter
+kubectl create ns loki
+kubectl create ns kyverno
+kubectl create ns keycloakx
+kubectl create ns falco
+kubectl create ns falco-exporter
