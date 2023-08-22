@@ -4,6 +4,6 @@ metadata:
   name: default
   namespace: metallb
 spec:
-  myASN: 64500
-  peerASN: 64501
+  myASN: 64512
+  peerASN: 64512
   peerAddress: 192.168.1.1
