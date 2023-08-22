@@ -60,7 +60,7 @@ hubble:
             - hubble.cloud.feddema.dev
 
 monitor:
-  enalbed: false
+  enabled: true
 
 prometheus:
   enabled: true
@@ -70,7 +70,7 @@ dashboards:
   enabled: true
 
 operator:
-  replicas: 2
+  replicas: 3
   resources: {}
   prometheus:
     enabled: true

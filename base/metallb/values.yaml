@@ -24,7 +24,7 @@ controller:
       memory: 100Mi
     requests:
       cpu: 30m
-      memory: 100Mi
+      memory: 50Mi
 
 speaker:
   enabled: false
