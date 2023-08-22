@@ -6,18 +6,12 @@ prometheus:
   serviceMonitor:
     enabled: true
   namespace: "metallb"
+  prometheusRule:
+    enabled: true
 
 controller:
   enabled: true
   logLevel: info
-
-  serviceAccount:
-    create: true
-
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 65534
-    fsGroup: 65534
 
   resources:
     limits:
@@ -27,7 +21,15 @@ controller:
       memory: 50Mi
 
 speaker:
-  enabled: false
+  enabled: true
+  logLevel: info
+
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      cpu: 30m
+      memory: 50Mi
 
 crds:
   enabled: true
