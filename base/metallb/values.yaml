@@ -21,15 +21,15 @@ controller:
       memory: 50Mi
 
 speaker:
-  enabled: true
-  logLevel: info
-
-  resources:
-    limits:
-      memory: 100Mi
-    requests:
-      cpu: 30m
-      memory: 50Mi
+  enabled: false
+#  logLevel: info
+#
+#  resources:
+#    limits:
+#      memory: 100Mi
+#    requests:
+#      cpu: 30m
+#      memory: 50Mi
 
 crds:
   enabled: true
