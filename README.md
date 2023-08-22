@@ -9,7 +9,6 @@ This repository will be used for the configuration of the feddema.dev Kubernetes
   * [PostgreSQL](#postgresql)
     * [Create user and database](#create-user-and-database)
     * [Upgrade](#upgrade)
-  * [Mysql](#mysql)
   * [Upgrade kubernetes](#upgrade-kubernetes)
   * [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
   * [Node setup](#node-setup)
