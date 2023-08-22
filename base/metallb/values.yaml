@@ -6,8 +6,8 @@ prometheus:
   serviceMonitor:
     enabled: true
   namespace: "metallb"
-#  prometheusRule:
-#    enabled: true
+  prometheusRule:
+    enabled: true
 
 controller:
   enabled: true
@@ -21,15 +21,15 @@ controller:
       memory: 50Mi
 
 speaker:
-  enabled: false
-#  logLevel: info
-#
-#  resources:
-#    limits:
-#      memory: 100Mi
-#    requests:
-#      cpu: 30m
-#      memory: 50Mi
+  enabled: true
+  logLevel: info
+
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      cpu: 30m
+      memory: 50Mi
 
 crds:
   enabled: true

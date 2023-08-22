@@ -1,8 +1,8 @@
-piVersion: metallb.io/v1beta2
+apiVersion: metallb.io/v1beta2
 kind: BGPPeer
 metadata:
   name: default
-  namespace: metallb-system
+  namespace: metallb
 spec:
   myASN: 64500
   peerASN: 64501
