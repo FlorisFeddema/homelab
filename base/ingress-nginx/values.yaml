@@ -14,7 +14,7 @@ controller:
     nodePorts:
       http: 32080
       https: 32443
-    externalIps:
+    externalIPs:
       - 31.201.251.186
 
   resources:
