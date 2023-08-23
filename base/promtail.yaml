@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: promtail
       repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 6.14.1
+      targetRevision: 6.15.0
       helm:
         valueFiles:
           - $repo/base/promtail/values.yaml
