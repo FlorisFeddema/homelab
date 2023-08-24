@@ -14,7 +14,7 @@ spec:
       ref: repo
     - chart: nextcloud
       repoURL: https://nextcloud.github.io/helm
-      targetRevision: 4.0.0
+      targetRevision: 4.1.0
       helm:
         valueFiles:
           - $repo/dev/nextcloud/values.yaml
