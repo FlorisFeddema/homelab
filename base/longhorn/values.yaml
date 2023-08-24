@@ -15,7 +15,7 @@ csi:
 defaultSettings:
   defaultReplicaCount: 2
   backupTarget: s3://backups@default/
-  backupTargetCredentialSecret: azure-credentials
+  backupTargetCredentialSecret: s3-credentials
   defaultLonghornStaticStorageClass: longhorn
   backupConcurrentLimit: 2
   restoreConcurrentLimit: 2
