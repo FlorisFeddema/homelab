@@ -16,6 +16,8 @@ bgpControlPlane:
 certgen:
   ttlSecondsAfterFinished: null
 
+rollOutCiliumPods: true
+
 hubble:
   enabled: true
 
