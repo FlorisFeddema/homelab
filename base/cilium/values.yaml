@@ -10,6 +10,9 @@ resources:
     memory: 512Mi
     cpu: 100m
 
+bgpControlPlane:
+  enabled: true
+
 certgen:
   ttlSecondsAfterFinished: null
 
@@ -70,7 +73,7 @@ dashboards:
   enabled: true
 
 operator:
-  replicas: 3
+  replicas: 1
   resources: {}
   prometheus:
     enabled: true
