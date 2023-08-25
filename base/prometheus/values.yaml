@@ -276,7 +276,6 @@ prometheus:
     podMonitorSelectorNilUsesHelmValues: false
     probeSelectorNilUsesHelmValues: false
 
-    externalUrl: "prometheus.cloud.feddema.dev"
     scrapeInterval: "30s"
 
     resources:
