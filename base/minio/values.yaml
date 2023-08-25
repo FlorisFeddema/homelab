@@ -23,7 +23,7 @@ consoleIngress:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: minio.cloud.feddema.dev
     external-dns.alpha.kubernetes.io/ttl: "120"
-    cert-manager.io/cluster-issuer: letsencrypt
+    cert-manager.io/cluster-issuer: letsencrypt-dns
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
   path: /
   hosts:

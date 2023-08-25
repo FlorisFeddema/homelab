@@ -11,7 +11,7 @@ expose:
       core: registry.cloud.feddema.dev
     annotations:
       external-dns.alpha.kubernetes.io/ttl: "120"
-      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/cluster-issuer: letsencrypt-dns
       nginx.ingress.kubernetes.io/custom-http-errors: "418"
     harbor:
       annotations:

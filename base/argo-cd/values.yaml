@@ -70,7 +70,7 @@ server:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: argocd.cloud.feddema.dev
       external-dns.alpha.kubernetes.io/ttl: "120"
-      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/cluster-issuer: letsencrypt-dns
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     hosts:
@@ -85,7 +85,7 @@ server:
     annotations:
       external-dns.alpha.kubernetes.io/hostname: grpc.argocd.cloud.feddema.dev
       external-dns.alpha.kubernetes.io/ttl: "120"
-      cert-manager.io/cluster-issuer: letsencrypt
+      cert-manager.io/cluster-issuer: letsencrypt-dns
       ingress-class: nginx
       nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
     hosts:
