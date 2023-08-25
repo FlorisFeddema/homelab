@@ -198,7 +198,7 @@ spec:
             summary: Host CPU high iowait (instance {{ $labels.instance }})
             description: "CPU iowait > 10%. A high iowait means that you are disk or network bound.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
         - alert: HostUnusualDiskIo
-          expr: (rate(node_disk_io_time_seconds_total[5m]) > 0.65) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
+          expr: (rate(node_disk_io_time_seconds_total[5m]) > 0.75) * on(instance) group_left (nodename) node_uname_info{nodename=~".+"}
           for: 10m
           labels:
             severity: critical
