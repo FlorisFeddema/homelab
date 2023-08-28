@@ -125,91 +125,6 @@ vmagent:
 grafana:
   enabled: false
 
-  ## ForceDeployDatasource Create datasource configmap even if grafana deployment has been disabled
-  forceDeployDatasource: false
-
-  ## Configure additional grafana datasources (passed through tpl)
-  ## ref: http://docs.grafana.org/administration/provisioning/#datasources
-  additionalDataSources: []
-  # - name: prometheus-sample
-  #   access: proxy
-  #   basicAuth: true
-  #   basicAuthPassword: pass
-  #   basicAuthUser: daco
-  #   editable: false
-  #   jsonData:
-  #       tlsSkipVerify: true
-  #   orgId: 1
-  #   type: prometheus
-  #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
-  #   version: 1
-
-  dashboardProviders:
-    dashboardproviders.yaml:
-      apiVersion: 1
-      providers:
-        - name: "default"
-          orgId: 1
-          folder: ""
-          type: file
-          disableDeletion: false
-          editable: true
-          options:
-            path: /var/lib/grafana/dashboards/default
-
-  dashboards:
-    default:
-      nodeexporter:
-        gnetId: 1860
-        revision: 22
-        datasource: VictoriaMetrics
-
-  defaultDashboardsTimezone: utc
-
-  ingress:
-    enabled: false
-    # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
-    # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    # ingressClassName: nginx
-    # Values can be templated
-    annotations:
-      {}
-      # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-    labels: {}
-    path: /
-    # pathType is only for k8s > 1.19
-    pathType: Prefix
-
-    hosts:
-      - grafana.domain.com
-    ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
-    extraPaths: []
-    # - path: /*
-    #   backend:
-    #     serviceName: ssl-redirect
-    #     servicePort: use-annotation
-    ## Or for k8s > 1.19
-    # - path: /*
-    #   pathType: Prefix
-    #   backend:
-    #     service:
-    #       name: ssl-redirect
-    #       port:
-    #         name: service
-    tls: []
-    #  - secretName: grafana-ingress-tls
-    #    hosts:
-    #      - grafana.domain.com
-
-  vmServiceScrape:
-    # wheter we should create a service scrape resource for grafana
-    enabled: true
-
-    # spec for VMServiceScrape crd
-    # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
-    spec: {}
-
 prometheus-node-exporter:
   enabled: false
 
@@ -218,7 +133,6 @@ kube-state-metrics:
 
 kubelet:
   enabled: true
-
   cadvisor: true
   probes: true
 
@@ -233,13 +147,10 @@ coreDns:
 
 kubeEtcd:
   enabled: true
-
   service:
     enabled: true
-    port: 2379
-    targetPort: 2379
-    # selector:
-    #   component: etcd
+    port: 2381
+    targetPort: 2381
 
 kubeScheduler:
   enabled: true
