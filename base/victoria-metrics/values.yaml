@@ -112,7 +112,7 @@ vmalert:
     tls:
       - secretName: vmalert-tls
         hosts:
-          - alertvm.cloud.feddema.dev.domain.com
+          - alertvm.cloud.feddema.dev
 
 vmagent:
   enabled: true
