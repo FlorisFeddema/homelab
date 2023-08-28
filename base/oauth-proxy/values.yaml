@@ -18,6 +18,7 @@ ingress:
     - hubble.cloud.feddema.dev
     - policy.cloud.feddema.dev
     - prometheus.cloud.feddema.dev
+    - alertvm.cloud.feddema.dev
   tls:
     - secretName: longhorn-tls
       hosts:
@@ -34,6 +35,9 @@ ingress:
     - secretName: prometheus-tls
       hosts:
         - prometheus.cloud.feddema.dev
+    - secretName: alertvm-tls
+      hosts:
+        - alertvm.cloud.feddema.dev
 
 resources:
   limits:
