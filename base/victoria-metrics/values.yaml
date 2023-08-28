@@ -1,0 +1,246 @@
+victoria-metrics-operator:
+  enabled: true
+
+  operator:
+    disable_prometheus_converter: true
+    prometheus_converter_add_argocd_ignore_annotations: true
+
+  serviceMonitor:
+    enabled: true
+
+defaultRules:
+  create: true
+  rules:
+    etcd: true
+    general: true
+    k8s: true
+    kubeApiserver: true
+    kubeApiserverAvailability: true
+    kubeApiserverBurnrate: true
+    kubeApiserverHistogram: true
+    kubeApiserverSlos: true
+    kubelet: true
+    kubePrometheusGeneral: true
+    kubePrometheusNodeRecording: true
+    kubernetesApps: true
+    kubernetesResources: true
+    kubernetesStorage: true
+    kubernetesSystem: true
+    kubeScheduler: true
+    kubeStateMetrics: true
+    network: true
+    node: true
+    vmagent: true
+    vmsingle: true
+    vmhealth: true
+    alertmanager: true
+
+defaultDashboardsEnabled: false
+experimentalDashboardsEnabled: false
+
+vmsingle:
+  enabled: false
+
+vmcluster:
+  enabled: true
+  spec:
+    retentionPeriod: "700"
+    replicationFactor: 1
+    vmstorage:
+      replicaCount: 1
+      storageDataPath: "/vm-data"
+      storage:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 50Gi
+      resources: {}
+    vmselect:
+      replicaCount: 1
+      cacheMountPath: "/select-cache"
+      storage:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 5Gi
+      resources: {}
+    vminsert:
+      replicaCount: 1
+      resources: {}
+
+alertmanager:
+  enabled: false
+  spec:
+    selectAllByDefault: true
+    externalURL: "alertmanagervm.cloud.feddema.dev"
+
+    # if this one defined, it will be used for alertmanager configuration and config parameter will be ignored
+    # configSecret: "alertmanager-config"
+
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+      external-dns.alpha.kubernetes.io/hostname: alertmanagervm.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    hosts:
+      - alertmanagervm.cloud.feddema.dev
+    tls:
+      - secretName: alertmanager-tls
+        hosts:
+          - alertmanagervm.cloud.feddema.dev
+
+vmalert:
+  enabled: true
+
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+      external-dns.alpha.kubernetes.io/hostname: alertvm.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    hosts:
+      - alertvm.cloud.feddema.dev
+    tls:
+      - secretName: vmalert-tls
+        hosts:
+          - alertvm.cloud.feddema.dev.domain.com
+
+vmagent:
+  enabled: true
+  spec:
+    selectAllByDefault: true
+    scrapeInterval: 20s
+    extraArgs:
+      promscrape.streamParse: "true"
+
+grafana:
+  enabled: false
+
+  ## ForceDeployDatasource Create datasource configmap even if grafana deployment has been disabled
+  forceDeployDatasource: false
+
+  ## Configure additional grafana datasources (passed through tpl)
+  ## ref: http://docs.grafana.org/administration/provisioning/#datasources
+  additionalDataSources: []
+  # - name: prometheus-sample
+  #   access: proxy
+  #   basicAuth: true
+  #   basicAuthPassword: pass
+  #   basicAuthUser: daco
+  #   editable: false
+  #   jsonData:
+  #       tlsSkipVerify: true
+  #   orgId: 1
+  #   type: prometheus
+  #   url: https://{{ printf "%s-prometheus.svc" .Release.Name }}:9090
+  #   version: 1
+
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: "default"
+          orgId: 1
+          folder: ""
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+
+  dashboards:
+    default:
+      nodeexporter:
+        gnetId: 1860
+        revision: 22
+        datasource: VictoriaMetrics
+
+  defaultDashboardsTimezone: utc
+
+  ingress:
+    enabled: false
+    # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+    # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+    # ingressClassName: nginx
+    # Values can be templated
+    annotations:
+      {}
+      # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    labels: {}
+    path: /
+    # pathType is only for k8s > 1.19
+    pathType: Prefix
+
+    hosts:
+      - grafana.domain.com
+    ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
+    extraPaths: []
+    # - path: /*
+    #   backend:
+    #     serviceName: ssl-redirect
+    #     servicePort: use-annotation
+    ## Or for k8s > 1.19
+    # - path: /*
+    #   pathType: Prefix
+    #   backend:
+    #     service:
+    #       name: ssl-redirect
+    #       port:
+    #         name: service
+    tls: []
+    #  - secretName: grafana-ingress-tls
+    #    hosts:
+    #      - grafana.domain.com
+
+  vmServiceScrape:
+    # wheter we should create a service scrape resource for grafana
+    enabled: true
+
+    # spec for VMServiceScrape crd
+    # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
+    spec: {}
+
+prometheus-node-exporter:
+  enabled: false
+
+kube-state-metrics:
+  enabled: false
+
+kubelet:
+  enabled: true
+
+  cadvisor: true
+  probes: true
+
+kubeApiServer:
+  enabled: true
+
+kubeControllerManager:
+  enabled: true
+
+coreDns:
+  enabled: true
+
+kubeEtcd:
+  enabled: true
+
+  service:
+    enabled: true
+    port: 2379
+    targetPort: 2379
+    # selector:
+    #   component: etcd
+
+kubeScheduler:
+  enabled: true
+
+crds:
+  enabled: true
