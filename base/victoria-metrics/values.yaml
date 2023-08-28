@@ -1,3 +1,5 @@
+fullnameOverride: vm-stack
+
 victoria-metrics-operator:
   enabled: true
 
