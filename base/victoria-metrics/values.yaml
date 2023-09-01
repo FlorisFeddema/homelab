@@ -72,6 +72,52 @@ vmcluster:
       replicaCount: 1
       resources: {}
 
+  
+  ingress:
+    vmstorage:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+        external-dns.alpha.kubernetes.io/hostname: vmstorage.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      hosts:
+        - vmstorage.cloud.feddema.dev
+      tls:
+        - secretName: vmstorage-tls
+          hosts:
+            - vmstorage.cloud.feddema.dev
+    vmselect:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+        external-dns.alpha.kubernetes.io/hostname: vmselect.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      hosts:
+        - vmselect.cloud.feddema.dev
+      tls:
+        - secretName: vmselect-tls
+          hosts:
+            - vmselect.cloud.feddema.dev
+    vminsert:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+        external-dns.alpha.kubernetes.io/hostname: vminsert.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      hosts:
+        - vminsert.cloud.feddema.dev
+      tls:
+        - secretName: vminsert-tls
+          hosts:
+            - vminsert.cloud.feddema.dev
+
+
 alertmanager:
   enabled: false
   spec:
@@ -104,15 +150,15 @@ vmalert:
     annotations:
       nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
       nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-      external-dns.alpha.kubernetes.io/hostname: alertvm.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/hostname: vmalert.cloud.feddema.dev
       external-dns.alpha.kubernetes.io/ttl: "120"
       cert-manager.io/cluster-issuer: letsencrypt-dns
     hosts:
-      - alertvm.cloud.feddema.dev
+      - vmalert.cloud.feddema.dev
     tls:
       - secretName: vmalert-tls
         hosts:
-          - alertvm.cloud.feddema.dev
+          - vmalert.cloud.feddema.dev
 
 vmagent:
   enabled: true
