@@ -141,7 +141,7 @@ kubeApiServer:
 
 kubeControllerManager:
   enabled: true
- spec:
+  spec:
     endpoints:
     - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
       port: http-metrics
