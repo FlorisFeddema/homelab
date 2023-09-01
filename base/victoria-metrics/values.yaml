@@ -72,52 +72,6 @@ vmcluster:
       replicaCount: 1
       resources: {}
 
-  
-  ingress:
-    storage:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-        external-dns.alpha.kubernetes.io/hostname: vmstorage.cloud.feddema.dev
-        external-dns.alpha.kubernetes.io/ttl: "120"
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-      hosts:
-        - vmstorage.cloud.feddema.dev
-      tls:
-        - secretName: vmstorage-tls
-          hosts:
-            - vmstorage.cloud.feddema.dev
-    select:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-        external-dns.alpha.kubernetes.io/hostname: vmselect.cloud.feddema.dev
-        external-dns.alpha.kubernetes.io/ttl: "120"
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-      hosts:
-        - vmselect.cloud.feddema.dev
-      tls:
-        - secretName: vmselect-tls
-          hosts:
-            - vmselect.cloud.feddema.dev
-    insert:
-      enabled: true
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-        external-dns.alpha.kubernetes.io/hostname: vminsert.cloud.feddema.dev
-        external-dns.alpha.kubernetes.io/ttl: "120"
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-      hosts:
-        - vminsert.cloud.feddema.dev
-      tls:
-        - secretName: vminsert-tls
-          hosts:
-            - vminsert.cloud.feddema.dev
-
-
 alertmanager:
   enabled: false
   spec:
@@ -187,6 +141,14 @@ kubeApiServer:
 
 kubeControllerManager:
   enabled: true
+ spec:
+    endpoints:
+    - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      port: http-metrics
+      scheme: https
+      tlsConfig:
+        caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        insecureSkipVerify: true
 
 coreDns:
   enabled: true
