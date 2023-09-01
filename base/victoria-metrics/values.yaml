@@ -169,6 +169,12 @@ kubeEtcd:
           
 kubeScheduler:
   enabled: true
+
+  service:
+    enabled: true
+    port: 10259
+    targetPort: 10259
+
   spec:
     jobLabel: jobLabel
     endpoints:
