@@ -122,6 +122,21 @@ vmagent:
     extraArgs:
       promscrape.streamParse: "true"
 
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+      external-dns.alpha.kubernetes.io/hostname: vmagent.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    hosts:
+      - vmagent.cloud.feddema.dev
+    tls:
+      - secretName: vmagent-tls
+        hosts:
+          - vmagent.cloud.feddema.dev
+
 grafana:
   enabled: false
 

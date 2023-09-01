@@ -19,6 +19,7 @@ ingress:
     - policy.cloud.feddema.dev
     - prometheus.cloud.feddema.dev
     - vmalert.cloud.feddema.dev
+    - vmagent.cloud.feddema.dev
   tls:
     - secretName: longhorn-tls
       hosts:
@@ -38,6 +39,9 @@ ingress:
     - secretName: vmalert-tls
       hosts:
         - vmalert.cloud.feddema.dev
+    - secretName: vmagent-tls
+      hosts:
+        - vmagent.cloud.feddema.dev
 
 resources:
   limits:
