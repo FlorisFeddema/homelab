@@ -74,7 +74,7 @@ vmcluster:
 
   
   ingress:
-    vmstorage:
+    storage:
       enabled: true
       annotations:
         nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
@@ -88,7 +88,7 @@ vmcluster:
         - secretName: vmstorage-tls
           hosts:
             - vmstorage.cloud.feddema.dev
-    vmselect:
+    select:
       enabled: true
       annotations:
         nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
@@ -102,7 +102,7 @@ vmcluster:
         - secretName: vmselect-tls
           hosts:
             - vmselect.cloud.feddema.dev
-    vminsert:
+    insert:
       enabled: true
       annotations:
         nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
