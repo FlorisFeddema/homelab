@@ -167,9 +167,17 @@ kubeEtcd:
         tlsConfig:
           caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           
-
 kubeScheduler:
   enabled: true
+  spec:
+    jobLabel: jobLabel
+    endpoints:
+      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+        port: http-metrics
+        scheme: https
+        tlsConfig:
+          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecureSkipVerify: true
 
 crds:
   enabled: true
