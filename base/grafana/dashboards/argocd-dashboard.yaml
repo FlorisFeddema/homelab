@@ -4,7 +4,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: argocd-dashboard 
-  namespace: prometheus
+  namespace: grafana
 data:
   argocd-dashboard.json: |-
     {

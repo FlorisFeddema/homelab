@@ -1,12 +1,12 @@
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: prometheus-grafana-vpa
-  namespace: prometheus
+  name: grafana-vpa
+  namespace: grafana
 spec:
   targetRef:
     apiVersion: "apps/v1"
     kind:       StatefulSet
-    name:       prometheus-grafana
+    name:       grafana
   updatePolicy:
     updateMode: "Off"

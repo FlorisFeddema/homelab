@@ -4,7 +4,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: smartmeter-gateway-dashboard
-  namespace: prometheus
+  namespace: grafana
 data:
   smartmeter-gateway-dashboard.json: |-
     {

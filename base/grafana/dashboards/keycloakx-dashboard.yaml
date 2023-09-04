@@ -4,7 +4,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: keycloakx-dashboard 
-  namespace: prometheus
+  namespace: grafana
 data:
   keycloakx.json: |-
     {

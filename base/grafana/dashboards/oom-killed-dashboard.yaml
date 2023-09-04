@@ -4,7 +4,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: oom-killed-dashboard 
-  namespace: prometheus
+  namespace: grafana
 data:
   oom-killed.json: |-
     {

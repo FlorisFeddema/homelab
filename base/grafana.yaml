@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-dashboards-application
+  name: grafana
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -9,19 +9,27 @@ metadata:
 spec:
   project: no-sync
   sources:
+    - repoURL: https://github.com/florisfeddema/cloud-gitops
+      targetRevision: main
+      ref: repo
+    - chart: grafana
+      repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 6.59.1
+      helm:
+        valueFiles:
+          - $repo/base/grafana/values.yaml
     - repoURL: https://github.com/florisfeddema/cloud-gitops.git
       targetRevision: HEAD
-      path: base/prometheus/dashboards
-    - path: ./
-      repoURL: https://github.com/dotdc/grafana-dashboards-kubernetes
-      targetRevision: HEAD
+      path: base/grafana
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus
+    namespace: grafana
 
   revisionHistoryLimit: 2
   syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
     automated:
       prune: true
       selfHeal: true

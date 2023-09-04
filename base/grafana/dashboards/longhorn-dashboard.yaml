@@ -4,7 +4,7 @@ metadata:
   labels:
     grafana_dashboard: "1"
   name: longhorn-dashboard 
-  namespace: prometheus
+  namespace: grafana
 data:
   longhorn-dashboard.json: |- 
     {
