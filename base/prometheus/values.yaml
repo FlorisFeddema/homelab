@@ -46,6 +46,7 @@ alertmanager:
 
 grafana:
   enabled: false
+  forceDeployDashboards: true
 
 kubeApiServer:
   enabled: true
