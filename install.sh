@@ -44,3 +44,6 @@ eval $command
 
 helm repo remove temp
 
+echo "$files" | while read line ; do
+   kubectl apply -f $line
+done

@@ -169,7 +169,7 @@ bash ./install.sh base external-dns
 0. sudo usermod -aG sudo localadmin
 0. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
 0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-0. sudo apt install curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
+0. sudo apt install nano curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
 0. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
 0. sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
 0. echo "fs.inotify.max_user_instances=512" | sudo tee -a /etc/sysctl.conf
@@ -198,7 +198,7 @@ bash ./install.sh base external-dns
 0. curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
 0. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-0. sudo apt -y install kubelet=1.27.3-00 kubeadm=1.27.3-00 kubectl=1.27.3-00
+0. sudo apt -y install kubelet=1.27.5-00 kubeadm=1.27.5-00 kubectl=1.27.5-00
 0. sudo apt-mark hold kubelet kubeadm kubectl
 0. nano config.yaml
 0. sudo kubeadm init --config config.yaml --skip-phases=addon/kube-proxy --upload-certs
@@ -209,11 +209,9 @@ bash ./install.sh base external-dns
 
 ## Install load balancer
 
-1. apk add nginx
-0. apk add nginx-mod-stream
+1. sudo apt install nginx
 0. rm /etc/nginx/nginx.conf
 0. nano /etc/nginx/nginx.conf
-0. service nginx start
 
 ## Known issues
 
@@ -234,5 +232,5 @@ sudo gdisk /dev/sdb
 -> w
 sudo mkfs.ext4 /dev/sdb1
 lsblk -f
-echo "UUID=b5d85b8f-4860-4e31-a80c-53ce7d88840a /mnt/ssd1 ext4 defaults 0 0" >>/etc/fstab
+echo "UUID=475d6722-87ff-43b6-89f5-2181c65393ed /mnt/ssd3 ext4 defaults 0 0" >>/etc/fstab
 sudo reboot
