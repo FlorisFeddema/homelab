@@ -8,7 +8,7 @@ metadata:
 spec:
   project: always-sync
   source:
-    repoURL: https://github.com/florisfeddema/cloud-gitops.git
+    repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
     targetRevision: HEAD
     path: base
 

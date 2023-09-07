@@ -9,7 +9,7 @@ metadata:
 spec:
   project: no-sync
   sources:
-    - repoURL: https://github.com/florisfeddema/cloud-gitops
+    - repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
       targetRevision: main
       ref: repo
     - chart: victoria-metrics-k8s-stack
@@ -18,7 +18,7 @@ spec:
       helm:
         valueFiles:
           - $repo/base/victoria-metrics/values.yaml
-    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
+    - repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
       targetRevision: HEAD
       path: base/victoria-metrics
 

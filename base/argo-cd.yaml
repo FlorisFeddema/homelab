@@ -9,17 +9,17 @@ metadata:
 spec:
   project: no-sync
   sources:
-    - repoURL: https://github.com/florisfeddema/cloud-gitops
+    - repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
       targetRevision: main
       ref: repo
     - chart: argo-cd
       repoURL: https://argoproj.github.io/argo-helm
-      targetRevision: 5.44.0
+      targetRevision: 5.43.0
       helm:
         valueFiles:
           - $repo/base/argo-cd/values.yaml
-    - repoURL: https://github.com/florisfeddema/cloud-gitops.git
-      targetRevision: HEAD
+    - repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
+      targetRevision: main
       path: base/argo-cd
 
   destination:
