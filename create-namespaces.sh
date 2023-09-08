@@ -3,5 +3,5 @@
 files=$(find . -type f | grep "namespace.yaml")
 
 echo "$files" | while read line ; do
-   kubectl apply -f $line
+   kubectl delete -f $line
 done

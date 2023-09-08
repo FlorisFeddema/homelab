@@ -1,8 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: BFDProfile
-metadata:
-  name: default
-  namespace: metallb
-spec:
-  receiveInterval: 380
-  transmitInterval: 270
