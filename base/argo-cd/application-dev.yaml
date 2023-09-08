@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: cloud-gitops-dev
   namespace: argocd
-  finalizers: {}
+  finalizers: []
 #    - resources-finalizer.argocd.argoproj.io
 spec:
   project: always-sync

@@ -3,7 +3,7 @@
  metadata:
    name: mysql-application
    namespace: argocd
-   finalizers: {}
+   finalizers: []
  #    - resources-finalizer.argocd.argoproj.io
 
  spec:

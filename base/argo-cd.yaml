@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: argo-cd
   namespace: argocd
-  finalizers: {}
+  finalizers: []
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:

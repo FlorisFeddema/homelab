@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: intel-device-plugins-gpu
   namespace: argocd
-  finalizers: {}
+  finalizers: []
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:

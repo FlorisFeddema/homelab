@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     cloud.feddema.dev/helm-updater-skip: "true"
-  finalizers: {}
+  finalizers: []
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:

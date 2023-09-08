@@ -3,7 +3,7 @@
  metadata:
    name: dependency-track-application
    namespace: argocd
-   finalizers: {}
+   finalizers: []
  #    - resources-finalizer.argocd.argoproj.io
 
  spec:
