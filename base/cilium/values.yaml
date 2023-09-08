@@ -56,7 +56,7 @@ hubble:
         nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
         external-dns.alpha.kubernetes.io/hostname: hubble.cloud.feddema.dev
         external-dns.alpha.kubernetes.io/ttl: "120"
-        cert-manager.io/cluster-issuer: letsencrypt
+        cert-manager.io/cluster-issuer: letsencrypt-dns
       hosts:
         - hubble.cloud.feddema.dev
       tls:

@@ -46,11 +46,13 @@ echo -n <VALUE> | kubeseal --controller-namespace sealed-secrets --raw --namespa
 
 ### Restore key in new cluster
 
-1. kubectl get secrets -n sealed-secrets -o yaml > out.yaml
-2. !! UPDATE KEY AND CRT !!
-3. kubectl apply -f out.yaml
-4. rm out.yaml
-5. kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
+```shell
+kubectl get secrets -n sealed-secrets -o yaml > out.yaml
+!! UPDATE KEY AND CRT !!
+kubectl apply -f out.yaml
+rm out.yaml
+kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
+```
 
 ## PostgreSQL
 
