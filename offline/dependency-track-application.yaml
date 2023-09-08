@@ -3,8 +3,8 @@
  metadata:
    name: dependency-track-application
    namespace: argocd
-   finalizers:
-     - resources-finalizer.argocd.argoproj.io
+   finalizers: {}
+ #    - resources-finalizer.argocd.argoproj.io
 
  spec:
    project: no-sync

@@ -3,8 +3,8 @@ kind: Application
 metadata:
   name: hize-gitops
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  finalizers: {}
+#    - resources-finalizer.argocd.argoproj.io
 spec:
   project: always-sync
   source:
