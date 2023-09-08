@@ -1,0 +1,111 @@
+grafana:
+  sidecar:
+    dashboards:
+      enabled: true
+
+  datasources:
+    datasource.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          access: proxy
+          uid: loki
+          url: http://loki-gateway.loki.svc.cluster.local
+          editable: false
+        - name: Prometheus
+          type: prometheus
+          uid: prometheus
+          url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090/
+          access: proxy
+          isDefault: true
+          jsonData:
+            httpMethod: POST
+            timeInterval: 30s
+        - name: Alertmanager
+          type: alertmanager
+          uid: alertmanager
+          url: http://prometheus-kube-prometheus-alertmanager.prometheus.svc.cluster.local:9093/
+          access: proxy
+          jsonData:
+            handleGrafanaManagedAlerts: false
+            implementation: prometheus
+
+  replicas: 1
+
+  ingress:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: grafana.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      ingress.kubernetes.io/rewrite-target: /
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    path: /
+    hosts:
+      - grafana.cloud.feddema.dev
+    tls:
+      - hosts:
+          - grafana.cloud.feddema.dev
+        secretName: "grafana-tls"
+
+  extraSecretMounts:
+    - name: auth-generic-oauth-secret-mount
+      secretName: grafana-oauth-credentials
+      defaultMode: 0440
+      mountPath: /etc/secrets/auth_generic_oauth
+      readOnly: true
+
+  grafana.ini:
+    auth:
+      oauth_allow_insecure_email_lookup: true
+    auth.generic_oauth:
+      enabled: true
+      name: Keycloak
+      allow_sign_up: true
+      scopes: "openid email profile offline_access roles"
+      email_attribute_path: email
+      login_attribute_path: username
+      name_attribute_path: full_name
+      auth_url: "https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/auth"
+      token_url: "https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/token"
+      api_url: "https://auth.cloud.feddema.dev/realms/master/protocol/openid-connect/userinfo"
+      client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+      client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+      allow_assign_grafana_admin: true
+      role_attribute_path: contains(realm_access.roles[*], 'admin') && 'GrafanaAdmin' || 'Admin'
+    paths:
+      data: /var/lib/grafana
+      logs: /var/log/grafana
+      plugins: /var/lib/grafana/plugins
+      provisioning: /etc/grafana/provisioning
+    analytics:
+      check_for_updates: true
+    log:
+      mode: console
+    grafana_net:
+      url: https://grafana.net
+    server:
+      domain: "https://grafana.cloud.feddema.dev"
+      root_url: "https://grafana.cloud.feddema.dev"
+
+  serviceMonitor:
+    enabled: true
+
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+
+  persistence:
+    type: StatefulSet
+    enabled: true
+    accessModes:
+      - ReadWriteOnce
+    size: 16Gi
+
+  admin:
+    existingSecret: "grafana-credentials"
+    userKey: admin-user
+    passwordKey: admin-passwords

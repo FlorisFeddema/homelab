@@ -1,0 +1,115 @@
+keycloakx:
+  command:
+    - "/opt/keycloak/bin/kc.sh"
+    - "start"
+    - "--auto-build"
+    - "--http-enabled=true"
+    - "--http-port=8080"
+    - "--hostname-strict=false"
+    - "--hostname-strict-https=false"
+
+  extraEnv: |
+    - name: KEYCLOAK_STATISTICS
+      value: all
+    - name: JAVA_OPTS_APPEND
+      value: >-
+        -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
+    - name: KEYCLOAK_ADMIN
+      valueFrom:
+        secretKeyRef:
+          name: 'keycloak-credentials'
+          key: keycloak-admin
+    - name: KEYCLOAK_ADMIN_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: 'keycloak-credentials'
+          key: keycloak-admin-password
+
+  replicas: 1
+
+  enableServiceLinks: true
+
+  serviceAccount:
+    create: true
+    allowReadPods: false
+
+  rbac:
+    create: false
+  podSecurityContext:
+    fsGroup: 1000
+
+  securityContext:
+    runAsUser: 1000
+    runAsNonRoot: true
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 256Mi
+    limits:
+      memory: 1024Mi
+
+  ingress:
+    enabled: true
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: auth.cloud.feddema.dev
+      external-dns.alpha.kubernetes.io/ttl: "120"
+      ingress.kubernetes.io/rewrite-target: /
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+    rules:
+      - host: 'auth.cloud.feddema.dev'
+        paths:
+          - path: '/'
+            pathType: Prefix
+    tls:
+      - hosts:
+          - auth.cloud.feddema.dev
+        secretName: "auth-tls"
+
+    console:
+      enabled: false
+
+  networkPolicy:
+    enabled: false
+
+  dbchecker:
+    enabled: true
+    securityContext:
+      allowPrivilegeEscalation: false
+      runAsUser: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+    resources:
+      requests:
+        cpu: 20m
+        memory: 32Mi
+      limits:
+        memory: 32Mi
+
+  database:
+    existingSecret: "keycloak-credentials"
+    vendor: postgres
+    hostname: postgresql.postgresql.svc.cluster.local
+    port: 5432
+    username: keycloak
+    database: keycloak
+
+  cache:
+    stack: default
+
+  proxy:
+    enabled: true
+    mode: edge
+
+  metrics:
+    enabled: true
+
+  serviceMonitor:
+    enabled: true
+
+  health:
+    enabled: true
+
+  http:
+    relativePath: "/"

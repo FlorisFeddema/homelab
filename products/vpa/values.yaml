@@ -1,0 +1,40 @@
+vpa:
+  recommender:
+    enabled: true
+    extraArgs:
+      v: "4"
+      pod-recommendation-min-cpu-millicores: 5
+      pod-recommendation-min-memory-mb: 10
+      prometheus-address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+      storage: prometheus
+    replicaCount: 1
+    resources:
+      limits:
+        memory: 256Mi
+        cpu: null
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+  updater:
+    enabled: true
+    replicaCount: 1
+    resources:
+      limits:
+        memory: 256Mi
+        cpu: null
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+  admissionController:
+    enabled: true
+    generateCertificate: true
+    replicaCount: 1
+    resources:
+      limits:
+        memory: 256Mi
+        cpu: null
+      requests:
+        cpu: 50m
+        memory: 128Mi

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: minio
+description: A Helm chart for Kubernetes
+type: application
+version: 1.0.0
+
+dependencies:
+  - name: minio
+    version: 5.0.13
+    repository: https://charts.min.io

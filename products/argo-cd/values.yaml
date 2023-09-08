@@ -1,0 +1,122 @@
+argo-cd:
+  configs:
+    cm:
+      exec.enabled: true
+
+    secret:
+      createSecret: false
+
+    params:
+      server.insecure: true
+
+  controller:
+    replicas: 1
+
+    resources:
+      limits:
+        memory: 2048Mi
+      requests:
+        cpu: 130m
+        memory: 512Mi
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  dex:
+    enabled: false
+
+  redis:
+    enabled: true
+
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+    exporter:
+      enabled: true
+      resources:
+        limits:
+          memory: 64Mi
+        requests:
+          cpu: 10m
+          memory: 32Mi
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  server:
+    replicas: 1
+
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 70m
+        memory: 128Mi
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+    ingress:
+      enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: argocd.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      hosts:
+        - argocd.cloud.feddema.dev
+      tls:
+        - secretName: argocd-tls
+          hosts:
+            - argocd.cloud.feddema.dev
+
+    ingressGrpc:
+      enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: grpc.argocd.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+        ingress-class: nginx
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+      hosts:
+        - grpc.argocd.cloud.feddema.dev
+      tls:
+        - secretName: argocd-grpc-tls
+          hosts:
+            - grpc.argocd.cloud.feddema.dev
+
+    configEnabled: false
+
+    rbacConfigCreate: false
+
+  repoServer:
+    replicas: 1
+
+    resources:
+      limits:
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  applicationSet:
+    enabled: false
+
+  notifications:
+    enabled: false

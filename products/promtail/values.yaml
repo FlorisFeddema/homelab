@@ -1,0 +1,19 @@
+promtail:
+  daemonset:
+    enabled: true
+
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 30m
+      memory: 128Mi
+
+  serviceMonitor:
+    enabled: true
+
+  config:
+    logLevel: info
+    serverPort: 3101
+    clients:
+      - url: http://loki-gateway.loki/loki/api/v1/push

@@ -1,0 +1,92 @@
+cert-manager:
+  installCRDs: true
+  replicaCount: 1
+
+  global:
+    logLevel: 1
+
+    rbac:
+      create: true
+
+    podSecurityPolicy:
+      enabled: false
+
+  serviceAccount:
+    create: true
+    automountServiceAccountToken: true
+
+  securityContext:
+    runAsNonRoot: true
+
+  containerSecurityContext:
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+        - ALL
+
+  prometheus:
+    enabled: true
+    servicemonitor:
+      enabled: true
+
+  webhook:
+    replicaCount: 1
+    timeoutSeconds: 10
+
+    securityContext:
+      runAsNonRoot: true
+
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      capabilities:
+        drop:
+          - ALL
+
+    serviceAccount:
+      create: true
+      automountServiceAccountToken: true
+
+    serviceType: ClusterIP
+
+  cainjector:
+    enabled: true
+    replicaCount: 1
+
+    securityContext:
+      runAsNonRoot: true
+
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+      capabilities:
+        drop:
+          - ALL
+
+    serviceAccount:
+      create: true
+      automountServiceAccountToken: true
+
+  startupapicheck:
+    enabled: true
+    timeout: 1m
+    backoffLimit: 4
+
+    securityContext:
+      runAsNonRoot: true
+
+    jobAnnotations:
+      helm.sh/hook: post-install
+      helm.sh/hook-weight: "1"
+      helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+
+    rbac:
+      annotations:
+        helm.sh/hook: post-install
+        helm.sh/hook-weight: "-5"
+        helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+
+    serviceAccount:
+      create: true
+      automountServiceAccountToken: true

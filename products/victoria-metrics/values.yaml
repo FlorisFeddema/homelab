@@ -1,0 +1,190 @@
+victoria-metrics-k8s-stack:
+  fullnameOverride: vm-stack
+
+  victoria-metrics-operator:
+    enabled: true
+
+    operator:
+      disable_prometheus_converter: true
+      prometheus_converter_add_argocd_ignore_annotations: true
+
+    serviceMonitor:
+      enabled: true
+
+  defaultRules:
+    create: true
+    rules:
+      etcd: true
+      general: true
+      k8s: true
+      kubeApiserver: true
+      kubeApiserverAvailability: true
+      kubeApiserverBurnrate: true
+      kubeApiserverHistogram: true
+      kubeApiserverSlos: true
+      kubelet: true
+      kubePrometheusGeneral: true
+      kubePrometheusNodeRecording: true
+      kubernetesApps: true
+      kubernetesResources: true
+      kubernetesStorage: true
+      kubernetesSystem: true
+      kubeScheduler: true
+      kubeStateMetrics: true
+      network: true
+      node: true
+      vmagent: true
+      vmsingle: true
+      vmhealth: true
+      alertmanager: true
+
+  defaultDashboardsEnabled: false
+  experimentalDashboardsEnabled: false
+
+  vmsingle:
+    enabled: false
+
+  vmcluster:
+    enabled: true
+    spec:
+      retentionPeriod: "700"
+      replicationFactor: 1
+      vmstorage:
+        replicaCount: 1
+        storageDataPath: "/vm-data"
+        storage:
+          volumeClaimTemplate:
+            spec:
+              resources:
+                requests:
+                  storage: 50Gi
+        resources: { }
+      vmselect:
+        replicaCount: 1
+        cacheMountPath: "/select-cache"
+        storage:
+          volumeClaimTemplate:
+            spec:
+              resources:
+                requests:
+                  storage: 5Gi
+        resources: { }
+      vminsert:
+        replicaCount: 1
+        resources: { }
+
+  alertmanager:
+    enabled: false
+    spec:
+      selectAllByDefault: true
+      externalURL: "alertmanagervm.cloud.feddema.dev"
+
+      # if this one defined, it will be used for alertmanager configuration and config parameter will be ignored
+      # configSecret: "alertmanager-config"
+
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+        external-dns.alpha.kubernetes.io/hostname: alertmanagervm.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      hosts:
+        - alertmanagervm.cloud.feddema.dev
+      tls:
+        - secretName: alertmanager-tls
+          hosts:
+            - alertmanagervm.cloud.feddema.dev
+
+  vmalert:
+    enabled: true
+
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+        external-dns.alpha.kubernetes.io/hostname: vmalert.cloud.feddema.dev
+        external-dns.alpha.kubernetes.io/ttl: "120"
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      hosts:
+        - vmalert.cloud.feddema.dev
+      tls:
+        - secretName: vmalert-tls
+          hosts:
+            - vmalert.cloud.feddema.dev
+
+  vmagent:
+    enabled: true
+    spec:
+      selectAllByDefault: true
+      scrapeInterval: 20s
+      extraArgs:
+        promscrape.streamParse: "true"
+
+  grafana:
+    enabled: false
+
+  prometheus-node-exporter:
+    enabled: false
+
+  kube-state-metrics:
+    enabled: false
+
+  kubelet:
+    enabled: true
+    cadvisor: true
+    probes: true
+
+  kubeApiServer:
+    enabled: true
+
+  kubeControllerManager:
+    enabled: true
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
+
+  coreDns:
+    enabled: true
+
+  kubeEtcd:
+    enabled: true
+    service:
+      enabled: true
+      port: 2381
+      targetPort: 2381
+    spec:
+      jobLabel: jobLabel
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+  kubeScheduler:
+    enabled: true
+
+    service:
+      enabled: true
+      port: 10259
+      targetPort: 10259
+
+    spec:
+      jobLabel: jobLabel
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
+
+  crds:
+    enabled: true
