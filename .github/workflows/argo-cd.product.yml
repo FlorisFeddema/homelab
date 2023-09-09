@@ -3,4 +3,4 @@ name: argo-cd build
 on: [push]
 
 extends:
-  - .github/workflows/product.template.yml
+  - .github/templates/product.template.yml
