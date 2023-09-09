@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: ingress-nginx
   namespace: argocd
-  finalizers: []
+#  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 
 spec:

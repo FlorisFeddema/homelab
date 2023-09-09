@@ -3,7 +3,7 @@ kind: AppProject
 metadata:
   name: always-sync
   namespace: argocd
-  finalizers: []
+#  finalizers:
 #    - resources-finalizer.argocd.argoproj.io
 spec:
   description: Autosync is always enabled
