@@ -4,7 +4,4 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: ./.github/workflows/product.template.yml
+    uses: ./.github/workflows/product.template.yml
