@@ -8,4 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ./.github/workflows/product.template.yml
+      - uses: actions/checkout@v3
+
+      - name: Run a one-line script
+        run: echo Hello from template

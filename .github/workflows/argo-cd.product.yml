@@ -1,7 +1,10 @@
 name: argo-cd build
 
-on:
-  push:
+on: [push]
 
-extends:
-  - .github/templates/product.template.yml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ./.github/workflows/product.template.yml
