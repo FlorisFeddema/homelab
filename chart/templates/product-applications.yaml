@@ -1,0 +1,32 @@
+{{ range $k, $v :=.Values.products }}
+{{ if $v.deploy }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ kebabcase $k }}
+  namespace: argocd
+  finalizers: []
+#    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: no-sync
+  source:
+    repoURL: oci://{{ $.Values.registry }}
+    chart: {{ kebabcase $k }}
+    targetRevision: {{ $v.version }}
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: {{ default ( kebabcase $k ) $v.namespace }}
+  revisionHistoryLimit: 1
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 2
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 10m
+---
+{{ end -}}
+{{ end -}}

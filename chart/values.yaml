@@ -1,0 +1,87 @@
+registry: feddemadev.azurecr.io
+
+products:
+  argoCd:
+    deploy: true
+    version:
+  certManager:
+    deploy: true
+    version: 
+  cilium:
+    deploy: true
+    namespace: kube-system
+    version: 
+  enphaseEnvoyPrometheusExporter:
+    deploy: true
+    version: 
+  externalDns:
+    deploy: true
+    version: 
+  falco:
+    deploy: true
+    version: 
+  falcoExporter:
+    deploy: true
+    version: 
+  grafana:
+    deploy: true
+    version: 
+  ingressNginx:
+    deploy: true
+    version: 
+  intelDevicePluginsGpu:
+    deploy: true
+    version: 
+  keycloakx:
+    deploy: true
+    version: 
+  kyverno:
+    deploy: true
+    version: 
+  loki:
+    deploy: true
+    version: 
+  longhorn:
+    deploy: true
+    namespace: longhorn-system
+    version: 
+  metricsServer:
+    deploy: true
+    version: 
+  minio:
+    deploy: true
+    version: 
+  nodeFeatureDiscovery:
+    deploy: true
+    version: 
+  oauthProxy:
+    deploy: true
+    version: 
+  policyReporter:
+    deploy: true
+    version: 
+  postgresql:
+    deploy: true
+    version: 
+  prometheus:
+    deploy: true
+    version: 
+  prometheusCrd:
+    deploy: true
+    namespace: defaults
+    version: 
+  promtail:
+    deploy: true
+    version: 
+  sealedSecrets:
+    deploy: true
+    version: 
+  smartmeterGatewayPrometheusExporter:
+    deploy: true
+    version: 
+  victoriaMetrics:
+    deploy: true
+    version: 
+  vpa:
+    deploy: true
+    version: 

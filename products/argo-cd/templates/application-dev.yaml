@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: dev
+    path: chart
 
   destination:
     server: https://kubernetes.default.svc
