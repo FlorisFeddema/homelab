@@ -36,4 +36,4 @@ jobs:
           helm package products/${{ inputs.productName }}
           
           echo "push helm chart"
-          helm push ${{ inputs.productName }}-${{ github.run_id }} oci://${{ inputs.registryName }}/helm
+          helm push ${{ inputs.productName }}-${{ github.run_id }}.tgz oci://${{ inputs.registryName }}/helm
