@@ -24,6 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a one-line script
+      - name: Release chart version ${{ github.run_id }}
         run: |
-          echo "release chart version {{ github.run_id }}"
+          echo "release chart version ${{ github.run_id }}"
