@@ -1,7 +1,16 @@
 name: argo-cd build
 
-on: [push]
+on:
+  push:
+    paths:
+      - products/argo-cd/**
 
 jobs:
   build:
     uses: ./.github/workflows/product.template.yml
+    with:
+      productName: argo-cd
+      registryName: feddemadev.azurecr.io
+      registryUserName: gha-push
+      registryPassword: ${{ secrets.REGISTRY_PASSWORD }}
+

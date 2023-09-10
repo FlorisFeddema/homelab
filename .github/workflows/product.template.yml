@@ -1,14 +1,29 @@
+# https://docs.github.com/en/actions/using-workflows/reusing-workflows
 name: Product build
 
 on:
   workflow_call:
+    inputs:
+      productName:
+        required: true
+        type: string
+      registryName:
+        required: true
+        type: string
+      registryUsername:
+        required: true
+        type: string
+    secrets:
+      registryPassword:
+        required: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-#      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Run a one-line script
-        run: echo Hello from template
+        run: |
+          echo "release chart version {{ github.run_id }}"
