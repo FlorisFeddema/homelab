@@ -32,6 +32,7 @@ jobs:
           yq -i '.version=${{ github.run_id }}' products/${{ inputs.productName }}/Chart.yaml
           
           echo "package helm chart"
+          helm dep build
           helm package products/${{ inputs.productName }}
           
           echo "push helm chart"
