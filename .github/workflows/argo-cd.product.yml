@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - products/argo-cd/**
+      - .github/workflows/**
 
 jobs:
   build:
