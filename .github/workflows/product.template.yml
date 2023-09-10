@@ -27,7 +27,12 @@ jobs:
       - name: Release chart version ${{ github.run_id }}
         run: |
           echo "login to helm registry"
-          
           echo ${{ secrets.registryPassword }} | helm registry login ${{ inputs.registryName }} --username ${{ inputs.registryUsername }} --password-stdin
           
-          echo "release chart version ${{ github.run_id }}"
+          yq -i '.version=${{ github.run_id }}' products/${{ inputs.productName }}/Chart.yaml
+          
+          echo "package helm chart"
+          helm package products/${{ inputs.productName }}
+          
+          echo "push helm chart"
+          helm push ${{ inputs.productName }}-${{ github.run_id }} oci://${{ inputs.registryName }}/helm
