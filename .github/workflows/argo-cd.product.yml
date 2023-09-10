@@ -13,5 +13,6 @@ jobs:
       productName: argo-cd
       registryName: feddemadev.azurecr.io
       registryUserName: gha-push
+    secrets:
       registryPassword: ${{ secrets.REGISTRY_PASSWORD }}
 
