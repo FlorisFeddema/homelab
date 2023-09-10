@@ -26,4 +26,8 @@ jobs:
 
       - name: Release chart version ${{ github.run_id }}
         run: |
+          echo "login to helm registry"
+          
+          echo ${{ secrets.registryPassword }} | helm registry login ${{ env.registryName }} --username ${{ env.registryUsername }} --password-stdin
+          
           echo "release chart version ${{ github.run_id }}"
