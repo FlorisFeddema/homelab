@@ -50,8 +50,6 @@ products:
     deploy: true
   postgresql:
     deploy: true
-  prometheus:
-    deploy: false
   prometheusCrd:
     deploy: true
     namespace: defaults

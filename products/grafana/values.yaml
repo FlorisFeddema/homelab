@@ -16,7 +16,7 @@ grafana:
         - name: Prometheus
           type: prometheus
           uid: prometheus
-          url: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090/
+          url: http://vmselect-vm-stack.victoria-metrics.svc.cluster.local:8481/select/0/prometheus
           access: proxy
           isDefault: true
           jsonData:

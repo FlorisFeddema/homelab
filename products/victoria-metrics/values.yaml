@@ -5,7 +5,7 @@ victoria-metrics-k8s-stack:
     enabled: true
 
     operator:
-      disable_prometheus_converter: true
+      disable_prometheus_converter: false
       prometheus_converter_add_argocd_ignore_annotations: true
 
     serviceMonitor:
@@ -38,8 +38,8 @@ victoria-metrics-k8s-stack:
       vmhealth: true
       alertmanager: true
 
-  defaultDashboardsEnabled: false
-  experimentalDashboardsEnabled: false
+  defaultDashboardsEnabled: true
+  experimentalDashboardsEnabled: true
 
   vmsingle:
     enabled: false
@@ -74,13 +74,12 @@ victoria-metrics-k8s-stack:
         resources: { }
 
   alertmanager:
-    enabled: false
+    enabled: true
     spec:
       selectAllByDefault: true
-      externalURL: "alertmanagervm.cloud.feddema.dev"
+      externalURL: "alert.cloud.feddema.dev"
 
-      # if this one defined, it will be used for alertmanager configuration and config parameter will be ignored
-      # configSecret: "alertmanager-config"
+      configSecret: "alertmanager-config"
 
     ingress:
       enabled: true
@@ -127,10 +126,20 @@ victoria-metrics-k8s-stack:
     enabled: false
 
   prometheus-node-exporter:
-    enabled: false
+    enabled: true
+    prometheus:
+      monitor:
+        enabled: true
 
   kube-state-metrics:
-    enabled: false
+    enabled: true
+    rbac:
+      create: true
+    prometheus:
+      monitor:
+        enabled: true
+    selfMonitor:
+      enabled: true
 
   kubelet:
     enabled: true
