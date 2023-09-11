@@ -25,7 +25,7 @@ grafana:
         - name: Alertmanager
           type: alertmanager
           uid: alertmanager
-          url: http://prometheus-kube-prometheus-alertmanager.prometheus.svc.cluster.local:9093/
+          url: http://vmalertmanager-vm-stack.victoria-metrics.svc.cluster.local:9093/
           access: proxy
           jsonData:
             handleGrafanaManagedAlerts: false
