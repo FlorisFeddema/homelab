@@ -14,7 +14,7 @@ victoria-metrics-k8s-stack:
   defaultRules:
     create: true
     rules:
-      etcd: true
+      etcd: false
       general: true
       k8s: true
       kubeApiserver: true
