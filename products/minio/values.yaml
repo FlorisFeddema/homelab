@@ -62,4 +62,4 @@ minio:
   metrics:
     serviceMonitor:
       enabled: true
-      public: false
+      includeNode: true
