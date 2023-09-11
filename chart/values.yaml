@@ -23,10 +23,16 @@ products:
     deploy: true
   intelDevicePluginsGpu:
     deploy: true
+    ignoreDifferences:
+      - group: "deviceplugin.intel.com"
+        kind: "GpuDevicePlugin"
+        jsonPointers:
+          - /spec/resourceManager
   keycloakx:
     deploy: true
   kyverno:
     deploy: true
+    serverSideApply: true
   loki:
     deploy: true
   longhorn:
@@ -49,6 +55,7 @@ products:
   prometheusCrd:
     deploy: true
     namespace: defaults
+    serverSideApply: true
   promtail:
     deploy: true
   sealedSecrets:

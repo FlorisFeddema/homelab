@@ -17,7 +17,14 @@ spec:
     server: https://kubernetes.default.svc
     namespace: {{ default ( kebabcase $k ) $v.namespace }}
   revisionHistoryLimit: 1
+  {{- with $v.ignoreDifferences }}
+  ignoreDifferences: {{ toYaml $v.ignoreDifferences | nindent 4 }}
+  {{- end }}
   syncPolicy:
+    {{ if $v.serverSideApply }}
+    syncOptions:
+      - ServerSideApply=true
+    {{ end }}
     automated:
       prune: true
       selfHeal: true

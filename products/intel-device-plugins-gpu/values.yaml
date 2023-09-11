@@ -5,7 +5,6 @@ intel-device-plugins-gpu:
   logLevel: 2
   enableMonitoring: true
   allocationPolicy: "none"
-  resourceManager: false
 
   nodeSelector:
     intel.feature.node.kubernetes.io/gpu: 'true'
