@@ -64,7 +64,7 @@ loki:
     resources: { }
     persistence:
       size: 10Gi
-    affinity: null
+    affinity: { }
     extraArgs:
       - '-config.expand-env=true'
     extraEnvFrom:
@@ -77,7 +77,7 @@ loki:
     persistence:
       size: 10Gi
       enableStatefulSetAutoDeletePVC: false
-    affinity: null
+    affinity: { }
     extraArgs:
       - '-config.expand-env=true'
     extraEnvFrom:
@@ -89,7 +89,7 @@ loki:
     verboseLogging: false
     replicas: 1
     resources: { }
-    affinity: null
+    affinity: { }
     extraArgs:
       - '-config.expand-env=true'
     extraEnvFrom:
