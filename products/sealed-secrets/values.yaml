@@ -1,0 +1,41 @@
+sealed-secrets:
+  createController: true
+
+  secretName: "sealed-secrets-key"
+  keyrenewperiod: "0"
+
+  fullnameOverride: "sealed-secrets-controller"
+
+  podSecurityContext:
+    enabled: true
+    fsGroup: 65534
+
+  containerSecurityContext:
+    enabled: true
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1001
+
+  service:
+    type: ClusterIP
+    port: 8080
+
+  ingress:
+    enabled: false
+
+  networkPolicy:
+    enabled: false
+
+  serviceAccount:
+    create: true
+
+  rbac:
+    create: true
+    pspEnabled: false
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+
+    dashboards:
+      create: true

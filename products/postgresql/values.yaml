@@ -1,0 +1,84 @@
+postgresql:
+  diagnosticMode:
+    enabled: false
+
+  image:
+    debug: false
+
+  auth:
+    enablePostgresUser: true
+    replicationUsername: repl_user
+    existingSecret: postgresql-credentials
+    usePasswordFiles: true
+
+  architecture: standalone
+
+  containerPorts:
+    postgresql: 5432
+
+  ldap:
+    enabled: false
+
+  postgresqlDataDir: /bitnami/postgresql/data
+  shmVolume:
+    enabled: true
+
+  tls:
+    enabled: false
+
+  primary:
+    standby:
+      enabled: false
+
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        memory: 128Mi
+        cpu: 50m
+
+    podSecurityContext:
+      enabled: false
+
+    containerSecurityContext:
+      enabled: true
+      runAsUser: 0
+      runAsGroup: 0
+      runAsNonRoot: false
+      allowPrivilegeEscalation: true
+      seccompProfile:
+        type: RuntimeDefault
+      capabilities:
+        drop: [ ]
+
+    service:
+      ports:
+        postgresql: 5432
+
+    persistence:
+      enabled: true
+      mountPath: /bitnami/postgresql
+
+      accessModes:
+        - ReadWriteOnce
+
+      size: 500Gi
+
+  networkPolicy:
+    enabled: false
+
+  volumePermissions:
+    enabled: false
+
+  serviceAccount:
+    create: false
+
+  rbac:
+    create: false
+
+  psp:
+    create: false
+
+  metrics:
+    enabled: false
+

@@ -1,0 +1,50 @@
+ingress-nginx:
+  controller:
+    config:
+      #     custom-http-errors: 401,403,404,500,501,502,503
+      use-forwarded-headers: "true"
+    ingressClassResource:
+      default: true
+
+    kind: Deployment
+    replicaCount: 2
+    minAvailable: 0
+    maxUnavailable: 2
+
+    service:
+      nodePorts:
+        http: 32080
+        https: 32443
+      externalIPs:
+        - 31.201.251.186
+
+    resources:
+      limits:
+        memory: 768Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+  revisionHistoryLimit: 2
+
+  defaultBackend:
+    enabled: true
+    image:
+      repository: ghcr.io/tarampampam/error-pages
+      tag: 2.25.0
+    extraEnvs:
+      - name: TEMPLATE_NAME
+        value: ghost
+      - name: SHOW_DETAILS
+        value: 'true'
+    resources:
+      limits:
+        memory: 20Mi
+      requests:
+        cpu: 10m
+        memory: 10Mi
