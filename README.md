@@ -14,6 +14,8 @@ This repository will be used for the configuration of the feddema.dev Kubernetes
   * [Node setup](#node-setup)
   * [Install load balancer](#install-load-balancer)
   * [Known issues](#known-issues)
+  * [Sources](#sources)
+  * [Disk install](#disk-install)
 <!-- TOC -->
 
 ## Kubeseal
@@ -44,11 +46,13 @@ echo -n <VALUE> | kubeseal --controller-namespace sealed-secrets --raw --namespa
 
 ### Restore key in new cluster
 
-1. kubectl get secrets -n sealed-secrets -o yaml > out.yaml
-2. !! UPDATE KEY AND CRT !!
-3. kubectl apply -f out.yaml
-4. rm out.yaml
-5. kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
+```shell
+kubectl get secrets -n sealed-secrets -o yaml > out.yaml
+!! UPDATE KEY AND CRT !!
+kubectl apply -f out.yaml
+rm out.yaml
+kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
+```
 
 ## PostgreSQL
 
@@ -164,54 +168,63 @@ bash ./install.sh base external-dns
 
 ## Node setup
 
-1. cat ~/.ssh/id_ed25519.pub | ssh localadmin@targon.feddema.dev -p 6022 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
-0. passwd
-0. sudo usermod -aG sudo localadmin
-0. echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
-0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-0. sudo apt install nano curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
-0. sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
-0. sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
-0. echo "fs.inotify.max_user_instances=512" | sudo tee -a /etc/sysctl.conf
-0. echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
-0. sudo install -m 0755 -d /etc/apt/keyrings
-0. curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-0. sudo chmod a+r /etc/apt/keyrings/docker.gpg
-0. echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-0. sudo apt install containerd.io 
-0. cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-    overlay
-    br_netfilter
-    EOF
-0. sudo modprobe overlay && sudo modprobe br_netfilter
-0. cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-    net.bridge.bridge-nf-call-iptables  = 1
-    net.bridge.bridge-nf-call-ip6tables = 1
-    net.ipv4.ip_forward                 = 1
-    EOF
-0. sudo sysctl --system
-0. sudo containerd config default > /etc/containerd/config.toml
-0. !! CHANGE SystemdCgroup = true IN \[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] !!
-0. sudo systemctl restart containerd
-0. sudo systemctl enable containerd
-0. curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
-0. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-0. sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-0. sudo apt -y install kubelet=1.27.5-00 kubeadm=1.27.5-00 kubectl=1.27.5-00
-0. sudo apt-mark hold kubelet kubeadm kubectl
-0. nano config.yaml
-0. sudo kubeadm init --config config.yaml --skip-phases=addon/kube-proxy --upload-certs
-0. mkdir -p $HOME/.kube
-0. sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
-0. sudo chown $(id -u):$(id -g) $HOME/.kube/config
-0. kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+```shell 
+cat ~/.ssh/id_ed25519.pub | ssh localadmin@targon.feddema.dev -p 6022 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
+passwd
+sudo usermod -aG sudo localadmin
+echo "localadmin ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/localadmin
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+sudo apt install nano curl gnupg2 software-properties-common apt-transport-https ca-certificates net-tools open-iscsi jq nfs-common -y
+sudo swapoff -a && sudo sed -i '/swap.img/ s/^/#/' /etc/fstab
+sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
+echo "fs.inotify.max_user_instances=512" | sudo tee -a /etc/sysctl.conf
+echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+sudo apt install containerd.io 
+
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay && sudo modprobe br_netfilter
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward                 = 1
+EOF
+
+sudo sysctl --system
+sudo containerd config default > /etc/containerd/config.toml
+
+!! CHANGE SystemdCgroup = true IN \[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options] !!
+
+sudo systemctl restart containerd
+sudo systemctl enable containerd
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-archive-keyring.gpg
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+sudo apt -y install kubelet=1.27.5-00 kubeadm=1.27.5-00 kubectl=1.27.5-00
+sudo apt-mark hold kubelet kubeadm kubectl
+nano config.yaml
+sudo kubeadm init --config config.yaml --skip-phases=addon/kube-proxy --upload-certs
+mkdir -p $HOME/.kube
+sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+```
 
 ## Install load balancer
 
-1. sudo apt install nginx
-0. rm /etc/nginx/nginx.conf
-0. nano /etc/nginx/nginx.conf
+```shell    
+sudo apt install nginx
+rm /etc/nginx/nginx.conf
+nano /etc/nginx/nginx.conf
+```
 
 ## Known issues
 
@@ -223,6 +236,7 @@ bash ./install.sh base external-dns
 
 ## Disk install
 
+```shell
 sudo mkdir /mnt/ssd1
 lsblk -f
 sudo fdisk -l
@@ -232,5 +246,7 @@ sudo gdisk /dev/sdb
 -> w
 sudo mkfs.ext4 /dev/sdb1
 lsblk -f
-echo "UUID=475d6722-87ff-43b6-89f5-2181c65393ed /mnt/ssd3 ext4 defaults 0 0" >>/etc/fstab
+echo "UUID=27c8a0fa-24a0-43fa-be1c-d7b02826f0a0 /mnt/ssd2 ext4 defaults 0 0" >>/etc/fstab
 sudo reboot
+```
+
