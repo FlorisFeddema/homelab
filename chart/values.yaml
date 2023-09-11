@@ -62,5 +62,6 @@ products:
     deploy: true
   victoriaMetrics:
     deploy: true
+    serverSideApply: true
   vpa:
     deploy: true
