@@ -11,7 +11,6 @@ vpa:
     resources:
       limits:
         memory: 256Mi
-        cpu: null
       requests:
         cpu: 50m
         memory: 128Mi
@@ -22,7 +21,6 @@ vpa:
     resources:
       limits:
         memory: 256Mi
-        cpu: null
       requests:
         cpu: 50m
         memory: 128Mi
@@ -34,7 +32,6 @@ vpa:
     resources:
       limits:
         memory: 256Mi
-        cpu: null
       requests:
         cpu: 50m
         memory: 128Mi
