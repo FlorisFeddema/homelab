@@ -77,7 +77,7 @@ victoria-metrics-k8s-stack:
     enabled: true
     spec:
       selectAllByDefault: true
-      externalURL: "alert.cloud.feddema.dev"
+      externalURL: "https://alert.cloud.feddema.dev"
 
       configSecret: "alertmanager-config"
 
