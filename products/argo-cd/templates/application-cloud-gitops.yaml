@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloud-gitops-dev
+  name: cloud-gitops
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io

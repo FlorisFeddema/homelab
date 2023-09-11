@@ -10,9 +10,9 @@ metadata:
 spec:
   project: no-sync
   source:
-    repoURL: oci://{{ $.Values.registry }}
-    chart: {{ kebabcase $k }}
-    targetRevision: {{ $v.version }}
+    repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
+    targetRevision: HEAD
+    path: products/{{ kebabcase $k }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ default ( kebabcase $k ) $v.namespace }}
