@@ -108,4 +108,4 @@ grafana:
   admin:
     existingSecret: "grafana-credentials"
     userKey: admin-user
-    passwordKey: admin-passwords
+    passwordKey: admin-password
