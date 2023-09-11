@@ -3,6 +3,7 @@ registry: feddemadev.azurecr.io
 products:
   argoCd:
     deploy: true
+    namespace: argocd
   certManager:
     deploy: true
   cilium:
