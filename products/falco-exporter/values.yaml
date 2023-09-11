@@ -1,6 +1,4 @@
 falco-exporter:
-  service:
-    annotations: {}
 
   falco:
     grpcUnixSocketPath: "unix:///run/falco/falco.sock"
