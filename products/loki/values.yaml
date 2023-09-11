@@ -51,7 +51,7 @@ loki:
     resources: { }
     persistence:
       size: 10Gi
-    affinity: null
+    affinity: { }
     extraArgs:
       - '-config.expand-env=true'
     extraEnvFrom:
