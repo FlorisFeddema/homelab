@@ -2,7 +2,7 @@ kind: PrometheusRule
 apiVersion: monitoring.coreos.com/v1
 metadata:
   name: alerting-rules
-  namespace: prometheus
+  namespace: victoria-metrics
 spec:
   groups:
     - name: longhorn.cloud.feddema.dev
@@ -55,49 +55,6 @@ spec:
           for: 5m
           labels:
             severity: critical
-
-    - name: prometheus.cloud.feddema.dev
-      rules:
-        - alert: PrometheusTooManyRestarts
-          expr: changes(process_start_time_seconds{job=~"prometheus|pushgateway|alertmanager"}[15m]) > 2
-          for: 0m
-          labels:
-            severity: critical
-          annotations:
-            summary: Prometheus too many restarts (instance {{`{{$labels.instance}}`}})
-            description: "Prometheus has restarted more than twice in the last 15 minutes. It might be crashlooping.\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
-        - alert: PrometheusRuleEvaluationFailures
-          expr: increase(prometheus_rule_evaluation_failures_total[3m]) > 0
-          for: 0m
-          labels:
-            severity: critical
-          annotations:
-            summary: Prometheus rule evaluation failures (instance {{`{{$labels.instance}}`}})
-            description: "Prometheus encountered {{`{{$value}}`}} rule evaluation failures, leading to potentially ignored alerts.\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
-        - alert: PrometheusTargetScrapingSlow
-          expr: prometheus_target_interval_length_seconds{quantile="0.9"} / on (interval, instance, job) prometheus_target_interval_length_seconds{quantile="0.5"} > 1.05
-          for: 5m
-          labels:
-            severity: critical
-          annotations:
-            summary: Prometheus target scraping slow (instance {{`{{$labels.instance}}`}})
-            description: "Prometheus is scraping exporters slowly since it exceeded the requested interval time. Your Prometheus server is under-provisioned.\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
-        - alert: PrometheusLargeScrape
-          expr: increase(prometheus_target_scrapes_exceeded_sample_limit_total[10m]) > 10
-          for: 5m
-          labels:
-            severity: critical
-          annotations:
-            summary: Prometheus large scrape (instance {{`{{$labels.instance}}`}})
-            description: "Prometheus has many scrapes that exceed the sample limit\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
-        - alert: PrometheusTargetScrapeDuplicate
-          expr: increase(prometheus_target_scrapes_sample_duplicate_timestamp_total[5m]) > 0
-          for: 5m
-          labels:
-            severity: critical
-          annotations:
-            summary: Prometheus target scrape duplicate (instance {{`{{$labels.instance}}`}})
-            description: "Prometheus has many samples rejected due to duplicate timestamps but different values\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
 
     - name: node.cloud.feddema.dev
       rules:
