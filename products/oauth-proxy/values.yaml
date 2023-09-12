@@ -67,6 +67,9 @@ oauth2-proxy:
 
   checkDeprecation: true
 
+  extraArgs:
+    - "--scope openid email"
+
   metrics:
     enabled: true
     servicemonitor:
