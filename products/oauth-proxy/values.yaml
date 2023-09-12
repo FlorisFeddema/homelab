@@ -68,7 +68,7 @@ oauth2-proxy:
   checkDeprecation: true
 
   extraArgs:
-    - "--session-cookie-minimal true"
+    - "--session-cookie-minimal"
 
   metrics:
     enabled: true
