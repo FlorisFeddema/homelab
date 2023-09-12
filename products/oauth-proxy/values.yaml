@@ -29,7 +29,7 @@ oauth2-proxy:
           - falco.cloud.feddema.dev
       - secretName: policy-tls
         hosts:
-          - policys.cloud.feddema.dev
+          - policy.cloud.feddema.dev
       - secretName: hubble-tls
         hosts:
           - hubble.cloud.feddema.dev
