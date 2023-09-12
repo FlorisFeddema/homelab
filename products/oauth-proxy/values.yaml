@@ -6,6 +6,7 @@ oauth2-proxy:
       upstreams = [ "file:///dev/null" ]
       provider = "keycloak-oidc"
       oidc_issuer_url = "https://auth.cloud.feddema.dev/realms/master"
+      scope = "openid email"
 
   serviceAccount:
     enabled: true
@@ -66,9 +67,6 @@ oauth2-proxy:
     type: cookie
 
   checkDeprecation: true
-
-  extraArgs:
-    - "--scope openid email"
 
   metrics:
     enabled: true
