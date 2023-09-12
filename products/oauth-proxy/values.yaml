@@ -63,17 +63,7 @@ oauth2-proxy:
   httpScheme: http
 
   sessionStorage:
-    type: redis
-    redis:
-      clientType: "standalone"
-      password: secret
-
-  redis:
-    enabled: true
-    architecture: standalone
-    auth:
-      enabled: true
-      password: secret
+    type: cookie
 
   checkDeprecation: true
 
