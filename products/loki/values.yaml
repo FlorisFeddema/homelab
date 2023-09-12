@@ -34,7 +34,7 @@ loki:
   monitoring:
     dashboards:
       enabled: true
-      namespace: prometheus
+      namespace: loki
       labels:
         grafana_dashboard: "1"
     serviceMonitor:
