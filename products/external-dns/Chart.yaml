@@ -2,9 +2,9 @@ apiVersion: v2
 name: external-dns
 description: A Helm chart for Kubernetes
 type: application
-version: 1.0.1
+version: 1.0.2
 
 dependencies:
   - name: external-dns
-    version: 6.25.0
+    version: 6.25.1
     repository: oci://registry-1.docker.io/bitnamicharts
