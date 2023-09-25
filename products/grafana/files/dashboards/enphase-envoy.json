@@ -24,7 +24,7 @@
   "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 966,
+  "id": 159,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -76,7 +76,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
@@ -146,7 +146,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
@@ -211,7 +211,7 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
@@ -257,6 +257,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -376,6 +377,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -487,18 +489,22 @@
         "showThresholdLabels": false,
         "showThresholdMarkers": true
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "prometheus"
           },
+          "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "increase(envoy_production_watthours_lifetime[$__range])",
+          "expr": "sum by(namespace) (increase(envoy_production_watthours_lifetime[$__range]))",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "instant": false,
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "title": "Production over time",
@@ -565,7 +571,7 @@
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.0.1",
+      "pluginVersion": "10.1.1",
       "targets": [
         {
           "datasource": {
@@ -594,7 +600,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -610,6 +616,6 @@
   "timezone": "",
   "title": "Envoy Solarpanels",
   "uid": "fI005ff4k",
-  "version": 2,
+  "version": 9423,
   "weekStart": ""
 }
