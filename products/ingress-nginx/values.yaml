@@ -1,5 +1,6 @@
 ingress-nginx:
   controller:
+    allowSnippetAnnotations: true
     config:
       #     custom-http-errors: 401,403,404,500,501,502,503
       use-forwarded-headers: "true"
