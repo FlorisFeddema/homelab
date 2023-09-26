@@ -9,6 +9,8 @@ products:
   cilium:
     deploy: true
     namespace: kube-system
+  crowdsec:
+    deploy: true
   enphaseEnvoyPrometheusExporter:
     deploy: true
   externalDns:
