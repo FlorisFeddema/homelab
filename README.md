@@ -54,6 +54,13 @@ rm out.yaml
 kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
 ```
 
+## Crowdsec
+
+```shell
+kubectl -n crowdsec exec -it crowdsec-agent- -- sh
+cscli bouncers add ingress-nginx
+```
+
 ## PostgreSQL
 
 PostgreSQL can be assed via port 5432 on the following DNS name from withing the cluster:

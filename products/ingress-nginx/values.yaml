@@ -2,7 +2,8 @@ ingress-nginx:
   controller:
     allowSnippetAnnotations: true
     config:
-      #     custom-http-errors: 401,403,404,500,501,502,503
+      plugins: "crowdsec"
+      lua-shared-dicts: "crowdsec_cache: 50m"
       use-forwarded-headers: "true"
     ingressClassResource:
       default: true
@@ -30,6 +31,34 @@ ingress-nginx:
       enabled: true
       serviceMonitor:
         enabled: true
+
+  extraVolumes:
+    - name: crowdsec-bouncer-plugin
+      emptyDir: {}
+
+  extraInitContainers:
+    - name: init-clone-crowdsec-bouncer
+      image: crowdsecurity/lua-bouncer-plugin
+      imagePullPolicy: IfNotPresent
+      env:
+        - name: API_URL
+          value: "http://crowdsec-service.crowdsec.svc.cluster.local:8080"
+        - name: API_KEY
+          valueFrom:
+          secretKeyRef:
+            name: crowdsec-api
+            key: API_KEY
+        - name: BOUNCER_CONFIG
+          value: "/crowdsec/crowdsec-bouncer.conf"
+      command: ['sh', '-c', "sh /docker_start.sh; mkdir -p /lua_plugins/crowdsec/; cp -R /crowdsec/* /lua_plugins/crowdsec/"]
+      volumeMounts:
+        - name: crowdsec-bouncer-plugin
+          mountPath: /lua_plugins
+
+  extraVolumeMounts:
+    - name: crowdsec-bouncer-plugin
+      mountPath: /etc/nginx/lua/plugins/crowdsec
+      subPath: crowdsec
 
   revisionHistoryLimit: 2
 
