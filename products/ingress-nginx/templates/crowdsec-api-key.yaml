@@ -1,0 +1,14 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: crowdsec-api-key
+  namespace: ingress-nginx
+spec:
+  encryptedData:
+    API_KEY: AgA3rJEPVOGc4VmRpXm4yfwp1Uf998L/688w8toFmNYqZgE2hvqD4vJRyb4bCUfpnmedPdDDEoy8HxycIyJFb/MezSYPZotBIjj4qh1X8fXGKms796fwiELKWYixnbZ4zi0//IpcN+GEiMbjtRGQRaTMQEPHRDT9HE5rU3Pj5Q4wFsA92IUuIAEj0+Va/1p0edka4b8xIllN3zm06eBGIK13Y/5p8Kcs1Vwcf0FlXIT1NMv8mu/tn0w8LI2k0wX5Cr9OdpTEjv5RqqRZqkyjxJRUh34OYYDuCnc6AqLUnXiPkigzmmC80QhEu4lzxcm8hJwIyJU5CHYIiN+b/UrNvjomibBcgBbwwF/HaK7O/PXhlo153s/v6XRpPooYeKGvxKUA3OePNVQUkQJyMoFgLu5HEoOBzkAeAwuF3ErUyvktRYGVn9I8lCKqPO7ppLvqdGkDkDpDh5ntR8wWq5QQf/4waXYkXVhDSb+7ZOtzrzC2JkHLVxpgicKH6MqQCtScdw+wf2oVFBfBY+G164uxvaCPEuglPr8iUKMJyU9lpKuVq48rlpfEubxNMSHRJ+9F7usrnPsFcHsBQ+/dSIYgkadGJlJR+uZjyLU+3r95jcftkmHqnuGpGJOGRsefsPsibIBHKoyPO3HWi8jzc89M4JMWoDOjsAXHEjmx0yXyg8ZpdxA8TTqZ76ZwZjDf0zN9o715jJAyrKIYi+JEyDJfL/hpgLCoqbMnGH6KfdtsLNgmnA==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: crowdsec-api-key
+      namespace: ingress-nginx

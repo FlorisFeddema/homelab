@@ -27,6 +27,8 @@ ingress-nginx:
         cpu: 100m
         memory: 256Mi
 
+    minReadySeconds: 30
+
     metrics:
       enabled: true
       serviceMonitor:
