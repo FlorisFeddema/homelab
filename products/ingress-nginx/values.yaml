@@ -48,7 +48,7 @@ ingress-nginx:
           - name: API_KEY
             valueFrom:
               secretKeyRef:
-                name: crowdsec-api
+                name: crowdsec-api-key
                 key: API_KEY
           - name: BOUNCER_CONFIG
             value: "/crowdsec/crowdsec-bouncer.conf"
