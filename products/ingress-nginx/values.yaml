@@ -46,7 +46,7 @@ ingress-nginx:
         imagePullPolicy: IfNotPresent
         env:
           - name: API_URL
-            value: "https://crowdsec-service.crowdsec.svc.cluster.local:8080"
+            value: "http://crowdsec-service.crowdsec.svc.cluster.local:8080"
           - name: API_KEY
             valueFrom:
               secretKeyRef:
