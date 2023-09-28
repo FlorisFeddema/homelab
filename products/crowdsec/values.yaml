@@ -4,9 +4,27 @@ crowdsec:
 
   lapi:
     dashboard:
-      enabled: false
+      enabled: true
+      resources:
+         limits:
+           memory: 256Mi
+         requests:
+           cpu: 10m
+         memory: 128Mi
+
       ingress:
-        enabled: false
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+          external-dns.alpha.kubernetes.io/hostname: crowdsec.cloud.feddema.dev
+          external-dns.alpha.kubernetes.io/ttl: "120"
+          ingress.kubernetes.io/rewrite-target: /
+          cert-manager.io/cluster-issuer: letsencrypt-dns
+        host: "crowdsec.cloud.feddema.dev"
+        tls:
+          - hosts:
+              - crowdsec.cloud.feddema.dev
+            secretName: "crowdsec-tls"
 
     resources:
       limits:
