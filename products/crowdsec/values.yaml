@@ -12,10 +12,10 @@ crowdsec:
 
     resources:
       limits:
-        memory: 100Mi
+        memory: 256Mi
       requests:
-        cpu: 150m
-        memory: 100Mi
+        cpu: 50m
+        memory: 128Mi
 
     persistentVolume:
       data:
