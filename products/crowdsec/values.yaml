@@ -2,7 +2,11 @@ crowdsec:
   container_runtime: containerd
 
   tls:
-    enabled: false
+    enabled: true
+    caBundle: true
+    insecureSkipVerify: false
+    certManager:
+      enabled: true
 
   lapi:
     dashboard:
