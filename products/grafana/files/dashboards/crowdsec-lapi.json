@@ -1,39 +1,12 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "bargauge",
-      "name": "Bar gauge",
-      "version": ""
-    },
-    {
-      "type": "grafana",
-      "id": "grafana",
-      "name": "Grafana",
-      "version": "8.1.2"
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    }
-  ],
   "annotations": {
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -49,15 +22,17 @@
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": null,
-  "iteration": 1655915193937,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -66,31 +41,31 @@
       },
       "id": 10,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Agents",
       "type": "row"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
@@ -103,7 +78,27 @@
       },
       "id": 2,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "vertical",
         "reduceOptions": {
           "calcs": [
@@ -112,19 +107,35 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "repeat": "query0",
       "repeatDirection": "h",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": false,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint=\"/v1/watchers/login\", instance=\"$lapi\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -132,25 +143,19 @@
       "type": "heatmap"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
         },
         "overrides": []
       },
@@ -162,7 +167,27 @@
       },
       "id": 6,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -171,17 +196,33 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint=\"/v1/watchers/login\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -190,7 +231,10 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -199,31 +243,31 @@
       },
       "id": 12,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Decisions",
       "type": "row"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
@@ -236,7 +280,27 @@
       },
       "id": 4,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -245,17 +309,33 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint= \"/v1/decisions\", instance=\"$lapi\", method=~\"(GET)|(HEAD)\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -263,27 +343,18 @@
       "type": "heatmap"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
@@ -296,7 +367,27 @@
       },
       "id": 13,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -305,17 +396,33 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint= \"/v1/decisions/stream\", instance=\"$lapi\", method=~\"(GET)|(HEAD)\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -323,27 +430,18 @@
       "type": "heatmap"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
@@ -356,7 +454,27 @@
       },
       "id": 8,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -365,17 +483,33 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint=~\"/v1/decisions.*\", instance=\"$lapi\", method=\"DELETE\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -384,7 +518,10 @@
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -393,31 +530,31 @@
       },
       "id": 15,
       "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "refId": "A"
+        }
+      ],
       "title": "Alerts",
       "type": "row"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
@@ -430,7 +567,27 @@
       },
       "id": 17,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -439,17 +596,33 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint=\"/v1/alerts\",instance=\"$lapi\",method=\"POST\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -457,27 +630,18 @@
       "type": "heatmap"
     },
     {
-      "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+      "datasource": {},
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
           }
         },
         "overrides": []
@@ -490,7 +654,27 @@
       },
       "id": 18,
       "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
         "displayMode": "gradient",
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true
+        },
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -499,17 +683,33 @@
           "fields": "",
           "values": false
         },
+        "rowsFrame": {
+          "layout": "auto"
+        },
         "showUnfilled": false,
-        "text": {}
+        "text": {},
+        "tooltip": {
+          "show": true,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false
+        }
       },
-      "pluginVersion": "8.1.2",
+      "pluginVersion": "10.1.2",
       "targets": [
         {
+          "datasource": {
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "editorMode": "code",
           "exemplar": true,
           "expr": "sum(rate(cs_lapi_request_duration_seconds_bucket{endpoint=\"/v1/alerts\",instance=\"$lapi\",method=~\"(GET)|(HEAD)\"}[$__rate_interval])) by (le)",
           "format": "heatmap",
           "interval": "",
           "legendFormat": "{{le}}",
+          "range": true,
           "refId": "A"
         }
       ],
@@ -517,23 +717,21 @@
       "type": "heatmap"
     }
   ],
-  "schemaVersion": 30,
+  "refresh": "",
+  "schemaVersion": 38,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
-        "current": {},
-        "datasource": {
-        "uid": "${DS_PROMETHEUS}"
-      },
+        "current": {
+          "selected": true,
+          "text": "10.0.0.15:6060",
+          "value": "10.0.0.15:6060"
+        },
         "definition": "label_values(cs_info, instance)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
-        "label": null,
         "multi": false,
         "name": "lapi",
         "options": [],
@@ -557,5 +755,6 @@
   "timezone": "",
   "title": "LAPI Metrics",
   "uid": "ofdKJG37k",
-  "version": 11
+  "version": 1,
+  "weekStart": ""
 }
