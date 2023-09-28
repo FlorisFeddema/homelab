@@ -19,7 +19,6 @@ oauth2-proxy:
       - falco.cloud.feddema.dev
       - hubble.cloud.feddema.dev
       - policy.cloud.feddema.dev
-      - prometheus.cloud.feddema.dev
       - vmalert.cloud.feddema.dev
     tls:
       - secretName: longhorn-tls
@@ -34,9 +33,6 @@ oauth2-proxy:
       - secretName: hubble-tls
         hosts:
           - hubble.cloud.feddema.dev
-      - secretName: prometheus-tls
-        hosts:
-          - prometheus.cloud.feddema.dev
       - secretName: vmalert-tls
         hosts:
           - vmalert.cloud.feddema.dev
