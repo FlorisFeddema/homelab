@@ -5,6 +5,12 @@ crowdsec:
   lapi:
     dashboard:
       enabled: true
+
+      image:
+        repository: metabase/metabase
+        pullPolicy: IfNotPresent
+        tag: "v0.47.2"
+
       resources:
          limits:
            memory: 256Mi
