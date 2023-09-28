@@ -80,7 +80,9 @@
       "panels": [
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -155,7 +157,9 @@
           "type": "stat"
         },
         {
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "displayName": "",
@@ -212,7 +216,9 @@
           "type": "gauge"
         },
         {
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "mappings": [],
@@ -274,7 +280,9 @@
         },
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -350,7 +358,9 @@
         },
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -427,7 +437,9 @@
         },
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -504,7 +516,9 @@
         },
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -581,7 +595,9 @@
         },
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -657,7 +673,9 @@
         },
         {
           "cacheTimeout": null,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -732,7 +750,9 @@
           "type": "stat"
         },
         {
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
           "fieldConfig": {
             "defaults": {
               "mappings": [],
@@ -803,7 +823,9 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": {
+        "uid": "${DS_PROMETHEUS}"
+      },
         "definition": "label_values(cs_info, instance)",
         "description": null,
         "error": null,
