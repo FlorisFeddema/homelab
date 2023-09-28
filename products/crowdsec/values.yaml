@@ -3,35 +3,6 @@ crowdsec:
 
 
   lapi:
-    dashboard:
-      enabled: true
-
-      image:
-        repository: metabase/metabase
-        pullPolicy: IfNotPresent
-        tag: "v0.46.8"
-
-      resources:
-         limits:
-           memory: 1024Mi
-         requests:
-           cpu: 10m
-           memory: 256Mi
-
-      ingress:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-          external-dns.alpha.kubernetes.io/hostname: crowdsec.cloud.feddema.dev
-          external-dns.alpha.kubernetes.io/ttl: "120"
-          ingress.kubernetes.io/rewrite-target: /
-          cert-manager.io/cluster-issuer: letsencrypt-dns
-        host: "crowdsec.cloud.feddema.dev"
-        tls:
-          - hosts:
-              - crowdsec.cloud.feddema.dev
-            secretName: "crowdsec-tls"
-
     resources:
       limits:
         memory: 256Mi
