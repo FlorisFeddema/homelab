@@ -11,6 +11,12 @@ products:
     namespace: kube-system
   crowdsec:
     deploy: true
+    ignoreDifferences:
+      - group: ""
+        kind: "Secret"
+        jsonPointers:
+          - /data/password
+          - /data/username
   enphaseEnvoyPrometheusExporter:
     deploy: true
   externalDns:
