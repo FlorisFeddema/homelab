@@ -3,10 +3,6 @@ crowdsec:
 
   tls:
     enabled: false
-    caBundle: true
-    insecureSkipVerify: false
-    certManager:
-      enabled: true
 
   lapi:
     dashboard:

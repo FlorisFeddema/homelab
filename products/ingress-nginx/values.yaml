@@ -5,6 +5,8 @@ ingress-nginx:
       plugins: "crowdsec"
       lua-shared-dicts: "crowdsec_cache: 50m"
       use-forwarded-headers: "true"
+      server-snippet : |
+        resolver local=on ipv6=off;
     ingressClassResource:
       default: true
 
