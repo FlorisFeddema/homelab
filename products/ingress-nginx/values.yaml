@@ -52,7 +52,12 @@ ingress-nginx:
                 key: API_KEY
           - name: BOUNCER_CONFIG
             value: "/crowdsec/crowdsec-bouncer.conf"
-        command: ['sh', '-c', "sh /docker_start.sh; mkdir -p /lua_plugins/crowdsec/; cp -R /crowdsec/* /lua_plugins/crowdsec/"]
+        command:
+          [
+            "sh",
+            "-c",
+            "apk update; apk add bash; bash /docker_start.sh; mkdir -p /lua_plugins/crowdsec/; cp -R /crowdsec/* /lua_plugins/crowdsec/",
+          ]
         volumeMounts:
           - name: crowdsec-bouncer-plugin
             mountPath: /lua_plugins
