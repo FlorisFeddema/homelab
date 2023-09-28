@@ -36,6 +36,10 @@ crowdsec:
         podName: "ingress-nginx-controller-*"
         program: "nginx"
         poll_without_inotify: false
+    env:
+      - name: COLLECTIONS
+        value: "crowdsecurity/nginx"
+
     resources:
       limits:
         memory: 128Mi
