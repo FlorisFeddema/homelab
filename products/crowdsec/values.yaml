@@ -9,7 +9,7 @@ crowdsec:
       image:
         repository: metabase/metabase
         pullPolicy: IfNotPresent
-        tag: "v0.46.8"
+        tag: "v0.47.2"
 
       resources:
          limits:
