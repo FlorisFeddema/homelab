@@ -1,0 +1,135 @@
+pg-db:
+  crVersion: 2.2.0
+  postgresVersion: 15
+  pause: false
+  unmanaged: false
+  standby:
+    enabled: false
+
+  # users:
+  #   - name: rhino
+  #     databases:
+  #       - zoo
+  #     options: "SUPERUSER"
+  #     password:
+  #       type: ASCII
+  #     secretName: "rhino-credentials"
+
+  # dataSource:
+  #   pgbackrest:
+  #     stanza: db
+  #     configuration:
+  #     - secret:
+  #         name: pgo-s3-creds
+  #     global:
+  #       repo1-path: /pgbackrest/postgres-operator/hippo/repo1
+  #     repo:
+  #       name: repo1
+  #       s3:
+  #         bucket: "my-bucket"
+  #         endpoint: "s3.ca-central-1.amazonaws.com"
+  #         region: "ca-central-1"
+
+  instances:
+    - name: instance1
+      replicas: 1
+      resources:
+        limits:
+          memory: 1024Mi
+        requests:
+          cpu: 100m
+          memory: 512Mi
+
+      walVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
+
+      dataVolumeClaimSpec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 16Gi
+
+  proxy:
+    pgBouncer:
+      replicas: 1
+      exposeSuperusers: true
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      config:
+        global:
+          pool_mode: transaction
+
+  backups:
+    pgbackrest:
+      #    metadata:
+      #    labels:
+      image: ""
+      #    configuration:
+      #      - secret:
+      #          name: cluster1-pgbackrest-secrets
+      #    jobs:
+      #      priorityClassName: high-priority
+      #      resources:
+      #        limits:
+      #          cpu: 200m
+      #          memory: 128Mi
+      #
+      #    global:
+      #      repo1-retention-full: "14"
+      #      repo1-retention-full-type: time
+      #      repo1-path: /pgbackrest/postgres-operator/cluster1/repo1
+      #      repo1-cipher-type: aes-256-cbc
+      #      repo1-s3-uri-style: path
+      #      repo2-path: /pgbackrest/postgres-operator/cluster1-multi-repo/repo2
+      #      repo3-path: /pgbackrest/postgres-operator/cluster1-multi-repo/repo3
+      #      repo4-path: /pgbackrest/postgres-operator/cluster1-multi-repo/repo4
+      #    repoHost:
+      #      priorityClassName: high-priority
+      #
+
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
+      repos:
+        - name: repo1
+          schedules:
+            full: "0 0 * * 6"
+          #        differential: "0 1 * * 1-6"
+          volume:
+            volumeClaimSpec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
+
+
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+          max_parallel_workers: 2
+          max_worker_processes: 2
+          shared_buffers: 1GB
+          work_mem: 2MB
+
+  secrets:
+    name:
+    # replication user password
+    primaryuser:
+    # superuser password
+    postgres:
+    # pgbouncer user password
+    pgbouncer:
+    # pguser user password
+    pguser:
