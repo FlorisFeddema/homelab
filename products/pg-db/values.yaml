@@ -35,11 +35,7 @@ pg-db:
       replicas: 1
       resources:
         limits:
-          cpu: 300m
           memory: 1024Mi
-        requests:
-          cpu: 100m
-          memory: 512Mi
 
       walVolumeClaimSpec:
         accessModes:
