@@ -54,6 +54,8 @@ products:
     deploy: true
   oauthProxy:
     deploy: true
+  pg-operator:
+    deploy: true
   policyReporter:
     deploy: true
   postgresql:
