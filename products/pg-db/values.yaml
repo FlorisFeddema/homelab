@@ -33,9 +33,12 @@ pg-db:
   instances:
     - name: instance1
       replicas: 1
-#      resources:
-#        limits:
-#          memory: 1024Mi
+      resources:
+        limits:
+          memory: 256Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
 
       walVolumeClaimSpec:
         accessModes:
