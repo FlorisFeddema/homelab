@@ -18,10 +18,6 @@ pg-db:
   instances:
     - name: instance1
       replicas: 1
-      resources:
-        limits:
-          memory: 1Gi
-          cpu: 1
 
       walVolumeClaimSpec:
         accessModes:
