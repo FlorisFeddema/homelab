@@ -51,3 +51,19 @@ postgres-operator:
     requests:
       cpu: 100m
       memory: 250Mi
+
+postgres-operator-ui:
+  replicaCount: 1
+
+  resources:
+    limits:
+      memory: 200Mi
+    requests:
+      cpu: 50m
+      memory: 100Mi
+
+  envs:
+    appUrl: "http://localhost:8081"
+    operatorApiUrl: "http://postgres-operator:8080"
+    resourcesVisible: "False"
+    targetNamespace: "postgres-operator"
