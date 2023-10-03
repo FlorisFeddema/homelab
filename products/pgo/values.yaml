@@ -1,0 +1,11 @@
+pgo:
+  debug: false
+
+  # Resource configuration of the PostgresCluster and PGUpgrade controllers.
+  resources:
+    controller:
+      limits:
+        memory: 200Mi
+      requests:
+        memory: 100Mi
+        cpu: 50m
