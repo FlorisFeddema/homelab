@@ -56,8 +56,6 @@ products:
     deploy: true
   policyReporter:
     deploy: true
-  postgresOperator:
-    deploy: true
   postgresql:
     deploy: true
   prometheusCrd:
