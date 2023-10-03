@@ -58,8 +58,6 @@ products:
     deploy: true
   postgresOperator:
     deploy: true
-  postgresPlatform:
-    deploy: true
   postgresql:
     deploy: true
   prometheusCrd:
