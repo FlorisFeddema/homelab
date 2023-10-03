@@ -1,0 +1,24 @@
+kind: "postgresql"
+apiVersion: "acid.zalan.do/v1"
+metadata:
+  name: "platform"
+  namespace: "postgres-operator"
+
+spec:
+  teamId: "acid"
+  postgresql:
+    version: "15"
+  numberOfInstances: 3
+  enableConnectionPooler: true
+  enableReplicaConnectionPooler: true
+  enableMasterPoolerLoadBalancer: true
+  enableReplicaPoolerLoadBalancer: true
+  volume:
+    size: "10Gi"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      memory: 1024Mi
