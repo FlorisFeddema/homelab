@@ -63,7 +63,7 @@ cscli bouncers add ingress-nginx
 
 ## PostgreSQL
 
-PostgreSQL can be assed via port 5432 on the following DNS name from withing the cluster:
+PostgreSQL can be access via port 5432 on the following DNS name from withing the cluster:
 
 ```md
 postgresql.postgresql.svc.cluster.local
