@@ -28,13 +28,17 @@ spec:
   proxy:
     pgBouncer:
       replicas: 2
+      config:
+        global:
+          server_tls_sslmode: disable
 
   patroni:
     dynamicConfiguration:
       postgresql:
         parameters:
           ssl: "off"
-
+        pg_hba:
+          - "hostnossl all all all md5"
   users:
     - name: policyreporter
       databases:
