@@ -27,7 +27,7 @@ external-dns:
   labelFilter: ""
 
   dryRun: false
-  triggerLoopOnEvent: false
+  triggerLoopOnEvent: true
   interval: "1m"
   logLevel: info
   logFormat: text
