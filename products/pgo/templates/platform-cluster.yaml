@@ -31,12 +31,11 @@ spec:
       config:
         global:
           server_tls_sslmode: disable
+          client_tls_sslmode: disable
 
   patroni:
     dynamicConfiguration:
       postgresql:
-        parameters:
-          ssl: "off"
         pg_hba:
           - "hostnossl all all all md5"
   users:
