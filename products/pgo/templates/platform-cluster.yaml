@@ -32,8 +32,8 @@ spec:
   patroni:
     dynamicConfiguration:
       postgresql:
-        pg_hba:
-          - "hostnossl all all all md5"
+        parameters:
+          ssl: "off"
 
   users:
     - name: policyreporter
