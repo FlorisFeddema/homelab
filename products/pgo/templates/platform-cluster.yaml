@@ -40,8 +40,11 @@ spec:
         pg_hba:
           - "host all all all md5"
   users:
+    - name: admin
+      options: "SUPERUSER"
     - name: policyreporter
       databases:
         - policyreporter
-    - name: admin
-      options: "SUPERUSER"
+    - name: nextcloud
+      databases:
+        - nextcloud
