@@ -14,6 +14,7 @@ spec:
         resources:
           requests:
             storage: 32Gi
+
   backups:
     pgbackrest:
       repos:
@@ -25,20 +26,22 @@ spec:
               resources:
                 requests:
                   storage: 32Gi
+
   proxy:
     pgBouncer:
       replicas: 2
       config:
         global:
-          server_tls_sslmode: disable
           client_tls_sslmode: disable
 
   patroni:
     dynamicConfiguration:
       postgresql:
         pg_hba:
-          - "hostnossl all all all md5"
+          - "host all all all md5"
   users:
     - name: policyreporter
       databases:
         - policyreporter
+    - name: admin
+      options: "SUPERUSER"
