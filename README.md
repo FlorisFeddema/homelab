@@ -63,6 +63,28 @@ cscli bouncers add ingress-nginx
 
 ## PostgreSQL
 
+Setup port forward to postgres server:
+
+```shell
+PG_CLUSTER_PRIMARY_POD=$(kubectl get pod -n pgo -o name  -l postgres-operator.crunchydata.com/cluster=platform,postgres-operator.crunchydata.com/role=master)
+kubectl -n pgo port-forward "${PG_CLUSTER_PRIMARY_POD}" 5432:5432
+```
+
+Connect shell to database:
+
+```shell
+PG_CLUSTER_USER_SECRET_NAME=platform-pguser-admin
+PGPASSWORD=$(kubectl get secrets -n pgo  "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.password | base64decode}}') PGUSER=$(kubectl get secrets -n pgo "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.user | base64decode}}') psql -h localhost -d <DATABASE>
+```
+
+Make user owner of database:
+
+```shell
+ALTER DATABASE policyreporter OWNER TO policyreporter;
+```
+
+### Old
+
 PostgreSQL can be access via port 5432 on the following DNS name from withing the cluster:
 
 ```md
