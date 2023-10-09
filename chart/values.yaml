@@ -50,6 +50,8 @@ products:
     deploy: true
   minio:
     deploy: true
+  nextcloud:
+    deploy: true
   nodeFeatureDiscovery:
     deploy: true
   oauthProxy:

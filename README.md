@@ -6,7 +6,9 @@ This repository will be used for the configuration of the feddema.dev Kubernetes
 * [cloud-gitops](#cloud-gitops)
   * [Kubeseal](#kubeseal)
     * [Restore key in new cluster](#restore-key-in-new-cluster)
+  * [Crowdsec](#crowdsec)
   * [PostgreSQL](#postgresql)
+    * [Old](#old)
     * [Create user and database](#create-user-and-database)
     * [Upgrade](#upgrade)
   * [Upgrade kubernetes](#upgrade-kubernetes)
@@ -28,8 +30,8 @@ metadata:
   namespace: default
 type: Opaque
 stringData:
-  username: admin
-  password: p4ssw0rd
+  username: "admin"
+  password: "p4ssw0rd"
 ```
 
 To create a new encrypted secret run the following command:
@@ -80,7 +82,7 @@ PGPASSWORD=$(kubectl get secrets -n pgo  "${PG_CLUSTER_USER_SECRET_NAME}" -o go-
 Make user owner of database:
 
 ```shell
-ALTER DATABASE policyreporter OWNER TO policyreporter;
+ALTER DATABASE <DATABASE> OWNER TO <USER>;
 ```
 
 ### Old
