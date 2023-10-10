@@ -90,7 +90,7 @@ keycloakx:
   database:
     existingSecret: "keycloak-credentials"
     vendor: postgres
-    hostname: postgresql.postgresql.svc.cluster.local
+    hostname: platform-pgbouncer.pgo.svc
     port: 5432
     username: keycloak
     database: keycloak
