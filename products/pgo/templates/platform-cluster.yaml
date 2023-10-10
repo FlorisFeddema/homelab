@@ -48,3 +48,6 @@ spec:
     - name: nextcloud
       databases:
         - nextcloud
+    - name: keycloak
+      databases:
+        - keycloak
