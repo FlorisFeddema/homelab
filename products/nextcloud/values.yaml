@@ -75,7 +75,7 @@ nextcloud:
   externalDatabase:
     enabled: true
     type: postgresql
-    host: postgresql.postgresql.svc.cluster.local
+    host: platform-pgbouncer.pgo.svc
     database: nextcloud
 
     existingSecret:

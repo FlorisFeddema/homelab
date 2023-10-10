@@ -76,7 +76,7 @@ Connect shell to database:
 
 ```shell
 PG_CLUSTER_USER_SECRET_NAME=platform-pguser-admin
-PGPASSWORD=$(kubectl get secrets -n pgo  "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.password | base64decode}}') PGUSER=$(kubectl get secrets -n pgo "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.user | base64decode}}') psql -h localhost -d <DATABASE>
+PGPASSWORD=$(kubectl get secrets -n pgo "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.password | base64decode}}') PGUSER=$(kubectl get secrets -n pgo "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.user | base64decode}}') psql -h localhost -d <DATABASE>
 ```
 
 Make user owner of database:
@@ -108,7 +108,8 @@ kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace postgr
 Or the connect form outside the cluster run:
 
 ```bash
-kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
+kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 
+PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
 ```
 
 ### Create user and database
