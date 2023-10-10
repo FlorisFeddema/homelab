@@ -61,8 +61,6 @@ products:
     serverSideApply: true
   policyReporter:
     deploy: true
-  postgresql:
-    deploy: true
   prometheusCrd:
     deploy: true
     namespace: defaults

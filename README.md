@@ -8,9 +8,6 @@ This repository will be used for the configuration of the feddema.dev Kubernetes
     * [Restore key in new cluster](#restore-key-in-new-cluster)
   * [Crowdsec](#crowdsec)
   * [PostgreSQL](#postgresql)
-    * [Old](#old)
-    * [Create user and database](#create-user-and-database)
-    * [Upgrade](#upgrade)
   * [Upgrade kubernetes](#upgrade-kubernetes)
   * [Install ArgoCD applications by hand](#install-argocd-applications-by-hand)
   * [Node setup](#node-setup)
@@ -83,55 +80,6 @@ Make user owner of database:
 
 ```shell
 ALTER DATABASE <DATABASE> OWNER TO <USER>;
-```
-
-### Old
-
-PostgreSQL can be access via port 5432 on the following DNS name from withing the cluster:
-
-```md
-postgresql.postgresql.svc.cluster.local
-```
-
-Get the database password by running the following command:
-
-```bash
-export POSTGRES_PASSWORD=$(kubectl get secret --namespace postgresql postgresql-credentials -o jsonpath="{.data.postgres-password}" | base64 -d)
-```
-
-To connect to the database run the following command: 
-
-```bash
-kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace postgresql --image docker.io/bitnami/postgresql:latest --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgresql -U postgres -d postgres -p 5432
-```
-
-Or the connect form outside the cluster run:
-
-```bash
-kubectl port-forward --namespace postgresql svc/postgresql 5432:5432 
-PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U postgres -d postgres -p 5432
-```
-
-### Create user and database
-
-```psql
-CREATE DATABASE <NAME>;
-CREATE USER <NAME> WITH ENCRYPTED PASSWORD '<PASSWORD>';
-GRANT ALL PRIVILEGES ON DATABASE <NAME> TO <NAME>;
-ALTER DATABASE <NAME> OWNER TO <NAME>;
-```
-
-### Upgrade
-
-```bash
-k port-forward -n postgresql postgresql-0 5432:5432
-pg_dumpall -U postgres -h localhost -p 5432 > dump.sql
-```
-
-Remove pvc from Longhorn and update the container to the ner Postgresql version.
-
-```bash
-psql -h localhost -p 5432 -U postgres < dump.sql
 ```
 
 ## Upgrade kubernetes
