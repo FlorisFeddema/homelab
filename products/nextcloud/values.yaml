@@ -1,6 +1,9 @@
 nextcloud:
   replicaCount: 1
 
+  image:
+    flavor: fpm
+
   phpClientHttpsFix:
     enabled: true
     protocol: https
