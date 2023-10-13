@@ -71,6 +71,8 @@ products:
     deploy: true
   smartmeterGatewayPrometheusExporter:
     deploy: true
+  uptimeKuma:
+    deploy: true
   victoriaMetrics:
     deploy: true
     serverSideApply: true

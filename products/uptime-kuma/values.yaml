@@ -1,0 +1,41 @@
+uptime-kuma:
+  podSecurityContext:
+    fsGroup: 1000
+
+  securityContext: 
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+      nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+      cert-manager.io/cluster-issuer: letsencrypt-dns"
+    hosts:
+      - host: uptime.cloud.feddema.dev
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+     - secretName: uptime-kuma-tls
+       hosts:
+         - uptime.cloud.feddema.dev
+
+  resources: {}
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 30m
+      memory: 64Mi
+
+  persistence:
+    enabled: true
+    sizeLimit: 4Gi
+
+  serviceMonitor:
+    enabled: true
