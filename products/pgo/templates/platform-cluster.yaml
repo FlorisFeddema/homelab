@@ -42,6 +42,7 @@ spec:
   users:
     - name: admin
       options: "SUPERUSER"
+    - name: uptimekuma
     - name: policyreporter
       databases:
         - policyreporter

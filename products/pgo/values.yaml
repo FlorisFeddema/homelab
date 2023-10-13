@@ -1,7 +1,6 @@
 pgo:
   debug: false
 
-  # Resource configuration of the PostgresCluster and PGUpgrade controllers.
   resources:
     controller:
       limits:
