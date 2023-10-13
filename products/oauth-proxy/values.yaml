@@ -19,7 +19,7 @@ oauth2-proxy:
       - falco.cloud.feddema.dev
       - hubble.cloud.feddema.dev
       - policy.cloud.feddema.dev
-      - postgres-ui.cloud.feddema.dev
+      - uptime.cloud.feddema.dev
     tls:
       - secretName: longhorn-tls
         hosts:
@@ -33,9 +33,9 @@ oauth2-proxy:
       - secretName: hubble-tls
         hosts:
           - hubble.cloud.feddema.dev
-      - secretName: postgres-ui-tls
+      - secretName: uptime-tls
         hosts:
-          - postgres-ui.cloud.feddema.dev
+          - uptime.cloud.feddema.dev
 
   resources:
     limits:
