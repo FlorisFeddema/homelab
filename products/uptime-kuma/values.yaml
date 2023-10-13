@@ -38,4 +38,4 @@ uptime-kuma:
     sizeLimit: 4Gi
 
   serviceMonitor:
-    enabled: true
+    enabled: false
