@@ -27,6 +27,10 @@ products:
     deploy: true
   grafana:
     deploy: true
+  grafanaDashboards:
+    deploy: true
+    namespace: grafana
+    serverSideApply: true
   ingressNginx:
     deploy: true
   intelDevicePluginsGpu:
