@@ -36,6 +36,8 @@ products:
         kind: "GpuDevicePlugin"
         jsonPointers:
           - /spec/resourceManager
+  kepler:
+    deploy: true
   keycloakx:
     deploy: true
   kyverno:
