@@ -22,9 +22,9 @@ products:
   externalDns:
     deploy: true
   falco:
-    deploy: true
+    deploy: false
   falcoExporter:
-    deploy: true
+    deploy: false
   grafana:
     deploy: true
   grafanaDashboards:
