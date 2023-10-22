@@ -32,6 +32,8 @@ cilium:
         enabled: true
       dashboards:
         enabled: true
+        namespace: grafana
+        label: grafana_dashboard
 
     relay:
       enabled: true
