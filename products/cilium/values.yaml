@@ -74,6 +74,8 @@ cilium:
       enabled: true
   dashboards:
     enabled: true
+    namespace: grafana
+    label: grafana_dashboard
 
   operator:
     replicas: 1
@@ -84,3 +86,5 @@ cilium:
         enabled: true
     dashboards:
       enabled: true
+      namespace: grafana
+      label: grafana_dashboard
