@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitops
+  namespace: gitops
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/broersma-forslund/homelab.git
+    path: apps/base
+    targetRevision: HEAD
+  syncPolicy: {}
+  destination:
+    name: in-cluster
+    namespace: gitops

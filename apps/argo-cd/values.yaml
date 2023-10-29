@@ -1,0 +1,114 @@
+argo-cd:
+  configs:
+    cm:
+      exec.enabled: true
+
+    secret:
+      createSecret: true
+
+    params:
+      server.insecure: true
+
+  controller:
+    replicas: 1
+
+    # resources:
+    #   limits:
+    #     memory: 2048Mi
+    #   requests:
+    #     cpu: 130m
+    #     memory: 512Mi
+
+    # metrics:
+    #   enabled: true
+    #   serviceMonitor:
+    #     enabled: true
+
+  dex:
+    enabled: true
+
+  redis:
+    enabled: true
+
+    # resources:
+    #   limits:
+    #     memory: 256Mi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 128Mi
+
+    # exporter:
+    #   enabled: true
+    #   resources:
+    #     limits:
+    #       memory: 64Mi
+    #     requests:
+    #       cpu: 10m
+    #       memory: 32Mi
+
+    # metrics:
+    #   enabled: true
+    #   serviceMonitor:
+    #     enabled: true
+
+  server:
+    replicas: 1
+
+    # resources:
+    #   limits:
+    #     memory: 512Mi
+    #   requests:
+    #     cpu: 70m
+    #     memory: 128Mi
+
+    # metrics:
+    #   enabled: true
+    #   serviceMonitor:
+    #     enabled: true
+
+    # ingress:
+    #   enabled: true
+    #   annotations:
+    #     cert-manager.io/cluster-issuer: letsencrypt-dns
+    #     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    #     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    #   hosts:
+    #     - argocd.mobrockers.com
+    #   tls:
+    #     - secretName: argocd-tls
+    #       hosts:
+    #         - argocd.mobrockers.com
+
+    # ingressGrpc:
+    #   enabled: true
+    #   annotations:
+    #     cert-manager.io/cluster-issuer: letsencrypt-dns
+    #     ingress-class: nginx
+    #     nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    #   hosts:
+    #     - argocd.mobrockers.com
+    #   tls:
+    #     - secretName: argocd-grpc-tls
+    #       hosts:
+    #         - argocd.mobrockers.com
+
+  repoServer:
+    replicas: 1
+
+    # resources:
+    #   limits:
+    #     memory: 512Mi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 128Mi
+
+    # metrics:
+    #   enabled: true
+    #   serviceMonitor:
+    #     enabled: true
+
+  applicationSet:
+    enabled: false
+
+  notifications:
+    enabled: false
