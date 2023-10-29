@@ -72,6 +72,7 @@ argo-cd:
         # cert-manager.io/cluster-issuer: letsencrypt-dns
         # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+        nginx.ingress.kubernetes.io/ssl-redirect: "false"
       hosts:
         - argocd.mobrockers.com
       # tls:
