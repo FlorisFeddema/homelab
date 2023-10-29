@@ -27,7 +27,9 @@ argo-cd:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       hosts:
         - argocd.mobrockers.com
-      tls: {}
+      tls:
+      - hosts:
+        - argocd.mobrockers.com
 
   repoServer:
     replicas: 1
