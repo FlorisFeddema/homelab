@@ -33,36 +33,31 @@ The repository is organized as follows:
 Control plane nodes:
 
 ```
-talosctl gen config                                                     \
-    --output rendered/control-plane-0.yaml                              \
+talosctl gen config talos-broersma https://10.0.10.111:6443             \
+    --output rendered/control-plane-x.yaml                              \
     --output-types controlplane                                         \
     --with-cluster-discovery=false                                      \
     --with-secrets secrets.yaml                                         \
     --config-patch @talos/patches/cluster-name.yaml                     \
     --config-patch @talos/patches/disable-cni-and-kube-proxy.yaml       \
-    --config-patch @talos/nodes/control-plane-0.yaml                    \
-    --config-patch @talos/nodes/control-plane-all.yaml                  \
-    $CLUSTER_NAME                                                       \
-    $CONTROL_PLANE_0 --force
+    --config-patch @talos/nodes/control-plane-x.yaml                    \
+    --config-patch @talos/nodes/control-plane-all.yaml
 ```
 
-`talosctl apply-config --insecure --nodes $CONTROL_PLANE_0 --file rendered/control-plane-0.yaml`
+`talosctl apply-config --insecure --nodes <node-x-ip> --file rendered/control-plane-x.yaml`
 
 ``` 
-talosctl gen config                                                     \
-    --output rendered/worker/0.yaml                                     \
+talosctl gen config talos-broersma https://10.0.10.111:6443             \
+    --output rendered/worker/x.yaml                                     \
     --output-types worker                                               \
     --with-cluster-discovery=false                                      \
     --with-secrets secrets.yaml                                         \
     --config-patch @talos/patches/cluster-name.yaml                     \
     --config-patch @talos/patches/disable-cni-and-kube-proxy.yaml       \
-    --config-patch @talos/nodes/worker-0.yaml                           \  
-    --config-patch @talos/nodes/worker-all.yaml                         \
-    $CLUSTER_NAME                                                       \
-    $CONTROL_PLANE_0 --force
+    --config-patch @talos/nodes/worker-x.yaml
 ```
 
-`talosctl apply-config --insecure --nodes $WORKER_0 --file rendered/worker-0.yaml`
+`talosctl apply-config --insecure --nodes <node-x-ip> --file rendered/worker-x.yaml`
 
 ## Contributing
 We welcome contributions! To contribute to this repository:
