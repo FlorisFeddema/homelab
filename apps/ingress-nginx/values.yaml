@@ -1,0 +1,18 @@
+ingress-nginx:
+  controller:
+    ingressClassResource:
+      default: true
+
+    kind: Deployment
+
+  service:
+    enabled: true
+    external:
+      enabled: false 
+    internal:
+      enabled: true 
+      annotations: 
+        'io.cilium/lb-ipam-ips': 10.0.10.130
+      externalTrafficPolicy: Local
+
+  revisionHistoryLimit: 0
