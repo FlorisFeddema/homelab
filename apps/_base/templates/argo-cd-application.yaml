@@ -12,4 +12,4 @@ spec:
   syncPolicy: {}
   destination:
     name: in-cluster
-    namespace: gitops
+    namespace: argo-cd
