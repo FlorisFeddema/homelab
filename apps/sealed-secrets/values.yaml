@@ -9,3 +9,6 @@ sealed-secrets:
   ingress:
     enabled: true
     hostname: sealed-secrets.mobrockers.com
+    extraTls:
+    - hosts:
+      - sealed-secrets.mobrockers.com
