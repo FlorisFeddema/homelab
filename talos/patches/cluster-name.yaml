@@ -1,0 +1,4 @@
+cluster:
+  clusterName: k8s.broersma.com
+  network:
+    dnsDomain: broersma.com.local
