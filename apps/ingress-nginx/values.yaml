@@ -15,4 +15,8 @@ ingress-nginx:
           'io.cilium/lb-ipam-ips': 10.0.10.130
         externalTrafficPolicy: Local
 
+    extraArgs:
+      default-ssl-certificate: ingress-nginx/default-wildcard-certificate
+      update-status-on-shutdown: 'false'
+
   revisionHistoryLimit: 0
