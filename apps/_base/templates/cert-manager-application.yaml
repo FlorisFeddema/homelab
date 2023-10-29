@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/broersma-forslund/homelab.git
+    path: apps/cert-manager
+    targetRevision: HEAD
+  syncPolicy: {}
+  destination:
+    name: in-cluster
+    namespace: cert-manager
