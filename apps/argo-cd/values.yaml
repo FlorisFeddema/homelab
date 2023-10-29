@@ -66,18 +66,18 @@ argo-cd:
     #   serviceMonitor:
     #     enabled: true
 
-    # ingress:
-    #   enabled: true
-    #   annotations:
-    #     cert-manager.io/cluster-issuer: letsencrypt-dns
-    #     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    #     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    #   hosts:
-    #     - argocd.mobrockers.com
-    #   tls:
-    #     - secretName: argocd-tls
-    #       hosts:
-    #         - argocd.mobrockers.com
+    ingress:
+      enabled: true
+      annotations:
+        # cert-manager.io/cluster-issuer: letsencrypt-dns
+        # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      hosts:
+        - argocd.mobrockers.com
+      # tls:
+      #   - secretName: argocd-tls
+      #     hosts:
+      #       - argocd.mobrockers.com
 
     # ingressGrpc:
     #   enabled: true
