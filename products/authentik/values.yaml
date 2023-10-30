@@ -35,11 +35,11 @@ authentik:
 envValueFrom:
   AUTHENTIK_SECRET_KEY:
     secretKeyRef:
-      key: secret-key
+      key: secretKey
       name: authentik-secret
   AUTHENTIK_POSTGRESQL__PASSWORD:
     secretKeyRef:
-      key: secretKey
+      key: databasePassword
       name: authentik-secret
 
 resources:
