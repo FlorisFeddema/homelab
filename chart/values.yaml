@@ -4,6 +4,8 @@ products:
   argoCd:
     deploy: true
     namespace: argocd
+  authentik:
+    deploy: true
   certManager:
     deploy: true
   cilium:
