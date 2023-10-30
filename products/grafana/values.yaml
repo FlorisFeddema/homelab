@@ -56,7 +56,6 @@ grafana:
   grafana.ini:
     auth:
       signout_redirect_url: https://authentik.cloud.feddema.dev/application/o/grafana/end-session/
-      oauth_allow_insecure_email_lookup: true
     auth.generic_oauth:
       enabled: true
       name: Authentik
@@ -67,7 +66,7 @@ grafana:
       client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
       client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
       allow_assign_grafana_admin: true
-      role_attribute_path: 'Editor'
+      role_attribute_path: contains(groups[*], 'Admins') && 'Admin' || contains(groups[*], 'Contributor') && 'Editor' || 'Viewer'
     paths:
       data: /var/lib/grafana
       logs: /var/log/grafana
@@ -77,6 +76,7 @@ grafana:
       check_for_updates: true
     log:
       mode: console
+      level: debug
     grafana_net:
       url: https://grafana.net
     server:
