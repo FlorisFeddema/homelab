@@ -14,3 +14,7 @@ spec:
                 name: ak-outpost-authentik-embedded-outpost
                 port:
                   number: 9000
+  tls:
+    - hosts:
+        - authentik.cloud.feddema.dev
+      secretName: authentik-tls
