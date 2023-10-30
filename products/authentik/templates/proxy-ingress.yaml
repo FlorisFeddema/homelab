@@ -4,7 +4,7 @@ metadata:
   name: authentik-embedded-outpost
 spec:
   rules:
-    - host: authentik.cloud.feddema.dev
+    - host: proxy.authentik.cloud.feddema.dev
       http:
         paths:
           - path: /outpost.goauthentik.io
@@ -16,5 +16,5 @@ spec:
                   number: 9000
   tls:
     - hosts:
-        - authentik.cloud.feddema.dev
-      secretName: authentik-tls
+        - proxy.authentik.cloud.feddema.dev
+      secretName: proxy-authentik-tls
