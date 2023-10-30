@@ -8,7 +8,9 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   policy.csv: |
-    g, admins, role:admin
+    g, Admins, role:admin
+    g, Contributors, role:readonly
+    g, Readers, role:readonly
     g, codespaces, role:admin
 
   policy.default: role:readonly
