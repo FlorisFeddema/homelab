@@ -54,3 +54,6 @@ spec:
     - name: keycloak
       databases:
         - keycloak
+    - name: authentik
+      databases:
+        - authentik
