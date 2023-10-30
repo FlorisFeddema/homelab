@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: authentik-embedded-outpost
+spec:
+  rules:
+    - host: authentik.cloud.feddema.dev
+      http:
+        paths:
+          - path: /outpost.goauthentik.io
+            pathType: Prefix
+            backend:
+              service:
+                name: ak-outpost-authentik-embedded-outpost
+                port:
+                  number: 9000
