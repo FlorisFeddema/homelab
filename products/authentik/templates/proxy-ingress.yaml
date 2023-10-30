@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: authentik-embedded-outpost
+  name: hubble-proxy
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
 spec:
   rules:
-    - host: proxy.authentik.cloud.feddema.dev
+    - host: hubble.cloud.feddema.dev
       http:
         paths:
           - path: /outpost.goauthentik.io
@@ -18,5 +18,5 @@ spec:
                   number: 9000
   tls:
     - hosts:
-        - proxy.authentik.cloud.feddema.dev
-      secretName: proxy-authentik-tls
+        - hubble.cloud.feddema.dev
+      secretName: hubble-proxy-tls
