@@ -60,7 +60,7 @@ grafana:
     auth.generic_oauth:
       enabled: true
       name: Authentik
-      scopes: "openid email profile"
+      scopes: "openid email profile roles groups"
       auth_url: "https://authentik.cloud.feddema.dev/application/o/authorize/"
       token_url: "https://authentik.cloud.feddema.dev/application/o/token/"
       api_url: "https://authentik.cloud.feddema.dev/application/o/userinfo/"
