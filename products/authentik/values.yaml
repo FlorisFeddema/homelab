@@ -1,0 +1,60 @@
+replicas: 1
+securityContext: {}
+containerSecurityContext: {}
+
+worker:
+  replicas: 1
+  securityContext: {}
+  containerSecurityContext: {}
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+  hosts:
+    - host: authentik.cloud.feddema.dev
+      paths:
+        - path: "/"
+          pathType: Prefix
+  tls:
+    - secretName: authentik-tls
+      hosts:
+        - authentik.cloud.feddema.dev
+
+authentik:
+  log_level: info
+
+  postgresql:
+    host: "platform-pgbouncer.pgo.svc"
+    name: "authentik"
+    user: "authentik"
+    port: 5432
+  redis:
+    host: "{{ .Release.Name }}-redis-master"
+
+envValueFrom:
+  AUTHENTIK_SECRET_KEY:
+    secretKeyRef:
+      key: secret-key
+      name: authentik-secret
+  AUTHENTIK_POSTGRESQL__PASSWORD:
+    secretKeyRef:
+      key: secretKey
+      name: authentik-secret
+
+resources:
+  server: {}
+  worker: {}
+
+prometheus:
+  serviceMonitor:
+    create: true
+  rules:
+    create: true
+
+
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: false

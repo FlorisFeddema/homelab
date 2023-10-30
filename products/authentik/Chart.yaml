@@ -1,0 +1,10 @@
+apiVersion: v2
+name: authentik
+description: A Helm chart for Kubernetes
+type: application
+version: 1.0.0
+
+dependencies:
+  - name: authentik
+    version: 2023.10.2
+    repository: https://charts.goauthentik.io/
