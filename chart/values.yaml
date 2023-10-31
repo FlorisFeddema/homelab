@@ -63,7 +63,7 @@ products:
   nodeFeatureDiscovery:
     deploy: true
   oauthProxy:
-    deploy: true
+    deploy: false
   pgo:
     deploy: true
     serverSideApply: true
