@@ -2,9 +2,9 @@ apiVersion: v2
 name: tetragon
 description: A Helm chart for Kubernetes
 type: application
-version: 1.0.3
+version: 1.0.4
 
 dependencies:
   - name: tetragon
-    version: 1.0.0-rc.5
+    version: 1.0.0
     repository: https://helm.cilium.io/
