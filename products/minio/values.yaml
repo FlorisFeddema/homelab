@@ -43,7 +43,7 @@ minio:
     clientId: "xdEQir8pxCMgVYuKfMIx0yYy2CBorFRPvYhdvJ9C"
     existingClientSecretName: "minio-oidc-credentials"
     existingClientSecretKey: "clientSecret"
-    scopes: "openid,profile,email"
+    scopes: "openid,profile,email,minio"
     claimName: "policy"
 
 # Fixed in version >5.0.14
