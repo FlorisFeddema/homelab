@@ -11,6 +11,15 @@ minio:
     accessMode: ReadWriteOnce
     size: 500Gi
 
+  extraVolumes:
+    - name: mc-volume
+      emptyDir:
+
+  extraVolumeMounts:
+    - name: mc-volume
+      mountPath: /.mc
+
+
   service:
     type: ClusterIP
     clusterIP: ~
