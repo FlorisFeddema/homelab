@@ -37,6 +37,15 @@ minio:
       memory: 256Mi
       cpu: 50m
 
+  oidc:
+    enabled: true
+    configUrl: "https://authentik.cloud.feddema.dev/application/o/minio/.well-known/openid-configuration"
+    clientId: "xdEQir8pxCMgVYuKfMIx0yYy2CBorFRPvYhdvJ9C"
+    existingClientSecretName: "minio-oidc-credentials"
+    existingClientSecretKey: "clientSecret"
+    scopes: "openid,profile,email"
+    redirectUri: "https://minio.cloud.feddema.dev/oauth_callback"
+
   users:
     - accessKey: loki
       existingSecret: loki-credentials
