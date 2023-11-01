@@ -44,7 +44,7 @@ minio:
     existingClientSecretName: "minio-oidc-credentials"
     existingClientSecretKey: "clientSecret"
     scopes: "openid,profile,email"
-#    redirectUri: "https://minio.cloud.feddema.dev/oauth_callback"
+    redirectUri: "https://minio.cloud.feddema.dev/oauth_callback"
 
   users:
     - accessKey: loki
