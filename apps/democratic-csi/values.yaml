@@ -20,7 +20,7 @@ democratic-csi:
     name: "org.democratic-csi.iscsi"
 
   storageClasses:
-  - name: trueas-iscsi-slow
+  - name: truenas-iscsi-slow
     defaultClass: true
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
