@@ -7,32 +7,72 @@ This repository contains all the configuration files and resources for our Kuber
 ## Cluster Details
 
 - **Operating System**: Talos Kubernetes OS
+- **Apps**: See /apps
 - **Tools Used**:
-  - **ArgoCD**: For continuous deployment and management of Kubernetes resources.
-  - **Kubeseal**: For managing and encrypting Kubernetes secrets.
+  - talosctl
+  - crane (google)
+  - kubectl
+  - kubeseal
+  - 
 
-## Structure
+### Create talos boot and update images with required drivers
 
-The repository is organized as follows:
+Talos is an immutable OS so we can't install additional packages after boot. However not all required system packages are available by default.
+Talos allows creating customized OS images using their [imager container](https://www.talos.dev/v1.5/talos-guides/install/boot-assets/)
 
-- `/argocd`: Contains configuration files for ArgoCD.
-- `/kubeseal`: Stores encrypted secrets using Kubeseal.
-- `/manifests`: Kubernetes manifests and configurations for various applications and services.
-- `/scripts`: Handy scripts for managing or automating certain processes.
+We currently use the following talos-provided additional components:
+- https://github.com/siderolabs/extensions/tree/main/storage/iscsi-tools
+- https://github.com/siderolabs/extensions/tree/main/guest-agents/qemu-guest-agent
 
-## Setup Instructions
+Talos system-extensions are compatible with specific versions of talos. To find the correct extension version for the talos version run:
 
-### Prerequisites
+```
+TALOS_CONFIG=/path/to/talos/config
+TALOS_VERSION=$(talosctl version --short | grep Tag | sed -n 's/.*Tag://p' | sed -e 's/^[ \t]*//')
+echo $TALOS_VERSION
+```
 
-- A running Kubernetes cluster provisioned with Talos Kubernetes OS.
-- ArgoCD and Kubeseal installed and configured within the cluster.
-- kubectl CLI configured to interact with the cluster.
+Then run:
 
+```
+crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep <extension-name>
+```
 
-### talos
+Example:
+
+```
+ISCSI_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep iscsi-tools)
+QEMU_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep qemu)
+echo $ISCSI_IMAGE
+echo $QEMU_IMAGE
+```
+
+To create the custom image run the `imager` container with the following command:
+
+```
+mkdir _images
+docker run --rm -t -v $PWD/_images:/out --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION iso \
+  --system-extension-image $ISCSI_IMAGE --system-extension-image $QEMU_IMAGE
+docker run --rm -t -v $PWD/_images:/out --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION installer \
+  --system-extension-image $ISCSI_IMAGE --system-extension-image $QEMU_IMAGE
+```
+
+Now upload the installer iso and image to proxmox and the container registry. Go to https://github.com/settings/tokens/new?scopes=write:packages and create a new PAT with the selected scope.
+
+```
+GHCR_TOKEN=""
+echo $GHCR_TOKEN | docker login ghcr.io -u TOKEN --password-stdin
+crane push _images/metal-amd64-installer.tar ghcr.io/broersma-forslund/homelab/talos-installer:$TALOS_VERSION
+```
+
+### Create talos nodes
+
+Boot machine with custom talos ISO and perform the below steps
+
 Control plane nodes:
 
 ```
+TALOS_CONFIG=/path/to/talos/config
 talosctl gen config talos-broersma https://10.0.10.111:6443             \
     --output rendered/control-plane-x.yaml                              \
     --output-types controlplane                                         \
@@ -46,7 +86,8 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
 
 `talosctl apply-config --insecure --nodes <node-x-ip> --file rendered/control-plane-x.yaml`
 
-``` 
+```
+TALOS_CONFIG=/path/to/talos/config
 talosctl gen config talos-broersma https://10.0.10.111:6443             \
     --output rendered/worker/x.yaml                                     \
     --output-types worker                                               \
@@ -59,17 +100,12 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
 
 `talosctl apply-config --insecure --nodes <node-x-ip> --file rendered/worker-x.yaml`
 
-## Contributing
-We welcome contributions! To contribute to this repository:
+### Upgrading talos
 
-Fork the repository.
-Create a new branch for your feature (git checkout -b feature/NewFeature).
-Make changes and commit them (git commit -am 'Add new feature').
-Push the changes to your branch (git push origin feature/NewFeature).
-Create a pull request detailing the changes.
+To update talos use our custom intaller image containing the required system extensions
 
-## Troubleshooting
-If you encounter issues or have questions, send a message. If the problem persists, feel free to open an issue.
-
-## License
-This project is licensed under the MIT License.
+```
+TALOS_CONFIG=/path/to/talos/config
+TALOS_UPGRADE_VERSION=""
+talosctl upgrade --nodes <node-x-ip> --image ghcr.io/broersma-forslund/homelab/talos-installer:$TALOS_UPGRADE_VERSION --preserve
+```
