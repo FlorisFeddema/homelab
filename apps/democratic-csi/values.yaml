@@ -17,7 +17,7 @@ democratic-csi:
       iscsiDirHostPathType: ""
 
   csiDriver:
-    name: "org.democratic-csi.iscsi"
+    name: "org.democratic-csi.iscsi.slow"
 
   storageClasses:
   - name: truenas-iscsi-slow
