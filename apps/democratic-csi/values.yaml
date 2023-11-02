@@ -1,13 +1,13 @@
 democratic-csi:
   controller:
     driver:
-      image: ghcr.io/democratic-csi/democratic-csi:1.8.3 # chart default is latest
+      image: ghcr.io/democratic-csi/democratic-csi:v1.8.3 # chart default is latest
 
   # talos config
   node:
     hostPID: true
     driver:
-      image: ghcr.io/democratic-csi/democratic-csi:1.8.3 # chart default is latest
+      image: ghcr.io/democratic-csi/democratic-csi:v1.8.3 # chart default is latest
       extraEnv:
         - name: ISCSIADM_HOST_STRATEGY
           value: nsenter
