@@ -1,0 +1,10 @@
+apiVersion: v2
+name: sealed-secrets
+description: A Helm chart for Kubernetes
+type: application
+version: 1.0.0
+
+dependencies:
+  - name: democratic-csi
+    version: 1.8.3
+    repository: https://democratic-csi.github.io/charts/

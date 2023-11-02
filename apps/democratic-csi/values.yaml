@@ -1,0 +1,42 @@
+democratic-csi:
+  controller:
+    driver:
+      image: docker.io/democraticcsi/democratic-csi:1.8.3 # chart default is latest
+
+  # talos config
+  node:
+    hostPID: true
+    driver:
+      image: docker.io/democraticcsi/democratic-csi:1.8.3 # chart default is latest
+      extraEnv:
+        - name: ISCSIADM_HOST_STRATEGY
+          value: nsenter
+        - name: ISCSIADM_HOST_PATH
+          value: /usr/local/sbin/iscsiadm
+      iscsiDirHostPath: /usr/local/etc/iscsi
+      iscsiDirHostPathType: ""
+
+  csiDriver:
+    name: "org.democratic-csi.iscsi"
+
+  storageClasses:
+  - name: trueas-iscsi-slow
+    defaultClass: true
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      fsType: ext4
+
+    mountOptions: []
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+  driver:
+    existingConfigSecret: truenas-iscsi-slow-config
+    config:
+      driver: freenas-api-iscsi # required

@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: democratic-csi
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/broersma-forslund/homelab.git
+    path: apps/democratic-csi
+    targetRevision: HEAD
+  syncPolicy: {}
+  destination:
+    name: in-cluster
+    namespace: democratic-csi
