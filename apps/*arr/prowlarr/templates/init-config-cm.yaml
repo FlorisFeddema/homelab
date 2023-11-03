@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: init-prowlarr
+  name: init-prowlarr-cm
 data:
   config.xml: |
     <Config>
