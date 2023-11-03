@@ -29,12 +29,23 @@ spec:
               name: init-files-prowlarr
             - mountPath: /config
               name: data
+          securityContext:
+            runAsUser: 1000
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
       containers:
         - name: prowlarr
           image: '{{ .Values.images.prowlarr.repository }}:{{ .Values.images.prowlarr.version }}'
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam
+            - name: PUID
+              value: 1000
+            - name: PGID
+              value: 1000
             # - name: S6_READ_ONLY_ROOT # Apparently this thing is needed when running with read only root filesystem
             #   value: '1'
           ports:
@@ -54,8 +65,8 @@ spec:
             #   mountPath: /tmp
             # - name: varlogs # Apparently this thing is needed when running with read only root filesystem
             #   mountPath: /var/logs
-
           securityContext:
+            runAsUser: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -63,7 +74,6 @@ spec:
             privileged: false
             # readOnlyRootFilesystem: true
             # runAsNonRoot: true
-            # runAsUser: 1001
             seccompProfile:
               type: RuntimeDefault
       volumes:
