@@ -1,6 +1,7 @@
 #!/bin/sh
-echo "### Initializing config ###"
-if [ ! -f /config/config.xml ]; then
-    cp -n /init-prowlarr/config.xml /config/config.xml
-    echo "### No configuration found, intialized with default settings ###"
+if [ -e /config/config.xml ]; then
+    echo "Config already exists"
+    exit 1
 fi
+echo "Initializing config"
+cp -n /init-prowlarr/config.xml /config/config.xml
