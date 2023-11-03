@@ -2,15 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prowlarr
-  labels:
-    app.kubernetes.io/instance: prowlarr
-    app.kubernetes.io/name: prowlarr
 spec:
   replicas: 1
   revisionHistoryLimit: 0
   strategy:
     type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: prowlarr
+      app.kubernetes.io/name: prowlarr
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: prowlarr
+        app.kubernetes.io/name: prowlarr 
     spec:
       automountServiceAccountToken: false
       initContainers:
