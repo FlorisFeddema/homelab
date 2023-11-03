@@ -44,16 +44,16 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            - name: varrun
+            - name: varrun # Apparently this thing is needed when running with read only root filesystem
               mountPath: /var/run
-            # - name: devshm
-            #   mountPath: /dev/shm
-            # - name: shared
-            #   mountPath: /shared
-            # - name: tmp
-            #   mountPath: /tmp
-            # - name: varlogs
-            #   mountPath: /var/logs
+            - name: devshm # Apparently this thing is needed when running with read only root filesystem
+              mountPath: /dev/shm
+            - name: shared # Apparently this thing is needed when running with read only root filesystem
+              mountPath: /shared
+            - name: tmp # Apparently this thing is needed when running with read only root filesystem
+              mountPath: /tmp
+            - name: varlogs # Apparently this thing is needed when running with read only root filesystem
+              mountPath: /var/logs
 
           securityContext:
             allowPrivilegeEscalation: false
@@ -76,12 +76,12 @@ spec:
         - name: varrun
           emptyDir:
             medium: Memory
-        # - name: devshm
-        #   emptyDir:
-        #     medium: Memory
-        # - name: shared
-        #   emptyDir: {}
-        # - name: tmp
-        #   emptyDir: {}
-        # - name: varlogs
-        #   emptyDir: {}
+        - name: devshm
+          emptyDir:
+            medium: Memory
+        - name: shared
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+        - name: varlogs
+          emptyDir: {}
