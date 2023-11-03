@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  labels:
+    app.kubernetes.io/instance: prowlarr
+    app.kubernetes.io/name: prowlarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: prowlarr
+          image: '{{ .Values.image.repository }}:{{ .Values.image.version }}'
+          env:
+            - name: TZ
+              value: TZ=Europe/Amsterdam
+            - name: PROWLARR__AUTHENTICATION_METHOD
+          ports:
+            - containerPort: 9696
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: config
+              readOnly: false
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1001
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: prowlarr-config
+
