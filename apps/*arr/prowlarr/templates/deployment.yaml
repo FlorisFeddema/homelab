@@ -21,7 +21,9 @@ spec:
       initContainers:
         - name: configure-prowlarr
           image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
-          command: ["/init-prowlarr/init-prowlarr.sh"]
+              command:
+              - "sh"
+              - "/init-prowlarr/init-prowlarr.sh"
           volumeMounts:
             - mountPath: /init-prowlarr
               name: init-files-prowlarr
