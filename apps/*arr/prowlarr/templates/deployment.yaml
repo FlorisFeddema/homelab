@@ -29,7 +29,6 @@ spec:
               name: init-files-prowlarr
             - mountPath: /config
               name: data
-              readOnly: false
       containers:
         - name: prowlarr
           image: '{{ .Values.images.prowlarr.repository }}:{{ .Values.images.prowlarr.version }}'
@@ -37,7 +36,7 @@ spec:
             - name: TZ
               value: TZ=Europe/Amsterdam
             - name: S6_READ_ONLY_ROOT # Apparently this thing is needed when running with read only root filesystem
-              value: 1
+              value: '1'
           ports:
             - containerPort: 9696
               name: http
@@ -45,22 +44,16 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-              readOnly: false
             - name: varrun
               mountPath: /var/run
-              readOnly: false
             # - name: devshm
             #   mountPath: /dev/shm
-            #   readOnly: false
             # - name: shared
             #   mountPath: /shared
-            #   readOnly: false
             # - name: tmp
             #   mountPath: /tmp
-            #   readOnly: false
             # - name: varlogs
             #   mountPath: /var/logs
-            #   readOnly: false
 
           securityContext:
             allowPrivilegeEscalation: false
