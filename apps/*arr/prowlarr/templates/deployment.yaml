@@ -43,9 +43,9 @@ spec:
             - name: TZ
               value: TZ=Europe/Amsterdam
             - name: PUID
-              value: 1000
+              value: '1000'
             - name: PGID
-              value: 1000
+              value: '1000'
             # - name: S6_READ_ONLY_ROOT # Apparently this thing is needed when running with read only root filesystem
             #   value: '1'
           ports:
