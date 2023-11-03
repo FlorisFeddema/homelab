@@ -22,7 +22,7 @@ democratic-csi:
   storageClasses:
   - name: truenas-iscsi-slow
     defaultClass: true
-    reclaimPolicy: Delete
+    reclaimPolicy: Retain
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
     parameters:
