@@ -18,6 +18,8 @@ spec:
         app.kubernetes.io/name: prowlarr 
     spec:
       automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 2000
       initContainers:
         - name: configure-prowlarr
           image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
@@ -30,7 +32,6 @@ spec:
             - mountPath: /config
               name: data
           securityContext:
-            fsGroup: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -66,7 +67,6 @@ spec:
             # - name: varlogs # Apparently this thing is needed when running with read only root filesystem
             #   mountPath: /var/logs
           securityContext:
-            fsGroup: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:
