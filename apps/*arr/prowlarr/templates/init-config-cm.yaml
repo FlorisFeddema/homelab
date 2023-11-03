@@ -11,9 +11,8 @@ data:
       <Port>9696</Port>
       <EnableSsl>False</EnableSsl>
       <LaunchBrowser>False</LaunchBrowser>
-      <AuthenticationMethod>Forms</AuthenticationMethod>
       <Branch>master</Branch>
-      <AuthenticationRequired>External</AuthenticationRequired>
+      <AuthenticationMethod>External</AuthenticationMethod>
     </Config>
   init-prowlarr.sh: |
 {{ .Files.Get "init-prowlarr.sh" | indent 4 }}
