@@ -35,8 +35,8 @@ spec:
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam
-            - name: S6_READ_ONLY_ROOT # Apparently this thing is needed when running with read only root filesystem
-              value: '1'
+            # - name: S6_READ_ONLY_ROOT # Apparently this thing is needed when running with read only root filesystem
+            #   value: '1'
           ports:
             - containerPort: 9696
               name: http
