@@ -1,2 +1,13 @@
 prowlarr:
-  bla: bla
+  service:
+    metrics:
+      enabled: false
+  workload:
+    exportarr:
+      enabled: false
+  metrics:
+    main:
+      enabled: false
+  portal:
+    open:
+      enabled: false
