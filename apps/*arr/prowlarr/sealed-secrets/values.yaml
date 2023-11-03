@@ -1,0 +1,14 @@
+sealed-secrets:
+  createController: true
+
+  secretName: "sealed-secrets-key"
+  keyrenewperiod: "0"
+
+  fullnameOverride: "sealed-secrets-controller"
+
+  ingress:
+    enabled: true
+    hostname: sealed-secrets.mobrockers.com
+    extraTls:
+    - hosts:
+      - sealed-secrets.mobrockers.com
