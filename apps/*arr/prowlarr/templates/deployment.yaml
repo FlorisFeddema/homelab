@@ -30,7 +30,7 @@ spec:
             - mountPath: /config
               name: data
           securityContext:
-            runAsUser: 1000
+            fsGroup: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:
@@ -66,7 +66,7 @@ spec:
             # - name: varlogs # Apparently this thing is needed when running with read only root filesystem
             #   mountPath: /var/logs
           securityContext:
-            runAsUser: 1000
+            fsGroup: 1000
             allowPrivilegeEscalation: false
             capabilities:
               drop:
