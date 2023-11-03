@@ -26,7 +26,7 @@ spec:
             - mountPath: /init-prowlarr
               name: init-files-prowlarr
             - mountPath: /config
-              name: config
+              name: data
               readOnly: false
       containers:
         - name: prowlarr
@@ -40,7 +40,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - mountPath: /config
-              name: config
+              name: data
               readOnly: false
           securityContext:
             allowPrivilegeEscalation: false
@@ -57,6 +57,6 @@ spec:
         - name: init-files-prowlarr
           configMap:
             name: init-prowlarr-cm
-        - name: config
+        - name: data
           persistentVolumeClaim:
-            claimName: prowlarr-config
+            claimName: prowlarr-data
