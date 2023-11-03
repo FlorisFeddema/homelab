@@ -46,6 +46,9 @@ spec:
             - mountPath: /config
               name: data
               readOnly: false
+            - name: varrun
+              mountPath: /var/run
+              readOnly: false
             # - name: devshm
             #   mountPath: /dev/shm
             #   readOnly: false
@@ -58,9 +61,6 @@ spec:
             # - name: varlogs
             #   mountPath: /var/logs
             #   readOnly: false
-            - name: varrun
-              mountPath: /var/run
-              readOnly: false
 
           securityContext:
             allowPrivilegeEscalation: false
@@ -80,6 +80,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: prowlarr-data
+        - name: varrun
+          emptyDir:
+            medium: Memory
         # - name: devshm
         #   emptyDir:
         #     medium: Memory
@@ -89,6 +92,3 @@ spec:
         #   emptyDir: {}
         # - name: varlogs
         #   emptyDir: {}
-        - name: varrun
-          emptyDir:
-            medium: Memory
