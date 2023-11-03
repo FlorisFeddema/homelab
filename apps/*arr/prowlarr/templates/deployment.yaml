@@ -31,12 +31,6 @@ spec:
               name: init-files-prowlarr
             - mountPath: /config
               name: data
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            privileged: false
       containers:
         - name: prowlarr
           image: '{{ .Values.images.prowlarr.repository }}:{{ .Values.images.prowlarr.version }}'
@@ -47,8 +41,6 @@ spec:
               value: '1000'
             - name: PGID
               value: '1000'
-            # - name: S6_READ_ONLY_ROOT # Apparently this thing is needed when running with read only root filesystem
-            #   value: '1'
           ports:
             - containerPort: 9696
               name: http
@@ -56,26 +48,6 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
-            # - name: varrun # Apparently this thing is needed when running with read only root filesystem
-            #   mountPath: /var/run
-            # - name: devshm # Apparently this thing is needed when running with read only root filesystem
-            #   mountPath: /dev/shm
-            # - name: shared # Apparently this thing is needed when running with read only root filesystem
-            #   mountPath: /shared
-            # - name: tmp # Apparently this thing is needed when running with read only root filesystem
-            #   mountPath: /tmp
-            # - name: varlogs # Apparently this thing is needed when running with read only root filesystem
-            #   mountPath: /var/logs
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            privileged: false
-            # readOnlyRootFilesystem: true
-            # runAsNonRoot: true
-            seccompProfile:
-              type: RuntimeDefault
       volumes:
         - name: init-files-prowlarr
           configMap:
@@ -83,15 +55,3 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: prowlarr-data
-        # - name: varrun
-        #   emptyDir:
-        #     medium: Memory
-        # - name: devshm
-        #   emptyDir:
-        #     medium: Memory
-        # - name: shared
-        #   emptyDir: {}
-        # - name: tmp
-        #   emptyDir: {}
-        # - name: varlogs
-        #   emptyDir: {}
