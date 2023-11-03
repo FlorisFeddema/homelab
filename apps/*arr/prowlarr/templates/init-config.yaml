@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-prowlarr
+data:
+  config.xml: |
+    <Config>
+      <LogLevel>info</LogLevel>
+      <UpdateMechanism>Docker</UpdateMechanism>
+      <BindAddress>*</BindAddress>
+      <Port>9696</Port>
+      <EnableSsl>False</EnableSsl>
+      <LaunchBrowser>False</LaunchBrowser>
+      <AuthenticationMethod>Forms</AuthenticationMethod>
+      <Branch>master</Branch>
+      <AuthenticationRequired>External</AuthenticationRequired>
+    </Config>
+  init-prowlarr.sh: {{ .Files.Get init-prowlar.sh }}

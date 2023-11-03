@@ -13,13 +13,22 @@ spec:
   template:
     spec:
       automountServiceAccountToken: false
+      initContainers:
+        - name: configure-prowlarr
+          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
+          command: ["/init-prowlarr/init-prowlarr.sh"]
+          volumeMounts:
+            - mountPath: /init-prowlarr
+              name: init-files-prowlarr
+            - mountPath: /config
+              name: config
+              readOnly: false
       containers:
         - name: prowlarr
-          image: '{{ .Values.image.repository }}:{{ .Values.image.version }}'
+          image: '{{ .Values.images.prowlarr.repository }}:{{ .Values.images.prowlarr.version }}'
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam
-            - name: PROWLARR__AUTHENTICATION_METHOD
           ports:
             - containerPort: 9696
               name: http
@@ -40,7 +49,9 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       volumes:
+        - name: init-files-prowlarr
+          configMap:
+            name: init-prowlarr-cm
         - name: config
           persistentVolumeClaim:
             claimName: prowlarr-config
-
