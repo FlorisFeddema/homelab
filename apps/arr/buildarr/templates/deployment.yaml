@@ -29,6 +29,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: buildarr-config
+            - mountPath: /secrets
+              name: secrets-cache
             - mountPath: /prowlarr
               name: prowlarr-config
       volumes:
@@ -38,3 +40,6 @@ spec:
         - name: prowlarr-config
           secret:
             secretName: prowlarr-config
+        - name: secrets-cache
+          emptyDir:
+            sizeLimit: 10Mi
