@@ -12,7 +12,7 @@ spec:
     path: apps/democratic-csi/chart
     helm:
       valueFiles:
-      - ../iscsi-value.yaml
+      - ../iscsi-values.yaml
   syncPolicy: {}
   destination:
     name: in-cluster

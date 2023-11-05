@@ -12,7 +12,7 @@ spec:
     path: apps/democratic-csi/chart
     helm:
       valueFiles:
-      - ../nfs-value.yaml
+      - ../nfs-values.yaml
   syncPolicy: {}
   destination:
     name: in-cluster
