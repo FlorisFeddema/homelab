@@ -1,14 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: democratic-csi
+  name: democratic-csi-nfs-ssd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://github.com/broersma-forslund/homelab.git
-    path: apps/democratic-csi
     targetRevision: HEAD
+    path: apps/democratic-csi/chart
+    helm:
+      valueFiles:
+      - apps/democratic-csi/nfs-value.yaml
   syncPolicy: {}
   destination:
     name: in-cluster
-    namespace: democratic-csi
+    namespace: democratic-csi-nfs-ssd

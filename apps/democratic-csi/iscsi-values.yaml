@@ -1,0 +1,40 @@
+democratic-csi:
+  # talos config
+  node:
+    driver:
+      extraEnv:
+        - name: ISCSIADM_HOST_STRATEGY
+          value: nsenter
+        - name: ISCSIADM_HOST_PATH
+          value: /usr/local/sbin/iscsiadm
+      iscsiDirHostPath: /usr/local/etc/iscsi
+      iscsiDirHostPathType: ""
+
+  csiDriver:
+    name: "org.democratic-csi.iscsi.slow"
+
+  storageClasses:
+  - name: truenas-iscsi-slow
+    defaultClass: true
+    reclaimPolicy: Retain
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
+    parameters:
+      fsType: ext4
+
+    mountOptions:
+    - noatime
+    secrets:
+      provisioner-secret:
+      controller-publish-secret:
+      node-stage-secret:
+      node-publish-secret:
+      controller-expand-secret:
+
+  driver:
+    existingConfigSecret: truenas-iscsi-slow-config
+    config:
+      driver: freenas-api-iscsi # required
+
+driverConfigFileSealed: 
+  value: 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

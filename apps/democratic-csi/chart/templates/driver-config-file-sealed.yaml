@@ -1,0 +1,12 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: '{{ index .Values "democratic-csi" "driver" "existingConfigSecret" }}-sealed'
+  namespace: {{ .Release.Namespace }}
+spec:
+  encryptedData:
+    driver-config-file.yaml: {{ .Values.driverConfigFileSealed.value }}
+  template:
+    metadata:
+      name: {{ index .Values "democratic-csi" "driver" "existingConfigSecret"}}
+      namespace: {{ .Release.Namespace }}
