@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: democratic-csi-nfs-ssd
+  name: democratic-csi-nfs-hdd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,8 +12,8 @@ spec:
     path: apps/democratic-csi/chart
     helm:
       valueFiles:
-      - ../nfs-values.yaml
+      - ../nfs-hdd-values.yaml
   syncPolicy: {}
   destination:
     name: in-cluster
-    namespace: democratic-csi-nfs-ssd
+    namespace: democratic-csi-nfs-hdd

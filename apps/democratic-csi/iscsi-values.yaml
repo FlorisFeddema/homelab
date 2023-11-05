@@ -15,13 +15,19 @@ democratic-csi:
 
   storageClasses:
   - name: truenas-iscsi-hdd
-    defaultClass: true
+    defaultClass: false
     reclaimPolicy: Retain
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
     parameters:
       "csi.storage.k8s.io/fstype": "ext4"
 
+  secrets:
+    provisioner-secret:
+    controller-publish-secret:
+    node-stage-secret:
+    node-publish-secret:
+    controller-expand-secret:
     # secrets:
     #   node-stage-secret:
     #     node-db.node.session.auth.authmethod: CHAP
