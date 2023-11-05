@@ -21,14 +21,16 @@ spec:
       securityContext:
         fsGroup: 2000
       initContainers:
-        - name: configure-prowlarr
+        - name: configure
           image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
           command:
             - "sh"
-            - "/init-prowlarr/init-prowlarr.sh"
+          args:
+            - "-c"
+            - "cp -n /init/config.xml /config/config.xml"
           volumeMounts:
-            - mountPath: /init-prowlarr
-              name: init-files-prowlarr
+            - mountPath: /init
+              name: initial-config
             - mountPath: /config
               name: data
       containers:
@@ -49,9 +51,9 @@ spec:
             - mountPath: /config
               name: data
       volumes:
-        - name: init-files-prowlarr
+        - name: initial-config
           configMap:
-            name: init-prowlarr-cm
+            name: initial-config
         - name: data
           persistentVolumeClaim:
             claimName: prowlarr-data
