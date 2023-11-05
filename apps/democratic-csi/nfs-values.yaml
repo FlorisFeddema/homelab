@@ -10,7 +10,7 @@ democratic-csi:
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
     parameters:
-      fsType: ext4
+      fsType: nfs
 
     mountOptions:
     - noatime
