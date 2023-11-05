@@ -29,16 +29,12 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: buildarr-config
-            {{- if .Values.prowlarr.configSealed }}
             - mountPath: /prowlarr
               name: prowlarr-config
-            {{- end }}
       volumes:
         - name: buildarr-config
           configMap:
             name: buildarr-config
-        {{- if .Values.prowlarr.configSealed }}
         - name: prowlarr-config
           secret:
             secretName: prowlarr-config
-        {{- end }}
