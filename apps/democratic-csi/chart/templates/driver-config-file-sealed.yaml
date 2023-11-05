@@ -8,5 +8,5 @@ spec:
     driver-config-file.yaml: {{ .Values.driverConfigFileSealed.value }}
   template:
     metadata:
-      name: {{ index .Values "democratic-csi" "driver" "existingConfigSecret"}}
+      name: {{ index .Values "democratic-csi" "driver" "existingConfigSecret" }}
       namespace: {{ .Release.Namespace }}
