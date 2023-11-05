@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buildarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: buildarr
+      app.kubernetes.io/name: buildarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: buildarr
+        app.kubernetes.io/name: buildarr 
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: buildarr
+          image: '{{ .Values.images.buildarr.repository }}:{{ .Values.images.buildarr.version }}'
+          env:
+            - name: TZ
+              value: TZ=Europe/Amsterdam
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '1000'
+          volumeMounts:
+            - mountPath: /config
+              name: buildarr-config
+            {{- if .Values.prowlarr.configSealed }}
+            - mountPath: /prowlarr
+              name: prowlarr-config
+            {{- end }}
+      volumes:
+        - name: buildarr-config
+          configMap:
+            name: buildarr-config-cm
+        {{- if .Values.prowlarr.configSealed }}
+        - name: prowlarr-config
+          secret:
+            secretName: prowlarr-config
+        {{- end }}

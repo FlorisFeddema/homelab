@@ -6,7 +6,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/broersma-forslund/homelab.git
-    path: apps/*arr/prowlarr
+    path: apps/arr/prowlarr
     targetRevision: HEAD
   syncPolicy: {}
   destination:

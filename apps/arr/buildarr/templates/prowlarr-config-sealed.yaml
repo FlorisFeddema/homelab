@@ -1,0 +1,9 @@
+{{- if .Values.prowlarr.configSealed }}
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: prowlarr-config
+spec:
+  encryptedData:
+    prowlarr.yaml: {{ .Values.prowlarr.configSealed }}
+{{- end }}
