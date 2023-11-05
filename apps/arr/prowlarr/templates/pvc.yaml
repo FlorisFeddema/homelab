@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: prowlarr-data
 spec:
+  storageClassName: truenas-nfs-hdd
   accessModes:
     - ReadWriteOnce
   resources:
