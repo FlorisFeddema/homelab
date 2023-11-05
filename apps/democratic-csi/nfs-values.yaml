@@ -1,4 +1,7 @@
 democratic-csi:
+  controller:
+    driver:
+      image: ghcr.io/democratic-csi/democratic-csi:next # temp override because of https://github.com/democratic-csi/democratic-csi/issues/333
 
   csiDriver:
     name: "org.democratic-csi.nfs.ssd"
