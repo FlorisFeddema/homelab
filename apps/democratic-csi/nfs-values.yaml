@@ -10,7 +10,7 @@ democratic-csi:
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
     parameters:
-      fsType: nfs
+      "csi.storage.k8s.io/fstype" = "nfs"
 
     mountOptions:
     - noatime
