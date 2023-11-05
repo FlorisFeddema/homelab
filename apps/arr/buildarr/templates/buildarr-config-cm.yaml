@@ -6,6 +6,7 @@ data:
   buildarr.yml: |-
     buildarr:
       watch_config: true
+      secrets_file_path: /secrets/secrets.json
       update_days:
         - "monday"
         - "tuesday"
