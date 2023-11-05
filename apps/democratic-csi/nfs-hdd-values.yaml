@@ -27,7 +27,7 @@ democratic-csi:
       controller-expand-secret:
 
   driver:
-    existingConfigSecret: truenas-nfs-ssd-config
+    existingConfigSecret: truenas-nfs-hdd-config
     config:
       driver: freenas-api-nfs # required
 
