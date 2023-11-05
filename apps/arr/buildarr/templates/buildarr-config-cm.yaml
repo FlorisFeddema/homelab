@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: buildarr-cm
+  name: buildarr-config
 data:
   buildarr.yml: |-
     buildarr:

@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: buildarr-config
           configMap:
-            name: buildarr-config-cm
+            name: buildarr-config
         {{- if .Values.prowlarr.configSealed }}
         - name: prowlarr-config
           secret:
