@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: radarr
+spec:
+  rules:
+    - host: radarr.mobrockers.com
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: radarr
+                port:
+                  name: http
+            pathType: Prefix
+  tls:
+    - hosts:
+        - radarr.mobrockers.com
