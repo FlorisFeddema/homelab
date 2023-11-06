@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: sonarr
+      app.kubernetes.io/name: sonarr
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: sonarr
+        app.kubernetes.io/name: sonarr 
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 2000
+      initContainers:
+        - name: configure
+          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
+          command:
+            - "sh"
+          args:
+            - "-c"
+            - "cp -n /init/config.xml /config/config.xml"
+          volumeMounts:
+            - mountPath: /init
+              name: initial-config
+            - mountPath: /config
+              name: data
+      containers:
+        - name: sonarr
+          image: '{{ .Values.images.sonarr.repository }}:{{ .Values.images.sonarr.version }}'
+          env:
+            - name: TZ
+              value: TZ=Europe/Amsterdam
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '1000'
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: data
+      volumes:
+        - name: initial-config
+          configMap:
+            name: initial-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: sonarr-data
