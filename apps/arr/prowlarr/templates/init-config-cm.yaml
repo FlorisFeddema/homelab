@@ -8,7 +8,7 @@ data:
       <LogLevel>info</LogLevel>
       <UpdateMechanism>Docker</UpdateMechanism>
       <BindAddress>*</BindAddress>
-      <Port>80</Port>
+      <Port>8080</Port>
       <EnableSsl>False</EnableSsl>
       <LaunchBrowser>False</LaunchBrowser>
       <Branch>master</Branch>
