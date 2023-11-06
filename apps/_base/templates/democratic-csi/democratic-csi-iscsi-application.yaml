@@ -1,19 +1,19 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: democratic-csi-iscsi-hdd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/broersma-forslund/homelab.git
-    targetRevision: HEAD
-    path: apps/democratic-csi/chart
-    helm:
-      valueFiles:
-      - ../iscsi-values.yaml
-  syncPolicy: {}
-  destination:
-    name: in-cluster
-    namespace: democratic-csi-iscsi-hdd
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: democratic-csi-iscsi-hdd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/broersma-forslund/homelab.git
+#     targetRevision: HEAD
+#     path: apps/democratic-csi/chart
+#     helm:
+#       valueFiles:
+#       - ../iscsi-values.yaml
+#   syncPolicy: {}
+#   destination:
+#     name: in-cluster
+#     namespace: democratic-csi-iscsi-hdd
