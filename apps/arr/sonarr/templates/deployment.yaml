@@ -27,7 +27,9 @@ spec:
             - "sh"
           args:
             - "-c"
-            - "cp -n /init/config.xml /config/config.xml"
+            - "cp /init/config.xml /config/config.xml"
+            - "echo config overwritten with"
+            - "cat init/config.xml"
           volumeMounts:
             - mountPath: /init
               name: initial-config
