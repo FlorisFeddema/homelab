@@ -27,19 +27,30 @@ spec:
             - name: PGID
               value: '1000'
           volumeMounts:
-            - mountPath: /config
-              name: buildarr-config
             - mountPath: /secrets
               name: secrets-cache
+            - mountPath: /config
+              name: buildarr-config
             - mountPath: /prowlarr
               name: prowlarr-config
+            - mountPath: /prowlarr/secrets
+              name: prowlarr-api-key
+            - mountPath: /drunken-slug/secrets
+              name: drunken-slug-api-key
       volumes:
+        - name: secrets-cache
+          emptyDir:
+            sizeLimit: 10Mi
         - name: buildarr-config
           configMap:
             name: buildarr-config
         - name: prowlarr-config
+          configMap:
+            name: prowlarr-config
+        - name: prowlarr-api-key
           secret:
-            secretName: prowlarr-config
-        - name: secrets-cache
-          emptyDir:
-            sizeLimit: 10Mi
+            secretName: prowlarr-api-key
+        - name: drunken-slug-api-key
+          secret:
+            secretName: drunken-slug-api-key
+        
