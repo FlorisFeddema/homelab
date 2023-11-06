@@ -10,6 +10,8 @@ data:
           hostname: prowlarr.prowlarr
           port: 80
           protocol: http
+          includes:
+          - /prowlarr/secrets/api-key.yaml
           settings:
             indexers:
               indexers:
