@@ -8,15 +8,15 @@
 #   resources:
 #     requests:
 #       storage: 1Gi
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: test-claim-nfs
-spec:
-  storageClassName: truenas-nfs-ssd
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+# ---
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: test-claim-nfs
+# spec:
+#   storageClassName: truenas-nfs-ssd
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
