@@ -10,7 +10,7 @@ data:
       instances:
         sonarr:
           hostname: sonarr.sonarr
-          port: 8080
+          port: 80
           protocol: http
           settings:
             media_management:
