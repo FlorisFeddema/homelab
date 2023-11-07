@@ -57,3 +57,6 @@ spec:
     - name: authentik
       databases:
         - authentik
+    - name: powerdns
+      databases:
+        - powerdns
