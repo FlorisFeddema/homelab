@@ -35,6 +35,8 @@ spec:
               mountPath: /prowlarr
             - name: prowlarr-api-key
               mountPath: /prowlarr/secrets
+            - name: drunken-slug-api-key
+              mountPath: /drunken-slug/secrets
             - name: nzbfinder-api-key
               mountPath: /nzbfinder/secrets
             - name: nzbgeek-api-key
