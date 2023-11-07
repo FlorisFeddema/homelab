@@ -20,4 +20,4 @@ data:
 
     includes: 
     - /prowlarr/prowlarr.yaml
-    - /prowlarr/secrets/api-key.yaml
+    - /sonarr/sonarr.yaml

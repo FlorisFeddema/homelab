@@ -5,19 +5,20 @@ metadata:
 data:
   prowlarr.yaml: |-
     includes:
+    - /prowlarr/secrets/api-key.yaml
     - /drunken-slug/secrets/api-key.yaml
+    - /nzbfinder/secrets/api-key.yaml
+    - /nzbgeek/secrets/api-key.yaml
     prowlarr:
       instances:
         prowlarr:
           hostname: prowlarr.prowlarr
           port: 80
           protocol: http
-          includes:
-          - /prowlarr/secrets/api-key.yaml
           settings:
             indexers:
               indexers:
-                delete_unmanaged: false
+                delete_unmanaged: true
                 definitions:
                   DrunkenSlug:
                     type: newznab
@@ -34,3 +35,100 @@ data:
                       additionalParameters: null
                       vipExpiration: ''
                       baseSettings.limitsUnit: Day
+                  NZBFinder:
+                    type: newznab
+                    enable: true
+                    sync_profile: Standard
+                    redirect: false
+                    priority: 25
+                    query_limit: 5000
+                    grab_limit: null
+                    tags: []
+                    fields:
+                      baseUrl: https://nzbfinder.ws
+                      apiPath: /api
+                      additionalParameters: null
+                      vipExpiration: '2023-12-25'
+                      baseSettings.limitsUnit: Day
+                  NZBgeek:
+                    type: newznab
+                    enable: true
+                    sync_profile: Standard
+                    redirect: false
+                    priority: 25
+                    query_limit: null
+                    grab_limit: null
+                    tags: []
+                    fields:
+                      baseUrl: https://api.nzbgeek.info
+                      apiPath: /api
+                      additionalParameters: null
+                      vipExpiration: ''
+                      baseSettings.limitsUnit: Day
+              proxies:
+                delete_unmanaged: true
+                definitions: {}
+            apps:
+              applications:
+                delete_unmanaged: true
+                definitions:
+                  # Radarr:
+                  #   type: radarr
+                  #   prowlarr_url: http://prowlarr.prowlarr
+                  #   base_url: http://radarr.radarr
+                  #   sync_level: full-sync
+                  #   sync_categories:
+                  #   - movies/uhd
+                  #   - movies/hd
+                  #   - movies
+                  #   - movies/dvd
+                  #   - movies/web-dl
+                  #   - movies/bluray
+                  #   - movies/3d
+                  #   - movies/sd
+                  #   - movies/foreign
+                  #   - movies/other
+                  #   tags: []
+                  #   instance_name: radarr
+                  Sonarr:
+                    type: sonarr
+                    prowlarr_url: http://prowlarr.prowlarr
+                    base_url: http://sonarr.sonarr
+                    sync_level: full-sync
+                    sync_categories:
+                    - tv/sd
+                    - tv/anime
+                    - tv/other
+                    - tv
+                    - tv/web-dl
+                    - tv/uhd
+                    - tv/hd
+                    - tv/foreign
+                    tags: []
+                    instance_name: sonarr
+                    anime_sync_categories:
+                    - tv/anime
+                    sync_anime_standard_format_search: false
+              sync_profiles:
+                delete_unmanaged: true
+                definitions:
+                  Standard:
+                    enable_rss: true
+                    enable_interactive_search: true
+                    enable_automatic_search: true
+                    minimum_seeders: 1
+            notifications:
+              delete_unmanaged: true
+              definitions: {}
+            tags:
+              definitions: []
+            ui:
+              first_day_of_week: monday
+              week_column_header: day-first-padded
+              short_date_format: word-month-second
+              long_date_format: day-first
+              time_format: twentyfour-hour
+              show_relative_dates: true
+              enable_color_impaired_mode: false
+              theme: auto
+              ui_language: en

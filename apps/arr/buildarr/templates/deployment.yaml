@@ -27,16 +27,22 @@ spec:
             - name: PGID
               value: '1000'
           volumeMounts:
-            - mountPath: /secrets
-              name: secrets-cache
-            - mountPath: /config
-              name: buildarr-config
-            - mountPath: /prowlarr
-              name: prowlarr-config
-            - mountPath: /prowlarr/secrets
-              name: prowlarr-api-key
-            - mountPath: /drunken-slug/secrets
-              name: drunken-slug-api-key
+            - name: secrets-cache
+              mountPath: /secrets
+            - name: buildarr-config
+              mountPath: /config
+            - name: prowlarr-config
+              mountPath: /prowlarr
+            - name: prowlarr-api-key
+              mountPath: /prowlarr/secrets
+            - name: nzbfinder-api-key
+              mountPath: /nzbfinder/secrets
+            - name: nzbgeek-api-key
+              mountPath: /nzbgeek/secrets
+            - name: sonarr-config
+              mountPath: /sonarr
+            - name: sonarr-api-key
+              mountPath: /sonarr/secrets
       volumes:
         - name: secrets-cache
           emptyDir:
@@ -53,4 +59,16 @@ spec:
         - name: drunken-slug-api-key
           secret:
             secretName: drunken-slug-api-key
+        - name: nzbfinder-api-key
+          secret:
+            secretName: nzbfinder-api-key
+        - name: nzbgeek-api-key
+          secret:
+            secretName: nzbgeek-api-key
+        - name: sonarr-config
+          configMap:
+            name: sonarr-config
+        - name: sonarr-api-key
+          secret:
+            secretName: sonarr-api-key
         
