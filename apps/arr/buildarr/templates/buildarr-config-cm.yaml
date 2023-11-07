@@ -20,6 +20,7 @@ data:
 
     includes: 
     - /prowlarr/prowlarr.yaml
+    - /prowlarr/secrets/api-key.yaml
     {{- if .Values.sonarr.configSealed }}
     - /sonarr/sonarr.yaml
     {{- end }}
