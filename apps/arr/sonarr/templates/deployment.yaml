@@ -27,7 +27,7 @@ spec:
             - "sh"
           args:
             - "-c"
-            - "cp -n /init/config.xml /config/config.xml"
+            - "cp /init/config.xml /config/config.xml"
           volumeMounts:
             - mountPath: /init
               name: initial-config

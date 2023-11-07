@@ -12,5 +12,5 @@ data:
       <EnableSsl>False</EnableSsl>
       <LaunchBrowser>False</LaunchBrowser>
       <Branch>master</Branch>
-      <AuthenticationMethod>External</AuthenticationMethod>
+      <AuthenticationMethod>None</AuthenticationMethod>
     </Config>
