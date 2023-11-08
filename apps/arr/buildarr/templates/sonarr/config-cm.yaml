@@ -119,27 +119,15 @@ data:
                 episode_images: true
               roksbox:
                 enable: false
-                episode_metadata: true
-                series_images: true
-                season_images: true
-                episode_images: true
               wdtv:
                 enable: false
-                episode_metadata: true
-                series_images: true
-                season_images: true
-                episode_images: true
             tags:
               definitions: []
+            general:
               security:
-                authentication: none
                 certificate_validation: enabled
               proxy:
                 enable: false
-              backup:
-                folder: Backups
-                interval: 7
-                retention: 28
             ui:
               first_day_of_week: monday
               week_column_header: day-first-padded

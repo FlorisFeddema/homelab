@@ -122,6 +122,13 @@ data:
               definitions: {}
             tags:
               definitions: []
+            general:
+              proxy:
+                enable: false
+              security:
+                certificate_validation: enabled
+              analytics:
+                send_anonymous_usage_data: false
             ui:
               first_day_of_week: monday
               week_column_header: day-first-padded

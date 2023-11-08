@@ -45,6 +45,10 @@ spec:
               mountPath: /sonarr
             - name: sonarr-api-key
               mountPath: /sonarr/secrets
+            - name: radarr-config
+              mountPath: /radarr
+            - name: radarr-api-key
+              mountPath: /radarr/secrets
       volumes:
         - name: secrets-cache
           emptyDir:
@@ -73,4 +77,9 @@ spec:
         - name: sonarr-api-key
           secret:
             secretName: sonarr-api-key
-        
+        - name: radarr-config
+          configMap:
+            name: radarr-config
+        - name: radarr-api-key
+          secret:
+            secretName: radarr-api-key
