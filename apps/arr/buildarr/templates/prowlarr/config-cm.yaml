@@ -72,24 +72,24 @@ data:
               applications:
                 delete_unmanaged: true
                 definitions:
-                  # Radarr:
-                  #   type: radarr
-                  #   prowlarr_url: http://prowlarr.prowlarr
-                  #   base_url: http://radarr.radarr
-                  #   sync_level: full-sync
-                  #   sync_categories:
-                  #   - movies/uhd
-                  #   - movies/hd
-                  #   - movies
-                  #   - movies/dvd
-                  #   - movies/web-dl
-                  #   - movies/bluray
-                  #   - movies/3d
-                  #   - movies/sd
-                  #   - movies/foreign
-                  #   - movies/other
-                  #   tags: []
-                  #   instance_name: radarr
+                  Radarr:
+                    type: radarr
+                    prowlarr_url: http://prowlarr.prowlarr
+                    base_url: http://radarr.radarr
+                    sync_level: full-sync
+                    sync_categories:
+                    - movies/uhd
+                    - movies/hd
+                    - movies
+                    - movies/dvd
+                    - movies/web-dl
+                    - movies/bluray
+                    - movies/3d
+                    - movies/sd
+                    - movies/foreign
+                    - movies/other
+                    tags: []
+                    instance_name: radarr
                   Sonarr:
                     type: sonarr
                     prowlarr_url: http://prowlarr.prowlarr
