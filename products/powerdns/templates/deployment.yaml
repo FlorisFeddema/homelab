@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/component: "powerdns"
     {{- include "labels" . | nindent 4 }}
 spec:
+  revisionHistoryLimit: 0
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
