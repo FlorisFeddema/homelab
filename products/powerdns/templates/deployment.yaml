@@ -52,19 +52,6 @@ spec:
             - name: api
               containerPort: 8081
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /metrics
-              port: api
-            initialDelaySeconds: 5
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /metrics
-              port: api
-            initialDelaySeconds: 5
-            periodSeconds: 5
-            failureThreshold: 5
           resources: {{ toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: custom-config
