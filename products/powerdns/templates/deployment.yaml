@@ -59,6 +59,14 @@ spec:
             - name: default-config
               mountPath: /etc/powerdns/pdns.conf
               subPath: pdns.conf
+          securityContext:
+            runAsNonRoot: true
+            capabilities:
+              drop:
+                - ALL
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
       volumes:
         - name: test
           emptyDir: {}
