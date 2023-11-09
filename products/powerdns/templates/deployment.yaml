@@ -53,14 +53,14 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: metrics
+              path: /metrics
+              port: api
             initialDelaySeconds: 5
             periodSeconds: 30
           readinessProbe:
             httpGet:
-              path: /
-              port: metrics
+              path: /metrics
+              port: api
             initialDelaySeconds: 5
             periodSeconds: 5
             failureThreshold: 5
