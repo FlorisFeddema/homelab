@@ -25,6 +25,11 @@ spec:
         app.kubernetes.io/component: "powerdns"
         {{- include "labels" . | nindent 8 }}
     spec:
+      securityContext:
+        fsGroup: 1001
+        runAsGroup: 1001
+        runAsUser: 1001
+        runAsNonRoot: true
       containers:
         - name: powerdns
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -60,9 +65,6 @@ spec:
               mountPath: /etc/powerdns/pdns.conf
               subPath: pdns.conf
           securityContext:
-            runAsNonRoot: true
-            runAsUser: 1001
-            runAsGroup: 1001
             capabilities:
               drop:
                 - ALL
