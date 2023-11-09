@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "powerdns.fullname" . }}-config
+data:
+  pdns.conf: |
+    local-address=0.0.0.0,::
+    include-dir=/etc/powerdns/pdns.d
+  pdns.j2: |
+    launch=gpgsql
+    local-port=5300
+    webserver-port=8081
+    dnsupdate=yes
+    loglevel=4
+    default-ttl=3600
+    gpgsql-host={{.Values.powerdns.database.postgres.host}}
+    gpgsql-port={{.Values.powerdns.database.postgres.port}}
+    gpgsql-user={{.Values.powerdns.database.postgres.user}}
+    gpgsql-dbname={{.Values.powerdns.database.postgres.databaseName}}
+    gpgsql-password={{ printf "{{POWERDNS_POSTGRES_PASSSWORD}}" }}

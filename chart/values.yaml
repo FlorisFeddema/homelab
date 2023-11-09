@@ -69,6 +69,8 @@ products:
     serverSideApply: true
   policyReporter:
     deploy: true
+  powerdns:
+    deploy: true
   prometheusCrd:
     deploy: true
     namespace: defaults
