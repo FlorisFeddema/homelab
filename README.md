@@ -80,6 +80,7 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
     --with-cluster-discovery=false                                      \
     --with-secrets secrets.yaml                                         \
     --config-patch @talos/patches/cluster-name.yaml                     \
+    --config-patch @talos/patches/cluster-endpoint.yaml                 \
     --config-patch @talos/patches/disable-cni-and-kube-proxy.yaml       \
     --config-patch @talos/nodes/control-plane-$CONTROL_PLANE.yaml       \
     --config-patch @talos/nodes/control-plane-all.yaml
@@ -96,6 +97,7 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
     --with-cluster-discovery=false                                      \
     --with-secrets secrets.yaml                                         \
     --config-patch @talos/patches/cluster-name.yaml                     \
+    --config-patch @talos/patches/cluster-endpoint.yaml                 \
     --config-patch @talos/patches/disable-cni-and-kube-proxy.yaml       \
     --config-patch @talos/nodes/worker-$WORKER.yaml
 ```

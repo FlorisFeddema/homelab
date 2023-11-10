@@ -1,0 +1,3 @@
+cluster:
+  controlPlane:
+    endpoint: https://k8s.mobrockers.com:6443
