@@ -13,17 +13,17 @@ spec:
   replicas: {{ .Values.admin.replicas }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "powerdns.name" . }}
+      app.kubernetes.io/name: {{ template "powerdns.name" . }}-admin
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/component: "powerdnsadmin"
-      {{- include "labels" . | nindent 4 }}
+      {{- include "labels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ template "powerdns.name" . }}
+        app.kubernetes.io/name: {{ template "powerdns.name" . }}-admin
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "powerdnsadmin"
-        {{- include "labels" . | nindent 4 }}
+        {{- include "labels" . | nindent 8 }}
     spec:
       containers:
         - name: powerdnsadmin
