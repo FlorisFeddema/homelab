@@ -1,7 +1,12 @@
 democratic-csi:
-  # talos config
+  controller:
+    driver:
+      image: ghcr.io/democratic-csi/democratic-csi:v1.8.4
+
   node:
     driver:
+      image: ghcr.io/democratic-csi/democratic-csi:v1.8.4
+      # talos config
       extraEnv:
         - name: ISCSIADM_HOST_STRATEGY
           value: nsenter
@@ -9,13 +14,14 @@ democratic-csi:
           value: /usr/local/sbin/iscsiadm
       iscsiDirHostPath: /usr/local/etc/iscsi
       iscsiDirHostPathType: ""
+      # talos config
 
   csiDriver:
     name: "org.democratic-csi.iscsi.hdd"
 
   storageClasses:
   - name: truenas-iscsi-hdd
-    defaultClass: false
+    defaultClass: true
     reclaimPolicy: Retain
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
