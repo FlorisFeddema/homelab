@@ -8,7 +8,6 @@ image:
   registry: docker.io
   repository: powerdns/pdns-auth-48
   tag: 4.8.3
-  pullPolicy: IfNotPresent
 
 resources: {}
 
@@ -22,3 +21,11 @@ powerdns:
       user: 'powerdns'
   apiKey:
     existingSecret: "powerdns-credentials" #key = apiKey
+
+admin:
+  replicas: 1
+
+  image:
+    registry: docker.io
+    repository: powerdnsadmin/pda-legacy
+    tag: 0.3.0

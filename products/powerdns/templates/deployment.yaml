@@ -28,7 +28,7 @@ spec:
       containers:
         - name: powerdns
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: IfNotPresent
           env:
             - name: TEMPLATE_FILES
               value: pdns
@@ -36,7 +36,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.powerdns.apiKey.existingSecret }}
-                  key: apiKey
+                  key: apiKeyd
             - name: POWERDNS_POSTGRES_PASSSWORD
               valueFrom:
                 secretKeyRef:

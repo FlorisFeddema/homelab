@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "powerdns.fullname" . }}-admin
+  labels:
+    app: {{ template "powerdns.name" . }}-admin
+    app.kubernetes.io/name: {{ template "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "powerdnsadmin"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: {{ template "powerdns.name" . }}-admin
+    app.kubernetes.io/name: {{ template "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "powerdnsadmin"
