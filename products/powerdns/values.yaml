@@ -29,3 +29,6 @@ admin:
     registry: docker.io
     repository: powerdnsadmin/pda-legacy
     tag: 0.3.0
+
+  config:
+    existingSecret: "powerdns-admin-credentials" #keys = adminKey, databaseConnectionString
