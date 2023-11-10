@@ -47,10 +47,10 @@ spec:
                   name: {{ .Values.admin.config.existingSecret }}
                   key: databaseConnectionString
           resources: {{ toYaml .Values.admin.resources | nindent 12 }}
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
+{{/*          securityContext:*/}}
+{{/*            capabilities:*/}}
+{{/*              drop:*/}}
+{{/*                - ALL*/}}
+{{/*            allowPrivilegeEscalation: false*/}}
+{{/*            seccompProfile:*/}}
+{{/*              type: RuntimeDefault*/}}
