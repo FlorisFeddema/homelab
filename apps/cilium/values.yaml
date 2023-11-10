@@ -23,11 +23,6 @@ cilium:
       enabled: true                             
     ui:
       enabled: true                                
-    peerService:
-      clusterDomain: broersma.com.local
-
-  etcd:
-    clusterDomain: broersma.com.local
 
   securityContext:
     capabilities:

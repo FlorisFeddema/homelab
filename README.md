@@ -73,32 +73,34 @@ Control plane nodes:
 
 ```
 TALOS_CONFIG=/path/to/talos/config
+CONTROL_PLANE=0
 talosctl gen config talos-broersma https://10.0.10.111:6443             \
-    --output rendered/control-plane-x.yaml                              \
+    --output rendered/control-plane-$CONTROL_PLANE.yaml                 \
     --output-types controlplane                                         \
     --with-cluster-discovery=false                                      \
     --with-secrets secrets.yaml                                         \
     --config-patch @talos/patches/cluster-name.yaml                     \
     --config-patch @talos/patches/disable-cni-and-kube-proxy.yaml       \
-    --config-patch @talos/nodes/control-plane-x.yaml                    \
+    --config-patch @talos/nodes/control-plane-$CONTROL_PLANE.yaml       \
     --config-patch @talos/nodes/control-plane-all.yaml
 ```
 
-`talosctl apply-config --insecure --nodes <node-x-ip> --file rendered/control-plane-x.yaml`
+`talosctl apply-config --nodes <node-x-ip> --file rendered/control-plane-$CONTROL_PLANE.yaml`
 
 ```
 TALOS_CONFIG=/path/to/talos/config
+WORKER=0
 talosctl gen config talos-broersma https://10.0.10.111:6443             \
-    --output rendered/worker/x.yaml                                     \
+    --output rendered/worker-$WORKER.yaml                               \
     --output-types worker                                               \
     --with-cluster-discovery=false                                      \
     --with-secrets secrets.yaml                                         \
     --config-patch @talos/patches/cluster-name.yaml                     \
     --config-patch @talos/patches/disable-cni-and-kube-proxy.yaml       \
-    --config-patch @talos/nodes/worker-x.yaml
+    --config-patch @talos/nodes/worker-$WORKER.yaml
 ```
 
-`talosctl apply-config --insecure --nodes <node-x-ip> --file rendered/worker-x.yaml`
+`talosctl apply-config --nodes <node-x-ip> --file rendered/worker-$WORKER.yaml`
 
 ### Upgrading talos
 
