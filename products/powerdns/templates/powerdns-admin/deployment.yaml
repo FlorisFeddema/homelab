@@ -30,11 +30,8 @@ spec:
           image: "{{ .Values.admin.image.registry }}/{{ .Values.admin.image.repository }}:{{ .Values.admin.image.tag }}"
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               protocol: TCP
-          envFrom:
-            - configMapRef:
-                name: powerdnsadmin-env
           env:
             - name: SECRET_KEY
               valueFrom:
