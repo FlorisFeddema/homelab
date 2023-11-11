@@ -32,3 +32,6 @@ admin:
 
   config:
     existingSecret: "powerdns-admin-credentials" #keys = adminKey, databaseConnectionString
+
+  ingress:
+    domain: powerdns.cloud.feddema.dev
