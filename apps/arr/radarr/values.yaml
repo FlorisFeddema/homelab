@@ -1,7 +1,7 @@
 images:
   alpine:
     repository: alpine
-    version: 3.18.4
+    tag: 3.18.4
   radarr:
     repository: ghcr.io/linuxserver/radarr
-    version: 5.0.3
+    tag: 5.0.3

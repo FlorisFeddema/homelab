@@ -22,7 +22,7 @@ spec:
         fsGroup: 2000
       initContainers:
         - name: configure
-          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
+          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.tag }}'
           command:
             - "sh"
           args:
@@ -35,7 +35,7 @@ spec:
               name: data
       containers:
         - name: prowlarr
-          image: '{{ .Values.images.prowlarr.repository }}:{{ .Values.images.prowlarr.version }}'
+          image: '{{ .Values.images.prowlarr.repository }}:{{ .Values.images.prowlarr.tag }}'
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam

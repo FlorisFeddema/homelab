@@ -1,7 +1,7 @@
 images:
   alpine:
     repository: alpine
-    version: 3.18.4
+    tag: 3.18.4
   prowlarr:
     repository: ghcr.io/linuxserver/prowlarr
-    version: 1.9.4
+    tag: 1.9.4

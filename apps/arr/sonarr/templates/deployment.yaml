@@ -22,7 +22,7 @@ spec:
         fsGroup: 2000
       initContainers:
         - name: configure
-          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
+          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.tag }}'
           command:
             - "sh"
           args:
@@ -35,7 +35,7 @@ spec:
               name: data
       containers:
         - name: sonarr
-          image: '{{ .Values.images.sonarr.repository }}:{{ .Values.images.sonarr.version }}'
+          image: '{{ .Values.images.sonarr.repository }}:{{ .Values.images.sonarr.tag }}'
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam

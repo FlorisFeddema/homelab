@@ -22,7 +22,7 @@ spec:
         fsGroup: 2000
       initContainers:
         - name: configure
-          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.version }}'
+          image: '{{ .Values.images.alpine.repository }}:{{ .Values.images.alpine.tag }}'
           command:
             - "sh"
           args:
@@ -35,7 +35,7 @@ spec:
               name: data
       containers:
         - name: radarr
-          image: '{{ .Values.images.radarr.repository }}:{{ .Values.images.radarr.version }}'
+          image: '{{ .Values.images.radarr.repository }}:{{ .Values.images.radarr.tag }}'
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam
