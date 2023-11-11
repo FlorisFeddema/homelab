@@ -1,7 +1,8 @@
-images:
-  alpine:
+alpine:
+  image:
     repository: alpine
     tag: 3.18.4
-  radarr:
+radarr:
+  image:
     repository: ghcr.io/linuxserver/radarr
     tag: 5.0.3
