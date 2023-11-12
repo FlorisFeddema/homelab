@@ -3,6 +3,7 @@ democratic-csi:
   node:
     hostPID: true
     driver:
+      logLevel: debug
       # talos config
       extraEnv:
         - name: ISCSIADM_HOST_STRATEGY
