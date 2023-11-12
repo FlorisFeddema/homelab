@@ -21,4 +21,4 @@ data:
     includes: 
     - /prowlarr/prowlarr.yaml
     - /sonarr/sonarr.yaml
-    - /radarr/radarr.yaml
+    # - /radarr/radarr.yaml
