@@ -172,9 +172,9 @@ data:
                     upgrade_until_custom_format_score: 0
                     custom_formats: []
                     language: original
-              delay_profiles:
-                definitions: []
-                delete_unmanaged: false
+              # delay_profiles:
+              #   definitions: []
+              #   delete_unmanaged: false
             custom_formats:
               delete_unmanaged: true
               definitions: {}
