@@ -31,7 +31,15 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
+          envFrom:
+            - configMapRef:
+                name:  {{ template "powerdns.name" . }}-admin-config
           env:
+            - name: OIDC_OAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.config.existingSecret }}
+                  key: oidcSecret
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:

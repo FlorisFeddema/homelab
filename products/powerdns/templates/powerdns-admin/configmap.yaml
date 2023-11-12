@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "powerdns.name" . }}-admin-config
+  labels:
+    app.kubernetes.io/name: {{ template "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "powerdnsadmin"
+    {{- include "labels" . | nindent 4 }}
+data:
+  OIDC_OAUTH_ENABLED: "true"
+  OIDC_OAUTH_KEY: "pda"
+  OIDC_OAUTH_API_URL: "https://authentik.cloud.feddema.dev/application/o/pda/"
+  OIDC_OAUTH_TOKEN_URL: "https://authentik.cloud.feddema.dev/application/o/token/"
+  OIDC_OAUTH_AUTHORIZE_URL: "https://authentik.cloud.feddema.dev/application/o/authorize/"
+  OIDC_OAUTH_METADATA_URL: "https://authentik.cloud.feddema.dev/application/o/pda/.well-known/openid-configuration"
+  OIDC_OAUTH_LOGOUT_URL: "https://authentik.cloud.feddema.dev/application/o/pda/end-session/"
+  OIDC_OAUTH_SCOPE: "openid,profile,email,groups"
+  OIDC_OAUTH_USERNAME: "preferred_username"
+  OIDC_OAUTH_FIRSTNAME: "given_name"
+  OIDC_OAUTH_LAST_NAME: "family_name"
+  OIDC_OAUTH_EMAIL: "email"
