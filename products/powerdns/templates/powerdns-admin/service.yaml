@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: {{ template "powerdns.fullname" . }}-admin
   labels:
-    app: {{ template "powerdns.name" . }}-admin
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "powerdnsadmin"
@@ -14,7 +13,6 @@ spec:
       port: 80
       targetPort: 80
   selector:
-    app: {{ template "powerdns.name" . }}-admin
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "powerdnsadmin"

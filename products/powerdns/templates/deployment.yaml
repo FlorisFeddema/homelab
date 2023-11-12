@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: {{ template "powerdns.fullname" . }}
   labels:
-    app: {{ template "powerdns.name" . }}
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "powerdns"
