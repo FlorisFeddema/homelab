@@ -11,6 +11,8 @@ spec:
     - nfsvers=3
     - nolock
     - noatime
+  capacity:
+    storage: {{ $pv.capacity }}
   csi:
     driver: org.democratic-csi.node-manual
     readOnly: false
