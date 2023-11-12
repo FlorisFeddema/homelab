@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: radarr-api-key
+  namespace: buildarr
+stringData:
+  api-key.yaml: |-
+    radarr:
+      instances:
+        radarr:
+          api_key: 
