@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: radarr-data-iscsi
+  name: radarr-data
 spec:
   accessModes:
     - ReadWriteOnce
