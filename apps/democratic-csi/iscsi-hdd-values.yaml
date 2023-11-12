@@ -1,6 +1,7 @@
 democratic-csi:
 
   node:
+    hostPID: true
     driver:
       # talos config
       extraEnv:
