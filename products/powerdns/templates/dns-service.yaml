@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: {{ template "powerdns.fullname" . }}-dns
   labels:
-    app: {{ template "powerdns.name" . }}
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "powerdns"
@@ -20,7 +19,6 @@ spec:
       protocol: TCP
       name: dns-tcp
   selector:
-    app: {{ template "powerdns.name" . }}
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "powerdns"
