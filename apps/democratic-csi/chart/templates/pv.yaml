@@ -1,0 +1,25 @@
+{{- range $pv := .Values.persistentVolumes }}
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ $pv.name }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=3
+    - nolock
+    - noatime
+  csi:
+    driver: org.democratic-csi.node-manual
+    readOnly: false
+    fsType: nfs
+    volumeHandle: {{ $pv.guid }}
+    volumeAttributes:
+      server: truenas.mobrockers.com
+      share: {{ $pv.sharePath }}
+      node_attach_driver: nfs
+      provisioner_driver: node-manual
+---
+{{- end }}

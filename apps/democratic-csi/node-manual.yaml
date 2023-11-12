@@ -1,0 +1,16 @@
+democratic-csi:
+  csiDriver:
+    name: org.democratic-csi.node-manual
+    attachRequired: false
+  controller:
+    externalAttacher:
+      enabled: false
+
+  driver:
+    config:
+      driver: node-manual # required
+
+persistentVolumes:
+- name: media
+  sharePath: /mnt/slow/media
+  volumeHandle: 7f7eb4bb-ac38-4dad-8254-48ca98c89463
