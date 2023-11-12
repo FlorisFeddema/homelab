@@ -81,6 +81,8 @@ products:
     deploy: true
   smartmeterGatewayPrometheusExporter:
     deploy: true
+  teslamate:
+    deploy: true
   tetragon:
     deploy: true
   uptimeKuma:
