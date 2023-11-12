@@ -8,7 +8,10 @@ spec:
     repoURL: https://github.com/broersma-forslund/homelab.git
     path: apps/arr/prowlarr
     targetRevision: HEAD
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
   destination:
     name: in-cluster
     namespace: prowlarr
