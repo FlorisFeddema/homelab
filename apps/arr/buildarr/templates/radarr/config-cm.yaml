@@ -174,7 +174,7 @@ data:
                     language: original
               delay_profiles:
                 definitions: []
-                delete_unmanaged: true
+                delete_unmanaged: false
             custom_formats:
               delete_unmanaged: true
               definitions: {}
