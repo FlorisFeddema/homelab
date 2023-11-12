@@ -62,3 +62,8 @@ spec:
         - powerdns
       password:
         type: "AlphaNumeric"
+    - name: powerdnsadmin
+      databases:
+        - powerdnsadmin
+      password:
+        type: "AlphaNumeric"
