@@ -212,4 +212,4 @@ data:
               show_relative_dates: true
               enable_color_impaired_mode: false
               theme: auto
-              ui_language: en
+              ui_language: english
