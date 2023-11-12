@@ -27,8 +27,6 @@ spec:
             - name: PGID
               value: '1000'
           volumeMounts:
-            - name: secrets-cache
-              mountPath: /secrets
             - name: buildarr-config
               mountPath: /config
             - name: prowlarr-config
@@ -50,9 +48,6 @@ spec:
             - name: radarr-api-key
               mountPath: /radarr/secrets
       volumes:
-        - name: secrets-cache
-          emptyDir:
-            sizeLimit: 10Mi
         - name: buildarr-config
           configMap:
             name: buildarr-config
