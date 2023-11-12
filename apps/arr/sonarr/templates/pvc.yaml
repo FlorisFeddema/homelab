@@ -16,3 +16,8 @@ metadata:
 spec:
   storageClassName: ""
   volumeName: media
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
