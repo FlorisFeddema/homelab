@@ -9,3 +9,15 @@ spec:
   resources:
     requests:
       storage: 50Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-data-iscsi
+spec:
+  storageClassName: truenas-iscsi-hdd-delete
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Mi

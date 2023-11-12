@@ -56,4 +56,4 @@ spec:
             name: initial-config
         - name: data
           persistentVolumeClaim:
-            claimName: radarr-data
+            claimName: radarr-data-iscsi
