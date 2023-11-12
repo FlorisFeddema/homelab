@@ -66,8 +66,6 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       volumes:
-        - name: test
-          emptyDir: {}
         - name: custom-config
           configMap:
             name: {{ template "powerdns.fullname" . }}-config

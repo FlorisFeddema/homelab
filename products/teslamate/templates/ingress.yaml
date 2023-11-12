@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: teslamate
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+  labels:
+    app.kubernetes.io/name: {{ template "teslamate.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "teslamate"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: {{ .Values.ingress.domain }}
+      http:
+        paths:
+          - backend:
+              service:
+                name:  {{ template "teslamate.fullname" . }}
+                port:
+                  number: 4000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - {{ .Values.ingress.domain }}
+      secretName: teslamate-tls

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "teslamate.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ template "teslamate.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "teslamate"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4000
+      targetPort: 4000
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ template "teslamate.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "teslamate"

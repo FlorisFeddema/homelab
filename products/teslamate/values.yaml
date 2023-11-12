@@ -1,0 +1,19 @@
+fullnameOverride:
+nameOverride:
+commonlabels:
+
+replicas: 1
+
+image:
+  registry: docker.io
+  repository: teslamate/teslamate
+  tag: 1.27.4
+
+resources: {}
+
+config:
+  existingSecret: 'teslamate-credentials'
+  timezone: 'Europe/Amsterdam'
+
+ingress:
+  domain: 'teslamate.cloud.feddema.dev'
