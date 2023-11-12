@@ -5,12 +5,12 @@ democratic-csi:
   controller:
     externalAttacher:
       enabled: false
-  externalProvisioner:
-    enabled: false
-  externalResizer:
+    externalProvisioner:
       enabled: false
-  externalSnapshotter:
-    enabled: false
+    externalResizer:
+        enabled: false
+    externalSnapshotter:
+      enabled: false
 
   driver:
     config:
