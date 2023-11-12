@@ -33,13 +33,5 @@ admin:
   config:
     existingSecret: "powerdns-admin-credentials" #keys = adminKey, databaseConnectionString
 
-    database:
-      postgres:
-        existingSecret: "powerdnsadmin-credentials" #key = postgres-password
-        host: 'platform-pgbouncer.pgo.svc'
-        port: 5432
-        databaseName: 'powerdnsadmin'
-        user: 'powerdnsadmin'
-
   ingress:
     domain: powerdns.cloud.feddema.dev
