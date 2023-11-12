@@ -50,10 +50,16 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
+          volumeMounts:
+            - mountPath: /media
+              name: media              
       volumes:
         - name: initial-config
           configMap:
             name: initial-config
         - name: data
+          persistentVolumeClaim:
+            claimName: sonarr-data
+        - name: media
           persistentVolumeClaim:
             claimName: sonarr-data
