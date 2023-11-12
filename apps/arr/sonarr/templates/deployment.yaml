@@ -20,19 +20,6 @@ spec:
       automountServiceAccountToken: false
       securityContext:
         fsGroup: 2000
-      initContainers:
-        - name: configure
-          image: '{{ .Values.alpine.image.repository }}:{{ .Values.alpine.image.tag }}'
-          command:
-            - "sh"
-          args:
-            - "-c"
-            - "cp -n /init/config.xml /config/config.xml"
-          volumeMounts:
-            - mountPath: /init
-              name: initial-config
-            - mountPath: /config
-              name: data
       containers:
         - name: sonarr
           image: '{{ .Values.sonarr.image.repository }}:{{ .Values.sonarr.image.tag }}'
@@ -44,7 +31,7 @@ spec:
             - name: PGID
               value: '1000'
           ports:
-            - containerPort: 8080
+            - containerPort: 8989
               name: http
               protocol: TCP
           volumeMounts:
