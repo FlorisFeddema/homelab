@@ -68,6 +68,7 @@ spec:
       password:
         type: "AlphaNumeric"
     - name: teslamate
+      options: "SUPERUSER"
       databases:
         - teslamate
       password:
