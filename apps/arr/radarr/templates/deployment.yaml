@@ -35,9 +35,8 @@ spec:
               name: http
               protocol: TCP
           volumeMounts:
-            - mountPath: /data
+            - mountPath: /config
               name: data
-          volumeMounts:
             - mountPath: /media
               name: media
       volumes:
