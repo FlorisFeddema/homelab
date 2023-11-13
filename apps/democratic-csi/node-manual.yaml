@@ -15,9 +15,3 @@ democratic-csi:
   driver:
     config:
       driver: node-manual # required
-
-persistentVolumes:
-- name: media
-  guid: 7f7eb4bb-ac38-4dad-8254-48ca98c89463
-  sharePath: /mnt/slow/media
-  capacity: 2Ti

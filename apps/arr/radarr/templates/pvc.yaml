@@ -10,12 +10,37 @@ spec:
       storage: 50Mi
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: radarr-media
+spec:
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=3
+    - nolock
+    - noatime
+  capacity:
+    storage: 1Ti
+  csi:
+    driver: org.democratic-csi.node-manual
+    readOnly: false
+    fsType: nfs
+    volumeHandle: ddb83394-6b14-4596-ab89-59036555af69
+    volumeAttributes:
+      server: truenas.mobrockers.com
+      share: /mnt/slow/media
+      node_attach_driver: nfs
+      provisioner_driver: node-manual
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: radarr-media
 spec:
   storageClassName: ""
-  volumeName: media
+  volumeName: radarr-media
   accessModes:
     - ReadWriteMany
   resources:

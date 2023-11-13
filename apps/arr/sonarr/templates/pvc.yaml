@@ -10,12 +10,37 @@ spec:
       storage: 50Mi
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-media
+spec:
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=3
+    - nolock
+    - noatime
+  capacity:
+    storage: 1Ti
+  csi:
+    driver: org.democratic-csi.node-manual
+    readOnly: false
+    fsType: nfs
+    volumeHandle: 1c4fdba5-825f-4bae-8f8d-38d3c3e367fd
+    volumeAttributes:
+      server: truenas.mobrockers.com
+      share: /mnt/slow/media
+      node_attach_driver: nfs
+      provisioner_driver: node-manual
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sonarr-media
 spec:
   storageClassName: ""
-  volumeName: media
+  volumeName: sonarr-media
   accessModes:
     - ReadWriteMany
   resources:
