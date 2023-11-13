@@ -1,0 +1,9 @@
+node-feature-discovery:
+  enableNodeFeatureApi: false
+
+  master:
+    replicaCount: 1
+
+  tls:
+    enable: true
+    certManager: true
