@@ -19,20 +19,6 @@ spec:
     spec:
       automountServiceAccountToken: false
       securityContext:
-        fsGroup: 2000
-      initContainers:
-        - name: configure
-          image: '{{ .Values.alpine.image.repository }}:{{ .Values.alpine.image.tag }}'
-          command:
-            - "sh"
-          args:
-            - "-c"
-            - "cp -n /init/config.xml /config/config.xml"
-          volumeMounts:
-            - mountPath: /init
-              name: initial-config
-            - mountPath: /config
-              name: data
       containers:
         - name: prowlarr
           image: '{{ .Values.prowlarr.image.repository }}:{{ .Values.prowlarr.image.tag }}'
@@ -42,18 +28,15 @@ spec:
             - name: PUID
               value: '1000'
             - name: PGID
-              value: '1000'
+              value: '5000'
           ports:
-            - containerPort: 8080
+            - containerPort: 9696
               name: http
               protocol: TCP
           volumeMounts:
             - mountPath: /config
               name: data
       volumes:
-        - name: initial-config
-          configMap:
-            name: initial-config
         - name: data
           persistentVolumeClaim:
             claimName: prowlarr-data

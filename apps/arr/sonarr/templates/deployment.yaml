@@ -19,7 +19,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       securityContext:
-        fsGroup: 2000
+        fsGroup: 5000
       containers:
         - name: sonarr
           image: '{{ .Values.sonarr.image.repository }}:{{ .Values.sonarr.image.tag }}'
@@ -29,7 +29,7 @@ spec:
             - name: PUID
               value: '1000'
             - name: PGID
-              value: '1000'
+              value: '5000'
           ports:
             - containerPort: 8989
               name: http
@@ -41,9 +41,6 @@ spec:
             - mountPath: /media
               name: media              
       volumes:
-        - name: initial-config
-          configMap:
-            name: initial-config
         - name: data
           persistentVolumeClaim:
             claimName: sonarr-data
