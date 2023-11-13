@@ -15,7 +15,7 @@ spec:
         app.kubernetes.io/name: plex
     spec:
       nodeSelector:
-        gpu.intel.com/device.count: 1
+        'gpu.intel.com/device.count': 1
       containers:
       - name: plex
         image: '{{ .Values.plex.image.repository }}:{{ .Values.plex.image.tag }}'
