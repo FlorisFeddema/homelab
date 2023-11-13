@@ -1,5 +1,3 @@
 machine:
   network:
     hostname: talos-worker-1
-  nodeLabels:
-    gpu.intel.com/device.count: 1
