@@ -23,6 +23,14 @@ spec:
         - name: http
           containerPort: 32400
         env:
+          - name: TZ
+            value: TZ=Europe/Amsterdam
+          - name: PUID
+            value: '1000'
+          - name: PGID
+            value: '5000'
+          - name: VERSION
+            value: docker
           - name: PLEX_CLAIM
             value: claim-9P_SbAwsPtoUko7Jabge
         volumeMounts:
