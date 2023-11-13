@@ -31,8 +31,6 @@ spec:
             value: '5000'
           - name: VERSION
             value: docker
-          - name: PLEX_CLAIM
-            value: claim-9P_SbAwsPtoUko7Jabge
         volumeMounts:
         - name: pms-transcode
           mountPath: /transcode
