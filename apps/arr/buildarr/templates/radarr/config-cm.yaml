@@ -200,6 +200,7 @@ data:
               proxy:
                 enable: false
               security:
+                authentication: external
                 certificate_validation: enabled
               analytics:
                 send_anonymous_usage_data: false

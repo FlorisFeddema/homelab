@@ -125,6 +125,7 @@ data:
               definitions: []
             general:
               security:
+                # authentication: external
                 certificate_validation: enabled
               proxy:
                 enable: false
