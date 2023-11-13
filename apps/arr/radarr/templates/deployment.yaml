@@ -50,6 +50,9 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: data
+          volumeMounts:
+            - mountPath: /media
+              name: media
       volumes:
         - name: initial-config
           configMap:
@@ -57,3 +60,7 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: radarr-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: radarr-media
+  

@@ -8,3 +8,16 @@ spec:
   resources:
     requests:
       storage: 50Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-media
+spec:
+  storageClassName: ""
+  volumeName: media
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti
