@@ -1,0 +1,8 @@
+apiVersion: v2
+name: plex
+version: 1.0.0
+
+dependencies:
+  - name: plex
+    version: 0.1.6
+    repository: https://raw.githubusercontent.com/plexinc/pms-docker/gh-pages

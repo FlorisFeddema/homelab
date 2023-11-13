@@ -1,7 +1,3 @@
-alpine:
-  image:
-    repository: alpine
-    tag: 3.18.4
 sonarr:
   image:
     repository: ghcr.io/linuxserver/sonarr

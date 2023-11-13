@@ -31,14 +31,14 @@ spec:
             - name: PGID
               value: '5000'
           ports:
-            - containerPort: 7878
-              name: http
+            - name: http
               protocol: TCP
+              containerPort: 7878
           volumeMounts:
-            - mountPath: /config
-              name: data
-            - mountPath: /media
-              name: media
+            - name: data
+              mountPath: /config
+            - name: media
+              mountPath: /media
       volumes:
         - name: data
           persistentVolumeClaim:

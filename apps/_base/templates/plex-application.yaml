@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: plex
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/broersma-forslund/homelab.git
+    path: apps/plex
+    targetRevision: HEAD
+  syncPolicy: {}
+  destination:
+    name: in-cluster
+    namespace: plex

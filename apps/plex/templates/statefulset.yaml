@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: plex
+spec:
+  serviceName: plex
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: plex
+      app.kubernetes.io/name: plex
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: plex
+        app.kubernetes.io/name: plex
+    spec:
+      nodeSelector:
+        gpu.intel.com/device.count: 1
+      containers:
+      - name: plex
+        image: '{{ .Values.plex.image.repository }}:{{ .Values.plex.image.tag }}'
+        ports:
+        - name: http
+          containerPort: 32400
+        env:
+          - name: PLEX_CLAIM
+            value: claim-9P_SbAwsPtoUko7Jabge
+        volumeMounts:
+        - name: pms-transcode
+          mountPath: /transcode
+        - name: pms-config
+          mountPath: /config
+        - name: media
+          mountPath: /media
+      volumes:
+      - name: pms-transcode
+        emptyDir: {}
+      - name: media
+        persistentVolumeClaim:
+          claimName: plex-media
+  volumeClaimTemplates:
+  - metadata:
+      name: pms-config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi

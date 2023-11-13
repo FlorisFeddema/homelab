@@ -35,10 +35,10 @@ spec:
               name: http
               protocol: TCP
           volumeMounts:
-            - mountPath: /config
-              name: data
-            - mountPath: /media
-              name: media
+            - name: data
+              mountPath: /config
+            - name: media
+              mountPath: /media
       volumes:
         - name: data
           persistentVolumeClaim:
