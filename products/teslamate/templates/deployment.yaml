@@ -39,8 +39,6 @@ spec:
               value: "teslamate"
             - name: DATABASE_HOST
               value: "platform-pgbouncer.pgo.svc"
-            - name: DATABASE_PORT
-              value: "5432"
             - name: TZ
               value: "{{ .Values.config.timezone }}"
             - name: ENCRYPTION_KEY
