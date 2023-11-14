@@ -10,7 +10,10 @@ spec:
     repoURL: https://github.com/broersma-forslund/homelab.git
     path: apps/intel-device-operator
     targetRevision: HEAD
-  syncPolicy: {}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
   destination:
     name: in-cluster
     namespace: intel-device-operator
