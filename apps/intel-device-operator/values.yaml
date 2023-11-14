@@ -1,7 +1,7 @@
 intel-device-plugins-gpu:
   name: intel-device-plugins-gpu
 
-  sharedDevNum: 2
-  logLevel: 2
-  resourceManager: true
+  sharedDevNum: 1
+  logLevel: 5
+  resourceManager: false
   nodeFeatureRule: true
