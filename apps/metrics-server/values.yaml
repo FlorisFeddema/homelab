@@ -1,0 +1,4 @@
+metrics-server:
+
+  metrics:
+    enabled: true
