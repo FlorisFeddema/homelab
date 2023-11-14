@@ -26,4 +26,5 @@ data:
   SAML_ASSERTION_ENCRYPTED: "False"
   SAML_WANT_MESSAGE_SIGNED: "False"
   SAML_CERT: "/certs/saml.crt"
-  SAML_DEBUG: "True"
+  SAML_KEY: "/certs/saml.crt"
+  SAML_DEBUG: "False"
