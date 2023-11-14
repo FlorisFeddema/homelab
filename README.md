@@ -27,7 +27,7 @@ We currently use the following talos-provided additional components:
 Talos system-extensions are compatible with specific versions of talos. To find the correct extension version for the talos version run:
 
 ```
-TALOS_CONFIG=/path/to/talos/config
+export TALOSCONFIG=/path/to/talos/config
 TALOS_VERSION=$(talosctl version --short | grep Tag | sed -n 's/.*Tag://p' | sed -e 's/^[ \t]*//')
 echo $TALOS_VERSION
 ```
@@ -43,8 +43,10 @@ Example:
 ```
 ISCSI_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep iscsi-tools)
 QEMU_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep qemu)
+I915_UCODE_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep i915-ucode)
 echo $ISCSI_IMAGE
 echo $QEMU_IMAGE
+echo $I915_UCODE_IMAGE
 ```
 
 To create the custom image run the `imager` container with the following command:
@@ -52,9 +54,9 @@ To create the custom image run the `imager` container with the following command
 ```
 mkdir _images
 docker run --rm -t -v $PWD/_images:/out --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION iso \
-  --system-extension-image $ISCSI_IMAGE --system-extension-image $QEMU_IMAGE
+  --system-extension-image $ISCSI_IMAGE --system-extension-image $QEMU_IMAGE --system-extension-image $I915_UCODE_IMAGE
 docker run --rm -t -v $PWD/_images:/out --privileged ghcr.io/siderolabs/imager:$TALOS_VERSION installer \
-  --system-extension-image $ISCSI_IMAGE --system-extension-image $QEMU_IMAGE
+  --system-extension-image $ISCSI_IMAGE --system-extension-image $QEMU_IMAGE --system-extension-image $I915_UCODE_IMAGE
 ```
 
 Now upload the installer iso and image to proxmox and the container registry. Go to https://github.com/settings/tokens/new?scopes=write:packages and create a new PAT with the selected scope.
