@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bazarr
+spec:
+  rules:
+    - host: bazarr.mobrockers.com
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: bazarr
+                port:
+                  name: http
+            pathType: Prefix
+  tls:
+    - hosts:
+        - bazarr.mobrockers.com

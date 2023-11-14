@@ -1,0 +1,4 @@
+bazarr:
+  image:
+    repository: ghcr.io/linuxserver/bazarr
+    tag: 1.3.1

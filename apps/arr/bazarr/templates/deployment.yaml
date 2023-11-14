@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prowlarr
+  name: bazarr
 spec:
   replicas: 1
   revisionHistoryLimit: 0
@@ -9,19 +9,19 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app.kubernetes.io/instance: prowlarr
-      app.kubernetes.io/name: prowlarr
+      app.kubernetes.io/instance: bazarr
+      app.kubernetes.io/name: bazarr
   template:
     metadata:
       labels:
-        app.kubernetes.io/instance: prowlarr
-        app.kubernetes.io/name: prowlarr 
+        app.kubernetes.io/instance: bazarr
+        app.kubernetes.io/name: bazarr 
     spec:
       automountServiceAccountToken: false
       securityContext:
       containers:
-        - name: prowlarr
-          image: '{{ .Values.prowlarr.image.repository }}:{{ .Values.prowlarr.image.tag }}'
+        - name: bazarr
+          image: '{{ .Values.bazarr.image.repository }}:{{ .Values.bazarr.image.tag }}'
           env:
             - name: TZ
               value: TZ=Europe/Amsterdam
@@ -30,13 +30,18 @@ spec:
             - name: PGID
               value: '5000'
           ports:
-            - containerPort: 9696
+            - containerPort: 6767
               name: http
               protocol: TCP
           volumeMounts:
             - name: data
               mountPath: /config
+            - name: media
+              mountPath: /media
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: prowlarr-data
+            claimName: bazarr-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: bazarr-media
