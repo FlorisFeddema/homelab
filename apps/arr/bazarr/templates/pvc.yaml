@@ -8,3 +8,41 @@ spec:
   resources:
     requests:
       storage: 50Mi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bazarr-media
+spec:
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=3
+    - nolock
+    - noatime
+  capacity:
+    storage: 1Ti
+  csi:
+    driver: org.democratic-csi.node-manual
+    readOnly: false
+    fsType: nfs
+    volumeHandle: 18a5a7f5-69ec-4365-851f-62391e66660f
+    volumeAttributes:
+      server: truenas.mobrockers.com
+      share: /mnt/slow/media
+      node_attach_driver: nfs
+      provisioner_driver: node-manual
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bazarr-media
+spec:
+  storageClassName: ""
+  volumeName: bazarr-media
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Ti
