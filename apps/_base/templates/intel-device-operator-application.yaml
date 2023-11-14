@@ -10,6 +10,11 @@ spec:
     repoURL: https://github.com/broersma-forslund/homelab.git
     path: apps/intel-device-operator
     targetRevision: HEAD
+  ignoreDifferences:
+  - group: deviceplugin.intel.com
+    kind: GpuDevicePlugin
+    jsonPointers:
+    - /spec/resourceManager
   syncPolicy:
     automated:
       prune: true
