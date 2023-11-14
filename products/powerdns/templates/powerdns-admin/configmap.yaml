@@ -22,7 +22,7 @@ data:
   SAML_ATTRIBUTE_EMAIL: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
   SAML_ATTRIBUTE_GROUP: "http://schemas.xmlsoap.org/claims/Group"
   SAML_GROUP_ADMIN_NAME: "Admins"
-  SAML_SIGN_REQUEST: "False"
+  SAML_SIGN_REQUEST: "True"
   SAML_ASSERTION_ENCRYPTED: "False"
   SAML_WANT_MESSAGE_SIGNED: "False"
   SAML_CERT: "/certs/saml.crt"
