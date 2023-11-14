@@ -1,9 +1,10 @@
 node-feature-discovery:
-  enableNodeFeatureApi: false
-
   master:
-    replicaCount: 1
-
-  tls:
-    enable: true
-    certManager: true
+    extraLabelNs:
+    - gpu.intel.com
+    - sgx.intel.com
+    resourceLabels:
+    - gpu.intel.com/millicores
+    - gpu.intel.com/memory.max
+    - gpu.intel.com/tiles
+    - sgx.intel.com/epc
