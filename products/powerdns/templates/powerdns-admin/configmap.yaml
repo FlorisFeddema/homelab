@@ -8,15 +8,21 @@ metadata:
     app.kubernetes.io/component: "powerdnsadmin"
     {{- include "labels" . | nindent 4 }}
 data:
-  OIDC_OAUTH_ENABLED: "true"
-  OIDC_OAUTH_KEY: "pda"
-  OIDC_OAUTH_API_URL: "https://authentik.cloud.feddema.dev/application/o/pda/"
-  OIDC_OAUTH_TOKEN_URL: "https://authentik.cloud.feddema.dev/application/o/token/"
-  OIDC_OAUTH_AUTHORIZE_URL: "https://authentik.cloud.feddema.dev/application/o/authorize/"
-  OIDC_OAUTH_METADATA_URL: "https://authentik.cloud.feddema.dev/application/o/pda/.well-known/openid-configuration"
-  OIDC_OAUTH_LOGOUT_URL: "https://authentik.cloud.feddema.dev/application/o/pda/end-session/"
-  OIDC_OAUTH_SCOPE: "openid,profile,email,groups"
-  OIDC_OAUTH_USERNAME: "preferred_username"
-  OIDC_OAUTH_FIRSTNAME: "given_name"
-  OIDC_OAUTH_LAST_NAME: "family_name"
-  OIDC_OAUTH_EMAIL: "email"
+  SAML_ENABLED: True
+  SAML_PATH: os.path.join(os.path.dirname(file), 'saml')
+  SAML_METADATA_URL: https://authentik.cloud.feddema.dev/application/saml/pdnsadmin/metadata/
+  SAML_METADATA_CACHE_LIFETIME: 1
+  SAML_LOGOUT_URL: https://authentik.cloud.feddema.dev/application/saml/pdnsadmin/slo/binding/redirect/
+  SAML_SP_ENTITY_ID: pdns-admin
+  SAML_SP_CONTACT_NAME: me
+  SAML_SP_CONTACT_MAIL: me
+  SAML_NAMEID_FORMAT: urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+  SAML_ATTRIBUTE_USERNAME: http://schemas.goauthentik.io/2021/02/saml/username
+  SAML_ATTRIBUTE_NAME: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name
+  SAML_ATTRIBUTE_EMAIL: http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+  SAML_ATTRIBUTE_GROUP: http://schemas.xmlsoap.org/claims/Group
+  SAML_GROUP_ADMIN_NAME: Admins
+  SAML_SIGN_REQUEST: 'False'
+  SAML_ASSERTION_ENCRYPTED: False
+  SAML_WANT_MESSAGE_SIGNED: False
+  SAML_CERT: /certs/saml.crt
