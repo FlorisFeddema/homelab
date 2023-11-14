@@ -22,7 +22,7 @@ spec:
           containerPort: 32400
         env:
           - name: TZ
-            value: TZ=Europe/Amsterdam
+            value: Europe/Amsterdam
           - name: PUID
             value: '1000'
           - name: PGID

@@ -21,7 +21,7 @@ spec:
           image: '{{ .Values.buildarr.image.repository }}:{{ .Values.buildarr.image.tag }}'
           env:
             - name: TZ
-              value: TZ=Europe/Amsterdam
+              value: Europe/Amsterdam
             - name: PUID
               value: '1000'
             - name: PGID

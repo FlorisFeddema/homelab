@@ -25,7 +25,7 @@ spec:
           image: '{{ .Values.sonarr.image.repository }}:{{ .Values.sonarr.image.tag }}'
           env:
             - name: TZ
-              value: TZ=Europe/Amsterdam
+              value: Europe/Amsterdam
             - name: PUID
               value: '1000'
             - name: PGID
