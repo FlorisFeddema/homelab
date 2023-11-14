@@ -30,7 +30,7 @@ spec:
           - name: VERSION
             value: docker
         resources: 
-          requests: 
+          limits: 
             gpu.intel.com/i915: "1" 
         volumeMounts:
         - name: pms-transcode
