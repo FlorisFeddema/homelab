@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sabnzbd
+spec:
+  rules:
+    - host: sabnzbd.mobrockers.com
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: sabnzbd
+                port:
+                  name: http
+            pathType: Prefix
+  tls:
+    - hosts:
+        - sabnzbd.mobrockers.com

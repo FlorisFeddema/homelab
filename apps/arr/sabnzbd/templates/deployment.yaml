@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: sabnzbd
+      app.kubernetes.io/name: sabnzbd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: sabnzbd
+        app.kubernetes.io/name: sabnzbd 
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+      containers:
+        - name: sabnzbd
+          image: '{{ .Values.sabnzbd.image.repository }}:{{ .Values.sabnzbd.image.tag }}'
+          env:
+            - name: TZ
+              value: Europe/Amsterdam
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '5000'
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: media
+              mountPath: /media
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: sabnzbd-data
+        - name: media
+          persistentVolumeClaim:
+            claimName: sabnzbd-media

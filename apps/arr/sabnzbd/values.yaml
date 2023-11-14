@@ -1,0 +1,4 @@
+sabnzbd:
+  image:
+    repository: ghcr.io/linuxserver/sabnzbd
+    tag: 4.1.0
