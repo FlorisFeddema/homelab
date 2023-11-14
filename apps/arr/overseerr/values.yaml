@@ -1,0 +1,4 @@
+prowlarr:
+  image:
+    repository: sctx/overseerr
+    tag: 1.33.2
