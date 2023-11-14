@@ -2,7 +2,6 @@ cilium:
   k8sServiceHost: k8s.mobrockers.com
   k8sServicePort: 6443
   kubeProxyReplacement: strict
-
   rollOutCiliumPods: true
 
   ipam:
@@ -10,6 +9,9 @@ cilium:
 
   l2announcements:
     enabled: true
+  k8sClientRateLimit: # higher rate limit due to l2announcements
+    qps: 15
+    burst: 30
 
   hostFirewall:
     enabled: true
