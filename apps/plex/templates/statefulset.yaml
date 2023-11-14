@@ -14,8 +14,6 @@ spec:
         app.kubernetes.io/instance: plex
         app.kubernetes.io/name: plex
     spec:
-      nodeSelector:
-        'gpu.intel.com/device.count': '1'
       containers:
       - name: plex
         image: '{{ .Values.plex.image.repository }}:{{ .Values.plex.image.tag }}'
@@ -31,6 +29,9 @@ spec:
             value: '5000'
           - name: VERSION
             value: docker
+        resources: 
+          requests: 
+            gpu.intel.com/i915: "1" 
         volumeMounts:
         - name: pms-transcode
           mountPath: /transcode
