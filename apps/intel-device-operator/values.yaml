@@ -3,9 +3,5 @@ intel-device-plugins-gpu:
 
   sharedDevNum: 1
   logLevel: 2
-  allocationPolicy: "none"
-
-  # nodeSelector:
-  #   intel.feature.node.kubernetes.io/gpu: 'true'
-
+  resourceManager: true
   nodeFeatureRule: true
