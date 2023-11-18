@@ -1,0 +1,30 @@
+authentik:
+  ingress:
+    enabled: true
+    hosts:
+      - host: authentik.mobrockers.com
+        paths:
+          - path: "/"
+            pathType: Prefix
+    tls:
+      - hosts:
+          - authentik.mobrockers.com
+
+  env:
+    AUTHENTIK_POSTGRESQL__HOST: env://AUTHENTIK_DATA_RW_SERVICE_HOST
+  envValueFrom:
+    AUTHENTIK_SECRET_KEY:
+      secretKeyRef:
+        key: secretKey
+        name: authentik-secret
+    AUTHENTIK_POSTGRESQL__USER:
+      secretKeyRef:
+        key: username
+        name: authentik-data-app
+    AUTHENTIK_POSTGRESQL__PASSWORD:
+      secretKeyRef:
+        key: password
+        name: authentik-data-app
+
+  redis:
+    enabled: true
