@@ -17,6 +17,10 @@ authentik:
       secretKeyRef:
         key: secretKey
         name: authentik-secret
+    AUTHENTIK_POSTGRESQL__NAME: # DB Name
+      secretKeyRef:
+        key: dbname
+        name: authentik-data-app
     AUTHENTIK_POSTGRESQL__USER:
       secretKeyRef:
         key: username
