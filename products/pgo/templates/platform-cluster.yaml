@@ -72,6 +72,12 @@ spec:
         - powerdnsadmin
       password:
         type: "AlphaNumeric"
+    - name: powerdnsreplicator
+      databases:
+        - powerdnsprimary
+      password:
+        type: "AlphaNumeric"
+      options: "REPLICATION"
     - name: teslamate
       databases:
         - teslamate
