@@ -57,9 +57,14 @@ spec:
     - name: authentik
       databases:
         - authentik
-    - name: powerdns
+    - name: powerdnsprimary
       databases:
-        - powerdns
+        - powerdnsprimary
+      password:
+        type: "AlphaNumeric"
+    - name: powerdnssecondary
+      databases:
+        - powerdnssecondary
       password:
         type: "AlphaNumeric"
     - name: powerdnsadmin
