@@ -1,4 +1,0 @@
-buildarr:
-  image:
-    repository: callum027/buildarr
-    tag: 0.7.1
