@@ -30,20 +30,20 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: TEMPLATE_FILES
-              value: pdns
+              value: "pdns"
             - name: PDNS_AUTH_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.config.apiKey.existingSecret }}
                   key: apiKey
             - name: POWERDNS_POSTGRES_HOST
-              value: {{ .Values.primary.postgres.host }}
+              value: "{{ .Values.primary.postgres.host }}"
             - name: POWERDNS_POSTGRES_PORT
-              value: {{ .Values.primary.postgres.port }}
+              value: "{{ .Values.primary.postgres.port }}"
             - name: POWERDNS_POSTGRES_USERNAME
-              value: {{ .Values.primary.postgres.user }}
+              value: "{{ .Values.primary.postgres.user }}"
             - name: POWERDNS_POSTGRES_DATABASE
-              value: {{ .Values.primary.postgres.databaseName }}
+              value: "{{ .Values.primary.postgres.databaseName }}"
             - name: POWERDNS_POSTGRES_PASSSWORD
               valueFrom:
                 secretKeyRef:
