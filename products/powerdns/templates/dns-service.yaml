@@ -5,7 +5,7 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "powerdns"
+    app.kubernetes.io/component: "powerdns-dns"
     {{- include "labels" . | nindent 4 }}
 spec:
   type: LoadBalancer
@@ -21,4 +21,4 @@ spec:
   selector:
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "powerdns"
+    app.kubernetes.io/component: "powerdns-secondary"

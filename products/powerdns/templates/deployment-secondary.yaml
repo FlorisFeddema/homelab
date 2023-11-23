@@ -1,57 +1,60 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "powerdns.fullname" . }}
+  name: {{ template "powerdns.fullname" . }}-secondary
   labels:
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "powerdns"
+    app.kubernetes.io/component: "powerdns-secondary"
     {{- include "labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
-  replicas: {{ .Values.replicas }}
+  replicas: {{ .Values.secondary.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "powerdns.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/component: "powerdns"
+      app.kubernetes.io/component: "powerdns-secondary"
       {{- include "labels" . | nindent 6 }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ template "powerdns.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/component: "powerdns"
+        app.kubernetes.io/component: "powerdns-secondary"
         {{- include "labels" . | nindent 8 }}
     spec:
       containers:
-        - name: powerdns
+        - name: powerdns-secondary
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
             - name: TEMPLATE_FILES
               value: pdns
-            - name: PDNS_AUTH_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.powerdns.apiKey.existingSecret }}
-                  key: apiKey
+            - name: POWERDNS_POSTGRES_HOST
+              value: {{ .Values.secondary.postgres.host }}
+            - name: POWERDNS_POSTGRES_PORT
+              value: {{ .Values.secondary.postgres.port }}
+            - name: POWERDNS_POSTGRES_USERNAME
+              value: {{ .Values.secondary.postgres.user }}
+            - name: POWERDNS_POSTGRES_DATABASE
+              value: {{ .Values.secondary.postgres.databaseName }}
             - name: POWERDNS_POSTGRES_PASSSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.powerdns.database.postgres.existingSecret }}
+                  name: {{ .Values.secondary.postgres.existingSecret }}
                   key: postgres-password
           ports:
-            - name: dns-udp
-              containerPort: 5300
-              protocol: UDP
-            - name: dns-tcp
-              containerPort: 5300
-              protocol: TCP
             - name: api
               containerPort: 8081
               protocol: TCP
-          resources: {{ toYaml .Values.resources | nindent 12 }}
+            - name: dns-tcp
+              containerPort: 5300
+              protocol: TCP
+            - name: dns-udp
+              containerPort: 5300
+              protocol: UDP
+          resources: {{ toYaml .Values.secondary.resources | nindent 12 }}
           volumeMounts:
             - name: custom-config
               mountPath: /etc/powerdns/templates.d

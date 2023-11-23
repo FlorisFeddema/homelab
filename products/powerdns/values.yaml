@@ -2,25 +2,35 @@ fullnameOverride:
 nameOverride:
 commonlabels:
 
-replicas: 1
-
 image:
   registry: docker.io
   repository: powerdns/pdns-auth-48
   tag: 4.8.3
 
-resources: {}
-
-powerdns:
-  database:
-    postgres:
-      existingSecret: "powerdns-credentials" #key = postgres-password
-      host: 'platform-pgbouncer.pgo.svc'
-      port: 5432
-      databaseName: 'powerdns'
-      user: 'powerdns'
+config:
+  logLevel: 4
+  defaultTtl: 3600
   apiKey:
     existingSecret: "powerdns-credentials" #key = apiKey
+
+primary:
+  resources: {}
+  postgres:
+    existingSecret: "powerdnsprimary-credentials" #key = postgres-password
+    host: 'platform-pgbouncer.pgo.svc'
+    port: 5432
+    databaseName: 'powerdnsprimary'
+    user: 'powerdnsprimary'
+
+secondary:
+  resources: {}
+  replicas: 1
+  postgres:
+    existingSecret: "powerdnssecondary-credentials" #key = postgres-password
+    host: 'platform-pgbouncer.pgo.svc'
+    port: 5432
+    databaseName: 'powerdnsprimary'
+    user: 'powerdnssecondary'
 
 admin:
   replicas: 1
