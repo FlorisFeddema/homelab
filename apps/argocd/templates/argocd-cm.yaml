@@ -2,13 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-cm
-  namespace: argocd
   labels:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
 data:
-  admin.enabled: true
-  exec.enabled: true
+  admin.enabled: "true"
+  exec.enabled: "true"
   url: https://argocd.mobrockers.com
   statusbadge.enabled: "false"
   users.anonymous.enabled: "false"
