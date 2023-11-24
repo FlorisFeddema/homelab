@@ -11,7 +11,7 @@ config:
   logLevel: 4
   defaultTtl: 3600
   apiKey:
-    existingSecret: "powerdns-credentials" #key = apiKey
+    existingSecret: "powerdnsprimary-credentials" #key = apiKey
 
 primary:
   resources: {}
