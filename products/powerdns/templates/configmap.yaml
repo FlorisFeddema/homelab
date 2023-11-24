@@ -12,6 +12,9 @@ data:
     loglevel={{ .Values.config.logLevel }}
     default-ttl={{ .Values.config.defaultTtl}}
     webserver-port=8081
+    log-dns-queries=yes
+    log-dns-details=yes
+    loglevel=7
 
   pdns.j2: |
     gpgsql-host={{ printf "{{POWERDNS_POSTGRES_HOST}}" }}
