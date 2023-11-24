@@ -6,15 +6,16 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
 data:
-  admin.enabled: "true"
-  exec.enabled: "true"
+  application.resourceTrackingMethod: annotation
+  admin.enabled: 'true'
+  exec.enabled: 'true'
   url: https://argocd.mobrockers.com
-  statusbadge.enabled: "false"
-  users.anonymous.enabled: "false"
+  statusbadge.enabled: 'false'
+  users.anonymous.enabled: 'false'
 
   oidc.config: |
     name: Authentik
     issuer: https://authentik.mobrockers.com/application/o/argocd/
     clientID: $authentik-credentials:client_id
     clientSecret: $authentik-credentials:client_secret
-    requestedScopes: ["openid", "profile", "email", "groups"]
+    requestedScopes: ['openid', 'profile', 'email', 'groups']
