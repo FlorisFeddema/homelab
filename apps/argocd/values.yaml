@@ -1,19 +1,26 @@
 argo-cd:
-  configs:
-    cm:
-      exec.enabled: true
+  global:
+    revisionHistoryLimit: 0
 
+  dex:
+    enabled: false
+  applicationSet:
+    enabled: false
+  notifications:
+    enabled: false
+
+  configs:
     secret:
       createSecret: true
-
+    cm:
+      create: false
+    rbac:
+      create: false
     params:
-      server.insecure: true
+      create: false
 
   controller:
     replicas: 1
-
-  dex:
-    enabled: true
 
   redis:
     enabled: true
@@ -33,9 +40,3 @@ argo-cd:
 
   repoServer:
     replicas: 1
-
-  applicationSet:
-    enabled: false
-
-  notifications:
-    enabled: false
