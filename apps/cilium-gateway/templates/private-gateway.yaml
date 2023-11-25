@@ -20,16 +20,16 @@ spec:
         from: All
     tls:
       mode: Terminate
-        certificateRefs:
-        - name: star-mobrockers-com-tls
+      certificateRefs:
+      - name: star-mobrockers-com-tls
   - name: ldaps
     protocol: TLS
     port: 636
     hostname: 'ldap.mobrockers.com'
     tls:
       mode: Terminate
-        certificateRefs:
-        - name: star-mobrockers-com-tls
+      certificateRefs:
+      - name: star-mobrockers-com-tls
     allowedRoutes:
       namespaces:
         from: Selector
