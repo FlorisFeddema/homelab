@@ -26,13 +26,16 @@ spec:
     protocol: TLS
     port: 636
     hostname: 'ldap.mobrockers.com'
-    allowedRoutes:
-      namespaces:
-        from: Selector
     tls:
       mode: Terminate
         certificateRefs:
         - name: star-mobrockers-com-tls
+    allowedRoutes:
+      namespaces:
+        from: Selector
+      selector:
+        matchLabels:
+          app: authentik-ldap
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
