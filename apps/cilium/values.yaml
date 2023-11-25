@@ -15,6 +15,9 @@ cilium:
 
   hostFirewall:
     enabled: true
+  
+  gatewayAPI:
+    enabled: true
 
   hubble:
     enabled: true
