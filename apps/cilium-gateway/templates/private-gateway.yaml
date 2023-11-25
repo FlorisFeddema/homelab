@@ -34,9 +34,9 @@ spec:
     allowedRoutes:
       namespaces:
         from: Selector
-      selector:
-        matchLabels:
-          app: authentik-ldap
+        selector:
+          matchLabels:
+            app: authentik-ldap
     tls:
       mode: Terminate
       certificateRefs:
