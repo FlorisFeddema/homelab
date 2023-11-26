@@ -2,8 +2,6 @@ apiVersion: gateway.networking.k8s.io/v1alpha2
 kind: TLSRoute
 metadata:
   name: ldap-route
-  labels:
-    app.kubernetes.io/name: authentik-ldap
 spec:
   parentRefs:
   - name: private-gateway

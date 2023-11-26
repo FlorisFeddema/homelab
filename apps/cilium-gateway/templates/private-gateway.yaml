@@ -36,7 +36,7 @@ spec:
         from: Selector
         selector:
           matchLabels:
-            app.kubernetes.io/name: authentik-ldap
+            use-private-gateway-ldaps: 'true'
     tls:
       mode: Terminate
       certificateRefs:
