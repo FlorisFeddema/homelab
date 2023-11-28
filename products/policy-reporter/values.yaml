@@ -1,6 +1,7 @@
 policy-reporter:
   replicaCount: 1
   worker: 5
+  revisionHistoryLimit: 0
 
   resources:
     limits:

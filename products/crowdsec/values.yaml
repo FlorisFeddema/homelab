@@ -1,7 +1,6 @@
 crowdsec:
   container_runtime: containerd
 
-
   lapi:
     resources:
       limits:

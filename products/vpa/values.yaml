@@ -1,6 +1,7 @@
 vpa:
   recommender:
     enabled: true
+    revisionHistoryLimit: 0
     extraArgs:
       v: "4"
       pod-recommendation-min-cpu-millicores: 5
@@ -17,6 +18,7 @@ vpa:
 
   updater:
     enabled: true
+    revisionHistoryLimit: 0
     replicaCount: 1
     resources:
       limits:
@@ -26,6 +28,7 @@ vpa:
         memory: 128Mi
 
   admissionController:
+    revisionHistoryLimit: 0
     enabled: true
     generateCertificate: true
     replicaCount: 1

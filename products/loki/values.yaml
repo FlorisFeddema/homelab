@@ -1,6 +1,6 @@
 loki:
   loki:
-    revisionHistoryLimit: 2
+    revisionHistoryLimit: 0
     auth_enabled: false
     commonConfig:
       replication_factor: 1

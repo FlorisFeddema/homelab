@@ -69,7 +69,7 @@ ingress-nginx:
         mountPath: /etc/nginx/lua/plugins/crowdsec
         subPath: crowdsec
 
-  revisionHistoryLimit: 2
+  revisionHistoryLimit: 0
 
   defaultBackend:
     enabled: true

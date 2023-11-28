@@ -9,6 +9,8 @@ promtail:
       cpu: 30m
       memory: 128Mi
 
+  revisionHistoryLimit: 0
+
   serviceMonitor:
     enabled: true
 
