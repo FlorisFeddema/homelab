@@ -9,9 +9,12 @@ cilium:
 
   l2announcements:
     enabled: true
+    leaseDuration: 2s
+    leaseRenewDeadline: 2s
+    leaseRetryPeriod: 300ns
   k8sClientRateLimit: # higher rate limit due to l2announcements
-    qps: 15
-    burst: 30
+    qps: 30
+    burst: 45
 
   hostFirewall:
     enabled: true
