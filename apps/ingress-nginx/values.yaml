@@ -2,11 +2,8 @@ ingress-nginx:
   revisionHistoryLimit: 0
 
   controller:
-
-    allowSnippetAnnotations: true
-    ingressClassResource:
-      default: true
-
+    kind: DaemonSet
+    
     service:
       enabled: true
       external:
@@ -17,6 +14,10 @@ ingress-nginx:
           'io.cilium/lb-ipam-ips': 10.0.10.130
         externalTrafficPolicy: Local
 
+    allowSnippetAnnotations: true
+    ingressClassResource:
+      default: true
+    
     extraArgs:
       default-ssl-certificate: ingress-nginx/default-wildcard-certificate
       update-status-on-shutdown: 'false'
