@@ -1,9 +1,9 @@
 apiVersion: v2
 name: smartmeter-gateway-prometheus-exporter
 type: application
-version: 1.0.0
+version: 1.0.1
 
 dependencies:
   - name: smartmeter-gateway-prometheus-exporter
-    version: 0.1.1
+    version: 0.1.2
     repository: https://florisfeddema.github.io/smartmeter-gateway-prometheus-exporter/
