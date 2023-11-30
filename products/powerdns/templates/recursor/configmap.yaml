@@ -1,20 +1,17 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "powerdns.fullname" . }}-config
+  name: {{ template "powerdns.fullname" . }}-recursor-config
 data:
-  pdns.conf: |
+  recursor.conf: |
     local-address=0.0.0.0,::
-    include-dir=/etc/powerdns/pdns.d
-    launch=gpgsql
-    dnsupdate=yes
+    include-dir=/etc/powerdns/recursor.d
     local-port=5300
-    loglevel={{ .Values.config.logLevel }}
-    default-ttl={{ .Values.config.defaultTtl}}
+    loglevel={{ .Values.recursor.config.logLevel }}
+    default-ttl={{ .Values.recursor.config.defaultTtl}}
     webserver-port=8081
-    log-dns-queries=yes
-    log-dns-details=yes
-    loglevel=7
+    log-dns-queries={{ .Values.recursor.config.logDnsQueries}}
+    log-dns-details={{ .Values.recursor.config.logDnsDetails}}
 
   pdns.j2: |
     gpgsql-host={{ printf "{{POWERDNS_POSTGRES_HOST}}" }}
@@ -22,3 +19,4 @@ data:
     gpgsql-user={{ printf "{{POWERDNS_POSTGRES_USERNAME}}" }}
     gpgsql-dbname={{ printf "{{POWERDNS_POSTGRES_DATABASE}}" }}
     gpgsql-password={{ printf "{{POWERDNS_POSTGRES_PASSSWORD}}" }}
+
