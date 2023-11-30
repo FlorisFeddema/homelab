@@ -35,8 +35,7 @@
       "asDropdown": true,
       "icon": "external link",
       "tags": [
-        "TeslaMate",
-        "Prometheus"
+        "tesla"
       ],
       "title": "Dashboards",
       "type": "dashboards"
@@ -183,7 +182,8 @@
   "schemaVersion": 36,
   "style": "dark",
   "tags": [
-    "tesla"
+    "TeslaMate",
+    "Prometheus"
   ],
   "templating": {
     "list": [
