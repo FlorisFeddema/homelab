@@ -33,7 +33,7 @@ grafana:
           jsonData:
             handleGrafanaManagedAlerts: false
             implementation: prometheus
-        - name: TeslaMate
+        - name: TeslaMate2
           type: postgres
           url: platform-pgbouncer.pgo.svc:5432
           user: $TESLAMATE_DATABASE_USER
