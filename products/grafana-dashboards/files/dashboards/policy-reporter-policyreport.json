@@ -417,7 +417,9 @@
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
-    "Policy Reporter"
+    "Policy Reporter",
+    "Kyverno",
+    "Prometheus"
   ],
   "templating": {
     "list": [

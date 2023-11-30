@@ -8841,7 +8841,10 @@
   "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "Victoria-Metrics",
+    "Prometheus"
+  ],
   "templating": {
     "list": [
       {

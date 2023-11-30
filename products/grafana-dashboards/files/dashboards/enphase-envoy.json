@@ -594,7 +594,9 @@
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
-    "Energy"
+    "Energy",
+    "Home",
+    "Prometheus"
   ],
   "templating": {
     "list": []

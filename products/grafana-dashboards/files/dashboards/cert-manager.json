@@ -1243,7 +1243,8 @@
   "schemaVersion": 19,
   "style": "dark",
   "tags": [
-    "k8s"
+    "Cert-manager",
+    "Prometheus"
   ],
   "templating": {
     "list": [

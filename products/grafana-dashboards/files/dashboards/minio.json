@@ -33,7 +33,8 @@
       "includeVars": true,
       "keepTime": true,
       "tags": [
-        "minio"
+        "Minio",
+        "Prometheus"
       ],
       "type": "dashboards"
     }

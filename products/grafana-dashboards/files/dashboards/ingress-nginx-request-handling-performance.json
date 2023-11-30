@@ -911,7 +911,8 @@
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
-    "nginx"
+    "NGINX",
+    "Prometheus"
   ],
   "templating": {
     "list": [

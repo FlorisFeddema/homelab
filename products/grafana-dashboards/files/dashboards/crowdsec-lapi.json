@@ -720,7 +720,10 @@
   "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "Crowdsec",
+    "Prometheus"
+  ],
   "templating": {
     "list": [
       {

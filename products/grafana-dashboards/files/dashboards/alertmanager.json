@@ -3480,9 +3480,8 @@
   "schemaVersion": 38,
   "style": "dark",
   "tags": [
-    "alertmanager",
-    "prometheus",
-    "alerting"
+    "Alertmanager",
+    "Prometheus"
   ],
   "templating": {
     "list": [

@@ -808,7 +808,11 @@
   "refresh": "",
   "schemaVersion": 37,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "Kepler",
+    "Prometheus",
+    "Energy"
+  ],
   "templating": {
     "list": [
       {

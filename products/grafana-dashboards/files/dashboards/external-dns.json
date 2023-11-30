@@ -1517,8 +1517,8 @@
       "schemaVersion": 37,
       "style": "dark",
       "tags": [
-        "external-dns",
-        "dns"
+        "External-dns",
+        "Prometheus"
       ],
       "templating": {
         "list": [
