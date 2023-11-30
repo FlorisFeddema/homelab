@@ -12,11 +12,3 @@ data:
     webserver-port=8081
     log-dns-queries={{ .Values.recursor.config.logDnsQueries}}
     log-dns-details={{ .Values.recursor.config.logDnsDetails}}
-
-  pdns.j2: |
-    gpgsql-host={{ printf "{{POWERDNS_POSTGRES_HOST}}" }}
-    gpgsql-port={{ printf "{{POWERDNS_POSTGRES_PORT}}" }}
-    gpgsql-user={{ printf "{{POWERDNS_POSTGRES_USERNAME}}" }}
-    gpgsql-dbname={{ printf "{{POWERDNS_POSTGRES_DATABASE}}" }}
-    gpgsql-password={{ printf "{{POWERDNS_POSTGRES_PASSSWORD}}" }}
-
