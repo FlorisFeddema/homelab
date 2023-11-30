@@ -8,7 +8,6 @@ data:
     include-dir=/etc/powerdns/recursor.d
     local-port=5300
     loglevel={{ .Values.recursor.config.logLevel }}
-    default-ttl={{ .Values.recursor.config.defaultTtl}}
     webserver-port=8081
     log-dns-queries={{ .Values.recursor.config.logDnsQueries}}
     log-dns-details={{ .Values.recursor.config.logDnsDetails}}

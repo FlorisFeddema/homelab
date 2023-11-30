@@ -46,7 +46,6 @@ recursor:
 
   config:
     logLevel: 4
-    defaultTtl: 3600
     logDnsDetails: yes
     logDnsQueries: yes
     apiKey:
