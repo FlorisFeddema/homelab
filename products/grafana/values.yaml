@@ -36,13 +36,13 @@ grafana:
         - name: TeslaMate
           type: postgres
           url: platform-pgbouncer.pgo.svc:5432
-          user: teslamate
+          user: $TESLAMATE_DATABASE_USER
           database: teslamate
           secureJsonData:
             password: $TESLAMATE_DATABASE_PASSWORD
           jsonData:
             postgresVersion: 1500
-            sslmode: 'disabled'
+            sslmode: 'disable'
           version: 1
           editable: false
 
