@@ -41,7 +41,6 @@ grafana:
           access: proxy
           basicAuth: false
           withCredentials: false
-          isDefault: true
           secureJsonData:
             password: $TESLAMATE_DATABASE_PASSWORD
           jsonData:
