@@ -51,8 +51,6 @@ recursor:
     apiKey:
       existingSecret: "powerdns-recursor-credentials" #key = apiKey
 
-
-
 admin:
   replicas: 1
 
