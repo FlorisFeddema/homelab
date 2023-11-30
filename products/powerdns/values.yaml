@@ -46,8 +46,6 @@ recursor:
 
   config:
     logLevel: 4
-    logDnsDetails: yes
-    logDnsQueries: yes
     apiKey:
       existingSecret: "powerdns-recursor-credentials" #key = apiKey
 

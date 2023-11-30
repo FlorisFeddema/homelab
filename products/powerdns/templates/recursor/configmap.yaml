@@ -9,6 +9,5 @@ data:
     local-port=5300
     loglevel={{ .Values.recursor.config.logLevel }}
     webserver-port=8081
-    log-dns-details={{ .Values.recursor.config.logDnsDetails}}
 
   pdns.j2: ""
