@@ -9,7 +9,7 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
-  replicas: {{ .Values.secondary.replicas }}
+  replicas: {{ .Values.auth.secondary.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "powerdns.name" . }}
@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: powerdns-auth-secondary
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.auth.image.registry }}/{{ .Values.auth.image.repository }}:{{ .Values.auth.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
             - name: TEMPLATE_FILES
