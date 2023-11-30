@@ -42,6 +42,8 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.recursor.resources | nindent 12 }}
           volumeMounts:
+            - name: custom-config
+              mountPath: /etc/powerdns/templates.d
             - name: default-config
               mountPath: /etc/powerdns/recursor.conf
               subPath: recursor.conf
@@ -53,6 +55,12 @@ spec:
             seccompProfile:
               type: RuntimeDefault
       volumes:
+        - name: custom-config
+          configMap:
+            name: {{ template "powerdns.fullname" . }}-recursor-config
+            items:
+              - key: pdns.j2
+                path: pdns.j2
         - name: default-config
           configMap:
             name: {{ template "powerdns.fullname" . }}-recursor-config

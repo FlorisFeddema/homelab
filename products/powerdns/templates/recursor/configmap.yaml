@@ -12,3 +12,5 @@ data:
     webserver-port=8081
     log-dns-queries={{ .Values.recursor.config.logDnsQueries}}
     log-dns-details={{ .Values.recursor.config.logDnsDetails}}
+
+  pdns.j2: ""
