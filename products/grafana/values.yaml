@@ -38,14 +38,11 @@ grafana:
           url: platform-pgbouncer.pgo.svc:5432
           user: teslamate
           database: teslamate
-          access: proxy
-          basicAuth: false
-          withCredentials: false
           secureJsonData:
             password: $TESLAMATE_DATABASE_PASSWORD
           jsonData:
             postgresVersion: 1500
-            sslmode: false
+            sslmode: 'disabled'
           version: 1
           editable: false
 
