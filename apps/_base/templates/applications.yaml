@@ -14,10 +14,10 @@ spec:
     repoURL: https://github.com/broersma-forslund/homelab.git
     targetRevision: HEAD
     path: {{ $app.path | default (printf "apps/%s" ($name | kebabcase)) }}
-  {{- with $app.valueFiles }}
-  helm:
-    valueFiles: {{ . | toYaml | nindent 6 }}
-  {{- end }}
+    {{- with $app.valueFiles }}
+    helm:
+      valueFiles: {{ . | toYaml | nindent 8 }}
+    {{- end }}
   destination:
     server: in-cluster
     namespace: {{ $app.namespace | default (kebabcase $name) }}

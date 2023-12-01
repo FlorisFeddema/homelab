@@ -10,13 +10,13 @@ spec:
     repoURL: https://github.com/broersma-forslund/homelab.git
     path: apps/_base
     targetRevision: HEAD
-  helm:
-    valueFiles:
-    - core-apps.yaml
-    - csi-apps.yaml
-    - connectivity-apps.yaml
-    - arr-apps.yaml
-    - apps.yaml
+    helm:
+      valueFiles:
+      - core-apps.yaml
+      - csi-apps.yaml
+      - connectivity-apps.yaml
+      - arr-apps.yaml
+      - apps.yaml
   syncPolicy: {}
     # automated:
     #   prune: true
