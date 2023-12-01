@@ -8,7 +8,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  {{ if $v.autoSync}}
+  project: always-sync
+  {{ else }}
   project: no-sync
+  {{ end }}
   source:
     repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
     targetRevision: HEAD
@@ -25,11 +29,9 @@ spec:
     syncOptions:
       - ServerSideApply=true
     {{ end }}
-    {{ if $v.autoSync }}
     automated:
       prune: true
       selfHeal: true
-    {{ end }}
     retry:
       limit: 2
       backoff:
