@@ -1,0 +1,41 @@
+{{- range $name, $app := .Values.apps }}
+{{- if $app.deploy }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $name | kebabcase }}
+  namespace: argocd
+  # finalizers:
+  #   - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  revisionHistoryLimit: 0
+  source:
+    repoURL: https://github.com/broersma-forslund/homelab.git
+    targetRevision: HEAD
+    path: {{ $app.path | default (printf "apps/%s" ($name | kebabcase)) }}
+  {{- with $app.valueFiles }}
+  helm:
+    valueFiles: {{ . | toYaml | nindent 6 }}
+  {{- end }}
+  destination:
+    server: in-cluster
+    namespace: {{ $app.namespace | default (kebabcase $name) }}
+  {{- with $app.ignoreDifferences }}
+  ignoreDifferences: {{ . | toYaml | nindent 6 }}
+  {{- end }}
+  syncPolicy:
+    {{- if $app.serverSideApply }}
+    syncOptions:
+      - ServerSideApply=true
+    {{- end }}
+    {{- if and (hasKey $app "autoSync") (not $app.autoSync) }}
+    automated: {}
+    {{- else }}
+    automated:
+      prune: true
+      selfHeal: true
+    {{- end }}
+---
+{{- end }}
+{{- end }}

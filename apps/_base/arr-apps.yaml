@@ -1,0 +1,19 @@
+apps:
+  sabnzbd:
+    deploy: true
+    path: apps/arr/sabnzbd
+  prowlarr:
+    deploy: true
+    path: apps/arr/prowlarr
+  sonarr:
+    deploy: true
+    path: apps/arr/sonarr
+  radarr:
+    deploy: true
+    path: apps/arr/radarr
+  overseerr:
+    deploy: true
+    path: apps/arr/overseerr
+  bazarr:
+    deploy: true
+    path: apps/arr/bazarr

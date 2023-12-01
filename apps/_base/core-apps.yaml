@@ -1,0 +1,22 @@
+apps:
+  cilium:
+    deploy: true
+    autoSync: false
+    namespace: kube-system
+  metrics-server:
+    deploy: true
+  node-feature-discovery:
+    deploy: true
+  intel-device-operator:
+    deploy: true
+    ignoreDifferences:
+    - group: deviceplugin.intel.com
+      kind: GpuDevicePlugin
+      jsonPointers:
+      - /spec/resourceManager
+  argo-cd:
+    deploy: true
+    autoSync: false
+    namespace: argocd
+  sealed-secrets:
+    deploy: true

@@ -1,0 +1,7 @@
+apps:
+  authentik:
+    deploy: true
+  plex:
+    deploy: true
+  cloudnative-postgres:
+    deploy: true

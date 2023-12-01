@@ -1,0 +1,7 @@
+apps:
+  cert-manager:
+    deploy: true
+  cilium-gateway:
+    deploy: true
+  ingress-nginx:
+    deploy: true
