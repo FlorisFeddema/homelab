@@ -10,10 +10,10 @@ spec:
     repoURL: https://github.com/broersma-forslund/homelab.git
     path: apps/_base
     targetRevision: HEAD
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  syncPolicy: {}
+    # automated:
+    #   prune: true
+    #   selfHeal: true
   destination:
     name: in-cluster
     namespace: argocd
