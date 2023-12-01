@@ -25,12 +25,13 @@ spec:
   ignoreDifferences: {{ . | toYaml | nindent 6 }}
   {{- end }}
   syncPolicy:
-    {{- if $app.serverSideApply }}
     syncOptions:
+     - FailOnSharedResource=true
+    {{- if $app.serverSideApply }}
       - ServerSideApply=true
     {{- end }}
     {{- if and (hasKey $app "autoSync") (not $app.autoSync) }}
-    automated: {}
+    automated: null
     {{- else }}
     automated:
       prune: true
