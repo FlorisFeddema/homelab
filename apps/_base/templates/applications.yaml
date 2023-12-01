@@ -19,7 +19,7 @@ spec:
       valueFiles: {{ . | toYaml | nindent 8 }}
     {{- end }}
   destination:
-    server: in-cluster
+    name: in-cluster
     namespace: {{ $app.namespace | default (kebabcase $name) }}
   {{- with $app.ignoreDifferences }}
   ignoreDifferences: {{ . | toYaml | nindent 6 }}
