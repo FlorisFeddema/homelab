@@ -5,8 +5,10 @@ kind: Application
 metadata:
   name: {{ $name | kebabcase }}
   namespace: argocd
-  # finalizers:
-  #   - resources-finalizer.argocd.argoproj.io
+  {{- if $app.finalize }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  {{- end }}
 spec:
   project: default
   revisionHistoryLimit: 0

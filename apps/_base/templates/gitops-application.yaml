@@ -2,8 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: gitops
-  # finalizers:
-  #   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -17,10 +15,12 @@ spec:
       - connectivity-apps.yaml
       - arr-apps.yaml
       - apps.yaml
-  syncPolicy: {}
-    # automated:
-    #   prune: true
-    #   selfHeal: true
+  syncPolicy:
+    syncOptions:
+     - FailOnSharedResource=true
+    automated:
+      prune: true
+      selfHeal: true
   destination:
     name: in-cluster
     namespace: argocd
