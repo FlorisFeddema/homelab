@@ -14,7 +14,7 @@ apps:
       kind: GpuDevicePlugin
       jsonPointers:
       - /spec/resourceManager
-  argo-cd:
+  argocd:
     deploy: true
     autoSync: false
     namespace: argocd
