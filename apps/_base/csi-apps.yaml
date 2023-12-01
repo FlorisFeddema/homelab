@@ -1,21 +1,25 @@
 apps:
   democratic-csi-iscsi-hdd:
     deploy: true
+    autoSync: false
     path: apps/democratic-csi/chart
     valueFiles:
       - ../iscsi-hdd-values.yaml
   democratic-csi-nfs-hdd:
     deploy: true
+    autoSync: false
     path: apps/democratic-csi/chart
     valueFiles:
       - ../nfs-hdd-values.yaml
   democratic-csi-nfs-ssd:
     deploy: true
+    autoSync: false
     path: apps/democratic-csi/chart
     valueFiles:
       - ../nfs-ssd-values.yaml
   democratic-csi-node-manual:
     deploy: true
+    autoSync: false
     path: apps/democratic-csi/chart
     valueFiles:
       - ../node-manual.yaml

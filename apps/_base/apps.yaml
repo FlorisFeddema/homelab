@@ -5,3 +5,4 @@ apps:
     deploy: true
   cloudnative-postgres:
     deploy: true
+    autoSync: false
