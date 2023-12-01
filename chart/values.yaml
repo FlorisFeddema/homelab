@@ -6,13 +6,16 @@ products:
     namespace: argocd
   authentik:
     deploy: true
+    autoSync: true
   certManager:
     deploy: true
+    autoSync: true
   cilium:
     deploy: true
     namespace: kube-system
   crowdsec:
     deploy: true
+    autoSync: true
     ignoreDifferences:
       - group: ""
         kind: "Secret"
@@ -21,20 +24,25 @@ products:
           - /data/username
   enphaseEnvoyPrometheusExporter:
     deploy: true
+    autoSync: true
   externalDns:
     deploy: true
+    autoSync: true
   falco:
     deploy: false
   falcoExporter:
     deploy: false
   grafana:
     deploy: true
+    autoSync: true
   grafanaDashboards:
     deploy: true
+    autoSync: true
     namespace: grafana
     serverSideApply: true
   ingressNginx:
     deploy: true
+    autoSync: true
   intelDevicePluginsGpu:
     deploy: true
     ignoreDifferences:
@@ -44,51 +52,71 @@ products:
           - /spec/resourceManager
   kepler:
     deploy: true
+    autoSync: true
   keycloakx:
-    deploy: true
+    deploy: false
+    autoSync: true
   kyverno:
     deploy: true
+    autoSync: true
     serverSideApply: true
   loki:
     deploy: true
+    autoSync: true
   longhorn:
     deploy: true
     namespace: longhorn-system
   metricsServer:
     deploy: true
+    autoSync: true
   minio:
     deploy: true
+    autoSync: true
   nextcloud:
     deploy: true
+    autoSync: true
   nodeFeatureDiscovery:
     deploy: true
+    autoSync: true
   oauthProxy:
     deploy: false
   pgo:
     deploy: true
+    autoSync: true
     serverSideApply: true
   policyReporter:
     deploy: true
+    autoSync: true
   powerdns:
     deploy: true
+    autoSync: true
   prometheusCrd:
     deploy: true
+    autoSync: true
     namespace: defaults
     serverSideApply: true
   promtail:
     deploy: true
+    autoSync: true
   sealedSecrets:
     deploy: true
+    autoSync: true
   smartmeterGatewayPrometheusExporter:
     deploy: true
+    autoSync: true
   teslamate:
     deploy: true
+    autoSync: true
   tetragon:
     deploy: true
+    autoSync: true
   uptimeKuma:
     deploy: true
+    autoSync: true
   victoriaMetrics:
     deploy: true
+    autoSync: true
     serverSideApply: true
   vpa:
     deploy: true
+    autoSync: true

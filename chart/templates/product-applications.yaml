@@ -25,9 +25,11 @@ spec:
     syncOptions:
       - ServerSideApply=true
     {{ end }}
+    {{ if $v.autoSync }}
     automated:
       prune: true
       selfHeal: true
+    {{ end }}
     retry:
       limit: 2
       backoff:
