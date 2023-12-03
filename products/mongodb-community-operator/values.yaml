@@ -7,6 +7,7 @@ community-operator:
         cpu: 30m
         memory: 64Mi
       limits:
+        cpu: null
         memory: 128Mi
 
     replicas: 1
