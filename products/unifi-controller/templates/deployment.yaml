@@ -25,18 +25,19 @@ spec:
         {{- include "labels" . | nindent 8 }}
     spec:
       securityContext:
-        fsGroup: 1000
-        runAsUser: 1000
-        runAsGroup: 1000
+        fsGroup: 0
+        runAsUser: 0
+        runAsGroup: 0
+        runAsNonRoot: false
       containers:
         - name: unifi-controller
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
             - name: GID
-              value: "1000"
+              value: "0"
             - name: UID
-              value: "1000"
+              value: "0"
             - name: MONGO_USER
               value: "unificontroller"
             - name: MONGO_DBNAME
