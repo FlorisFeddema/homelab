@@ -9,6 +9,7 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   type: ClusterIP
+  clusterIP: {{ .Values.auth.service.clusterIP }}
   ports:
     - port: 53
       targetPort: 5300

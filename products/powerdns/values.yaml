@@ -8,6 +8,9 @@ auth:
     repository: powerdns/pdns-auth-48
     tag: 4.8.3
 
+  service:
+    clusterIP: 10.10.10.10
+
   config:
     logLevel: 4
     defaultTtl: 3600
