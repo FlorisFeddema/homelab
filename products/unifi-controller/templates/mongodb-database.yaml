@@ -2,6 +2,7 @@ apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: unifi-controller-database
+  namespace: mongodb-community-operator
 spec:
   members: 1
   type: ReplicaSet

@@ -1,6 +1,6 @@
 community-operator:
   operator:
-    watchNamespace: "*"
+    watchNamespace: "mongodb-community-operator"
 
     resources:
       requests:
