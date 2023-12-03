@@ -1,7 +1,7 @@
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
-  name: unify-controller-database
+  name: unifi-controller-database
 spec:
   members: 1
   type: ReplicaSet
@@ -10,15 +10,15 @@ spec:
     authentication:
       modes: ["SCRAM"]
   users:
-    - name: unifycontroller
-      db: unifycontroller
+    - name: unificontroller
+      db: unificontroller
       passwordSecretRef:
-        name: unify-controller-database-credentials
+        name: unifi-controller-database-credentials
       roles:
         - name: clusterAdmin
-          db: unifycontroller
+          db: unificontroller
         - name: userAdminAnyDatabase
-          db: unifycontroller
-      scramCredentialsSecretName: unifycontroller-scram
+          db: unificontroller
+      scramCredentialsSecretName: unificontroller-scram
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: zlib
