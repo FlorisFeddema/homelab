@@ -18,6 +18,8 @@ spec:
       roles:
         - name: dbOwner
           db: unificontroller
+        - name: dbOwner
+          db: unificontroller_stat
         - name: clusterAdmin
           db: unificontroller
         - name: userAdminAnyDatabase
