@@ -70,3 +70,10 @@ spec:
             allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /config
+              name: config
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ template "unifiController.fullname" . }}-config
