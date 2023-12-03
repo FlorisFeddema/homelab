@@ -67,9 +67,9 @@ spec:
             capabilities:
               drop:
                 - ALL
-            allowPrivilegeEscalation: false
             seccompProfile:
               type: RuntimeDefault
+            privileged: true
           volumeMounts:
             - mountPath: /config
               name: config
