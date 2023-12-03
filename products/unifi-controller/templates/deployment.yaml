@@ -34,9 +34,9 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
-            - name: GID
+            - name: PGID
               value: "0"
-            - name: UID
+            - name: PUID
               value: "0"
             - name: MONGO_USER
               value: "unificontroller"
