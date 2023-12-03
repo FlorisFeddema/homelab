@@ -33,7 +33,7 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
-            - name: GUID
+            - name: GID
               value: "1000"
             - name: UID
               value: "1000"
