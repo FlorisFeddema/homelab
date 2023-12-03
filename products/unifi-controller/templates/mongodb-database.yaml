@@ -16,6 +16,8 @@ spec:
       passwordSecretRef:
         name: unifi-controller-database-credentials
       roles:
+        - name: dbOwner
+          db: unificontroller
         - name: clusterAdmin
           db: unificontroller
         - name: userAdminAnyDatabase
