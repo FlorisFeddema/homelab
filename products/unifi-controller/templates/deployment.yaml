@@ -25,7 +25,7 @@ spec:
         {{- include "labels" . | nindent 8 }}
     spec:
       containers:
-        - name: unifiController
+        - name: unifi-controller
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:

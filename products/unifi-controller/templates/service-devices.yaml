@@ -13,12 +13,15 @@ spec:
     - port: 3478
       targetPort: 3478
       protocol: UDP
+      name: stun
     - port: 10001
       targetPort: 10001
       protocol: UDP
+      name: ap-discovery
     - port: 8080
       targetPort: 8080
       protocol: TCP
+      name: device-communication
   selector:
     app.kubernetes.io/name: {{ template "unifiController.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
