@@ -14,3 +14,6 @@ resources: {}
 config:
   timezone: "Europe/Amsterdam"
   existingSecret: unifi-controller-credentials
+
+persistence:
+  size: 1Gi
