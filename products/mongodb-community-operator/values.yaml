@@ -1,0 +1,21 @@
+community-operator:
+  operator:
+    watchNamespace: "*"
+
+    resources:
+      requests:
+        cpu: 30m
+        memory: 64Mi
+      limits:
+        memory: 128Mi
+
+    replicas: 1
+
+  database:
+    name: mongodb-database
+    namespace: mongodb-community-operator
+
+  community-operator-crds:
+    enabled: true
+
+  createResource: false
