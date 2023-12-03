@@ -9,5 +9,6 @@ data:
     local-port=5300
     loglevel={{ .Values.recursor.config.logLevel }}
     webserver-port=8081
+    forward-zones=internal.feddema.dev={{ template "powerdns.fullname" . }}-auth-dns.powerdns.svc:53
 
   pdns.j2: ""

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/component: "powerdns-auth-dns"
     {{- include "labels" . | nindent 4 }}
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 53
       targetPort: 5300
