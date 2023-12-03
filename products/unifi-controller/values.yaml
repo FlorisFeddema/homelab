@@ -1,0 +1,12 @@
+fullnameOverride:
+nameOverride:
+commonlabels:
+
+replicas: 1
+
+image:
+  registry: lscr.io
+  repository: linuxserver/unifi-network-application
+  tag:  8.0.7
+
+resources: {}
