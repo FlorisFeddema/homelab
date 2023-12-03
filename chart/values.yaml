@@ -116,6 +116,9 @@ products:
   uptimeKuma:
     deploy: true
     autoSync: true
+  unifiController:
+    deploy: true
+    autoSync: true
   victoriaMetrics:
     deploy: true
     autoSync: true
