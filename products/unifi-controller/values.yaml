@@ -10,3 +10,7 @@ image:
   tag:  8.0.7
 
 resources: {}
+
+config:
+  timezone: "Europe/Amsterdam"
+  existingSecret: unifi-controller-credentials
