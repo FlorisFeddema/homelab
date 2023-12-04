@@ -2,9 +2,9 @@ apiVersion: v2
 name: oauth-proxy
 description: A Helm chart for Kubernetes
 type: application
-version: 1.0.8
+version: 1.0.9
 
 dependencies:
   - name: oauth2-proxy
-    version: 6.20.0
+    version: 6.20.1
     repository: https://oauth2-proxy.github.io/manifests
