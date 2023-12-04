@@ -4,7 +4,6 @@ metadata:
   name: adguard
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   labels:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
