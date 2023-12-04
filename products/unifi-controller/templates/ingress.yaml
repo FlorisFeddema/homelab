@@ -4,6 +4,7 @@ metadata:
   name: unifi-controller
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   labels:
     app.kubernetes.io/name: {{ template "unifiController.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
