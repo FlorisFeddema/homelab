@@ -24,20 +24,15 @@ spec:
         app.kubernetes.io/component: "unifiController"
         {{- include "labels" . | nindent 8 }}
     spec:
-      securityContext:
-        fsGroup: 0
-        runAsUser: 0
-        runAsGroup: 0
-        runAsNonRoot: false
       containers:
         - name: unifi-controller
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
-            - name: PGID
-              value: "0"
             - name: PUID
-              value: "0"
+              value: '1000'
+            - name: PGID
+              value: '5000'
             - name: MONGO_USER
               value: "unificontroller"
             - name: MONGO_DBNAME
@@ -63,13 +58,6 @@ spec:
             - containerPort: 8080
               protocol: UDP
           resources: {{ toYaml .Values.resources | nindent 12 }}
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            seccompProfile:
-              type: RuntimeDefault
-            privileged: true
           volumeMounts:
             - mountPath: /config
               name: config
