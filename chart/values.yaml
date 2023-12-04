@@ -1,6 +1,9 @@
 registry: feddemadev.azurecr.io
 
 products:
+  adguard:
+    deploy: true
+    autoSync: true
   argoCd:
     deploy: true
     namespace: argocd

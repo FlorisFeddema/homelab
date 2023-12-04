@@ -1,0 +1,18 @@
+fullnameOverride:
+nameOverride:
+commonlabels:
+
+replicas: 1
+
+image:
+  registry: docker.io
+  repository: adguard/adguardhome
+  tag: v0.107.41
+
+resources: {}
+
+persistence:
+  size: 1Gi
+
+ingress:
+  domain: adguard.cloud.feddema.dev

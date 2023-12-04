@@ -56,6 +56,7 @@ recursor:
 
 admin:
   replicas: 1
+  resources: {}
 
   image:
     registry: docker.io
