@@ -28,6 +28,9 @@ spec:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
           args:
             - --config
             - /opt/adguardhome/conf/AdGuardHome.yaml
