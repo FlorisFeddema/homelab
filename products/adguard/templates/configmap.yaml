@@ -8,7 +8,7 @@ data:
       pprof:
         port: 6060
         enabled: false
-      address: adguard.cloud.feddema.dev
+      address: 0.0.0.0
       session_ttl: 720h
     users:
       - name: admin
