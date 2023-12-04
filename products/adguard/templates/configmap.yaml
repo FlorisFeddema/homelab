@@ -8,7 +8,7 @@ data:
       pprof:
         port: 6060
         enabled: false
-      address: 0.0.0.0
+      address: 0.0.0.0:3000
       session_ttl: 720h
     users:
       - name: admin
