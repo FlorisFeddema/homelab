@@ -17,3 +17,6 @@ config:
 
 persistence:
   size: 1Gi
+
+ingress:
+  domain: unifi.cloud.feddema.dev
