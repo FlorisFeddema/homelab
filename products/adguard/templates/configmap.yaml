@@ -29,13 +29,9 @@ data:
       ratelimit_whitelist: []
       refuse_any: true
       upstream_dns:
-        - powerdns-recursor-dns.powerdns.svc:53
+        - 10.96.0.100
       upstream_dns_file: ""
-      bootstrap_dns:
-        - 9.9.9.10
-        - 149.112.112.10
-        - 2620:fe::10
-        - 2620:fe::fe:10
+      bootstrap_dns: []
       fallback_dns:
         - 1.1.1.1
         - 1.0.0.1
@@ -105,10 +101,6 @@ data:
         url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
         name: AdGuard DNS filter
         id: 1
-      - enabled: false
-        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_2.txt
-        name: AdAway Default Blocklist
-        id: 2
     whitelist_filters: []
     user_rules: []
     dhcp:
