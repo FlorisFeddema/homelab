@@ -16,3 +16,9 @@ persistence:
 
 ingress:
   domain: adguard.cloud.feddema.dev
+
+copyConfig:
+  image:
+    registry: docker.io
+    repository: busybox
+    tag: 1.36.1
