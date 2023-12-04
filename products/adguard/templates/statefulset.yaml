@@ -36,7 +36,7 @@ spec:
                 echo "copy current config to /opt/adguardhome/conf/AdGuardHome.yaml.old"
                 cp /opt/adguardhome/conf/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml.old
               fi
-            - cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+             cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
           volumeMounts:
             - name: default-config
               mountPath: /tmp/AdGuardHome.yaml
