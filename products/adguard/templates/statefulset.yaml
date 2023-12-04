@@ -42,13 +42,6 @@ spec:
               containerPort: 443
               protocol: TCP
           resources: {{ toYaml .Values.resources | nindent 12 }}
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
-            allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
