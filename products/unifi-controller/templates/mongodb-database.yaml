@@ -27,8 +27,3 @@ spec:
       scramCredentialsSecretName: unificontroller-scram
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: zlib
-  monitor:
-    agent: prometheus.io/operator
-    prometheus:
-      serviceMonitor:
-        interval: 30s
