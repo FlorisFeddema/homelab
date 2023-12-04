@@ -54,8 +54,8 @@ spec:
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
-            - mountPath: /opt/adguardhome/conf
-              name: config
+{{/*            - mountPath: /opt/adguardhome/conf*/}}
+{{/*              name: config*/}}
       volumes:
         - name: config
           configMap:
