@@ -44,7 +44,7 @@ spec:
             - name: dns-tcp
               containerPort: 53
               protocol: TCP
-            - name: http
+            - name: web
               containerPort: 3000
               protocol: TCP
             - name: https
