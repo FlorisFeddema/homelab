@@ -24,6 +24,23 @@ spec:
         app.kubernetes.io/component: "adguard"
         {{- include "labels" . | nindent 8 }}
     spec:
+      initContainers:
+        - name: copy-config
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - |
+              if [ ! -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
+                mkdir -p /opt/adguardhome/conf
+                cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+              fi
+          volumeMounts:
+            - name: default-config
+              mountPath: /tmp/AdGuardHome.yaml
+              subPath: AdGuardHome.yaml
+            - name: config
+              mountPath: /opt/adguardhome/conf
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -33,7 +50,7 @@ spec:
               value: "Europe/Amsterdam"
           args:
             - --config
-            - /config/AdGuardHome.yaml
+            - /opt/adguardhome/conf/AdGuardHome.yaml
             - --work-dir
             - /opt/adguardhome/work
             - --no-check-update
@@ -54,15 +71,22 @@ spec:
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
-            - mountPath: /config
+            - mountPath: /opt/adguardhome/conf
               name: config
       volumes:
-        - name: config
+        - name: default-config
           configMap:
             name: {{ template "adguard.fullname" . }}-config
   volumeClaimTemplates:
     - metadata:
         name: work
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
+    - metadata:
+        name: config
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
