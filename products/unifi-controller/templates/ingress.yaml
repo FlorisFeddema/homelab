@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: teslamate
+  name: unifi-controller
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
   labels:
@@ -25,4 +25,4 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingress.domain }}
-      secretName: unifiController-tls
+      secretName: unifi-controller-tls
