@@ -33,7 +33,7 @@ spec:
               value: "Europe/Amsterdam"
           args:
             - --config
-            - /opt/adguardhome/conf/AdGuardHome.yaml
+            - /config/AdGuardHome.yaml
             - --work-dir
             - /opt/adguardhome/work
             - --no-check-update
@@ -54,7 +54,7 @@ spec:
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
-            - mountPath: /opt/adguardhome/conf
+            - mountPath: /config
               name: config
       volumes:
         - name: config
