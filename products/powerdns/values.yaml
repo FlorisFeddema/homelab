@@ -44,6 +44,11 @@ recursor:
   resources: {}
   replicas: 1
 
+  service:
+    # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
+    # https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/
+    clusterIP: 10.96.0.101
+
   image:
     registry: docker.io
     repository: powerdns/pdns-recursor-49
