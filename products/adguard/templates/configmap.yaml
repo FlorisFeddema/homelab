@@ -29,9 +29,11 @@ data:
       ratelimit_whitelist: []
       refuse_any: true
       upstream_dns:
-        - 10.96.0.100
+        - 10.96.0.101
       upstream_dns_file: ""
-      bootstrap_dns: []
+      bootstrap_dns:
+        - 1.1.1.1
+        - 1.0.0.1
       fallback_dns:
         - 1.1.1.1
         - 1.0.0.1
@@ -100,7 +102,15 @@ data:
       - enabled: true
         url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_1.txt
         name: AdGuard DNS filter
-        id: 1
+        id: 1701729775
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt
+        name: OISD Blocklist Big
+        id: 1701729776
+      - enabled: true
+        url: https://adguardteam.github.io/HostlistsRegistry/assets/filter_49.txt
+        name: HaGeZi's Ultimate Blocklist
+        id: 1701729777
     whitelist_filters: []
     user_rules: []
     dhcp:
