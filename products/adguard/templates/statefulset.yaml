@@ -37,6 +37,10 @@ spec:
                 cp /opt/adguardhome/conf/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml.old
               fi
               cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+              sed -i "s/%%%PASSWORD%%%/${PASSWORD}/g" /opt/adguardhome/conf/AdGuardHome.yaml
+          envFrom:
+            - secretRef:
+                name: adguard-credentials
           volumeMounts:
             - name: default-config
               mountPath: /tmp/AdGuardHome.yaml
