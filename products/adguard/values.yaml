@@ -12,7 +12,10 @@ image:
 resources: {}
 
 persistence:
-  size: 1Gi
+  config:
+    size: 1Gi
+  work:
+    size: 1Gi
 
 ingress:
   domain: adguard.cloud.feddema.dev

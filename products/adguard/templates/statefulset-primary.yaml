@@ -1,11 +1,11 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ template "adguard.fullname" . }}
+  name: {{ template "adguard.fullname" . }}-primary
   labels:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "adguard"
+    app.kubernetes.io/component: "adguard-primary"
     {{- include "labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
@@ -14,14 +14,14 @@ spec:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/component: "adguard"
+      app.kubernetes.io/component: "adguard-primary"
       {{- include "labels" . | nindent 6 }}
   template:
     metadata:
       labels:
         app.kubernetes.io/name: {{ template "adguard.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/component: "adguard"
+        app.kubernetes.io/component: "adguard-primary"
         {{- include "labels" . | nindent 8 }}
     spec:
       initContainers:
@@ -61,17 +61,8 @@ spec:
             - /opt/adguardhome/work
             - --no-check-update
           ports:
-            - name: dns-udp
-              containerPort: 53
-              protocol: UDP
-            - name: dns-tcp
-              containerPort: 53
-              protocol: TCP
             - name: web
               containerPort: 3000
-              protocol: TCP
-            - name: https
-              containerPort: 443
               protocol: TCP
           resources: {{ toYaml .Values.resources | nindent 12 }}
           volumeMounts:
@@ -90,13 +81,13 @@ spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: {{ .Values.persistence.size }}
+            storage: {{ .Values.persistence.work.size }}
     - metadata:
         name: config
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: {{ .Values.persistence.size }}
+            storage: {{ .Values.persistence.config.size }}
 
 
