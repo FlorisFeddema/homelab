@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ template "adguard.fullname" . }}-config
 data:
-  AdGuardHome.yaml: |-
-    {{ template "adguard.config" . | indent 4 }}
+  AdGuardHome.yaml: |- {{ include "common.tplvalues.render" ( dict "value" .Values.config "context" $) | nindent 4 }}
