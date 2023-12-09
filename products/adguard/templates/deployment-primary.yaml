@@ -77,3 +77,6 @@ spec:
             name: {{ template "adguard.fullname" . }}-config
         - name: config
           emptyDir: {}
+        - name: work
+          persistentVolumeClaim:
+            claimName: {{ template "adguard.fullname" . }}-primary-work
