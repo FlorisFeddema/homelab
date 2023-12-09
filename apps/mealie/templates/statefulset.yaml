@@ -61,7 +61,7 @@ spec:
           - name: LDAP_AUTH_ENABLED
             value: 'true'
           - name: LDAP_SERVER_URL
-            value: 'ldap://ak-outpost-ldap.authentik'
+            value: 'ldaps://ldap.mobrockers.com'
           - name: LDAP_TLS_INSECURE
             value: 'true'
           - name: LDAP_BASE_DN
