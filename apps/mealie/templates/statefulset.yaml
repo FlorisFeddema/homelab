@@ -57,6 +57,25 @@ spec:
               secretKeyRef:
                 name: mealie-data-app
                 key: password
+          # LDAP
+          - name: LDAP_AUTH_ENABLED
+            value: 'true'
+          - name: LDAP_SERVER_URL
+            value: 'ak-outpost-ldap.authentik'
+          - name: LDAP_TLS_INSECURE
+            value: 'true'
+          - name: LDAP_BASE_DN
+            value: OU=mealie,DC=ldap,DC=goauthentik,DC=io
+          - name: LDAP_QUERY_BIND
+            valueFrom:
+              secretKeyRef:
+                name: mealie-ldapbind-credential
+                key: cn
+          - name: LDAP_QUERY_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mealie-ldapbind-credential
+                key: password
         volumeMounts:
         - name: data
           mountPath: /app/data/
