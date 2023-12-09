@@ -61,6 +61,10 @@ spec:
             - --work-dir
             - /opt/adguardhome/work
             - --no-check-update
+          securityContext:
+            capabilities:
+              drop:
+                - ALL
           ports:
             - name: web
               containerPort: 3000
