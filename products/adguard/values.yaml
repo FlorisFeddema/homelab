@@ -2,7 +2,6 @@ fullnameOverride:
 nameOverride:
 commonlabels:
 
-
 image:
   registry: docker.io
   repository: adguard/adguardhome
@@ -30,6 +29,19 @@ copyConfig:
     registry: docker.io
     repository: busybox
     tag: 1.36.1
+
+sync:
+  replicas: 1
+  resources: {}
+
+  config:
+    loglevel: info
+    cron: "*/5 * * * *"
+
+  image:
+    registry: ghcr.io
+    repository: bakito/adguardhome-sync
+    tag: v0.5.2
 
 config:
   http:

@@ -54,13 +54,6 @@ spec:
             - mountPath: ./certs
               name: saml-certificates
           resources: {{ toYaml .Values.admin.resources | nindent 12 }}
-{{/*          securityContext:*/}}
-{{/*            capabilities:*/}}
-{{/*              drop:*/}}
-{{/*                - ALL*/}}
-{{/*            allowPrivilegeEscalation: false*/}}
-{{/*            seccompProfile:*/}}
-{{/*              type: RuntimeDefault*/}}
       volumes:
         - name: saml-certificates
           secret:

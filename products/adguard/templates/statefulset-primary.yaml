@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: {{ template "adguard.fullname" . }}-primary
   labels:
@@ -77,11 +77,3 @@ spec:
             name: {{ template "adguard.fullname" . }}-config
         - name: config
           emptyDir: {}
-  volumeClaimTemplates:
-    - metadata:
-        name: work
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: {{ .Values.persistence.work.size }}
