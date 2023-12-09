@@ -38,7 +38,7 @@ spec:
             value: postgres
           - name: POSTGRES_SERVER
             value: env://MEALIE_DATA_RW_SERVICE_HOST
-          - name: POSTGRES_SERVER
+          - name: POSTGRES_PORT
             value: env://MEALIE_DATA_RW_SERVICE_PORT
           - name: POSTGRES_DB
             valueFrom:
