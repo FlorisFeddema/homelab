@@ -75,12 +75,12 @@ spec:
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
-            - mountPath: /opt/adguardhome/conf
-              name: config
       volumes:
         - name: default-config
           configMap:
             name: {{ template "adguard.fullname" . }}-config
+        - name: config
+          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: work
@@ -89,10 +89,3 @@ spec:
         resources:
           requests:
             storage: {{ .Values.persistence.work.size }}
-    - metadata:
-        name: config
-      spec:
-        accessModes: [ "ReadWriteOnce" ]
-        resources:
-          requests:
-            storage: {{ .Values.persistence.config.size }}
