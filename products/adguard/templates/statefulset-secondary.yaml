@@ -52,10 +52,6 @@ spec:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
-          securityContext:
-            capabilities:
-              drop:
-                - ALL
           env:
             - name: TZ
               value: "Europe/Amsterdam"
