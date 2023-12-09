@@ -2,14 +2,19 @@ fullnameOverride:
 nameOverride:
 commonlabels:
 
-replicas: 1
 
 image:
   registry: docker.io
   repository: adguard/adguardhome
   tag: v0.107.42
 
-resources: {}
+primary:
+  replicas: 1
+  resources: {}
+
+secondary:
+  replicas: 2
+  resources: {}
 
 persistence:
   config:
