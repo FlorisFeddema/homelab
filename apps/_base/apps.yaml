@@ -8,3 +8,4 @@ apps:
     autoSync: false
   mealie:
     deploy: true
+    autoSync: false
