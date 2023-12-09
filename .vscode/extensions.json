@@ -1,0 +1,6 @@
+{
+    "recommendations": [
+        "ms-vscode-remote.remote-wsl",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ]
+}
