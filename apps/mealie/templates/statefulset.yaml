@@ -23,6 +23,8 @@ spec:
         - name: http
           containerPort: 9000
         env:
+          - name: LOG_LEVEL
+            value: DEBUG
           - name: TZ
             value: Europe/Amsterdam
           - name: PUID
