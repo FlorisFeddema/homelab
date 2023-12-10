@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "adguard.fullname" . }}-config
+  name: {{ template "adguard.fullname" . }}-sync-config
 data:
   LOG_LEVEL: "{{ .Values.sync.config.logLevel }}"
   CRON: "{{ .Values.sync.config.cron }}"
