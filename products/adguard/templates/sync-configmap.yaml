@@ -11,6 +11,6 @@ data:
   ORIGIN_URL: "http://{{ template "adguard.fullname" . }}-web:3000"
   ORIGIN_USERNAME: "admin"
 
-  {{ range $i := untilStep 1 (add1 ((int) .Values.secondary.replicas)) 1 }}
+  {{ range $i := untilStep 1 (add1 .Values.secondary.replicas) 1 }}
   REPLICA{{ $i }}_URL: "http://{{ template "adguard.fullname" . }}-secondary-{{ $i }}.{{ template "adguard.fullname" . }}-secondary:3000"
   {{ end }}
