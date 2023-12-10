@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "adguard.fullname" . }}-config
+data:
+  LOG_LEVEL: "{{ .Values.sync.config.logLevel }}"
+  CRON: "{{ .Values.sync.config.cron }}"
+  RUNONSTART: "true"
+  API_PORT: "0"
+
+  ORIGIN_URL: "http://{{ template "adguard.fullname" . }}-web:3000"
+  ORIGIN_USERNAME: "admin"
+
+  {{ range $i := untilStep 1 .Values.secondary.replicas+1 1 }}
+  REPLICA{{ $i }}_URL: "http://{{ template "adguard.fullname" . }}-secondary-{{ $i }}.{{ template "adguard.fullname" . }}-secondary:3000"
+  {{ end }}
