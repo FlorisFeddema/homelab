@@ -37,7 +37,7 @@ sync:
   config:
     existingSecret: adguard-sync-credentials
     loglevel: info
-    cron: "*/5 * * * *"
+    cron: "*/2 * * * *"
 
   image:
     registry: ghcr.io
