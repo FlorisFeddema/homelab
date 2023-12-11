@@ -17,4 +17,3 @@ data:
   REPLICA{{ $i }}_AUTOSETUP: "false"
   REPLICA{{ $i }}_DHCPSERVERENABLED: "false"
   {{ end }}
-

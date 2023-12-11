@@ -35,6 +35,7 @@ sync:
   resources: {}
 
   config:
+    existingSecret: adguard-sync-credentials
     loglevel: info
     cron: "*/5 * * * *"
 
