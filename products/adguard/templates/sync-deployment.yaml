@@ -32,9 +32,6 @@ spec:
             - run
             - --config
             - /config/adguardhome-sync.yaml
-          volumeMounts:
-            - mountPath: /config
-              name: config
           envFrom:
             - secretRef:
                 name: {{ .Values.sync.config.existingSecret }}
