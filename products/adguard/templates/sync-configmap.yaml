@@ -5,7 +5,7 @@ metadata:
 data:
   LOG_LEVEL: "{{ .Values.sync.config.logLevel }}"
   CRON: "{{ .Values.sync.config.cron }}"
-  RUNONSTART: true
+  RUNONSTART: "true"
   API_PORT: "0"
 
   ORIGIN_URL: "http://{{ template "adguard.fullname" . }}-web:3000"
