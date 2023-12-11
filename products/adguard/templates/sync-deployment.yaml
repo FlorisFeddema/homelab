@@ -28,8 +28,7 @@ spec:
         - name: adguard-sync
           image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
           imagePullPolicy: IfNotPresent
-          command:
-            - run
+          args:
             - --config
             - /config/adguardhome-sync.yaml
           envFrom:
