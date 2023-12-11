@@ -10,6 +10,7 @@ metadata:
 spec:
   revisionHistoryLimit: 0
   replicas: {{ .Values.secondary.replicas }}
+  serviceName: {{ template "adguard.fullname" . }}-secondary
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
