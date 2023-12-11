@@ -29,7 +29,7 @@ spec:
           image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
           imagePullPolicy: IfNotPresent
           command:
-            - run
+            - /opt/go/adguardhome-sync/run
           envFrom:
             - secretRef:
                 name: {{ .Values.sync.config.existingSecret }}
