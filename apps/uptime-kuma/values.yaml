@@ -6,6 +6,8 @@ uptime-kuma:
     capabilities:
       drop:
       - ALL
+      add:
+      - NET_RAW
     readOnlyRootFilesystem: true
     runAsNonRoot: true
     runAsUser: 1000
