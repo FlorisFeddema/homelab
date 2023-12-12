@@ -1,22 +1,22 @@
-apiVersion: "cilium.io/v2alpha1"
-kind: CiliumL2AnnouncementPolicy
-metadata:
-  name: l2-announce-loadbalancer-ips
-spec:
-  serviceSelector:
-    matchExpressions:
-      - key: io.kubernetes.service.namespace
-        operator: In
-        values: 
-          - ingress-nginx
-          - cilium-gateway
-      - key: io.kubernetes.service.name
-        operator: In
-        values: 
-          - ingress-nginx-controller-internal
-          - cilium-gateway-private-gateway
-  nodeSelector:
-    matchExpressions:
-      - key: node-role.kubernetes.io/control-plane
-        operator: DoesNotExist
-  loadBalancerIPs: true
+# apiVersion: "cilium.io/v2alpha1"
+# kind: CiliumL2AnnouncementPolicy
+# metadata:
+#   name: l2-announce-loadbalancer-ips
+# spec:
+#   serviceSelector:
+#     matchExpressions:
+#       - key: io.kubernetes.service.namespace
+#         operator: In
+#         values: 
+#           - ingress-nginx
+#           - cilium-gateway
+#       - key: io.kubernetes.service.name
+#         operator: In
+#         values: 
+#           - ingress-nginx-controller-internal
+#           - cilium-gateway-private-gateway
+#   nodeSelector:
+#     matchExpressions:
+#       - key: node-role.kubernetes.io/control-plane
+#         operator: DoesNotExist
+#   loadBalancerIPs: true
