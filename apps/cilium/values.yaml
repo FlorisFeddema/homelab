@@ -7,6 +7,8 @@ cilium:
   ipam:
     mode: kubernetes
 
+  bgpControlPlane:
+    enabled: true
   l2announcements:
     enabled: true
     leaseDuration: 2s
