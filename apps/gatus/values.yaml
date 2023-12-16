@@ -6,3 +6,23 @@ gatus:
     tls:
     - hosts:
       - status.mobrockers.com
+  
+  config:
+    # security:
+    #   oidc:
+    #     issuer-url:
+    #     redirect-url: "https://status.mobrockers.com/authorization-code/callback"
+    #     client-id: "123456789"
+    #     client-secret: "abcdefghijk"
+    #     scopes: ["openid"]
+    endpoints:
+    - name: argocd
+      url: https://argocd.mobrockers.com
+      group: inhouse
+    - name: tls-ldaps
+      url: "tls://ldap.mobrockers.com:636"
+      group: inhouse
+      interval: 30m
+      conditions:
+        - "[CONNECTED] == true"
+        - "[CERTIFICATE_EXPIRATION] > 48h"
