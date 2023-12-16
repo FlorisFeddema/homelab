@@ -19,6 +19,8 @@ gatus:
     - name: argocd
       url: https://argocd.mobrockers.com
       group: inhouse
+      conditions:
+      - "[STATUS] == 200"
     - name: tls-ldaps
       url: "tls://ldap.mobrockers.com:636"
       group: inhouse
