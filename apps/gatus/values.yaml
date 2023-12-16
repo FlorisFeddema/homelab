@@ -1,0 +1,8 @@
+gatus:
+  ingress:
+    enabled: true
+    hosts:
+    - status.mobrockers.com
+    tls:
+    - hosts:
+      - status.mobrockers.com
