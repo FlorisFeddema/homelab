@@ -24,7 +24,8 @@ gatus:
     - name: tls-ldaps
       url: "tls://ldap.mobrockers.com:636"
       group: inhouse
-      interval: 30m
       conditions:
         - "[CONNECTED] == true"
         - "[CERTIFICATE_EXPIRATION] > 48h"
+      client:
+        insecure: true
