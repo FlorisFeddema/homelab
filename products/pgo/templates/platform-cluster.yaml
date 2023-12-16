@@ -66,8 +66,8 @@ spec:
       password:
         type: "AlphaNumeric"
     - name: powerdnsadmin
-{{/*      databases:*/}}
-{{/*        - powerdnsadmin*/}}
+      databases:
+        - powerdnsadmin
       password:
         type: "AlphaNumeric"
     - name: teslamate
