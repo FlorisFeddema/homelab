@@ -10,4 +10,3 @@ apps:
     deploy: true
   gatus:
     deploy: true
-    autoSync: false
