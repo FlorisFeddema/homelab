@@ -30,11 +30,9 @@ gatus:
         insecure: true
     - name: plex
       url: https://plex.mobrockers.com
-      group: external
+      group: internal
       conditions:
-      - '[STATUS] == 200'
-      client:
-        dns-resolver: 'udp://1.1.1.1:53'
+      - '[STATUS] == any(200, 401)'
 # external
     - name: argocd
       url: https://argocd.mobrockers.com
@@ -47,7 +45,7 @@ gatus:
       url: https://plex.mobrockers.com
       group: external
       conditions:
-      - '[STATUS] == 200'
+      - '[STATUS] == any(200, 401)'
       client:
         dns-resolver: 'udp://1.1.1.1:53'
     - name: overseerr
