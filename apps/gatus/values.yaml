@@ -8,24 +8,24 @@ gatus:
       - status.mobrockers.com
   
   config:
-    # security:
-    #   oidc:
-    #     issuer-url:
-    #     redirect-url: "https://status.mobrockers.com/authorization-code/callback"
-    #     client-id: "123456789"
-    #     client-secret: "abcdefghijk"
-    #     scopes: ["openid"]
     endpoints:
     - name: argocd
       url: https://argocd.mobrockers.com
       group: inhouse
       conditions:
-      - "[STATUS] == 200"
+      - '[STATUS] == 200'
+    - name: argocd
+      url: https://argocd.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'tcp://1.1.1.1:853'
     - name: tls-ldaps
-      url: "tls://ldap.mobrockers.com:636"
+      url: 'tls://ldap.mobrockers.com:636'
       group: inhouse
       conditions:
-        - "[CONNECTED] == true"
-        - "[CERTIFICATE_EXPIRATION] > 48h"
+        - '[CONNECTED] == true'
+        - '[CERTIFICATE_EXPIRATION] > 48h'
       client:
         insecure: true
