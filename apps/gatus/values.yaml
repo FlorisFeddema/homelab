@@ -20,7 +20,7 @@ gatus:
       conditions:
       - '[STATUS] == 200'
       client:
-        dns-resolver: 'tcp://1.1.1.1:853'
+        dns-resolver: 'udp://1.1.1.1:53'
     - name: tls-ldaps
       url: 'tls://ldap.mobrockers.com:636'
       group: inhouse
