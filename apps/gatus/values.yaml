@@ -9,23 +9,58 @@ gatus:
   
   config:
     endpoints:
-    - name: argocd
-      url: https://argocd.mobrockers.com
-      group: inhouse
+# internal
+    - name: homeassistant
+      url: https://home.mobrockers.com
+      group: internal
       conditions:
       - '[STATUS] == 200'
     - name: argocd
       url: https://argocd.mobrockers.com
-      group: external
+      group: internal
       conditions:
       - '[STATUS] == 200'
-      client:
-        dns-resolver: 'udp://1.1.1.1:53'
     - name: tls-ldaps
       url: 'tls://ldap.mobrockers.com:636'
-      group: inhouse
+      group: internal
       conditions:
         - '[CONNECTED] == true'
         - '[CERTIFICATE_EXPIRATION] > 48h'
       client:
         insecure: true
+    - name: plex
+      url: https://plex.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
+# external
+    - name: argocd
+      url: https://argocd.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == 404'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
+    - name: plex
+      url: https://plex.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
+    - name: overseerr
+      url: https://overseerr.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
+    - name: homeassistant
+      url: https://home.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
