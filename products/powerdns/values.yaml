@@ -6,7 +6,7 @@ auth:
   image:
     registry: docker.io
     repository: powerdns/pdns-auth-48
-    tag: 4.8.3
+    tag: 4.8.4
 
   service:
     # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
