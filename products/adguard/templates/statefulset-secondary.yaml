@@ -76,6 +76,8 @@ spec:
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
+            - name: config
+              mountPath: /opt/adguardhome/conf
       volumes:
         - name: default-config
           configMap:
