@@ -137,7 +137,7 @@ config:
     file_enabled: true
   statistics:
     ignored: [ ]
-    interval: 24h
+    interval: 730d
     enabled: true
   filters:
     - enabled: true
