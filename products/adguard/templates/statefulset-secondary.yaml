@@ -74,8 +74,8 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.secondary.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: /opt/adguardhome/work
-              name: work
+            - name: work
+              mountPath: /opt/adguardhome/work
             - name: config
               mountPath: /opt/adguardhome/conf
       volumes:
