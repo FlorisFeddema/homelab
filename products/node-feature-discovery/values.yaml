@@ -1,4 +1,4 @@
 node-feature-discovery:
   tls:
-    enable: true
+    enable: false
     certManager: true
