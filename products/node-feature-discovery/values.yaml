@@ -1,1 +1,3 @@
-node-feature-discovery: {}
+node-feature-discovery:
+  prometheus:
+    enable: true
