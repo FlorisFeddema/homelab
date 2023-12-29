@@ -63,6 +63,11 @@ products:
     deploy: true
     autoSync: true
     serverSideApply: true
+    ignoreDifferences:
+      - group: "kyverno.io"
+        kind: "ClusterPolicy"
+        jsonPointers:
+          - /data/rules/skipBackgroundRequests
   loki:
     deploy: true
     autoSync: true
