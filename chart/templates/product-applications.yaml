@@ -5,8 +5,8 @@ kind: Application
 metadata:
   name: {{ kebabcase $k }}
   namespace: argocd
-{{/*  finalizers:*/}}
-{{/*    - resources-finalizer.argocd.argoproj.io*/}}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   {{ if $v.autoSync}}
   project: always-sync
