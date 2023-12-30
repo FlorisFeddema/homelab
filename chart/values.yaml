@@ -1,5 +1,3 @@
-registry: feddemadev.azurecr.io
-
 products:
   adguard:
     deploy: true
