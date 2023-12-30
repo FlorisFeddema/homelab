@@ -16,15 +16,6 @@ products:
   cilium:
     deploy: true
     namespace: kube-system
-  crowdsec:
-    deploy: true
-    autoSync: true
-    ignoreDifferences:
-      - group: ""
-        kind: "Secret"
-        jsonPointers:
-          - /data/password
-          - /data/username
   enphaseEnvoyPrometheusExporter:
     deploy: true
     autoSync: true
