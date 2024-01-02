@@ -1,0 +1,9 @@
+cloudnative-pg:
+  podMonitorEnabled: true
+
+  resources:
+     limits:
+       memory: 128Mi
+     requests:
+       cpu: 20m
+       memory: 64Mi
