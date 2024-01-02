@@ -45,9 +45,6 @@ spec:
     - name: uptimekuma
       databases:
       - uptimekuma
-    - name: policyreporter
-      databases:
-        - policyreporter
     - name: nextcloud
       databases:
         - nextcloud

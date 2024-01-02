@@ -48,10 +48,6 @@ products:
   keycloakx:
     deploy: false
     autoSync: true
-  kyverno:
-    deploy: true
-    autoSync: true
-    serverSideApply: true
   loki:
     deploy: true
     autoSync: true
@@ -79,9 +75,6 @@ products:
     deploy: true
     autoSync: true
     serverSideApply: true
-  policyReporter:
-    deploy: true
-    autoSync: true
   powerdns:
     deploy: true
     autoSync: true
