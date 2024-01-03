@@ -5,7 +5,7 @@ democratic-csi:
 
   storageClasses:
   - name: truenas-nfs-ssd
-    defaultClass: false
+    defaultClass: 'false'
     reclaimPolicy: Retain
     volumeBindingMode: Immediate
     allowVolumeExpansion: true

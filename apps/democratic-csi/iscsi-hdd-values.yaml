@@ -19,7 +19,7 @@ democratic-csi:
 
   storageClasses:
   - name: truenas-iscsi-hdd-delete
-    defaultClass: true
+    defaultClass: 'true'
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
