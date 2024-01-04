@@ -1,5 +1,3 @@
 apiVersion: v2
 name: grafana-dashboards
-description: A Helm chart for Kubernetes
-type: application
 version: 1.0.0

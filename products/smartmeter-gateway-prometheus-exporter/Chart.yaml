@@ -1,6 +1,5 @@
 apiVersion: v2
 name: smartmeter-gateway-prometheus-exporter
-type: application
 version: 1.0.2
 
 dependencies:

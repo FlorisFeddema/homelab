@@ -1,6 +1,5 @@
 apiVersion: v2
 name: nextcloud
-type: application
 version: 1.0.16
 
 dependencies:
