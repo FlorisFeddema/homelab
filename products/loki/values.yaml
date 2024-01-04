@@ -35,8 +35,6 @@ loki:
     dashboards:
       enabled: true
       namespace: loki
-      labels:
-        grafana_dashboard: "1"
     serviceMonitor:
       enabled: true
     selfMonitoring:
@@ -95,3 +93,9 @@ loki:
     extraEnvFrom:
       - secretRef:
           name: loki-s3-credentials
+
+  compactor:
+    enabled: true
+    shared_store: s3
+    retention_enabled: true
+
