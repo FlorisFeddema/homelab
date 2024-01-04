@@ -22,7 +22,7 @@ victoria-metrics-k8s-stack:
       kubeApiserverBurnrate: true
       kubeApiserverHistogram: true
       kubeApiserverSlos: true
-      kubelet: true
+      kubelet: false
       kubePrometheusGeneral: true
       kubePrometheusNodeRecording: true
       kubernetesApps: true
@@ -57,7 +57,7 @@ victoria-metrics-k8s-stack:
             spec:
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 100Gi
         resources: { }
       vmselect:
         replicaCount: 1
@@ -119,8 +119,6 @@ victoria-metrics-k8s-stack:
 
   kubelet:
     enabled: true
-    cadvisor: true
-    probes: true
 
   kubeApiServer:
     enabled: true
