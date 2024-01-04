@@ -27,6 +27,8 @@ loki:
       filesystem:
         chunks_directory: /var/loki/chunks
         rules_directory: /var/loki/rules
+    compactor:
+      retention_enabled: true
 
   test:
     enabled: false
@@ -94,8 +96,4 @@ loki:
       - secretRef:
           name: loki-s3-credentials
 
-  compactor:
-    enabled: true
-    shared_store: s3
-    retention_enabled: true
 
