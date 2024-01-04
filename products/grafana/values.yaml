@@ -1,7 +1,14 @@
 grafana:
   sidecar:
     dashboards:
+      enabled: true    
+      searchNamespace: ALL
+    datasources:
       enabled: true
+      searchNamespace: ALL
+    plugins:
+      enabled: true
+      searchNamespace: ALL
 
   envFromSecrets:
     - name: teslamate-database-credentials
