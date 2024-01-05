@@ -3,7 +3,18 @@ node-feature-discovery:
     config:
       usb:
         # https://www.usb.org/defined-class-codes
-        deviceClassWhitelist: ["02", "03", "0e", "ef", "fe", "ff"]
+        deviceClassWhitelist:
+        - "02"
+        - "03"
+        - "0e"
+        - "ef"
+        - "fe"
+        - "ff"
+
+        deviceLabelFields:
+          - "class"
+          - "vendor"
+          - "device"
 
   prometheus:
     enable: true
