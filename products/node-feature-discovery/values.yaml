@@ -2,6 +2,9 @@ node-feature-discovery:
   topologyUpdater:
     enable: true
 
+  worker:
+    config:
+      featureSources: [all]
 
   prometheus:
     enable: true
