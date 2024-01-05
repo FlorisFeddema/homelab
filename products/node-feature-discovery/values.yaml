@@ -1,7 +1,4 @@
 node-feature-discovery:
-  topologyUpdater:
-    enable: true
-
   worker:
     config:
       featureSources: [all]
