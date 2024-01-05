@@ -18,10 +18,14 @@ node-feature-discovery:
 
         custom:
           - name: "sonoff-zigbee-dongle-plus-e"
-            matchOn:
-              - usbId:
-                  vendor: ["1a86"]
-                  device: ["55d4"]
+            labels:
+              "sonoff.tech/zigbee-dongle-plus-e": "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  device: {op: In, value: ["55d4"]}
+                  vendor: {op: In, value: ["1a86"]}
+                  class: {op: In, value: ["02"]}
 
   prometheus:
     enable: true
