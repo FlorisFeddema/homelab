@@ -1,7 +1,8 @@
 node-feature-discovery:
   worker:
     config:
-      featureSources: [all]
+      core:
+        featureSources: [all]
 
   prometheus:
     enable: true
