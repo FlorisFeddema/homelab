@@ -3,6 +3,6 @@ node-feature-discovery:
     config:
       core:
         featureSources: [all]
-
+        labelSources: [all]
   prometheus:
     enable: true
