@@ -6,7 +6,6 @@ node-feature-discovery:
           # https://www.usb.org/defined-class-codes
           deviceClassWhitelist:
           - "02"
-          - "03"
           - "0e"
           - "ef"
           - "fe"
