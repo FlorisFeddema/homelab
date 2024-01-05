@@ -1,0 +1,18 @@
+emqx:
+  replicaCount: 1
+
+  ingress:
+    dashboard:
+      enabled: true
+      hosts:
+        - emqx.mobrockers.com
+      tls:
+        - hosts:
+            - emqx.mobrockers.com
+    mqtt:
+      enabled: true
+      hosts:
+        - mqtt.mobrockers.com
+      tls:
+        - hosts:
+            - mqtt.mobrockers.com
