@@ -1,3 +1,7 @@
 node-feature-discovery:
+  topologyUpdater:
+    enable: true
+
+
   prometheus:
     enable: true
