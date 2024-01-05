@@ -20,7 +20,6 @@ node-feature-discovery:
           - name: "sonoff-zigbee-dongle-plus-e"
             matchOn:
               - usbId:
-                  class: ["0200"]
                   vendor: ["1a86"]
                   device: ["55d4"]
 
