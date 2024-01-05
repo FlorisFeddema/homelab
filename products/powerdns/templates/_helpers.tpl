@@ -21,7 +21,7 @@
 {{- end -}}
 
 {{- define "labels" -}}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/version: {{ .Chart.Version | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 helm.sh/chart: {{ include "chartName" . }}
 {{- if .Values.commonLabels}}
