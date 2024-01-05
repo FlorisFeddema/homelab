@@ -1,20 +1,21 @@
 node-feature-discovery:
   worker:
     config:
-      usb:
-        # https://www.usb.org/defined-class-codes
-        deviceClassWhitelist:
-        - "02"
-        - "03"
-        - "0e"
-        - "ef"
-        - "fe"
-        - "ff"
+      sources:
+        usb:
+          # https://www.usb.org/defined-class-codes
+          deviceClassWhitelist:
+          - "02"
+          - "03"
+          - "0e"
+          - "ef"
+          - "fe"
+          - "ff"
 
-        deviceLabelFields:
-          - "class"
-          - "vendor"
-          - "device"
+          deviceLabelFields:
+            - "class"
+            - "vendor"
+            - "device"
 
   prometheus:
     enable: true
