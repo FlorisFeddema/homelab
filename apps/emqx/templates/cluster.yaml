@@ -18,16 +18,12 @@ spec:
         ssl_options {
           certfile = "/mounted/cert/tls.crt"
           keyfile = "/mounted/cert/tls.key"
-          gc_after_handshake = true
-          handshake_timeout = 5s
         }
       }
       listeners.wss.default {
         ssl_options {
           certfile = "/mounted/cert/tls.crt"
           keyfile = "/mounted/cert/tls.key"
-          gc_after_handshake = true
-          handshake_timeout = 5s
         }
         websocket {
           mqtt_path = "/"
