@@ -6,6 +6,38 @@ spec:
   image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
   revisionHistoryLimit: 0
 
+  config:
+    data: |
+      listeners.ssl.default {
+        bind = "0.0.0.0:8883"
+        ssl_options {
+          cacertfile = "/mounted/cert/ca.crt"
+          certfile = "/mounted/cert/tls.crt"
+          keyfile = "/mounted/cert/tls.key"
+          gc_after_handshake = true
+          handshake_timeout = 5s
+        }
+      }
+
+  coreTemplate:
+    spec:
+      extraVolumes:
+        - name: emqx-tls
+          secret:
+            secretName: mqtt-tls-certificate
+      extraVolumeMounts:
+        - name: emqx-tls
+          mountPath: /mounted/cert
+  replicantTemplate:
+    spec:
+      extraVolumes:
+        - name: emqx-tls
+          secret:
+            secretName: mqtt-tls-certificate
+      extraVolumeMounts:
+        - name: emqx-tls
+          mountPath: /mounted/cert
+
   listenersServiceTemplate:
     spec:
       type: LoadBalancer
