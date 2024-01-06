@@ -1,4 +1,4 @@
-emqx:
+emqx-operator:
   replicaCount: 1
 
 #   emqxConfig:
@@ -23,3 +23,8 @@ emqx:
 #     issuer:
 #       kind: ClusterIssuer
 #       name: cloudflare-letsencrypt-dns
+
+cluster:
+  image:
+    repository: emqx
+    tag: 5.4.1
