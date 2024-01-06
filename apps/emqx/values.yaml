@@ -1,6 +1,9 @@
 emqx:
   replicaCount: 1
 
+  emqxConfig:
+    EMQX_LISTENERS__TCP__DEFAULT__PROXY_PROTOCOL: "true"
+
   ingress:
     dashboard:
       enabled: true
