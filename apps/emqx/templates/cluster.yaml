@@ -8,12 +8,29 @@ spec:
 
   config:
     data: |
+      listeners.tcp.default {
+        enable = false
+      }
+      listeners.ws.default {
+        enable = false
+      }
       listeners.ssl.default {
         ssl_options {
           certfile = "/mounted/cert/tls.crt"
           keyfile = "/mounted/cert/tls.key"
           gc_after_handshake = true
           handshake_timeout = 5s
+        }
+      }
+      listeners.wss.default {
+        ssl_options {
+          certfile = "/mounted/cert/tls.crt"
+          keyfile = "/mounted/cert/tls.key"
+          gc_after_handshake = true
+          handshake_timeout = 5s
+        }
+        ws_opts {
+          mqtt_path = "/"
         }
       }
 
