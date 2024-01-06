@@ -3,5 +3,5 @@ kind: EMQX
 metadata:
    name: emqx
 spec:
-   image: '{{ .Values.cluster.image.repository }}-{{ .Values.cluster.image.tag }}'
+   image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
    revisionHistoryLimit: 0
