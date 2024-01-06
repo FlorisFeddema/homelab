@@ -12,10 +12,14 @@ emqx:
       tls:
         - hosts:
             - emqx.mobrockers.com
-    mqtt:
-      enabled: true
-      hosts:
-        - mqtt.mobrockers.com
-      tls:
-        - hosts:
-            - mqtt.mobrockers.com
+  service:
+    type: LoadBalancer
+  
+  ssl:
+    enabled: true
+    dnsnames:
+      - emqx.mobrockers.com
+      - mqtt.mobrockers.com
+    issuer:
+      kind: ClusterIssuer
+      name: cloudflare-letsencrypt-dns
