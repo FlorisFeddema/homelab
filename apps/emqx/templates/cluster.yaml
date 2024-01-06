@@ -1,0 +1,11 @@
+apiVersion: apps.emqx.io/v2beta1
+kind: EMQX
+metadata:
+  name: emqx
+spec:
+  image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
+  revisionHistoryLimit: 0
+
+  listenersServiceTemplate:
+    spec:
+      type: LoadBalancer
