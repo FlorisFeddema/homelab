@@ -11,5 +11,5 @@ apps:
   gatus:
     deploy: true
   emqx:
-    deploy: false
+    deploy: true
     autoSync: false

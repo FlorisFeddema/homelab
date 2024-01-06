@@ -1,25 +1,25 @@
 emqx:
   replicaCount: 1
 
-  emqxConfig:
-    EMQX_LISTENERS__TCP__DEFAULT__PROXY_PROTOCOL: "true"
+#   emqxConfig:
+#     EMQX_LISTENERS__TCP__DEFAULT__PROXY_PROTOCOL: "true"
 
-  ingress:
-    dashboard:
-      enabled: true
-      hosts:
-        - emqx.mobrockers.com
-      tls:
-        - hosts:
-            - emqx.mobrockers.com
-  service:
-    type: LoadBalancer
+#   ingress:
+#     dashboard:
+#       enabled: true
+#       hosts:
+#         - emqx.mobrockers.com
+#       tls:
+#         - hosts:
+#             - emqx.mobrockers.com
+#   service:
+#     type: LoadBalancer
   
-  ssl:
-    enabled: true
-    dnsnames:
-      - emqx.mobrockers.com
-      - mqtt.mobrockers.com
-    issuer:
-      kind: ClusterIssuer
-      name: cloudflare-letsencrypt-dns
+#   ssl:
+#     enabled: true
+#     dnsnames:
+#       - emqx.mobrockers.com
+#       - mqtt.mobrockers.com
+#     issuer:
+#       kind: ClusterIssuer
+#       name: cloudflare-letsencrypt-dns
