@@ -29,7 +29,7 @@ spec:
           gc_after_handshake = true
           handshake_timeout = 5s
         }
-        ws_opts {
+        websocket {
           mqtt_path = "/"
         }
       }
