@@ -19,14 +19,14 @@ democratic-csi:
 
   storageClasses:
   - name: truenas-iscsi-hdd-delete
-    defaultClass: 'true'
+    defaultClass: true
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
     parameters:
       "csi.storage.k8s.io/fstype": "ext4"
   - name: truenas-iscsi-hdd-retain
-    defaultClass: 'false'
+    defaultClass: false
     reclaimPolicy: Retain
     volumeBindingMode: Immediate
     allowVolumeExpansion: true
