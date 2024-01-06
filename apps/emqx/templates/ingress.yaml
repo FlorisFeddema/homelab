@@ -42,7 +42,7 @@ spec:
               service:
                 name: emqx-dashboard
                 port:
-                  name: http
+                  name: dashboard
             pathType: Prefix
   tls:
     - hosts:
