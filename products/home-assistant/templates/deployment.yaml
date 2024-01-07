@@ -24,12 +24,12 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "home-assistant"
         {{- include "labels" . | nindent 8 }}
-        config-hash: {{ print .Values.configuration | sha1sum  }}
+        config-hash: {{ print .Values.config.configurationYaml | sha1sum  }}
     spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: copy-config
-          image: "{{ .Values.copyConfig.image.registry }}/{{ .Values.copyConfig.image.repository }}:{{ .Values.copyConfig.image.tag }}"
+          image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
           imagePullPolicy: IfNotPresent
           command:
             - "sh"
@@ -42,15 +42,23 @@ spec:
                 cat /config/configuration.yaml.old
               fi
               cp /tmp/configuration.yaml /config/configuration.yaml
+              if [ -f /config/secrets.yaml ]; then
+                echo "Copy current secrets to /config/secrets.yaml.old"
+                cp /config/secrets.yaml /config/secrets.yaml.old
+              fi
+              cp /tmp/secrets.yaml /config/secrets.yaml
               cd /config
               touch $files
           env:
             - name: files
-              value: "{{ join " " .Values.createConfigFiles }}"
+              value: "{{ join " " .Values.config.createFiles }}"
           volumeMounts:
             - name: default-config
               mountPath: /tmp/configuration.yaml
               subPath: configuration.yaml
+            - name: secret-config
+              mountPath: /tmp/secret.yaml
+              subPath: secrets.yaml
             - name: config
               mountPath: /config
       containers:
@@ -84,3 +92,6 @@ spec:
         - name: default-config
           configMap:
             name: {{ template "homeAssistant.fullname" . }}-config
+        - name: secret-config
+          secret:
+            secretName: {{ .Values.config.secretName }}

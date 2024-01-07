@@ -40,44 +40,50 @@ ingress:
     nginx.ingress.kubernetes.io/auth-snippet: |
       proxy_set_header X-Forwarded-Host $http_host;
 
-copyConfig:
+
+config:
   image:
     registry: docker.io
     repository: busybox
     tag: 1.36.1
 
-createConfigFiles:
-  - customize.yaml
-  - automations.yaml
-  - scripts.yaml
-  - scenes.yaml
-  - sensors.yaml
-  - groups.yaml
+  createFiles:
+    - customize.yaml
+    - automations.yaml
+    - scripts.yaml
+    - scenes.yaml
+    - sensors.yaml
+    - groups.yaml
 
-configuration: |
-  # Loads default set of integrations. Do not remove.
-  default_config:
-  homeassistant:
-    name: Home
-    unit_system: metric
-    temperature_unit: C
-    currency: EUR
-    external_url: https://home.cloud.feddema.dev
-    customize: !include customize.yaml
-    language: en
-    country: NL
-  http:
-    use_x_forwarded_for: true
-    trusted_proxies:
-      - 10.0.0.0/8
+  secretName: home-assistant-secret
+
+  configurationYaml: |
+    # Loads default set of integrations. Do not remove.
+    default_config:
+    homeassistant:
+      name: Home
+      unit_system: metric
+      temperature_unit: C
+      currency: EUR
+      external_url: https://home.cloud.feddema.dev
+      customize: !include customize.yaml
+      language: en
+      country: NL
+    http:
+      use_x_forwarded_for: true
+      trusted_proxies:
+        - 10.0.0.0/8
   
-  auth_header:
-    username_header: X-authentik-username
-
-  tts:
-    - platform: google_translate
-  automation: !include automations.yaml
-  script: !include scripts.yaml
-  scene: !include scenes.yaml
-  sensor: !include sensors.yaml
-  group: !include groups.yaml
+    recorder:
+      db_url: !secret recorder_db_url
+    
+    auth_header:
+      username_header: X-authentik-username
+  
+    tts:
+      - platform: google_translate
+    automation: !include automations.yaml
+    script: !include scripts.yaml
+    scene: !include scenes.yaml
+    sensor: !include sensors.yaml
+    group: !include groups.yaml

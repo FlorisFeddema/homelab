@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ template "homeAssistant.fullname" . }}-config
 data:
-  configuration.yaml: |- {{ include "common.tplvalues.render" ( dict "value" .Values.configuration "context" $) | nindent 4 }}
+  configuration.yaml: |- {{ include "common.tplvalues.render" ( dict "value" .Values.config.configurationYaml "context" $) | nindent 4 }}
