@@ -8,3 +8,31 @@ node-feature-discovery:
     - gpu.intel.com/memory.max
     - gpu.intel.com/tiles
     - sgx.intel.com/epc
+
+  worker:
+    config:
+      sources:
+        usb:
+          # https://www.usb.org/defined-class-codes
+          deviceClassWhitelist:
+          - "02"
+          - "0e"
+          - "ef"
+          - "fe"
+          - "ff"
+
+          deviceLabelFields:
+            - "class"
+            - "vendor"
+            - "device"
+
+        custom:
+          - name: "sonoff-zigbee-dongle-plus-e"
+            labels:
+              "sonoff.tech/zigbee-dongle-plus-e": "true"
+            matchFeatures:
+              - feature: usb.device
+                matchExpressions:
+                  device: {op: In, value: ["55d4"]}
+                  vendor: {op: In, value: ["1a86"]}
+                  class: {op: In, value: ["02"]}
