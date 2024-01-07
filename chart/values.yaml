@@ -35,6 +35,9 @@ products:
     autoSync: true
     namespace: grafana
     serverSideApply: true
+  homeAssistant:
+    deploy: true
+    autoSync: true
   ingressNginx:
     deploy: true
     autoSync: true
