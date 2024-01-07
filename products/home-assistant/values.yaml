@@ -27,6 +27,7 @@ persistence:
   size: 5Gi
 
 ingress:
+  enabled: false
   domain: home.cloud.feddema.dev
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
