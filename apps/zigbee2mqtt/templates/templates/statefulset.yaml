@@ -25,8 +25,9 @@ spec:
         env:
           - name: TZ
             value: Europe/Amsterdam
-        - name: config
-          mountPath: /app/data
+        volumeMounts:
+          - name: config
+            mountPath: /app/data
   volumeClaimTemplates:
   - metadata:
       name: config
