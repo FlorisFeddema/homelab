@@ -6,7 +6,8 @@ spec:
   image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
   revisionHistoryLimit: 0 
   replicantTemplate:
-    replicas: 0
+    spec:
+      replicas: 0
 
   config:
     data: |
