@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zigbee2mqtt
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  serviceName: zigbee2mqtt
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: zigbee2mqtt
+      app.kubernetes.io/name: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: zigbee2mqtt
+        app.kubernetes.io/name: zigbee2mqtt
+    spec:
+      containers:
+      - name: zigbee2mqtt
+        image: '{{ .Values.zigbee2mqtt.image.repository }}:{{ .Values.zigbee2mqtt.image.tag }}'
+        ports:
+        - name: http
+          containerPort: 8080
+        env:
+          - name: TZ
+            value: Europe/Amsterdam
+        - name: config
+          mountPath: /app/data
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Mi

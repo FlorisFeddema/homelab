@@ -1,0 +1,4 @@
+zigbee2mqtt:
+  image:
+    repository: koenkk/zigbee2mqtt
+    tag: 1.35.1

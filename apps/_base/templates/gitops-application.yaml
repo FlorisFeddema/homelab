@@ -13,7 +13,8 @@ spec:
       - core-apps.yaml
       - csi-apps.yaml
       - connectivity-apps.yaml
-      - arr-apps.yaml
+      - home-automation.yaml
+      - mediacenter.yaml
       - apps.yaml
   syncPolicy:
     syncOptions:

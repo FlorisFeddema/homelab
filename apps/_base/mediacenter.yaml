@@ -1,4 +1,6 @@
 apps:
+  plex:
+    deploy: true
   sabnzbd:
     deploy: true
     path: apps/arr/sabnzbd
