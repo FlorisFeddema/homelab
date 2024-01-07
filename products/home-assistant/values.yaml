@@ -1,0 +1,74 @@
+replicas: 1
+
+image:
+  registry: ghcr.io
+  repository: home-assistant/home-assistant
+  tag: 2024.1.2
+
+resources: {}
+
+deploymentStrategy:
+  type: Recreate
+
+podSecurityContext:
+#  runAsUser: 1000
+#  runAsGroup: 1000
+#  fsGroup: 1000
+#  runAsNonRoot: true
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ "ALL" ]
+#  readOnlyRootFilesystem: true
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+ingress:
+  domain: home.cloud.feddema.dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+
+copyConfig:
+  image:
+    registry: docker.io
+    repository: busybox
+    tag: 1.36.1
+
+createConfigFiles:
+  - customize.yaml
+  - automations.yaml
+  - scripts.yaml
+  - scenes.yaml
+  - sensors.yaml
+  - groups.yaml
+
+configuration: |
+  # Loads default set of integrations. Do not remove.
+  default_config:
+  homeassistant:
+    name: Home
+    unit_system: metric
+    temperature_unit: C
+    currency: EUR
+    external_url: https://home.cloud.feddema.dev
+    customize: !include customize.yaml
+    language: en
+    country: NL
+  http:
+    use_x_forwarded_for: true
+    trusted_proxies:
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - 127.0.0.1
+      - ::1
+  tts:
+    - platform: google_translate
+  automation: !include automations.yaml
+  script: !include scripts.yaml
+  scene: !include scenes.yaml
+  sensor: !include sensors.yaml
+  group: !include groups.yaml
