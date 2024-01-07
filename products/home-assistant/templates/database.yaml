@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: homelab-data
+  name: home-assistant-data
 spec:
   instances: 1
 
