@@ -19,9 +19,6 @@ spec:
   syncPolicy:
     syncOptions:
      - FailOnSharedResource=true
-    automated:
-      prune: true
-      selfHeal: true
   destination:
     name: in-cluster
     namespace: argocd
