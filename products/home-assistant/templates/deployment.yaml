@@ -57,7 +57,7 @@ spec:
               mountPath: /tmp/configuration.yaml
               subPath: configuration.yaml
             - name: secret-config
-              mountPath: /tmp/secret.yaml
+              mountPath: /tmp/secrets.yaml
               subPath: secrets.yaml
             - name: config
               mountPath: /config
