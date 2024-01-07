@@ -1,28 +1,6 @@
 emqx-operator:
   replicaCount: 1
-
-#   emqxConfig:
-#     EMQX_LISTENERS__TCP__DEFAULT__PROXY_PROTOCOL: "true"
-
-#   ingress:
-#     dashboard:
-#       enabled: true
-#       hosts:
-#         - emqx.mobrockers.com
-#       tls:
-#         - hosts:
-#             - emqx.mobrockers.com
-#   service:
-#     type: LoadBalancer
-  
-#   ssl:
-#     enabled: true
-#     dnsnames:
-#       - emqx.mobrockers.com
-#       - mqtt.mobrockers.com
-#     issuer:
-#       kind: ClusterIssuer
-#       name: cloudflare-letsencrypt-dns
+  development: true
 
 cluster:
   image:
