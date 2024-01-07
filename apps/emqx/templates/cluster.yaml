@@ -4,7 +4,9 @@ metadata:
   name: emqx
 spec:
   image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: 0 
+  replicantTemplate:
+    replicas: 0
 
   config:
     data: |
@@ -17,7 +19,7 @@ spec:
       listeners.ssl.default {
         ssl_options {
           certfile = "/mounted/cert/tls.crt"
-          keyfile = "/mounted/cert/tls.key"
+          keyfile = "/mounted/cert/tls.key" 
         }
       }
       listeners.wss.default {
