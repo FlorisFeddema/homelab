@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ $name | kebabcase }}
+  name: {{ $name }}
   namespace: argocd
   {{- if $app.finalize | default true }}
   finalizers:
@@ -15,14 +15,14 @@ spec:
   source:
     repoURL: https://github.com/broersma-forslund/homelab.git
     targetRevision: HEAD
-    path: {{ $app.path | default (printf "apps/%s" ($name | kebabcase)) }}
+    path: {{ $app.path | default (printf "apps/%s" $name) }}
     {{- with $app.valueFiles }}
     helm:
       valueFiles: {{ . | toYaml | nindent 8 }}
     {{- end }}
   destination:
     name: in-cluster
-    namespace: {{ $app.namespace | default (kebabcase $name) }}
+    namespace: {{ $app.namespace | default $name }}
   {{- with $app.ignoreDifferences }}
   ignoreDifferences: {{ . | toYaml | nindent 6 }}
   {{- end }}
