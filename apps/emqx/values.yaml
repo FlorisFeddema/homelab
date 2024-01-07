@@ -1,5 +1,5 @@
 emqx-operator:
-  replicaCount: 1
+  replicaCount: 0
   development: true
 
 cluster:
