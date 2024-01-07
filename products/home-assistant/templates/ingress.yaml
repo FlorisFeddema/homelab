@@ -16,7 +16,7 @@ spec:
         paths:
           - backend:
               service:
-                name:  {{ template "homeAssistant.fullname" . }}-web
+                name:  {{ template "homeAssistant.fullname" . }}
                 port:
                   number: 8123
             path: /
