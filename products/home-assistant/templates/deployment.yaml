@@ -27,6 +27,7 @@ spec:
         config-hash: {{ print .Values.config.configurationYaml | sha1sum  }}
     spec:
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: copy-config
