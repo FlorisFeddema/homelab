@@ -72,7 +72,6 @@ spec:
             - name: http
               containerPort: 8123
               protocol: TCP
-            {{- toYaml .Values.extraPorts | nindent 12 }}
           resources: {{ toYaml .Values.resources | nindent 12 }}
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
           livenessProbe:

@@ -27,11 +27,6 @@ persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
 
-extraPorts: []
-
-loadBalancer:
-  enabled: false
-
 ingress:
   enabled: true
   domain: home.cloud.feddema.dev
@@ -86,7 +81,6 @@ config:
       use_x_forwarded_for: true
       trusted_proxies:
         - 10.0.0.0/8
-    
     
     recorder:
       db_url: !secret recorder_db_url
