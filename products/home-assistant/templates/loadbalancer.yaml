@@ -1,0 +1,19 @@
+{{- if .Values.loadBalancer.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "homeAssistant.fullname" . }}-loadbalancer
+  labels:
+    app.kubernetes.io/name: {{ template "homeAssistant.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "home-assistant"
+    {{- include "labels" . | nindent 4 }}
+  annotations: {{ toYaml .Values.loadBalancer.annotations | nindent 4 }}
+spec:
+  type: LoadBalancer
+  ports: {{ toYaml .Values.loadBalancer.ports | nindent 4 }}
+  selector:
+    app.kubernetes.io/name: {{ template "homeAssistant.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "home-assistant"
+{{- end }}
