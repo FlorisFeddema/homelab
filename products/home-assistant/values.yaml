@@ -104,12 +104,6 @@ config:
       language: en
       country: NL
 
-    logger:
-      default: warning
-      logs:
-        homeassistant.components.homekit: debug
-        pyhap: debug
-
     http:
       use_x_forwarded_for: true
       trusted_proxies:
@@ -120,9 +114,6 @@ config:
       mode: bridge
       advertise_ip: 192.168.1.101
       port: 21064
-      filter:
-        include_entities:
-          - demo.demo
     
     recorder:
       db_url: !secret recorder_db_url
