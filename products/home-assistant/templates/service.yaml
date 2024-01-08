@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "homeAssistant.fullname" . }}
+  name: {{ template "homeAssistant.fullname" . }}-loadbalancer
   labels:
     app.kubernetes.io/name: {{ template "homeAssistant.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
