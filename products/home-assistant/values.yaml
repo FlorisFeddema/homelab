@@ -39,11 +39,9 @@ extraPorts:
     protocol: TCP
 
 loadBalancer:
-  enabled: true
+  enabled: false
   annotations:
     "io.cilium/lb-ipam-ips": "192.168.100.200"
-    kubelish/service-name: Example
-    kubelish/service-type: _example._tcp
   ports:
     - name: http
       port: 8123
@@ -60,6 +58,7 @@ loadBalancer:
     - name: homekit-2
       port: 21063
       targetPort: 21063
+      protocol: TCP
 
 ingress:
   enabled: true
@@ -116,6 +115,14 @@ config:
       trusted_proxies:
         - 10.0.0.0/8
     
+    homekit:
+      name: Home Assistant Bridge
+      mode: bridge
+      advertise_ip: 192.168.1.101
+      port: 21064
+      filter:
+        include_entities:
+          - demo.demo
     
     recorder:
       db_url: !secret recorder_db_url
