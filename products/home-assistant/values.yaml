@@ -31,6 +31,9 @@ extraPorts:
   - name: homekit
     containerPort: 21064
     protocol: TCP
+  - name: homekit-udp
+    containerPort: 21064
+    protocol: UDP
 
 loadBalancer:
   enabled: true
@@ -41,6 +44,10 @@ loadBalancer:
       port: 21064
       targetPort: 21064
       protocol: TCP
+    - name: homekit-udp
+      port: 21064
+      targetPort: 21064
+      protocol: UDP
 
 ingress:
   enabled: true
