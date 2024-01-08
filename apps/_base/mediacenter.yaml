@@ -6,21 +6,16 @@ apps:
     path: apps/arr/sabnzbd
   prowlarr:
     deploy: true
-    autoSync: false
     path: apps/arr/prowlarr
   sonarr:
     deploy: true
-    autoSync: false
     path: apps/arr/sonarr
   radarr:
     deploy: true
-    autoSync: false
     path: apps/arr/radarr
   overseerr:
     deploy: true
-    autoSync: false
     path: apps/arr/overseerr
   bazarr:
     deploy: true
-    autoSync: false
     path: apps/arr/bazarr
