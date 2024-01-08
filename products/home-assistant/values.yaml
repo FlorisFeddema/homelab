@@ -28,26 +28,19 @@ persistence:
   size: 5Gi
 
 extraPorts:
-  - name: homekit-tcp
+  - name: homekit
     containerPort: 21064
     protocol: TCP
-  - name: homekit-udp
-    containerPort: 21064
-    protocol: UDP
 
 loadBalancer:
   enabled: true
   annotations:
     "io.cilium/lb-ipam-ips": "192.168.100.200"
   ports:
-    - name: homekit-tcp
+    - name: homekit
       port: 21064
       targetPort: 21064
       protocol: TCP
-    - name: homekit-udp
-      port: 21064
-      targetPort: 21064
-      protocol: UDP
 
 ingress:
   enabled: true
@@ -107,10 +100,14 @@ config:
     homekit:
       name: Home Assistant Bridge
       mode: bridge
+      ip_address: 192.168.100.200
       advertise_ip: 192.168.100.200
       port: 21064
-  
-    recorder:
+      filter:
+        include_entities:
+          - demo.demo
+    
+      recorder:
       db_url: !secret recorder_db_url
     
     auth_header:
