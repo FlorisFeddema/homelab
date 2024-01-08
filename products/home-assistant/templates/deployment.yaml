@@ -26,6 +26,7 @@ spec:
         {{- include "labels" . | nindent 8 }}
         config-hash: {{ print .Values.config.configurationYaml | sha1sum  }}
     spec:
+      hostNetwork: true
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: copy-config
