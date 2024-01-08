@@ -27,6 +27,21 @@ persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
 
+extraPorts:
+  - name: homekit
+    containerPort: 21064
+    protocol: TCP
+
+loadBalancer:
+  enabled: true
+  annotations:
+    "io.cilium/lb-ipam-ips": "192.168.100.200"
+  ports:
+    - name: homekit
+      port: 21064
+      targetPort: 21064
+      protocol: TCP
+
 ingress:
   enabled: true
   domain: home.cloud.feddema.dev
@@ -74,6 +89,12 @@ config:
       use_x_forwarded_for: true
       trusted_proxies:
         - 10.0.0.0/8
+    
+    homekit:
+      name: Home Assistant Bridge
+      mode: bridge
+      advertise_ip: 192.168.100.200
+      port: 21064
   
     recorder:
       db_url: !secret recorder_db_url
