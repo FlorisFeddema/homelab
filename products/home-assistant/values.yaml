@@ -31,6 +31,12 @@ extraPorts:
   - name: homekit
     containerPort: 21064
     protocol: TCP
+  - name: homekit-1
+    containerPort: 5353
+    protocol: UDP
+  - name: homekit-2
+    containerPort: 21063
+    protocol: TCP
 
 loadBalancer:
   enabled: true
@@ -40,6 +46,14 @@ loadBalancer:
     - name: homekit
       port: 21064
       targetPort: 21064
+      protocol: TCP
+    - name: homekit-1
+      port: 5353
+      targetPort: 5353
+      protocol: TCP
+    - name: homekit-2
+      port: 21063
+      targetPort: 21063
       protocol: TCP
 
 ingress:
