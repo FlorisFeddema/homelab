@@ -43,6 +43,15 @@ extraPorts:
   - name: homekit-4
     containerPort: 51828
     protocol: TCP
+  - name: ssdp
+    containerPort: 1900
+    protocol: UDP
+  - name: homekit-5
+    containerPort: 5350
+    protocol: UDP
+  - name: homekit-6
+    containerPort: 5351
+    protocol: UDP
 
 loadBalancer:
   enabled: true
@@ -73,6 +82,10 @@ loadBalancer:
       port: 51828
       targetPort: 51828
       protocol: TCP
+    - name: ssdp
+      port: 1900
+      targetPort: 1900
+      protocol: UDP
 
 ingress:
   enabled: true
@@ -129,14 +142,14 @@ config:
       trusted_proxies:
         - 10.0.0.0/8
     
-    #    homekit:
-    #      name: Home Assistant Bridge
-    #      mode: bridge
-    #      advertise_ip: 192.168.100.200
-    #      port: 21064
-    #      filter:
-    #        include_entities:
-    #          - demo.demo
+    homekit:
+      name: Home Assistant Bridge
+      mode: bridge
+      advertise_ip: 192.168.100.200
+      port: 21064
+      filter:
+        include_entities:
+          - demo.demo
     
       recorder:
       db_url: !secret recorder_db_url
