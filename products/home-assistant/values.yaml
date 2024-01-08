@@ -85,6 +85,13 @@ config:
       customize: !include customize.yaml
       language: en
       country: NL
+
+    logger:
+      default: warning
+      logs:
+        homeassistant.components.homekit: debug
+        pyhap: debug
+
     http:
       use_x_forwarded_for: true
       trusted_proxies:
@@ -104,6 +111,7 @@ config:
   
     tts:
       - platform: google_translate
+    
     automation: !include automations.yaml
     script: !include scripts.yaml
     scene: !include scenes.yaml
