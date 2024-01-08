@@ -82,6 +82,14 @@ loadBalancer:
       port: 51828
       targetPort: 51828
       protocol: TCP
+    - name: homekit-5
+      port: 5350
+      targetPort: 5350
+      protocol: TCP
+    - name: homekit-6
+      port: 5351
+      targetPort: 5351
+      protocol: TCP
     - name: ssdp
       port: 1900
       targetPort: 1900
@@ -142,14 +150,14 @@ config:
       trusted_proxies:
         - 10.0.0.0/8
     
-    homekit:
-      name: Home Assistant Bridge
-      mode: bridge
-      advertise_ip: 192.168.100.200
-      port: 21064
-      filter:
-        include_entities:
-          - demo.demo
+    #    homekit:
+    #      name: Home Assistant Bridge
+    #      mode: bridge
+    #      advertise_ip: 192.168.100.200
+    #      port: 21064
+    #      filter:
+    #        include_entities:
+    #          - demo.demo
     
       recorder:
       db_url: !secret recorder_db_url
