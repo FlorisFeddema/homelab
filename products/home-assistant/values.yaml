@@ -28,7 +28,7 @@ persistence:
   size: 5Gi
 
 extraPorts:
-  - name: homekit
+  - name: homekit-tcp
     containerPort: 21064
     protocol: TCP
   - name: homekit-udp
@@ -40,7 +40,7 @@ loadBalancer:
   annotations:
     "io.cilium/lb-ipam-ips": "192.168.100.200"
   ports:
-    - name: homekit
+    - name: homekit-tcp
       port: 21064
       targetPort: 21064
       protocol: TCP
