@@ -8,3 +8,8 @@ emqx-operator:
     requests:
       cpu: 20m
       memory: 64Mi
+
+cluster:
+  image:
+    repository: emqx/emqx
+    tag: 5.4.1

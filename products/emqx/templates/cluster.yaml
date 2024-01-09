@@ -1,0 +1,68 @@
+apiVersion: apps.emqx.io/v2beta1
+kind: EMQX
+metadata:
+  name: {{ template "emqx.fullname" . }}
+spec:
+  image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
+  revisionHistoryLimit: 0
+  replicantTemplate:
+    spec:
+      replicas: 0
+
+  config:
+    data: |
+      listeners.tcp.default {
+        enable = false
+      }
+      listeners.ws.default {
+        enable = false
+      }
+      listeners.ssl.default {
+        ssl_options {
+          certfile = "/mounted/cert/tls.crt"
+          keyfile = "/mounted/cert/tls.key"
+        }
+      }
+      listeners.wss.default {
+        ssl_options {
+          certfile = "/mounted/cert/tls.crt"
+          keyfile = "/mounted/cert/tls.key"
+        }
+        websocket {
+          mqtt_path = "/"
+        }
+      }
+
+      authentication = [{
+        mechanism = "password_based"
+        backend = "built_in_database"
+      }]
+      authorization {
+        no_match = "deny"
+        deny_action = "disconnect"
+
+        sources = [{
+          type = "built_in_database"
+        }]
+      }
+
+  coreTemplate:
+    spec:
+      replicas: 1
+      volumeClaimTemplates:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
+      extraVolumes:
+        - name: emqx-tls
+          secret:
+            secretName: mqtt-tls-certificate
+      extraVolumeMounts:
+        - name: emqx-tls
+          mountPath: /mounted/cert
+
+  listenersServiceTemplate:
+    spec:
+      type: LoadBalancer
