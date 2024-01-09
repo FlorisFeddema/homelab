@@ -33,6 +33,21 @@ spec:
         }
       }
 
+      authentication [{
+        mechanism = "password_based"
+        backend = "built_in_database"
+      }]
+      authorization {
+        no_match = "deny"
+        deny_action = "disconnect"
+
+        sources [{
+          {
+            type = "built_in_database"
+          }]
+        }
+      }
+
   coreTemplate:
     spec:
       replicas: 1
