@@ -1,11 +1,16 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: mqtt-tls-certificate
+  name:  {{ template "emqx.fullname" . }}-listener-tls
+  labels:
+    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "emqx"
+    {{- include "labels" . | nindent 4 }}
 spec:
-  secretName: mqtt-tls-certificate
+  secretName: {{ template "emqx.fullname" . }}-listener-tls
   dnsNames:
-    - 'mqtt.cloud.feddema.dev'
+    - {{ .Values.cluster.certificate.domain}}
   issuerRef:
-    name: letsencrypt-dns
+    name: {{ .Values.cluster.certificate.issuer }}
     kind: ClusterIssuer

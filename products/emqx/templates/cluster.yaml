@@ -2,12 +2,17 @@ apiVersion: apps.emqx.io/v2beta1
 kind: EMQX
 metadata:
   name: {{ template "emqx.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "emqx"
+    {{- include "labels" . | nindent 4 }}
 spec:
   image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
   revisionHistoryLimit: 0
   replicantTemplate:
     spec:
-      replicas: 0
+      replicas: {{ .Values.cluster.replicant.replicas }}
 
   config:
     data: |
@@ -48,21 +53,22 @@ spec:
 
   coreTemplate:
     spec:
-      replicas: 1
+      replicas: {{ .Values.cluster.replicas }}
       volumeClaimTemplates:
         accessModes:
-          - ReadWriteOnce
+          - {{ .Values.cluster.persistence.accessMode }}
         resources:
           requests:
-            storage: 100Mi
+            storage: {{ .Values.cluster.persistence.size }}
       extraVolumes:
         - name: emqx-tls
           secret:
-            secretName: mqtt-tls-certificate
+            secretName: {{ template "emqx.fullname" . }}-listener-tls
       extraVolumeMounts:
         - name: emqx-tls
           mountPath: /mounted/cert
-
+  {{- if .Values.cluster.listener.service.enabled }}
   listenersServiceTemplate:
     spec:
-      type: LoadBalancer
+      type: {{ .Values.cluster.listener.service.type }}
+  {{ end }}

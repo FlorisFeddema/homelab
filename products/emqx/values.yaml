@@ -10,6 +10,31 @@ emqx-operator:
       memory: 64Mi
 
 cluster:
+  replicas: 1
+
+  replicant:
+    replicas: 0
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 500Mi
+
   image:
     repository: emqx/emqx
     tag: 5.4.1
+
+  listener:
+    service:
+      enabled: true
+      type: LoadBalancer
+
+  certificate:
+    domain: emqx.cloud.feddema.dev
+    issuer: letsencrypt-dns
+
+  ingress:
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    domain: emqx.cloud.feddema.dev
+
+
