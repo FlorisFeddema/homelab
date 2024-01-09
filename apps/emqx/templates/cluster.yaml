@@ -49,6 +49,12 @@ spec:
   coreTemplate:
     spec:
       replicas: 1
+      volumeClaimTemplates:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Mi
       extraVolumes:
         - name: emqx-tls
           secret:
