@@ -33,7 +33,7 @@ spec:
         }
       }
 
-      authentication.0 {
+      authentication = [{
         mechanism = "password_based"
         backend = "built_in_database"
       }]
@@ -41,11 +41,9 @@ spec:
         no_match = "deny"
         deny_action = "disconnect"
 
-        sources.1 {
-          {
-            type = "built_in_database"
-          }]
-        }
+        sources = [{
+          type = "built_in_database"
+        }]
       }
 
   coreTemplate:
