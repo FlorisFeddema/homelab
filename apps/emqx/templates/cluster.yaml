@@ -33,7 +33,7 @@ spec:
         }
       }
 
-      authentication [{
+      authentication.0 {
         mechanism = "password_based"
         backend = "built_in_database"
       }]
@@ -41,7 +41,7 @@ spec:
         no_match = "deny"
         deny_action = "disconnect"
 
-        sources [{
+        sources.1 {
           {
             type = "built_in_database"
           }]
