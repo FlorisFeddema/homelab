@@ -75,8 +75,6 @@ products:
   nodeFeatureDiscovery:
     deploy: true
     autoSync: true
-  oauthProxy:
-    deploy: false
   pgo:
     deploy: true
     autoSync: true
