@@ -17,6 +17,9 @@ products:
   cloudnativePg:
     deploy: true
     autoSync: true
+  emqx:
+    deploy: true
+    autoSync: true
   enphaseEnvoyPrometheusExporter:
     deploy: true
     autoSync: true
