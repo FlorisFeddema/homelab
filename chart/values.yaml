@@ -51,9 +51,6 @@ products:
   kepler:
     deploy: true
     autoSync: true
-  keycloakx:
-    deploy: false
-    autoSync: true
   loki:
     deploy: true
     autoSync: true
