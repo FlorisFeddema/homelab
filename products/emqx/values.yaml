@@ -1,2 +1,10 @@
-emqx-operator: {}
+emqx-operator:
+  revisionHistoryLimit: 0
 
+  resources:
+    limits:
+      cpu: null
+      memory: 128Mi
+    requests:
+      cpu: 20m
+      memory: 64Mi
