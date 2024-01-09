@@ -7,5 +7,5 @@ spec:
   dnsNames:
     - 'mqtt.cloud.feddema.dev'
   issuerRef:
-    name: letsencrypt-dns-key
+    name: letsencrypt-dns
     kind: ClusterIssuer
