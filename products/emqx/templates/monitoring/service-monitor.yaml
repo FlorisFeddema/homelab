@@ -20,7 +20,7 @@ spec:
       path: /metrics
       relabelings:
         - action: replace
-          replacement: {{ template "emqx.fullname" }}
+          replacement: {{ template "emqx.fullname" . }}
           targetLabel: cluster
         - action: replace
           replacement: exporter
