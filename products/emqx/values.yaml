@@ -36,19 +36,3 @@ cluster:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     domain: emqx.cloud.feddema.dev
-
-  monitoring:
-    enabled: true
-    replicas: 1
-    revisionHistoryLimit: 0
-
-    resources:
-      limits:
-        memory: 50Mi
-      requests:
-        cpu: 10m
-        memory: 20Mi
-
-    image:
-      repository: emqx/emqx-exporter
-      tag: 0.2.7
