@@ -1,7 +1,3 @@
-fullnameOverride:
-nameOverride:
-commonlabels:
-
 replicas: 1
 
 image:

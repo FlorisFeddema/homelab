@@ -1,7 +1,3 @@
-fullnameOverride:
-nameOverride:
-commonlabels:
-
 image:
   registry: docker.io
   repository: adguard/adguardhome
