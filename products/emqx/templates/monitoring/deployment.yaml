@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/component: "emqx-exporter"
     {{- include "labels" . | nindent 4 }}
 spec:
+  revisionHistoryLimit: {{ .Values.cluster.monitoring.revisionHistoryLimit }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "emqx.name" . }}
@@ -41,10 +42,5 @@ spec:
             - containerPort: 8085
               name: metrics
               protocol: TCP
-          resources:
-            limits:
-              memory: 50Mi
-            requests:
-              cpu: 10m
-              memory: 20Mi
+          resources: {{ toYaml .Values.cluster.monitoring.resources | nindent 12 }}
 {{- end }}

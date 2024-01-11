@@ -40,6 +40,14 @@ cluster:
   monitoring:
     enabled: true
     replicas: 1
+    revisionHistoryLimit: 0
+
+    resources:
+      limits:
+        memory: 50Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
 
     image:
       repository: emqx/emqx-exporter
