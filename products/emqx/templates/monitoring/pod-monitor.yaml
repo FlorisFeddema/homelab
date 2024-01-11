@@ -1,0 +1,30 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: emqx
+  labels:
+    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "emqx"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  podMetricsEndpoints:
+    - interval: 5s
+      path: /api/v5/prometheus/stats
+      port: dashboard
+      relabelings:
+        - action: replace
+          replacement: {{ include "emqx.fullname" }}
+          targetLabel: cluster
+        - action: replace
+          replacement: emqx
+          targetLabel: from
+        - action: replace
+          sourceLabels: ['pod']
+          targetLabel: "instance"
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "emqx.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: "emqx"
+      {{- include "labels" . | nindent 6 }}

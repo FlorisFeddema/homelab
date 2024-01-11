@@ -1,0 +1,50 @@
+{{- if .Values.cluster.monitoring.enabled -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "emqx.fullname" }}-exporter
+  labels:
+    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "emqx-exporter"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "emqx.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: "emqx-exporter"
+      {{- include "labels" . | nindent 4 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ template "emqx.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: "emqx-exporter"
+        {{- include "labels" . | nindent 8 }}
+    spec:
+      securityContext:
+        runAsUser: 1000
+      containers:
+        - name: exporter
+          image: {{ .Values.cluster.monitoring.image.repository }}:{{ .Values.cluster.monitoring.image.tag }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - --emqx.nodes={{ template "emqx.fullname" . }}-dashboard:18083
+            - --emqx.auth-username=$API_KEY
+            - --emqx.auth-password=$SECRET_KEY
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+          ports:
+            - containerPort: 8085
+              name: metrics
+              protocol: TCP
+          resources:
+            limits:
+              memory: 50Mi
+            requests:
+              cpu: 10m
+              memory: 20Mi
+{{- end }}

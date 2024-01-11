@@ -37,4 +37,10 @@ cluster:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     domain: emqx.cloud.feddema.dev
 
+  monitoring:
+    enabled: true
+    replicas: 1
 
+    image:
+      repository: emqx/emqx-exporter
+      tag: 0.2.7
