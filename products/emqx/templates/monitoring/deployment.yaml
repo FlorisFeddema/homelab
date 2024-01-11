@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "emqx.fullname" }}-exporter
+  name: {{ template "emqx.fullname" . }}-exporter
   labels:
     app.kubernetes.io/name: {{ template "emqx.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
