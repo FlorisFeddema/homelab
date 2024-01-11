@@ -31,7 +31,7 @@ spec:
           image: {{ .Values.cluster.monitoring.image.repository }}:{{ .Values.cluster.monitoring.image.tag }}
           imagePullPolicy: IfNotPresent
           args:
-            - --emqx.nodes={{ template "emqx.fullname" . }}-dashboard:18083
+            - --emqx.nodes="{{ template "emqx.fullname" . }}-dashboard:18083"
             - --emqx.auth-username=$API_KEY
             - --emqx.auth-password=$SECRET_KEY
           securityContext:
