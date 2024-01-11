@@ -27,39 +27,6 @@ persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
 
-extraPorts:
-  - name: homekit
-    containerPort: 21064
-    protocol: TCP
-  - name: homekit-1
-    containerPort: 5353
-    protocol: UDP
-  - name: homekit-2
-    containerPort: 21063
-    protocol: TCP
-
-loadBalancer:
-  enabled: false
-  annotations:
-    "io.cilium/lb-ipam-ips": "192.168.100.200"
-  ports:
-    - name: http
-      port: 8123
-      targetPort: 8123
-      protocol: TCP
-    - name: homekit
-      port: 21064
-      targetPort: 21064
-      protocol: TCP
-    - name: homekit-1
-      port: 5353
-      targetPort: 5353
-      protocol: TCP
-    - name: homekit-2
-      port: 21063
-      targetPort: 21063
-      protocol: TCP
-
 ingress:
   enabled: true
   domain: home.cloud.feddema.dev
