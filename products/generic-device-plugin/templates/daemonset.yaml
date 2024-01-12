@@ -37,7 +37,7 @@ spec:
             - --config
             - /config/config.yaml
             - --domain
-            - device.local
+            - {{ .Values.domain }}
             - --log-level
             - all
           resources: {{ toYaml .Values.resources | nindent 12 }}
