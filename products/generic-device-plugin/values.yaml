@@ -15,15 +15,15 @@ resources:
 podSecurityContext: {}
 
 securityContext:
-  privileged: true
-#  allowPrivilegeEscalation: false
-#  capabilities:
-#    drop: [ "ALL" ]
-#  readOnlyRootFilesystem: true
-#  seccompProfile:
-#    type: "RuntimeDefault"
-#  seLinuxOptions:
-#    type: "container_device_plugin_t"
+  privileged: false
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ "ALL" ]
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: "RuntimeDefault"
+  seLinuxOptions:
+    type: "container_device_plugin_t"
 
 domain: device.local
 
