@@ -56,5 +56,3 @@ config:
     adapter: ezsp
   frontend:
     port: 8080
-  advanced:
-    network_key: GENERATE
