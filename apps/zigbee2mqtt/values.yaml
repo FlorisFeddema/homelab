@@ -17,8 +17,8 @@ frontend:
   url: https://z2mqtt.mobrockers.com
 zigbee:
   adapter: /dev/ttyACM0
-  pan_id: 23219
-  ext_pan_id: [194, 57, 175, 193, 119, 126, 53, 38]
+  pan_id: '23219'
+  ext_pan_id: '[194, 57, 175, 193, 119, 126, 53, 38]'
 mqtt:
   base_topic: zigbee2mqtt
   server: mqtts://mqtt.mobrockers.com
