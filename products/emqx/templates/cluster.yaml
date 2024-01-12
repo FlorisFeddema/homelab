@@ -15,7 +15,7 @@ spec:
       replicas: {{ .Values.cluster.replicant.replicas }}
 
   config:
-    mode: Replace
+    mode: Merge
     data: |
       listeners.tcp.default {
         enable = false
