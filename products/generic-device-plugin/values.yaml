@@ -23,14 +23,14 @@ securityContext:
   allowPrivilegeEscalation: true
 #  capabilities:
 #    drop: [ "ALL" ]
-#  readOnlyRootFilesystem: true
-#  seccompProfile:
-#    type: RuntimeDefault
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
 
 devices:
   - name: zigbee
     groups:
-      - usb:
-          - vendor: "10c4"
-            product: "ea60"
+      - serial:
+          - vendor: "1a86"
+            product: "55d4"
 
