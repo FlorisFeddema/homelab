@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ include "base.productName" (dict "k" $k "v" $v) }}
+  name: {{ include "base.productName" (dict "key" $k "value" $v) }}
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -16,10 +16,10 @@ spec:
   source:
     repoURL: git@github.com:FlorisFeddema/homelab.git
     targetRevision: HEAD
-    path: products/{{ include "base.productName" (dict "k" $k "v" $v) }}
+    path: products/{{ include "base.productName" (dict "key" $k "value" $v) }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ include "base.productName" (dict "k" $k "v" $v) }}
+    namespace: {{ default (include "base.productName" (dict "key" $k "value" $v)) $v.namespace }}
   revisionHistoryLimit: 1
   {{- with $v.ignoreDifferences }}
   ignoreDifferences: {{ toYaml $v.ignoreDifferences | nindent 4 }}
