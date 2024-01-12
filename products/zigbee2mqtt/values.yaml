@@ -47,7 +47,7 @@ config:
     repository: busybox
     tag: 1.36.1
 
-  secretName: zigbee2mqtt-config
+  secretName: zigbee2mqtt-credentials
 
   fileContent:
     permit_join: true
