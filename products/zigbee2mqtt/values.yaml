@@ -53,9 +53,9 @@ config:
     permit_join: true
     mqtt:
       base_topic: zigbee2mqtt
-      server: '!secret.yaml mqtt.server'
-      user: '!secret.yaml mqtt.user'
-      password: '!secret.yaml mqtt.password'
+      server: '!secret.yaml mqtt_server'
+      user: '!secret.yaml mqtt_user'
+      password: '!secret.yaml mqtt_password'
     serial:
       port: /dev/ttyACM0
       adapter: ezsp
