@@ -25,6 +25,8 @@ securityContext:
     drop: [ "ALL" ]
   readOnlyRootFilesystem: true
   seccompProfile:
+    type: "RuntimeDefault"
+  seLinuxOptions:
     type: "container_device_plugin_t"
 
 devices:
