@@ -9,7 +9,8 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   secretName: {{ template "emqx.fullname" . }}-listener-tls
-  dnsNames: {{ toYaml .Values.cluster.certificate.domains | nindent 6 }}
+  dnsNames:
+    - {{ .Values.cluster.certificate.domain }}
   issuerRef:
     name: {{ .Values.cluster.certificate.issuer }}
     kind: ClusterIssuer
