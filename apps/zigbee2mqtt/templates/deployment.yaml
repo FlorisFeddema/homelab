@@ -51,7 +51,7 @@ spec:
             - name: secret-config
               mountPath: /tmp/secret.yaml
               subPath: secret.yaml
-            - name: config
+            - name: data
               mountPath: /config
       containers:
         - name: zigbee2mqtt
