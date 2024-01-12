@@ -27,9 +27,10 @@ cluster:
     service:
       enabled: true
       type: LoadBalancer
+      hostname: mqtt.cloud.feddema.dev
 
   certificate:
-    domain: emqx.cloud.feddema.dev
+    domain: mqtt.cloud.feddema.dev
     issuer: letsencrypt-dns
 
   ingress:

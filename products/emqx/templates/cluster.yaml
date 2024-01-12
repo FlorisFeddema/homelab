@@ -74,6 +74,9 @@ spec:
           mountPath: /mounted/cert
   {{- if .Values.cluster.listener.service.enabled }}
   listenersServiceTemplate:
+    annotations:
+      external-dns.alpha.kubernetes.io/hostname: {{ .Values.cluster.listener.service.hostname }}
+
     spec:
       type: {{ .Values.cluster.listener.service.type }}
   {{ end }}
