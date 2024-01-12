@@ -32,3 +32,5 @@ devices:
     groups:
       - paths:
           - path: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20221130184109-if00
+            mountPath: /dev/ttyACM0
+#            mountPath: /dev/sonoff/zigbeedonglepluse
