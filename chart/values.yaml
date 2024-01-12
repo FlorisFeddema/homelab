@@ -30,6 +30,9 @@ products:
     deploy: false
   falcoExporter:
     deploy: false
+  genericDevicePlugin:
+    deploy: true
+    autoSync: true
   grafana:
     deploy: true
     autoSync: true
