@@ -21,8 +21,8 @@ podSecurityContext:
 securityContext:
   privileged: true
   allowPrivilegeEscalation: true
-#  capabilities:
-#    drop: [ "ALL" ]
+  capabilities:
+    drop: [ "ALL" ]
   readOnlyRootFilesystem: true
   seccompProfile:
     type: RuntimeDefault
