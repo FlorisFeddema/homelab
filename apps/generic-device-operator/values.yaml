@@ -4,8 +4,9 @@ image:
 
 
 devices:
-  - name: serial
-    groups:
-      - paths:
-          - path: /dev/ttyACM*
+- name: sonoff-zigbee-dongle-plus-p
+  groups:
+  - usb:
+    - vendor: "10c4"
+      product: "ea60"
  
