@@ -31,7 +31,7 @@ spec:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
       initContainers:
         - name: copy-config
-          image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
+          image: "{{ .Values.copyConfig.image.registry }}/{{ .Values.copyConfig.image.repository }}:{{ .Values.copyConfig.image.tag }}"
           imagePullPolicy: IfNotPresent
           command:
             - "sh"
