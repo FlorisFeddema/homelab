@@ -22,7 +22,10 @@ spec:
       containers:
       - image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
         args:
-          - --config /config/config.yaml
+          - --config 
+          - /config/config.yaml
+          - --domain 
+          - device.local
         name: generic-device-plugin
         resources:
           requests:
