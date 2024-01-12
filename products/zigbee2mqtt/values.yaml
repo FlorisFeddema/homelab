@@ -1,0 +1,38 @@
+replicas: 1
+
+revisionHistoryLimit: 0
+
+image:
+  registry: docker.io
+  repository: koenkk/zigbee2mqtt
+  tag: 1.35.1
+
+resources: {}
+
+podSecurityContext:
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+  runAsNonRoot: true
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ "ALL" ]
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 1Gi
+
+ingress:
+  enabled: true
+  domain: zigbee.cloud.feddema.dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+
+nodeSelector:
+  sonoff.tech/zigbee-dongle-plus-e: "true"
