@@ -26,6 +26,8 @@ spec:
           - /config/config.yaml
           - --domain 
           - device.local
+          - --log-level
+          - all
         name: generic-device-plugin
         resources:
           requests:
