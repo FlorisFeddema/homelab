@@ -25,6 +25,9 @@ spec:
         env:
           - name: TZ
             value: Europe/Amsterdam
+        resources: 
+          limits: 
+            device.local/zigbee: 1 
         volumeMounts:
           - name: config
             mountPath: /app/data
