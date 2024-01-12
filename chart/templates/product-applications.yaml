@@ -3,7 +3,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ kebabcase $k }}
+  name: {{ include "base.productName" (dict "k" $k "v" $v) }}
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -14,12 +14,12 @@ spec:
   project: no-sync
   {{ end }}
   source:
-    repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
+    repoURL: git@github.com:FlorisFeddema/homelab.git
     targetRevision: HEAD
-    path: products/{{ default ( kebabcase $k ) $v.nameOverride }}
+    path: products/{{ include "base.productName" (dict "k" $k "v" $v) }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ default ( kebabcase $k ) $v.namespace }}
+    namespace: {{ include "base.productName" (dict "k" $k "v" $v) }}
   revisionHistoryLimit: 1
   {{- with $v.ignoreDifferences }}
   ignoreDifferences: {{ toYaml $v.ignoreDifferences | nindent 4 }}
