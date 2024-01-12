@@ -27,7 +27,7 @@ We currently use the following talos-provided additional components:
 Talos system-extensions are compatible with specific versions of talos. To find the correct extension version for the talos version run:
 
 ```
-export TALOSCONFIG=/path/to/talos/config
+TALOSCONFIG=/path/to/talos/config
 TALOS_VERSION=$(talosctl version --short | grep Tag | sed -n 's/.*Tag://p' | sed -e 's/^[ \t]*//')
 echo $TALOS_VERSION
 ```
@@ -74,7 +74,7 @@ Boot machine with custom talos ISO and perform the below steps
 Control plane nodes:
 
 ```
-TALOS_CONFIG=/path/to/talos/config
+TALOSCONFIG=/path/to/talos/config
 CONTROL_PLANE=0
 talosctl gen config talos-broersma https://10.0.10.111:6443             \
     --output rendered/control-plane-$CONTROL_PLANE.yaml                 \
@@ -91,9 +91,9 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
 `talosctl apply-config --nodes <node-x-ip> --file rendered/control-plane-$CONTROL_PLANE.yaml`
 
 ```
-TALOS_CONFIG=/path/to/talos/config
+TALOSCONFIG=/path/to/talos/config
 WORKER=0
-talosctl gen config talos-broersma https://10.0.10.111:6443             \
+talosctl gen config talos-broersma https://10.0.10.12:6443             \
     --output rendered/worker-$WORKER.yaml                               \
     --output-types worker                                               \
     --with-cluster-discovery=false                                      \
@@ -108,10 +108,5 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
 
 ### Upgrading talos
 
-To update talos use our custom intaller image containing the required system extensions
-
-```
-TALOS_CONFIG=/path/to/talos/config
-TALOS_UPGRADE_VERSION=""
-talosctl upgrade --nodes <node-x-ip> --image ghcr.io/broersma-forslund/homelab/talos-installer:$TALOS_UPGRADE_VERSION --preserve
-```
+To update talos create a custom image with the [talos image factory](https://factory.talos.dev/).
+Select per host the required talos packages.
