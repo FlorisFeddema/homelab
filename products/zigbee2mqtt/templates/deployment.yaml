@@ -37,11 +37,11 @@ spec:
             - "sh"
             - "-c"
             - |
-              if [ -f /data/configuration.yaml ]; then
-                echo "Copy current config to /data/configuration.yaml.old"
-                cp /data/configuration.yaml /data/configuration.yaml.old
+              if [ -f /config/configuration.yaml ]; then
+                echo "Copy current config to /config/configuration.yaml.old"
+                cp /config/configuration.yaml /config/configuration.yaml.old
                 echo "Old config:"
-                cat /data/configuration.yaml.old
+                cat /config/configuration.yaml.old
               fi
               cp /tmp/configuration.yaml /data/configuration.yaml
           volumeMounts:
