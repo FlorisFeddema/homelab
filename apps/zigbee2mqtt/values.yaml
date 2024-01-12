@@ -2,3 +2,25 @@ zigbee2mqtt:
   image:
     repository: koenkk/zigbee2mqtt
     tag: 1.35.1
+
+config:
+  image:
+    repository: busybox
+    tag: 1.36.1
+
+resources:
+  limits: 
+    device.local/zigbee: 1
+
+frontend:
+  port: 8080
+  url: https://z2mqtt.mobrockers.com
+zigbee:
+  port: /dev/ttyACM0
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtts://mqtt.mobrockers.com
+  user: '!secret.yaml mqtt_user'
+  password: '!secret.yaml mqtt_password'
+
+credentialsSealed: AgBbzULj7GWkILDQlw9MEjIVaOwO+gjDxGgSyTIquA/1m6ARZ4BurEh2JGjHw7nNmnjGUOmaBl+BPqW6vaa54TdtX8bKZk5Vte1de1mOgiC5uMPsqk/sVSDo263lCryxmW0fw0nRiP5J989bunOH9bnMPMxcciAPULbl4IqrpdUHgViKUnPxdfKjNT5mSHe6YIpMY20+mFA1QxpEvEwh7Efq+11hGvUqQBJxm0NlyMm31HdDulsRE1NveqO6B11pzhw1pEmIdz4Nnm+esmhd1jzX5u0kPnunbZOlr/Lvu5vLiPLG7fnZ7k4cupuUDM7OkaCrFfZWHizp41+8BorNmYuZAJwc3DEiFI0QR946waYpYUTcGEu0cSZGTeCSLZmwx65k6Es31bRuhORPaW6CgcVRtAYvXYMO09Qk3mFhRlnHMAk52MGo9TIZyhw2ehIL98BJTzpQubS3x1+gx++SlOaToMM5iD85x8X87sE5DgvT/EWW6JaKA9G1uSBz61djU6gqO60kbxjh8Ocd6G2M4C/4R8HHH7KTuL/T6p3atEBk+YyZypsezhCpxt9Nzgu3SsDtHsNlq9VHXFKY0nzaySxdUk9tdJRtzX3WA3bbNWnMOLhUXHfBrRE0o4x1qDxuYe5SJRtI3JaUd3MSytKzKjVvQDeeHlNXPtHNWDdS7PCMkaMGwtflyc1lk7bVrDMUdA+1K1GSlEkNC8r0uGLIfO3aEa8qaK2LNoNfs361YnoCTKziOkZPG25h4zMgivlIR66QZje7PyH26Wqtq7Rea8UBSVK/OVYcGb43FX3zxISFxa4avK08A+hcBaSC7Ih3eCVAhKD3KV8P3D98rb/RwYyrAcHs/0d6ABXSIpJGZvjUNw0NKd4H5DHCa9NA

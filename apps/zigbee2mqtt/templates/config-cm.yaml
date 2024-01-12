@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zigbee2mqtt-config
+data:
+  configuration.yaml: |
+    permit_join: false
+    devices: devices.yaml
+    groups: groups.yaml
+    availability: true
+    homeassistant:
+      discovery_topic: 'homeassistant'
+      status_topic: 'hass/status' 
+      legacy_triggers: false
+      legacy_entity_attributes: false
+    device_options:
+      legacy: false
+    frontend: {{ .Values.frontend | toYaml | nindent 6 }}
+    mqtt: {{ .Values.mqtt | toYaml | nindent 6 }}
+    serial: {{ .Values.zigbee | toYaml | nindent 6 }}
+    advanced:
+      homeassistant_legacy_entity_attributes: false
+      legacy_api: false
+      legacy_availability_payload: false
+      network_key: !secret.yaml network_key
