@@ -42,8 +42,8 @@ spec:
         mechanism = "password_based"
         backend = "built_in_database"
         password_hash_algorithm = {
-          salt_position = "prefix"
-          name = "pbkdf2"
+          salt_rounds = 10
+          name = "bcrypt"
         }
       }]
       authorization {
