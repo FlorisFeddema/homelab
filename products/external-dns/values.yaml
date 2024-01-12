@@ -1,6 +1,7 @@
 external-dns:
   sources:
     - ingress
+    - service
 
   provider: cloudflare
 
