@@ -2,10 +2,10 @@ image:
   repository: squat/generic-device-plugin
   tag: latest # :cry:
 
-devices: |
-  devices:
-    - name: serial
-      groups:
-        - paths:
-            - path: /dev/ttyACM*
+
+devices:
+  - name: serial
+    groups:
+      - paths:
+          - path: /dev/ttyACM*
  

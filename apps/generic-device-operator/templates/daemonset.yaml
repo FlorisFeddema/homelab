@@ -42,7 +42,7 @@ spec:
         - name: dev
           mountPath: /dev
         - name: config
-          mountPath: /config/config.yaml
+          mountPath: /config
       volumes:
       - name: device-plugin
         hostPath:
