@@ -3,7 +3,7 @@ revisionHistoryLimit: 0
 image:
   registry: docker.io
   repository: squat/generic-device-plugin
-  tag: 6f9f14b70757ed3ebd547d8cbbf1fde78c8e1ec9 #only latest is pushed
+  tag: latest #https://github.com/squat/generic-device-plugin/issues/24
 
 resources:
   requests:
