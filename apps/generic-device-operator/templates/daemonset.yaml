@@ -22,12 +22,20 @@ spec:
       containers:
       - image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
         args:
-          - --config 
-          - /config/config.yaml
-          - --domain 
-          - device.local
-          - --log-level
-          - all
+        - --domain 
+        - device.local
+        - --log-level
+        - all
+        - --device
+        - |
+          name: temp
+          groups:
+          - paths:
+            - path: /dev/ttyUSB*
+          - paths:
+            - path: /dev/ttyACM*
+        # - --config 
+        # - /config/config.yaml
         name: generic-device-plugin
         resources:
           requests:
@@ -46,8 +54,8 @@ spec:
           mountPath: /var/lib/kubelet/device-plugins
         - name: dev
           mountPath: /dev
-        - name: config
-          mountPath: /config
+        # - name: config
+        #   mountPath: /config
       volumes:
       - name: device-plugin
         hostPath:
@@ -55,8 +63,8 @@ spec:
       - name: dev
         hostPath:
           path: /dev
-      - name: config
-        configMap:
-          name: devices
+      # - name: config
+      #   configMap:
+      #     name: devices
   updateStrategy:
     type: RollingUpdate
