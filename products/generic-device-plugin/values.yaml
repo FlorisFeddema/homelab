@@ -1,0 +1,36 @@
+revisionHistoryLimit: 0
+
+image:
+  registry: docker.io
+  repository: squat/generic-device-plugin
+  tag: 6f9f14b70757ed3ebd547d8cbbf1fde78c8e1ec9 #only latest is pushed
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 10Mi
+  limits:
+    memory: 20Mi
+
+podSecurityContext:
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+  runAsNonRoot: true
+
+securityContext:
+  privileged: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: [ "ALL" ]
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+
+devices:
+  - name: zigbee
+    groups:
+      - usb:
+          - vendor: "10c4"
+            product: "ea60"
+
