@@ -20,12 +20,12 @@ podSecurityContext:
 #  runAsNonRoot: true
 
 securityContext:
-  allowPrivilegeEscalation: false
+#  allowPrivilegeEscalation: false
 #  capabilities:
 #    drop: [ "ALL" ]
-  readOnlyRootFilesystem: true
-  seccompProfile:
-    type: RuntimeDefault
+#  readOnlyRootFilesystem: true
+#  seccompProfile:
+#    type: RuntimeDefault
 
 persistence:
   accessMode: ReadWriteOnce
