@@ -40,13 +40,20 @@ ingress:
 nodeSelector:
   sonoff.tech/zigbee-dongle-plus-e: "true"
 
+copyConfig:
+  image:
+    registry: docker.io
+    repository: busybox
+    tag: 1.36.1
+
 config:
   permit_join: true
   mqtt:
     base_topic: zigbee2mqtt
     server: mqtt://emqx-listeners.emqx:8883
   serial:
-    port: /dev/ttyUSB0
+    port: /dev/ttyACM0
+    adapter: ezsp
   frontend:
     port: 8080
   advanced:

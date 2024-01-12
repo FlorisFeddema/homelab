@@ -29,6 +29,27 @@ spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       nodeSelector:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
+      initContainers:
+        - name: copy-config
+          image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - |
+              if [ -f /data/configuration.yaml ]; then
+                echo "Copy current config to /data/configuration.yaml.old"
+                cp /data/configuration.yaml /data/configuration.yaml.old
+                echo "Old config:"
+                cat /data/configuration.yaml.old
+              fi
+              cp /tmp/configuration.yaml /data/configuration.yaml
+          volumeMounts:
+            - name: default-config
+              mountPath: /tmp/configuration.yaml
+              subPath: configuration.yaml
+            - name: config
+              mountPath: /config
       containers:
         - name: zigbee2mqtt
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -49,3 +70,6 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: {{ template "zigbee2mqtt.fullname" . }}
+        - name: default-config
+          configMap:
+              name: {{ template "zigbee2mqtt.fullname" . }}
