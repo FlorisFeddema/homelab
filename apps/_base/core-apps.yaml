@@ -14,6 +14,8 @@ apps:
       kind: GpuDevicePlugin
       jsonPointers:
       - /spec/resourceManager
+  generic-device-operator:
+    deploy: true
   argocd:
     deploy: true
     autoSync: false
