@@ -64,5 +64,8 @@ spec:
           mountPath: /mounted/cert
 
   listenersServiceTemplate:
+    metadata:
+      annotations:
+        'io.cilium/lb-ipam-ips': 10.0.10.2
     spec:
       type: LoadBalancer
