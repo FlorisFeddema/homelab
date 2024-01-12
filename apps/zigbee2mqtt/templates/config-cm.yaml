@@ -22,4 +22,6 @@ data:
       homeassistant_legacy_entity_attributes: false
       legacy_api: false
       legacy_availability_payload: false
-      network_key: '!secret.yaml network_key'
+      pan_id: GENERATE
+      ext_pan_id: GENERATE
+      network_key: GENERATE
