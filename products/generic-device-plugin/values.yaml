@@ -19,13 +19,13 @@ podSecurityContext:
 #  runAsNonRoot: true
 
 securityContext:
-  privileged: true
-  allowPrivilegeEscalation: true
+  privileged: false
+  allowPrivilegeEscalation: false
   capabilities:
     drop: [ "ALL" ]
   readOnlyRootFilesystem: true
   seccompProfile:
-    type: RuntimeDefault
+    type: "container_device_plugin_t"
 
 devices:
   - name: zigbee
