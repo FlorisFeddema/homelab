@@ -41,7 +41,10 @@ spec:
       authentication = [{
         mechanism = "password_based"
         backend = "built_in_database"
-        password_hash_algorithm = {"salt_position":"prefix","name":"pbkdf2"}
+        password_hash_algorithm = {
+          salt_position = "prefix"
+          name = "pbkdf2"
+        }
       }]
       authorization {
         no_match = "deny"
