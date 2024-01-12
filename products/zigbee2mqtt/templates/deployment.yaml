@@ -38,10 +38,10 @@ spec:
             - "-c"
             - |
               if [ -f /config/configuration.yaml ]; then
-                    echo "Old config:"
-                    cat /config/configuration.yaml
-{{/*                echo "Copy current config to /config/configuration.yaml.old"*/}}
-{{/*                cp /config/configuration.yaml /config/configuration.yaml.old*/}}
+                echo "Old config:"
+                cat /config/configuration.yaml
+                echo "Copy current config to /config/configuration.yaml.old"
+                cp /config/configuration.yaml /config/configuration.yaml.old
               fi
               cp /tmp/configuration.yaml /config/configuration.yaml
               echo "==================================="
