@@ -43,7 +43,7 @@ spec:
                 echo "Old config:"
                 cat /config/configuration.yaml.old
               fi
-              cp /tmp/configuration.yaml /data/configuration.yaml
+              cp /tmp/configuration.yaml /config/configuration.yaml
           volumeMounts:
             - name: default-config
               mountPath: /tmp/configuration.yaml
