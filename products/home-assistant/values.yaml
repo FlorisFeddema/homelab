@@ -11,17 +11,12 @@ deploymentStrategy:
   type: Recreate
 
 podSecurityContext:
-#  runAsUser: 1000
-#  runAsGroup: 1000
-#  fsGroup: 1000
-#  runAsNonRoot: true
 
 securityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop: [ "ALL" ]
     add: ["NET_RAW", "NET_BIND_SERVICE"]
-#  readOnlyRootFilesystem: true
 
 persistence:
   accessMode: ReadWriteOnce
