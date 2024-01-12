@@ -39,7 +39,7 @@ spec:
             - --domain
             - {{ .Values.domain }}
             - --log-level
-            - all
+            - debug
           resources: {{ toYaml .Values.resources | nindent 12 }}
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
           volumeMounts:
