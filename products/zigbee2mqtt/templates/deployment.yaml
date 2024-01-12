@@ -41,8 +41,8 @@ spec:
           resources: {{ toYaml .Values.resources | nindent 12 }}
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
           volumeMounts:
-            - mountPath: config
-              name: /app/data
+            - mountPath: /app/data
+              name: config
       volumes:
         - name: config
           persistentVolumeClaim:

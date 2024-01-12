@@ -23,7 +23,6 @@ securityContext:
   seccompProfile:
     type: RuntimeDefault
 
-
 persistence:
   accessMode: ReadWriteOnce
   size: 1Gi

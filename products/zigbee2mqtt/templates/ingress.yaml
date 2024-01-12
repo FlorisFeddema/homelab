@@ -2,8 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: zigbee2mqtt
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns
+  annotations: {{ toYaml .Values.ingress.annotations | nindent 4 }}
   labels:
     app.kubernetes.io/name: {{ template "zigbee2mqtt.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
