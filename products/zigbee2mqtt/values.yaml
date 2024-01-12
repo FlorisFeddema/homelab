@@ -14,11 +14,10 @@ resources:
     device.local/zigbee: 1
 
 podSecurityContext:
-  runAsUser: 1001
-  runAsGroup: 1001
-  fsGroup: 1001
-  runAsNonRoot: true
-  fsGroupChangePolicy: "OnRootMismatch"
+#  runAsUser: 1001
+#  runAsGroup: 1001
+#  fsGroup: 1001
+#  runAsNonRoot: true
 
 securityContext:
   allowPrivilegeEscalation: false
