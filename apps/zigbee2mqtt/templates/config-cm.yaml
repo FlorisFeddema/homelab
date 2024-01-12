@@ -22,4 +22,4 @@ data:
       homeassistant_legacy_entity_attributes: false
       legacy_api: false
       legacy_availability_payload: false
-      network_key: !secret.yaml network_key
+      network_key: '!secret.yaml network_key'
