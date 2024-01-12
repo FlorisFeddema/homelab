@@ -53,7 +53,7 @@ config:
     permit_join: true
     mqtt:
       base_topic: zigbee2mqtt
-      server: mqtts://mqtt.cloud.feddema.dev:8883
+      server: '!secret.yaml mqtt.server'
       user: '!secret.yaml mqtt.user'
       password: '!secret.yaml mqtt.password'
     serial:
