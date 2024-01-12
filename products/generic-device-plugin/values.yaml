@@ -16,7 +16,7 @@ podSecurityContext: {}
 
 securityContext:
   privileged: true
-  allowPrivilegeEscalation: true
+#  allowPrivilegeEscalation: false
 #  capabilities:
 #    drop: [ "ALL" ]
 #  readOnlyRootFilesystem: true
