@@ -4,7 +4,7 @@ image:
 
 
 devices:
-- name: sonoff-zigbee-dongle-plus-p
+- name: test
   groups:
   - usb:
     - vendor: "10c4"
