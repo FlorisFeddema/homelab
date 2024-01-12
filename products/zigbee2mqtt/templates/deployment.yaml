@@ -48,18 +48,18 @@ spec:
               echo "New config:"
               cat /config/configuration.yaml
 
-              if [ -f /config/secrets.yaml ]; then
-                echo "Copy current secrets to /config/secrets.yaml.old"
-                cp /config/secrets.yaml /config/secrets.yaml.old
+              if [ -f /config/secret.yaml ]; then
+                echo "Copy current secrets to /config/secret.yaml.old"
+                cp /config/secret.yaml /config/secret.yaml.old
               fi
-              cp /tmp/secrets.yaml /config/secrets.yaml
+              cp /tmp/secret.yaml /config/secret.yaml
           volumeMounts:
             - name: default-config
               mountPath: /tmp/configuration.yaml
               subPath: configuration.yaml
             - name: secret-config
-              mountPath: /tmp/secrets.yaml
-              subPath: secrets.yaml
+              mountPath: /tmp/secret.yaml
+              subPath: secret.yaml
             - name: config
               mountPath: /config
       containers:
