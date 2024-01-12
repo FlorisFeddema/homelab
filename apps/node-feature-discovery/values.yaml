@@ -31,7 +31,7 @@ node-feature-discovery:
               - feature: usb.device
                 matchExpressions:
                   class: {op: In, value: ["ff"]}
-                  vendor: {op: In, value: ["0c4"]}
+                  vendor: {op: In, value: ["10c4"]}
                   device: {op: In, value: ["ea60"]}
           - name: "sonoff-zigbee-dongle-plus-e"
             labels:
