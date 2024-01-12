@@ -18,7 +18,6 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/component: "zigbee2mqtt"
       {{- include "labels" . | nindent 6 }}
-      config-hash: {{ print .Values.config.fileContent | sha1sum  }}
   template:
     metadata:
       labels:
@@ -26,6 +25,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "zigbee2mqtt"
         {{- include "labels" . | nindent 8 }}
+        config-hash: {{ print .Values.config.fileContent | sha1sum  }}
     spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       nodeSelector:
