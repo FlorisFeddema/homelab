@@ -44,6 +44,9 @@ spec:
 {{/*                cp /config/configuration.yaml /config/configuration.yaml.old*/}}
               fi
               cp /tmp/configuration.yaml /config/configuration.yaml
+              echo "==================================="
+              echo "New config:"
+              cat /config/configuration.yaml
           volumeMounts:
             - name: default-config
               mountPath: /tmp/configuration.yaml
