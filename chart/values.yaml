@@ -117,4 +117,5 @@ products:
     autoSync: true
   zigbee2mqtt:
     deploy: true
+    nameOverride: zigbee2mqtt
     autoSync: true

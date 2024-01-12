@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: git@github.com:FlorisFeddema/cloud-gitops.git
     targetRevision: HEAD
-    path: products/{{ kebabcase $k }}
+    path: products/{{ default ( kebabcase $k ) $v.nameOverride }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ default ( kebabcase $k ) $v.namespace }}
