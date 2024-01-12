@@ -39,7 +39,7 @@ spec:
             - --domain
             - device.local
             - --log-level
-            - bingbong
+            - all
           resources: {{ toYaml .Values.resources | nindent 12 }}
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
           volumeMounts:
