@@ -31,7 +31,7 @@ spec:
           effect: "NoSchedule"
       containers:
         - name: generic-device-plugin
-          image: '{{ .Values.image.registry }}{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          image: '{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           args:
             - --config
             - /config/config.yaml
