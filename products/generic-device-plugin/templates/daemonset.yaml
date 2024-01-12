@@ -21,6 +21,7 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "generic-device-plugin"
         {{- include "labels" . | nindent 8 }}
+        config-hash: {{ print .Values.devices | sha1sum  }}
     spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       priorityClassName: system-node-critical
