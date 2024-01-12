@@ -115,3 +115,6 @@ products:
   vpa:
     deploy: true
     autoSync: true
+  zigbee2mqtt:
+    deploy: true
+    autoSync: true
