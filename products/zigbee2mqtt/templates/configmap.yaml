@@ -8,4 +8,4 @@ metadata:
     app.kubernetes.io/component: "zigbee2mqtt"
     {{- include "labels" . | nindent 4 }}
 data:
-  configuration.yaml: |{{ .Values.config | toYaml | nindent 4 }}
+  configuration.yaml: | {{ .Values.config.fileContent | toYaml | nindent 4 }}

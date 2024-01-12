@@ -31,7 +31,7 @@ spec:
         {{- toYaml .Values.nodeSelector | nindent 8 }}
       initContainers:
         - name: copy-config
-          image: "{{ .Values.copyConfig.image.registry }}/{{ .Values.copyConfig.image.repository }}:{{ .Values.copyConfig.image.tag }}"
+          image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
           imagePullPolicy: IfNotPresent
           command:
             - "sh"
@@ -47,10 +47,19 @@ spec:
               echo "==================================="
               echo "New config:"
               cat /config/configuration.yaml
+
+              if [ -f /config/secrets.yaml ]; then
+                echo "Copy current secrets to /config/secrets.yaml.old"
+                cp /config/secrets.yaml /config/secrets.yaml.old
+              fi
+              cp /tmp/secrets.yaml /config/secrets.yaml
           volumeMounts:
             - name: default-config
               mountPath: /tmp/configuration.yaml
               subPath: configuration.yaml
+            - name: secret-config
+              mountPath: /tmp/secrets.yaml
+              subPath: secrets.yaml
             - name: config
               mountPath: /config
       containers:
@@ -76,3 +85,6 @@ spec:
         - name: default-config
           configMap:
               name: {{ template "zigbee2mqtt.fullname" . }}
+        - name: secret-config
+          secret:
+            secretName: {{ .Values.config.secretName }}
