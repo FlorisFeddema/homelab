@@ -13,10 +13,10 @@ resources:
     memory: 20Mi
 
 podSecurityContext:
-#  runAsUser: 1001
-#  runAsGroup: 1001
-#  fsGroup: 1001
-#  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+  runAsNonRoot: true
 
 securityContext:
   privileged: false
