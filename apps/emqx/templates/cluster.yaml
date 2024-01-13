@@ -46,6 +46,18 @@ spec:
         }]
       }
 
+      mqtt {
+        retain_available = true
+        wildcard_subscription = true
+      }
+      retainer {
+        enable = true
+        backend {
+          type = "built_in_database"
+          storage_type = "disc"
+        }
+      }
+
   coreTemplate:
     spec:
       replicas: 2
