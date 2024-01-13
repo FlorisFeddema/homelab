@@ -20,6 +20,7 @@ zigbee:
   pan_id: '23219'
   ext_pan_id: '[194, 57, 175, 193, 119, 126, 53, 38]'
 mqtt:
+  version: 5
   base_topic: zigbee2mqtt
   server: mqtts://mqtt.mobrockers.com
   user: '!secret.yaml mqtt_user'
