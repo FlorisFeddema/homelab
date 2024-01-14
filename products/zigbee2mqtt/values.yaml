@@ -69,6 +69,6 @@ config:
       port: 8080
     advanced:
       network_key: '!secret.yaml advanced_network_key'
-      pan_id: '!secret.yaml advanced_pan_id'
-      ext_pan_id: '!secret.yaml advanced_ext_pan_id'
+      pan_id: 23016
+      ext_pan_id: [195, 192, 116, 85, 33, 65, 21, 93]
 
