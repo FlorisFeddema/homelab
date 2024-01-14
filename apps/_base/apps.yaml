@@ -11,3 +11,4 @@ apps:
   emqx:
     deploy: true
     autoSync: false
+    finalize: false
