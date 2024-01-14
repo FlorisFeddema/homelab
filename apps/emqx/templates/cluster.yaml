@@ -47,8 +47,10 @@ spec:
       }
 
       mqtt {
+        ignore_loop_deliver = false
         retain_available = true
         wildcard_subscription = true
+        use_username_as_clientid = true
       }
       retainer {
         enable = true
