@@ -21,7 +21,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: z2mqtt
+  name: zigbee2mqtt
   annotations:
     nginx.ingress.kubernetes.io/auth-url: |-
         http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
