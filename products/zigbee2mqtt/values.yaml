@@ -67,3 +67,7 @@ config:
       adapter: ezsp
     frontend:
       port: 8080
+    advanced:
+      network_key: GENERATE
+      pan_id: GENERATE
+      ext_pan_id: GENERATE
