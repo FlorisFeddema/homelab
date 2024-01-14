@@ -4,13 +4,16 @@ metadata:
     name: mobrockers-com-domain-auth-ingress
 spec:
   rules:
-    - host: authentik.mobrockers.com
-      http:
-          paths: 
-        - path: /outpost.goauthentik.io
-          pathType: Prefix
-          backend:
-            service:
-              name: ak-outpost-authentik-embedded-outpost
-              port:
-                number: 9000
+  - host: authentik.mobrockers.com
+    http:
+      paths: 
+      - path: /outpost.goauthentik.io
+        pathType: Prefix
+        backend:
+          service:
+            name: ak-outpost-authentik-embedded-outpost
+            port:
+              number: 9000
+  tls:
+  - hosts:
+    - authentik.mobrockers.com
