@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: authentik-outpost-mobrockers-com
+spec:
+  rules:
+    - host: mobrockers.com
+      http:
+        paths: /outpost.goauthentik.io
+        pathType: Prefix
+        backend:
+          service:
+            name: ak-outpost-authentik-embedded-outpost
+            port:
+              number: 9000
