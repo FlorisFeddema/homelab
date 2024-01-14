@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-    name: authentik-outpost-mobrockers-com
+    name: mobrockers-com-domain-auth-ingress
 spec:
   rules:
-    - host: mobrockers.com
+    - host: authentik.mobrockers.com
       http:
-        paths: 
+          paths: 
         - path: /outpost.goauthentik.io
           pathType: Prefix
           backend:
