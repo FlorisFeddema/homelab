@@ -88,11 +88,6 @@ config:
         - papier
       postcode: 5628AN
       streetnumber: 50
-
-    tesla:
-      username: !secret tesla_username
-      password: !secret tesla_password
-      scan_interval: 3600
     
     homekit:
       name: Home Assistant Bridge
