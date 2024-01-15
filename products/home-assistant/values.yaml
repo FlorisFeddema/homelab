@@ -49,6 +49,7 @@ config:
     - scripts.yaml
     - scenes.yaml
     - sensors.yaml
+    - known_devices.yaml
     - groups.yaml
 
   secretName: home-assistant-secret
