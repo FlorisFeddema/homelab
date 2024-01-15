@@ -57,7 +57,15 @@ config:
   secretName: zigbee2mqtt-credentials
 
   fileContent:
+    permit_join: false
+    availability: true
+    homeassistant:
+      discovery_topic: homeassistant
+      status_topic: hass/status
+      legacy_entity_attributes: false
+      legacy_triggers: false
     mqtt:
+      version: 5
       base_topic: zigbee2mqtt
       server: '!secret.yaml mqtt_server'
       user: '!secret.yaml mqtt_user'
@@ -67,8 +75,10 @@ config:
       adapter: ezsp
     frontend:
       port: 8080
+      url: https://zigbee.cloud.feddema.dev
     advanced:
       network_key: '!secret.yaml advanced_network_key'
       pan_id: 23016
       ext_pan_id: [195, 192, 116, 85, 33, 65, 21, 93]
-
+      legacy_api: false
+      legacy_availability_payload: false
