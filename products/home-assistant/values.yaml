@@ -67,6 +67,14 @@ config:
       language: en
       country: NL
 
+    proximity:
+      home_tesla:
+        zone: home
+        devices:
+          - device_tracker.tesla_location
+        tolerance: 10
+        unit_of_measurement: km
+
     http:
       use_x_forwarded_for: true
       trusted_proxies:
