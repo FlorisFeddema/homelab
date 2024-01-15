@@ -30,7 +30,20 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: DISABLE_MQTT
+              value: "false"
+            - name: MQTT_HOST
+              value: "mqtt.cloud.feddema.dev"
+            - name: MQTT_PORT
+              value: "8883"
+            - name: MQTT_TLS
               value: "true"
+            - name: MQTT_USERNAME
+              value: "teslamate"
+            - name: MQTT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.config.existingSecret }}
+                  key: mqttPassword
             - name: VIRTUAL_HOST
               value: "{{ .Values.ingress.domain }}"
             - name: DATABASE_USER
