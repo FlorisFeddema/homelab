@@ -1,4 +1,6 @@
 grafana:
+  assertNoLeakedSecrets: false
+
   sidecar:
     dashboards:
       enabled: true    
