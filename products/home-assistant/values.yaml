@@ -50,6 +50,8 @@ config:
     - scenes.yaml
     - sensors.yaml
     - known_devices.yaml
+    - mqtt_sensors.yaml
+    - binary_sensors.yaml
     - groups.yaml
 
   secretName: home-assistant-secret
@@ -103,7 +105,9 @@ config:
   
     tts:
       - platform: google_translate
-    
+
+    mqtt: !include mqtt_sensors.yaml
+    binary_sensor: !include binary_sensors.yaml
     automation: !include automations.yaml
     script: !include scripts.yaml
     scene: !include scenes.yaml
