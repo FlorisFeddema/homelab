@@ -23,4 +23,4 @@ spec:
             path: /
             pathType: Prefix
   tls: {{ toYaml .Values.admin.ingress.tls | nindent 4 }}
-
+{{ end }}
