@@ -118,6 +118,7 @@ config:
           - sensor.*tesla*
           - sensor.model_3*
           - climate.model_3*
+          - device_tracker.tesla*
     
     recorder:
       db_url: !secret recorder_db_url
