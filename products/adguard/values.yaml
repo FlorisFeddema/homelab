@@ -25,7 +25,7 @@ ingress:
   tls:
     - hosts:
         - adguard.cloud.feddema.dev
-      secretName: adguard-tls
+      secretName:
 
 copyConfig:
   image:
