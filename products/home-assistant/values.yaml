@@ -119,6 +119,7 @@ config:
           - sensor.model_3*
           - climate.model_3*
           - device_tracker.tesla*
+          - sensor.dsmr_*
     
     recorder:
       db_url: !secret recorder_db_url
