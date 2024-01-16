@@ -68,6 +68,7 @@ config:
       customize: !include customize.yaml
       language: en
       country: NL
+      packages: !include_dir_named packages
 
     proximity:
       home_tesla:
