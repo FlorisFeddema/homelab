@@ -18,7 +18,14 @@ persistence:
     size: 1Gi
 
 ingress:
+  enabled: true
   domain: adguard.cloud.feddema.dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+  tls:
+    - hosts:
+        - adguard.cloud.feddema.dev
+      secretName: adguard-tls
 
 copyConfig:
   image:

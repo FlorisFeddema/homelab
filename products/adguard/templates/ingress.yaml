@@ -1,9 +1,9 @@
+{{ if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: adguard
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns
+  annotations: {{ toYaml .Values.ingress.annotations | nindent 4 }}
   labels:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
@@ -22,7 +22,5 @@ spec:
                   number: 3000
             path: /
             pathType: Prefix
-  tls:
-    - hosts:
-        - {{ .Values.ingress.domain }}
-      secretName: adguard-tls
+  tls: {{ toYaml .Values.ingress.tls | nindent 4 }}
+{{ end }}
