@@ -107,7 +107,7 @@ config:
           - sensor.drive_cloud_*
           - tts.*
           - sensor.*price*
-          - *iphone*
+          - sensor.*iphone*
     
     
     
