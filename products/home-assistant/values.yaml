@@ -102,6 +102,13 @@ config:
           - sensor.hacs
         exclude_entity_globs:
           - person.*
+          - binary_sensor.*
+          - switch.*
+          - cover.*
+          - lock.*
+          - button.*
+          - scene.*
+          - select.*
           - switch.automation_*
           - scene.automation_*
           - sensor.drive_cloud_*
@@ -110,10 +117,6 @@ config:
           - sensor.*iphone*
           - sensor.*tesla*
           - sensor.model_3*
-          - lock.model_3*
-          - switch.model_3*
-          - cover.model_3*
-          - select.model_3*
     
     recorder:
       db_url: !secret recorder_db_url
