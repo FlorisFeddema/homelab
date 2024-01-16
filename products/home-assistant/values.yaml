@@ -97,6 +97,19 @@ config:
       mode: bridge
       advertise_ip: 192.168.1.101
       port: 21064
+      filter:
+        exclude_entities:
+          - sensor.hacs
+        exclude_entity_globs:
+          - person.*
+          - switch.automation_*
+          - scene.automation_*
+          - sensor.drive_cloud_*
+          - tts.*
+          - sensor.*price*
+          - *iphone*
+    
+    
     
     recorder:
       db_url: !secret recorder_db_url
