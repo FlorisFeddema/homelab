@@ -45,9 +45,8 @@ ingress:
     nginx.ingress.kubernetes.io/auth-snippet: |
       proxy_set_header X-Forwarded-Host $http_host;
   tls:
-    - hosts:
-        - zigbee.cloud.feddema.dev
-      secretName: zigbee2mqtt-tls
+    enabled: true
+    secretName: zigbee2mqtt-tls
 
 nodeSelector:
   sonoff.tech/zigbee-dongle-plus-e: "true"
