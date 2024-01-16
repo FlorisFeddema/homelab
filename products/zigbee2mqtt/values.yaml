@@ -33,7 +33,7 @@ persistence:
 
 ingress:
   enabled: true
-  domain: zigbee.cloud.feddema.dev
+  domain:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
     nginx.ingress.kubernetes.io/auth-url: |-
@@ -46,7 +46,7 @@ ingress:
       proxy_set_header X-Forwarded-Host $http_host;
   tls:
     - hosts:
-        - {{ .Values.ingress.domain }}
+        - zigbee.cloud.feddema.dev
       secretName: zigbee2mqtt-tls
 
 nodeSelector:
