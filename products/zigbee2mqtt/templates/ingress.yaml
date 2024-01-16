@@ -1,3 +1,4 @@
+{{ if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -21,3 +22,4 @@ spec:
             path: /
             pathType: Prefix
   tls: {{ toYaml .Values.ingress.tls | nindent 4 }}
+{{ end }}
