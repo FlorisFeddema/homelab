@@ -22,8 +22,5 @@ spec:
                   number: 8123
             path: /
             pathType: Prefix
-  tls:
-    - hosts:
-        - {{ .Values.ingress.domain }}
-      secretName: home-assistant-tls
+  tls: {{ toYaml .Values.ingress.tls | nindent 4 }}
 {{- end }}
