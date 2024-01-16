@@ -68,4 +68,12 @@ admin:
     existingSecret: "powerdns-admin-credentials" #keys = adminKey, databaseConnectionString
 
   ingress:
+    enabled: true
     domain: powerdns.cloud.feddema.dev
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    tls:
+      - hosts:
+          - powerdns.cloud.feddema.dev
+        secretName: powerdns-admin-tls
+

@@ -4,7 +4,6 @@ kind: Ingress
 metadata:
   name: teslamate
   annotations: {{ toYaml .Values.ingress.annotations | nindent 4 }}
-
   labels:
     app.kubernetes.io/name: {{ template "teslamate.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

@@ -1,9 +1,9 @@
+{{ if .Values.admin.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: powerdns-admin
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns
+  annotations: {{ toYaml .Values.admin.ingress.annotations | nindent 4 }}
   labels:
     app.kubernetes.io/name: {{ template "powerdns.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
@@ -22,7 +22,5 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
-  tls:
-    - hosts:
-        - {{ .Values.admin.ingress.domain }}
-      secretName: powerdns-admin-tls
+  tls: {{ toYaml .Values.admin.ingress.tls | nindent 4 }}
+
