@@ -73,7 +73,6 @@ admin:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     tls:
-      - hosts:
-          - powerdns.cloud.feddema.dev
-        secretName: powerdns-admin-tls
+      enabled: true
+      secretName: powerdns-admin-tls
 
