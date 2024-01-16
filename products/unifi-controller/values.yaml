@@ -15,4 +15,11 @@ persistence:
   size: 1Gi
 
 ingress:
+  enabled: true
   domain: unifi.cloud.feddema.dev
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+  tls:
+    enabled: true
+    secretName: unifi-controller-tls
