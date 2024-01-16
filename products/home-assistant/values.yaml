@@ -36,9 +36,8 @@ ingress:
 #    nginx.ingress.kubernetes.io/auth-snippet: |
 #      proxy_set_header X-Forwarded-Host $http_host;
   tls:
-    - hosts:
-        - home.cloud.feddema.dev
-      secretName: home-assistant-tls
+    enabled: true
+    secretName: home-assistant-tls
 
 config:
   image:
