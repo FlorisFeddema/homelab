@@ -22,5 +22,10 @@ spec:
                   number: 4000
             path: /
             pathType: Prefix
-  tls: {{ toYaml .Values.ingress.tls | nindent 4 }}
+  {{- if .Values.ingress.tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.domain }}
+      secretName: {{ .Values.ingress.tls.secretName}}
+  {{- end }}
 {{ end }}

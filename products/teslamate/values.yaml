@@ -25,6 +25,5 @@ ingress:
     nginx.ingress.kubernetes.io/auth-snippet: |
       proxy_set_header X-Forwarded-Host $http_host;
   tls:
-    - hosts:
-        - teslamate.cloud.feddema.dev
-      secretName: teslamate-tls
+    enabled: true
+    secretName: teslamate-tls
