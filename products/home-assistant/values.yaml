@@ -108,8 +108,7 @@ config:
           - tts.*
           - sensor.*price*
           - sensor.*iphone*
-    
-    
+          - sensor.*tesla*
     
     recorder:
       db_url: !secret recorder_db_url
