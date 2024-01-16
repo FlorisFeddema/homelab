@@ -20,7 +20,4 @@ spec:
                   name: http
             path: /
             pathType: Prefix
-  tls:
-    - hosts:
-        - {{ .Values.ingress.domain }}
-      secretName: zigbee2mqtt-tls
+  tls: {{ toYaml .Values.ingress.tls | nindent 4 }}
