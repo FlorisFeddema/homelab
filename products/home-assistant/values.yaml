@@ -109,6 +109,7 @@ config:
           - sensor.*price*
           - sensor.*iphone*
           - sensor.*tesla*
+          - sensor.*model_3*
     
     recorder:
       db_url: !secret recorder_db_url
