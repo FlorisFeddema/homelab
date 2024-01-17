@@ -42,7 +42,7 @@ spec:
             - name: MQTT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.config.existingSecret }}
+                  name:  {{ .Values.config.secret.name }}
                   key: mqttPassword
             - name: VIRTUAL_HOST
               value: "{{ .Values.ingress.domain }}"
@@ -57,12 +57,12 @@ spec:
             - name: ENCRYPTION_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.config.existingSecret }}
+                  name: {{ .Values.config.secret.name }}
                   key: encryptionKey
             - name: DATABASE_PASS
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.config.existingSecret }}
+                  name:  {{ .Values.config.secret.name }}
                   key: databasePassword
           ports:
             - containerPort: 4000
