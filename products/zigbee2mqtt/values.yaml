@@ -46,7 +46,7 @@ ingress:
       proxy_set_header X-Forwarded-Host $http_host;
   tls:
     enabled: true
-    secretName: zigbee2mqtt-tls
+#    secretName: zigbee2mqtt-tls
 
 nodeSelector:
   sonoff.tech/zigbee-dongle-plus-e: "true"
