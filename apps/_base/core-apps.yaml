@@ -5,6 +5,8 @@ apps:
     namespace: kube-system
   metrics-server:
     deploy: true
+  descheduler:
+    deploy: true
   node-feature-discovery:
     deploy: true
   intel-device-operator:
