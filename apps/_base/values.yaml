@@ -1,0 +1,15 @@
+# apps:
+#   example:
+#     deploy: false
+#     namespace: kube-system
+#     path: /apps/ex-ample
+#     valueFiles:
+#       - ../ex-ample-values.yaml
+#     ignoreDifferences:
+#     - group: deviceplugin.intel.com
+#       kind: GpuDevicePlugin
+#       jsonPointers:
+#       - /spec/resourceManager
+#     autoSync: false
+#     finalize: false
+#     serverSideApply: true

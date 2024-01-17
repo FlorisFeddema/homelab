@@ -23,7 +23,6 @@ spec:
       initContainers:
         - name: copy-config
           image: '{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}'
-          imagePullPolicy: IfNotPresent
           command:
             - 'sh'
             - '-c'
