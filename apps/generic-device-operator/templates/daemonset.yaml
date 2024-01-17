@@ -15,10 +15,7 @@ spec:
     spec:
       priorityClassName: system-node-critical
       tolerations:
-      - operator: "Exists"
-        effect: "NoExecute"
-      - operator: "Exists"
-        effect: "NoSchedule"
+      - operator: Exists
       containers:
       - image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
         args:
