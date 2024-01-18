@@ -5,7 +5,7 @@ metadata:
 data:
   LOG_LEVEL: "{{ .Values.sync.config.logLevel }}"
   CRON: "{{ .Values.sync.config.cron }}"
-  RUNONSTART: "true"
+  RUN_ON_START: "true"
   API_PORT: "0"
 
   ORIGIN_URL: "http://{{ template "adguard.fullname" . }}-web.{{ $.Release.Namespace }}.svc:3000"
@@ -15,5 +15,5 @@ data:
   REPLICA{{ $v }}_URL: "http://{{ template "adguard.fullname" $ }}-secondary-{{ $i }}.{{ template "adguard.fullname" $ }}-secondary.{{ $.Release.Namespace }}.svc:3000"
   REPLICA{{ $v }}_USERNAME: "admin"
   REPLICA{{ $v }}_AUTO_SETUP: "true"
-  REPLICA{{ $v }}_DHCPSERVERENABLED: "false"
+  REPLICA{{ $v }}_DHCP_SERVER_ENABLED: "false"
   {{ end }}
