@@ -32,7 +32,7 @@ spec:
             - run
           envFrom:
             - secretRef:
-                name: {{ .Values.sync.config.existingSecret }}
+                name: {{ .Values.sync.config.secret.name }}
             - configMapRef:
                 name: {{ template "adguard.fullname" . }}-sync-config
           ports:
