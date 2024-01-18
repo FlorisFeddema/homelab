@@ -14,6 +14,6 @@ data:
   {{ range $i, $v := untilStep 1 ((add1 .Values.secondary.replicas) | int ) 1 }}
   REPLICA{{ $v }}_URL: "http://{{ template "adguard.fullname" $ }}-secondary-{{ $i }}.{{ template "adguard.fullname" $ }}-secondary.{{ $.Release.Namespace }}.svc:3000"
   REPLICA{{ $v }}_USERNAME: "admin"
-  REPLICA{{ $v }}_AUTOSETUP: "true"
+  REPLICA{{ $v }}_AUTO_SETUP: "true"
   REPLICA{{ $v }}_DHCPSERVERENABLED: "false"
   {{ end }}
