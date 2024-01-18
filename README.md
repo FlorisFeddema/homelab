@@ -76,7 +76,8 @@ Control plane nodes:
 ```
 TALOSCONFIG=/path/to/talos/config
 CONTROL_PLANE=0
-talosctl gen config talos-broersma https://10.0.10.111:6443             \
+NODE_IP=10.0.10.111
+talosctl gen config talos-broersma https://$NODE_IP:6443             \
     --output rendered/control-plane-$CONTROL_PLANE.yaml                 \
     --output-types controlplane                                         \
     --with-cluster-discovery=false                                      \
@@ -88,12 +89,13 @@ talosctl gen config talos-broersma https://10.0.10.111:6443             \
     --config-patch @talos/nodes/control-plane-all.yaml
 ```
 
-`talosctl apply-config --nodes <node-x-ip> --file rendered/control-plane-$CONTROL_PLANE.yaml`
+`talosctl apply-config --nodes $NODE_IP --file rendered/control-plane-$CONTROL_PLANE.yaml`
 
 ```
 TALOSCONFIG=/path/to/talos/config
 WORKER=0
-talosctl gen config talos-broersma https://10.0.10.12:6443             \
+NODE_IP=10.0.10.12
+talosctl gen config talos-broersma https://$NODE_IP:6443             \
     --output rendered/worker-$WORKER.yaml                               \
     --output-types worker                                               \
     --with-cluster-discovery=false                                      \
@@ -104,7 +106,7 @@ talosctl gen config talos-broersma https://10.0.10.12:6443             \
     --config-patch @talos/nodes/worker-$WORKER.yaml
 ```
 
-`talosctl apply-config --nodes <node-x-ip> --file rendered/worker-$WORKER.yaml`
+`talosctl apply-config --nodes $NODE_IP --file rendered/worker-$WORKER.yaml`
 
 ### Upgrading talos
 
