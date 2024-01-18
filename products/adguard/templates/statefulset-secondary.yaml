@@ -42,7 +42,7 @@ spec:
               sed -i "s|%%%PASSWORD%%%|${PASSWORD}|g" /opt/adguardhome/conf/AdGuardHome.yaml
           envFrom:
             - secretRef:
-                name: adguard-credentials
+                name: {{ .Values.secret.name }}
           volumeMounts:
             - name: default-config
               mountPath: /tmp/AdGuardHome.yaml
