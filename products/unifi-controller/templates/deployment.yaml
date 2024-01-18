@@ -34,19 +34,19 @@ spec:
             - name: PGID
               value: '5000'
             - name: MONGO_USER
-              value: "unificontroller"
+              value: {{ ..Values.mongodb.username }}
             - name: MONGO_DBNAME
-              value: "unificontroller"
+              value: {{ .Values.mongodb.database }}
             - name: MONGO_PORT
-              value: "27017"
+              value: {{ .Values.mongodb.port }}
             - name: MONGO_HOST
-              value: "unifi-controller-database-0.unifi-controller-database-svc.mongodb-community-operator.svc"
+              value: {{.Values.mongodb.host}}
             - name: TZ
               value: "{{ .Values.config.timezone }}"
             - name: MONGO_PASS
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.config.existingSecret }}
+                  name: {{ .Values.config.secret.name }}
                   key: databasePassword
           ports:
             - containerPort: 8443

@@ -1,8 +1,9 @@
+{{ if .Values.mongodb.enabled }}
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: unifi-controller-database
-  namespace: mongodb-community-operator
+  namespace: {{ .Values.mongodb.namespace }}
 spec:
   members: 1
   type: ReplicaSet
@@ -11,19 +12,20 @@ spec:
     authentication:
       modes: ["SCRAM"]
   users:
-    - name: unificontroller
-      db: unificontroller
+    - name: {{ .Values.mongodb.username }}
+      db: {{ .Values.mongodb.database }}
       passwordSecretRef:
-        name: unifi-controller-database-credentials
+        name: {{ .Values.mongodb.secret.name }}
       roles:
         - name: dbOwner
-          db: unificontroller
+          db: {{ .Values.mongodb.database }}
         - name: dbOwner
           db: unificontroller_stat
         - name: clusterAdmin
-          db: unificontroller
+          db: {{ .Values.mongodb.database }}
         - name: userAdminAnyDatabase
-          db: unificontroller
+          db: {{ .Values.mongodb.database }}
       scramCredentialsSecretName: unificontroller-scram
   additionalMongodConfig:
     storage.wiredTiger.engineConfig.journalCompressor: zlib
+{{ end }}
