@@ -96,4 +96,4 @@ spec:
             name: {{ template "homeAssistant.fullname" . }}-config
         - name: secret-config
           secret:
-            secretName: {{ .Values.config.secretName }}
+            secretName: {{ .Values.config.secret.name }}
