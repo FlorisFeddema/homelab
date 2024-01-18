@@ -38,7 +38,7 @@ spec:
             - name: MONGO_DBNAME
               value: {{ .Values.mongodb.database }}
             - name: MONGO_PORT
-              value: {{ .Values.mongodb.port }}
+              value: {{ .Values.mongodb.port | squote }}
             - name: MONGO_HOST
               value: {{.Values.mongodb.host}}
             - name: TZ
