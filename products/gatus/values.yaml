@@ -44,7 +44,7 @@ gatus:
         client:
           dns-resolver: 'udp://10.96.0.99:53'
       - name: authentik
-        url: https://auth.cloud.feddema.dev
+        url: https://authentik.cloud.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -65,7 +65,7 @@ gatus:
         client:
           dns-resolver: 'udp://10.96.0.99:53'
       - name: gatus
-        url: https://gatus.cloud.feddema.dev
+        url: https://status.cloud.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
