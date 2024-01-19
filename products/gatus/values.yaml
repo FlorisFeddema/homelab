@@ -1,0 +1,9 @@
+gatus:
+  ingress:
+    enabled: true
+    hosts:
+      - status.cloud.feddema.dev
+    tls:
+      - hosts:
+          - status.cloud.feddema.dev
+        secretName: status-tls
