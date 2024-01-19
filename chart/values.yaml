@@ -33,6 +33,9 @@ products:
     deploy: false
   falcoExporter:
     deploy: false
+  gatus:
+    deploy: true
+    autoSync: true
   genericDevicePlugin:
     deploy: true
     autoSync: true
