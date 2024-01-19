@@ -23,15 +23,38 @@ gatus:
     enabled: true
 
   config:
+    metrics: true
+#    storage:
+#      type: postgres
+#      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable"
     endpoints:
-        # internal
+      # internal
       - name: homeassistant
         url: https://home.cloud.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
       - name: argocd
         url: https://argocd.cloud.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+        # external
+      - name: homeassistant
+        url: https://home.cloud.feddema.dev
+        group: external
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://1.1.1.1:53'
+      - name: argocd
+        url: https://argocd.cloud.feddema.dev
+        group: external
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://1.1.1.1:53'
