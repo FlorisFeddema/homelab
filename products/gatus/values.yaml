@@ -1,6 +1,8 @@
 gatus:
   ingress:
     enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
     hosts:
       - status.cloud.feddema.dev
     tls:
