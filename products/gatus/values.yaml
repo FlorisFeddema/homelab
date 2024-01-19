@@ -29,13 +29,6 @@ gatus:
 #      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable"
     endpoints:
       # internal
-      - name: homeassistant
-        url: https://home.cloud.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
       - name: argocd
         url: https://argocd.cloud.feddema.dev
         group: internal
@@ -43,6 +36,112 @@ gatus:
           - '[STATUS] == 200'
         client:
           dns-resolver: 'udp://10.96.0.99:53'
+      - name: adguard
+        url: https://adguard.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: authentik
+        url: https://auth.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: hubble
+        url: https://hubble.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: emqx
+        url: https://emqx.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: gatus
+        url: https://gatus.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: grafana
+        url: https://grafana.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: homeassistant
+        url: https://home.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: minio
+        url: https://minio.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: nextcloud
+        url: https://drive.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: powerdnsadmin
+        url: https://powerdns.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: teslamate
+        url: https://teslamate.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: unifi
+        url: https://unifi.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: alertmanager
+        url: https://alert.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: vmalert
+        url: https://vmalert.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+      - name: zigbee2mqtt
+        url: https://zigbee2mqtt.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://10.96.0.99:53'
+
         # external
       - name: homeassistant
         url: https://home.cloud.feddema.dev
