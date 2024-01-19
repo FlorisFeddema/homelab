@@ -9,6 +9,7 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   type: LoadBalancer
+  clusterIP: {{ .Values.service.clusterIP }}
   ports:
     - port: 53
       targetPort: 53
