@@ -1,8 +1,6 @@
 descheduler:
   kind: Deployment
   deschedulingInterval: 5m
-  tolerations:
-    - operator: Exists
   resources:
     requests:
       cpu: 50m
