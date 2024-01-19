@@ -108,9 +108,6 @@ products:
   tetragon:
     deploy: true
     autoSync: true
-  uptimeKuma:
-    deploy: true
-    autoSync: true
   unifiController:
     deploy: true
     autoSync: true
