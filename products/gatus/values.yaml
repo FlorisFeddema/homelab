@@ -135,7 +135,7 @@ gatus:
         client:
           dns-resolver: 'udp://10.96.0.99:53'
       - name: zigbee2mqtt
-        url: https://zigbee2mqtt.cloud.feddema.dev
+        url: https://zigbee.cloud.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
