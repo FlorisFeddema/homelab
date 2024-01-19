@@ -17,6 +17,9 @@ products:
   cloudnativePg:
     deploy: true
     autoSync: true
+  descheduler:
+    deploy: true
+    autoSync: true
   emqx:
     deploy: true
     autoSync: true
