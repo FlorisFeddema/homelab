@@ -51,7 +51,6 @@ ingress:
 nodeSelector:
   sonoff.tech/zigbee-dongle-plus-e: "true"
 
-
 config:
   image:
     registry: docker.io

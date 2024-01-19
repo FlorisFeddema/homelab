@@ -34,7 +34,7 @@ spec:
             - name: PDNS_AUTH_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.auth.config.apiKey.existingSecret }}
+                  name: {{ .Values.auth.primary.secret.name }}
                   key: apiKey
             - name: POWERDNS_POSTGRES_HOST
               value: "{{ .Values.auth.primary.postgres.host }}"
@@ -47,7 +47,7 @@ spec:
             - name: POWERDNS_POSTGRES_PASSSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.auth.primary.postgres.existingSecret }}
+                  name: {{ .Values.auth.primary.secret.name }}
                   key: postgres-password
           ports:
             - name: api

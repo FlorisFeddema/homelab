@@ -14,27 +14,35 @@ auth:
     defaultTtl: 3600
     logDnsDetails: yes
     logDnsQueries: yes
-    apiKey:
-      existingSecret: "powerdnsprimary-auth-credentials" #key = apiKey
 
   primary:
     resources: {}
     postgres:
-      existingSecret: "powerdnsprimary-auth-credentials" #key = postgres-password
       host: 'platform-pgbouncer.pgo.svc'
       port: 5432
       databaseName: 'powerdnsprimary'
       user: 'powerdnsprimary'
 
+    secret:
+      name: "powerdnsprimary-auth-credentials"
+      sealedValues:
+        apiKey: AgAkbuginnn5NHbWwMIK7Z4yIuugaPc/NjoaNV2n7Wjvn1UFJh5ue6wVhg9OaWGYaBvRwg9j5+Q1QYJT2kaVPQ8Wk7C9pPCt6GfXZzwkabnUQXx79Bs6iMKVb0LPHNNi5D8M8GK/cwmpaHu+ACn7q/cXUK7hqrKV26NCcLmqpo6BPcvagLeUhHZVoJMX++RKQM1SS+NCy4u02IZ8IzAGxymMgpNn39/x2n6eTBwDALBOaDoF0WkJiyEmlfmWoj+2Gmmt4s5ygYtRH/oAd70ubKJo8ySlxY/g63vIkBxsmDhR5gO5Xmx1tyRKqlQUeFogCsTy1+wPxP30EAyJKqFb0mp3kcEndo/n+NDITE/Q3JZoU0S6MduBp68LpFn39WtY+vxbbbD4wewUtMyQj7dWF9OucOpPm/MDc3sFPA9MHcE1tEIb/XGNfhjgQXeI0gdUt53sHDGkjNjDLPR6yK4y7XH6UASy5g5DPsnWom1UQsAasRzIQuder54YLchuE4RktKcb2SoKi5DZz7Yxnytjx+JWLoYW4klpNZBNt+rnMaWugXX1f/I0b8XzrK9sGAG4EocFibfxkUKQEQObcY+/9eM5m3KPAic+KrMvjXJA3jlEjrU8rBStQgXRCC0E6LkmnQm4lucjmXRpvlVifk6O7/0YSWqvqKLIWxrzZBGBkia/cb1PouUC/9olyvKMad6XVKAJPUfdfsMZc6Eu4nFDO+PJY06RanJvmG+w8Ti9ngoxfWtHluA/z2Rm1TUACMOidODU/j5+8ntquMKJTu9xF6lK
+        postgresPassword: AgCsnyZVb7nIUxX4E0ImufiKZIjmnwXS2LCzewK5YlpUpI9xvYdzRUvtZyX37coJxLrfvj6xYEq+FTfvJ+ln4RNgbYOPC2LeB917dnqJb101I/1PmeRwBmxSK4FddR2ZOO3efTqp7K+C+heps864C8PPqnD6VtYuqLJPobzns4hzQ69JeBnuMoLffabT3JdJw1//49lZM0CYJkBQzJFnRvbI11uCnDkjsLgogHkNUGGSlRlF+d3vbnEF8Jt56/tLapu/Lj3G08Mkd9f5uR6ChZF2aMbEHp7sC0oJFnQLZcIIYLDSX5NKSIPIeqKAGOUxZNOstKwWFV9ZcHw9lGhw51BgctOxc7XleMS4Nit4Ugp+vGARQr+0zFtw+75DqSct0OtTbaIM6tZHP+IhyyDnza1ycMMzSZTSaUiS7pnORzj3XYMKMQb24zKBRBkluJ9jhk40krBNH7NAQGrs4R0ZPny/FGLibB6REo8cJ3bou7CKbBuTlaLD9UmVJswMO9L/lbJsLgx8O3UCfA6NKwP4rURJkhDe8JiGxtU65cpq5c+u3BVZXwdjm7hbszUtRPUhcxb/zIUEKeisYE7oQJrdqsJQmeZXvxgGHI0VWmtIa66cQpl51vTlsfCCaGIvqdlXBlVzlE01x9xgY8NWVhJKXv6Z4q2Hhch8Ct8jxcemq5/gOuQ/r+WGn/ilyVH1bi60ggVk/rpBv04TtAD2KvGTXFp5FxYfFyvFbnQ=
+
   secondary:
     resources: {}
     replicas: 1
     postgres:
-      existingSecret: "powerdnssecondary-auth-credentials" #key = postgres-password
       host: 'platform-pgbouncer.pgo.svc'
       port: 5432
       databaseName: 'powerdnsprimary'
       user: 'powerdnssecondary'
+
+    secret:
+      name: "powerdnssecondary-auth-credentials"
+      sealedValues:
+        postgresPassword: AgC/BKUd7hilFfYWkX9wssetHlJIfxtCGYEEyt/HH07cJV0D0KSzaIi21xZUdpbWPscoSkooiBvLzNwi+Wh2cPE+w4nhYPathX5rRGO9//aTjgtKDMtFAGDxZKvKK+deSdWs1d21dpgQbErokT9BNv/eB/YY1PNMMjI1cZbuI88VMaXmSx/RZgoGvvt5agOGmtac/9ld44NaXYYphWjdW0oiqQuwgLNfBe9nfGOYeivKC41l5ffHHTtKnroy9QqlG0BMoc/zJWLGB3XB4Pm0r2rGP23qYP+jgOWO7fgh+4bqKDuNrEoeQObXJI8FYcCS3tE2LQHJtn8lNuLas8dCJpf/T4f8ZCHS62745K8HoDJ27Y8ISHfdbrIpoHboq2Y0RJfZIT0eI/KHCeNJEMBuQ4IbRCjWt+3IE6arbqjo6ieHtdp1Htqz/TwvjPevtSmI88+Q4eE0N7aR2acUanAAnTgcpuvne/bxOjgGyFA358bzShaOX4hb1FxNsO5tNngl33CrRegJCHvUOca7XF84w8q3iwKJXAZ2Z3djTt7Ao9jBQW2qU419JApyeOm3ltCyKQX8yPnkZ8+ckRdNbh7RQJTzk4KoSaefeFGUORxXaHVBmiHyinuqzv9u/Qnm0/vtAcEn2nm+W0S+7mdvmu16i+iEE61qjRJqJEq8uu3WE8jOkOfJyJNwggqATJFJ3dy7AgTaTAIPtmiMp0K5hj/H0EYcY5KHVrA49r0=
+
 
 recursor:
   resources: {}

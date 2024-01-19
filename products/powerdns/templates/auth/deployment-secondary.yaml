@@ -42,7 +42,7 @@ spec:
             - name: POWERDNS_POSTGRES_PASSSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.auth.secondary.postgres.existingSecret }}
+                  name: {{ .Values.auth.secondary.secret.name }}
                   key: postgres-password
           ports:
             - name: api
