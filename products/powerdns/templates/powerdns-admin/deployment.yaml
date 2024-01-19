@@ -45,11 +45,15 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.admin.secret.name }}
                   key: databaseConnectionString
+          {{ if .Values.admin.saml.enabled -}}
           volumeMounts:
             - mountPath: ./certs
               name: saml-certificates
+          {{- end }}
           resources: {{ toYaml .Values.admin.resources | nindent 12 }}
+      {{ if .Values.admin.saml.enabled -}}
       volumes:
         - name: saml-certificates
           secret:
-            secretName: saml-certificates
+            secretName: {{ .Values.admin.saml.name }}
+      {{- end }}
