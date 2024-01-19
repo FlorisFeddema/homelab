@@ -1,0 +1,55 @@
+descheduler:
+  kind: Deployment
+  deschedulingInterval: 5m
+  resources:
+    requests:
+      cpu: 30m
+      memory: 128Mi
+  deschedulerPolicyAPIVersion: descheduler/v1alpha2
+  deschedulerPolicy:
+    strategies: null
+    profiles:
+      - name: DefaultEvictor
+        nodeFit: true
+        evictLocalStoragePods: true
+        evictFailedBarePods: true
+      - name: RemovePodsHavingTooManyRestarts
+        args:
+          podRestartThreshold: 10
+          includingInitContainers: true
+      - name: LowNodeUtilization
+        args:
+          thresholds:
+            cpu : 20
+            memory: 20
+          targetThresholds:
+            cpu : 50
+            memory: 50
+      - name: RemovePodsViolatingNodeAffinity
+        args:
+          nodeAffinityType:
+            - requiredDuringSchedulingIgnoredDuringExecution
+            - preferreddDuringSchedulingIgnoredDuringExecution
+      - name: RemovePodsViolatingInterPodAntiAffinity
+      - name: RemovePodsViolatingTopologySpreadConstraint
+        args:
+          topologyBalanceNodeFit: true
+          constraints:
+            - DoNotSchedule
+            - ScheduleAnyway
+      - name: RemovePodsViolatingNodeTaints
+        args:
+          includePreferNoSchedule: true
+          excludedTains:
+            - node.kubernetes.io/unschedulable
+    plugins:
+      deschedule:
+        enabled:
+          - RemovePodsHavingTooManyRestarts
+          - RemovePodsViolatingInterPodAntiAffinity
+          - RemovePodsViolatingNodeAffinity
+          - RemovePodsViolatingNodeTaints
+      balance:
+        enabled:
+          - LowNodeUtilization
+          - RemovePodsViolatingTopologySpreadConstraint
