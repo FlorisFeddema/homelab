@@ -17,6 +17,11 @@ persistence:
   work:
     size: 1Gi
 
+service:
+  # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
+  # https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/
+  clusterIP: 10.96.0.101
+
 ingress:
   enabled: true
   domain: adguard.cloud.feddema.dev
