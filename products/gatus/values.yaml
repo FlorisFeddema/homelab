@@ -9,3 +9,29 @@ gatus:
       - hosts:
           - status.cloud.feddema.dev
         secretName: status-tls
+
+  resources: {}
+
+  persistence:
+    enabled: true
+    size: 1Gi
+    mountPath: /data
+    accessModes:
+      - ReadWriteOnce
+
+  serviceMonitor:
+    enabled: true
+
+  config:
+    endpoints:
+        # internal
+      - name: homeassistant
+        url: https://home.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
+      - name: argocd
+        url: https://argocd.cloud.feddema.dev
+        group: internal
+        conditions:
+          - '[STATUS] == 200'
