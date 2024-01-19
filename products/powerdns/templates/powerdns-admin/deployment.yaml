@@ -38,12 +38,12 @@ spec:
             - name: SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.admin.config.existingSecret }}
+                  name: {{ .Values.admin.secret.sealedValues.apiKey }}
                   key: secretKey
             - name: SQLALCHEMY_DATABASE_URI
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.admin.config.existingSecret }}
+                  name: {{ .Values.admin.secret.sealedValues.databaseString }}
                   key: databaseConnectionString
           volumeMounts:
             - mountPath: ./certs
