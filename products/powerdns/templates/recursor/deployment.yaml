@@ -34,7 +34,7 @@ spec:
             - name: PDNS_RECURSOR_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.recursor.config.apiKey.existingSecret }}
+                  name: {{ .Values.recursor.secret.name }}
                   key: apiKey
           ports:
             - name: api
