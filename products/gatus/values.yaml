@@ -35,6 +35,7 @@ gatus:
     storage:
       type: postgres
       path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
+      caching: true
     endpoints:
       # internal
       - name: argocd
