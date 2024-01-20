@@ -8,7 +8,3 @@ apps:
     deploy: true
   gatus:
     deploy: true
-  emqx:
-    deploy: true
-    autoSync: false
-    finalize: false
