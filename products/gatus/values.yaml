@@ -36,6 +36,10 @@ gatus:
       type: postgres
       path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
       caching: true
+    alerting:
+      telegram:
+        token: ${TELEGRAM_TOKEN}
+        id: ${TELEGRAM_ID}
     endpoints:
       # internal
       - name: argocd
