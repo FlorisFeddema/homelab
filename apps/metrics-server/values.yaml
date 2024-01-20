@@ -12,4 +12,16 @@ metrics-server:
      kubernetes.io/name: "Metrics-server"
 
   metrics:
-    enabled: true
+    enabled: false
+
+  tolerations:
+  - operator: Exists
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: Exists
