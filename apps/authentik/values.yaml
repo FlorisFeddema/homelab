@@ -1,4 +1,10 @@
 authentik:
+  authentik:
+    error_reporting:
+      enabled: false
+
+  replicas: 2
+
   ingress:
     enabled: true
     hosts:
