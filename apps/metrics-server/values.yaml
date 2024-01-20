@@ -1,20 +1,8 @@
 metrics-server:
-  tolerations:
-  - operator: Exists
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 1
-        preference:
-          matchExpressions:
-          - key: node-role.kubernetes.io/control-plane
-            operator: Exists
 
-  defaultArgs:
-  - --cert-dir=/tmp
-  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-  - --kubelet-use-node-status-port
-  - --metric-resolution=15s
+  revisionHistoryLimit: 0
+  replicas: 3
+  args:
   - --kubelet-insecure-tls
 
   service:
@@ -22,7 +10,6 @@ metrics-server:
     #  Add these labels to have metrics-server show up in `kubectl cluster-info`
      kubernetes.io/cluster-service: "true"
      kubernetes.io/name: "Metrics-server"
-
 
   metrics:
     enabled: true
