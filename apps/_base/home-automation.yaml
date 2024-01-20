@@ -3,4 +3,4 @@ apps:
     deploy: false
     autoSync: false
   zigbee2mqtt:
-    deploy: true
+    deploy: false
