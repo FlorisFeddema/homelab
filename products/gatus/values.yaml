@@ -19,6 +19,8 @@ gatus:
     accessModes:
       - ReadWriteOnce
 
+  secrets: true
+
   serviceMonitor:
     enabled: true
 
@@ -26,7 +28,7 @@ gatus:
     metrics: true
 #    storage:
 #      type: postgres
-#      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable"
+#      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@5432:{POSTGRES_PORT}/${POSTGRES_DB}?sslmode=disable"
     endpoints:
       # internal
       - name: argocd
