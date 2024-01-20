@@ -21,14 +21,20 @@ gatus:
 
   secrets: true
 
+  env:
+    POSTGRES_DB: app
+    POSTGRES_HOST: gatus-data-rw.gatus
+    POSTGRES_PORT: "5432"
+    POSTGRES_USER: app
+
   serviceMonitor:
     enabled: true
 
   config:
     metrics: true
-#    storage:
-#      type: postgres
-#      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@5432:{POSTGRES_PORT}/${POSTGRES_DB}?sslmode=disable"
+    storage:
+      type: postgres
+      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/${POSTGRES_DB}"
     endpoints:
       # internal
       - name: argocd
