@@ -6,13 +6,13 @@ apps:
     valueFiles:
       - ../iscsi-hdd-values.yaml
   democratic-csi-nfs-hdd:
-    deploy: true
+    deploy: false
     autoSync: false
     path: apps/democratic-csi/chart
     valueFiles:
       - ../nfs-hdd-values.yaml
   democratic-csi-nfs-ssd:
-    deploy: true
+    deploy: false
     autoSync: false
     path: apps/democratic-csi/chart
     valueFiles:
