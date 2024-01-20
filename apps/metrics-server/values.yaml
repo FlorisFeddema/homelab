@@ -1,6 +1,6 @@
 metrics-server:
   tolerations:
-    operator: Exists
+  - operator: Exists
   affinity:
     nodeAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
