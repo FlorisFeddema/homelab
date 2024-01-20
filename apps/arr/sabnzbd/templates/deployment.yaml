@@ -18,7 +18,16 @@ spec:
         app.kubernetes.io/name: sabnzbd 
     spec:
       automountServiceAccountToken: false
-      securityContext:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       containers:
         - name: sabnzbd
           image: '{{ .Values.sabnzbd.image.repository }}:{{ .Values.sabnzbd.image.tag }}'
