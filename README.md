@@ -148,7 +148,7 @@ bash ./install.sh base external-dns
 
 ## Set up VLAN
 
-There are 2 components that we need to setup to make the vlan work.
+There are 2 components that we need to set up to make the vlan work.
 
 - Unifi Controller
 - Ubiquiti EdgeRouter X
@@ -156,9 +156,9 @@ There are 2 components that we need to setup to make the vlan work.
 ### Unifi Controller
 
 This is the easy part. 
-Just go to the Unifi Controller web portal, go to settings, Networks and create an new virtual network.
+Just go to the Unifi Controller web portal, go to settings, Networks and create a new virtual network.
 Give it a recognizable name and set the VLAN ID to the VLAN ID you want to use.
-In case you want to create a WiFi network for this VLAN,  go back to settings and go to WiFi. Give it a name, password and select the VLAN you just created.
+In case you want to create a Wi-Fi network for this VLAN,  go back to settings and go to Wi-Fi. Give it a name, password and select the VLAN you just created.
 
 ### Ubiquiti EdgeRouter X
 
