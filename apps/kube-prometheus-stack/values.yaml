@@ -1,0 +1,28 @@
+prometheus-operator-crds:
+  crds:
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true 
+kube-prometheus-stack:
+  crds:
+    enabled: false
+  prometheus-operator:
+    revisionHistoryLimit: 0
+  prometheus:
+    prometheusSpec:
+      probeSelectorNilUsesHelmValues: false
+      scrapeConfigSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+  grafana:
+    assertNoLeakedSecrets: false
+    replicas: 1
+    initChownData: false
+    defaultDashboardsTimezone: Europe/Amsterdam
+    ingress:
+      enabled: true
+      hosts: 
+      - grafana.mobrockers.com
+      tls:
+        - hosts:
+          - grafana.mobrockers.com

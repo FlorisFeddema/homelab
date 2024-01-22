@@ -8,3 +8,6 @@ apps:
     deploy: true
   gatus:
     deploy: true
+  kube-prometheus-stack:
+    deploy: true
+    autoSync: false
