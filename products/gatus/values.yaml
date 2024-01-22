@@ -268,3 +268,23 @@ gatus:
           - '[STATUS] == 200'
         client:
           dns-resolver: 'udp://1.1.1.1:53'
+
+      # dns servers
+      - name: adguard-dns-loadbalancer
+        url: 192.168.100.222
+        group: dns
+        dns:
+          query-name: "example.com"
+          query-type: "A"
+        conditions:
+          - "[BODY] == 93.184.216.34"
+          - "[DNS_RCODE] == NOERROR"
+      - name: powerdns-dns-loadbalancer
+        url: 192.168.100.248
+        group: dns
+        dns:
+          query-name: "example.com"
+          query-type: "A"
+        conditions:
+          - "[BODY] == 93.184.216.34"
+          - "[DNS_RCODE] == NOERROR"
