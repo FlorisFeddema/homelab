@@ -448,6 +448,19 @@ gatus:
             failure-threshold: 3
             success-threshold: 3
 
+      - name: fail
+        url: https://fail.cloud.feddema.dev
+        group: external
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://1.1.1.1:53'
+        alerts:
+          - type: telegram
+            send-on-resolved: true
+            failure-threshold: 3
+            success-threshold: 3
+
       # dns servers
       - name: adguard-dns-loadbalancer
         url: 192.168.100.222
