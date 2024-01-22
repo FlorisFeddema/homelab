@@ -146,6 +146,33 @@ helm install prometheus-crds prometheus-community/prometheus-operator-crds
 bash ./install.sh base external-dns
 ```
 
+## Set up VLAN
+
+There are 2 components that we need to setup to make the vlan work.
+
+- Unifi Controller
+- Ubiquiti EdgeRouter X
+
+### Unifi Controller
+
+This is the easy part. 
+Just go to the Unifi Controller web portal, go to settings, Networks and create an new virtual network.
+Give it a recognizable name and set the VLAN ID to the VLAN ID you want to use.
+In case you want to create a WiFi network for this VLAN,  go back to settings and go to WiFi. Give it a name, password and select the VLAN you just created.
+
+### Ubiquiti EdgeRouter X
+
+First we need to create a new VLAN interface.
+Go to dashboard, Add Interface and select VLAN. Use the same VLAN ID as you used in the Unifi Controller.
+Set the interface to the port you want to use for this VLAN. In my case I used switch0.
+Pick manual IP configuration and set the IP address and subnet mask. In my case I used 192.168.x.1/24.
+Next we need to create a new DHCP server for this VLAN. Go to services, DHCP server and create a new DHCP server.
+Give it a name, set the subnet to the same range as you used for the VLAN interface and set the range to the same range as the subnet.
+Set the start to 192.168.x.2 and the end to 192.168.x.254, and the router ip and dns to 192.168.x.1.
+Go to Dashboard and add the vid to the switch0 interface. In my case the eth2 ports is enough. 
+Go to services, DNS and add the VLAN interface to the dns forwarding interfaces.
+Add the subnet to the firewall network-group in the Firewall/NAT tab. 
+
 ## Node setup
 
 ```shell 
