@@ -53,8 +53,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: adguard
         url: https://adguard.cloud.feddema.dev
@@ -66,8 +66,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: authentik
         url: https://authentik.cloud.feddema.dev
@@ -79,8 +79,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: hubble
         url: https://hubble.cloud.feddema.dev
@@ -92,8 +92,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: emqx
         url: https://emqx.cloud.feddema.dev
@@ -105,8 +105,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: gatus
         url: https://status.cloud.feddema.dev
@@ -118,8 +118,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: grafana
         url: https://grafana.cloud.feddema.dev
@@ -131,8 +131,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: homeassistant
         url: https://home.cloud.feddema.dev
@@ -144,8 +144,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: minio
         url: https://minio.cloud.feddema.dev
@@ -157,8 +157,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: nextcloud
         url: https://drive.cloud.feddema.dev
@@ -170,8 +170,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: powerdnsadmin
         url: https://powerdns.cloud.feddema.dev
@@ -183,8 +183,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: teslamate
         url: https://teslamate.cloud.feddema.dev
@@ -196,14 +196,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
-
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: unifi
         url: https://unifi.cloud.feddema.dev
@@ -215,8 +209,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: alertmanager
         url: https://alert.cloud.feddema.dev
@@ -228,8 +222,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: vmalert
         url: https://vmalert.cloud.feddema.dev
@@ -241,8 +235,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: zigbee2mqtt
         url: https://zigbee.cloud.feddema.dev
@@ -277,8 +271,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: hubble
         url: https://hubble.cloud.feddema.dev
@@ -290,8 +284,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: emqx
         url: https://emqx.cloud.feddema.dev
@@ -303,8 +297,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: gatus
         url: https://status.cloud.feddema.dev
@@ -316,8 +310,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: grafana
         url: https://grafana.cloud.feddema.dev
@@ -329,8 +323,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: homeassistant
         url: https://home.cloud.feddema.dev
@@ -342,8 +336,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
       - name: minio
         url: https://minio.cloud.feddema.dev
         group: external
@@ -354,8 +348,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: nextcloud
         url: https://drive.cloud.feddema.dev
@@ -367,8 +361,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: powerdnsadmin
         url: https://powerdns.cloud.feddema.dev
@@ -380,8 +374,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: teslamate
         url: https://teslamate.cloud.feddema.dev
@@ -393,8 +387,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: unifi
         url: https://unifi.cloud.feddema.dev
@@ -406,8 +400,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: alertmanager
         url: https://alert.cloud.feddema.dev
@@ -419,8 +413,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: vmalert
         url: https://vmalert.cloud.feddema.dev
@@ -432,8 +426,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       - name: zigbee2mqtt
         url: https://zigbee.cloud.feddema.dev
@@ -445,21 +439,8 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
-
-      - name: fail
-        url: https://fail.cloud.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 3
-            success-threshold: 3
+            failure-threshold: 2
+            success-threshold: 1
 
       # dns servers
       - name: adguard-dns-loadbalancer
@@ -475,7 +456,7 @@ gatus:
           - type: telegram
             send-on-resolved: true
             failure-threshold: 1
-            success-threshold: 3
+            success-threshold: 1
 
       - name: powerdns-dns-loadbalancer
         url: 192.168.100.248
@@ -490,4 +471,4 @@ gatus:
           - type: telegram
             send-on-resolved: true
             failure-threshold: 1
-            success-threshold: 3
+            success-threshold: 1
