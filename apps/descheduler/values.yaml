@@ -13,6 +13,19 @@ descheduler:
       nodeFit: true
       evictLocalStoragePods: true
       evictFailedBarePods: true
+    - name: PodLifeTime
+      args:
+        maxPodLifeTimeSeconds: 120
+        states:
+        - Unknown
+        - Failed
+        - Succeeded
+        - NodeLost
+        - Shutdown
+        - UnexpectedAdmissionError
+        - CreateContainerError
+        - CreateContainerConfigError
+        - CrashLoopBackOff
     - name: RemovePodsHavingTooManyRestarts
       args:
         podRestartThreshold: 10
@@ -45,6 +58,7 @@ descheduler:
     plugins:
       deschedule:
         enabled:
+        - PodLifeTime
         - RemovePodsHavingTooManyRestarts
         - RemovePodsViolatingInterPodAntiAffinity
         - RemovePodsViolatingNodeAffinity
