@@ -112,3 +112,10 @@ talosctl gen config talos-broersma https://$NODE_IP:6443             \
 
 To update talos create a custom image with the [talos image factory](https://factory.talos.dev/).
 Select per host the required talos packages.
+
+```
+TALOS_CONFIG=/path/to/talos/config
+NODE_IP=10.0.10.12
+TALOS_IMAGE=factory.talos.dev/installer/ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515:v1.6.2
+talosctl upgrade --nodes $NODE_IP --image $TALOS_IMAGE --preserve
+```
