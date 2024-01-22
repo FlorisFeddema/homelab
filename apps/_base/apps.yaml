@@ -10,4 +10,5 @@ apps:
     deploy: true
   kube-prometheus-stack:
     deploy: true
+    namespace: prometheus
     autoSync: false
