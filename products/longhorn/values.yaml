@@ -18,8 +18,8 @@ longhorn:
     backupTarget: s3://backups@default/
     backupTargetCredentialSecret: s3-credentials
     defaultLonghornStaticStorageClass: longhorn
-    backupConcurrentLimit: 2
-    restoreConcurrentLimit: 2
+    backupConcurrentLimit: 4
+    restoreConcurrentLimit: 4
 
   longhornUI:
     replicas: 1
