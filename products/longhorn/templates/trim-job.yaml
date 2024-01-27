@@ -1,7 +1,7 @@
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
-  name: daily-job
+  name: trim-job
   namespace: longhorn-system
 spec:
   cron: 0 6 * * *
