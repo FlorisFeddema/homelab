@@ -42,15 +42,9 @@ spec:
   users:
     - name: admin
       options: "SUPERUSER"
-    - name: uptimekuma
-      databases:
-      - uptimekuma
     - name: nextcloud
       databases:
         - nextcloud
-    - name: keycloak
-      databases:
-        - keycloak
     - name: authentik
       databases:
         - authentik
