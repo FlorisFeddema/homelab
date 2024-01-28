@@ -20,7 +20,7 @@ spec:
   externalClusters:
     - name: pgo
       connectionParameters:
-        host: platform-ha.pgo.svc
+        host: platform-primary.pgo.svc
         user: admin
         dbname: teslamate
       password:
