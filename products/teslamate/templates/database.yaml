@@ -12,7 +12,7 @@ spec:
     initdb:
       import:
         databases:
-          - app
+          - teslamate
         source:
           externalCluster: pgo
         type: microservice
