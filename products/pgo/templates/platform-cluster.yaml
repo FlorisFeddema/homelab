@@ -42,6 +42,10 @@ spec:
   users:
     - name: admin
       options: "SUPERUSER"
+    - name: import
+      options: "SUPERUSER"
+      password:
+        type: "AlphaNumeric"
     - name: nextcloud
       databases:
         - nextcloud
