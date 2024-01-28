@@ -1,0 +1,28 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ template "teslamate.fullname" . }}
+spec:
+  instances: 1
+
+  storage:
+    size: 5Gi
+
+  bootstrap:
+    initdb:
+      import:
+        databases:
+          - app
+        source:
+          externalCluster: pgo
+        type: microservice
+
+  externalClusters:
+    - name: pgo
+      connectionParameters:
+        host: platform-pgbouncer.pgo.svc
+        user: admin
+        dbname: teslamate
+      password:
+        key: password
+        name: pgo-credentials
