@@ -4,6 +4,12 @@ metadata:
   name: {{ template "teslamate.fullname" . }}
 spec:
   instances: 1
+  postgresql:
+    parameters:
+      pgaudit.log: "all, -misc"
+      pgaudit.log_catalog: "off"
+      pgaudit.log_parameter: "on"
+      pgaudit.log_relation: "on"
 
   storage:
     size: 5Gi
