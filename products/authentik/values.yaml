@@ -30,9 +30,9 @@ authentik:
     log_level: info
 
     postgresql:
-      host: "platform-pgbouncer.pgo.svc"
-      name: "authentik"
-      user: "authentik"
+      host: "authentik-postgres-rw"
+      name: "app"
+      user: "app"
       port: 5432
     redis:
       host: "{{ .Release.Name }}-redis-master"
