@@ -46,9 +46,6 @@ spec:
       options: "SUPERUSER"
       password:
         type: "AlphaNumeric"
-    - name: authentik
-      databases:
-        - authentik
     - name: powerdnsprimary
       databases:
         - powerdnsprimary
