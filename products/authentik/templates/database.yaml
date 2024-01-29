@@ -14,21 +14,3 @@ spec:
   storage:
     size: {{ .Values.database.size }}
 
-  bootstrap:
-    initdb:
-      import:
-        databases:
-          - authentik
-        source:
-          externalCluster: pgo
-        type: microservice
-
-  externalClusters:
-    - name: pgo
-      connectionParameters:
-        host: platform-primary.pgo.svc
-        user: import
-        dbname: authentik
-      password:
-        key: password
-        name: pgo-credentials
