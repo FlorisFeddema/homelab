@@ -12,7 +12,7 @@ config:
 
   database:
     host: teslamate-rw.teslamate.svc
-    name: teslamate
+    name: app
     user: app
     port: 5432
 

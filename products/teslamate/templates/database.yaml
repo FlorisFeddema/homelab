@@ -16,5 +16,21 @@ spec:
 
   bootstrap:
     initdb:
-      database: teslamate
+      database: app
+      owner: app
+      import:
+        databases:
+          - teslamate
+        source:
+          externalCluster: pgo
+        type: microservice
 
+  externalClusters:
+    - name: pgo
+      connectionParameters:
+        host: platform-primary.pgo.svc
+        user: import
+        dbname: teslamate
+      password:
+        key: password
+        name: pgo-credentials
