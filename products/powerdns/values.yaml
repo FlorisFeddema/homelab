@@ -70,6 +70,10 @@ admin:
   replicas: 1
   resources: {}
 
+  database:
+    replicas: 1
+    size: 5Gi
+
   image:
     registry: docker.io
     repository: powerdnsadmin/pda-legacy

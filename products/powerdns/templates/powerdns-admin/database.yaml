@@ -1,0 +1,34 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ template "powerdns.name" . }}-admin-postgres
+spec:
+  instances: {{ .Values.admin.database.replicas }}
+  postgresql:
+    parameters:
+      pgaudit.log: "all, -misc"
+      pgaudit.log_catalog: "off"
+      pgaudit.log_parameter: "on"
+      pgaudit.log_relation: "on"
+
+  storage:
+    size: {{ .Values.database.size }}
+
+  bootstrap:
+    initdb:
+      import:
+        databases:
+          - powerdnsadmin
+        source:
+          externalCluster: pgo
+        type: microservice
+
+  externalClusters:
+    - name: pgo
+      connectionParameters:
+        host: platform-primary.pgo.svc
+        user: import
+        dbname: powerdnsadmin
+      password:
+        key: password
+        name: pgo-credentials
