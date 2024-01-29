@@ -12,7 +12,7 @@ spec:
       pgaudit.log_relation: "on"
 
   storage:
-    size: {{ .Values.database.size }}
+    size: {{ .Values.admin.database.size }}
 
   bootstrap:
     initdb:
