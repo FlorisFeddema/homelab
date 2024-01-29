@@ -53,11 +53,10 @@ rm out.yaml
 kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
 ```
 
-## Crowdsec
+## Remove old replica sets
 
 ```shell
-kubectl -n crowdsec exec -it crowdsec-agent- -- sh
-cscli bouncers add ingress-nginx
+kubectl get replicaset -o jsonpath='{ .items[?(@.spec.replicas==0)]}' -A | k delete -f -
 ```
 
 ## PostgreSQL
