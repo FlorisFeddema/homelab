@@ -13,22 +13,3 @@ spec:
 
   storage:
     size: {{ .Values.admin.database.size }}
-
-  bootstrap:
-    initdb:
-      import:
-        databases:
-          - powerdnsprimary
-        source:
-          externalCluster: pgo
-        type: microservice
-
-  externalClusters:
-    - name: pgo
-      connectionParameters:
-        host: platform-primary.pgo.svc
-        user: import
-        dbname: powerdnsprimary
-      password:
-        key: password
-        name: pgo-credentials
