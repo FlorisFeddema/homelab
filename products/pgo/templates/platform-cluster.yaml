@@ -46,9 +46,6 @@ spec:
       options: "SUPERUSER"
       password:
         type: "AlphaNumeric"
-    - name: nextcloud
-      databases:
-        - nextcloud
     - name: authentik
       databases:
         - authentik
