@@ -10,6 +10,18 @@ resources: {}
 config:
   timezone: 'Europe/Amsterdam'
 
+  database:
+    host: platform-pgbouncer.pgo.svc
+    name: teslamate
+    user: teslamate
+    port: 5432
+
+  mqtt:
+    host: mqtt.cloud.feddema.de
+    user: teslamate
+    port: 8883
+    tls: true
+
   secret:
     name: teslamate-credentials
     sealedValues:
@@ -17,6 +29,9 @@ config:
       encryptionKey: AgAFxq0SCLOfAFS/NyfaoUWAbZJVYfxkO/Dy/juNFZt4emnEeyLnmdEJ8l7FKyQ+pZ/bT083rwi+/I+sC/WmSmDdmgS7UEAtMizzYZTxODgoGvXpCOTAgweo+CV6X/cXhQjN0zkrmEk7EvMGMiJxbO2ZaljhQVOGz3pjUIMrGb9+7YjCX/bmpOe++GRdnGwH1ni8fwOP5+hxd5klAuG/1FdYwegk8JuaJlOWSsR7SX790awOdN075T4PNuRrRahGasZLEKJDSNEXM6Z5TVYBBkDm5FMe2jrPez4T8Pd+xykEiwOzeLzViw5p41FCy8M3VMc6RMF0wxl59smUJIKCj9I//gspo8duyOHu5JgTZmkN4SaCIe4qAtvbHkBMSjMIqbCdXowl1JXb3XaizI2Ec7WXaotUk2xizi2WUcVNKtXzQefRyxypWMrRmHPmvQJfkxMVq+SD5RoQCVko0HJD+JH4plKbFptTe2vgrffun3IzoGnQbnMnG3K/1ciy7CkOmQ9/0rDFS7A9ioomE2p2q4OMmUssbkQR27agY3VctDc/CRJGCURaPxgdsfjvSJz3OvjfX1BgY8u8tJlwY3gmM0FM3074kBwX/tvzZ+43duqfbYfNX7yebQZOVqR21AXrQRTXRD5e2aYQBWwnLvmJIhU5a5PLpJdm3rU4LW4CX8FtwZ8vEtqXBKrtwjJco+pjWNFD65Mu6AjVRZKnqxytwdmT/SWgXdFWVRQxOo2NYi0VC3BGjgCw/J8mAPiTquVPvoNObJWrLekRQKD8Iab7lg/m
       mqttPassword: AgATVwkkkXfUGnillNd5xQqAmrsV4PXuKwyLDb4OwERWBIlwAdZ9FtwGlVgQ0gbEQOfRM9+BCeeRwJ+pOLQcjxfig8VXOWGs4a3NO2ZwlOEyV4rmF5jDchlF+nH65LluXUmW5vs5vRrhLo4N+ciYyK9Ky40oxH8Bo6hBe5CNryYfmy2sdYXuPxr46HuOrlT6TlzcNrMPp2qLyWvzY6ygKAWbr12eHV9tif0khDIPeEW4AxriGeLcOlk5Mb0JVtEe9IEDNiepVt4OsgvzUtbl8IrBq8xZobfRFmF3D+Anl9CSMWt4rvTB5RtOOwtcDvaDQpkppKWiMZ5Gp24spgf41aEdD1ArpMvhvd8Rj92+hPFfo/nRkfp7o4yLRTrUUBCsQBKMk7PbZI1sOgPrBgLkxV4pLwKnqHoFi4qMRFJSfthd9Wa15wWNQZD9fxEvmmDPPYy9ohK3VK06vlPiMzf2+iql4HI5rZH9gEUTdJ1o47yHgdA/48uXLWj18ROuUlrohuDIPOj4rQ+v4TTMA7EsoVMQJOrXlAxtr1CmxX7nIlqwTwy4+EevL+CymSeWUonCGX/rzYAYmkLW8Crf6xRpT047fJo2imWh6jFx093D2yG6vBRUkJEPHFB+dXoVsnMsJHoC6fPaJXHhWH5SKHIWWGpHuCk42u7dPBZFpvwEz4IEBGQLgZOHh0MK+WTlZwZlChQKXWKqaq0IKT/V1GD7n5I1Xmo/ZjlBPIi/EA3EmaDhfCND7T60Xd1h7JQxpWbOZ0oma5TXdwNpszKqO+SqpfRM
 
+database:
+  replicas: 1
+  size: 5Gi
 
 ingress:
   enabled: true

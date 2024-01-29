@@ -32,13 +32,13 @@ spec:
             - name: DISABLE_MQTT
               value: "false"
             - name: MQTT_HOST
-              value: "mqtt.cloud.feddema.dev"
+              value: "{{ .Values.config.mqtt.host }}"
             - name: MQTT_PORT
-              value: "8883"
+              value: "{{ .Values.config.mqtt.port }}"
             - name: MQTT_TLS
-              value: "true"
+              value: "{{ .Values.config.mqtt.tls }}"
             - name: MQTT_USERNAME
-              value: "teslamate"
+              value: "{{ .Values.config.mqtt.user }}"
             - name: MQTT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -47,11 +47,13 @@ spec:
             - name: VIRTUAL_HOST
               value: "{{ .Values.ingress.domain }}"
             - name: DATABASE_USER
-              value: "teslamate"
+              value: "{{ .Values.config.database.user }}"
             - name: DATABASE_NAME
-              value: "teslamate"
+              value: "{{ .Values.config.database.name }}"
+            - name: DATABASE_PORT
+              value: "{{ .Values.config.database.port }}"
             - name: DATABASE_HOST
-              value: "platform-pgbouncer.pgo.svc"
+              value: "{{ .Values.config.database.host }}"
             - name: TZ
               value: "{{ .Values.config.timezone }}"
             - name: ENCRYPTION_KEY

@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: {{ template "teslamate.fullname" . }}
 spec:
-  instances: 1
+  instances: {{ .Values.database.replicas }}
   postgresql:
     parameters:
       pgaudit.log: "all, -misc"
@@ -12,7 +12,7 @@ spec:
       pgaudit.log_relation: "on"
 
   storage:
-    size: 5Gi
+    size: {{ .Values.database.size }}
 
   bootstrap:
     initdb:
