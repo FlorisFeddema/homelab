@@ -83,8 +83,8 @@ nextcloud:
   externalDatabase:
     enabled: true
     type: postgresql
-    host: platform-pgbouncer.pgo.svc
-    database: nextcloud
+    host: nextcloud-postgres-rw
+    database: app
 
     existingSecret:
       enabled: true
