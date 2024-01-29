@@ -1,3 +1,7 @@
+database:
+  replicas: 1
+  size: 5Gi
+
 authentik:
   replicas: 1
   securityContext: { }
