@@ -65,8 +65,3 @@ spec:
         - powerdnsadmin
       password:
         type: "AlphaNumeric"
-    - name: teslamate
-      databases:
-        - teslamate
-      password:
-        type: "AlphaNumeric"
