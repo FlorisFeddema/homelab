@@ -16,6 +16,7 @@ spec:
 
   bootstrap:
     initdb:
+      database: teslamate
       owner: app
       import:
         databases:
