@@ -84,10 +84,6 @@ products:
   nodeFeatureDiscovery:
     deploy: true
     autoSync: true
-  pgo:
-    deploy: true
-    autoSync: true
-    serverSideApply: true
   powerdns:
     deploy: true
     autoSync: true
