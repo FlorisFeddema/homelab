@@ -11,7 +11,7 @@ config:
   timezone: 'Europe/Amsterdam'
 
   database:
-    host: teslamate-rw
+    host: teslamate-rw.teslamate.svc
     name: teslamate
     user: app
     port: 5432
