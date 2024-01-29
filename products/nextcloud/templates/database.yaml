@@ -1,0 +1,35 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nextcloud-postgres
+spec:
+  instances: {{ .Values.database.replicas }}
+  postgresql:
+    parameters:
+      pgaudit.log: "all, -misc"
+      pgaudit.log_catalog: "off"
+      pgaudit.log_parameter: "on"
+      pgaudit.log_relation: "on"
+
+  storage:
+    size: {{ .Values.database.size }}
+
+  bootstrap:
+    initdb:
+      import:
+        databases:
+          - nextcloud
+        source:
+          externalCluster: pgo
+        type: microservice
+
+  externalClusters:
+    - name: pgo
+      connectionParameters:
+        host: platform-primary.pgo.svc
+        user: import
+        dbname: nextcloud
+      password:
+        key: password
+        name: pgo-credentials
+

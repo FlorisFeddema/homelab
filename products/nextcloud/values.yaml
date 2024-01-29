@@ -1,3 +1,7 @@
+database:
+  size: 5Gi
+  replicas: 1
+
 nextcloud:
   replicaCount: 1
 
