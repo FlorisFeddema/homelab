@@ -46,7 +46,7 @@ grafana:
           type: postgres
           url: teslamate-postgres-r.teslamate.svc:5432
           user: $TESLAMATE_DATABASE_USER
-          database: teslamate
+          database: app
           secureJsonData:
             password: $TESLAMATE_DATABASE_PASSWORD
           jsonData:
