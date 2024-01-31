@@ -77,7 +77,7 @@ admin:
   image:
     registry: docker.io
     repository: powerdnsadmin/pda-legacy
-    tag: 0.4.1
+    tag: 0.4.2
 
   secret:
     name: powerdns-admin-credentials
