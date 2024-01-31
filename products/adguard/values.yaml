@@ -52,7 +52,7 @@ sync:
   image:
     registry: ghcr.io
     repository: bakito/adguardhome-sync
-    tag: v0.6.3
+    tag: v0.6.4
 
 secret:
   name: adguard-credentials
