@@ -165,6 +165,7 @@ First we need to create a new VLAN interface.
 Go to dashboard, Add Interface and select VLAN. Use the same VLAN ID as you used in the Unifi Controller.
 Set the interface to the port you want to use for this VLAN. In my case I used switch0.
 Pick manual IP configuration and set the IP address and subnet mask. In my case I used 192.168.x.1/24.
+After the interface is created, add the vid (VLAN ID) to the interfaces that you want to use for this VLAN. I added it to the eth2 port on the switch0 interface.
 Next we need to create a new DHCP server for this VLAN. Go to services, DHCP server and create a new DHCP server.
 Give it a name, set the subnet to the same range as you used for the VLAN interface and set the range to the same range as the subnet.
 Set the start to 192.168.x.2 and the end to 192.168.x.254, and the router ip and dns to 192.168.x.1.
