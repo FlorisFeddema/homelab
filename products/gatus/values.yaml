@@ -447,10 +447,10 @@ gatus:
         url: 192.168.100.222
         group: dns
         dns:
-          query-name: "example.com"
+          query-name: "targon.feddema.dev"
           query-type: "A"
         conditions:
-          - "[BODY] == 93.184.216.34"
+          - "[BODY] == 31.201.251.186"
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: telegram
@@ -462,10 +462,10 @@ gatus:
         url: 192.168.100.248
         group: dns
         dns:
-          query-name: "example.com"
+          query-name: "targon.feddema.dev"
           query-type: "A"
         conditions:
-          - "[BODY] == 93.184.216.34"
+          - "[BODY] == 31.201.251.186"
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: telegram
