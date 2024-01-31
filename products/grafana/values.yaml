@@ -42,18 +42,18 @@ grafana:
           jsonData:
             handleGrafanaManagedAlerts: false
             implementation: prometheus
-#        - name: TeslaMate
-#          type: postgres
-#          url: teslamate-postgres-r.teslamate.svc:5432
-#          user: $TESLAMATE_DATABASE_USER
-#          database: teslamate
-#          secureJsonData:
-#            password: $TESLAMATE_DATABASE_PASSWORD
-#          jsonData:
-#            postgresVersion: 1500
-#            sslmode: 'disable'
-#          version: 1
-#          editable: false
+        - name: TeslaMate
+          type: postgres
+          url: teslamate-postgres-r.teslamate.svc:5432
+          user: $TESLAMATE_DATABASE_USER
+          database: teslamate
+          secureJsonData:
+            password: $TESLAMATE_DATABASE_PASSWORD
+          jsonData:
+            postgresVersion: 1500
+            sslmode: 'disable'
+          version: 1
+          editable: false
 
   replicas: 1
   revisionHistoryLimit: 0
@@ -119,11 +119,7 @@ grafana:
       memory: 128Mi
 
   persistence:
-    type: StatefulSet
-    enabled: true
-    accessModes:
-      - ReadWriteOnce
-    size: 16Gi
+    enabled: false
 
   admin:
     existingSecret: "grafana-credentials"
