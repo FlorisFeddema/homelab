@@ -172,6 +172,16 @@ Go to Dashboard and add the vid to the switch0 interface. In my case the eth2 po
 Go to services, DNS and add the VLAN interface to the dns forwarding interfaces.
 Add the subnet to the firewall network-group in the Firewall/NAT tab. 
 
+### Enable mDNS over VLANS
+
+SSH into the router and run the following commands:
+
+```shell
+configure
+set service mdns repeater interface <interfacename>
+commit; save
+```
+
 ## Node setup
 
 ```shell 
