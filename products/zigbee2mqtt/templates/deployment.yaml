@@ -54,6 +54,10 @@ spec:
                 cp /config/secret.yaml /config/secret.yaml.old
               fi
               cp /tmp/secret.yaml /config/secret.yaml
+              touch $files
+          env:
+            - name: files
+              value: "{{ join " " .Values.config.createFiles }}"
           volumeMounts:
             - name: default-config
               mountPath: /tmp/configuration.yaml
