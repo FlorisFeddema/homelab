@@ -1,6 +1,8 @@
 apps:
   cert-manager:
     deploy: true
+    autoSync: false
+    finalize: false
   cilium-gateway:
     deploy: true
   ingress-nginx:
