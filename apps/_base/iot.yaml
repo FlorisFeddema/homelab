@@ -6,4 +6,4 @@ apps:
   zigbee2mqtt:
     deploy: true
     autoSync: false
-    finalize:
+    finalize: false
