@@ -450,7 +450,7 @@ gatus:
           query-name: "targon.feddema.dev"
           query-type: "A"
         conditions:
-          - "[BODY] == 31.201.251.186"
+          - "[BODY] == 31.201.249.143"
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: telegram
@@ -465,7 +465,7 @@ gatus:
           query-name: "targon.feddema.dev"
           query-type: "A"
         conditions:
-          - "[BODY] == 31.201.251.186"
+          - "[BODY] == 31.201.249.143"
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: telegram
