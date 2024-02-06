@@ -1,7 +1,5 @@
 apps:
   emqx:
     deploy: true
-    autoSync: false
   zigbee2mqtt:
     deploy: true
-    autoSync: false
