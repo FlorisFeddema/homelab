@@ -3,18 +3,5 @@ apps:
     deploy: true
     autoSync: false
     finalize: false
-  cloudnative-postgres:
-    deploy: true
-    autoSync: false
-    finalize: false
   mealie:
     deploy: true
-  gatus:
-    deploy: true
-    autoSync: false
-    finalize: false
-  kube-prometheus-stack:
-    deploy: true
-    namespace: prometheus
-    autoSync: false
-    finalize: false

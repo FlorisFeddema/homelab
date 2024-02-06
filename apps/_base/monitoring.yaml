@@ -1,0 +1,10 @@
+apps:
+  gatus:
+    deploy: true
+    autoSync: false
+    finalize: false
+  kube-prometheus-stack:
+    deploy: true
+    namespace: prometheus
+    autoSync: false
+    finalize: false

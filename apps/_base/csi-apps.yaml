@@ -23,3 +23,7 @@ apps:
     path: apps/democratic-csi/chart
     valueFiles:
       - ../node-manual.yaml
+  cloudnative-postgres:
+    deploy: true
+    autoSync: false
+    finalize: false

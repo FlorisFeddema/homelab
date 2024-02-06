@@ -5,7 +5,16 @@ apps:
     namespace: kube-system
   metrics-server:
     deploy: true
+  argocd:
+    deploy: true
+    autoSync: false
   descheduler:
+    deploy: true
+  cert-manager:
+    deploy: true
+    autoSync: false
+    finalize: false
+  sealed-secrets:
     deploy: true
   node-feature-discovery:
     deploy: true
@@ -17,9 +26,4 @@ apps:
       jsonPointers:
       - /spec/resourceManager
   generic-device-operator:
-    deploy: true
-  argocd:
-    deploy: true
-    autoSync: false
-  sealed-secrets:
     deploy: true
