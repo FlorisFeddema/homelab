@@ -1,7 +1,5 @@
 apps:
-  authentik:
+  mealie:
     deploy: true
     autoSync: false
     finalize: false
-  mealie:
-    deploy: true
