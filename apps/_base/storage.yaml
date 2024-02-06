@@ -25,5 +25,3 @@ apps:
       - ../node-manual.yaml
   cloudnative-postgres:
     deploy: true
-    autoSync: false
-    finalize: false
