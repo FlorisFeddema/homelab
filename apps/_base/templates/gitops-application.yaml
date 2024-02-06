@@ -12,7 +12,6 @@ spec:
       valueFiles:
       - core-apps.yaml
       - storage.yaml
-      - csi-apps.yaml
       - connectivity-apps.yaml
       - device-operators.yaml
       - monitoring.yaml
