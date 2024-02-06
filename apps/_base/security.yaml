@@ -1,5 +1,3 @@
 apps:
   authentik:
     deploy: true
-    autoSync: false
-    finalize: false

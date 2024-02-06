@@ -1,5 +1,3 @@
 apps:
   mealie:
     deploy: true
-    autoSync: false
-    finalize: false

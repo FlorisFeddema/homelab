@@ -1,12 +1,8 @@
 apps:
   node-feature-discovery:
     deploy: true
-    autoSync: false
-    finalize: false
   intel-device-operator:
     deploy: true
-    autoSync: false
-    finalize: false
     ignoreDifferences:
     - group: deviceplugin.intel.com
       kind: GpuDevicePlugin
@@ -14,5 +10,3 @@ apps:
       - /spec/resourceManager
   generic-device-operator:
     deploy: true
-    autoSync: false
-    finalize: false

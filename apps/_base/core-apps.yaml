@@ -12,7 +12,5 @@ apps:
     deploy: true
   cert-manager:
     deploy: true
-    autoSync: false
-    finalize: false
   sealed-secrets:
     deploy: true
