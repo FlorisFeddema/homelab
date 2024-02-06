@@ -5,7 +5,7 @@ kind: Application
 metadata:
   name: {{ $name }}
   namespace: argocd
-  {{- if $app.finalize | default true }}
+  {{- if list nil true | has $app.finalize }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
   {{- end }}
