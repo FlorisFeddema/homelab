@@ -13,6 +13,7 @@ spec:
       - core-apps.yaml
       - csi-apps.yaml
       - connectivity-apps.yaml
+      - monitoring.yaml
       - home-automation.yaml
       - mediacenter.yaml
       - apps.yaml
