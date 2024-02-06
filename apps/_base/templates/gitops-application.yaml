@@ -18,6 +18,7 @@ spec:
       - security.yaml
       - home.yaml
       - home-automation.yaml
+      - iot.yaml
       - mediacenter.yaml
       - apps.yaml
   syncPolicy:
