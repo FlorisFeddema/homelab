@@ -1,5 +1,9 @@
 apps:
   emqx:
     deploy: true
+    autoSync: false
+    finalize: false
   zigbee2mqtt:
     deploy: true
+    autoSync: false
+    finalize: false
