@@ -21,6 +21,5 @@ apps:
   argocd:
     deploy: true
     autoSync: false
-    namespace: argocd
   sealed-secrets:
     deploy: true
