@@ -8,6 +8,9 @@ external-dns:
   containerPorts:
     http: 7979
 
+  extraArgs:
+    exclude-target-net: 192.168.0.0/16
+
   combineFQDNAnnotation: false
   ignoreHostnameAnnotation: false
   publishInternalServices: false
