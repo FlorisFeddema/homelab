@@ -75,9 +75,6 @@ products:
   minio:
     deploy: true
     autoSync: true
-  mongodbCommunityOperator:
-    deploy: true
-    autoSync: true
   nextcloud:
     deploy: true
     autoSync: true
