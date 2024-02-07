@@ -12,9 +12,6 @@ ingress-nginx:
     maxUnavailable: 2
 
     service:
-      nodePorts:
-        http: 32080
-        https: 32443
       externalIPs:
         - 31.201.249.143
 
