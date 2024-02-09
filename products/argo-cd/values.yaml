@@ -78,25 +78,8 @@ argo-cd:
         cert-manager.io/cluster-issuer: letsencrypt-dns
         nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-      hosts:
-        - argocd.cloud.feddema.dev
-      tls:
-        - secretName: argocd-tls
-          hosts:
-            - argocd.cloud.feddema.dev
-
-    ingressGrpc:
-      enabled: true
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-        ingress-class: nginx
-        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
-      hosts:
-        - grpc.argocd.cloud.feddema.dev
-      tls:
-        - secretName: argocd-grpc-tls
-          hosts:
-            - grpc.argocd.cloud.feddema.dev
+      hostname: argocd.cloud.feddema.dev
+      tls: true
 
     configEnabled: false
 
