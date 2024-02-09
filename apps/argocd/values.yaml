@@ -18,7 +18,7 @@ argo-cd:
     rbac:
       create: false
     params:
-      create: false
+      server.insecure: 'true'
 
   controller:
     replicas: 1
@@ -31,6 +31,7 @@ argo-cd:
 
     ingress:
       enabled: true
+      tls: false
       annotations:
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
       hostname: argocd.mobrockers.com
