@@ -56,10 +56,10 @@ nextcloud:
     tls:
       - secretName: nextcloud-tls
         hosts:
-          - drive.cloud.feddema.dev
+          - nextcloud.feddema.dev
 
   nextcloud:
-    host: drive.cloud.feddema.dev
+    host: nextcloud.feddema.dev
 
     existingSecret:
       enabled: true
