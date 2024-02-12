@@ -80,14 +80,14 @@ grafana:
 
   grafana.ini:
     auth:
-      signout_redirect_url: https://authentik.cloud.feddema.dev/application/o/grafana/end-session/
+      signout_redirect_url: https://authentik.feddema.dev/application/o/grafana/end-session/
     auth.generic_oauth:
       enabled: true
       name: Authentik
       scopes: "openid email profile"
-      auth_url: "https://authentik.cloud.feddema.dev/application/o/authorize/"
-      token_url: "https://authentik.cloud.feddema.dev/application/o/token/"
-      api_url: "https://authentik.cloud.feddema.dev/application/o/userinfo/"
+      auth_url: "https://authentik.feddema.dev/application/o/authorize/"
+      token_url: "https://authentik.feddema.dev/application/o/token/"
+      api_url: "https://authentik.feddema.dev/application/o/userinfo/"
       client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
       client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
       allow_assign_grafana_admin: true
