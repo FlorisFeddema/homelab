@@ -24,7 +24,7 @@ service:
 
 ingress:
   enabled: true
-  domain: adguard.cloud.feddema.dev
+  domain: adguard.feddema.dev
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns
   tls:
