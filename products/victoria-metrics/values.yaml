@@ -47,7 +47,7 @@ victoria-metrics-k8s-stack:
   vmcluster:
     enabled: true
     spec:
-      retentionPeriod: "700"
+      retentionPeriod: "120"
       replicationFactor: 1
       vmstorage:
         replicaCount: 1
