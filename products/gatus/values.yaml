@@ -109,7 +109,7 @@ gatus:
             success-threshold: 1
 
       - name: gatus
-        url: https://status.feddema.dev
+        url: https://gatus.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -301,7 +301,7 @@ gatus:
             success-threshold: 1
 
       - name: gatus
-        url: https://status.feddema.dev
+        url: https://gatus.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
