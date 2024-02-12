@@ -26,11 +26,11 @@ minio:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     path: /
     hosts:
-      - minio.cloud.feddema.dev
+      - minio.feddema.dev
     tls:
       - secretName: minio-tls
         hosts:
-          - minio.cloud.feddema.dev
+          - minio.feddema.dev
 
   resources:
     requests:
