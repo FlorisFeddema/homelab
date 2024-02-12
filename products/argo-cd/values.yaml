@@ -82,7 +82,7 @@ argo-cd:
         cert-manager.io/cluster-issuer: letsencrypt-dns
         nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
         nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-      hostname: argocd.cloud.feddema.dev
+      hostname: argocd.feddema.dev
       tls: true
 
     configEnabled: false
