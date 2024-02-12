@@ -41,7 +41,7 @@ data:
   oidc.tls.insecure.skip.verify: "false"
   oidc.config: |
     name: Authentik
-    issuer: https://authentik.cloud.feddema.dev/application/o/argocd/
+    issuer: https://authentik.feddema.dev/application/o/argocd/
     clientID: 7uRmOU7Cho0KwDa7SIODe0ugmQ5djIvDuN3wUeux
     clientSecret: $oidc.keycloak.clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
