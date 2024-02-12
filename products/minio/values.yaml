@@ -9,7 +9,7 @@ minio:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 500Gi
+    size: 50Gi
 
   service:
     type: ClusterIP
