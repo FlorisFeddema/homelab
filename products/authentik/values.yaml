@@ -21,10 +21,17 @@ authentik:
         paths:
           - path: "/"
             pathType: Prefix
+      - host: authentik.feddema.dev
+        paths:
+          - path: "/"
+            pathType: Prefix
     tls:
-      - secretName: authentik-tls
+      - secretName: authentik-old-tls
         hosts:
           - authentik.cloud.feddema.dev
+      - secretName: authentik-tls
+        hosts:
+          - authentik.feddema.dev
 
   authentik:
     log_level: info
