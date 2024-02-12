@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
 data:
-  url: https://argocd.cloud.feddema.dev
+  url: https://argocd.feddema.dev
   statusbadge.enabled: "true"
   
   application.resourceTrackingMethod: annotation
