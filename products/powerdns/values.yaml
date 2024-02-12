@@ -92,7 +92,7 @@ admin:
 
   ingress:
     enabled: true
-    domain: powerdns.cloud.feddema.dev
+    domain: powerdns.feddema.dev
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     tls:
