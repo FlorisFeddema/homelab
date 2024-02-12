@@ -161,7 +161,7 @@ gatus:
             success-threshold: 1
 
       - name: nextcloud
-        url: https://drive.feddema.dev
+        url: https://nextcloud.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -188,19 +188,6 @@ gatus:
 
       - name: teslamate
         url: https://teslamate.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
-
-      - name: unifi
-        url: https://unifi.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -352,7 +339,7 @@ gatus:
             success-threshold: 1
 
       - name: nextcloud
-        url: https://drive.feddema.dev
+        url: https://nextcloud.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -379,19 +366,6 @@ gatus:
 
       - name: teslamate
         url: https://teslamate.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
-
-      - name: unifi
-        url: https://unifi.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -447,7 +421,7 @@ gatus:
         url: 192.168.100.222
         group: dns
         dns:
-          query-name: "targon.feddema.dev"
+          query-name: "test.feddema.dev"
           query-type: "A"
         conditions:
           - "[BODY] == 31.201.249.143"
@@ -462,7 +436,7 @@ gatus:
         url: 192.168.100.248
         group: dns
         dns:
-          query-name: "targon.feddema.dev"
+          query-name: "test.feddema.dev"
           query-type: "A"
         conditions:
           - "[BODY] == 31.201.249.143"
