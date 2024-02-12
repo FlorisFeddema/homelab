@@ -65,10 +65,10 @@ grafana:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     path: /
     hosts:
-      - grafana.cloud.feddema.dev
+      - grafana.feddema.dev
     tls:
       - hosts:
-          - grafana.cloud.feddema.dev
+          - grafana.feddema.dev
         secretName: "grafana-tls"
 
   extraSecretMounts:
@@ -105,8 +105,8 @@ grafana:
     grafana_net:
       url: https://grafana.net
     server:
-      domain: "https://grafana.cloud.feddema.dev"
-      root_url: "https://grafana.cloud.feddema.dev"
+      domain: "https://grafana.feddema.dev"
+      root_url: "https://grafana.feddema.dev"
 
   serviceMonitor:
     enabled: true
