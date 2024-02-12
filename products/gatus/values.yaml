@@ -4,10 +4,10 @@ gatus:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     hosts:
-      - status.cloud.feddema.dev
+      - gatus.feddema.dev
     tls:
       - hosts:
-          - status.cloud.feddema.dev
+          - gatus.feddema.dev
         secretName: status-tls
 
   resources: {}
@@ -44,7 +44,7 @@ gatus:
 
       # internal
       - name: argocd
-        url: https://argocd.cloud.feddema.dev
+        url: https://argocd.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -57,7 +57,7 @@ gatus:
             success-threshold: 1
 
       - name: adguard
-        url: https://adguard.cloud.feddema.dev
+        url: https://adguard.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -70,7 +70,7 @@ gatus:
             success-threshold: 1
 
       - name: authentik
-        url: https://authentik.cloud.feddema.dev
+        url: https://authentik.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -83,7 +83,7 @@ gatus:
             success-threshold: 1
 
       - name: hubble
-        url: https://hubble.cloud.feddema.dev
+        url: https://hubble.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -96,7 +96,7 @@ gatus:
             success-threshold: 1
 
       - name: emqx
-        url: https://emqx.cloud.feddema.dev
+        url: https://emqx.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -109,7 +109,7 @@ gatus:
             success-threshold: 1
 
       - name: gatus
-        url: https://status.cloud.feddema.dev
+        url: https://status.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -122,7 +122,7 @@ gatus:
             success-threshold: 1
 
       - name: grafana
-        url: https://grafana.cloud.feddema.dev
+        url: https://grafana.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -135,7 +135,7 @@ gatus:
             success-threshold: 1
 
       - name: homeassistant
-        url: https://home.cloud.feddema.dev
+        url: https://home.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -148,7 +148,7 @@ gatus:
             success-threshold: 1
 
       - name: minio
-        url: https://minio.cloud.feddema.dev
+        url: https://minio.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -161,7 +161,7 @@ gatus:
             success-threshold: 1
 
       - name: nextcloud
-        url: https://drive.cloud.feddema.dev
+        url: https://drive.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -174,7 +174,7 @@ gatus:
             success-threshold: 1
 
       - name: powerdnsadmin
-        url: https://powerdns.cloud.feddema.dev
+        url: https://powerdns.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -187,7 +187,7 @@ gatus:
             success-threshold: 1
 
       - name: teslamate
-        url: https://teslamate.cloud.feddema.dev
+        url: https://teslamate.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -200,7 +200,7 @@ gatus:
             success-threshold: 1
 
       - name: unifi
-        url: https://unifi.cloud.feddema.dev
+        url: https://unifi.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -213,7 +213,7 @@ gatus:
             success-threshold: 1
 
       - name: alertmanager
-        url: https://alert.cloud.feddema.dev
+        url: https://alert.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -226,7 +226,7 @@ gatus:
             success-threshold: 1
 
       - name: vmalert
-        url: https://vmalert.cloud.feddema.dev
+        url: https://vmalert.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -239,7 +239,7 @@ gatus:
             success-threshold: 1
 
       - name: zigbee2mqtt
-        url: https://zigbee.cloud.feddema.dev
+        url: https://zigbee.feddema.dev
         group: internal
         conditions:
           - '[STATUS] == 200'
@@ -248,21 +248,21 @@ gatus:
 
         # external
       - name: argocd
-        url: https://argocd.cloud.feddema.dev
+        url: https://argocd.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
         client:
           dns-resolver: 'udp://1.1.1.1:53'
       - name: adguard
-        url: https://adguard.cloud.feddema.dev
+        url: https://adguard.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
         client:
           dns-resolver: 'udp://1.1.1.1:53'
       - name: authentik
-        url: https://authentik.cloud.feddema.dev
+        url: https://authentik.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -275,7 +275,7 @@ gatus:
             success-threshold: 1
 
       - name: hubble
-        url: https://hubble.cloud.feddema.dev
+        url: https://hubble.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -288,7 +288,7 @@ gatus:
             success-threshold: 1
 
       - name: emqx
-        url: https://emqx.cloud.feddema.dev
+        url: https://emqx.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -301,7 +301,7 @@ gatus:
             success-threshold: 1
 
       - name: gatus
-        url: https://status.cloud.feddema.dev
+        url: https://status.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -314,7 +314,7 @@ gatus:
             success-threshold: 1
 
       - name: grafana
-        url: https://grafana.cloud.feddema.dev
+        url: https://grafana.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -327,7 +327,7 @@ gatus:
             success-threshold: 1
 
       - name: homeassistant
-        url: https://home.cloud.feddema.dev
+        url: https://home.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -339,7 +339,7 @@ gatus:
             failure-threshold: 2
             success-threshold: 1
       - name: minio
-        url: https://minio.cloud.feddema.dev
+        url: https://minio.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -352,7 +352,7 @@ gatus:
             success-threshold: 1
 
       - name: nextcloud
-        url: https://drive.cloud.feddema.dev
+        url: https://drive.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -365,7 +365,7 @@ gatus:
             success-threshold: 1
 
       - name: powerdnsadmin
-        url: https://powerdns.cloud.feddema.dev
+        url: https://powerdns.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -378,7 +378,7 @@ gatus:
             success-threshold: 1
 
       - name: teslamate
-        url: https://teslamate.cloud.feddema.dev
+        url: https://teslamate.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -391,7 +391,7 @@ gatus:
             success-threshold: 1
 
       - name: unifi
-        url: https://unifi.cloud.feddema.dev
+        url: https://unifi.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -404,7 +404,7 @@ gatus:
             success-threshold: 1
 
       - name: alertmanager
-        url: https://alert.cloud.feddema.dev
+        url: https://alert.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -417,7 +417,7 @@ gatus:
             success-threshold: 1
 
       - name: vmalert
-        url: https://vmalert.cloud.feddema.dev
+        url: https://vmalert.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
@@ -430,7 +430,7 @@ gatus:
             success-threshold: 1
 
       - name: zigbee2mqtt
-        url: https://zigbee.cloud.feddema.dev
+        url: https://zigbee.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
