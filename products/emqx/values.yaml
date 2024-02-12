@@ -36,4 +36,4 @@ cluster:
   ingress:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
-    domain: emqx.cloud.feddema.dev
+    domain: emqx.feddema.dev
