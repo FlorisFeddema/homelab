@@ -14,6 +14,8 @@ data:
   users.anonymous.enabled: "false"
   users.session.duration: "24h"
 
+  accounts.infro: "apiKey"
+
   kustomize.enabled: "true"
   jsonnet.enabled: "true"
   helm.enabled: "true"
