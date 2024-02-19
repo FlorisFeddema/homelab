@@ -19,3 +19,5 @@ data:
     clientID: $authentik-credentials:client_id
     clientSecret: $authentik-credentials:client_secret
     requestedScopes: ['openid', 'profile', 'email', 'groups']
+
+  accounts.infro: apiKey
