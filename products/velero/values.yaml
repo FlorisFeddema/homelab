@@ -41,7 +41,6 @@ velero:
       - name: minio
         provider: aws
         bucket: velero
-        default: true
         config:
           region: eu
           s3ForcePathStyle: true
