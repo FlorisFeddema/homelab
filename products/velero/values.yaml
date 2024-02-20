@@ -38,7 +38,7 @@ velero:
 
   configuration:
     backupStorageLocation:
-      - name: minio
+      - name: default
         provider: aws
         bucket: velero
         config:
