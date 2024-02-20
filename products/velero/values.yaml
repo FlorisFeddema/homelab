@@ -1,0 +1,68 @@
+values:
+  revisionHistoryLimit: 0
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      memory: 512Mi
+      cpu: null
+
+  initContainers:
+  # - name: velero-plugin-for-csi
+  #   image: velero/velero-plugin-for-csi:v0.7.0
+  #   imagePullPolicy: IfNotPresent
+  #   volumeMounts:
+  #     - mountPath: /target
+  #       name: plugins
+  # - name: velero-plugin-for-aws
+  #   image: velero/velero-plugin-for-aws:v1.9.0
+  #   imagePullPolicy: IfNotPresent
+  #   volumeMounts:
+  #     - mountPath: /target
+  #       name: plugins
+
+  metrics:
+    enabled: true
+
+    serviceMonitor:
+      autodetect: true
+      enabled: true
+
+    prometheusRule:
+      autodetect: true
+      enabled: true
+
+  upgradeCRDs: true
+  cleanUpCRDs: false
+
+  configuration:
+    backupStorageLocation:
+      - name: minio
+        provider: aws
+        bucket: velero
+        default: true
+        config:
+          region: eu
+          s3ForcePathStyle: true
+          s3Url: http://minio.minio:9000
+          insecureSkipTLSVerify: true
+
+    features: EnableCSI
+
+  credentials:
+    existingSecret: velero-credentials
+
+  backupsEnabled: true
+  snapshotsEnabled: false
+
+  schedules:
+     mybackup:
+       disabled: false
+       schedule: "15 21 * * *"
+       useOwnerReferencesInBackup: false
+       template:
+         ttl: "240h"
+         storageLocation: default
+         includedNamespaces:
+           - teslamate
