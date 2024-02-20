@@ -104,6 +104,9 @@ products:
   tetragon:
     deploy: true
     autoSync: true
+  velero:
+    deploy: true
+    autoSync: true
   victoriaMetrics:
     deploy: true
     autoSync: true
