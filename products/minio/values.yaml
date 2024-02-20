@@ -56,6 +56,10 @@ minio:
       policy: none
       purge: false
       versioning: false
+    - name: velero
+      policy: none
+      purge: false
+      versioning: false
 
   metrics:
     serviceMonitor:
