@@ -1,4 +1,4 @@
-values:
+velero:
   revisionHistoryLimit: 0
   resources:
     requests:
@@ -63,6 +63,6 @@ values:
        useOwnerReferencesInBackup: false
        template:
          ttl: "240h"
-         storageLocation: default
+         storageLocation: minio
          includedNamespaces:
            - teslamate
