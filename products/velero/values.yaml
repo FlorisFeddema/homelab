@@ -33,7 +33,7 @@ velero:
       autodetect: true
       enabled: true
 
-  upgradeCRDs: true
+  upgradeCRDs: false
   cleanUpCRDs: false
 
   configuration:
