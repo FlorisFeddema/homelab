@@ -58,7 +58,7 @@ velero:
   schedules:
      mybackup:
        disabled: false
-       schedule: "10 12 * * *"
+       schedule: "20 12 * * *"
        useOwnerReferencesInBackup: false
        template:
          ttl: "240h"
