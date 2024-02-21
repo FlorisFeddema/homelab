@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-snapshotter-crd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: always-sync
+  source:
+    path: /client/config/crd
+    repoURL: https://github.com/kubernetes-csi/external-snapshotter.git
+    targetRevision: v6.3.2
+    kustomize: {}
