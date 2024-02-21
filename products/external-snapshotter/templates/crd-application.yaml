@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: always-sync
   source:
-    path: /client/config/crd
+    path: client/config/crd
     repoURL: https://github.com/kubernetes-csi/external-snapshotter.git
-    targetRevision: v6.3.3
+    targetRevision: {{ .Values.version }}
     kustomize: {}
