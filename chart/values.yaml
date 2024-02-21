@@ -29,6 +29,9 @@ products:
   externalDns:
     deploy: true
     autoSync: true
+  externalSnapshotter:
+    deploy: true
+    autoSync: false
   falco:
     deploy: false
   falcoExporter:
