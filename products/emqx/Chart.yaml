@@ -1,8 +1,8 @@
 apiVersion: v2
 name: emqx
-version: 1.0.4
+version: 1.0.5
 
 dependencies:
   - name: emqx-operator
-    version: 2.2.14
+    version: 2.2.15
     repository: https://repos.emqx.io/charts
