@@ -48,18 +48,6 @@ minio:
       policy: none
       purge: false
       versioning: false
-    - name: loki-ruler
-      policy: none
-      purge: false
-      versioning: false
-    - name: loki-admin
-      policy: none
-      purge: false
-      versioning: false
-    - name: velero
-      policy: none
-      purge: false
-      versioning: false
 
   metrics:
     serviceMonitor:
