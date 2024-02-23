@@ -1,0 +1,22 @@
+machine:
+  network:
+    hostname: kashaylan-1
+
+    interfaces:
+      - interface: enx46a7e06dddf1
+        dhcp: true
+        vip:
+          ip: 192.168.4.9
+
+  install:
+    disk: /dev/mmcblk0
+
+  disks:
+    - device: /dev/nvme0n1
+      partitions:
+        - mountpoint: /var/mnt/nvme1
+
+  kernel:
+    modules:
+      - name: rockchip-cpufreq
+

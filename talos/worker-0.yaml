@@ -1,0 +1,16 @@
+machine:
+  network:
+    hostname: kashaylan-2
+
+  install:
+    disk: /dev/mmcblk0
+
+  disks:
+    - device: /dev/nvme0n1
+      partitions:
+        - mountpoint: /var/mnt/nvme1
+
+  kernel:
+    modules:
+      - name: rockchip-cpufreq
+
