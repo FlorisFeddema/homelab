@@ -1,6 +1,9 @@
 grafana:
   assertNoLeakedSecrets: false
 
+  serviceAccount:
+    autoMount: true
+
   sidecar:
     dashboards:
       enabled: true    
