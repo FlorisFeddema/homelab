@@ -1,4 +1,4 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: enphase-envoy-prometheus-exporter
+  name: {{ .Release.Namespace }}

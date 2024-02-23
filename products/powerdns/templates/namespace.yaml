@@ -1,4 +1,4 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: powerdns
+  name: {{ .Release.Namespace }}
