@@ -1,8 +1,22 @@
 cilium:
-  k8sServiceHost: targon.feddema.dev
+  k8sServiceHost: gerador.feddema.dev
   k8sServicePort: 6443
-
   kubeProxyReplacement: strict
+
+  ipam:
+    mode: kubernetes
+
+  hostFirewall:
+    enabled: true
+
+  securityContext:
+    capabilities:
+      ciliumAgent: [ CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID ]
+      cleanCiliumState: [ NET_ADMIN,SYS_ADMIN,SYS_RESOURCE ]
+  cgroup:
+    autoMount:
+      enabled: false
+    hostRoot: /sys/fs/cgroup
 
   resources:
     limits:
@@ -12,7 +26,7 @@ cilium:
       cpu: 100m
 
   bgpControlPlane:
-    enabled: true
+    enabled: false
 
   certgen:
     ttlSecondsAfterFinished: null
@@ -20,32 +34,32 @@ cilium:
   rollOutCiliumPods: true
 
   hubble:
-    enabled: true
+    enabled: false
 
     tls:
       auto:
         method: cronJob
 
     metrics:
-      enableOpenMetrics: true
+      enableOpenMetrics: false
       serviceMonitor:
-        enabled: true
+        enabled: false
       dashboards:
-        enabled: true
+        enabled: false
         namespace: grafana
         label: grafana_dashboard
 
     relay:
-      enabled: true
+      enabled: false
       rollOutPods: true
       resources: { }
       prometheus:
-        enabled: true
+        enabled: false
         serviceMonitor:
-          enabled: true
+          enabled: false
 
     ui:
-      enabled: true
+      enabled: false
       rollOutPods: true
       backend:
         resources: { }
@@ -53,7 +67,7 @@ cilium:
         resources: { }
 
       ingress:
-        enabled: true
+        enabled: false
         annotations:
           nginx.ingress.kubernetes.io/auth-url: |-
             http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
@@ -72,14 +86,14 @@ cilium:
               - hubble.feddema.dev
 
   monitor:
-    enabled: true
+    enabled: false
 
   prometheus:
-    enabled: true
+    enabled: false
     serviceMonitor:
-      enabled: true
+      enabled: false
   dashboards:
-    enabled: true
+    enabled: false
     namespace: grafana
     label: grafana_dashboard
 
@@ -87,10 +101,10 @@ cilium:
     replicas: 1
     resources: { }
     prometheus:
-      enabled: true
+      enabled: false
       serviceMonitor:
-        enabled: true
+        enabled: false
     dashboards:
-      enabled: true
+      enabled: false
       namespace: grafana
       label: grafana_dashboard
