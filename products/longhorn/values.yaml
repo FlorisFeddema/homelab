@@ -5,7 +5,7 @@ longhorn:
   persistence:
     defaultClass: true
     defaultFsType: ext4
-    defaultClassReplicaCount: 1
+    defaultClassReplicaCount: 2
     reclaimPolicy: Retain
     defaultDataLocality: best-effort
     defaultReplicaAutoBalance: best-effort
@@ -17,12 +17,12 @@ longhorn:
     snapshotterReplicaCount: 1
 
   defaultSettings:
-    defaultReplicaCount: 1
+    defaultReplicaCount: 2
     backupTarget: s3://backups@default/
     backupTargetCredentialSecret: s3-credentials
     defaultLonghornStaticStorageClass: longhorn
-    backupConcurrentLimit: 4
-    restoreConcurrentLimit: 4
+    backupConcurrentLimit: 5
+    restoreConcurrentLimit: 5
 
   longhornUI:
     replicas: 1
