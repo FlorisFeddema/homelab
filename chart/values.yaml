@@ -13,7 +13,6 @@ products:
 #    autoSync: true
   cilium:
     deploy: true
-    namespace: kube-system
   cloudnativePg:
     deploy: true
 #    autoSync: true
@@ -87,7 +86,7 @@ products:
   prometheusCrd:
     deploy: true
 #    autoSync: true
-    namespace: defaults
+    namespace: default
     serverSideApply: true
   promtail:
     deploy: true
