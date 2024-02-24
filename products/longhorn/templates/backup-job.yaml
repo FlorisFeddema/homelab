@@ -1,3 +1,4 @@
+{{ if .Values.backups.enabled }}
 apiVersion: longhorn.io/v1beta1
 kind: RecurringJob
 metadata:
@@ -10,4 +11,5 @@ spec:
     - default
   retain: 4
   concurrency: 4
+{{ end }}
 
