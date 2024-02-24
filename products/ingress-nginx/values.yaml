@@ -6,10 +6,9 @@ ingress-nginx:
     ingressClassResource:
       default: true
 
-    kind: Deployment
-    replicaCount: 2
-    minAvailable: 0
-    maxUnavailable: 2
+    kind: DaemonSet
+    minAvailable: 2
+    maxUnavailable: 3
 
     service:
       externalIPs:
