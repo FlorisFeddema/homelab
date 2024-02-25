@@ -4,6 +4,7 @@ metadata:
   name: authentik-postgres
 spec:
   instances: {{ .Values.database.replicas }}
+
   postgresql:
     parameters:
       pgaudit.log: "all, -misc"
@@ -13,3 +14,15 @@ spec:
 
   storage:
     size: {{ .Values.database.size }}
+
+{{/*  backup:*/}}
+{{/*    barmanObjectStore:*/}}
+{{/*      destinationPath: s3://pg-backup-authentik/*/}}
+{{/*      endpointURL: https://s3.minio.feddema.dev*/}}
+{{/*      s3Credentials:*/}}
+{{/*        accessKeyId:*/}}
+{{/*          name: minio-secret*/}}
+{{/*          key: MINIO_ACCESS_KEY*/}}
+{{/*        secretAccessKey:*/}}
+{{/*          name: minio-secret*/}}
+{{/*          key: MINIO_SECRET_KEY*/}}
