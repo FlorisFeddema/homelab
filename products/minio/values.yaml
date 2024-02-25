@@ -17,7 +17,20 @@ minio:
     port: "9000"
 
   ingress:
-    enabled: false
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    path: /
+    hosts:
+      - s3.minio.feddema.dev
+    tls:
+      - secretName: s3-minio-tls
+        hosts:
+          - s3.minio.feddema.dev
 
   consoleIngress:
     enabled: true
@@ -45,6 +58,26 @@ minio:
 
   buckets:
     - name: loki-chunks
+      policy: none
+      purge: false
+      versioning: false
+    - name: pg-backup-home-assistant
+      policy: none
+      purge: false
+      versioning: false
+    - name: pg-backup-authentik
+      policy: none
+      purge: false
+      versioning: false
+    - name: pg-backup-nextcloud
+      policy: none
+      purge: false
+      versioning: false
+    - name: pg-backup-teslamate
+      policy: none
+      purge: false
+      versioning: false
+    - name: pg-backup-gatus
       policy: none
       purge: false
       versioning: false
