@@ -26,7 +26,7 @@ cilium:
       cpu: 100m
 
   bgpControlPlane:
-    enabled: false
+    enabled: true
 
   certgen:
     ttlSecondsAfterFinished: null
@@ -34,32 +34,31 @@ cilium:
   rollOutCiliumPods: true
 
   hubble:
-    enabled: false
+    enabled: true
 
     tls:
       auto:
         method: cronJob
 
     metrics:
-      enableOpenMetrics: false
       serviceMonitor:
-        enabled: false
+        enabled: true
       dashboards:
-        enabled: false
+        enabled: true
         namespace: grafana
         label: grafana_dashboard
 
     relay:
-      enabled: false
+      enabled: true
       rollOutPods: true
       resources: { }
       prometheus:
-        enabled: false
+        enabled: true
         serviceMonitor:
-          enabled: false
+          enabled: true
 
     ui:
-      enabled: false
+      enabled: true
       rollOutPods: true
       backend:
         resources: { }
@@ -86,14 +85,14 @@ cilium:
               - hubble.feddema.dev
 
   monitor:
-    enabled: false
+    enabled: true
 
   prometheus:
-    enabled: false
+    enabled: true
     serviceMonitor:
-      enabled: false
+      enabled: true
   dashboards:
-    enabled: false
+    enabled: true
     namespace: grafana
     label: grafana_dashboard
 
@@ -101,10 +100,10 @@ cilium:
     replicas: 1
     resources: { }
     prometheus:
-      enabled: false
+      enabled: true
       serviceMonitor:
-        enabled: false
+        enabled: true
     dashboards:
-      enabled: false
+      enabled: true
       namespace: grafana
       label: grafana_dashboard
