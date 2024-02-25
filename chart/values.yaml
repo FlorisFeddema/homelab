@@ -80,9 +80,6 @@ products:
   nodeFeatureDiscovery:
     deploy: true
 #    autoSync: true
-  powerdns:
-    deploy: true
-#    autoSync: true
   prometheusCrd:
     deploy: true
 #    autoSync: true
