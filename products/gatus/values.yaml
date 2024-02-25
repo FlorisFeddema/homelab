@@ -23,7 +23,7 @@ gatus:
 
   env:
     POSTGRES_DB: app
-    POSTGRES_HOST: gatus-data-rw.gatus
+    POSTGRES_HOST: gatus-postgres-rw.gatus
     POSTGRES_PORT: "5432"
     POSTGRES_USER: app
 
