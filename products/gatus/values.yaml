@@ -173,19 +173,6 @@ gatus:
             failure-threshold: 2
             success-threshold: 1
 
-      - name: powerdnsadmin
-        url: https://powerdns.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
-
       - name: teslamate
         url: https://teslamate.feddema.dev
         group: internal
@@ -351,19 +338,6 @@ gatus:
             failure-threshold: 2
             success-threshold: 1
 
-      - name: powerdnsadmin
-        url: https://powerdns.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
-
       - name: teslamate
         url: https://teslamate.feddema.dev
         group: external
@@ -419,21 +393,6 @@ gatus:
       # dns servers
       - name: adguard-dns-loadbalancer
         url: 192.168.100.222
-        group: dns
-        dns:
-          query-name: "test.feddema.dev"
-          query-type: "A"
-        conditions:
-          - "[BODY] == 31.201.249.143"
-          - "[DNS_RCODE] == NOERROR"
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 1
-            success-threshold: 1
-
-      - name: powerdns-dns-loadbalancer
-        url: 192.168.100.248
         group: dns
         dns:
           query-name: "test.feddema.dev"
