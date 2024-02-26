@@ -139,6 +139,7 @@ victoria-metrics-k8s-stack:
 
   prometheus-node-exporter:
     enabled: true
+    namespaceOverride: prometheus-node-exporter
     prometheus:
       monitor:
         enabled: true
