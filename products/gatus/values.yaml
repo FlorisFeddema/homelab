@@ -42,183 +42,183 @@ gatus:
         id: ${TELEGRAM_ID}
     endpoints:
 
-      # internal
-      - name: argocd
-        url: https://argocd.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # # internal
+      # - name: argocd
+      #   url: https://argocd.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: adguard
-        url: https://adguard.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: adguard
+      #   url: https://adguard.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: authentik
-        url: https://authentik.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: authentik
+      #   url: https://authentik.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: hubble
-        url: https://hubble.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: hubble
+      #   url: https://hubble.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: emqx
-        url: https://emqx.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: emqx
+      #   url: https://emqx.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: gatus
-        url: https://gatus.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: gatus
+      #   url: https://gatus.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: grafana
-        url: https://grafana.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: grafana
+      #   url: https://grafana.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: homeassistant
-        url: https://home.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: homeassistant
+      #   url: https://home.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: minio
-        url: https://minio.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: minio
+      #   url: https://minio.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: nextcloud
-        url: https://nextcloud.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: nextcloud
+      #   url: https://nextcloud.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: teslamate
-        url: https://teslamate.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: teslamate
+      #   url: https://teslamate.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: alertmanager
-        url: https://alert.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: alertmanager
+      #   url: https://alert.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: vmalert
-        url: https://vmalert.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
+      # - name: vmalert
+      #   url: https://vmalert.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 2
+      #       success-threshold: 1
 
-      - name: zigbee2mqtt
-        url: https://zigbee.feddema.dev
-        group: internal
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://10.96.0.99:53'
+      # - name: zigbee2mqtt
+      #   url: https://zigbee.feddema.dev
+      #   group: internal
+      #   conditions:
+      #     - '[STATUS] == 200'
+      #   client:
+      #     dns-resolver: 'udp://10.96.0.99:53'
 
         # external
       - name: argocd
