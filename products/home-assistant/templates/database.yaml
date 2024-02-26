@@ -1,9 +1,21 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: home-assistant-data
+  name: home-assistant-postgres
 spec:
   instances: 1
 
   storage:
     size: 5Gi
+
+{{/*  backup:*/}}
+{{/*    barmanObjectStore:*/}}
+{{/*      destinationPath: s3://pg-backup-home-assistant/*/}}
+{{/*      endpointURL: https://s3.minio.feddema.dev*/}}
+{{/*      s3Credentials:*/}}
+{{/*        accessKeyId:*/}}
+{{/*          name: minio-secret*/}}
+{{/*          key: MINIO_ACCESS_KEY*/}}
+{{/*        secretAccessKey:*/}}
+{{/*          name: minio-secret*/}}
+{{/*          key: MINIO_SECRET_KEY*/}}

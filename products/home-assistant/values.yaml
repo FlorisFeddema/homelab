@@ -92,7 +92,7 @@ config:
     homekit:
       name: Home Assistant Bridge
       mode: bridge
-      advertise_ip: 192.168.1.101
+      advertise_ip: !env_var NODE_IP
       port: 21064
       filter:
         exclude_entities:
