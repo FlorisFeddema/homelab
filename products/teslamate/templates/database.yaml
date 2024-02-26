@@ -1,9 +1,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: {{ template "teslamate.fullname" . }}-postgres
+  name: teslamate-postgres
 spec:
-  instances: {{ .Values.database.replicas }}
+  instances: 1
   postgresql:
     parameters:
       pgaudit.log: "all, -misc"
@@ -12,4 +12,17 @@ spec:
       pgaudit.log_relation: "on"
 
   storage:
-    size: {{ .Values.database.size }}
+    size: 5Gi
+
+{{/*  backup:*/}}
+{{/*    barmanObjectStore:*/}}
+{{/*      destinationPath: s3://pg-backup-teslamate/*/}}
+{{/*      endpointURL: https://s3.minio.feddema.dev*/}}
+{{/*      s3Credentials:*/}}
+{{/*        accessKeyId:*/}}
+{{/*          name: minio-secret*/}}
+{{/*          key: MINIO_ACCESS_KEY*/}}
+{{/*        secretAccessKey:*/}}
+{{/*          name: minio-secret*/}}
+{{/*          key: MINIO_SECRET_KEY*/}}
+
