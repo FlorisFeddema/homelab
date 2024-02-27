@@ -1,7 +1,7 @@
 products:
   adguard:
     deploy: true
-#    autoSync: true
+    autoSync: true
   argoCd:
     deploy: true
     namespace: argocd
@@ -17,7 +17,7 @@ products:
     deploy: true
     autoSync: true
   descheduler:
-    deploy: false
+    deploy: true
     autoSync: true
   emqx:
     deploy: true
@@ -54,6 +54,7 @@ products:
     autoSync: true
   intelDevicePluginsGpu:
     deploy: false
+    autoSync: true
     ignoreDifferences:
       - group: "deviceplugin.intel.com"
         kind: "GpuDevicePlugin"
@@ -61,7 +62,7 @@ products:
           - /spec/resourceManager
   kepler:
     deploy: false
-#    autoSync: true
+    autoSync: true
   loki:
     deploy: true
     autoSync: true
