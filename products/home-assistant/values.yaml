@@ -61,7 +61,7 @@ config:
       unit_system: metric
       temperature_unit: C
       currency: EUR
-      external_url: https://home.cloud.feddema.dev
+      external_url: https://home.feddema.dev
       customize: !include customize.yaml
       language: en
       country: NL
