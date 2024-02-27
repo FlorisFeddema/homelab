@@ -1,0 +1,10 @@
+etcd:
+  auth:
+    rbac:
+      enabled: true
+      allowNoneAuthentication: true
+
+    token:
+      enabled: false
+
+
