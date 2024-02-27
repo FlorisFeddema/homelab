@@ -5,11 +5,11 @@ metadata:
   name: backup-job
   namespace: longhorn-system
 spec:
-  cron: 0 */2 * * *
+  cron: {{ .Values.backups.schedule }}
   task: "backup"
   groups:
     - default
-  retain: 4
-  concurrency: 4
+  retain: {{ .Values.backups.retention }}
+  concurrency: {{ .Values.backups.concurrency }}
 {{ end }}
 

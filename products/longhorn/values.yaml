@@ -1,5 +1,8 @@
 backups:
-  enabled: false
+  enabled: true
+  schedule: "0 */2 * * *"
+  retention: 4
+  concurrency: 5
 
 longhorn:
   persistence:
@@ -11,14 +14,14 @@ longhorn:
     defaultReplicaAutoBalance: best-effort
 
   csi:
-    attacherReplicaCount: 1
-    provisionerReplicaCount: 1
-    resizerReplicaCount: 1
-    snapshotterReplicaCount: 1
+    attacherReplicaCount: 2
+    provisionerReplicaCount: 2
+    resizerReplicaCount: 2
+    snapshotterReplicaCount: 2
 
   defaultSettings:
     defaultReplicaCount: 2
-    backupTarget: s3://backups@default/
+    backupTarget: s3://datastore@default/
     backupTargetCredentialSecret: s3-credentials
     defaultLonghornStaticStorageClass: longhorn
     backupConcurrentLimit: 5
