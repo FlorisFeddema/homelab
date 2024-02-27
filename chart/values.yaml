@@ -7,106 +7,106 @@ products:
     namespace: argocd
   authentik:
     deploy: true
-#    autoSync: true
+    autoSync: true
   certManager:
     deploy: true
-#    autoSync: true
+    autoSync: true
   cilium:
     deploy: true
   cloudnativePg:
     deploy: true
-#    autoSync: true
+    autoSync: true
   descheduler:
     deploy: false
-#    autoSync: true
+    autoSync: true
   emqx:
     deploy: true
-#    autoSync: true
+    autoSync: true
   enphaseEnvoyPrometheusExporter:
     deploy: true
-#    autoSync: true
+    autoSync: true
   externalDns:
     deploy: true
-#    autoSync: true
+    autoSync: true
   falco:
     deploy: false
   falcoExporter:
     deploy: false
   gatus:
     deploy: true
-#    autoSync: true
+    autoSync: true
   genericDevicePlugin:
     deploy: true
-#    autoSync: true
+    autoSync: true
   grafana:
     deploy: true
-#    autoSync: true
+    autoSync: true
   grafanaDashboards:
     deploy: true
-#    autoSync: true
+    autoSync: true
     namespace: grafana
     serverSideApply: true
   homeAssistant:
     deploy: true
-#    autoSync: true
+    autoSync: true
   ingressNginx:
     deploy: true
-#    autoSync: true
+    autoSync: true
   intelDevicePluginsGpu:
-    deploy: true
+    deploy: false
     ignoreDifferences:
       - group: "deviceplugin.intel.com"
         kind: "GpuDevicePlugin"
         jsonPointers:
           - /spec/resourceManager
   kepler:
-    deploy: true
+    deploy: false
 #    autoSync: true
   loki:
     deploy: true
-#    autoSync: true
+    autoSync: true
   longhorn:
     deploy: true
     namespace: longhorn-system
   metricsServer:
     deploy: true
-#    autoSync: true
+    autoSync: true
   minio:
     deploy: true
-#    autoSync: true
+    autoSync: true
   nextcloud:
     deploy: true
-#    autoSync: true
+    autoSync: true
   nodeFeatureDiscovery:
     deploy: true
-#    autoSync: true
+    autoSync: true
   prometheusCrd:
     deploy: true
-#    autoSync: true
+    autoSync: true
     namespace: default
     serverSideApply: true
   promtail:
     deploy: true
-#    autoSync: true
+    autoSync: true
   sealedSecrets:
     deploy: true
-#    autoSync: true
+    autoSync: true
   smartmeterGatewayPrometheusExporter:
     deploy: true
 #    autoSync: true
   teslamate:
     deploy: true
-#    autoSync: true
+    autoSync: true
   tetragon:
     deploy: true
-#    autoSync: true
+    autoSync: true
   victoriaMetrics:
     deploy: true
-#    autoSync: true
+    autoSync: true
     serverSideApply: true
   vpa:
     deploy: true
-#    autoSync: true
+    autoSync: true
   zigbee2mqtt:
     deploy: true
     nameOverride: zigbee2mqtt
