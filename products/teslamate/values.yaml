@@ -17,7 +17,7 @@ config:
     port: 5432
 
   mqtt:
-    host: mqtt.cloud.feddema.dev
+    host: mqtt.feddema.dev
     user: teslamate
     port: 8883
     tls: true
