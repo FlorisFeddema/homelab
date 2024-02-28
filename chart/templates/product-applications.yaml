@@ -5,8 +5,8 @@ kind: Application
 metadata:
   name: {{ include "base.productName" (dict "key" $k "value" $v) }}
   namespace: argocd
-{{/*  finalizers:*/}}
-{{/*    - resources-finalizer.argocd.argoproj.io*/}}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   {{ if $v.autoSync}}
   project: always-sync
