@@ -30,7 +30,7 @@ cluster:
       hostname: mqtt.feddema.dev
 
   certificate:
-    domain: mqtt.cloud.feddema.dev
+    domain: mqtt.feddema.dev
     issuer: letsencrypt-dns
 
   ingress:
