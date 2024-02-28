@@ -8,7 +8,7 @@ metadata:
 spec:
   project: always-sync
   source:
-    repoURL: git@github.com:FlorisFeddema/homelab.git
+    repoURL: https://github.com/FlorisFeddema/homelab
     targetRevision: HEAD
     path: chart
 
