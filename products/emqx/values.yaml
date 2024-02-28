@@ -27,7 +27,7 @@ cluster:
     service:
       enabled: true
       type: LoadBalancer
-      hostname: mqtt.cloud.feddema.dev
+      hostname: mqtt.feddema.dev
 
   certificate:
     domain: mqtt.cloud.feddema.dev
