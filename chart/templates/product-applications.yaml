@@ -14,7 +14,7 @@ spec:
   project: no-sync
   {{ end }}
   source:
-    repoURL: https://github.com/FlorisFeddema/homelab
+    repoURL: https://github.com/FlorisFeddema/homelab.git
     targetRevision: HEAD
     path: products/{{ include "base.productName" (dict "key" $k "value" $v) }}
   destination:
