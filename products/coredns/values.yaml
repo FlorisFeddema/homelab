@@ -1,7 +1,7 @@
 etcd:
   auth:
     rbac:
-      enabled: true
+      enabled: false
       allowNoneAuthentication: true
 
     token:
