@@ -7,4 +7,6 @@ etcd:
     token:
       enabled: false
 
-
+  peer:
+    secureTransport: true
+    useAutoTLS: true
