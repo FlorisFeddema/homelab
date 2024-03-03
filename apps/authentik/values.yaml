@@ -1,10 +1,23 @@
-authentik:
-  global:
-    revisionHistoryLimit: 0
+global:
+  revisionHistoryLimit: 0
 
+  volumes:
+  - name: postgres-credentials
+    secret:
+      secretName: authentik-data-app
+  volumeMounts:
+    - name: postgres-credentials
+      mountPath: /postgres-credentials
+      readOnly: true
+  env:
+    - name: AUTHENTIK_SECRET_KEY
+      valueFrom:
+        secretKeyRef:
+          name: authentik-secret
+          key: secretKey
+
+authentik:
   authentik:
-    error_reporting:
-      enabled: false
     postgresql:
       host: env://AUTHENTIK_DATA_RW_SERVICE_HOST
       name: file:///postgres-credentials/dbname
@@ -25,30 +38,6 @@ authentik:
       tls:
         - hosts:
           - authentik.mobrockers.com
-
-    volumes:
-      - name: postgres-credentials
-        secret:
-          secretName: authentik-data-app
-    volumeMounts:
-      - name: postgres-credentials
-        mountPath: /postgres-credentials
-        readOnly: true
-    envValueFrom:
-      AUTHENTIK_SECRET_KEY:
-        secretKeyRef:
-          key: secretKey
-          name: authentik-secret
-
-  worker:
-    volumes:
-      - name: postgres-credentials
-        secret:
-          secretName: authentik-data-app
-    volumeMounts:
-      - name: postgres-credentials
-        mountPath: /postgres-credentials
-        readOnly: true
 
   redis:
     enabled: true
