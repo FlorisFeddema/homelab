@@ -4,7 +4,8 @@ database:
 
 authentik:
   global:
-    envValueFrom:
+    revisionHistoryLimit: 0
+    env:
       AUTHENTIK_SECRET_KEY:
         secretKeyRef:
           key: secretKey
