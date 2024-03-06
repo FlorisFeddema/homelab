@@ -66,19 +66,6 @@ config:
       language: en
       country: NL
       packages: !include_dir_named packages
-
-    proximity:
-      home_tesla:
-        zone: home
-        devices:
-          - device_tracker.tesla_location
-        tolerance: 10
-        unit_of_measurement: km
-
-    http:
-      use_x_forwarded_for: true
-      trusted_proxies:
-        - 10.0.0.0/8
     
     afvalbeheer:
       wastecollector: MijnAfvalwijzer
@@ -118,12 +105,6 @@ config:
           - device_tracker.tesla*
           - sensor.dsmr_*
     
-    recorder:
-      db_url: !secret recorder_db_url
-    
-    auth_header:
-      username_header: X-authentik-username
-  
     tts:
       - platform: google_translate
 
