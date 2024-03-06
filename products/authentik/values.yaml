@@ -29,7 +29,7 @@ authentik:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-dns
       hosts:
-        - host: authentik.feddema.dev
+        - authentik.feddema.dev
       tls:
         - secretName: authentik-tls
           hosts:
