@@ -3,28 +3,37 @@ database:
   size: 5Gi
 
 authentik:
-  replicas: 1
-  securityContext: { }
-  containerSecurityContext: { }
+  global:
+    envValueFrom:
+      AUTHENTIK_SECRET_KEY:
+        secretKeyRef:
+          key: secretKey
+          name: authentik-secret
+      AUTHENTIK_POSTGRESQL__PASSWORD:
+        secretKeyRef:
+          key: databasePassword
+          name: authentik-secret
 
   worker:
     replicas: 1
-    securityContext: { }
-    containerSecurityContext: { }
 
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    hosts:
-      - host: authentik.feddema.dev
-        paths:
-          - path: "/"
-            pathType: Prefix
-    tls:
-      - secretName: authentik-tls
-        hosts:
-          - authentik.feddema.dev
+  server:
+    replicas: 1
+
+    metrics:
+      serviceMonitor:
+        enabled: true
+
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      hosts:
+        - host: authentik.feddema.dev
+      tls:
+        - secretName: authentik-tls
+          hosts:
+            - authentik.feddema.dev
 
   authentik:
     log_level: info
@@ -37,25 +46,10 @@ authentik:
     redis:
       host: "{{ .Release.Name }}-redis-master"
 
-  envValueFrom:
-    AUTHENTIK_SECRET_KEY:
-      secretKeyRef:
-        key: secretKey
-        name: authentik-secret
-    AUTHENTIK_POSTGRESQL__PASSWORD:
-      secretKeyRef:
-        key: databasePassword
-        name: authentik-secret
-
-  resources:
-    server: { }
-    worker: { }
 
   prometheus:
-    serviceMonitor:
-      create: true
     rules:
-      create: true
+      enabled: true
 
   redis:
     enabled: true
