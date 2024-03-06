@@ -6,14 +6,16 @@ authentik:
   global:
     revisionHistoryLimit: 0
     env:
-      AUTHENTIK_SECRET_KEY:
-        secretKeyRef:
-          key: secretKey
-          name: authentik-secret
-      AUTHENTIK_POSTGRESQL__PASSWORD:
-        secretKeyRef:
-          key: databasePassword
-          name: authentik-secret
+      - name: AUTHENTIK_SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            key: secretKey
+            name: authentik-secret
+      - name: AUTHENTIK_POSTGRESQL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: databasePassword
+            name: authentik-secret
 
   worker:
     replicas: 1
