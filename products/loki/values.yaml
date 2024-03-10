@@ -63,7 +63,7 @@ loki:
     legacyReadTarget: false
     resources: { }
     persistence:
-      size: 10Gi
+      size: 25Gi
     affinity: { }
     extraArgs:
       - '-config.expand-env=true'
@@ -75,7 +75,7 @@ loki:
     replicas: 1
     resources: { }
     persistence:
-      size: 10Gi
+      size: 25Gi
       enableStatefulSetAutoDeletePVC: false
     affinity: { }
     extraArgs:
