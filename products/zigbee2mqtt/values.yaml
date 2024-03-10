@@ -13,6 +13,9 @@ resources:
   requests:
     device.local/zigbee: 1
 
+strategy:
+  type: Recreate
+
 podSecurityContext:
 #  runAsUser: 1001
 #  runAsGroup: 1001

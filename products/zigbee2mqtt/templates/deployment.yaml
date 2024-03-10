@@ -10,8 +10,7 @@ metadata:
 spec:
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   replicas: {{ .Values.replicas }}
-  strategy:
-    type: Recreate
+  strategy: {{ toYaml .Values.strategy | nindent 4 }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "zigbee2mqtt.name" . }}
