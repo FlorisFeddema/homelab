@@ -7,6 +7,9 @@ image:
 
 resources: {}
 
+strategy:
+  type: Recreate
+
 config:
   timezone: 'Europe/Amsterdam'
 
