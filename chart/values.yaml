@@ -81,6 +81,9 @@ products:
   nodeFeatureDiscovery:
     deploy: true
     autoSync: true
+  powerdns:
+    deploy: true
+    autoSync: true
   prometheusCrd:
     deploy: true
     autoSync: true
@@ -93,8 +96,8 @@ products:
     deploy: true
     autoSync: true
   smartmeterGatewayPrometheusExporter:
-    deploy: true
-#    autoSync: true
+    deploy: false
+    autoSync: true
   teslamate:
     deploy: true
     autoSync: true
@@ -111,4 +114,4 @@ products:
   zigbee2mqtt:
     deploy: true
     nameOverride: zigbee2mqtt
-#    autoSync: true
+    autoSync: true
