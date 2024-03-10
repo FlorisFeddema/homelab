@@ -1,15 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: {{ template "powerdns.name" . }}-postgres
+  name: {{ template "powerdns.name" . }}-auth-postgres
 spec:
-  instances: {{ .Values.admin.database.replicas }}
-  postgresql:
-    parameters:
-      pgaudit.log: "all, -misc"
-      pgaudit.log_catalog: "off"
-      pgaudit.log_parameter: "on"
-      pgaudit.log_relation: "on"
-
+  instances: {{ .Values.auth.database.replicas }}
   storage:
-    size: {{ .Values.admin.database.size }}
+    size: {{ .Values.auth.database.size }}

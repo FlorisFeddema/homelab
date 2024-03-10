@@ -4,12 +4,5 @@ metadata:
   name: {{ template "powerdns.name" . }}-admin-postgres
 spec:
   instances: {{ .Values.admin.database.replicas }}
-  postgresql:
-    parameters:
-      pgaudit.log: "all, -misc"
-      pgaudit.log_catalog: "off"
-      pgaudit.log_parameter: "on"
-      pgaudit.log_relation: "on"
-
   storage:
     size: {{ .Values.admin.database.size }}

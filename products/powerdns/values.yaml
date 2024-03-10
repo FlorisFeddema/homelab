@@ -9,6 +9,10 @@ auth:
     # https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/
     clusterIP: 10.96.0.100
 
+  database:
+    replicas: 3
+    size: 5Gi
+
   config:
     logLevel: 4
     defaultTtl: 3600
@@ -18,7 +22,7 @@ auth:
   primary:
     resources: {}
     postgres:
-      host: 'powerdns-postgres-rw'
+      host: 'powerdns-postgres-auth-rw'
       port: 5432
       databaseName: 'app'
       user: 'app'
@@ -31,9 +35,9 @@ auth:
 
   secondary:
     resources: {}
-    replicas: 1
+    replicas: 3
     postgres:
-      host: 'powerdns-postgres-rw'
+      host: 'powerdns-postgres-auth-ro'
       port: 5432
       databaseName: 'app'
       user: 'app'
@@ -46,7 +50,7 @@ auth:
 
 recursor:
   resources: {}
-  replicas: 1
+  replicas: 3
 
   service:
     # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
