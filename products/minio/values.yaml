@@ -1,5 +1,4 @@
 minio:
-  mode: standalone
   existingSecret: "minio-credentials"
 
   replicas: 3
