@@ -1,8 +1,0 @@
-apiVersion: postgresql.cnpg.io/v1
-kind: Cluster
-metadata:
-  name: {{ template "powerdns.name" . }}-auth-postgres
-spec:
-  instances: {{ .Values.auth.database.replicas }}
-  storage:
-    size: {{ .Values.auth.database.size }}
