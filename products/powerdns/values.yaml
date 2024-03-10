@@ -60,7 +60,7 @@ recursor:
   image:
     registry: docker.io
     repository: powerdns/pdns-recursor-49
-    tag: 4.9.3
+    tag: 4.9.4
 
   config:
     logLevel: 4
