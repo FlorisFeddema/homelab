@@ -66,7 +66,7 @@ cilium:
         resources: { }
 
       ingress:
-        enabled: false
+        enabled: true
         annotations:
           nginx.ingress.kubernetes.io/auth-url: |-
             http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
