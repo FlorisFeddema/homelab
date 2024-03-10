@@ -165,20 +165,7 @@ gatus:
       #       send-on-resolved: true
       #       failure-threshold: 2
       #       success-threshold: 1
-#
-#      - name: powerdnsadmin
-#        url: https://powerdns.feddema.dev
-#        group: internal
-#        conditions:
-#          - '[STATUS] == 200'
-#        client:
-#          dns-resolver: 'udp://10.96.0.99:53'
-#        alerts:
-#          - type: telegram
-#            send-on-resolved: true
-#            failure-threshold: 2
-#            success-threshold: 1
-#
+
       # - name: teslamate
       #   url: https://teslamate.feddema.dev
       #   group: internal
@@ -333,19 +320,6 @@ gatus:
 
       - name: nextcloud
         url: https://nextcloud.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 2
-            success-threshold: 1
-
-      - name: nextcloud
-        url: https://powerdns.feddema.dev
         group: external
         conditions:
           - '[STATUS] == 200'
