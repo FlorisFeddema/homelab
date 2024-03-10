@@ -87,7 +87,7 @@ victoria-metrics-k8s-stack:
       - alert.feddema.dev
 
       tls:
-      - secretName: alert-tls
+      - secretName: alertmanager-tls
         hosts:
           - alert.feddema.dev
 
@@ -111,7 +111,7 @@ victoria-metrics-k8s-stack:
       - vmalert.feddema.dev
 
       tls:
-      - secretName: alert-tls
+      - secretName: vmalert-tls
         hosts:
           - vmalert.feddema.dev
 
