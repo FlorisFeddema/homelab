@@ -50,7 +50,7 @@ loki:
     replicas: 1
     resources: { }
     persistence:
-      size: 10Gi
+      size: 25Gi
     affinity: { }
     extraArgs:
       - '-config.expand-env=true'
