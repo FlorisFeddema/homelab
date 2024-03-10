@@ -2,19 +2,10 @@ minio:
   mode: standalone
   existingSecret: "minio-credentials"
 
-  drivesPerNode: 1
-  replicas: 1
-  pools: 1
+  replicas: 3
 
   persistence:
-    enabled: true
-    accessMode: ReadWriteOnce
     size: 50Gi
-
-  service:
-    type: ClusterIP
-    clusterIP: ~
-    port: "9000"
 
   ingress:
     enabled: true
@@ -24,7 +15,6 @@ minio:
       nginx.ingress.kubernetes.io/proxy-body-size: "0"
       nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-    path: /
     hosts:
       - s3.minio.feddema.dev
     tls:
@@ -37,7 +27,6 @@ minio:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    path: /
     hosts:
       - minio.feddema.dev
     tls:
@@ -47,7 +36,7 @@ minio:
 
   resources:
     requests:
-      memory: 256Mi
+      memory: 512Mi
       cpu: 50m
 
   users:
@@ -61,26 +50,9 @@ minio:
       policy: none
       purge: false
       versioning: false
-    - name: pg-backup-home-assistant
-      policy: none
-      purge: false
-      versioning: false
-    - name: pg-backup-authentik
-      policy: none
-      purge: false
-      versioning: false
-    - name: pg-backup-nextcloud
-      policy: none
-      purge: false
-      versioning: false
-    - name: pg-backup-teslamate
-      policy: none
-      purge: false
-      versioning: false
-    - name: pg-backup-gatus
-      policy: none
-      purge: false
-      versioning: false
+
+  customCommands:
+    - command: mc ilm rule add --noncurrent-expire-days 7 myminio/loki-chunks
 
   metrics:
     serviceMonitor:
