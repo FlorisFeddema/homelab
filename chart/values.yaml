@@ -16,6 +16,9 @@ products:
   cloudnativePg:
     deploy: true
     autoSync: true
+  coredns:
+    deploy: true
+    autoSync: true
   descheduler:
     deploy: true
     autoSync: true
