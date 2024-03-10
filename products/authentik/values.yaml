@@ -1,5 +1,5 @@
 database:
-  replicas: 1
+  replicas: 3
   size: 5Gi
 
 authentik:
@@ -18,10 +18,10 @@ authentik:
             name: authentik-secret
 
   worker:
-    replicas: 1
+    replicas: 3
 
   server:
-    replicas: 1
+    replicas: 3
 
     metrics:
       serviceMonitor:
