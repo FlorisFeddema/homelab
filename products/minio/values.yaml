@@ -51,7 +51,7 @@ minio:
       versioning: false
 
   customCommands:
-    - command: ilm rule add --expire-days 7 myminio/loki-chunks
+    - command: ilm rule add --noncurrent-expire-days 7 myminio/loki-chunks
 
   metrics:
     serviceMonitor:
