@@ -1,0 +1,12 @@
+{{ if .Values.admin.saml.enabled }}
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: {{ .Values.admin.saml.name }}
+spec:
+  encryptedData:
+    saml.crt: {{ .Values.admin.saml.sealedCert }}
+  template:
+    metadata:
+      name: {{ .Values.admin.saml.name }}
+{{ end }}

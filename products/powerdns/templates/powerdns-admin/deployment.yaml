@@ -1,0 +1,59 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ template "powerdns.fullname" . }}-admin
+  labels:
+    app.kubernetes.io/name: {{ template "powerdns.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "powerdnsadmin"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.admin.replicas }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "powerdns.name" . }}-admin
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: "powerdnsadmin"
+      {{- include "labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ template "powerdns.name" . }}-admin
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: "powerdnsadmin"
+        {{- include "labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: powerdnsadmin
+          image: "{{ .Values.admin.image.registry }}/{{ .Values.admin.image.repository }}:{{ .Values.admin.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name:  {{ template "powerdns.name" . }}-admin-config
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.secret.name }}
+                  key: secretKey
+            - name: SQLALCHEMY_DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.admin.secret.name }}
+                  key: databaseConnectionString
+          {{ if .Values.admin.saml.enabled -}}
+          volumeMounts:
+            - mountPath: ./certs
+              name: saml-certificates
+          {{- end }}
+          resources: {{ toYaml .Values.admin.resources | nindent 12 }}
+      {{ if .Values.admin.saml.enabled -}}
+      volumes:
+        - name: saml-certificates
+          secret:
+            secretName: {{ .Values.admin.saml.name }}
+      {{- end }}
