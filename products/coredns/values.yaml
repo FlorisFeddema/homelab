@@ -1,0 +1,39 @@
+etcd:
+  auth:
+    rbac:
+      enabled: false
+      allowNoneAuthentication: true
+
+    token:
+      enabled: false
+
+    peer:
+      secureTransport: true
+      useAutoTLS: true
+
+  replicaCount: 3
+
+  initialClusterToken: "etcd-cluster-coredns"
+  logLevel: "warn"
+
+  resources: {}
+
+  startupProbe:
+    enabled: true
+
+  persistence:
+    size: 5Gi
+
+  networkPolicy:
+    enabled: false
+
+  metrics:
+    enabled: true
+    useSeparateEndpoint: true
+    podMonitor:
+      enabled: true
+      namespace: coredns
+    prometheusRule:
+      enabled: true
+      namespace: coredns
+
