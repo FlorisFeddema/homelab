@@ -12,13 +12,6 @@ gatus:
 
   resources: {}
 
-  persistence:
-    enabled: true
-    size: 1Gi
-    mountPath: /data
-    accessModes:
-      - ReadWriteOnce
-
   secrets: true
 
   env:
