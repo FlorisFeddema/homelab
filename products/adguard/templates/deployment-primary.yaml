@@ -10,6 +10,7 @@ metadata:
 spec:
   revisionHistoryLimit: 0
   replicas: {{ .Values.primary.replicas }}
+  strategy: {{ toYaml .Values.primary.strategy | nindent 4 }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
