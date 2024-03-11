@@ -2,8 +2,7 @@ etcd:
 
   auth:
     rbac:
-      enabled: true
-      create: true
+      enabled: false
 
     token:
       enabled: false
