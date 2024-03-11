@@ -12,4 +12,6 @@ spec:
     name: coredns-issuer
     kind: Issuer
     group: cert-manager.io
-
+  dnsNames:
+    - "*.coredns-etcd.coredns.svc.cluster.local"
+    - "*.coredns-etcd-headless.coredns.svc.cluster.local"
