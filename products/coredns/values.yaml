@@ -2,14 +2,15 @@ etcd:
   auth:
     rbac:
       enabled: false
-      allowNoneAuthentication: true
 
     token:
       enabled: false
 
     peer:
       secureTransport: true
-      useAutoTLS: true
+      useAutoTLS: false
+      existingSecret: "coredns-etcd-peer"
+      enableAuthentication: true
 
   replicaCount: 3
 
@@ -37,3 +38,35 @@ etcd:
       enabled: true
       namespace: coredns
 
+#coredns:
+#  replicaCount: 3
+#
+#  resources: {}
+#
+#  prometheus:
+#    monitor:
+#      enabled: true
+#
+#  service:
+#    clusterIP: '10.96.0.100'
+#
+#  isClusterService: false
+#
+#  servers:
+#    - zones:
+#        - zone: .
+#      port: 53
+#      plugins:
+#        - name: errors
+#        - name: health
+#          configBlock: |
+#            lameduck 5s
+#        - name: ready
+#        - prometheus:
+#          parameters: 0.0.0.0:9153
+#        - name: forward
+#        - name: loop
+#        - name: reload
+#        - name: loadbalance
+#        - name: cache
+#          parameters: 30
