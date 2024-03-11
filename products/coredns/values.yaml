@@ -9,12 +9,8 @@ etcd:
 
     peer:
       secureTransport: true
-      useAutoTLS: false
-      existingSecret: "coredns-etcd-peer"
+      useAutoTLS: true
       enableAuthentication: false
-      certFilename: tls.crt
-      certKeyFilename: tls.key
-      caFilename: ca.crt
 
   replicaCount: 3
 
