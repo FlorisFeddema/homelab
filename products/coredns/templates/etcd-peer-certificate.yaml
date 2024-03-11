@@ -4,6 +4,7 @@ metadata:
   name:  coredns-etcd-peer
 spec:
   isCA: false
+  commonName: coredns-etcd-peer
   secretName: coredns-etcd-peer
   usages:
     - server auth
