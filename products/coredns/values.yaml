@@ -10,7 +10,7 @@ etcd:
     peer:
       secureTransport: true
       useAutoTLS: true
-      enableAuthentication: false
+      enableAuthentication: true
 
   replicaCount: 3
 
