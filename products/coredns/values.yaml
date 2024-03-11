@@ -10,7 +10,7 @@ etcd:
       secureTransport: true
       useAutoTLS: false
       existingSecret: "coredns-etcd-peer"
-      enableAuthentication: true
+      enableAuthentication: false
       certFilename: tls.crt
       certKeyFilename: tls.key
       caFilename: ca.crt
