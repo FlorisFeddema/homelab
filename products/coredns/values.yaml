@@ -12,6 +12,7 @@ etcd:
       useAutoTLS: true
       enableAuthentication: false
 
+  removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
   replicaCount: 3
 
   initialClusterToken: "etcd-cluster-coredns"
@@ -38,35 +39,41 @@ etcd:
       enabled: true
       namespace: coredns
 
-#coredns:
-#  replicaCount: 3
-#
-#  resources: {}
-#
-#  prometheus:
-#    monitor:
-#      enabled: true
-#
-#  service:
-#    clusterIP: '10.96.0.100'
-#
-#  isClusterService: false
-#
-#  servers:
-#    - zones:
-#        - zone: .
-#      port: 53
-#      plugins:
-#        - name: errors
-#        - name: health
-#          configBlock: |
-#            lameduck 5s
-#        - name: ready
-#        - prometheus:
-#          parameters: 0.0.0.0:9153
-#        - name: forward
-#        - name: loop
-#        - name: reload
-#        - name: loadbalance
-#        - name: cache
-#          parameters: 30
+coredns:
+  replicaCount: 3
+
+  resources: {}
+
+  prometheus:
+    monitor:
+      enabled: true
+
+  service:
+    clusterIP: '10.96.0.100'
+
+  isClusterService: false
+
+  servers:
+    - zones:
+        - zone: .
+      port: 53
+      plugins:
+        - name: errors
+        - name: health
+          configBlock: |
+            lameduck 5s
+        - name: ready
+        - prometheus:
+          parameters: 0.0.0.0:9153
+        - name: forward
+          parameters: . 1.1.1.1 8.8.8.8
+        - name: loop
+        - name: reload
+        - name: loadbalance
+        - name: cache
+          parameters: 30
+        - name: cancel
+        - name: prometheus
+          parameters: 0.0.0.0:9153
+        - name: etcd
+          parameters: coredns-etcd:2379
