@@ -72,3 +72,4 @@ coredns:
         - name: etcd
           configBlock:
             endpoint coredns-etcd:2379
+        - name: log
