@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: coredns-external
+  annotations:
+    'io.cilium/lb-ipam-ips': 192.168.102.11
+spec:
+  type: LoadBalancer
+  ports:
+    - name: udp-53
+      port: 53
+      protocol: UDP
+      targetPort: 53
+    - name: tcp-53
+      port: 53
+      protocol: TCP
+      targetPort: 53
+  selector:
+    app.kubernetes.io/instance: coredns
+    app.kubernetes.io/name: coredns
