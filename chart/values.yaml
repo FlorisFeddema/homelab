@@ -18,7 +18,7 @@ products:
     autoSync: true
   coredns:
     deploy: true
-    autoSync: false
+    autoSync: true
   descheduler:
     deploy: true
     autoSync: true
