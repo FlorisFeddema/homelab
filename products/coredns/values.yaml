@@ -63,17 +63,15 @@ coredns:
           configBlock: |
             lameduck 5s
         - name: ready
-        - prometheus:
-          parameters: 0.0.0.0:9153
         - name: forward
-          parameters: . 1.1.1.1 8.8.8.8
+          parameters: '. 1.1.1.1 8.8.8.8'
         - name: loop
         - name: reload
         - name: loadbalance
         - name: cache
-          parameters: 30
+          parameters: '30'
         - name: cancel
         - name: prometheus
-          parameters: 0.0.0.0:9153
+          parameters: '0.0.0.0:9153'
         - name: etcd
-          parameters: coredns-etcd:2379
+          parameters: 'coredns-etcd:2379'
