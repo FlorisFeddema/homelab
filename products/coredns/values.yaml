@@ -5,8 +5,9 @@ etcd:
     peer:
       secureTransport: true
       useAutoTLS: true
+
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
-#  initialClusterState: "existing"
+  initialClusterState: "existing"
 
   replicaCount: 3
 
