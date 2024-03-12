@@ -45,6 +45,8 @@ coredns:
   resources: {}
 
   prometheus:
+    service:
+      enabled: true
     monitor:
       enabled: true
 
