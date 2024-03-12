@@ -1,17 +1,4 @@
 etcd:
-
-  auth:
-    rbac:
-      enabled: false
-
-    token:
-      enabled: false
-
-    peer:
-      secureTransport: true
-      useAutoTLS: true
-      enableAuthentication: false
-
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
   replicaCount: 3
 
