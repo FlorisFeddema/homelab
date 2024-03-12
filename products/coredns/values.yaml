@@ -2,6 +2,10 @@ etcd:
   auth:
     rbac:
       create: false
+    token:
+      privateKey:
+        filename: jwt-token.pem
+        existingSecret: "coredns-etcd-jwt-token"
     peer:
       secureTransport: true
       useAutoTLS: true
@@ -56,7 +60,7 @@ coredns:
       plugins:
         - name: errors
         - name: health
-          configBlock: |
+          configBlock:
             lameduck 5s
         - name: ready
         - name: forward
