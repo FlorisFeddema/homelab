@@ -82,7 +82,7 @@ coredns:
           parameters: '0.0.0.0:9153'
         - name: etcd
           configBlock:
+            fallthrough
             endpoint coredns-etcd:2379
-             fallthrough
         - name: forward
           parameters: '. /etc/resolv.conf'
