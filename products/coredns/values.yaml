@@ -55,6 +55,12 @@ coredns:
 
   isClusterService: false
 
+  livenessProbe:
+    initialDelaySeconds: 20
+
+  readinessProbe:
+    initialDelaySeconds: 20
+
   servers:
     - zones:
         - zone: .
@@ -78,4 +84,4 @@ coredns:
           configBlock:
             endpoint coredns-etcd:2379
         - name: forward
-          parameters: '. 1.1.1.1'
+          parameters: '1.1.1.1'
