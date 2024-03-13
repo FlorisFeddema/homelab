@@ -84,4 +84,4 @@ coredns:
           configBlock:
             endpoint coredns-etcd:2379
         - name: forward
-          parameters: '1.1.1.1'
+          parameters: '. /etc/resolv.conf'
