@@ -85,4 +85,4 @@ coredns:
             fallthrough
             endpoint coredns-etcd:2379
         - name: forward
-          parameters: '. /etc/resolv.conf'
+          parameters: '. 1.1.1.1'
