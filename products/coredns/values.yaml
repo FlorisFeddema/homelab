@@ -60,13 +60,12 @@ coredns:
         - zone: .
       port: 53
       plugins:
+        - name: log
         - name: errors
         - name: health
           configBlock:
             lameduck 5s
         - name: ready
-        - name: forward
-          parameters: '. 1.1.1.1 8.8.8.8'
         - name: loop
         - name: reload
         - name: loadbalance
@@ -78,4 +77,5 @@ coredns:
         - name: etcd
           configBlock:
             endpoint coredns-etcd:2379
-        - name: log
+        - name: forward
+          parameters: '. 1.1.1.1'
