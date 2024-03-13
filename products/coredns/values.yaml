@@ -73,10 +73,8 @@ coredns:
             lameduck 5s
         - name: ready
         - name: loop
-        - name: reload
+#        - name: reload # Pods get configmap sha
         - name: loadbalance
-        - name: cache
-          parameters: '30'
         - name: cancel
         - name: prometheus
           parameters: '0.0.0.0:9153'
@@ -85,4 +83,9 @@ coredns:
             fallthrough
             endpoint coredns-etcd:2379
         - name: forward
-          parameters: '. 1.1.1.1'
+          parameters: '. tls://9.9.9.10 tls://149.112.112.10'
+          configBlock: |
+            policy sequential
+            tls_servername dns.quad9.net
+        - name: cache
+          parameters: '30'
