@@ -80,8 +80,9 @@ coredns:
         - name: cancel
         - name: prometheus
           parameters: '0.0.0.0:9153'
-#        - name: etcd
-#          configBlock:
-#            endpoint coredns-etcd:2379
+        - name: etcd
+          configBlock:
+            endpoint coredns-etcd:2379
+             fallthrough
         - name: forward
           parameters: '. /etc/resolv.conf'
