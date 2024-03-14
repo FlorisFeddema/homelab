@@ -46,7 +46,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: adguard
@@ -59,7 +59,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: authentik
@@ -72,7 +72,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: hubble
@@ -85,7 +85,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: emqx
@@ -98,7 +98,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: gatus
@@ -111,7 +111,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: grafana
@@ -124,7 +124,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: homeassistant
@@ -137,7 +137,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: minio
@@ -150,7 +150,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: nextcloud
@@ -163,7 +163,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: teslamate
@@ -176,7 +176,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: alertmanager
@@ -189,7 +189,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: vmalert
@@ -202,7 +202,7 @@ gatus:
       #   alerts:
       #     - type: telegram
       #       send-on-resolved: true
-      #       failure-threshold: 2
+      #       failure-threshold: 4
       #       success-threshold: 1
 
       # - name: zigbee2mqtt
@@ -212,6 +212,11 @@ gatus:
       #     - '[STATUS] == 200'
       #   client:
       #     dns-resolver: 'udp://10.96.0.99:53'
+      #   alerts:
+      #     - type: telegram
+      #       send-on-resolved: true
+      #       failure-threshold: 4
+      #       success-threshold: 1
 
         # external
       - name: argocd
@@ -221,6 +226,11 @@ gatus:
           - '[STATUS] == 200'
         client:
           dns-resolver: 'udp://1.1.1.1:53'
+        alerts:
+          - type: telegram
+            send-on-resolved: true
+            failure-threshold: 4
+            success-threshold: 1
       - name: adguard
         url: https://adguard.feddema.dev
         group: external
@@ -228,6 +238,11 @@ gatus:
           - '[STATUS] == 200'
         client:
           dns-resolver: 'udp://1.1.1.1:53'
+        alerts:
+          - type: telegram
+            send-on-resolved: true
+            failure-threshold: 4
+            success-threshold: 1
       - name: authentik
         url: https://authentik.feddema.dev
         group: external
@@ -238,7 +253,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: hubble
@@ -251,7 +266,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: emqx
@@ -264,7 +279,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: gatus
@@ -277,7 +292,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: grafana
@@ -290,7 +305,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: homeassistant
@@ -303,7 +318,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
       - name: minio
         url: https://minio.feddema.dev
@@ -315,7 +330,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: nextcloud
@@ -328,7 +343,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: teslamate
@@ -341,7 +356,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: alertmanager
@@ -354,7 +369,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: vmalert
@@ -367,7 +382,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       - name: zigbee2mqtt
@@ -380,7 +395,7 @@ gatus:
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 4
             success-threshold: 1
 
       # dns servers
