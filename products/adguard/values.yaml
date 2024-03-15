@@ -23,6 +23,8 @@ service:
   # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
   # https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/
   clusterIP: 10.96.0.99
+  annotations:
+    'io.cilium/lb-ipam-ips': 192.168.102.11
 
 ingress:
   enabled: true
