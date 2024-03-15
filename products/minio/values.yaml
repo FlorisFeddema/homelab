@@ -39,20 +39,14 @@ minio:
       cpu: 50m
 
   users:
-    - accessKey: apps
-      existingSecret: apps-user-credentials
-      existingSecretKey: secretKey
-      policy: readwrite
-
-  svcaccts:
     - accessKey: loki
       existingSecret: loki-svc-credentials
       existingSecretKey: secretKey
-      user: apps
+      policy: readwrite
     - accessKey: cnpg
       existingSecret: cnpg-svc-credentials
       existingSecretKey: secretKey
-      user: apps
+      policy: readwrite
 
   buckets:
     - name: loki-chunks
