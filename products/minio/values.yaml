@@ -7,7 +7,7 @@ minio:
     size: 50Gi
 
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
