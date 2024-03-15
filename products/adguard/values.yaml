@@ -87,14 +87,12 @@ config:
     ratelimit_whitelist: [ ]
     refuse_any: true
     upstream_dns:
-      - 10.96.0.101
+      - 10.96.0.100
     upstream_dns_file: ""
     bootstrap_dns:
       - 1.1.1.1
       - 1.0.0.1
-    fallback_dns:
-      - 1.1.1.1
-      - 1.0.0.1
+    fallback_dns: []
     all_servers: false
     fastest_addr: false
     fastest_timeout: 1s
