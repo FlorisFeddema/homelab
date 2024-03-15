@@ -60,6 +60,7 @@ minio:
 
   customCommands:
     - command: ilm rule add --noncurrent-expire-days 7 myminio/loki-chunks
+    - command: ilm rule add --noncurrent-expire-days 7 myminio/cnpg
 
   metrics:
     serviceMonitor:
