@@ -46,7 +46,7 @@ minio:
 
   svcaccts:
     - accessKey: loki
-      existingSecret: loki-svc--credentials
+      existingSecret: loki-svc-credentials
       existingSecretKey: secretKey
       user: apps
     - accessKey: cnpg
