@@ -9,8 +9,7 @@ This repository will be used for the configuration of the feddema.dev Kubernetes
   * [Remove old replica sets](#remove-old-replica-sets)
   * [Known issues](#known-issues)
   * [Hardware setup](#hardware-setup)
-    * [Clusters](#clusters)
-  * [Talos setup](#talos-setup)
+  * [Talos](#talos)
     * [Generate secrets](#generate-secrets)
     * [Create nodes](#create-nodes)
       * [Control plane](#control-plane)
@@ -66,15 +65,13 @@ kubectl get replicaset -o jsonpath='{ .items[?(@.spec.replicas==0)]}' -A | k del
 
 ## Hardware setup
 
-- [ ] Targon
-  - [ ] Intel I9900K
 - [ ] Zandorya
   - [ ] RK1
   - [ ] RK1
   - [ ] RK1
   - [ ] RK1
 
-## Talos setup
+## Talos
 
 ### Generate secrets
 
