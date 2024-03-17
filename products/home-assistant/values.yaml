@@ -58,6 +58,7 @@ config:
   configurationYaml: |
     # Loads default set of integrations. Do not remove.
     default_config:
+    
     homeassistant:
       name: Home
       unit_system: metric
@@ -73,6 +74,11 @@ config:
       use_x_forwarded_for: true
       trusted_proxies:
         - 10.0.0.0/8
+
+    logger:
+      default: warning
+      logs:
+        homeassistant.components.homekit: debug
     
     afvalbeheer:
       wastecollector: MijnAfvalwijzer
