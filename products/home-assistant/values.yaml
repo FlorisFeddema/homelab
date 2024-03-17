@@ -95,6 +95,10 @@ config:
       advertise_ip: 192.168.4.11
       port: 21064
       filter:
+        include_entities:
+          - switch.bedroom_switch_1
+          - switch.diningroom_switch_1
+          - switch.livingroom_switch_1
         exclude_entities:
           - sensor.hacs
         exclude_entity_globs:
