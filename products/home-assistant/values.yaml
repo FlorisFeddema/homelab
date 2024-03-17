@@ -83,35 +83,6 @@ config:
       postcode: 5628AN
       streetnumber: 50
     
-    homekit:
-      name: Home Assistant Bridge
-      mode: bridge
-      advertise_ip: 192.168.4.11
-      port: 21064
-      filter:
-        exclude_entities:
-          - sensor.hacs
-        exclude_entity_globs:
-          - person.*
-          - binary_sensor.*
-          - switch.*
-          - cover.*
-          - lock.*
-          - button.*
-          - scene.*
-          - select.*
-          - switch.automation_*
-          - scene.automation_*
-          - sensor.drive_cloud_*
-          - tts.*
-          - sensor.*price*
-          - sensor.*iphone*
-          - sensor.*tesla*
-          - sensor.model_3*
-          - climate.model_3*
-          - device_tracker.tesla*
-          - sensor.dsmr_*
-    
     tts:
       - platform: google_translate
 
