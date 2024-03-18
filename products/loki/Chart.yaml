@@ -1,8 +1,8 @@
 apiVersion: v2
 name: loki
-version: 1.0.42
+version: 1.0.43
 
 dependencies:
   - name: loki
-    version: 5.44.1
+    version: 5.44.3
     repository: https://grafana.github.io/helm-charts
