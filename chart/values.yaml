@@ -65,7 +65,7 @@ products:
         jsonPointers:
           - /spec/resourceManager
   kepler:
-    deploy: false
+    deploy: true
     autoSync: true
   loki:
     deploy: true
