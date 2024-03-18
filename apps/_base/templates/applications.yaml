@@ -28,7 +28,7 @@ spec:
   {{- end }}
   syncPolicy:
     syncOptions:
-     - FailOnSharedResource=true
+      - FailOnSharedResource=true
     {{- if $app.serverSideApply }}
       - ServerSideApply=true
     {{- end }}
