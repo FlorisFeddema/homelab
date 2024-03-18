@@ -160,3 +160,38 @@ NODEIP=192.168.4.11
 TALOS_IMAGE=ghcr.io/florisfeddema/homelab/talos-installer:$TALOS_VERSION
 talosctl upgrade --nodes $NODEIP --image $TALOS_IMAGE --preserve
 ```
+
+## UDM 
+
+### BGP Setup
+
+Note: see files in udm folder.
+
+Install Unifi utilities to run on boot.
+
+```shell
+curl -fsL "https://raw.githubusercontent.com/unifi-utilities/unifios-utilities/HEAD/on-boot-script-2.x/remote_install.sh" | /bin/sh
+```
+
+Create run on boot script to install frr in `/data/on_boot.d/10-onboot-frr.sh`.
+
+Enable BGP by setting `bgpd=yes` in `/etc/frr/daemons`.
+
+Create BGP config in `/etc/frr/bgpd.conf`.
+Note: currently udm only supports 1 maximum-paths, this is known and should be possible in an upcoming update of the Unifi Network Application.
+
+```shell
+
+Chown BGP config to ffr user.
+
+```shell
+chown frr:frr /etc/frr/bgpd.conf
+service frr restart
+```
+
+Check if it is working.
+
+```shell
+vtysh -c 'show ip bgp'
+netstat -ar
+```
