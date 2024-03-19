@@ -11,7 +11,7 @@ etcd:
       useAutoTLS: true
 
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
-  initialClusterState: "new" # "new" or "existing"
+  initialClusterState: "existing" # "new" or "existing"
 
   replicaCount: 3
 
