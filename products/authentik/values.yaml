@@ -1,6 +1,6 @@
 database:
   replicas: 3
-  size: 5Gi
+  size: 16Gi
 
 authentik:
   global:
