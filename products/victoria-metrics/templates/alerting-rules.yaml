@@ -398,8 +398,8 @@ spec:
             summary: Etcd HTTP requests slow (instance {{`{{$labels.instance}}`}})
             description: "HTTP requests slowing down, 99th percentile is over 0.15s\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
         - alert: EtcdMemberCommunicationSlow
-          expr: histogram_quantile(0.99, rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) > 0.15
-          for: 2m
+          expr: histogram_quantile(0.99, rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) > 0.20
+          for: 5m
           labels:
             severity: critical
           annotations:
