@@ -398,13 +398,13 @@ spec:
             summary: Etcd HTTP requests slow (instance {{`{{$labels.instance}}`}})
             description: "HTTP requests slowing down, 99th percentile is over 0.15s\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
         - alert: EtcdMemberCommunicationSlow
-          expr: histogram_quantile(0.99, rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) > 0.20
+          expr: histogram_quantile(0.99, rate(etcd_network_peer_round_trip_time_seconds_bucket[1m])) > 0.25
           for: 5m
           labels:
             severity: critical
           annotations:
             summary: Etcd member communication slow (instance {{`{{$labels.instance}}`}})
-            description: "Etcd member communication slowing down, 99th percentile is over 0.15s\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
+            description: "Etcd member communication slowing down, 99th percentile is over 0.25s\n  VALUE = {{`{{$value}}`}}\n  LABELS = {{`{{$labels}}`}}"
 
     - name: argocd.cloud.feddema.dev
       rules:
