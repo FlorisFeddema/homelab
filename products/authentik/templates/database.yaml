@@ -15,15 +15,15 @@ spec:
   storage:
     size: {{ .Values.database.size }}
 
-  backup:
-    retentionPolicy: "5d"
-    barmanObjectStore:
-      destinationPath: s3://cnpg/authentik
-      endpointURL: http://minio.minio
-      s3Credentials:
-        accessKeyId:
-          name: minio-credentials
-          key: MINIO_ACCESS_KEY
-        secretAccessKey:
-          name: minio-credentials
-          key: MINIO_SECRET_KEY
+{{/*  backup:*/}}
+{{/*    retentionPolicy: "5d"*/}}
+{{/*    barmanObjectStore:*/}}
+{{/*      destinationPath: s3://cnpg/authentik*/}}
+{{/*      endpointURL: http://minio.minio*/}}
+{{/*      s3Credentials:*/}}
+{{/*        accessKeyId:*/}}
+{{/*          name: minio-credentials*/}}
+{{/*          key: MINIO_ACCESS_KEY*/}}
+{{/*        secretAccessKey:*/}}
+{{/*          name: minio-credentials*/}}
+{{/*          key: MINIO_SECRET_KEY*/}}
