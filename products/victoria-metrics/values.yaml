@@ -50,7 +50,7 @@ victoria-metrics-k8s-stack:
       retentionPeriod: "120"
       replicationFactor: 1
       vmstorage:
-        replicaCount: 1
+        replicaCount: 2
         storageDataPath: "/vm-data"
         storage:
           volumeClaimTemplate:
@@ -60,7 +60,7 @@ victoria-metrics-k8s-stack:
                   storage: 100Gi
         resources: { }
       vmselect:
-        replicaCount: 1
+        replicaCount: 2
         cacheMountPath: "/select-cache"
         storage:
           volumeClaimTemplate:
@@ -70,7 +70,7 @@ victoria-metrics-k8s-stack:
                   storage: 5Gi
         resources: { }
       vminsert:
-        replicaCount: 1
+        replicaCount: 2
         resources: { }
 
   alertmanager:
