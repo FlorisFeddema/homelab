@@ -1,9 +1,7 @@
-# cloud-gitops
-
-This repository will be used for the configuration of the feddema.dev Kubernetes Cluster. Different GitOps principles will be applied in this repository.
+# Homelab
 
 <!-- TOC -->
-* [cloud-gitops](#cloud-gitops)
+* [homelab](#homelab)
   * [Kubeseal](#kubeseal)
     * [Restore key in new cluster](#restore-key-in-new-cluster)
   * [Remove old replica sets](#remove-old-replica-sets)
