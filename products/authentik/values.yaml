@@ -1,6 +1,8 @@
 database:
   replicas: 3
   size: 16Gi
+  monitoring:
+    enabled: true
 
 authentik:
   global:

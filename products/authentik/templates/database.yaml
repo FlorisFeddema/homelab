@@ -12,6 +12,11 @@ spec:
       pgaudit.log_parameter: "on"
       pgaudit.log_relation: "on"
 
+  {{ if .Values.database.monitoring.enabled }}
+  monitoring:
+    enablePodMonitor: true
+  {{ end }}
+
   storage:
     size: {{ .Values.database.size }}
 
