@@ -1,5 +1,8 @@
 cloudnative-pg:
-  podMonitorEnabled: true
+  monitoring:
+    podMonitorEnabled: true
+    grafanaDashboard:
+      create: true
 
   resources:
      limits:
