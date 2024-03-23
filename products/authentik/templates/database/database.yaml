@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: authentik-postgres
+  name: {{ .Values.database.clusterName }}
 spec:
   instances: {{ .Values.database.replicas }}
 
@@ -23,9 +23,9 @@ spec:
       endpointURL: {{ .Values.database.backups.endpoint }}
       s3Credentials:
         accessKeyId:
-          name: postgres-backup-credentials
+          name: {{ .Values.database.clusterName }}-backup-credentials
           key: ACCESS_KEY
         secretAccessKey:
-          name: postgres-backup-credentials
+          name: {{ .Values.database.clusterName }}-backup-credentials
           key: SECRET_KEY
   {{ end }}
