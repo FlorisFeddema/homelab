@@ -8,7 +8,7 @@ spec:
   cron: {{ .Values.backups.schedule }}
   task: "backup"
   groups:
-    - default
+    - backup
   retain: {{ .Values.backups.retention }}
   concurrency: {{ .Values.backups.concurrency }}
 {{ end }}
