@@ -5,6 +5,8 @@ minio:
 
   persistence:
     size: 50Gi
+    annotations:
+      recurring-job-group.longhorn.io/backup: enabled
 
   ingress:
     enabled: false
