@@ -6,11 +6,6 @@ spec:
   instances: {{ .Values.database.replicas }}
 
   postgresql:
-    parameters:
-      pgaudit.log: "all, -misc"
-      pgaudit.log_catalog: "off"
-      pgaudit.log_parameter: "on"
-      pgaudit.log_relation: "on"
 
   {{ if .Values.database.monitoring.enabled }}
   monitoring:
