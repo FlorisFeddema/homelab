@@ -14,10 +14,9 @@ secondary:
   resources: {}
 
 persistence:
-  config:
-    size: 1Gi
-  work:
-    size: 1Gi
+  annotations:
+    recurring-job-group.longhorn.io/backup: enabled
+  size: 1Gi
 
 service:
   # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
