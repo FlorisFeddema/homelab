@@ -1,0 +1,36 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: authentik-postgres
+spec:
+  instances: {{ .Values.database.replicas }}
+
+  postgresql:
+    parameters:
+      pgaudit.log: "all, -misc"
+      pgaudit.log_catalog: "off"
+      pgaudit.log_parameter: "on"
+      pgaudit.log_relation: "on"
+
+  {{ if .Values.database.monitoring.enabled }}
+  monitoring:
+    enablePodMonitor: true
+  {{ end }}
+
+  storage:
+    size: {{ .Values.database.size }}
+
+  {{ if .Values.database.backups.enabled }}
+  backup:
+    retentionPolicy: {{ .Values.database.backups.retention }}
+    barmanObjectStore:
+      destinationPath: {{ .Values.database.backups.path }}
+      endpointURL: {{ .Values.database.backups.endpoint }}
+      s3Credentials:
+        accessKeyId:
+          name: postgres-backup-credentials
+          key: ACCESS_KEY
+        secretAccessKey:
+          name: postgres-backup-credentials
+          key: SECRET_KEY
+  {{ end }}
