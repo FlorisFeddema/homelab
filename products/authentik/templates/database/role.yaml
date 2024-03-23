@@ -6,6 +6,6 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["secrets"]
-    resourceNames: ["postgres-backup-credentials"]
+    resourceNames: ["{{ .Values.database.clusterName }}-backup-credentials"]
     verbs: ["get"]
 {{ end }}
