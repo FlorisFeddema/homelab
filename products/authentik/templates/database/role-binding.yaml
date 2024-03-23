@@ -6,7 +6,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: {{ .Values.database.backups.rbac.serviceAccountName }}
-    apiGroup: rbac.authorization.k8s.io
+    apiGroup: ""
 roleRef:
   kind: Role
   name: postgres-backup
