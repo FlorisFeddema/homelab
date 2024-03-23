@@ -19,7 +19,7 @@ spec:
   backup:
     retentionPolicy: {{ .Values.database.backups.retention }}
     barmanObjectStore:
-      destinationPath: {{ .Values.database.backups.path }}
+      destinationPath: {{ .Values.database.backups.path | quote }}
       endpointURL: {{ .Values.database.backups.endpoint }}
       s3Credentials:
         accessKeyId:
