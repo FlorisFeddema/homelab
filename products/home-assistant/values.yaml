@@ -21,6 +21,8 @@ securityContext:
 persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
+  labels:
+    recurring-job-group.longhorn.io/backup: enabled
 
 ingress:
   enabled: true
