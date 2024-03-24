@@ -7,6 +7,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "zigbee2mqtt"
     {{- include "labels" . | nindent 4 }}
+    {{ toYaml .Values.persistence.labels | nindent 4 }}
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}
