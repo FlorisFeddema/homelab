@@ -14,7 +14,7 @@ secondary:
   resources: {}
 
 persistence:
-  annotations:
+  labels:
     recurring-job-group.longhorn.io/backup: enabled
   size: 1Gi
 

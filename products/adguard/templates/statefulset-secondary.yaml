@@ -87,8 +87,8 @@ spec:
   volumeClaimTemplates:
     - metadata:
         name: work
-        annotations:
-          {{ toYaml .Values.persistence.annotations | nindent 10 }}
+        labels:
+          {{ toYaml .Values.persistence.labels | nindent 10 }}
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
