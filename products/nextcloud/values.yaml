@@ -102,6 +102,9 @@ nextcloud:
     enabled: true
     accessMode: ReadWriteOnce
     size: 16Gi
+    # labels are added by hand
+    labels:
+      recurring-job-group.longhorn.io/backup: enabled
 
   resources:
     limits:
