@@ -14,7 +14,7 @@ victoria-metrics-k8s-stack:
   defaultRules:
     create: true
     rules:
-      etcd: false
+      etcd: true
       general: true
       k8s: true
       kubeApiserver: true
@@ -178,7 +178,10 @@ victoria-metrics-k8s-stack:
     enabled: true
 
   kubeEtcd:
-    enabled: false
+    enabled: true
+    endpoints:
+      - 192.168.4.11
+      - 192.168.4.12
 
   kubeScheduler:
     enabled: true
