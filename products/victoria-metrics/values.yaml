@@ -162,14 +162,16 @@ victoria-metrics-k8s-stack:
 
   kubeControllerManager:
     enabled: true
-    spec:
-      endpoints:
-        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-          port: http-metrics
-          scheme: https
-          tlsConfig:
-            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-            insecureSkipVerify: true
+#    spec:
+#      endpoints:
+#        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+#          port: http-metrics
+#          scheme: https
+#          tlsConfig:
+#            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+#            insecureSkipVerify: true
+    selector:
+      k8s-app: kube-controller-manager
 
   coreDns:
     enabled: true
