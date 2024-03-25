@@ -170,8 +170,9 @@ victoria-metrics-k8s-stack:
 #          tlsConfig:
 #            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 #            insecureSkipVerify: true
-    selector:
-      k8s-app: kube-controller-manager
+    service:
+      selector:
+        k8s-app: kube-controller-manager
 
   coreDns:
     enabled: true
