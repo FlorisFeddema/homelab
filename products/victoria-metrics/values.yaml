@@ -183,6 +183,16 @@ victoria-metrics-k8s-stack:
       - 192.168.4.11
       - 192.168.4.12
 
+  spec:
+    jobLabel: jobLabel
+    endpoints:
+      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+        port: http-metrics
+        scheme: https
+        tlsConfig:
+          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          insecureSkipVerify: true
+
   kubeScheduler:
     enabled: true
 
