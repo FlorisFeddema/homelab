@@ -162,14 +162,14 @@ victoria-metrics-k8s-stack:
 
   kubeControllerManager:
     enabled: true
-#    spec:
-#      endpoints:
-#        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-#          port: http-metrics
-#          scheme: https
-#          tlsConfig:
-#            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-#            insecureSkipVerify: true
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
     service:
       selector:
         k8s-app: kube-controller-manager
@@ -178,26 +178,14 @@ victoria-metrics-k8s-stack:
     enabled: true
 
   kubeEtcd:
-    enabled: true
-    service:
-      enabled: true
-      port: 2381
-      targetPort: 2381
-    spec:
-      jobLabel: jobLabel
-      endpoints:
-        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-          port: http-metrics
-          tlsConfig:
-            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    enabled: false
 
   kubeScheduler:
     enabled: true
 
     service:
-      enabled: true
-      port: 10259
-      targetPort: 10259
+      selector:
+        k8s-app: kube-scheduler
 
     spec:
       jobLabel: jobLabel
