@@ -176,7 +176,6 @@ Create run on boot script to install frr in `/data/on_boot.d/10-onboot-frr.sh`.
 Enable BGP by setting `bgpd=yes` in `/etc/frr/daemons`.
 
 Create BGP config in `/etc/frr/bgpd.conf`.
-Note: currently udm only supports 1 maximum-paths, this is known and should be possible in an upcoming update of the Unifi Network Application.
 
 ```shell
 
