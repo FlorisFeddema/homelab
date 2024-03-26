@@ -29,7 +29,7 @@ products:
   enphaseEnvoyPrometheusExporter:
     deploy: true
     autoSync: true
-  externalDns:
+  publicExternalDns:
     deploy: true
     autoSync: true
   falco:
