@@ -3,71 +3,27 @@ external-dns:
   sources:
     - ingress
     - service
+    - crd
 
   provider: cloudflare
 
-  containerPorts:
-    http: 7979
-
   extraArgs:
     exclude-target-net: 192.168.0.0/16
-
-  combineFQDNAnnotation: false
-  ignoreHostnameAnnotation: false
-  publishInternalServices: false
-  publishHostIP: false
-  serviceTypeFilter: [ ]
 
   cloudflare:
     secretName: "cloudflare-api-token"
     proxied: false
 
-  domainFilters: [ ]
-  excludeDomains: [ ]
-  regexDomainFilter: ""
-  regexDomainExclusion: ""
-  zoneNameFilters: [ ]
-  zoneIdFilters: [ ]
-  annotationFilter: ""
-  labelFilter: ""
-
-  dryRun: false
   triggerLoopOnEvent: true
-  interval: "1m"
-  logLevel: info
-  logFormat: text
+  logLevel: warning
+  logFormat: json
   policy: sync
 
-  registry: "txt"
-  txtPrefix: ""
-  txtSuffix: ""
-  txtOwnerId: ""
-  forceTxtOwnerId: false
-  replicaCount: 1
-
   crd:
-    create: false
-
-  service:
-    enabled: true
-    type: ClusterIP
-    ports:
-      http: 7979
+    create: true
 
   serviceAccount:
-    create: true
     automountServiceAccountToken: true
-
-  rbac:
-    create: true
-    clusterRole: true
-    apiVersion: v1
-    pspEnabled: false
-
-  podSecurityContext:
-    enabled: true
-    fsGroup: 1001
-    runAsUser: 1001
 
   resources:
     limits:
