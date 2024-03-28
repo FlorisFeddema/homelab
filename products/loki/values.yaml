@@ -10,6 +10,7 @@ loki:
       cardinality_limit: 200000
       ingestion_burst_size_mb: 1000
       ingestion_rate_mb: 10000
+      retention_period: 48h
     storage:
       bucketNames:
         chunks: loki-chunks
