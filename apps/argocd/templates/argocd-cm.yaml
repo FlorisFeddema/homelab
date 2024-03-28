@@ -16,7 +16,7 @@ data:
   oidc.config: |
     name: Authentik
     issuer: https://authentik.mobrockers.com/application/o/argocd/
-    logoutURL: https://authentik.mobrockers.com/application/o/argocd/end-session
+    logoutURL: https://authentik.mobrockers.com/application/o/argocd/end-session/
     clientID: $authentik-credentials:client_id
     clientSecret: $authentik-credentials:client_secret
     requestedScopes: ['openid', 'profile', 'email', 'groups', 'offline_access']
