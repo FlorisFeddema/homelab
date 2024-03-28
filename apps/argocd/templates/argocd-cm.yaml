@@ -18,6 +18,6 @@ data:
     issuer: https://authentik.mobrockers.com/application/o/argocd/
     clientID: $authentik-credentials:client_id
     clientSecret: $authentik-credentials:client_secret
-    requestedScopes: ['openid', 'profile', 'email', 'groups']
+    requestedScopes: ['openid', 'profile', 'email', 'groups', 'offline_access']
 
   accounts.infro: apiKey
