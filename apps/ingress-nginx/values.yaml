@@ -22,4 +22,4 @@ ingress-nginx:
       default-ssl-certificate: ingress-nginx/default-wildcard-certificate
       update-status-on-shutdown: 'false'
     config:
-      strict-validate-path-type: 'true'
+      strict-validate-path-type: 'false'
