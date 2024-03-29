@@ -1,5 +1,6 @@
 emqx-operator:
   revisionHistoryLimit: 0
+  replicas: 0
 
   resources:
     limits:
