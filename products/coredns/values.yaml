@@ -13,7 +13,7 @@ etcd:
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
   initialClusterState: "existing" # "new" or "existing"
 
-  replicaCount: 3
+  replicaCount: 0
 
   initialClusterToken: "etcd-cluster-coredns"
   logLevel: "warn"
