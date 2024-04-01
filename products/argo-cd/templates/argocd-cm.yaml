@@ -8,21 +8,13 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   url: https://argocd.feddema.dev
-  statusbadge.enabled: "true"
-  
+
   application.resourceTrackingMethod: annotation
   users.anonymous.enabled: "false"
-  users.session.duration: "24h"
 
   accounts.infro: "apiKey"
 
-  kustomize.enabled: "true"
-  jsonnet.enabled: "true"
-  helm.enabled: "true"
-  
-  helm.valuesFileSchemes: http, https
-
-  admin.enabled: "true"
+  admin.enabled: "false"
 
   timeout.reconciliation: 180s
   cluster.inClusterEnabled: "true"
@@ -45,5 +37,6 @@ data:
     name: Authentik
     issuer: https://authentik.feddema.dev/application/o/argocd/
     clientID: 7uRmOU7Cho0KwDa7SIODe0ugmQ5djIvDuN3wUeux
-    clientSecret: $oidc.keycloak.clientSecret
+    clientSecret: $authentik-credentials:clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
+    logoutURL: https://authentik.feddema.dev/application/o/argocd/end-session/
