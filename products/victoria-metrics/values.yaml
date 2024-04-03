@@ -136,6 +136,9 @@ victoria-metrics-k8s-stack:
 
   grafana:
     enabled: false
+    sidecar:
+      dashboards:
+        label: grafana_dashboard
 
   prometheus-node-exporter:
     enabled: true
