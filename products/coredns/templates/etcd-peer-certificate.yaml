@@ -12,7 +12,11 @@ spec:
     - server auth
     - client auth
   dnsNames:
-    - 'coredns-etcd.default.svc.cluster.local'
-    - '*.coredns-etcd.default.svc.cluster.local'
-    - 'coredns-etcd-headless.default.svc.cluster.local'
-    - '*.coredns-etcd-headless.default.svc.cluster.local'
+    - 'coredns-etcd.coredns.svc.cluster.local'
+    - '*.coredns-etcd.coredns.svc.cluster.local'
+    - 'coredns-etcd-headless.coredns.svc.cluster.local'
+    - '*.coredns-etcd-headless.coredns.svc.cluster.local'
+    - 'coredns-etcd.coredns'
+    - '*.coredns-etcd.coredns'
+    - 'coredns-etcd-headless.coredns'
+    - '*.coredns-etcd-headless.coredns'
