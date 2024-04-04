@@ -1,8 +1,8 @@
 etcd:
   auth:
     rbac:
-      create: true
-      enabled: true
+      create: false
+      enabled: false
       allowNoneAuthentication: false
     token:
       enabled: true
@@ -36,9 +36,6 @@ etcd:
   logLevel: "warn"
 
   resources: {}
-
-  startupProbe:
-    enabled: true
 
   persistence:
     size: 5Gi
