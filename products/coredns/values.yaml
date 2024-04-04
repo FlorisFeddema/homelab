@@ -3,7 +3,7 @@ etcd:
     rbac:
       create: false
       enabled: false
-      allowNoneAuthentication: false
+      allowNoneAuthentication: true
     token:
       enabled: true
       type: jwt
