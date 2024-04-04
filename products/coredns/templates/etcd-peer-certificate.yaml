@@ -6,7 +6,7 @@ spec:
   secretName: etcd-peer-tls
   issuerRef:
     group: cert-manager.io
-    kind: ClusterIssuer
+    kind: Issuer
     name: selfsigned-issuer
   usages:
     - server auth
