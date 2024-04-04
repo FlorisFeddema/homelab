@@ -1,17 +1,34 @@
 etcd:
   auth:
     rbac:
-      create: false
+      create: true
+      enabled: true
+      allowNoneAuthentication: false
     token:
+      enabled: true
+      type: jwt
       privateKey:
         filename: jwt-token.pem
         existingSecret: "coredns-etcd-jwt-token"
     peer:
       secureTransport: true
-      useAutoTLS: true
+      useAutoTLS: false
+      existingSecret: etcd-peer-tls
+      enableAuthentication: true
+      certFilename: tls.crt
+      certKeyFilename: tls.key
+      caFilename: ca.crt
+    client:
+      secureTransport: true
+      useAutoTLS: false
+      existingSecret: etcd-client-tls
+      enableAuthentication: true
+      certFilename: tls.crt
+      certKeyFilename: tls.key
+      caFilename: ca.crt
 
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
-  initialClusterState: "existing" # "new" or "existing"
+  initialClusterState: "new" # "new" or "existing"
 
   replicaCount: 0
 
