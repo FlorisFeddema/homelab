@@ -5,7 +5,7 @@ prometheus-operator-crds:
 kube-prometheus-stack:
   crds:
     enabled: false
-  prometheus-operator:
+  prometheusOperator:
     revisionHistoryLimit: 0
   prometheus:
     prometheusSpec:
