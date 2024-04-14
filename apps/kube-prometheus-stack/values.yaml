@@ -43,3 +43,7 @@ kube-prometheus-stack:
       notifiers:
         enabled: false
         searchNamespace: ALL
+  kube-state-metrics:
+    revisionHistoryLimit: 0
+  prometheus-node-exporter:
+    revisionHistoryLimit: 0
