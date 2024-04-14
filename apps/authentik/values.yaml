@@ -41,3 +41,7 @@ authentik:
 
   redis:
     enabled: true
+
+  prometheus:
+    rules: 
+      enabled: true
