@@ -19,6 +19,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       securityContext:
+        fsGroup: 1000
       containers:
         - name: maintainerr
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
