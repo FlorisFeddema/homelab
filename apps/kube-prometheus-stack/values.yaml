@@ -27,6 +27,30 @@ kube-prometheus-stack:
       tls:
         - hosts:
           - grafana.mobrockers.com
+    grafana.ini:
+      auth:
+        signout_redirect_url: https://authentik.mobrockers.com/application/o/grafana/end-session/
+        oauth_auto_login: true
+      auth.generic_oauth:
+        enabled: true
+        name: Authentik
+        scopes: "openid email profile"
+        auth_url: "https://authentik.mobrockers.com/application/o/authorize/"
+        token_url: "https://authentik.mobrockers.com/application/o/token/"
+        api_url: "https://authentik.mobrockers.com/application/o/userinfo/"
+        client_id: $__file{/etc/secrets/auth_generic_oauth/client_id}
+        client_secret: $__file{/etc/secrets/auth_generic_oauth/client_secret}
+        allow_assign_grafana_admin: true
+        role_attribute_path: contains(groups[*], 'Admins') && 'Admin' || contains(groups[*], 'Contributor') && 'Editor' || 'Viewer'
+      server:
+        domain: "https://grafana.mobrockers.com"
+        root_url: "https://grafana.mobrockers.com"
+    extraSecretMounts:
+      - name: auth-generic-oauth-secret-mount
+        secretName: grafana-authentik-oauth-credentials
+        defaultMode: 0440
+        mountPath: /etc/secrets/auth_generic_oauth
+        readOnly: true
     sidecar:
       alerts:
         enabled: true
