@@ -15,7 +15,6 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
   grafana:
-    assertNoLeakedSecrets: false
     revisionHistoryLimit: 0
     replicas: 1
     initChownData: false
