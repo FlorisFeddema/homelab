@@ -27,7 +27,11 @@ kube-prometheus-stack:
       tls:
         - hosts:
           - grafana.mobrockers.com
+    env:
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: true
     grafana.ini:
+      auth.basic:
+        enabled: false
       auth:
         signout_redirect_url: https://authentik.mobrockers.com/application/o/grafana/end-session/
         oauth_auto_login: true
