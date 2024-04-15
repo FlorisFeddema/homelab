@@ -21,7 +21,7 @@ spec:
       securityContext:
       containers:
         - name: maintainerr
-          image: '{{ .Values.maintainerr.image.repository }}:{{ .Values.maintainerr.image.tag }}'
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           env:
             - name: TZ
               value: Europe/Amsterdam
