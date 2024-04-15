@@ -1,0 +1,4 @@
+overseerr:
+  image:
+    repository: ghcr.io/jorenn92/maintainerr
+    tag: 2.0.3
