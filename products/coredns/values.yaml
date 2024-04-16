@@ -1,4 +1,5 @@
 etcd:
+  enabled: false
   auth:
     rbac:
       create: false
