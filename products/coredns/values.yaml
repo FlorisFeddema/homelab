@@ -30,7 +30,7 @@ etcd:
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
   initialClusterState: "existing" # "new" or "existing"
 
-  replicaCount: 3
+  replicaCount: 0
 
   initialClusterToken: "etcd-cluster-coredns"
   logLevel: "warn"
@@ -94,10 +94,10 @@ coredns:
         - name: cancel
         - name: prometheus
           parameters: '0.0.0.0:9153'
-        - name: etcd
-          configBlock: |
-            fallthrough
-            endpoint coredns-etcd:2379
+        # - name: etcd
+        #   configBlock: |
+        #     fallthrough
+        #     endpoint coredns-etcd:2379
         - name: forward
           parameters: '. tls://9.9.9.10 tls://149.112.112.10'
           configBlock: |
