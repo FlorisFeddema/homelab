@@ -22,7 +22,7 @@ cluster:
 
   image:
     repository: emqx/emqx
-    tag: 5.6.0
+    tag: 5.6.1
 
   listener:
     service:
