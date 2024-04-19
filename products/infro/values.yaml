@@ -1,0 +1,38 @@
+replicas: 1
+
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 100m
+  limits:
+    memory: 2048Mi
+
+deploymentStrategy:
+  type: Recreate
+
+podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  runAsNonRoot: true
+
+securityContext:
+  capabilities:
+    drop: [ "ALL" ]
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  privileged: false
+
+image:
+  registry: docker.io
+  repository: infrolabs/infro-core
+  tag: latest # fix this to a specific version
+  pullPolicy: IfNotPresent
+
+config:
+  secretName: infro-secrets
+  existingSecret: true
+  # only used if existingSecret is false
+  sealedValues:
+    owner: AgCzlf0HFt9PCkiFrPj6IjB7DhzHlsWQSTeBF7uAUNmX4/CPYPR6OL7a/RbzV+fQgHtmZBzFgwtc7jIn8ELlIh2GAq4Ij0JigSNUYN5zO7F1WYfA7zlnwjZdxHR/6v/2qxaj0ypUdXS3MJM0sT6OmoQqjOeR4d3vOpz6zBItcIW+kNL/0mGd6iC2Vs+JSWWb2nVz/Ht2CH1H/nt3YFpE8QRiTG7S1KbdV/FyyGZmCmc6uwRKrcs3tWC/14JPDwwRqAsv6teSjztCdikSFjf5m8c0LjbUPSoZwz0f3IDu6vGkW1hHa2XqxQ7q86Nz57vpr+LrvHzuUmPzB94CdWgOSFwMtRSjB2Y03s1NJEEkinjnFzwTP/3c4fRyZBDA8XEltnQXGU/rfSY+AHNXlx5i9w76H4sYCiOIbpMpL01LP9d1ol/GU7GqnhTM9T3CbmS1Ox7tswU2D913aUNi2m2bDJJRFIXjlnf1KH3+0Lj+TsfGIt3Uu7xH8YOyx/6wPi0ILODZYJlRCcmngHIeUwRmfiJq0CQpleD3B6xJxikJ93QHCAHxPtgByQIX2gQ2nQXNRRP7+qqx/IOKiN+1C0woG9dAzR1Yw+uze8wpvcGQGt7DRegxO6aLZF088E+9EzPWdyfmayS1ETY6kF2cPRHvcFJZMCWo6NRCEoaxJ8jbhaDS2ba3W41p6AIx4jU6BTfp/UcQ2m/vipS2amnBPQYR
+    config: AgDvaUkbTzBBTGNBlTX6mD+8i0CoozznXC6mx/RHlP7/6VPPJ5rMd8dnB7G9nFHQ59zKj8S0Tsf3RXydwfqnbBXfpTdLiacNWZTmH/312kc7NYMn7FKkADuiq78/cZm2ar4nnVoasYwoFj5GAmr1TLCTPweUI5vjmVLuPkuiZcloNaMU2mXHPQ0wJ1iKxik4tPhruV4MGA+3P6W7ZzEGK/OD1K/OcQpMzkuI6BzscrqePfuTunyQJOGHlAOJZwe6Xe1RZPWXNDHdzh5IOUj8a+aV66odK0uZr5XoybUgLUOhm0qh5qE/HP5CP6J0v55l1Fn3XI2wRqa+LVVu8Fqo5OCiW74uElx6zX4dKpDD8mbFrqwcLkzNXuw8gm1WRl9rED1mBmYWXTv2JsVz17nKIES7P2RN8CzNjHw/aIuiEpDBEtuxCMBcCcUl1QQdIZpNB4jWZjOWGAaWXbY3WuYEOmIXRUYXXpJuKQp/nm+9UygzpU5Pv8+YdWdChUy/wId60ptfNCnebuLAriQ7UXC1+z1Rgg10fe4dkpS1HgSXAYOHPxKuUSF17FBl3S19M9CW95OGXhMcMbSp8vhThfNxrUyAU4ZV45/FVAH72sQoYDgM7WP4dKuxwpooQYaYlPmCvDgFqryyHv7PkzsXo0bCytQj0rBBLvNJZxNlKzxJFqfkIYbmT+cm2f4JGA/UtOWWypQLmwVg5BEO8dBazcTkFqb2dbRsNTDfXPBOrTCmy9NPaEwmM0ifHzIkk/zi+tCBklgmUMbTZJcgKgLxIlI61EkGbJLghJEfSr3fK1FoN1cnx9i8BRfgTJnK9clRJ01agPC7chy5sMclNP6WHq9abx5od+xabKI8HJU1F66+Go+stn5nFw67vCNrvZZIKe14mvL9WiKe2ivjJJKCY5KmuODa+F2ITMjmAIfbodB/3m6LgY9Bi3xEMMq6r+J/IUskAmjN6RxKNOv4LavjoW0zU6f8Oo8Kpm15SGlJt0WLgtMKLSbl1CY7ZyXL+QNrc6V57UjRsIEWAP3uAdZXr7SdEuDaZdzD+UUclzivwmZPMSYlq13+r16Mx+9aAKgxYVLHBASouVSIr+1Y+BhZ572vM9WFXHZ8IzDddIxgaqKxrckw+aTik84LQqVqVFrCdH6GfjZ/+xvzAEx5IdcOGbUkxWhrf/rnz8kESTzkBl2Mz2NSsFhlGpCM5Q==
