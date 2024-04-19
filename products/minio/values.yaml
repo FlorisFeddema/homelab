@@ -4,7 +4,7 @@ minio:
   replicas: 3
 
   persistence:
-    size: 50Gi
+    size: 100Gi
     # labels are added by hand
     labels:
       recurring-job-group.longhorn.io/backup: enabled
