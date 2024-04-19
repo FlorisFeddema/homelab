@@ -68,7 +68,7 @@ products:
     deploy: true
     autoSync: true
   loki:
-    deploy: false
+    deploy: true
     autoSync: true
   longhorn:
     deploy: true
