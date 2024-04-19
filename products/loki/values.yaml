@@ -31,7 +31,8 @@ loki:
         ruler: loki-ruler
         admin: loki-admin
       type: s3
-      s3:
+    storage_config:
+      aws:
         s3: s3://minio.minio:9000
         endpoint: http://minio.minio:9000
         region: eu
@@ -42,6 +43,7 @@ loki:
     compactor:
       retention_enabled: true
       delete_request_store: true
+
 
   write:
     replicas: 3
