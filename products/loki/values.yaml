@@ -5,7 +5,7 @@ loki:
       configs:
         - from: 2024-04-01
           store: tsdb
-          object_store: s3
+          object_store: aws
           schema: v13
           index:
             prefix: loki_index_
@@ -30,7 +30,7 @@ loki:
         chunks: loki-chunks
         ruler: loki-ruler
         admin: loki-admin
-      type: s3
+      type: aws
     storage_config:
       aws:
         s3: s3://minio.minio:9000
