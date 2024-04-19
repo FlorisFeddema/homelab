@@ -30,7 +30,7 @@ loki:
         chunks: loki-chunks
         ruler: loki-ruler
         admin: loki-admin
-      type: aws
+      type: s3
     storage_config:
       aws:
         s3: s3://minio.minio:9000
