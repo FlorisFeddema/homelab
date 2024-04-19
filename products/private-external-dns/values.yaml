@@ -1,0 +1,34 @@
+external-dns:
+  revisionHistoryLimit: 0
+  sources:
+    - ingress
+    - service
+    - crd
+
+  provider: coredns
+
+  extraArgs:
+    etarget-net-filter: 192.168.0.0/16
+
+  triggerLoopOnEvent: true
+  logLevel: warning
+  logFormat: json
+  policy: sync
+
+  crd:
+    create: false # Already created by public-external-dns
+
+  serviceAccount:
+    automountServiceAccountToken: true
+
+  resources:
+    limits:
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 30Mi
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
