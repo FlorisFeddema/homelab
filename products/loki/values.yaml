@@ -53,7 +53,8 @@ loki:
     #       name: loki-s3-credentials
 
   read:
-    # replicas: 3
+    replicas: 3
+    legacyReadTarget: false
     # extraArgs:
     #   - '-config.expand-env=true'
     # extraEnvFrom:
