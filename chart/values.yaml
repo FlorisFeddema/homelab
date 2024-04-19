@@ -53,6 +53,9 @@ products:
   homeAssistant:
     deploy: true
     autoSync: true
+  infro:
+    deploy: true
+    autoSync: true
   ingressNginx:
     deploy: true
     autoSync: true
