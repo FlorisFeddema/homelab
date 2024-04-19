@@ -1,5 +1,19 @@
 loki:
+  deploymentMode: SimpleScalable
   loki:
+    schemaConfig:
+      configs:
+        - from: 2024-04-01
+          store: tsdb
+          object_store: s3
+          schema: v13
+          index:
+            prefix: loki_index_
+            period: 24h
+    ingester:
+      chunk_encoding: snappy
+    querier:
+      max_concurrent: 4
     revisionHistoryLimit: 0
     auth_enabled: false
     commonConfig:
@@ -25,74 +39,43 @@ loki:
         accessKeyId: ${S3_ACCESS_KEY}
         s3ForcePathStyle: true
         insecure: true
-      filesystem:
-        chunks_directory: /var/loki/chunks
-        rules_directory: /var/loki/rules
     compactor:
       retention_enabled: true
 
-  test:
-    enabled: false
-
-  monitoring:
-    dashboards:
-      enabled: true
-      namespace: loki
-    serviceMonitor:
-      enabled: true
-    selfMonitoring:
-      enabled: false
-      grafanaAgent:
-        installOperator: false
-    lokiCanary:
-      enabled: false
-
   write:
-    replicas: 1
-    resources: { }
+    replicas: 3
     persistence:
       size: 100Gi
-    affinity: { }
-    extraArgs:
-      - '-config.expand-env=true'
-    extraEnvFrom:
-      - secretRef:
-          name: loki-s3-credentials
+    # extraArgs:
+    #   - '-config.expand-env=true'
+    # extraEnvFrom:
+    #   - secretRef:
+    #       name: loki-s3-credentials
 
   read:
-    replicas: 1
-    legacyReadTarget: false
-    resources: { }
-    affinity: { }
-    extraArgs:
-      - '-config.expand-env=true'
-    extraEnvFrom:
-      - secretRef:
-          name: loki-s3-credentials
+    # replicas: 3
+    # extraArgs:
+    #   - '-config.expand-env=true'
+    # extraEnvFrom:
+    #   - secretRef:
+    #       name: loki-s3-credentials
 
   backend:
-    replicas: 1
-    resources: { }
+    replicas: 3
     persistence:
       size: 50Gi
       enableStatefulSetAutoDeletePVC: false
-    affinity: { }
-    extraArgs:
-      - '-config.expand-env=true'
-    extraEnvFrom:
-      - secretRef:
-          name: loki-s3-credentials
+    # extraArgs:
+    #   - '-config.expand-env=true'
+    # extraEnvFrom:
+    #   - secretRef:
+    #       name: loki-s3-credentials
 
   gateway:
-    enabled: true
     verboseLogging: false
-    replicas: 1
-    resources: { }
-    affinity: { }
-    extraArgs:
-      - '-config.expand-env=true'
-    extraEnvFrom:
-      - secretRef:
-          name: loki-s3-credentials
-
-
+    replicas: 3
+    # extraArgs:
+    #   - '-config.expand-env=true'
+    # extraEnvFrom:
+    #   - secretRef:
+    #       name: loki-s3-credentials
