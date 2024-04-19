@@ -52,10 +52,10 @@ minio:
       policy: readwrite
 
   buckets:
-#    - name: loki-chunks
-#      policy: none
-#      purge: false
-#      versioning: false
+    - name: loki-chunks
+      policy: none
+      purge: false
+      versioning: false
     - name: loki-admin
       policy: none
       purge: false
@@ -78,7 +78,6 @@ minio:
     - command: ilm rule add --noncurrent-expire-days 2 myminio/loki-admin
     - command: ilm rule add --noncurrent-expire-days 2 myminio/loki-ruler
     - command: ilm rule add --noncurrent-expire-days 7 myminio/cnpg
-    - command: rm --recursive --force myminio/loki-chunks
 
   metrics:
     serviceMonitor:
