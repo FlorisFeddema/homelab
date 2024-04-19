@@ -41,7 +41,7 @@ loki:
         insecure: true
     compactor:
       retention_enabled: true
-      delete-request-store: true
+      delete_request_store: true
 
   write:
     replicas: 3
