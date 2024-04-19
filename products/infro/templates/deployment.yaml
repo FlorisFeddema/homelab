@@ -46,10 +46,10 @@ spec:
             - name: config
               valueFrom:
                 secretKeyRef:
-                  name: infro-secrets
+                  name: {{ .Values.config.secretName}}
                   key: config
             - name: owner
               valueFrom:
                 secretKeyRef:
-                  name: infro-secrets
+                  name: {{ .Values.config.secretName}}
                   key: owner
