@@ -24,8 +24,10 @@ securityContext:
   privileged: false
 
 image:
-  registry: docker.io
-  repository: infrolabs/infro-core
+  #  registry: docker.io
+  registry: ghcr.io
+  #  repository: infrolabs/infro-core
+  repository: florisfeddema/infro-core
   tag: latest # fix this to a specific version
   pullPolicy: IfNotPresent
 
