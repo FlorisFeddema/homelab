@@ -1,5 +1,5 @@
 etcd:
-  enabled: false
+  enabled: true
   auth:
     rbac:
       create: false
@@ -31,7 +31,7 @@ etcd:
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
   initialClusterState: "existing" # "new" or "existing"
 
-  replicaCount: 1
+  replicaCount: 3
 
   initialClusterToken: "etcd-cluster-coredns"
   logLevel: "warn"
