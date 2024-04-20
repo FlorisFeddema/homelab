@@ -15,7 +15,7 @@ external-dns:
     proxied: false
 
   triggerLoopOnEvent: true
-  logLevel: warning
+  logLevel: error
   logFormat: json
   policy: sync
 
