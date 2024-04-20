@@ -24,8 +24,8 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "home-assistant"
         {{- include "labels" . | nindent 8 }}
-        config-hash: {{ print .Values.config.configurationYaml | sha1sum  }}
     spec:
+      serviceAccountName: {{ template "homeAssistant.fullname" . }}
       # hostNetwork: true
       # dnsPolicy: ClusterFirstWithHostNet
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
