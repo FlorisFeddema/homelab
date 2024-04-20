@@ -1,5 +1,5 @@
 etcd:
-  enabled: false
+  enabled: true
   auth:
     rbac:
       create: false
