@@ -78,9 +78,9 @@ config:
         - 10.0.0.0/8
 
     logger:
-      default: warning
+      default: error
       logs:
-        homeassistant.components.homekit: debug
+        homeassistant.components.homekit: error
     
     afvalbeheer:
       wastecollector: MijnAfvalwijzer
