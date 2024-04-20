@@ -5,4 +5,5 @@ metadata:
   labels:
     home-assistant-config: "1"
 data:
-{{ (.Files.Get "configuration/configuration.yaml") | indent 2 }}
+  configuration.yaml: |
+{{ (.Files.Get "configuration/configuration.yaml") | indent 4 }}
