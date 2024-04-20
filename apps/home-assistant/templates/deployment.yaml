@@ -26,8 +26,8 @@ spec:
         {{- include "labels" . | nindent 8 }}
         config-hash: {{ print .Values.config.configurationYaml | sha1sum  }}
     spec:
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      # hostNetwork: true
+      # dnsPolicy: ClusterFirstWithHostNet
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
         - name: config-loader
