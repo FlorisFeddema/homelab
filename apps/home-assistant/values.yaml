@@ -40,8 +40,3 @@ config:
     registry: ghcr.io
     repository: kiwigrid/k8s-sidecar
     tag: 1.26.1
-
-  baseConfiguration: |
-    homeassistant:
-      # Load packages
-      packages: !include_dir_named integrations
