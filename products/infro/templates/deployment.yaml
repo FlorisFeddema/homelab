@@ -53,3 +53,9 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.config.secretName}}
                   key: owner
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
