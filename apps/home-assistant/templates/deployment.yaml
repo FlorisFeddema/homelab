@@ -34,6 +34,7 @@ spec:
           image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
           imagePullPolicy: IfNotPresent
           restartPolicy: Always
+          securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
           env:
           - name: IGNORE_ALREADY_PROCESSED
             value: "true"
