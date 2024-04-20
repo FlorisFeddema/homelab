@@ -76,6 +76,3 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: {{ template "homeAssistant.fullname" . }}
-        # - name: secret-config
-        #   secret:
-        #     secretName: {{ .Values.config.secret.name }}
