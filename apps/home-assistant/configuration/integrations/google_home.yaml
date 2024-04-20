@@ -1,7 +1,7 @@
 google_assistant:
   project_id: home-331c3
   report_state: true
-  service_account: !include google-home-sync-token.json
+  service_account: !include ../google-home-sync-token.json
   secure_devices_pin: !secret assistant_secure_devices_pin
   expose_by_default: true
   exposed_domains:
