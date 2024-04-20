@@ -11,7 +11,7 @@ emqx-operator:
       memory: 64Mi
 
 cluster:
-  replicas: 2
+  replicas: 3
 
   replicant:
     replicas: 0
