@@ -34,7 +34,7 @@ etcd:
   replicaCount: 3
 
   initialClusterToken: "etcd-cluster-coredns"
-  logLevel: "warn"
+  logLevel: "error"
 
   resources: {}
 
