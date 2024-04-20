@@ -29,14 +29,10 @@ ingress:
     enabled: true
 
 config:
-  secret:
-    name: home-assistant-secret
-    sealedValues:
-      secretsYaml: 
-
-  extraConfigMaps:
-    name: 
-    mountPath: 
+  # secret:
+  #   name: home-assistant-secret
+  #   sealedValues:
+  #     secretsYaml: 
 
   image:
     registry: ghcr.io
