@@ -15,7 +15,6 @@ podSecurityContext:
 
 securityContext:
   allowPrivilegeEscalation: false
-  runAsUser: 1000
   runAsGroup: 5000
   # capabilities:
   #   drop: [ "ALL" ]
