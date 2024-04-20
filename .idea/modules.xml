@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/cloud-gitops.iml" filepath="$PROJECT_DIR$/.idea/cloud-gitops.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../infro-core/.idea/infro-core.iml" filepath="$PROJECT_DIR$/../infro-core/.idea/infro-core.iml" />
     </modules>
   </component>
 </project>
