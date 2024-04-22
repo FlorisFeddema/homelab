@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: plex
-        image: '{{ .Values.plex.image.repository }}:{{ .Values.plex.image.tag }}'
+        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
         ports:
         - name: http
           containerPort: 32400
@@ -41,12 +41,34 @@ spec:
           mountPath: /config
         - name: media
           mountPath: /media
+      - name: tautulli
+        image: '{{ .Values.tautulli.image.repository }}:{{ .Values.tautulli.image.tag }}'
+        ports:
+        - name: tautulli-http
+          containerPort: 8181
+        env:
+          - name: TZ
+            value: Europe/Amsterdam
+          - name: PUID
+            value: '1000'
+          - name: PGID
+            value: '5000'
+        volumeMounts:
+        - name: tautulli-data
+          mountPath: /config 
+        - name: pms-config
+          mountPath: /logs
+          subpath: 'Library/Application Support/Plex Media Server'
+          readOnly: true
       volumes:
       - name: pms-transcode
         emptyDir: {}
       - name: media
         persistentVolumeClaim:
           claimName: plex-media
+      - name: tautulli-data
+        persistentVolumeClaim:
+          claimName: tautulli-data
   volumeClaimTemplates:
   - metadata:
       name: pms-config

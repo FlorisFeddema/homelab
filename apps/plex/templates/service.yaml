@@ -5,8 +5,11 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 80
+      port: 32400
       targetPort: http
+    - name: tautulli-http
+      port: 8181
+      targetPort: tautulli-http
   selector:
     app.kubernetes.io/instance: plex
     app.kubernetes.io/name: plex
