@@ -91,6 +91,9 @@ products:
   nodeFeatureDiscovery:
     deploy: true
     autoSync: true
+  privateExternalDns:
+    deploy: true
+    autoSync: false
   prometheusCrd:
     deploy: true
     autoSync: true
