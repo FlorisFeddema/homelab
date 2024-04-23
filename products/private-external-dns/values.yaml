@@ -27,7 +27,7 @@ external-dns:
   policy: sync
 
   crd:
-    create: false #created by the public-external-dns chart
+    create: true
 
   serviceAccount:
     automountServiceAccountToken: true
