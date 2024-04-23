@@ -8,6 +8,10 @@ spec:
     group: cert-manager.io
     kind: Issuer
     name: selfsigned-issuer
+  secretTemplate:
+    annotations:
+      replicator.v1.mittwald.de/replication-allowed: "true"
+      replicator.v1.mittwald.de/replication-allowed-namespaces: "private-external-dns"
   usages:
     - server auth
     - client auth
