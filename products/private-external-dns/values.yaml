@@ -11,7 +11,7 @@ external-dns:
     exclude-target-net: 192.168.0.0/16
 
   coredns:
-    etcdEndpoints: "http://coredns-etcd.coredns:2379"
+    etcdEndpoints: "coredns-etcd.coredns:2379"
 
     etcdTLS:
       enabled: true
