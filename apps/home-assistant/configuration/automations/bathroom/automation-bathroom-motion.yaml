@@ -1,0 +1,10 @@
+id: '1661453236911'
+alias: Bathroom lights motion
+description: ''
+use_blueprint:
+  path: homeassistant/motion_light.yaml
+  input:
+    motion_entity: binary_sensor.bathroom_sensor_occupancy
+    light_target:
+      area_id: bathroom
+    no_motion_wait: 360
