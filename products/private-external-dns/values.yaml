@@ -8,15 +8,36 @@ external-dns:
   provider: coredns
 
   extraArgs:
-    etarget-net-filter: 192.168.0.0/16
+    exclude-target-net: 192.168.0.0/16
+
+  coredns:
+    etcdEndpoints: "http://coredns-etcd.coredns:2379"
+
+    etcdTLS:
+      enabled: true
+      secretName: "etcd-client-certs"
+      ## @param coredns.etcdTLS.mountPath When using the CoreDNS provider, set destination dir to mount data from `coredns.etcdTLS.secretName` to
+      ##
+      mountPath: "/etc/coredns/tls/etcd"
+      ## @param coredns.etcdTLS.caFilename When using the CoreDNS provider, specify CA PEM file name from the `coredns.etcdTLS.secretName`
+      ##
+      caFilename: "ca.crt"
+      ## @param coredns.etcdTLS.certFilename When using the CoreDNS provider, specify cert PEM file name from the `coredns.etcdTLS.secretName`
+      ## Will be used by external-dns to authenticate against etcd
+      ##
+      certFilename: "cert.pem"
+      ## @param coredns.etcdTLS.keyFilename When using the CoreDNS provider, specify private key PEM file name from the `coredns.etcdTLS.secretName`
+      ## Will be used by external-dns to authenticate against etcd
+      ##
+      keyFilename: "key.pem"
 
   triggerLoopOnEvent: true
-  logLevel: warning
+  logLevel: error
   logFormat: json
   policy: sync
 
   crd:
-    create: false # Already created by public-external-dns
+    create: true
 
   serviceAccount:
     automountServiceAccountToken: true
