@@ -94,6 +94,14 @@ products:
   privateExternalDns:
     deploy: true
     autoSync: false
+    ignoreDifferences:
+      - group: ""
+        kind: Secret
+        name: private-external-dns
+        jsonPointers:
+          - /data/ca.crt
+          - /data/tls.crt
+          - /data/tls.key
   prometheusCrd:
     deploy: true
     autoSync: true
