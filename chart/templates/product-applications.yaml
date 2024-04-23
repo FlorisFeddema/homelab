@@ -25,8 +25,9 @@ spec:
   ignoreDifferences: {{ toYaml $v.ignoreDifferences | nindent 4 }}
   {{- end }}
   syncPolicy:
-    {{ if $v.serverSideApply }}
     syncOptions:
+      - RespectIgnoreDifferences=true
+    {{ if $v.serverSideApply }}
       - ServerSideApply=true
     {{ end }}
     automated:

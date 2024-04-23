@@ -97,7 +97,7 @@ products:
     ignoreDifferences:
       - group: ""
         kind: Secret
-        name: private-external-dns
+        name: etcd-client-certificate
         jsonPointers:
           - /data/ca.crt
           - /data/tls.crt
