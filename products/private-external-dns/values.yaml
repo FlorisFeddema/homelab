@@ -15,7 +15,7 @@ external-dns:
 
     etcdTLS:
       enabled: true
-      secretName: client-certificate.yaml
+      secretName: etcd-client-certificate
       mountPath: "/etc/coredns/tls/etcd"
       caFilename: "ca.crt"
       certFilename: "tls.crt"
