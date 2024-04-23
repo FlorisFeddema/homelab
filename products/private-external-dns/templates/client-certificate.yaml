@@ -8,3 +8,4 @@ type: kubernetes.io/tls
 data:
   tls.crt: ""
   tls.key: ""
+  ca.crt: ""
