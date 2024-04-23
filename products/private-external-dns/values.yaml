@@ -15,21 +15,11 @@ external-dns:
 
     etcdTLS:
       enabled: true
-      secretName: "etcd-client-certs"
-      ## @param coredns.etcdTLS.mountPath When using the CoreDNS provider, set destination dir to mount data from `coredns.etcdTLS.secretName` to
-      ##
+      secretName: client-certificate.yaml
       mountPath: "/etc/coredns/tls/etcd"
-      ## @param coredns.etcdTLS.caFilename When using the CoreDNS provider, specify CA PEM file name from the `coredns.etcdTLS.secretName`
-      ##
       caFilename: "ca.crt"
-      ## @param coredns.etcdTLS.certFilename When using the CoreDNS provider, specify cert PEM file name from the `coredns.etcdTLS.secretName`
-      ## Will be used by external-dns to authenticate against etcd
-      ##
-      certFilename: "cert.pem"
-      ## @param coredns.etcdTLS.keyFilename When using the CoreDNS provider, specify private key PEM file name from the `coredns.etcdTLS.secretName`
-      ## Will be used by external-dns to authenticate against etcd
-      ##
-      keyFilename: "key.pem"
+      certFilename: "tls.crt"
+      keyFilename: "tls.key"
 
   triggerLoopOnEvent: true
   logLevel: error
