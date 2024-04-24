@@ -4,7 +4,7 @@ emqx-operator:
 
   resources:
     limits:
-      cpu: null
+      cpu: 50m
       memory: 128Mi
     requests:
       cpu: 20m
