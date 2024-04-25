@@ -4,6 +4,8 @@ metadata:
   name: authentik-data
 spec:
   instances: 2
+  monitoring:
+    enablePodMonitor: true
 
   storage:
     size: 1Gi
