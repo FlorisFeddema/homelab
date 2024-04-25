@@ -14,3 +14,5 @@ apps:
   cloudnative-postgres:
     deploy: true
     serverSideApply: true
+  truecommand:
+    deploy: true
