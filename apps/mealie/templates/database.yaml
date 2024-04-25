@@ -4,5 +4,8 @@ metadata:
   name: mealie-data
 spec:
   instances: 1
+  monitoring:
+    enablePodMonitor: true
+
   storage:
     size: 1Gi
