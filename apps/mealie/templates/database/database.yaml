@@ -1,11 +1,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: authentik-data
+  name: mealie-data
 spec:
-  instances: 2
-  monitoring:
-    enablePodMonitor: true
+  instances: 1
 
   storage:
     size: 1Gi
