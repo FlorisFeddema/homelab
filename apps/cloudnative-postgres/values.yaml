@@ -1,0 +1,8 @@
+cloudnative-pg:
+  monitoring:
+    podMonitorEnabled: true
+
+dashboard:
+  grafanaDashboard:
+    labels:
+      grafana_dashboard: "1"
