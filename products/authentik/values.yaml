@@ -3,7 +3,7 @@ database:
   replicas: 3
   size: 16Gi
   monitoring:
-    enabled: true
+    enabled: false
   backups:
     enabled: true
     schedule: "0 0 4 * * *"
