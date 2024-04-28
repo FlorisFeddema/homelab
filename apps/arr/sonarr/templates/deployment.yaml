@@ -20,10 +20,27 @@ spec:
       automountServiceAccountToken: false
       securityContext:
         fsGroup: 5000
-      initContainers:
+      containers:
+        - name: sonarr
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          env:
+            - name: TZ
+              value: Europe/Amsterdam
+            - name: PUID
+              value: '1000'
+            - name: PGID
+              value: '5000'
+          ports:
+            - containerPort: 8989
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - name: data
+              mountPath: /config
+            - name: media
+              mountPath: /media
         - name: exporter
           image: '{{ .Values.monitoring.image.repository }}:{{ .Values.monitoring.image.tag }}'
-          restartPolicy: Always
           args:
             - sonarr
           env:
@@ -52,25 +69,6 @@ spec:
             - name: data
               mountPath: /config
               readonly: true
-      containers:
-        - name: sonarr
-          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-          env:
-            - name: TZ
-              value: Europe/Amsterdam
-            - name: PUID
-              value: '1000'
-            - name: PGID
-              value: '5000'
-          ports:
-            - containerPort: 8989
-              name: http
-              protocol: TCP
-          volumeMounts:
-            - name: data
-              mountPath: /config
-            - name: media
-              mountPath: /media
       volumes:
         - name: data
           persistentVolumeClaim:
