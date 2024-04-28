@@ -21,7 +21,7 @@ falco:
       enabled: true
 
   falco:
-    priority: warning
+    priority: info
     json_output: false
     buffered_outputs: true
     log_level: warning
