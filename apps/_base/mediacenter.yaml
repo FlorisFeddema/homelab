@@ -22,6 +22,6 @@ apps:
   bazarr:
     deploy: true
     path: apps/arr/bazarr
-  dashboards:
+  arr-dashboards:
     deploy: true
     path: apps/arr/dashboards
