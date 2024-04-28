@@ -1,31 +1,43 @@
 falco:
   resources:
     requests:
-      cpu: 100m
-      memory: 512Mi
+      cpu: 50m
+      memory: 256Mi
     limits:
+      cpu: null
       memory: 1024Mi
+
+  driver:
+    kind: modern-bpf
+    modernEbpf:
+      leastPrivileged: true
 
   collectors:
     docker:
       enabled: false
     crio:
       enabled: false
+    kubernetes:
+      enabled: true
 
-  driver:
-    kind: modern-bpf
+#  certs: TODO:
 
   falco:
-    log_level: info
-    grpc:
+    priority: warning
+    json_output: false
+    buffered_outputs: true
+    log_level: warning
+
+    metrics:
       enabled: true
-    grpc_output:
-      enabled: true
-    http_output:
-      insecure: true
+
+#    grpc:
+#      enabled: true
+#    grpc_output:
+#      enabled: true
 
   falcosidekick:
-    enabled: true
+    enabled: false
     replicaCount: 1
 
     resources:
