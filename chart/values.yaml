@@ -34,6 +34,7 @@ products:
     autoSync: true
   falco:
     deploy: true
+    autoSync: true
   falcoExporter:
     deploy: false
   gatus:
