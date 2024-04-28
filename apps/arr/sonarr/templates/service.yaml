@@ -5,8 +5,11 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 80
+      port: 7878
       targetPort: http
+    - name: monitoring
+      port: 9707
+      targetPort: monitoring
   selector:
     app.kubernetes.io/instance: sonarr
     app.kubernetes.io/name: sonarr
