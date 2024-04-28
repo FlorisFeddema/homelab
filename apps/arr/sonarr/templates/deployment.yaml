@@ -65,6 +65,10 @@ spec:
               port: monitoring
             failureThreshold: 5
             periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /config
+              readonly: true
       volumes:
         - name: data
           persistentVolumeClaim:
