@@ -20,7 +20,7 @@ spec:
       automountServiceAccountToken: false
       securityContext:
         fsGroup: 5000
-      initContains:
+      initContainers:
         - name: exporter
           image: '{{ .Values.monitoring.image.repository }}:{{ .Values.monitoring.image.tag }}'
           restartPolicy: Always
