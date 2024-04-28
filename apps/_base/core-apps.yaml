@@ -14,3 +14,5 @@ apps:
     deploy: true
   sealed-secrets:
     deploy: true
+  infro:
+    deploy: true
