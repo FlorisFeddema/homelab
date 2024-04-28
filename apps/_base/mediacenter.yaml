@@ -25,3 +25,4 @@ apps:
   arr-dashboards:
     deploy: true
     path: apps/arr/dashboards
+    namespace: prometheus
