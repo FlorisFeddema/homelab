@@ -32,7 +32,6 @@ spec:
       initContainers:
         - name: config-loader
           image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
-          imagePullPolicy: IfNotPresent
           restartPolicy: Always
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
           env:
@@ -52,7 +51,6 @@ spec:
       containers:
         - name: home-assistant
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: IfNotPresent
           env:
             - name: TZ
               value: "Europe/Amsterdam"
