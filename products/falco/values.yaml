@@ -20,8 +20,6 @@ falco:
     kubernetes:
       enabled: true
 
-#  certs: TODO:
-
   falco:
     priority: warning
     json_output: false
@@ -29,11 +27,6 @@ falco:
     log_level: warning
 
     metrics:
-      enabled: true
-
-    grpc:
-      enabled: true
-    grpc_output:
       enabled: true
 
   falcosidekick:
