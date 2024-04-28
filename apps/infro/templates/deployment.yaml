@@ -24,6 +24,17 @@ spec:
         app.kubernetes.io/component: "core"
         {{- include "labels" . | nindent 8 }}
     spec:
+      automountServiceAccountToken: false
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            preference:
+              matchExpressions:
+              - key: kubernetes.io/arch
+                operator: In
+                values:
+                - amd64
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: core
