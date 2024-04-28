@@ -63,7 +63,8 @@ kubectl get replicaset -o jsonpath='{ .items[?(@.spec.replicas==0)]}' -A | k del
 
 ## Hardware setup
 
-- [ ] Zandorya
+- [ ] Hortek
+- [ ] Kashaylan
   - [ ] RK1
   - [ ] RK1
   - [ ] RK1
@@ -154,7 +155,7 @@ crane push _images/installer-arm64.tar ghcr.io/florisfeddema/homelab/talos-insta
 
 ```shell
 TALOSCONFIG=./talosconfig
-NODEIP=192.168.4.11
+NODEIP=192.168.4.12
 TALOS_IMAGE=ghcr.io/florisfeddema/homelab/talos-installer:$TALOS_VERSION
 talosctl upgrade --nodes $NODEIP --image $TALOS_IMAGE --preserve
 ```

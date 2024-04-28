@@ -1,0 +1,24 @@
+machine:
+  network:
+    hostname: hortek-0
+
+    interfaces:
+      - deviceSelector:
+          busPath: "0*" # should select any hardware network device, if you have just one, it will be selected
+        dhcp: true
+        vip:
+          ip: 192.168.4.9
+
+  install:
+    disk: /dev/sda
+
+  disks:
+    - device: /dev/nvme0n1
+      partitions:
+        - mountpoint: /var/mnt/nvme1
+    - device: /dev/nvme1n1
+      partitions:
+        - mountpoint: /var/mnt/nvme2
+    - device: /dev/nvme2n1
+      partitions:
+        - mountpoint: /var/mnt/nvme3
