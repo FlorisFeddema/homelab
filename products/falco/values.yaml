@@ -31,10 +31,10 @@ falco:
     metrics:
       enabled: true
 
-#    grpc:
-#      enabled: true
-#    grpc_output:
-#      enabled: true
+    grpc:
+      enabled: true
+    grpc_output:
+      enabled: true
 
   falcosidekick:
     enabled: true
