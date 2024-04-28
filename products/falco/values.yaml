@@ -37,8 +37,30 @@ falco:
 #      enabled: true
 
   falcosidekick:
-    enabled: false
-    replicaCount: 1
+    enabled: true
+    replicaCount: 2
+
+    serviceMonitor:
+      enabled: true
+
+    prometheusRules:
+      enabled: true
+      alerts:
+        warning:
+          enabled: true
+        error:
+          enabled: true
+        critical:
+          enabled: true
+        alert:
+          enabled: true
+        emergency:
+          enabled: true
+        output:
+          enabled: true
+
+#    config:
+#      alertmanager: TODO:
 
     resources:
       limits:
@@ -50,8 +72,9 @@ falco:
     webui:
       enabled: true
       replicaCount: 1
-      loglevel: "info"
+      loglevel: "error"
       ttl: 5
+      disableauth: true
 
       ingress:
         enabled: true
@@ -60,13 +83,13 @@ falco:
           nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
         hosts:
-          - host: falco.cloud.feddema.dev
+          - host: falco.feddema.dev
             paths:
               - path: /
         tls:
           - secretName: falco-tls
             hosts:
-              - falco.cloud.feddema.dev
+              - falco.feddema.dev
 
       resources:
         limits:
@@ -78,12 +101,12 @@ falco:
       redis:
         enabled: true
         storageEnabled: true
-        storageSize: "16Gi"
+        storageSize: 16Gi
 
         resources:
           limits:
-            memory: 3Gi
+            memory: 512Gi
           requests:
             cpu: 10m
-            memory: 512Mi
+            memory: 128Mi
 
