@@ -38,18 +38,18 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /media
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          #   failureThreshold: 5
+          #   periodSeconds: 10
         - name: exportarr
           image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
           args:
