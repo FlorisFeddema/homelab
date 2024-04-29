@@ -13,6 +13,9 @@ spec:
     - name: monitoring
       port: 9707
       targetPort: monitoring
+    - name: additional-monitoring
+      port: 9708
+      targetPort: additional-monitoring
   selector:
     app.kubernetes.io/instance: sonarr
     app.kubernetes.io/name: sonarr
