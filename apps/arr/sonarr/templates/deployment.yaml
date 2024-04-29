@@ -50,6 +50,8 @@ spec:
               value: "http://sonarr:7878"
             - name: CONFIG
               value: /config/config.xml
+            - name: LOG_LEVEL
+              value: DEBUG
           ports:
             - name: monitoring
               containerPort: 9707
