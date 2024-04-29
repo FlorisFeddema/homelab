@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: sabnzbd
+  labels:
+    app.kubernetes.io/name: sabnzbd
+    app.kubernetes.io/instance: sabnzbd
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sabnzbd
+      app.kubernetes.io/instance: sabnzbd
+  endpoints:
+    - port: metrics
+      interval: 15m
+      scrapeTimeout: 90s
+      path: /metrics
+    - port: more-metrics
+      interval: 12h
+      scrapeTimeout: 1h
+      path: /metrics

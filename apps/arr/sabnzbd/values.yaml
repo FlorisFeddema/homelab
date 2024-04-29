@@ -1,4 +1,8 @@
-sabnzbd:
+image:
+  repository: ghcr.io/linuxserver/sabnzbd
+  tag: 4.2.3
+
+metrics:
   image:
-    repository: ghcr.io/linuxserver/sabnzbd
-    tag: 4.2.3
+    repository: ghcr.io/onedr0p/exportarr
+    tag: v2.0.1
