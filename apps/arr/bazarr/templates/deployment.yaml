@@ -38,6 +38,18 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /media
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 5
+            periodSeconds: 10
         - name: exportarr
           image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
           args:
@@ -47,8 +59,11 @@ spec:
               value: "9707"
             - name: URL
               value: "http://localhost:6767"
-            - name: CONFIG
-              value: /config/config/config.yaml
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-key-secret
+                  key: api-key
           ports:
             - name: metrics
               containerPort: 9707
@@ -56,18 +71,6 @@ spec:
             - name: data
               mountPath: /config
               readonly: true
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: metrics
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: metrics
-            failureThreshold: 5
-            periodSeconds: 10
         - name: additional-exportarr
           image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
           args:
@@ -77,8 +80,11 @@ spec:
               value: "9708"
             - name: URL
               value: "http://localhost:6767"
-            - name: CONFIG
-              value: /config/config/config.yaml
+            - name: APIKEY
+              valueFrom:
+                secretKeyRef:
+                  name: api-key-secret
+                  key: api-key
             - name: ENABLE_ADDITIONAL_METRICS
               value: "true"
           ports:
