@@ -48,7 +48,7 @@ spec:
             - name: URL
               value: "http://localhost:6767"
             - name: CONFIG
-              value: /config/config.xml
+              value: /config/config/config.yaml
           ports:
             - name: metrics
               containerPort: 9707
@@ -78,7 +78,7 @@ spec:
             - name: URL
               value: "http://localhost:6767"
             - name: CONFIG
-              value: /config/config.xml
+              value: /config/config/config.yaml
             - name: ENABLE_ADDITIONAL_METRICS
               value: "true"
           ports:
