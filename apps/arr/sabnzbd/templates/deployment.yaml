@@ -57,7 +57,7 @@ spec:
             - name: URL
               value: "http://localhost:8080"
             - name: CONFIG
-              value: /config/config.xml
+              value: /config/sabnzbd.ini
           ports:
             - name: metrics
               containerPort: 9707
@@ -87,7 +87,7 @@ spec:
             - name: URL
               value: "http://localhost:8080"
             - name: CONFIG
-              value: /config/config.xml
+              value: /config/sabnzbd.ini
             - name: ENABLE_ADDITIONAL_METRICS
               value: "true"
           ports:
