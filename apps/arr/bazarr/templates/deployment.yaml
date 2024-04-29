@@ -38,6 +38,56 @@ spec:
               mountPath: /config
             - name: media
               mountPath: /media
+        - name: exportarr
+          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
+          args:
+            - bazarr
+          env:
+            - name: PORT
+              value: "9707"
+            - name: URL
+              value: "http://localhost:6767"
+            - name: CONFIG
+              value: /config/config.xml
+          ports:
+            - name: metrics
+              containerPort: 9707
+          volumeMounts:
+            - name: data
+              mountPath: /config
+              readonly: true
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+            failureThreshold: 5
+            periodSeconds: 10
+        - name: additional-exportarr
+          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
+          args:
+            - bazarr
+          env:
+            - name: PORT
+              value: "9708"
+            - name: URL
+              value: "http://localhost:6767"
+            - name: CONFIG
+              value: /config/config.xml
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
+          ports:
+            - name: more-metrics
+              containerPort: 9708
+          volumeMounts:
+            - name: data
+              mountPath: /config
+              readonly: true
       volumes:
         - name: data
           persistentVolumeClaim:
