@@ -47,7 +47,7 @@ spec:
             - name: PORT
               value: "9707"
             - name: URL
-              value: "http://sonarr:7878"
+              value: "http://localhost:8989"
             - name: CONFIG
               value: /config/config.xml
             - name: LOG_LEVEL
