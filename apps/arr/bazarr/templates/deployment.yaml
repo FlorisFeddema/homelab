@@ -21,7 +21,7 @@ spec:
       securityContext:
       containers:
         - name: bazarr
-          image: '{{ .Values.bazarr.image.repository }}:{{ .Values.bazarr.image.tag }}'
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           env:
             - name: TZ
               value: Europe/Amsterdam
