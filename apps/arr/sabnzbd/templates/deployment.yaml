@@ -30,7 +30,7 @@ spec:
                 - amd64
       containers:
         - name: sabnzbd
-          image: '{{ .Values.sabnzbd.image.repository }}:{{ .Values.sabnzbd.image.tag }}'
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
           env:
             - name: TZ
               value: Europe/Amsterdam
