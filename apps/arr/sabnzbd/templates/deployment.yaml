@@ -71,7 +71,7 @@ spec:
             - name: APIKEY
               valueFrom:
                 secretKeyRef:
-                  name: api-key
+                  name: api-key-secret
                   key: api-key
           ports:
             - name: metrics
@@ -92,7 +92,7 @@ spec:
             - name: APIKEY
               valueFrom:
                 secretKeyRef:
-                  name: api-key
+                  name: api-key-secret
                   key: api-key
             - name: ENABLE_ADDITIONAL_METRICS
               value: "true"
