@@ -14,8 +14,8 @@
         {
           "builtIn": 1,
           "datasource": {
-            "type": "datasource",
-            "uid": "grafana"
+            "type": "grafana",
+            "uid": "-- Grafana --"
           },
           "enable": true,
           "hide": true,
@@ -695,17 +695,17 @@
     "refresh": "1m",
     "schemaVersion": 37,
     "style": "dark",
-    "tags": [],
+    "tags": ["mediacenter"],
     "templating": {
       "list": []
     },
     "time": {
-      "from": "now-2d",
+      "from": "now-24h",
       "to": "now"
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Radarr",
+    "title": "Radarr Dashboard",
     "uid": "A8iPssjZk",
     "version": 2,
     "weekStart": ""

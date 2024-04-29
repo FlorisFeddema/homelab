@@ -7885,18 +7885,7 @@
     "revision": 1,
     "schemaVersion": 38,
     "style": "dark",
-    "tags": [
-      "sonarr",
-      "readarr",
-      "radarr",
-      "lidarr",
-      "prowlarr",
-      "sabnzbd",
-      "music",
-      "movies",
-      "tv",
-      "media"
-    ],
+    "tags": ["mediacenter"],
     "templating": {
       "list": [
         {
