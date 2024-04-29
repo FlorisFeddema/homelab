@@ -50,8 +50,6 @@ spec:
               value: "http://localhost:8989"
             - name: CONFIG
               value: /config/config.xml
-            - name: LOG_LEVEL
-              value: debug
           ports:
             - name: monitoring
               containerPort: 9707
