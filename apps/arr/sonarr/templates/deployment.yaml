@@ -40,7 +40,7 @@ spec:
             - name: media
               mountPath: /media
         - name: exportarr
-          image: '{{ .Values.monitoring.image.repository }}:{{ .Values.monitoring.image.tag }}'
+          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
           args:
             - sonarr
           env:
@@ -51,7 +51,7 @@ spec:
             - name: CONFIG
               value: /config/config.xml
           ports:
-            - name: monitoring
+            - name: metrics
               containerPort: 9707
           volumeMounts:
             - name: data
@@ -60,17 +60,17 @@ spec:
           livenessProbe:
             httpGet:
               path: /healthz
-              port: monitoring
+              port: metrics
             failureThreshold: 5
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /healthz
-              port: monitoring
+              port: metrics
             failureThreshold: 5
             periodSeconds: 10
         - name: additional-exportarr
-          image: '{{ .Values.monitoring.image.repository }}:{{ .Values.monitoring.image.tag }}'
+          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
           args:
             - sonarr
           env:
@@ -83,7 +83,7 @@ spec:
             - name: ENABLE_ADDITIONAL_METRICS
               value: "true"
           ports:
-            - name: additional-monitoring
+            - name: more-metrics
               containerPort: 9708
           volumeMounts:
             - name: data

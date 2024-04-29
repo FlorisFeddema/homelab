@@ -10,12 +10,12 @@ spec:
     - name: http
       port: 7878
       targetPort: http
-    - name: monitoring
+    - name: metrics
       port: 9707
-      targetPort: monitoring
-    - name: additional-monitoring
+      targetPort: metrics
+    - name: more-metrics
       port: 9708
-      targetPort: additional-monitoring
+      targetPort: more-metrics
   selector:
     app.kubernetes.io/instance: sonarr
     app.kubernetes.io/name: sonarr
