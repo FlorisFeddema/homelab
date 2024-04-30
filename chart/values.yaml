@@ -121,9 +121,6 @@ products:
   smartmeterGatewayPrometheusExporter:
     deploy: false
     autoSync: true
-  teslamate:
-    deploy: true
-    autoSync: true
   tetragon:
     deploy: true
     autoSync: true
