@@ -16,7 +16,7 @@ grafana:
       searchNamespace: ALL
 
   datasources:
-    datasource.yaml:
+    datasource-loki.yaml:
       apiVersion: 1
       datasources:
         - name: Loki
