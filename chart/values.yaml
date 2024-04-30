@@ -71,6 +71,10 @@ products:
   kepler:
     deploy: true
     autoSync: true
+  kubePrometheusStack:
+    deploy: false
+    autoSync: true
+    namespace: prometheus
   kubernetesReplicator:
     deploy: true
     autoSync: true
@@ -124,7 +128,7 @@ products:
     deploy: true
     autoSync: true
   victoriaMetrics:
-    deploy: true
+    deploy: false
     autoSync: true
     serverSideApply: true
   vpa:
