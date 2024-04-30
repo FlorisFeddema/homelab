@@ -25,7 +25,7 @@ kube-prometheus-stack:
 
     alertmanagerSpec:
       useExistingSecret: true
-      configSecret: 'alertmanager-prometheus-kube-prometheus'
+      configSecret: 'alertmanager-config'
 
   grafana:
     enabled: false
