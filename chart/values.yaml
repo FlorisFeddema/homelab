@@ -72,7 +72,7 @@ products:
     deploy: true
     autoSync: true
   kubePrometheusStack:
-    deploy: false
+    deploy: true
     autoSync: true
     namespace: prometheus
   kubernetesReplicator:
