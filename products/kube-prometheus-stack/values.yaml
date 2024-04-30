@@ -27,6 +27,7 @@ kube-prometheus-stack:
       useExistingSecret: true
       configSecret: 'alertmanager-config'
       externalUrl: alertmanager.feddema.dev
+      scheme: https
 
     ingress:
       enabled: true
