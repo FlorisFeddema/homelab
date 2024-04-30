@@ -60,6 +60,18 @@ kube-prometheus-stack:
   kubeProxy:
     enabled: false
 
+  kubeScheduler:
+    enabled: true
+    service:
+      selector:
+        component: kube-scheduler
+
+  kubeControllerManager:
+    enabled: true
+    service:
+      selector:
+        component: kube-controller-manager
+
   kube-state-metrics:
     revisionHistoryLimit: 0
 
