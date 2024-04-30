@@ -13,9 +13,6 @@ spec:
     - name: metrics
       port: 9707
       targetPort: metrics
-    - name: more-metrics
-      port: 9708
-      targetPort: more-metrics
   selector:
     app.kubernetes.io/instance: radarr
     app.kubernetes.io/name: radarr

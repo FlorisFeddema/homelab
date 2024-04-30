@@ -12,10 +12,6 @@ spec:
       app.kubernetes.io/instance: sabnzbd
   endpoints:
     - port: metrics
-      interval: 15m
-      scrapeTimeout: 90s
-      path: /metrics
-    - port: more-metrics
-      interval: 12h
-      scrapeTimeout: 1h
+      interval: 60m
+      scrapeTimeout: 5m
       path: /metrics

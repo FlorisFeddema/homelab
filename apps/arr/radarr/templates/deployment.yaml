@@ -60,31 +60,13 @@ spec:
               value: "9707"
             - name: URL
               value: "http://localhost:7878"
+            - name: ENABLE_ADDITIONAL_METRICS
+              value: "true"
             - name: CONFIG
               value: /config/config.xml
           ports:
             - name: metrics
               containerPort: 9707
-          volumeMounts:
-            - name: data
-              mountPath: /config
-              readonly: true
-        - name: additional-exportarr
-          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
-          args:
-            - radarr
-          env:
-            - name: PORT
-              value: "9708"
-            - name: URL
-              value: "http://localhost:7878"
-            - name: CONFIG
-              value: /config/config.xml
-            - name: ENABLE_ADDITIONAL_METRICS
-              value: "true"
-          ports:
-            - name: more-metrics
-              containerPort: 9708
           volumeMounts:
             - name: data
               mountPath: /config
