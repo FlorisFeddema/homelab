@@ -74,3 +74,5 @@ kube-prometheus-stack:
     revisionHistoryLimit: 0
   prometheus-node-exporter:
     revisionHistoryLimit: 0
+  kubeProxy:
+    enabled: false # Cilium replacement
