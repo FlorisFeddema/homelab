@@ -255,7 +255,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
       - name: hubble
         url: https://hubble.feddema.dev
         group: external
@@ -268,7 +267,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
       - name: emqx
         url: https://emqx.feddema.dev
         group: external
@@ -281,7 +279,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
       - name: gatus
         url: https://gatus.feddema.dev
         group: external
@@ -294,7 +291,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
       - name: grafana
         url: https://grafana.feddema.dev
         group: external
@@ -307,7 +303,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
       - name: homeassistant
         url: https://home.feddema.dev
         group: external
@@ -332,7 +327,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
       - name: nextcloud
         url: https://nextcloud.feddema.dev
         group: external
@@ -345,46 +339,6 @@ gatus:
             send-on-resolved: true
             failure-threshold: 4
             success-threshold: 1
-
-      - name: teslamate
-        url: https://teslamate.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
-
-      - name: alertmanager
-        url: https://alert.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
-
-      - name: vmalert
-        url: https://vmalert.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
-
       - name: zigbee2mqtt
         url: https://zigbee.feddema.dev
         group: external
