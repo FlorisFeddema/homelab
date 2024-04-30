@@ -118,10 +118,6 @@ config:
           - tts.*
           - sensor.*price*
           - sensor.*iphone*
-          - sensor.*tesla*
-          - sensor.model_3*
-          - climate.model_3*
-          - device_tracker.tesla*
           - sensor.dsmr_*
     
     tts:
