@@ -1,0 +1,45 @@
+kube-prometheus-stack:
+  cleanPrometheusOperatorObjectNames: true
+  crds:
+    enabled: false
+
+  defaultRules:
+    rules:
+      kubeProxy: false
+      etcd: false
+      windows: false
+
+  prometheusOperator:
+    revisionHistoryLimit: 0
+
+  prometheus:
+    prometheusSpec:
+      probeSelectorNilUsesHelmValues: false
+      scrapeConfigSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
+
+  alertmanager:
+    enabled: true
+
+    alertmanagerSpec:
+      useExistingSecret: true
+      configSecret: 'alertmanager-prometheus-kube-prometheus'
+
+  grafana:
+    enabled: false
+    forceDeployDatasources: true
+    forceDeployDashboards: true
+
+  kubeEtcd:
+    enabled: false
+
+  kubeProxy:
+    enabled: false
+
+  kube-state-metrics:
+    revisionHistoryLimit: 0
+
+  prometheus-node-exporter:
+    revisionHistoryLimit: 0
