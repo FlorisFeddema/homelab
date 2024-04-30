@@ -1,10 +1,10 @@
 democratic-csi:
   controller:
     driver:
-      image: registry.gitlab.com/routhio/docker/democratic-csi:v1.9.6 # chart default is latest
+      image: ghcr.io/democratic-csi/democratic-csi:v1.9.0 # chart default is latest
   node:
     driver:
-      image: registry.gitlab.com/routhio/docker/democratic-csi:v1.9.6 # chart default is latest
+      image: ghcr.io/democratic-csi/democratic-csi:v1.9.0 # chart default is latest
 
 # driverConfigFileSealed: 
 #   value: 
