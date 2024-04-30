@@ -61,7 +61,7 @@ products:
     deploy: true
     autoSync: true
   intelDevicePluginsGpu:
-    deploy: false
+    deploy: true
     autoSync: true
     ignoreDifferences:
       - group: "deviceplugin.intel.com"
@@ -124,10 +124,6 @@ products:
   tetragon:
     deploy: true
     autoSync: true
-  victoriaMetrics:
-    deploy: false
-    autoSync: true
-    serverSideApply: true
   vpa:
     deploy: true
     autoSync: true
