@@ -96,6 +96,9 @@ products:
   nodeFeatureDiscovery:
     deploy: true
     autoSync: true
+  nodeProblemDetector:
+    deploy: true
+    autoSync: true
   privateExternalDns:
     deploy: true
     autoSync: false
