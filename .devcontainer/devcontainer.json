@@ -14,7 +14,7 @@
     "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
-    "ghcr.io/eitsupi/devcontainer-features/jq-likes:1": {},
+    "ghcr.io/eitsupi/devcontainer-features/jq-likes:2": {},
     "ghcr.io/rio/features/k9s:1": {}
   },
   "hostRequirements": {
