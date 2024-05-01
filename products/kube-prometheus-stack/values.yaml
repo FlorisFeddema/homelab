@@ -11,7 +11,10 @@ kube-prometheus-stack:
 
   prometheusOperator:
     revisionHistoryLimit: 0
-
+    admissionWebhooks:
+      patch:
+        ttlSecondsAfterFinished: 15
+        
   prometheus:
     prometheusSpec:
       probeSelectorNilUsesHelmValues: false
