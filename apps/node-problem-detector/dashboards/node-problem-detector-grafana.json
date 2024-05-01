@@ -554,11 +554,37 @@
   ],
   "templating": {
       "list": [
-      {
+        {
+          "current": {
+            "selected": true,
+            "text": "Prometheus",
+            "value": "Prometheus"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Datasource",
+          "multi": false,
+          "name": "DS_PROMETHEUS",
+          "options": [],
+          "query": "prometheus",
+          "queryValue": "",
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
           "current": {},
           "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        },
+        {
+          "current": {},
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
           "definition": "label_values(problem_counter,reason)",
           "hide": 0,
@@ -567,16 +593,16 @@
           "name": "problem_counter_reason",
           "options": [],
           "query": {
-          "query": "label_values(problem_counter,reason)",
-          "refId": "StandardVariableQuery"
+            "query": "label_values(problem_counter,reason)",
+            "refId": "StandardVariableQuery"
           },
           "refresh": 2,
           "regex": "",
           "skipUrlSync": false,
           "sort": 1,
           "type": "query"
-      },
-      {
+        },
+        {
           "current": {},
           "datasource": {
           "type": "prometheus",
@@ -597,29 +623,29 @@
           "skipUrlSync": false,
           "sort": 1,
           "type": "query"
-      },
-      {
+        },
+        {
           "current": {},
           "datasource": {
-          "type": "prometheus",
-          "uid": "${DS_PROMETHEUS}"
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
           },
-          "definition": "label_values(problem_gauge,type)",
-          "hide": 0,
-          "includeAll": true,
-          "multi": true,
-          "name": "problem_type",
-          "options": [],
-          "query": {
-          "query": "label_values(problem_gauge,type)",
-          "refId": "StandardVariableQuery"
+            "definition": "label_values(problem_gauge,type)",
+            "hide": 0,
+            "includeAll": true,
+            "multi": true,
+            "name": "problem_type",
+            "options": [],
+            "query": {
+            "query": "label_values(problem_gauge,type)",
+            "refId": "StandardVariableQuery"
           },
           "refresh": 2,
           "regex": "",
           "skipUrlSync": false,
           "sort": 1,
           "type": "query"
-      }
+        }  
       ]
   },
   "time": {
