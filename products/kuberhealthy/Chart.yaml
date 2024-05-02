@@ -4,6 +4,6 @@ version: 1.0.0
 
 dependencies:
   - name: kuberhealthy
-    version: 105
+    version: 104
     repository: https://kuberhealthy.github.io/kuberhealthy/helm-repos
 
