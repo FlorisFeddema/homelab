@@ -25,7 +25,7 @@ kuberhealthy:
       cpu: 100m
       memory: 128Mi
     limits:
-      cpu: null
+      cpu: nill
       memory: 256Mi
 
   podDisruptionBudget:
