@@ -42,26 +42,54 @@ kuberhealthy:
   check:
     daemonset:
       enabled: true
+      image:
+        registry: docker.io
+        repository: kuberhealthy/daemonset-check
+        tag: v3.3.0
     deployment:
       enabled: true
+      image:
+        registry: docker.io
+        repository: kuberhealthy/deployment-check
+        tag: v1.9.0
     dnsInternal:
       enabled: true
+      image:
+        registry: docker.io
+        repository: kuberhealthy/dns-resolution-check
+        tag: v1.5.0
       extraEnvs:
         HOSTNAME: "cluster.local"
     dnsExternal:
       enabled: true
+      image:
+        registry: docker.io
+        repository: kuberhealthy/dns-resolution-check
+        tag: v1.5.0
       extraEnvs:
         HOSTNAME: "google.com"
     podRestarts:
       enabled: true
+      image:
+        registry: docker.io
+        repository: kuberhealthy/pod-restarts-check
+        tag: v2.5.0
       allNamespaces: true
       extraEnvs:
         MAX_FAILURES_ALLOWED: "1"
     podStatus:
       enabled: true
+      image:
+        registry: docker.io
+        repository: kuberhealthy/pod-status-check
+        tag: v1.3.0
       allNamespaces: true
     storage:
       enabled: true
+      image:
+        registry: docker.io
+        repository: chrishirsch/kuberhealthy-storage-check
+        tag: v0.0.1
     networkConnection:
       enabled: true
       extraEnvs:
