@@ -41,18 +41,28 @@ kuberhealthy:
 
   check:
     daemonset:
-      enabled: false
+      enabled: true
     deployment:
-      enabled: false
+      enabled: true
     dnsInternal:
-      enabled: false
+      enabled: true
+      extraEnvs:
+        HOSTNAME: "cluster.local"
     dnsExternal:
-      enabled: false
+      enabled: true
+      extraEnvs:
+        HOSTNAME: "google.com"
     podRestarts:
-      enabled: false
+      enabled: true
+      allNamespaces: true
+      extraEnvs:
+        MAX_FAILURES_ALLOWED: "1"
     podStatus:
-      enabled: false
+      enabled: true
+      allNamespaces: true
     storage:
-      enabled: false
+      enabled: true
     networkConnection:
-      enabled: false
+      enabled: true
+      extraEnvs:
+        CONNECTION_TARGET: "tcp://github.com:443"
