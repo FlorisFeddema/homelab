@@ -72,7 +72,7 @@ products:
     deploy: true
     autoSync: true
   kuberhealthy:
-    deploy: true
+    deploy: false
     autoSync: true
   kubePrometheusStack:
     deploy: true
