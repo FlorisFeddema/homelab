@@ -1,9 +1,0 @@
-apiVersion: v2
-name: kuberhealty
-version: 1.0.0
-
-dependencies:
-  - name: kuberhealthy
-    version: 104
-    repository: https://kuberhealthy.github.io/kuberhealthy/helm-repos
-

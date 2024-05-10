@@ -71,9 +71,6 @@ products:
   kepler:
     deploy: true
     autoSync: true
-  kuberhealthy:
-    deploy: false
-    autoSync: true
   kubePrometheusStack:
     deploy: true
     autoSync: true
