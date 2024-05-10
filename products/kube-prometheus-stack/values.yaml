@@ -67,7 +67,8 @@ kube-prometheus-stack:
     enabled: true
     service:
       selector:
-        component: kube-scheduler
+        k8s-app: kube-scheduler
+        tier: control-plane
     spec:
       endpoints:
         - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -81,7 +82,8 @@ kube-prometheus-stack:
     enabled: true
     service:
       selector:
-        component: kube-controller-manager
+        k8s-app: kube-controller-manager
+        tier: control-plane
     spec:
       endpoints:
         - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
