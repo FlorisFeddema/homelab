@@ -1,7 +1,7 @@
 database:
   clusterName: authentik-postgres
   replicas: 3
-  size: 16Gi
+  size: 32Gi
   monitoring:
     enabled: false
   backups:
