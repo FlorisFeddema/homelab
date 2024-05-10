@@ -68,12 +68,28 @@ kube-prometheus-stack:
     service:
       selector:
         component: kube-scheduler
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
 
   kubeControllerManager:
     enabled: true
     service:
       selector:
         component: kube-controller-manager
+    spec:
+      endpoints:
+        - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+          port: http-metrics
+          scheme: https
+          tlsConfig:
+            caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+            insecureSkipVerify: true
 
   kube-state-metrics:
     revisionHistoryLimit: 0
