@@ -37,6 +37,8 @@ spec:
           env:
             - name: IMMICH_METRICS
               value: "true"
+            - name: IMMICH_METRICS_PORT
+              value: "3002"
             - name: DB_HOSTNAME
               value: {{ .Values.database.clusterName }}-ro.{{ .Release.Namespace }}
             - name: DB_USERNAME
