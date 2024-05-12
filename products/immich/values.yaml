@@ -4,7 +4,7 @@ persistence:
   accessMode: ReadWriteOnce
 
 config:
-  size: 50Gi
+  size: 1Gi
   storageClass: ''
   accessMode: ReadWriteOnce
 
