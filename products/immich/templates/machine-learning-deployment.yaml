@@ -67,8 +67,6 @@ spec:
           volumeMounts:
             - name: cache
               mountPath: /cache
-            - name: config
-              mountPath: /config
           ports:
             - name: http
               containerPort: 3003

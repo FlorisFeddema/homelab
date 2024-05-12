@@ -71,8 +71,6 @@ spec:
           volumeMounts:
             - name: library
               mountPath: /usr/src/app/upload
-            - name: config
-              mountPath: /config
           ports:
             - name: http
               containerPort: 3001
@@ -85,6 +83,3 @@ spec:
         - name: library
           persistentVolumeClaim:
               claimName: {{ template "immich.fullname" . }}-library
-        - name: config
-          persistentVolumeClaim:
-            claimName: {{ template "immich.fullname" . }}-config
