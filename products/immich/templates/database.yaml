@@ -19,7 +19,7 @@ spec:
 
   bootstrap:
     initdb:
-      postInitSQL:
+      postInitApplicationSQL:
         - ALTER SYSTEM SET search_path TO "$user", public, vectors;
         - CREATE EXTENSION IF NOT EXISTS "vectors";
 
