@@ -54,6 +54,9 @@ products:
   homeAssistant:
     deploy: true
     autoSync: true
+  immich:
+    deploy: true
+    autoSync: true
   infro:
     deploy: true
     autoSync: true
