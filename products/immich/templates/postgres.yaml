@@ -1,0 +1,41 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Values.database.clusterName }}
+  labels:
+    app.kubernetes.io/name: {{ template "immich.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "immich"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.database.replicas }}
+  image: {{ .Values.database.image.registry }}/{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
+
+
+  postgresql:
+    shared_preload_libraries:
+      - "vectors.so"
+
+  bootstrap:
+    initdb:
+      postInitSQL:
+        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
+        - CREATE EXTENSION IF NOT EXISTS "vectors";
+
+  storage:
+    size: {{ .Values.database.size }}
+
+  {{ if .Values.database.backups.enabled }}
+  backup:
+    retentionPolicy: {{ .Values.database.backups.retention }}
+    barmanObjectStore:
+      destinationPath: {{ .Values.database.backups.path | quote }}
+      endpointURL: {{ .Values.database.backups.endpoint }}
+      s3Credentials:
+        accessKeyId:
+          name: {{ .Values.database.clusterName }}-backup-credentials
+          key: ACCESS_KEY
+        secretAccessKey:
+          name: {{ .Values.database.clusterName }}-backup-credentials
+          key: SECRET_KEY
+  {{ end }}

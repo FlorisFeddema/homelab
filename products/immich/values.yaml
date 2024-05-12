@@ -1,0 +1,115 @@
+persistence:
+  size: 50Gi
+  storageClass: ''
+  accessMode: ReadWriteOnce
+
+config:
+  size: 50Gi
+  storageClass: ''
+  accessMode: ReadWriteOnce
+
+ingress:
+  enabled: true
+  domain: immich.feddema.dev
+  tls:
+    enabled: true
+    secretName: immich-tls
+
+database:
+  image:
+    registry: ghcr.io
+    repository: tensorchord/cloudnative-pgvecto.rs
+    tag: 16.2
+
+  clusterName: immich-postgresql
+  replicas: 1
+  monitoring:
+    enabled: false
+  size: 32Gi
+  backups:
+    enabled: false
+
+machineLearning:
+  replicas: 1
+  image:
+    registry: ghcr.io
+    repository: immich-app/immich-machine-learning
+    tag: 1.100.0
+    pullPolicy: IfNotPresent
+
+#  resources:
+#    requests:
+#      cpu: 10m
+#      memory: 128Mi
+#    limits:
+#      memory: 512Mi
+
+server:
+  replicas: 1
+  image:
+    registry: ghcr.io
+    repository: immich-app/immich
+    tag: 1.100.0
+    pullPolicy: IfNotPresent
+
+#  resources:
+#    requests:
+#      cpu: 10m
+#      memory: 128Mi
+#    limits:
+#      memory: 512Mi
+
+microservices:
+  replicas: 1
+  image:
+    registry: ghcr.io
+    repository: immich-app/immich
+    tag: 1.100.0
+    pullPolicy: IfNotPresent
+
+#  resources:
+#    requests:
+#      cpu: 10m
+#      memory: 128Mi
+#    limits:
+#      memory: 512Mi
+
+
+redis:
+  enabled: true
+
+immich:
+  env:
+    DB_HOSTNAME: "immich-postgresql-ro.immich"
+    DB_USERNAME: "app"
+    DB_DATABASE_NAME: "app"
+    DB_PASSWORD: "{{ .Values.postgresql.global.postgresql.auth.password }}"
+
+    # ref: https://immich.app/docs/install/config-file/
+#    configuration:
+#      oauth:
+#        enabled: true
+#        clientId: ''
+#        clientSecret: ''
+
+  server:
+    ingress:
+      main:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: "0"
+          cert-manager.io/cluster-issuer: letsencrypt-dns
+        hosts:
+          - host: immich.feddema.dev
+            paths:
+              - path: "/"
+        tls:
+          - hosts:
+              - immich.feddema.dev
+            secretName: "immich-tls"
+
+  machine-learning:
+    persistence:
+      cache:
+        type: pvc
+
