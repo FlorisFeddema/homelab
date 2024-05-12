@@ -32,11 +32,20 @@ spec:
           imagePullPolicy: {{ .Values.machineLearning.image.pullPolicy }}
           env:
             - name: DB_HOSTNAME
-              value: {{ .Values.database.clusterName }}-ro.{{ .Release.Namespace }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.clusterName }}-app
+                  key: host
             - name: DB_USERNAME
-              value: app
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.clusterName }}-app
+                  key: username
             - name: DB_DATABASE_NAME
-              value: app
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.clusterName }}-app
+                  key: dbname
             - name: REDIS_HOSTNAME
               value: {{ .Release.Name }}-redis-master
             - name: IMMICH_MACHINE_LEARNING_URL
