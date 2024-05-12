@@ -354,7 +354,7 @@ gatus:
 
       # dns servers
       - name: adguard-dns-loadbalancer
-        url: 192.168.100.222
+        url: 192.168.102.11
         group: dns
         dns:
           query-name: "test.feddema.dev"
