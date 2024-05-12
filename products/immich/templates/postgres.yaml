@@ -11,7 +11,6 @@ spec:
   instances: {{ .Values.database.replicas }}
   imageName: {{ .Values.database.image.registry }}/{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
 
-
   postgresql:
     shared_preload_libraries:
       - "vectors.so"
