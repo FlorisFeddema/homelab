@@ -30,14 +30,13 @@ spec:
         - name: server
           image: "{{ .Values.microservices.image.registry }}/{{ .Values.microservices.image.repository }}:{{ .Values.microservices.image.tag }}"
           imagePullPolicy: {{ .Values.microservices.image.pullPolicy }}
-          command: ["/bin/sh"]
+          command:
+            - "/bin/sh"
           args:
-            - "./start-microservices.sh"
+            - ./start-microservices.sh
           env:
             - name: IMMICH_METRICS
               value: "true"
-            - name: IMMICH_CONFIG_FILE
-              value: "/config/config.yaml"
             - name: DB_HOSTNAME
               value: {{ .Values.database.clusterName }}-ro.{{ .Release.Namespace }}
             - name: DB_USERNAME
@@ -48,6 +47,11 @@ spec:
               value: {{ .Release.Name }}-redis-master
             - name: IMMICH_MACHINE_LEARNING_URL
               value: http://{{ template "immich.fullname" . }}-machine-learning:3003
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.clusterName }}-app
+                  key: password
           livenessProbe:
             initialDelaySeconds: 0
             timeoutSeconds: 1
@@ -81,6 +85,3 @@ spec:
         - name: library
           persistentVolumeClaim:
             claimName: {{ template "immich.fullname" . }}-library
-        - name: config
-          persistentVolumeClaim:
-            claimName: {{ template "immich.fullname" . }}-config

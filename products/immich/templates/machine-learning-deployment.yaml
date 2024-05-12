@@ -31,10 +31,6 @@ spec:
           image: "{{ .Values.machineLearning.image.registry }}/{{ .Values.machineLearning.image.repository }}:{{ .Values.machineLearning.image.tag }}"
           imagePullPolicy: {{ .Values.machineLearning.image.pullPolicy }}
           env:
-            - name: IMMICH_METRICS
-              value: "true"
-            - name: IMMICH_CONFIG_FILE
-              value: "/config/config.yaml"
             - name: DB_HOSTNAME
               value: {{ .Values.database.clusterName }}-ro.{{ .Release.Namespace }}
             - name: DB_USERNAME
@@ -47,6 +43,11 @@ spec:
               value: http://{{ template "immich.fullname" . }}-machine-learning:3003
             - name: TRANSFORMERS_CACHE
               value: /cache
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.clusterName }}-app
+                  key: password
           livenessProbe:
             initialDelaySeconds: 0
             timeoutSeconds: 1
@@ -76,6 +77,3 @@ spec:
       volumes:
         - name: cache
           emptyDir: {}
-        - name: config
-          persistentVolumeClaim:
-            claimName: {{ template "immich.fullname" . }}-config

@@ -1,12 +1,7 @@
 persistence:
   size: 50Gi
   storageClass: ''
-  accessMode: ReadWriteOnce
-
-config:
-  size: 1Gi
-  storageClass: ''
-  accessMode: ReadWriteOnce
+  accessMode: ReadWriteMany
 
 ingress:
   enabled: true
@@ -51,7 +46,7 @@ server:
   replicas: 1
   image:
     registry: ghcr.io
-    repository: immich-app/immich
+    repository: immich-app/immich-server
     tag: v1.100.0
     pullPolicy: IfNotPresent
 
@@ -66,7 +61,7 @@ microservices:
   replicas: 1
   image:
     registry: ghcr.io
-    repository: immich-app/immich
+    repository: immich-app/immich-server
     tag: v1.100.0
     pullPolicy: IfNotPresent
 
