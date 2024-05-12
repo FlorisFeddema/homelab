@@ -9,7 +9,7 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   instances: {{ .Values.database.replicas }}
-  image: {{ .Values.database.image.registry }}/{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
+  imageName: {{ .Values.database.image.registry }}/{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
 
 
   postgresql:
