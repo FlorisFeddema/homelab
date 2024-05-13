@@ -76,6 +76,8 @@ kube-prometheus-stack:
         searchNamespace: ALL
   kube-state-metrics:
     revisionHistoryLimit: 0
+    metricLabelsAllowlist: 
+    - nodes=[topology.kubernetes.io/zone]
   prometheus-node-exporter:
     revisionHistoryLimit: 0
     namespaceOverride: 'prometheus-node-exporter'
