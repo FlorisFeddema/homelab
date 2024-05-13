@@ -37,8 +37,6 @@ spec:
           env:
             - name: IMMICH_METRICS
               value: "true"
-            - name: IMMICH_METRICS_PORT
-              value: "3002"
             - name: DB_HOSTNAME
               valueFrom:
                 secretKeyRef:
@@ -68,26 +66,21 @@ spec:
             timeoutSeconds: 1
             periodSeconds: 10
             failureThreshold: 3
-            httpGet:
-              port: http
-              path: /api/server-info/ping
+            tcpSocket:
+              port: 8081
           readinessProbe:
             initialDelaySeconds: 0
             timeoutSeconds: 1
             periodSeconds: 10
             failureThreshold: 3
-            httpGet:
-              port: http
-              path: /api/server-info/ping
+            tcpSocket:
+              port: 8081
           volumeMounts:
             - name: library
               mountPath: /usr/src/app/upload
           ports:
-            - name: http
-              containerPort: 3001
-              protocol: TCP
             - name: metrics
-              containerPort: 3002
+              containerPort: 8081
               protocol: TCP
           resources: {{ toYaml .Values.microservices.resources | nindent 12 }}
       volumes:

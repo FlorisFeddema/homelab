@@ -37,8 +37,6 @@ spec:
           env:
             - name: IMMICH_METRICS
               value: "true"
-            - name: IMMICH_METRICS_PORT
-              value: "3002"
             - name: DB_HOSTNAME
               valueFrom:
                 secretKeyRef:
@@ -87,7 +85,7 @@ spec:
               containerPort: 3001
               protocol: TCP
             - name: metrics
-              containerPort: 3002
+              containerPort: 8081
               protocol: TCP
           resources: {{ toYaml .Values.server.resources | nindent 12 }}
       volumes:
