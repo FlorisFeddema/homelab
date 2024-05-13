@@ -15,8 +15,6 @@ spec:
     shared_preload_libraries:
       - "vectors.so"
 
-  superuserSecret:
-    name: app-secret
 
   logLevel: warning
 
@@ -28,8 +26,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
         - ALTER SYSTEM SET search_path TO app, public, vectors;
         - ALTER SCHEMA vectors OWNER TO app;
-        # run this after the schema is created
-        #- GRANT SELECT ON TABLE pg_vector_index_stat TO app;
+        # run this via kubectl exec in database pod after the schema is created
+        #- \c app; GRANT SELECT ON TABLE pg_vector_index_stat TO app;
 
   storage:
     size: {{ .Values.database.size }}
