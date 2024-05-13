@@ -17,7 +17,6 @@ spec:
       app.kubernetes.io/name: {{ template "immich.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/component: "immich-server"
-      {{- include "labels" . | nindent 6 }}
   template:
     metadata:
       labels:
