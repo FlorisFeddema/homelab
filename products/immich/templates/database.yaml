@@ -23,8 +23,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS "vectors";
         - CREATE EXTENSION IF NOT EXISTS "cube";
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
-        - ALTER SYSTEM SET search_path TO "$user", public, vectors;
-        - ALTER SCHEMA vectors OWNER TO "$user";
+        - ALTER SYSTEM SET search_path TO app, public, vectors;
+        - ALTER SCHEMA vectors OWNER TO app;
 
   storage:
     size: {{ .Values.database.size }}
