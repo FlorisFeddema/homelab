@@ -1,10 +1,9 @@
 democratic-csi:
 
   node:
+    # talos config
     hostPID: true
     driver:
-      logLevel: debug
-      # talos config
       extraEnv:
         - name: ISCSIADM_HOST_STRATEGY
           value: nsenter
@@ -12,7 +11,12 @@ democratic-csi:
           value: /usr/local/sbin/iscsiadm
       iscsiDirHostPath: /usr/local/etc/iscsi
       iscsiDirHostPathType: ""
-      # talos config
+    # talos config
+      # logLevel: debug
+    mount:
+      checkFilesystem:
+        ext4:
+          enabled: true
 
   csiDriver:
     name: "org.democratic-csi.iscsi.hdd"
