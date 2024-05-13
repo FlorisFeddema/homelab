@@ -37,6 +37,8 @@ spec:
           env:
             - name: IMMICH_METRICS
               value: "true"
+            - name: IMMICH_METRICS_PORT
+              value: "8081"
             - name: DB_HOSTNAME
               valueFrom:
                 secretKeyRef:
