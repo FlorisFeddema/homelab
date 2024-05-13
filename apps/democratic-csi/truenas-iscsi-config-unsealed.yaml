@@ -9,6 +9,11 @@ stringData:
     # https://github.com/democratic-csi/democratic-csi/tree/master/examples
     # YOU MUST COPY THE DATA HERE INLINE!
     driver: freenas-api-iscsi
+    node:
+      mount:
+        checkFilesystem:
+          ext4:
+            enabled: true
     instance_id:
     httpConnection:
       protocol: https
@@ -46,3 +51,4 @@ stringData:
       extentBlocksize: 512
       extentRpm: SSD
       extentAvailThreshold: 80
+      
