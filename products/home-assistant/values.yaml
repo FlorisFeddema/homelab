@@ -33,7 +33,7 @@ ingress:
     enabled: true
     secretName: home-assistant-tls
 
-nodeName: kashaylan-0
+nodeName: hortek-0
 
 config:
   secret:
@@ -94,7 +94,7 @@ config:
     homekit:
       name: Home Assistant Bridge
       mode: bridge
-      advertise_ip: 192.168.4.11
+      advertise_ip: 192.168.4.15
       port: 21064
       filter:
         include_entities:
