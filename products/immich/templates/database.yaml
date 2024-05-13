@@ -25,7 +25,8 @@ spec:
         - CREATE EXTENSION IF NOT EXISTS "earthdistance";
         - ALTER SYSTEM SET search_path TO app, public, vectors;
         - ALTER SCHEMA vectors OWNER TO app;
-        - GRANT SELECT ON TABLE pg_vector_index_stat TO app;
+        # run this after the schema is created
+        #- GRANT SELECT ON TABLE pg_vector_index_stat TO app;
 
   storage:
     size: {{ .Values.database.size }}
