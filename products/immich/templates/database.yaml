@@ -15,8 +15,8 @@ spec:
     shared_preload_libraries:
       - "vectors.so"
 
-superuserSecret:
-  name: app-secret
+  superuserSecret:
+    name: app-secret
 
   logLevel: warning
 
