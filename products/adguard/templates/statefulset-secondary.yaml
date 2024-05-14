@@ -26,6 +26,7 @@ spec:
         app.kubernetes.io/component: "adguard-secondary"
         {{- include "labels" . | nindent 8 }}
     spec:
+      topologySpreadConstraints: {{ toYaml .Values.secondary.topologySpreadConstraints | nindent 8 }}
       initContainers:
         - name: copy-config
           image: "{{ .Values.copyConfig.image.registry }}/{{ .Values.copyConfig.image.repository }}:{{ .Values.copyConfig.image.tag }}"

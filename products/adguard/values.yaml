@@ -13,6 +13,16 @@ secondary:
   replicas: 3
   resources: {}
 
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+        app.kubernetes.io/component: adguard-secondary
+        app.kubernetes.io/instance: adguard
+        app.kubernetes.io/name: adguard
+
 persistence:
   labels:
     recurring-job-group.longhorn.io/backup: enabled
