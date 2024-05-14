@@ -56,6 +56,16 @@ etcd:
       enabled: true
       namespace: coredns
 
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: etcd
+          app.kubernetes.io/instance: coredns
+          app.kubernetes.io/name: etcd
+
 coredns:
   replicaCount: 3
 
@@ -78,6 +88,24 @@ coredns:
   readinessProbe:
     initialDelaySeconds: 20
 
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/instance: coredns
+          app.kubernetes.io/name: coredns
+
+  extraVolumes:
+    - name: etcd-tls
+      secret:
+        secretName: etcd-client-tls
+
+  extraVolumeMounts:
+    - name: etcd-tls
+      mountPath: /tls
+
   servers:
     - zones:
         - zone: .
@@ -99,6 +127,7 @@ coredns:
           configBlock: |
             fallthrough
             endpoint coredns-etcd:2379
+            tls /tls/tls.cert /tls/tls.key /tls/ca.cert
         - name: forward
           parameters: '. tls://9.9.9.10 tls://149.112.112.10'
           configBlock: |
