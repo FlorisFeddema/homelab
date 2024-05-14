@@ -8,7 +8,7 @@ external-dns:
   provider: coredns
 
   extraArgs:
-    exclude-target-net: 192.168.0.0/16
+    target-net-filter: 192.168.0.0/16
 
   coredns:
     etcdEndpoints: "https://coredns-etcd.coredns:2379"
