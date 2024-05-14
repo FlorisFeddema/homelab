@@ -19,9 +19,9 @@ secondary:
       whenUnsatisfiable: ScheduleAnyway
       labelSelector:
         matchLabels:
-        app.kubernetes.io/component: adguard-secondary
-        app.kubernetes.io/instance: adguard
-        app.kubernetes.io/name: adguard
+          app.kubernetes.io/component: adguard-secondary
+          app.kubernetes.io/instance: adguard
+          app.kubernetes.io/name: adguard
 
 persistence:
   labels:
