@@ -126,7 +126,7 @@ coredns:
         - name: etcd
           configBlock: |
             fallthrough
-            endpoint coredns-etcd:2379
+            endpoint coredns-etcd.coredns:2379
             tls /tls/tls.crt /tls/tls.key /tls/ca.crt
         - name: forward
           parameters: '. tls://9.9.9.10 tls://149.112.112.10'
