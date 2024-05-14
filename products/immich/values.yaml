@@ -1,5 +1,5 @@
 persistence:
-  size: 50Gi
+  size: 200Gi
   storageClass: ''
   accessMode: ReadWriteMany
 
