@@ -22,7 +22,7 @@ external-dns:
       keyFilename: "tls.key"
 
   triggerLoopOnEvent: true
-  logLevel: error
+  logLevel: info
   logFormat: json
   policy: sync
 
