@@ -1,10 +1,10 @@
 apiVersion: v2
 name: coredns
-version: 1.0.9
+version: 1.0.10
 
 dependencies:
   - name: etcd
-    version: 10.0.7
+    version: 10.0.8
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: etcd.enabled
   - name: coredns
