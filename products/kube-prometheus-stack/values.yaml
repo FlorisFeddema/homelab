@@ -23,6 +23,27 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
 
+      retention: 365d
+      replicas: 2
+
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 100Gi
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: kube-prometheus-stack
+              app.kubernetes.io/managed-by: prometheus-operator
+              app.kubernetes.io/name: prometheus
+              prometheus: kube-prometheus-stack
+
   alertmanager:
     enabled: true
 
@@ -64,6 +85,8 @@ kube-prometheus-stack:
     enabled: false
     forceDeployDatasources: true
     forceDeployDashboards: true
+    defaultDashboardsTimezone: Europe/Amsterdam
+    defaultDashboardsEditable: false
 
   kubeEtcd:
     enabled: false
@@ -103,6 +126,8 @@ kube-prometheus-stack:
 
   kube-state-metrics:
     revisionHistoryLimit: 0
+#    metricLabelsAllowlist:
+#      - nodes=[topology.kubernetes.io/zone]
 
   prometheus-node-exporter:
     revisionHistoryLimit: 0
