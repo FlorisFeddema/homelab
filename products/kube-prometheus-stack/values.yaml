@@ -31,6 +31,14 @@ kube-prometheus-stack:
       configSecret: 'alertmanager-config'
       externalUrl: https://alertmanager.feddema.dev
 
+      storage:
+       volumeClaimTemplate:
+         spec:
+           accessModes: ["ReadWriteOnce"]
+           resources:
+             requests:
+               storage: 2Gi
+
     ingress:
       enabled: true
       hosts:
