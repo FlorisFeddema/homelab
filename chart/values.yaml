@@ -130,6 +130,9 @@ products:
   tetragon:
     deploy: true
     autoSync: true
+  spegel:
+    deploy: true
+    autoSync: true
   vpa:
     deploy: true
     autoSync: true
