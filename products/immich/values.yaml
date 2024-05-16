@@ -48,7 +48,7 @@ server:
   image:
     registry: ghcr.io
     repository: immich-app/immich-server
-    tag: v1.104.0
+    tag: v1.105.1
     pullPolicy: IfNotPresent
 
 #  resources:
@@ -63,7 +63,7 @@ microservices:
   image:
     registry: ghcr.io
     repository: immich-app/immich-server
-    tag: v1.104.0
+    tag: v1.105.1
     pullPolicy: IfNotPresent
 
 #  resources:
