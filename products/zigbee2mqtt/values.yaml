@@ -90,7 +90,8 @@ config:
       password: '!secret.yaml mqtt_password'
     serial:
       port: /dev/ttyACM0
-      adapter: ezsp
+      adapter: ember
+      rtscts: false
     frontend:
       port: 8080
       url: https://zigbee.feddema.dev
