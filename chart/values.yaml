@@ -127,10 +127,10 @@ products:
   smartmeterGatewayPrometheusExporter:
     deploy: false
     autoSync: true
-  tetragon:
+  spegel:
     deploy: true
     autoSync: true
-  spegel:
+  tetragon:
     deploy: true
     autoSync: true
   vpa:
