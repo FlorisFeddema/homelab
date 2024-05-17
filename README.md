@@ -96,6 +96,7 @@ export TALOSCONFIG=./talosconfig
 CLUSTERNAME=gerador
 CONTROLPLANE=0
 NODEIP=192.168.4.11
+KUBEVERSION=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
 talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
     --output rendered/controlplane-$CONTROLPLANE.yaml \
     --output-types controlplane                       \
@@ -103,7 +104,8 @@ talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
     --with-secrets secrets.yaml                       \
     --config-patch @controlplane-$CONTROLPLANE.yaml   \
     --config-patch @controlplane-all.yaml             \
-    --config-patch @cluster.yaml
+    --config-patch @cluster.yaml                      \
+    --kubernetes-version $KUBEVERSION
     
 talosctl apply-config --insecure --nodes $NODEIP --file rendered/controlplane-$CONTROLPLANE.yaml
 ```
@@ -115,14 +117,16 @@ export TALOSCONFIG=./talosconfig
 CLUSTERNAME=gerador
 WORKER=1
 NODEIP=192.168.4.14
+KUBEVERSION=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
 talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
-    --output rendered/worker-$WORKER.yaml \
-    --output-types worker                       \
+    --output rendered/worker-$WORKER.yaml             \
+    --output-types worker                             \
     --with-cluster-discovery=false                    \
     --with-secrets secrets.yaml                       \
-    --config-patch @worker-$WORKER.yaml   \
-    --config-patch @worker-all.yaml             \
-    --config-patch @cluster.yaml
+    --config-patch @worker-$WORKER.yaml               \
+    --config-patch @worker-all.yaml                   \
+    --config-patch @cluster.yaml                      \
+    --kubernetes-version $KUBEVERSION
     
 talosctl apply-config --insecure --nodes $NODEIP --file rendered/worker-$WORKER.yaml
 ```
@@ -137,7 +141,7 @@ talosctl --nodes $NODEIP dashboard
 
 ```shell
 TALOSCONFIG=./talosconfig
-TALOS_VERSION=v1.6.5
+TALOS_VERSION=v1.7.1
 echo $TALOS_VERSION
 
 ISCSI_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep iscsi-tools)
