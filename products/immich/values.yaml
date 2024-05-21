@@ -18,7 +18,7 @@ database:
   image:
     registry: ghcr.io
     repository: tensorchord/cloudnative-pgvecto.rs
-    tag: 16.2
+    tag: 16.3
 
   clusterName: immich-postgresql
   replicas: 2
