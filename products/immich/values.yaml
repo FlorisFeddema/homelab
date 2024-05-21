@@ -21,7 +21,7 @@ database:
     tag: 16.2
 
   clusterName: immich-postgresql
-  replicas: 1
+  replicas: 2
   monitoring:
     enabled: false
   size: 32Gi
@@ -79,39 +79,3 @@ redis:
   architecture: standalone
   auth:
     enabled: false
-
-immich:
-  env:
-    DB_HOSTNAME: "immich-postgresql-ro.immich"
-    DB_USERNAME: "app"
-    DB_DATABASE_NAME: "app"
-    DB_PASSWORD: "{{ .Values.postgresql.global.postgresql.auth.password }}"
-
-    # ref: https://immich.app/docs/install/config-file/
-#    configuration:
-#      oauth:
-#        enabled: true
-#        clientId: ''
-#        clientSecret: ''
-
-  server:
-    ingress:
-      main:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
-          cert-manager.io/cluster-issuer: letsencrypt-dns
-        hosts:
-          - host: immich.feddema.dev
-            paths:
-              - path: "/"
-        tls:
-          - hosts:
-              - immich.feddema.dev
-            secretName: "immich-tls"
-
-  machine-learning:
-    persistence:
-      cache:
-        type: pvc
-
