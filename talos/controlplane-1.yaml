@@ -10,6 +10,7 @@ machine:
 
   nodeLabels:
     topology.kubernetes.io/zone: "kashaylan"
+    topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "controlplane-1"
 
   install:

@@ -11,8 +11,8 @@ machine:
 
   nodeLabels:
     topology.kubernetes.io/zone: "hortek"
+    topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "controlplane-2"
-
 
   install:
     disk: /dev/sdb
