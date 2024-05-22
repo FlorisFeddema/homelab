@@ -8,6 +8,10 @@ machine:
         vip:
           ip: 192.168.4.9
 
+  nodeLabels:
+    topology.kubernetes.io/zone: "kashaylan"
+    feddema.dev/talos-configfile: "controlplane-1"
+
   install:
     disk: /dev/mmcblk0
 

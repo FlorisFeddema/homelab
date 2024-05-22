@@ -87,82 +87,27 @@ talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
     --config-patch @cluster.yaml
 ```
 
-### Create nodes
-
-#### Control plane
+### General commands
 
 ```shell
-export TALOSCONFIG=./talosconfig
-CLUSTERNAME=gerador
-CONTROLPLANE=0
-NODEIP=192.168.4.11
-KUBEVERSION=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
-talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
-    --output rendered/controlplane-$CONTROLPLANE.yaml \
-    --output-types controlplane                       \
-    --with-cluster-discovery=false                    \
-    --with-secrets secrets.yaml                       \
-    --config-patch @controlplane-$CONTROLPLANE.yaml   \
-    --config-patch @controlplane-all.yaml             \
-    --config-patch @cluster.yaml                      \
-    --kubernetes-version $KUBEVERSION
-    
-talosctl apply-config --insecure --nodes $NODEIP --file rendered/controlplane-$CONTROLPLANE.yaml
-```
-
-#### Worker
-
 ```shell
-export TALOSCONFIG=./talosconfig
-CLUSTERNAME=gerador
-WORKER=1
-NODEIP=192.168.4.14
-KUBEVERSION=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
-talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
-    --output rendered/worker-$WORKER.yaml             \
-    --output-types worker                             \
-    --with-cluster-discovery=false                    \
-    --with-secrets secrets.yaml                       \
-    --config-patch @worker-$WORKER.yaml               \
-    --config-patch @worker-all.yaml                   \
-    --config-patch @cluster.yaml                      \
-    --kubernetes-version $KUBEVERSION
-    
-talosctl apply-config --insecure --nodes $NODEIP --file rendered/worker-$WORKER.yaml
-```
-
-```shell
-talosctl --nodes $NODEIP bootstrap
 talosctl --nodes $NODEIP kubeconfig
 talosctl --nodes $NODEIP dashboard
 ```
 
 ### Upgrade nodes
 
-```shell
-TALOSCONFIG=./talosconfig
-TALOS_VERSION=v1.7.1
-echo $TALOS_VERSION
-
-ISCSI_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep iscsi-tools)
-UTIL_IMAGE=$(crane export ghcr.io/siderolabs/extensions:$TALOS_VERSION | tar x -O image-digests | grep util-linux-tools)
-RK3588_IMAGE=$(crane export ghcr.io/nberlee/extensions:$TALOS_VERSION | tar x -O image-digests | grep rk3588)
-echo $ISCSI_IMAGE
-echo $UTIL_IMAGE
-echo $RK3588_IMAGE
-mkdir _images
-docker run --rm -t -v $PWD/_images:/out --privileged ghcr.io/nberlee/imager:$TALOS_VERSION iso --system-extension-image $ISCSI_IMAGE --system-extension-image $UTIL_IMAGE --system-extension-image $RK3588_IMAGE
-docker run --rm -t -v $PWD/_images:/out --privileged ghcr.io/nberlee/imager:$TALOS_VERSION installer --system-extension-image $ISCSI_IMAGE --system-extension-image $UTIL_IMAGE --system-extension-image $RK3588_IMAGE
-
-crane push _images/installer-arm64.tar ghcr.io/florisfeddema/homelab/talos-installer:$TALOS_VERSION
-```
+Upgrade Talos version:
 
 ```shell
-TALOSCONFIG=./talosconfig
-NODEIP=192.168.4.12
-TALOS_IMAGE=ghcr.io/florisfeddema/homelab/talos-installer:$TALOS_VERSION
-talosctl upgrade --nodes $NODEIP --image $TALOS_IMAGE --preserve
-```
+./update-talos.sh -n kashaylan-2 -v v1.7.2 -c ./talosconfig -f true
+ ```
+
+Upgrade configuration:
+
+```shell
+./update-config.sh -n kashaylan-2  -c ./talosconfig
+ ```
 
 ## UDM 
 

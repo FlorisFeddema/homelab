@@ -25,3 +25,5 @@ machine:
       enabled: true
       port: 7445
 
+  nodeLabels:
+    node-role.kubernetes.io/worker: ""

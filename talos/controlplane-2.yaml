@@ -9,8 +9,13 @@ machine:
         vip:
           ip: 192.168.4.9
 
+  nodeLabels:
+    topology.kubernetes.io/zone: "hortek"
+    feddema.dev/talos-configfile: "controlplane-2"
+
+
   install:
-    disk: /dev/sda
+    disk: /dev/sdb
 
   disks:
     - device: /dev/nvme0n1
