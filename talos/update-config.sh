@@ -30,7 +30,7 @@ echo "⚙️ Node is a $nodeType"
 clusterName="gerador"
 kubernetesVersion=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
 nodeIP=$(kubectl get node "$nodeName" -o yaml | yq '.status.addresses[] | select(.type == "InternalIP") | .address')
-configFile=$(kubectl get node hortek-0 -o yaml | yq '.metadata.labels["feddema.dev/talos-configfile"]')
+configFile=$(kubectl get node "$nodeName" -o yaml | yq '.metadata.labels["feddema.dev/talos-configfile"]')
 
 echo "⚙️ Generating Talos config for $nodeName"
 talosctl gen config $clusterName https://"$nodeIP":6443 \
@@ -43,9 +43,9 @@ talosctl gen config $clusterName https://"$nodeIP":6443 \
     --config-patch @cluster.yaml                      \
     --kubernetes-version "$kubernetesVersion"
 
-if [ -n "$forcePush" ]; then
+if [ -z "$forcePush" ]; then
   echo "⚙️ Applying Talos config for $nodeName"
-  talosctl apply-config --insecure --nodes $nodeIP --file ./rendered/"$configFile".yaml
+  talosctl apply-config --nodes $nodeIP --file ./rendered/"$configFile".yaml
 else
   echo "⚙️ Running in dry-run mode, skipping apply-config"
 fi
