@@ -90,7 +90,6 @@ talosctl gen config $CLUSTERNAME https://$NODEIP:6443 \
 ### General commands
 
 ```shell
-```shell
 talosctl --nodes $NODEIP kubeconfig
 talosctl --nodes $NODEIP dashboard
 ```
