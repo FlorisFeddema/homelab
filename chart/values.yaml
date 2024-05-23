@@ -62,7 +62,7 @@ products:
     deploy: true
     autoSync: true
   intelDevicePluginsGpu:
-    deploy: false
+    deploy: true
     autoSync: true
     ignoreDifferences:
       - group: "deviceplugin.intel.com"
