@@ -29,12 +29,12 @@ etcd:
       caFilename: ca.crt
 
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
-  initialClusterState: "existing" # "new" or "existing"
+  initialClusterState: "new" # "new" or "existing"
 
   replicaCount: 3
 
   initialClusterToken: "etcd-cluster-coredns"
-  logLevel: "error"
+  logLevel: "warning"
 
   resources: {}
 
