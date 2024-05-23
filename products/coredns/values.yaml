@@ -15,7 +15,7 @@ etcd:
       secureTransport: true
       useAutoTLS: false
       existingSecret: etcd-peer-tls
-      enableAuthentication: true
+      enableAuthentication: false
       certFilename: tls.crt
       certKeyFilename: tls.key
       caFilename: ca.crt
@@ -29,7 +29,7 @@ etcd:
       caFilename: ca.crt
 
   removeMemberOnContainerTermination: false #if true, the etcd pod cannot be restarted after it is terminated
-  initialClusterState: "new" # "new" or "existing"
+  initialClusterState: "existing" # "new" or "existing"
 
   replicaCount: 3
 
