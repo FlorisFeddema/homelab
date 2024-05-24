@@ -1,4 +1,7 @@
 gatus:
+  deployment:
+    annotateConfigChecksum: false
+
   ingress:
     enabled: true
     annotations:
@@ -25,6 +28,10 @@ gatus:
 
   config:
     metrics: true
+    connectivity:
+      checker:
+        target: 1.1.1.1:53
+        interval: 10s
     storage:
       type: postgres
       path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
@@ -199,7 +206,6 @@ gatus:
           query-name: "test.feddema.dev"
           query-type: "A"
         conditions:
-          - "[BODY] == 31.201.249.143"
           - "[DNS_RCODE] == NOERROR"
         alerts:
           - type: telegram
