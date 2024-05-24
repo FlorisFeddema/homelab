@@ -20,8 +20,10 @@ products:
     ignoreDifferences:
       - group: "admissionregistration.k8s.io"
         kind: MutatingWebhookConfiguration
-        jqPathExpressions:
-          - webhooks[]?.clientConfig.caBundle
+        jsonPointers:
+          - /webhooks/0/clientConfig/caBundle
+          - /webhooks/1/clientConfig/caBundle
+          - /webhooks/2/clientConfig/caBundle
   coredns:
     deploy: true
     autoSync: true
