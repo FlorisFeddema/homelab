@@ -15,7 +15,7 @@ etcd:
       secureTransport: true
       useAutoTLS: false
       existingSecret: etcd-peer-tls
-      enableAuthentication: false
+      enableAuthentication: true
       certFilename: tls.crt
       certKeyFilename: tls.key
       caFilename: ca.crt
