@@ -19,13 +19,7 @@ products:
     serverSideApply: true
     ignoreDifferences:
       - group: "admissionregistration.k8s.io"
-        kind: MutatingWebhookConfiguration
-        jsonPointers:
-          - /webhooks/0/clientConfig/caBundle
-          - /webhooks/1/clientConfig/caBundle
-          - /webhooks/2/clientConfig/caBundle
-      - group: "admissionregistration.k8s.io"
-        kind: ValidatingWebhookConfiguration
+        kind: *
         jsonPointers:
           - /webhooks/0/clientConfig/caBundle
           - /webhooks/1/clientConfig/caBundle
