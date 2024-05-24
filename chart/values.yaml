@@ -17,6 +17,11 @@ products:
     deploy: true
     autoSync: true
     serverSideApply: true
+    ignoreDifferences:
+      - group: "admissionregistration.k8s.io"
+        kind: MutatingWebhookConfiguration
+        jsonPointers:
+          - /webhooks/clientConfig/caBundle
   coredns:
     deploy: true
     autoSync: true
