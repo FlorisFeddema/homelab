@@ -8,5 +8,6 @@ apps:
       kind: GpuDevicePlugin
       jsonPointers:
       - /spec/resourceManager
+      - /spec/enableMonitoring
   generic-device-operator:
     deploy: true

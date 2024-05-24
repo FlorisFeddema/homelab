@@ -3,36 +3,5 @@ node-feature-discovery:
     tolerations: []
     affinity: {}
 
-  # worker:
-  #   config:
-  #     sources:
-  #       usb:
-  #         # https://www.usb.org/defined-class-codes
-  #         deviceClassWhitelist:
-  #         - "02"
-  #         - "ff"
-
-  #         deviceLabelFields:
-  #           - "class"
-  #           - "vendor"
-  #           - "device"
-
-  #       custom:
-  #         - name: "sonoff-zigbee-dongle-plus-p"
-  #           labels:
-  #             "sonoff.tech/zigbee-dongle-plus-p": "true"
-  #           matchFeatures:
-  #             - feature: usb.device
-  #               matchExpressions:
-  #                 class: {op: In, value: ["ff"]}
-  #                 vendor: {op: In, value: ["10c4"]}
-  #                 device: {op: In, value: ["ea60"]}
-  #         - name: "sonoff-zigbee-dongle-plus-e"
-  #           labels:
-  #             "sonoff.tech/zigbee-dongle-plus-e": "true"
-  #           matchFeatures:
-  #             - feature: usb.device
-  #               matchExpressions:
-  #                 class: {op: In, value: ["02"]}
-  #                 vendor: {op: In, value: ["1a86"]}
-  #                 device: {op: In, value: ["55d4"]}
+  prometheus:
+    enable: true
