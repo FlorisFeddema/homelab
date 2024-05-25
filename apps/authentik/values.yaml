@@ -18,7 +18,7 @@ global:
     - name: AUTHENTIK_POSTGRESQL__USE_PGBOUNCER
       value: "true"
     - name: AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__HOST
-      value: env://AUTHENTIK_DATA_R_SERVICE_HOST
+      value: env://AUTHENTIK_DATA_RO_SERVICE_HOST
     - name: AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__NAME
       value: file:///postgres-credentials/dbname
     - name: AUTHENTIK_POSTGRESQL__READ_REPLICAS__0__USER
