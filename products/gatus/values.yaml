@@ -28,6 +28,7 @@ gatus:
 
   config:
     metrics: true
+    disable-monitoring-lock: true
     connectivity:
       checker:
         target: 1.1.1.1:53
