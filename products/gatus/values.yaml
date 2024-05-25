@@ -27,6 +27,18 @@ gatus:
     enabled: true
 
   config:
+    default-endpoint-external: &default-endpoint-external
+      group: external
+      conditions:
+        - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
+      alerts:
+        - type: telegram
+          send-on-resolved: true
+          failure-threshold: 4
+          success-threshold: 1
+
     metrics: true
     disable-monitoring-lock: true
     connectivity:
@@ -44,160 +56,43 @@ gatus:
     endpoints:
       - name: adguard
         url: https://adguard.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: argocd
         url: https://argocd.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: authentik
         url: https://authentik.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: hubble
         url: https://hubble.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: emqx
         url: https://emqx.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: falco
         url: https://falco.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: gatus
         url: https://gatus.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: grafana
         url: https://grafana.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: homeassistant
         url: https://home.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: immich
         url: https://immich.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: minio
         url: https://minio.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: nextcloud
         url: https://nextcloud.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
       - name: zigbee2mqtt
         url: https://zigbee.feddema.dev
-        group: external
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 4
-            success-threshold: 1
+        <<: *default-endpoint-external
 
       # dns servers
       - name: adguard-dns-loadbalancer
