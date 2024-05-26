@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: authentik-data
 spec:
-  instances: 3
+  instances: 2
 
   storage:
     size: 2Gi
