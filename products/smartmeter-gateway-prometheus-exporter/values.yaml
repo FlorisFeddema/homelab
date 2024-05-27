@@ -9,4 +9,4 @@ smartmeter-gateway-prometheus-exporter:
       memory: 16Mi
 
   config:
-    gatewayAddress: '192.168.1.193:82'
+    gatewayAddress: '192.168.3.42:82'
