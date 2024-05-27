@@ -115,7 +115,7 @@ products:
     deploy: true
     autoSync: true
   privateExternalDns:
-    deploy: true
+    deploy: false
     autoSync: true
     ignoreDifferences:
       - group: ""
@@ -137,7 +137,7 @@ products:
     deploy: true
     autoSync: true
   smartmeterGatewayPrometheusExporter:
-    deploy: false
+    deploy: true
     autoSync: true
   spegel:
     deploy: true
