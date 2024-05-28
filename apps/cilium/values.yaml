@@ -6,11 +6,21 @@ cilium:
   tolerations:
     - operator: Exists
     - operator: Equal
+
+  envoy:
+    prometheus:
+      enabled: true
+
   operator:
     rollOutPods: true
     tolerations:
     - operator: Exists
     - operator: Equal
+    prometheus:
+      serviceMonitor:
+        enabled: true
+    dashboards:
+      enabled: true
 
   ipam:
     mode: kubernetes
@@ -69,6 +79,9 @@ cilium:
     ttlSecondsAfterFinished: null
     tolerations:
     - operator: Equal
+
   prometheus:
     serviceMonitor:
       enabled: true
+  dashboards:
+    enabled: true
