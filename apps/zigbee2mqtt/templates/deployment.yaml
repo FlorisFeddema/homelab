@@ -76,3 +76,8 @@ spec:
         - name: secret-config
           secret:
             secretName: zigbee2mqtt-credentials
+      tolerations:
+      - key: priority
+        operator: Exists
+        value: Essential
+        effect: NoExecute
