@@ -4,4 +4,4 @@ machine:
   install:
     disk: /dev/mmcblk0
   nodeTaints:
-    priority: Essential:NoExecute
+    essential: PreferNoSchedule
