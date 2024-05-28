@@ -3,6 +3,14 @@ cilium:
   k8sServicePort: 6443
   kubeProxyReplacement: strict
   rollOutCiliumPods: true
+  tolerations:
+    - operator: Exists
+    - operator: Equal
+  operator:
+    rollOutPods: true
+    tolerations:
+    - operator: Exists
+    - operator: Equal
 
   ipam:
     mode: kubernetes
@@ -23,10 +31,14 @@ cilium:
         method: cronJob
     relay:
       enabled: true
-      rollOutPods: true                      
+      rollOutPods: true
+      tolerations:
+      - operator: Equal
     ui:
       enabled: true
       rollOutPods: true
+      tolerations:
+      - operator: Equal
       ingress:
         enabled: true
         annotations:
@@ -55,3 +67,8 @@ cilium:
 
   certgen:
     ttlSecondsAfterFinished: null
+    tolerations:
+    - operator: Equal
+  prometheus:
+    serviceMonitor:
+      enabled: true
