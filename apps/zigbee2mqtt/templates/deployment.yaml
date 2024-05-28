@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: zigbee2mqtt
 spec:
   revisionHistoryLimit: 0
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   selector:
