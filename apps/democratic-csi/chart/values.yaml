@@ -4,7 +4,7 @@ democratic-csi:
       image: ghcr.io/democratic-csi/democratic-csi:v1.9.2 # chart default is latest
     tolerations:
     - key: priority
-      operator: Exists
+      operator: Equal
       value: Essential
       effect: NoExecute
   node:
@@ -12,7 +12,7 @@ democratic-csi:
       image: ghcr.io/democratic-csi/democratic-csi:v1.9.2 # chart default is latest
     tolerations:
     - key: priority
-      operator: Exists
+      operator: Equal
       value: Essential
       effect: NoExecute
 

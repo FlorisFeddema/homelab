@@ -77,6 +77,6 @@ spec:
             claimName: {{ template "homeAssistant.fullname" . }}
       tolerations:
       - key: priority
-        operator: Exists
+        operator: Equal
         value: Essential
         effect: NoExecute

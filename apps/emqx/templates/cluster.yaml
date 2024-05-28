@@ -78,7 +78,7 @@ spec:
           mountPath: /mounted/cert
       tolerations:
       - key: priority
-        operator: Exists
+        operator: Equal
         value: Essential
         effect: NoExecute
 
