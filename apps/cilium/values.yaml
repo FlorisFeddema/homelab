@@ -3,9 +3,6 @@ cilium:
   k8sServicePort: 6443
   kubeProxyReplacement: strict
   rollOutCiliumPods: true
-  tolerations:
-    - operator: Exists
-    - operator: Equal
 
   envoy:
     prometheus:
@@ -15,7 +12,6 @@ cilium:
     rollOutPods: true
     tolerations:
     - operator: Exists
-    - operator: Equal
     prometheus:
       serviceMonitor:
         enabled: true
@@ -42,13 +38,9 @@ cilium:
     relay:
       enabled: true
       rollOutPods: true
-      tolerations:
-      - operator: Equal
     ui:
       enabled: true
       rollOutPods: true
-      tolerations:
-      - operator: Equal
       ingress:
         enabled: true
         annotations:
@@ -78,7 +70,7 @@ cilium:
   certgen:
     ttlSecondsAfterFinished: null
     tolerations:
-    - operator: Equal
+    - operator: Exists
 
   prometheus:
     serviceMonitor:

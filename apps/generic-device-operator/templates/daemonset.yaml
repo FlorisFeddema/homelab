@@ -63,6 +63,5 @@ spec:
           name: devices
       tolerations:
       - operator: Exists
-      - operator: Equal
   updateStrategy:
     type: RollingUpdate
