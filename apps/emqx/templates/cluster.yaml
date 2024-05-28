@@ -76,6 +76,11 @@ spec:
       extraVolumeMounts:
         - name: emqx-tls
           mountPath: /mounted/cert
+      tolerations:
+      - key: priority
+        operator: Equal
+        value: Essential
+        effect: NoExecute
 
   listenersServiceTemplate:
     metadata:
