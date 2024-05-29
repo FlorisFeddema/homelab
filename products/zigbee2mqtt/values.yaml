@@ -34,6 +34,7 @@ persistence:
   accessMode: ReadWriteOnce
   size: 1Gi
   labels:
+    recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 
 ingress:
