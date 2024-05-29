@@ -1,7 +1,7 @@
 backups:
   enabled: true
-  schedule: "0 8 * * *"
-  retention: 4
+  schedule: "0 6 * * 0" #At 06:00 on Sunday
+  retention: 5
   concurrency: 5
 
 longhorn:
@@ -21,18 +21,16 @@ longhorn:
 
   defaultSettings:
     defaultReplicaCount: 2
-    backupTarget: s3://datastore@default/
-    backupTargetCredentialSecret: s3-credentials
+    backupTarget: azblob://backups@core.windows.net/
+    backupTargetCredentialSecret: azblob-secret
     defaultLonghornStaticStorageClass: longhorn
     backupConcurrentLimit: 5
     restoreConcurrentLimit: 5
 
   longhornUI:
-    replicas: 1
+    replicas: 2
 
   resources:
-    limits:
-      memory: 1024Mi
     requests:
       cpu: 100m
       memory: 128Mi
