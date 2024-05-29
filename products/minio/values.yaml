@@ -7,6 +7,7 @@ minio:
     size: 100Gi
     # labels are added by hand
     labels:
+      recurring-job.longhorn.io/source: enabled
       recurring-job-group.longhorn.io/backup: enabled
 
   ingress:
