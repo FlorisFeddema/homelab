@@ -104,6 +104,7 @@ nextcloud:
     size: 16Gi
     # labels are added by hand
     labels:
+      recurring-job.longhorn.io/source: enabled
       recurring-job-group.longhorn.io/backup: enabled
 
   resources:
