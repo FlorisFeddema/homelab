@@ -2,7 +2,7 @@ param stName string
 param location string
 param containerName string
 
-resource stAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
+resource stAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
   name: stName
   location: location
   sku: {
@@ -14,12 +14,12 @@ resource stAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   }
 }
 
-resource blobservice 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01' = {
+resource blobservice 'Microsoft.Storage/storageAccounts/blobServices@2023-04-01' = {
   name: 'default'
   parent: stAccount
 }
 
-resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-01-01' = {
+resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-04-01' = {
   name: containerName
   parent: blobservice
 }
