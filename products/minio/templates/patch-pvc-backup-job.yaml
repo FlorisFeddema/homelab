@@ -11,7 +11,7 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: patch-pvc-backup
-          image: bitnami/kubectl:1.31
+          image: '{{ .Values.patchBackupPvcJob.image.registry }}/{{ .Values.patchBackupPvcJob.image.repository }}:{{ .Values.patchBackupPvcJob.image.tag }}'
           command:
             - sh
             - -c
