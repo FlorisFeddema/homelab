@@ -40,8 +40,6 @@ etcd:
 
   persistence:
     size: 5Gi
-    labels:
-      recurring-job-group.longhorn.io/backup: enabled
 
   networkPolicy:
     enabled: false
