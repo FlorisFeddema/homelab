@@ -1,3 +1,10 @@
+patchBackupPvcJob:
+  enabled: true
+  pvcNames:
+    - export-minio-0
+    - export-minio-1
+    - export-minio-2
+
 minio:
   existingSecret: "minio-credentials"
 
@@ -5,7 +12,7 @@ minio:
 
   persistence:
     size: 100Gi
-    # labels are added by hand
+    # labels are added by patchBackupPvcJob
     labels:
       recurring-job.longhorn.io/source: enabled
       recurring-job-group.longhorn.io/backup: enabled
