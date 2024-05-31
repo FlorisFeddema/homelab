@@ -8,6 +8,6 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["persistentvolumeclaims"]
-    resourceNames: {{ toYaml | .Values.patchBackupPvcJob.pvcNames }}
+    resourceNames: {{ toYaml .Values.patchBackupPvcJob.pvcNames }}
     verbs: ["get", "patch"]
 {{ end }}
