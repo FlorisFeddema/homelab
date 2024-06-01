@@ -25,6 +25,8 @@ spec:
         app.kubernetes.io/component: "immich-server"
         {{- include "labels" . | nindent 8 }}
     spec:
+      securityContext:
+        fsGroup: 5000
       containers:
         - name: server
           image: "{{ .Values.server.image.registry }}/{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
