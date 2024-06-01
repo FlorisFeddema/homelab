@@ -39,7 +39,6 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   storageClassName: ""
-  name: {{ template "immich.fullname" . }}-library
   accessModes:
     - ReadWriteMany
   resources:
