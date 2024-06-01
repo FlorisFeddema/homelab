@@ -21,6 +21,8 @@ database:
   clusterName: photos-postgresql
   replicas: 3
   size: 32Gi
+  backups:
+    enabled: false
 
 machineLearning:
   replicas: 1
