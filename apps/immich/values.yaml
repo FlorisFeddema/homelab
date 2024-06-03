@@ -18,7 +18,7 @@ database:
     repository: tensorchord/cloudnative-pgvecto.rs
     tag: 16.3
 
-  replicas: 3
+  replicas: 2
   size: 32Gi
   backups:
     enabled: false
