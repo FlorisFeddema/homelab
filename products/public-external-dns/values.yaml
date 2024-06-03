@@ -14,6 +14,8 @@ external-dns:
     secretName: "cloudflare-api-token"
     proxied: false
 
+  txtOwnerId: "public-external-dns"
+
   triggerLoopOnEvent: true
   logLevel: error
   logFormat: json
