@@ -15,6 +15,7 @@ external-dns:
     proxied: false
 
   txtOwnerId: "public-external-dns"
+  forceTxtOwnerId: true
 
   triggerLoopOnEvent: true
   logLevel: info
