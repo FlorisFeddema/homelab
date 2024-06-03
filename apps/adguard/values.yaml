@@ -49,6 +49,7 @@ sync:
   resources: {}
 
   config:
+    password: nyDRXHM@$rc#wqAojVWn8qW6!o#4aq!d9d6BPLjL42fSoY3j@q3#sezQcAy3XtLB
     loglevel: info
     cron: "*/1 * * * *"
 
