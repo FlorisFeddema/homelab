@@ -1,0 +1,13 @@
+{{ if .Values.patchBackupPvcJob.enabled }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: patch-pvc-backup-job
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+rules:
+  - apiGroups: [""]
+    resources: ["persistentvolumeclaims"]
+    resourceNames: {{- toYaml .Values.patchBackupPvcJob.pvcNames | nindent 6 }}
+    verbs: ["get", "patch"]
+{{ end }}
