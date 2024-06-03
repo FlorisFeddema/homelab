@@ -35,7 +35,7 @@ spec:
               value: "Europe/Amsterdam"
           args:
             - --web-addr
-            -- 0.0.0.0:3000
+            - 0.0.0.0:3000
             - --config
             - /opt/adguardhome/conf/AdGuardHome.yaml
             - --work-dir
