@@ -5,6 +5,7 @@ metadata:
   name: patch-pvc-backup-job
   annotations:
     helm.sh/hook: post-install,post-upgrade
+    helm.sh/resource-policy: keep
 spec:
   template:
     spec:
