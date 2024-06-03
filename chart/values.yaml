@@ -112,16 +112,8 @@ products:
     deploy: true
     autoSync: true
   privateExternalDns:
-    deploy: false
+    deploy: true
     autoSync: true
-    ignoreDifferences:
-      - group: ""
-        kind: Secret
-        name: etcd-client-certificate
-        jsonPointers:
-          - /data/ca.crt
-          - /data/tls.crt
-          - /data/tls.key
   prometheusCrd:
     deploy: true
     autoSync: true
