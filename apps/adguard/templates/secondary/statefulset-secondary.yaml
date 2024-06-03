@@ -51,8 +51,12 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.secondary.resources | nindent 12 }}
           volumeMounts:
-            - name: data
+            - name: conf
               mountPath: /opt/adguardhome
+              subPath: conf
+            - name: work
+              mountPath: /opt/adguardhome
+              subPath: work
       tolerations:
       - key: essential
         operator: Exists
