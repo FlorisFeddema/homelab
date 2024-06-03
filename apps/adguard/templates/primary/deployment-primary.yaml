@@ -43,10 +43,10 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.primary.resources | nindent 12 }}
           volumeMounts:
-            - name: conf
+            - name: data
               mountPath: /opt/adguardhome
               subPath: conf
-            - name: work
+            - name: data
               mountPath: /opt/adguardhome
               subPath: work
       volumes:
