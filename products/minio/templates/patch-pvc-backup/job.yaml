@@ -9,8 +9,8 @@ metadata:
 spec:
   template:
     spec:
-    serviceAccountName: patch-pvc-backup-job
-    automountServiceAccountToken" true
+      serviceAccountName: patch-pvc-backup-job
+      automountServiceAccountToken: true
       restartPolicy: OnFailure
       containers:
         - name: patch-pvc-backup
