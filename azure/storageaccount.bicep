@@ -2,7 +2,7 @@ param stName string
 param location string
 param containerName string
 
-resource stAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
+resource stAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: stName
   location: location
   sku: {
