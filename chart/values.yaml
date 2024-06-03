@@ -32,7 +32,7 @@ products:
           - /webhooks/2/clientConfig/caBundle
           - /webhooks/3/clientConfig/caBundle
   coredns:
-    deploy: true
+    deploy: false
     autoSync: true
   descheduler:
     deploy: true
