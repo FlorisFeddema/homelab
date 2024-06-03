@@ -50,7 +50,7 @@ spec:
             - name: data
               mountPath: /opt/adguardhome
       volumes:
-        - name: work
+        - name: data
           persistentVolumeClaim:
             claimName: {{ template "adguard.fullname" . }}-primary-data
       tolerations:
