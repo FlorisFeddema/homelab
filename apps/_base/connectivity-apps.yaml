@@ -3,3 +3,6 @@ apps:
     deploy: true
   ingress-nginx:
     deploy: true
+  adguard:
+    deploy: true
+    autoSync: false

@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "adguard.fullname" . }}-primary
+  labels:
+    app.kubernetes.io/name: {{ template "adguard.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "adguard-primary"
+    {{- include "labels" . | nindent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  replicas: {{ .Values.primary.replicas }}
+  strategy: {{ toYaml .Values.primary.strategy | nindent 4 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "adguard.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: "adguard-primary"
+      {{- include "labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        config-hash: {{ print .Values.config | sha1sum  }}
+        app.kubernetes.io/name: {{ template "adguard.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: "adguard-primary"
+        {{- include "labels" . | nindent 8 }}
+    spec:
+      initContainers:
+        - name: copy-config
+          image: "{{ .Values.copyConfig.image.registry }}/{{ .Values.copyConfig.image.repository }}:{{ .Values.copyConfig.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - |
+              if [ -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
+                echo "copy current config to /opt/adguardhome/conf/AdGuardHome.yaml.old"
+                cp /opt/adguardhome/conf/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml.old
+              fi
+              cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
+              sed -i "s|%%%PASSWORD%%%|${PASSWORD}|g" /opt/adguardhome/conf/AdGuardHome.yaml
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secret.name }}
+          volumeMounts:
+            - name: default-config
+              mountPath: /tmp/AdGuardHome.yaml
+              subPath: AdGuardHome.yaml
+            - name: config
+              mountPath: /opt/adguardhome/conf
+      containers:
+        - name: adguard
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+          args:
+            - --config
+            - /opt/adguardhome/conf/AdGuardHome.yaml
+            - --work-dir
+            - /opt/adguardhome/work
+            - --no-check-update
+          ports:
+            - name: web
+              containerPort: 3000
+              protocol: TCP
+          resources: {{ toYaml .Values.primary.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /opt/adguardhome/work
+              name: work
+            - mountPath: /opt/adguardhome/conf
+              name: config
+      volumes:
+        - name: default-config
+          configMap:
+            name: {{ template "adguard.fullname" . }}-config
+        - name: config
+          emptyDir: {}
+        - name: work
+          persistentVolumeClaim:
+            claimName: {{ template "adguard.fullname" . }}-primary-work
+      tolerations:
+      - key: essential
+        operator: Exists
