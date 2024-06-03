@@ -17,7 +17,7 @@ external-dns:
   txtOwnerId: "public-external-dns"
 
   triggerLoopOnEvent: true
-  logLevel: error
+  logLevel: info
   logFormat: json
   policy: sync
 
