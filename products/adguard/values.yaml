@@ -98,8 +98,7 @@ config:
     ratelimit_whitelist: [ ]
     refuse_any: true
     upstream_dns:
-      - tls://9.9.9.10
-      - tls://149.112.112.10
+      - tls://dns10.quad9.net
     upstream_dns_file: ""
     bootstrap_dns:
       - 1.1.1.1
