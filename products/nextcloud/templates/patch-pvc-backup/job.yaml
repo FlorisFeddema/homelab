@@ -1,0 +1,31 @@
+{{ if .Values.patchBackupPvcJob.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: patch-pvc-backup-job
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/resource-policy: keep
+spec:
+  template:
+    spec:
+      serviceAccountName: patch-pvc-backup-job
+      automountServiceAccountToken: true
+      restartPolicy: OnFailure
+      containers:
+        - name: patch-pvc-backup
+          image: '{{ .Values.patchBackupPvcJob.image.registry }}/{{ .Values.patchBackupPvcJob.image.repository }}:{{ .Values.patchBackupPvcJob.image.tag }}'
+          command:
+            - sh
+            - -c
+            - |
+              setopt shwordsplit
+              for pvcName in $pvcNames; do
+                echo "Patching PVC $pvcName"
+                kubectl label pvc $pvcName recurring-job.longhorn.io/source=enabled
+                kubectl label pvc $pvcName recurring-job-group.longhorn.io/backup=enabled
+              done
+          env:
+            - name: pvcNames
+              value: "{{ join " " .Values.patchBackupPvcJob.pvcNames }}"
+{{ end }}
