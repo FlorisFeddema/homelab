@@ -1,5 +1,5 @@
 patchBackupPvcJob:
-  enabled: true
+  enabled: false
   image:
     registry: docker.io
     repository: bitnami/kubectl
