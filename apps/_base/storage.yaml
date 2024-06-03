@@ -32,4 +32,3 @@ apps:
     deploy: true
   immich:
     deploy: true
-    autoSync: false
