@@ -49,14 +49,7 @@ spec:
           volumeMounts:
             - mountPath: /opt/adguardhome/work
               name: work
-            - mountPath: /opt/adguardhome/conf
-              name: config
       volumes:
-        - name: default-config
-          configMap:
-            name: {{ template "adguard.fullname" . }}-config
-        - name: config
-          emptyDir: {}
         - name: work
           persistentVolumeClaim:
             claimName: {{ template "adguard.fullname" . }}-primary-work

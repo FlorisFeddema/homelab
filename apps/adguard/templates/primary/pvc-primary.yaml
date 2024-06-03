@@ -7,7 +7,9 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "adguard-primary"
     {{- include "labels" . | nindent 4 }}
-    {{ toYaml .Values.persistence.labels | nindent 4 }}
+    {{- with .Values.persistence.labels }}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   accessModes:
     - ReadWriteOnce
