@@ -10,17 +10,6 @@ external-dns:
   extraArgs:
     target-net-filter: 192.168.0.0/16
 
-  coredns:
-    etcdEndpoints: "https://coredns-etcd.coredns:2379"
-
-    etcdTLS:
-      enabled: true
-      secretName: etcd-client-certificate
-      mountPath: "/etc/coredns/tls/etcd"
-      caFilename: "ca.crt"
-      certFilename: "tls.crt"
-      keyFilename: "tls.key"
-
   triggerLoopOnEvent: true
   logLevel: info
   logFormat: json
