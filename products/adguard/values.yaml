@@ -32,7 +32,6 @@ persistence:
 service:
   # https://docs.cilium.io/en/v1.14/network/concepts/ipam/cluster-pool/
   # https://kubernetes.io/docs/concepts/services-networking/cluster-ip-allocation/
-  clusterIP: 10.96.0.99
   annotations:
     'io.cilium/lb-ipam-ips': 192.168.102.11
 
@@ -99,14 +98,13 @@ config:
     ratelimit_whitelist: [ ]
     refuse_any: true
     upstream_dns:
-      - 10.96.0.100
+      - tls://9.9.9.10
+      - tls://149.112.112.10
     upstream_dns_file: ""
     bootstrap_dns:
       - 1.1.1.1
       - 1.0.0.1
     fallback_dns:
-      - tls://9.9.9.10
-      - tls://149.112.112.10
     all_servers: false
     fastest_addr: false
     fastest_timeout: 1s
