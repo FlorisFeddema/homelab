@@ -54,14 +54,14 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.secondary.resources | nindent 12 }}
           volumeMounts:
-            - name: config
-              mountPath: /opt/adguardhome/conf
+            - name: data
+              mountPath: /opt/adguardhome
       tolerations:
       - key: essential
         operator: Exists
   volumeClaimTemplates:
     - metadata:
-        name: work
+        name: data
         labels:
           {{ toYaml .Values.persistence.labels | nindent 10 }}
       spec:
