@@ -7,6 +7,7 @@ data:
   CRON: "{{ .Values.sync.config.cron }}"
   RUN_ON_START: "true"
   API_PORT: "8080"
+  API_METRICS_ENABLED: "true"
 
   ORIGIN_URL: "http://{{ template "adguard.fullname" . }}-web.{{ $.Release.Namespace }}.svc:3000"
   ORIGIN_USERNAME: "admin"
