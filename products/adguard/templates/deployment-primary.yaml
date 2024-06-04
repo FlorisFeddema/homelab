@@ -51,7 +51,8 @@ spec:
             - configMapRef:
                 name: {{ template "adguard.fullname" . }}-sync-config
           ports:
-            - containerPort: 8080
+            - name: sync
+              containerPort: 8080
               protocol: TCP
           resources: {{ toYaml .Values.sync.resources | nindent 12 }}
         {{- end }}
