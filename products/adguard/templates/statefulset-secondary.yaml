@@ -34,12 +34,9 @@ spec:
             - sh
             - -c
             - |
-              if [ ! -d /opt/adguardhome/work ]; then
-                mkdir -p /opt/adguardhome/work
-              fi
-              if [ ! -d /opt/adguardhome/conf ]; then
-                mkdir -p /opt/adguardhome/conf
-              fi
+              mkdir -p /opt/adguardhome/work
+              mkdir -p /opt/adguardhome/conf
+              touch /opt/adguardhome/conf/AdguardHome.yaml
           volumeMounts:
             - name: home
               mountPath: /opt/adguardhome/
