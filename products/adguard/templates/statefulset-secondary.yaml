@@ -34,11 +34,11 @@ spec:
             - sh
             - -c
             - |
-              mkdir -p /opt/adguardhome/work
-              mkdir -p /opt/adguardhome/AdguardHome
+              mkdir -p /opt/data/work
+              mkdir -p /opt/data/conf
           volumeMounts:
-            - name: home
-              mountPath: /opt/adguardhome/
+            - name: data
+              mountPath: /opt/data/
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -47,6 +47,10 @@ spec:
             - name: TZ
               value: "Europe/Amsterdam"
           args:
+            - --config
+            - /opt/data/conf/AdGuardHome.yaml
+            - --work-dir
+            - /opt/data/work
             - --no-check-update
           ports:
             - name: web
@@ -60,15 +64,15 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.secondary.resources | nindent 12 }}
           volumeMounts:
-            - name: home
-              mountPath: /opt/adguardhome/
+            - name: data
+              mountPath: /opt/data/
       volumes:
-        - name: config
+        - name: data
           configMap:
             name: {{ template "adguard.fullname" . }}-config
   volumeClaimTemplates:
     - metadata:
-        name: home
+        name: data
         labels:
           {{ toYaml .Values.persistence.labels | nindent 10 }}
       spec:
