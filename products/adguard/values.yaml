@@ -49,6 +49,7 @@ ingress:
     secretName: adguard-tls
 
 sync:
+  enabled: true
   replicas: 1
   resources: {}
 
@@ -64,8 +65,3 @@ sync:
     registry: ghcr.io
     repository: bakito/adguardhome-sync
     tag: v0.6.11
-
-secret:
-  name: adguard-credentials
-  sealedValues:
-    password: AgAdN5/szkY81VTJ4is/6Wq+iCFt/1YgEArZoZYUtDxn5EXJvkN6jGff5sEc6NugsWbw11Eg8Edotnojl+zmTB19UDBP1zsewb+LoI6W4aTzc8IoPH6jGSbUzODRsMleWMUMj63Q4/dFc5Id4LvNkQxSvISBaSGLZQ5UYQ3QyQboOOYZPUwQaueACzbIWa/GiHFNUxqOa2EC4qHxNaPbqgLmLMLQgUGlU7jTVQtAPhYKh2fTdFCRYjKG4IroJRoITkzDY1hZHeeDTPKXPtKclfIE90KLo36elY5znLvIO5dxSLyFn2hBgkx/dIyeT3JJ/BX/YZpS9/xEbdaUTNtFgxNbPi8ihhQdDn9l9WW4Q3mCvDx0uLbrBXcnCGqatPkQ/4j549Q2KAUPjLBBcvR0lC3TxfxJ0FdbKcMlLvx9eY4k5y7ndmY/VY42zyN1SMtSKU5makxC0X0xcEvWjiLWFAhf2b+IyguuAAgs603UBIF6bLUrLWoTxaBFheoaumnzXDE0eUM/jHCBAOopven53moTfl+e5O9HQ4RVluMBEc2eD0r23IBGULYXmEkkoAmsLJMzggkqLJ7QmiB2nGnPbEc6kBOyTdAR5QeFFXGjh2JhYKWqZOWEU6Y10a62FVSEeGI28F7iInlXOZZQ6hcV+ngPo70Tj1aFl6i2K11ICqNuUKnHk7c8nLLkiPjEpK9UFyK/CWmeqzWqT4PTL3rzJMOY3ean5cTj5y2x1jQ3gql6b1FSBNDilTA2cjIqkYL9OPlwMA8kyktvmcO2Psg=

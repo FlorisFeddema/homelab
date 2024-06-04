@@ -38,6 +38,23 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data/
+        {{- if .Values.sync.enabled }}
+        - name: sync
+          image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          restartPolicy: Always
+          args:
+            - run
+          envFrom:
+            - secretRef:
+                name: {{ .Values.sync.config.secret.name }}
+            - configMapRef:
+                name: {{ template "adguard.fullname" . }}-sync-config
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          resources: {{ toYaml .Values.sync.resources | nindent 12 }}
+        {{- end }}
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
