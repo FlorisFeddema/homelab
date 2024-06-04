@@ -35,8 +35,7 @@ spec:
             - -c
             - |
               mkdir -p /opt/adguardhome/work
-              mkdir -p /opt/adguardhome/conf
-              touch /opt/adguardhome/conf/AdguardHome.yaml
+              mkdir -p /opt/adguardhome/AdguardHome
           volumeMounts:
             - name: home
               mountPath: /opt/adguardhome/
