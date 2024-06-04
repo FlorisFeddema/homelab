@@ -34,8 +34,6 @@ spec:
             - name: TZ
               value: "Europe/Amsterdam"
           args:
-            - --work-dir
-            - /opt/adguardhome/work
             - --no-check-update
           ports:
             - name: web
