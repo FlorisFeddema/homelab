@@ -3,10 +3,10 @@ kind: ConfigMap
 metadata:
   name: {{ template "adguard.fullname" . }}-sync-config
 data:
-  LOG_LEVEL: "{{ .Values.sync.config.logLevel }}"
+  LOG_LEVEL: "{{ .Values.sync.config.loglevel }}"
   CRON: "{{ .Values.sync.config.cron }}"
   RUN_ON_START: "true"
-  API_PORT: "0"
+  API_PORT: "8080"
 
   ORIGIN_URL: "http://{{ template "adguard.fullname" . }}-web.{{ $.Release.Namespace }}.svc:3000"
   ORIGIN_USERNAME: "admin"

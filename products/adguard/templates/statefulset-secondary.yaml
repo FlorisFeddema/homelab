@@ -27,29 +27,6 @@ spec:
         {{- include "labels" . | nindent 8 }}
     spec:
       topologySpreadConstraints: {{ toYaml .Values.secondary.topologySpreadConstraints | nindent 8 }}
-      initContainers:
-        - name: copy-config
-          image: "{{ .Values.copyConfig.image.registry }}/{{ .Values.copyConfig.image.repository }}:{{ .Values.copyConfig.image.tag }}"
-          imagePullPolicy: IfNotPresent
-          command:
-            - "sh"
-            - "-c"
-            - |
-              if [ -f /opt/adguardhome/conf/AdGuardHome.yaml ]; then
-                echo "copy current config to /opt/adguardhome/conf/AdGuardHome.yaml.old"
-                cp /opt/adguardhome/conf/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml.old
-              fi
-              cp /tmp/AdGuardHome.yaml /opt/adguardhome/conf/AdGuardHome.yaml
-              sed -i "s|%%%PASSWORD%%%|${PASSWORD}|g" /opt/adguardhome/conf/AdGuardHome.yaml
-          envFrom:
-            - secretRef:
-                name: {{ .Values.secret.name }}
-          volumeMounts:
-            - name: default-config
-              mountPath: /tmp/AdGuardHome.yaml
-              subPath: AdGuardHome.yaml
-            - name: config
-              mountPath: /opt/adguardhome/conf
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -80,11 +57,9 @@ spec:
             - name: config
               mountPath: /opt/adguardhome/conf
       volumes:
-        - name: default-config
+        - name: config
           configMap:
             name: {{ template "adguard.fullname" . }}-config
-        - name: config
-          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: work
