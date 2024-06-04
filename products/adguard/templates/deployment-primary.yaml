@@ -45,14 +45,9 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.primary.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: /opt/adguardhome/work
-              name: work
-            - mountPath: /opt/adguardhome/conf
-              name: config
+            - mountPath: /opt/adguardhome
+              name: home
       volumes:
-        - name: config
-          configMap:
-            name: {{ template "adguard.fullname" . }}-config
-        - name: work
+        - name: home
           persistentVolumeClaim:
-            claimName: {{ template "adguard.fullname" . }}-primary-work
+            claimName: {{ template "adguard.fullname" . }}-primary
