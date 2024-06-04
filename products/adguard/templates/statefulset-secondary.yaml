@@ -27,6 +27,22 @@ spec:
         {{- include "labels" . | nindent 8 }}
     spec:
       topologySpreadConstraints: {{ toYaml .Values.secondary.topologySpreadConstraints | nindent 8 }}
+      initContainers:
+        - name: busybox
+          image: "{{ .Values.init.image.registry }}/{{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}"
+          command:
+            - sh
+            - -c
+            - |
+              if [ ! -d /opt/adguardhome/work ]; then
+                mkdir -p /opt/adguardhome/work
+              fi
+              if [ ! -d /opt/adguardhome/conf ]; then
+                mkdir -p /opt/adguardhome/conf
+              fi
+          volumeMounts:
+            - name: home
+              mountPath: /opt/adguardhome/
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
