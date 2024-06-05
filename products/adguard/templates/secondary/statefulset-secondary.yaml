@@ -45,10 +45,10 @@ spec:
               containerPort: 3000
               protocol: TCP
             - name: dns-udp
-              containerPort: 5300
+              containerPort: 53
               protocol: UDP
             - name: dns-tcp
-              containerPort: 5300
+              containerPort: 53
               protocol: TCP
           resources: {{ toYaml .Values.secondary.resources | nindent 12 }}
           volumeMounts:

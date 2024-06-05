@@ -14,11 +14,11 @@ spec:
   externalTrafficPolicy: Local
   ports:
     - port: 53
-      targetPort: 5300
+      targetPort: 53
       protocol: TCP
       name: dns-tcp
     - port: 53
-      targetPort: 5300
+      targetPort: 53
       protocol: UDP
       name: dns-udp
   selector:
