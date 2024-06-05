@@ -8,7 +8,7 @@ data:
   RUN_ON_START: "true"
   API_PORT: "8080"
 
-  ORIGIN_URL: "localhost:3000"
+  ORIGIN_URL: "http://localhost:3000"
   ORIGIN_USERNAME: "admin"
   {{ with .Values.sync.config.password }}
   ORIGIN_PASSWORD: {{ . }}
