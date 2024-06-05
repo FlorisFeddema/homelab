@@ -26,9 +26,10 @@ spec:
         app.kubernetes.io/component: "adguard-primary"
         {{- include "labels" . | nindent 8 }}
     spec:
-      containers:
+      initContainers:
         - name: adguard-sync
           image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
+          restartPolicy: Always
           imagePullPolicy: IfNotPresent
           args:
             - run
@@ -39,6 +40,7 @@ spec:
             - name: metrics
               protocol: TCP
               containerPort: 8080
+      containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
