@@ -12,6 +12,7 @@ metadata:
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
+  internalTrafficPolicy: Local
   ports:
     - port: 53
       targetPort: 53
