@@ -11,6 +11,7 @@ metadata:
     {{- toYaml .Values.service.annotations | nindent 4 }}
 spec:
   type: LoadBalancer
+  externalTrafficPolicy: Local
   ports:
     - port: 53
       targetPort: 53
