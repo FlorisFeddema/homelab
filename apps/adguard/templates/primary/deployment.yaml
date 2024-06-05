@@ -10,7 +10,8 @@ metadata:
 spec:
   revisionHistoryLimit: 0
   replicas: 1
-  strategy: Recreate
+  strategy: 
+    type: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
