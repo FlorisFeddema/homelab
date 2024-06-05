@@ -17,7 +17,7 @@ spec:
         paths:
           - backend:
               service:
-                name:  {{ template "adguard.fullname" . }}-web
+                name:  {{ template "adguard.fullname" . }}-primary
                 port:
                   name: web
             path: /
