@@ -1,8 +1,7 @@
-{{- if false }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "adguard.fullname" . }}-metrics
+  name: {{ template "adguard.fullname" . }}-primary
   labels:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
@@ -11,12 +10,14 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 3000
-      targetPort: 3000
+    - name: web
+      port: 3000
+      targetPort: web
       protocol: TCP
-      name: web
+    - name: metrics
+      port: 8080
+      targetPort: metrics
   selector:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "adguard-secondary"
-{{- end }}
+    app.kubernetes.io/component: "adguard-primary"

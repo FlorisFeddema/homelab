@@ -27,6 +27,18 @@ spec:
         {{- include "labels" . | nindent 8 }}
     spec:
       containers:
+        - name: adguard-sync
+          image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          args:
+            - run
+          envFrom:
+            - configMapRef:
+                name: {{ template "adguard.fullname" . }}-sync-config
+          ports:
+            - name: metrics
+              protocol: TCP
+              containerPort: 8080
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
@@ -39,8 +51,8 @@ spec:
             - --no-check-update
           ports:
             - name: web
-              containerPort: 3000
               protocol: TCP
+              containerPort: 3000
           resources: {{ toYaml .Values.primary.resources | nindent 12 }}
           volumeMounts:
             - name: data

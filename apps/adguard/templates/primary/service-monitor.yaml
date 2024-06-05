@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: adguard-servicemonitor
+  labels:
+    name: adguard-servicemonitor
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "adguard.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: "adguard"
+  endpoints:
+    - port: metrics
