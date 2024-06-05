@@ -5,4 +5,3 @@ apps:
     deploy: true
   adguard:
     deploy: true
-    autoSync: false
