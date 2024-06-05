@@ -28,17 +28,6 @@ spec:
     spec:
       topologySpreadConstraints: {{ toYaml .Values.secondary.topologySpreadConstraints | nindent 8 }}
       initContainers:
-        - name: busybox
-          image: "{{ .Values.init.image.registry }}/{{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}"
-          command:
-            - sh
-            - -c
-            - |
-              mkdir -p /opt/data/work
-              mkdir -p /opt/data/conf
-          volumeMounts:
-            - name: data
-              mountPath: /opt/data/
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
