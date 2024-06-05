@@ -1,9 +1,9 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: adguard-servicemonitor
+  name: adguard-service-monitor
   labels:
-    name: adguard-servicemonitor
+    name: adguard-service-monitor
 spec:
   selector:
     matchLabels:
