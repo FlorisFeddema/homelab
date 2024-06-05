@@ -36,9 +36,9 @@ spec:
               value: "Europe/Amsterdam"
           args:
             - --config
-            - /opt/data/conf/AdGuardHome.yaml
+            - /opt/adguardhome/conf/AdGuardHome.yaml
             - --work-dir
-            - /opt/data/work
+            - /opt/adguardhome/work
             - --no-check-update
           ports:
             - name: web
