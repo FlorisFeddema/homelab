@@ -9,8 +9,8 @@ metadata:
     {{- include "labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
-  replicas: {{ .Values.primary.replicas }}
-  strategy: {{ toYaml .Values.primary.strategy | nindent 4 }}
+  replicas: 1
+  strategy: Recreate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
@@ -20,7 +20,6 @@ spec:
   template:
     metadata:
       labels:
-        config-hash: {{ print .Values.config | sha1sum  }}
         app.kubernetes.io/name: {{ template "adguard.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "adguard-primary"

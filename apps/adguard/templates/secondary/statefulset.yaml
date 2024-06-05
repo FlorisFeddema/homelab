@@ -20,7 +20,6 @@ spec:
   template:
     metadata:
       labels:
-        config-hash: {{ print .Values.config | sha1sum  }}
         app.kubernetes.io/name: {{ template "adguard.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "adguard-secondary"

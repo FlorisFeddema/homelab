@@ -4,10 +4,7 @@ image:
   tag: v0.107.50
 
 primary:
-  replicas: 1
   resources: {}
-  strategy:
-    type: Recreate
 
 secondary:
   replicas: 2
