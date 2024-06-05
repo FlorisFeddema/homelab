@@ -27,17 +27,6 @@ spec:
         {{- include "labels" . | nindent 8 }}
     spec:
       initContainers:
-        - name: busybox
-          image: "{{ .Values.init.image.registry }}/{{ .Values.init.image.repository }}:{{ .Values.init.image.tag }}"
-          command:
-            - sh
-            - -c
-            - |
-              mkdir -p /opt/data/work
-              mkdir -p /opt/data/conf
-          volumeMounts:
-            - name: data
-              mountPath: /opt/data/
         {{- if .Values.sync.enabled }}
         - name: sync
           image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
@@ -65,9 +54,9 @@ spec:
               value: "Europe/Amsterdam"
           args:
             - --config
-            - /opt/data/conf/AdGuardHome.yaml
+            - /opt/adguardhome/conf/AdGuardHome.yaml
             - --work-dir
-            - /opt/data/work
+            - /opt/adguardhome/work
             - --no-check-update
           ports:
             - name: web
@@ -75,8 +64,12 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.primary.resources | nindent 12 }}
           volumeMounts:
-            - mountPath: /opt/data
-              name: data
+            - name: data
+              mountPath: /opt/adguardhome/conf
+              subPath: conf
+            - name: data
+              mountPath: /opt/adguardhome/work
+              subPath: work
       volumes:
         - name: data
           persistentVolumeClaim:
