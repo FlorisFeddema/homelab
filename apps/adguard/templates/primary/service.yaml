@@ -14,9 +14,9 @@ spec:
       port: 3000
       targetPort: web
       protocol: TCP
-    - name: metrics
+    - name: sync
       port: 8080
-      targetPort: metrics
+      targetPort: sync
   selector:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

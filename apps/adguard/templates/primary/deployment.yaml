@@ -37,9 +37,21 @@ spec:
             - configMapRef:
                 name: {{ template "adguard.fullname" . }}-sync-config
           ports:
-            - name: metrics
+            - name: sync
               protocol: TCP
               containerPort: 8080
+          livenessProbe:
+            httpGet:
+              port: sync
+              path: /metrics
+            failureThreshold: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: sync
+              path: /metrics
+            failureThreshold: 5
+            periodSeconds: 10
       containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
