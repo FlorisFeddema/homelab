@@ -5,3 +5,6 @@ apps:
     deploy: true
   adguard:
     deploy: true
+  external-dns:
+    deploy: true
+    autoSync: false
