@@ -28,7 +28,7 @@ image:
   registry: ghcr.io
   #  repository: infrolabs/infro-core
   repository: florisfeddema/infro-core
-  tag: latest@sha256:44182cbb168bf77432382740181d6f05fd319d1adbd0b266b9ba7a8b03acec15 # fix this to a specific version
+  tag: latest@sha256:b1d783e23024b3333d7d49203fb01cf3a22a44fea25b1e9f3565621a302e8d10 # fix this to a specific version
   pullPolicy: IfNotPresent
 
 config:
