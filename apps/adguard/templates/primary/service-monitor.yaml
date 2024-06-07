@@ -10,7 +10,6 @@ spec:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/component: "adguard"
-      {{- include "labels" . | nindent 4 }}
   endpoints:
     - port: sync
       path: /metrics
