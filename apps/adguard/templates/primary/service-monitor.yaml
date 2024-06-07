@@ -5,16 +5,13 @@ metadata:
   labels:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "adguard-primary"
+    app.kubernetes.io/component: "adguard-metrics"
     {{- include "labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/component: "adguard-primary"
+      app.kubernetes.io/component: "adguard-metrics"
   endpoints:
-    - port: sync
-      path: /metrics
-      interval: 30s
-      scrapeTimeout: 10s
+    - port: metrics
