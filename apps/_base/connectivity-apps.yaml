@@ -7,4 +7,3 @@ apps:
     deploy: true
   external-dns:
     deploy: true
-    autoSync: false
