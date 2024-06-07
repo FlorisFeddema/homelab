@@ -12,7 +12,7 @@ spec:
   ports:
     - name: metrics
       port: 8080
-      targetPort: sync
+      targetPort: metrics
   selector:
     app.kubernetes.io/name: {{ template "adguard.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
