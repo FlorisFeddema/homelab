@@ -21,6 +21,9 @@ external-dns:
   sidecars:
   - name: adguard-webhook
     image: ghcr.io/muhlba91/external-dns-provider-adguard:v5.0.1
+    ports:
+    - containerPort: 8888
+      name: http
     livenessProbe:
       httpGet:
         path: /healthz
