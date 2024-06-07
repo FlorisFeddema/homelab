@@ -1,0 +1,13 @@
+{{- range $endpoint := .Values.recordSets }}
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: {{ $endpoint.name }}
+spec:
+  endpoints:
+  - dnsName: '{{ $endpoint.name }}.mobrockers.com'
+    recordType: A
+    targets:
+    - {{ $endpoint.ip }}
+{{- end }}
+---

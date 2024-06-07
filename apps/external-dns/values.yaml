@@ -1,3 +1,7 @@
+recordSets:
+  - name: work-laptop-rouke
+    ip: 10.0.20.161
+
 external-dns:
   crd:
     create: true
