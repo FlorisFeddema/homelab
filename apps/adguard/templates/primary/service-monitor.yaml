@@ -1,15 +1,18 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: adguard-servicemonitor
+  name: {{ template "adguard.fullname" . }}-primary
   labels:
-    name: adguard-servicemonitor
+    app.kubernetes.io/name: {{ template "adguard.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: "adguard-primary"
+    {{- include "labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "adguard.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
-      app.kubernetes.io/component: "adguard"
+      app.kubernetes.io/component: "adguard-primary"
   endpoints:
     - port: sync
       path: /metrics
