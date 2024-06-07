@@ -14,4 +14,4 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/component: "adguard-metrics"
   endpoints:
-    - port: metrics
+    - targetPort: 8080
