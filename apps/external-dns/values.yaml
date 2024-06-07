@@ -4,7 +4,7 @@ recordSets:
 
 external-dns:
   crd:
-    create: false
+    create: true
   revisionHistoryLimit: 0
 
   policy: sync
