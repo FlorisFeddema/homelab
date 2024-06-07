@@ -26,10 +26,11 @@ spec:
         app.kubernetes.io/component: "adguard-primary"
         {{- include "labels" . | nindent 8 }}
     spec:
-      initContainers:
+      # initContainers:
+      containers:
         - name: adguard-sync
           image: "{{ .Values.sync.image.registry }}/{{ .Values.sync.image.repository }}:{{ .Values.sync.image.tag }}"
-          restartPolicy: Always
+          # restartPolicy: Always
           imagePullPolicy: IfNotPresent
           args:
             - run
@@ -52,7 +53,7 @@ spec:
               path: /metrics
             failureThreshold: 5
             periodSeconds: 10
-      containers:
+      # containers:
         - name: adguard
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
