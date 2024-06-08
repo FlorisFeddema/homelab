@@ -1,4 +1,10 @@
 recordSets:
+  - name: embla
+    ip: 10.0.10.10
+  - name: truenas
+    ip: 10.0.10.100
+  - name: k8s
+    ip: 10.0.10.110
   - name: work-laptop-rouke
     ip: 10.0.20.161
 
