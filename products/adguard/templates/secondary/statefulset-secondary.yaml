@@ -58,10 +58,6 @@ spec:
             - name: data
               mountPath: /opt/adguardhome/work
               subPath: work
-      volumes:
-        - name: data
-          configMap:
-            name: {{ template "adguard.fullname" . }}-config
   volumeClaimTemplates:
     - metadata:
         name: data
