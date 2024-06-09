@@ -65,11 +65,7 @@ spec:
               mountPath: /config
       containers:
         - name: home-assistant
-          image: ubuntu:24.04
-          command:
-            - "sleep"
-            - "604800"
-{{/*          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"*/}}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
@@ -80,23 +76,18 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.resources | nindent 12 }}
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
-{{/*          livenessProbe:*/}}
-{{/*            httpGet:*/}}
-{{/*              path: /*/}}
-{{/*              port: http*/}}
-{{/*          readinessProbe:*/}}
-{{/*            httpGet:*/}}
-{{/*              path: /*/}}
-{{/*              port: http*/}}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
           volumeMounts:
             - mountPath: /config
               name: config
-            - mountPath: /config_old
-              name: config-old
       volumes:
-        - name: config-old
-          persistentVolumeClaim:
-            claimName: {{ template "homeAssistant.fullname" . }}
         - name: default-config
           configMap:
             name: {{ template "homeAssistant.fullname" . }}-config
