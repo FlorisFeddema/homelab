@@ -80,14 +80,14 @@ spec:
               protocol: TCP
           resources: {{ toYaml .Values.resources | nindent 12 }}
           securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+{{/*          livenessProbe:*/}}
+{{/*            httpGet:*/}}
+{{/*              path: /*/}}
+{{/*              port: http*/}}
+{{/*          readinessProbe:*/}}
+{{/*            httpGet:*/}}
+{{/*              path: /*/}}
+{{/*              port: http*/}}
           volumeMounts:
             - mountPath: /config
               name: config
