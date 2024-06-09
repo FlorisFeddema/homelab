@@ -16,10 +16,7 @@ image:
 
 resources: {}
 
-deploymentStrategy:
-  type: Recreate
-
-podSecurityContext:
+podSecurityContext: {}
 
 securityContext:
   allowPrivilegeEscalation: false

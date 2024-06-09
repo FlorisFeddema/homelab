@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ template "homeAssistant.fullname" . }}
   labels:
@@ -10,7 +10,6 @@ metadata:
 spec:
   revisionHistoryLimit: 0
   replicas: {{ .Values.replicas }}
-  strategy: {{ toYaml .Values.deploymentStrategy | nindent 4 }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ template "homeAssistant.name" . }}
@@ -66,7 +65,8 @@ spec:
               mountPath: /config
       containers:
         - name: home-assistant
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: ubuntu:24
+{{/*          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"*/}}
           imagePullPolicy: IfNotPresent
           env:
             - name: TZ
@@ -88,8 +88,10 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountPath: /config_old
+              name: config_old
       volumes:
-        - name: config
+        - name: config_old
           persistentVolumeClaim:
             claimName: {{ template "homeAssistant.fullname" . }}
         - name: default-config
@@ -98,3 +100,17 @@ spec:
         - name: secret-config
           secret:
             secretName: {{ .Values.config.secret.name }}
+  volumeClaimTemplates:
+    - metadata:
+        name: config
+        labels:
+          app.kubernetes.io/name: {{ template "homeAssistant.name" . }}
+          app.kubernetes.io/instance: {{ .Release.Name }}
+          app.kubernetes.io/component: "home-assistant"
+          {{- include "labels" . | nindent 8 }}
+      spec:
+        accessModes: [{{ .Values.persistence.accessMode }}]
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
+
