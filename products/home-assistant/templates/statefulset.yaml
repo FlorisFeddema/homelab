@@ -101,13 +101,15 @@ spec:
           secret:
             secretName: {{ .Values.config.secret.name }}
   volumeClaimTemplates:
-    - metadata:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
         name: config
         labels:
           app.kubernetes.io/name: {{ template "homeAssistant.name" . }}
           app.kubernetes.io/instance: {{ .Release.Name }}
           app.kubernetes.io/component: "home-assistant"
-          {{- include "labels" . | nindent 8 }}
+          {{- include "labels" . | nindent 10 }}
       spec:
         accessModes: [{{ .Values.persistence.accessMode }}]
         resources:
