@@ -65,7 +65,7 @@ spec:
               mountPath: /config
       containers:
         - name: home-assistant
-          image: ubuntu:24
+          image: ubuntu:24.04
 {{/*          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"*/}}
           imagePullPolicy: IfNotPresent
           env:
