@@ -89,9 +89,9 @@ spec:
             - mountPath: /config
               name: config
             - mountPath: /config_old
-              name: config_old
+              name: config-old
       volumes:
-        - name: config_old
+        - name: config-old
           persistentVolumeClaim:
             claimName: {{ template "homeAssistant.fullname" . }}
         - name: default-config
