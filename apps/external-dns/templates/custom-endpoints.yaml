@@ -9,5 +9,5 @@ spec:
     recordType: A
     targets:
     - {{ $endpoint.ip }}
-{{- end }}
 ---
+{{- end }}
