@@ -66,6 +66,9 @@ spec:
       containers:
         - name: home-assistant
           image: ubuntu:24.04
+          command:
+            - "sleep"
+            - "604800"
 {{/*          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"*/}}
           imagePullPolicy: IfNotPresent
           env:
