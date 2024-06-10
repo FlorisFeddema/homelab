@@ -1,7 +1,6 @@
 sealed-secrets:
-  createController: true
+  revisionHistoryLimit: 0
 
-  secretName: "sealed-secrets-key"
   keyrenewperiod: "0"
 
   fullnameOverride: "sealed-secrets-controller"
@@ -12,3 +11,9 @@ sealed-secrets:
     extraTls:
     - hosts:
       - sealed-secrets.mobrockers.com
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+    dashboards:
+      create: true
