@@ -14,7 +14,7 @@ ingress-nginx:
       annotations:
         'io.cilium/lb-ipam-ips': 192.168.102.10
       externalIPs:
-        - 95.98.178.79
+        - 31.201.249.184
 
     resources:
       limits:
