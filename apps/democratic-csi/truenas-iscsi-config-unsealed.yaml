@@ -31,8 +31,10 @@ stringData:
       zvolEnableReservation: false
     iscsi:
       targetPortal: "truenas.mobrockers.com:3260"
-      nameTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+      extentCommentTemplate: "{{ parameters.[csi.storage.k8s.io/pvc/namespace] }}-{{ parameters.[csi.storage.k8s.io/pvc/name] }}"
+      nameTemplate: "{{ name }}"
       namePrefix: "csi-"
+      nameSuffix: "-k8s"
       # add as many as needed
       targetGroups:
           # get the correct ID from the websocket messages because the actual id might be different from the UI index
