@@ -23,7 +23,7 @@ for ($node=0; $node -lt $controlPlanes.Count; $node++) {
     $endpoint = "https://$($nodeIp):6443"
     $output = $applyConfig ? "$repoPath/talos/rendered/control-plane-$node.yaml" : "-"
 
-    $cmdArgList = @(
+    $genArgList = @(
         "gen", "config", "talos-broersma", $endpoint,              
         "--output=$output",
         "--output-types=controlplane",
@@ -31,10 +31,7 @@ for ($node=0; $node -lt $controlPlanes.Count; $node++) {
         "--with-docs=$extendedConfig",
         "--with-examples=$extendedConfig",
         "--with-secrets=$repoPath/secrets.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster-name.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster-endpoint.yaml",
-        "--config-patch=@$repoPath/talos/patches/disable-cni-and-kube-proxy.yaml",
-        "--config-patch=@$repoPath/talos/patches/enable-kubeprism.yaml",
+        "--config-patch=@$repoPath/talos/patches/cluster.yaml",
         "--config-patch=@$repoPath/talos/patches/region-meijhorst.yaml",
         "--config-patch=@$repoPath/talos/patches/zone-embla.yaml",
         "--config-patch-control-plane=@$repoPath/talos/patches/control-plane-vip.yaml",
@@ -43,16 +40,17 @@ for ($node=0; $node -lt $controlPlanes.Count; $node++) {
         "--force"
     )
 
-    &talosctl $cmdArgList
+    &talosctl $genArgList
+
+    $applyArgList = @(
+        "apply",
+        "--talosconfig=$repoPath/talosconfig",
+        "--nodes=$nodeIp",
+        "--file=$repoPath/talos/rendered/control-plane-$node.yaml"
+    )
 
     if($applyConfig) {
-        $cmdArgList = @(
-            "apply",
-            "--talosconfig=$repoPath/talosconfig",
-            "--nodes=$nodeIp",
-            "--file=$repoPath/talos/rendered/control-plane-$node.yaml"
-        )
-        &talosctl $cmdArgList
+        &talosctl $applyArgList
     }
 }
 
@@ -65,7 +63,7 @@ for ($node=0; $node -lt $intelWorkers.Count; $node++) {
     $endpoint = "https://$($nodeIp):6443"
     $output = $applyConfig ? "$repoPath/talos/rendered/worker-$node.yaml" : "-"
 
-    $cmdArgList = @(
+    $genArgList = @(
         "gen", "config", "talos-broersma", $endpoint,              
         "--output=$output",
         "--output-types=worker",
@@ -73,9 +71,7 @@ for ($node=0; $node -lt $intelWorkers.Count; $node++) {
         "--with-docs=$extendedConfig",
         "--with-examples=$extendedConfig",
         "--with-secrets=$repoPath/secrets.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster-name.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster-endpoint.yaml",
-        "--config-patch=@$repoPath/talos/patches/disable-cni-and-kube-proxy.yaml",
+        "--config-patch=@$repoPath/talos/patches/cluster.yaml",
         "--config-patch=@$repoPath/talos/patches/region-meijhorst.yaml",
         "--config-patch=@$repoPath/talos/patches/zone-embla.yaml",
         "--config-patch-worker=@$repoPath/talos/nodes/worker-$node.yaml",
@@ -83,16 +79,17 @@ for ($node=0; $node -lt $intelWorkers.Count; $node++) {
         "--force"
     )
 
-    &talosctl $cmdArgList
+    &talosctl $genArgList
+
+    $applyArgList = @(
+        "apply",
+        "--talosconfig=$repoPath/talosconfig",
+        "--nodes=$nodeIp",
+        "--file=$repoPath/talos/rendered/worker-$node.yaml"
+    )
 
     if($applyConfig) {
-        $cmdArgList = @(
-            "apply",
-            "--talosconfig=$repoPath/talosconfig",
-            "--nodes=$nodeIp",
-            "--file=$repoPath/talos/rendered/worker-$node.yaml"
-        )
-        &talosctl $cmdArgList
+        &talosctl $applyArgList
     }
 }
 
@@ -105,7 +102,7 @@ for ($node=0; $node -lt $piWorkers.Count; $node++) {
     $endpoint = "https://$($nodeIp):6443"
     $output = $applyConfig ? "$repoPath/talos/rendered/worker-pi-$node.yaml" : "-"
 
-    $cmdArgList = @(
+    $genArgList = @(
         "gen", "config", "talos-broersma", $endpoint,              
         "--output=$output",
         "--output-types=worker",
@@ -113,9 +110,7 @@ for ($node=0; $node -lt $piWorkers.Count; $node++) {
         "--with-docs=$extendedConfig",
         "--with-examples=$extendedConfig",
         "--with-secrets=$repoPath/secrets.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster-name.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster-endpoint.yaml",
-        "--config-patch=@$repoPath/talos/patches/disable-cni-and-kube-proxy.yaml",
+        "--config-patch=@$repoPath/talos/patches/cluster.yaml",
         "--config-patch=@$repoPath/talos/patches/region-meijhorst.yaml",
         "--config-patch=@$repoPath/talos/patches/zone-pi.yaml",
         "--config-patch-worker=@$repoPath/talos/nodes/worker-pi-$node.yaml",
@@ -123,15 +118,16 @@ for ($node=0; $node -lt $piWorkers.Count; $node++) {
         "--force"
     )
 
-    &talosctl $cmdArgList
+    &talosctl $genArgList
+
+    $applyArgList = @(
+        "apply",
+        "--talosconfig=$repoPath/talosconfig",
+        "--nodes=$nodeIp",
+        "--file=$repoPath/talos/rendered/worker-pi-$node.yaml"
+    )
 
     if($applyConfig) {
-        $cmdArgList = @(
-            "apply",
-            "--talosconfig=$repoPath/talosconfig",
-            "--nodes=$nodeIp",
-            "--file=$repoPath/talos/rendered/worker-pi-$node.yaml"
-        )
-        &talosctl $cmdArgList
+        &talosctl $applyArgList
     }
 }

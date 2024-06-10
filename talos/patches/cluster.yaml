@@ -1,0 +1,18 @@
+cluster:
+  clusterName: k8s.broersma.com
+  controlPlane:
+    endpoint: https://k8s.mobrockers.com:6443
+  
+  controllerManager:
+    extraArgs:
+      bind-address: 0.0.0.0
+
+  scheduler:
+    extraArgs:
+      bind-address: 0.0.0.0
+
+  network:
+    cni:
+      name: none
+  proxy:
+    disabled: true
