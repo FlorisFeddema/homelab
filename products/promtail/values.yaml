@@ -11,6 +11,12 @@ promtail:
 
   revisionHistoryLimit: 0
 
+  service:
+    labels:
+      fixme: promtail
+    annotations:
+      fixme: promtail
+
   serviceMonitor:
     enabled: true
 
