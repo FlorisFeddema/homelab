@@ -22,11 +22,11 @@
     ]
   },
   "description": "Longhorn dashboard",
-  "editable": true,
+  "editable": false,
   "fiscalYearStartMonth": 0,
   "gnetId": 17626,
   "graphTooltip": 0,
-  "id": 184,
+  "id": 24,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -51,7 +51,7 @@
         "content": "<div class=\"dashboard-header text-center\">\n<span>NODES</span>\n</div>",
         "mode": "html"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -104,9 +104,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -166,9 +168,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -185,51 +189,89 @@
       "type": "stat"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
       "description": "",
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 10,
         "w": 15,
         "x": 8,
         "y": 3
       },
-      "hiddenSeries": false,
       "id": 24,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "percentage": false,
       "pluginVersion": "9.3.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
           "datasource": {
@@ -242,37 +284,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Node Storage Usage/Capacity",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:530",
-          "format": "percent",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:531",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -318,9 +331,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -380,9 +395,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -407,7 +424,10 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "displayMode": "auto",
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "decimals": 1,
@@ -432,8 +452,11 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "lcd-gauge"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
               }
             ]
           }
@@ -447,7 +470,9 @@
       },
       "id": 23,
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -456,7 +481,7 @@
         },
         "showHeader": true
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -496,49 +521,87 @@
       "type": "table"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": {
         "type": "prometheus",
         "uid": "prometheus"
       },
-      "decimals": 0,
-      "fill": 1,
-      "fillGradient": 0,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 8,
         "x": 0,
         "y": 15
       },
-      "hiddenSeries": false,
       "id": 26,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "multi",
+          "sort": "none"
+        }
       },
-      "percentage": false,
       "pluginVersion": "9.3.1",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
           "datasource": {
@@ -551,38 +614,8 @@
           "refId": "A"
         }
       ],
-      "thresholds": [],
-      "timeRegions": [],
       "title": "Number of Volumes Per Node",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "mode": "time",
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "$$hashKey": "object:422",
-          "decimals": 0,
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        },
-        {
-          "$$hashKey": "object:423",
-          "format": "short",
-          "logBase": 1,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false
-      }
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -605,7 +638,7 @@
         "content": "<div class=\"dashboard-header text-center\">\n<span>DISKS</span>\n</div>",
         "mode": "html"
       },
-      "pluginVersion": "9.3.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -620,6 +653,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -684,7 +718,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -717,7 +751,9 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "decimals": 1,
@@ -727,8 +763,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -742,8 +777,11 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "lcd-gauge"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
               }
             ]
           }
@@ -854,8 +892,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -912,8 +949,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "green",
@@ -970,7 +1006,9 @@
       "fieldConfig": {
         "defaults": {
           "custom": {
-            "displayMode": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
             "inspect": false
           },
           "decimals": 1,
@@ -989,8 +1027,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1004,8 +1041,10 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "auto"
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
               }
             ]
           },
@@ -1016,8 +1055,11 @@
             },
             "properties": [
               {
-                "id": "custom.displayMode",
-                "value": "lcd-gauge"
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
               }
             ]
           }
@@ -1088,8 +1130,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "orange",
@@ -1150,8 +1191,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1201,6 +1241,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1275,7 +1316,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -1312,8 +1353,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red",
-                "value": null
+                "color": "red"
               },
               {
                 "color": "green",
@@ -1374,8 +1414,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "yellow",
@@ -1459,6 +1498,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1520,7 +1560,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -1548,6 +1588,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1609,7 +1650,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -1637,6 +1678,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1698,7 +1740,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -1726,6 +1768,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1787,7 +1830,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -1815,6 +1858,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1879,7 +1923,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -1907,6 +1951,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -1971,7 +2016,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2034,6 +2079,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2069,7 +2115,6 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [],
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
@@ -2110,7 +2155,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2137,6 +2182,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2172,7 +2218,6 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [],
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
@@ -2213,7 +2258,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2240,6 +2285,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2306,7 +2352,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2333,6 +2379,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2398,7 +2445,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2424,6 +2471,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2460,7 +2508,6 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [],
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
@@ -2491,7 +2538,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2518,6 +2565,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2553,7 +2601,6 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [],
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
@@ -2594,7 +2641,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2621,6 +2668,7 @@
     },
     {
       "aliasColors": {},
+      "autoMigrateFrom": "graph",
       "bars": false,
       "dashLength": 10,
       "dashes": false,
@@ -2656,7 +2704,6 @@
       },
       "lines": true,
       "linewidth": 1,
-      "links": [],
       "nullPointMode": "null",
       "percentage": false,
       "pluginVersion": "7.1.5",
@@ -2687,7 +2734,7 @@
         "sort": 0,
         "value_type": "individual"
       },
-      "type": "graph",
+      "type": "timeseries",
       "xaxis": {
         "mode": "time",
         "show": true,
@@ -2713,8 +2760,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 37,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "Longhorn",
     "Prometheus"
@@ -2726,6 +2772,7 @@
     "from": "now-5m",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {
     "refresh_intervals": [
       "5s",
