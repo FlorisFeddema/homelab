@@ -83,7 +83,7 @@ config:
     logger:
       default: error
       logs:
-        homeassistant.components.homekit: error
+        homeassistant.components.homekit: info
     
     afvalbeheer:
       wastecollector: MijnAfvalwijzer
