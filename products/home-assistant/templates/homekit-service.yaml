@@ -9,7 +9,7 @@ metadata:
     {{- include "labels" . | nindent 4 }}
   annotations:  {{ toYaml .Values.homekit.service.annotations | nindent 4 }}
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - name: homekit
       port: 31064
