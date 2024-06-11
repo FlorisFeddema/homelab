@@ -10,7 +10,6 @@ metadata:
   annotations:  {{ toYaml .Values.homekit.service.annotations | nindent 4 }}
 spec:
   type: NodePort
-  externalTrafficPolicy: Local
   ports:
     - name: homekit
       port: 31064
