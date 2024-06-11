@@ -69,7 +69,11 @@ grafana:
       plugins: /var/lib/grafana/plugins
       provisioning: /etc/grafana/provisioning
     analytics:
-      check_for_updates: true
+      enabled: false
+      reporting_enabled: false
+      check_for_updates: false
+      check_for_plugin_updates: false
+      feedback_links_enabled: false
     log:
       mode: console
       level: debug
