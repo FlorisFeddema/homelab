@@ -94,6 +94,34 @@ config:
       postcode: 5628AN
       streetnumber: 50
     
+    homekit:
+      name: Homekit Assistant Bridge
+      mode: bridge
+      advertise_ip: 192.168.102.11
+      port: 31064
+      filter:
+        include_entities:
+          - switch.bedroom_switch_1
+          - switch.diningroom_switch_1
+          - switch.livingroom_switch_1
+        exclude_entities:
+          - sensor.hacs
+        exclude_entity_globs:
+          - person.*
+          - binary_sensor.*
+          - switch.*
+          - cover.*
+          - lock.*
+          - button.*
+          - scene.*
+          - select.*
+          - switch.automation_*
+          - scene.automation_*
+          - sensor.drive_cloud_*
+          - tts.*
+          - sensor.*price*
+          - sensor.*iphone*
+          - sensor.dsmr_*
     
     tts:
       - platform: google_translate
