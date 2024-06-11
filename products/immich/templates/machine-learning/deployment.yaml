@@ -47,6 +47,8 @@ spec:
                   key: dbname
             - name: REDIS_HOSTNAME
               value: {{ .Release.Name }}-redis-master
+            - name: IMMICH_PORT
+              value: "3003"
             - name: TRANSFORMERS_CACHE
               value: /cache
             - name: DB_PASSWORD
