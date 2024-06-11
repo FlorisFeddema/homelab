@@ -29,10 +29,6 @@ spec:
         - name: server
           image: "{{ .Values.server.image.registry }}/{{ .Values.server.image.repository }}:{{ .Values.server.image.tag }}"
           imagePullPolicy: {{ .Values.server.image.pullPolicy }}
-          command:
-            - "/bin/sh"
-          args:
-            - ./start-server.sh
           env:
             - name: IMMICH_METRICS
               value: "true"
