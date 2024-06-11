@@ -48,7 +48,7 @@
     ]
   },
   "description": "Monitors Kubernetes deployments in cluster using Prometheus. Shows overall cluster CPU / Memory of deployments, replicas in each deployment. Uses Kube state metrics and cAdvisor metrics (741)",
-  "editable": true,
+  "editable": false,
   "gnetId": 11001,
   "graphTooltip": 0,
   "id": null,
