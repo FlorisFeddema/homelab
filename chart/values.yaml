@@ -55,11 +55,6 @@ products:
   grafana:
     deploy: true
     autoSync: true
-  grafanaDashboards:
-    deploy: true
-    autoSync: true
-    namespace: grafana
-    serverSideApply: true
   homeAssistant:
     deploy: true
     autoSync: true
