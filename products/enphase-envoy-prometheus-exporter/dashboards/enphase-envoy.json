@@ -24,7 +24,7 @@
   "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 159,
+  "id": 9,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -73,10 +73,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -91,7 +93,6 @@
         }
       ],
       "title": "Today",
-      "transformations": [],
       "transparent": true,
       "type": "stat"
     },
@@ -144,9 +145,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -200,6 +203,8 @@
       },
       "id": 6,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "vertical",
         "reduceOptions": {
           "calcs": [
@@ -209,9 +214,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -227,7 +233,6 @@
         }
       ],
       "title": "Current",
-      "transformations": [],
       "transparent": true,
       "type": "gauge"
     },
@@ -244,6 +249,7 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -330,6 +336,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -364,6 +371,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -425,6 +433,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -478,6 +487,8 @@
       },
       "id": 13,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -487,9 +498,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -569,9 +581,11 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "10.1.1",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -591,8 +605,7 @@
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "Energy",
     "Home",
@@ -605,6 +618,7 @@
     "from": "now-2d",
     "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {
     "hidden": false,
     "refresh_intervals": [
@@ -618,6 +632,6 @@
   "timezone": "",
   "title": "Envoy Solarpanels",
   "uid": "fI005ff4k",
-  "version": 9423,
+  "version": 1,
   "weekStart": ""
 }
