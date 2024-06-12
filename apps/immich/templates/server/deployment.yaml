@@ -97,7 +97,7 @@ spec:
               matchLabels:
                 app.kubernetes.io/name: {{ template "immich.name" . }}
                 app.kubernetes.io/instance: {{ .Release.Name }}
-                {{- include "labels" . | nindent 4 }}
+                {{- include "labels" . | nindent 16 }}
       volumes:
         - name: library
           persistentVolumeClaim:
