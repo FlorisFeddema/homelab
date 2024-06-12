@@ -80,15 +80,15 @@ spec:
               containerPort: 3003
               protocol: TCP
           resources: {{ toYaml .Values.machineLearning.resources | nindent 12 }}
-          topologySpreadConstraints:
-          - maxSkew: 1
-            topologyKey: kubernetes.io/hostname
-            whenUnsatisfiable: ScheduleAnyway
-            labelSelector:
-              matchLabels:
-                app.kubernetes.io/name: {{ template "immich.name" . }}
-                app.kubernetes.io/instance: {{ .Release.Name }}
-                {{- include "labels" . | nindent 16 }}
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: {{ template "immich.name" . }}
+            app.kubernetes.io/instance: {{ .Release.Name }}
+            {{- include "labels" . | nindent 12 }}
       volumes:
         - name: cache
           emptyDir: {}
