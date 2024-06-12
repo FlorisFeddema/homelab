@@ -31,17 +31,13 @@ spec:
   storage:
     size: {{ .Values.database.size }}
 
-  {{ if .Values.database.backups.enabled }}
-  backup:
-    retentionPolicy: {{ .Values.database.backups.retention }}
-    barmanObjectStore:
-      destinationPath: {{ .Values.database.backups.path | quote }}
-      endpointURL: {{ .Values.database.backups.endpoint }}
-      s3Credentials:
-        accessKeyId:
-          name: {{ .Values.database.clusterName }}-backup-credentials
-          key: ACCESS_KEY
-        secretAccessKey:
-          name: {{ .Values.database.clusterName }}-backup-credentials
-          key: SECRET_KEY
-  {{ end }}
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: {{ template "immich.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: "immich"
+        {{- include "labels" . | nindent 8 }}
