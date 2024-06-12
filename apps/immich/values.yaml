@@ -28,7 +28,7 @@ machineLearning:
   image:
     registry: ghcr.io
     repository: immich-app/immich-machine-learning
-    tag: v1.105.1
+    tag: v1.106.2
     pullPolicy: IfNotPresent
 
 server:
@@ -36,17 +36,8 @@ server:
   image:
     registry: ghcr.io
     repository: immich-app/immich-server
-    tag: v1.105.1
+    tag: v1.106.2
     pullPolicy: IfNotPresent
-
-microservices:
-  replicas: 1
-  image:
-    registry: ghcr.io
-    repository: immich-app/immich-server
-    tag: v1.105.1
-    pullPolicy: IfNotPresent
-
 
 redis:
   enabled: true
