@@ -393,3 +393,4 @@ $RECYCLE.BIN/
 /secret/
 /talos/secrets.yaml
 /talos/talosconfig
+ .idea/**
