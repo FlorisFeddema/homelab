@@ -88,6 +88,7 @@ config:
         - papier
       postcode: 5628AN
       streetnumber: 50
+      upcomingsensor: 1
     
     homekit:
       name: Homekit Assistant Bridge
