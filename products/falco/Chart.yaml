@@ -1,8 +1,8 @@
 apiVersion: v2
 name: falco
-version: 1.0.15
+version: 1.0.16
 
 dependencies:
   - name: falco
-    version: 4.4.2
+    version: 4.4.3
     repository: https://falcosecurity.github.io/charts
