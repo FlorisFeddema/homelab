@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/cloud-gitops.iml" filepath="$PROJECT_DIR$/.idea/cloud-gitops.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../helm-charts/.idea/helm-charts.iml" filepath="$PROJECT_DIR$/../helm-charts/.idea/helm-charts.iml" />
     </modules>
   </component>
 </project>

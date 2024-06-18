@@ -76,7 +76,7 @@ products:
         jsonPointers:
           - /spec/resourceManager
   kepler:
-    deploy: true
+    deploy: false
     autoSync: true
   kubePrometheusStack:
     deploy: true
