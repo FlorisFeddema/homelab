@@ -1,8 +1,8 @@
 apiVersion: v2
 name: immich
-version: 1.0.9
+version: 1.0.10
 
 dependencies:
   - name: redis
-    version: 19.5.4
+    version: 19.5.5
     repository: https://charts.bitnami.com/bitnami
