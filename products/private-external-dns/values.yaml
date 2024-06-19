@@ -59,7 +59,7 @@ external-dns:
   policy: sync
 
   crd:
-    create: true
+    create: false #TODO: Uncomment when it is fixed
 
   serviceAccount:
     automountServiceAccountToken: true
