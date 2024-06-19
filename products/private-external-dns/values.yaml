@@ -1,5 +1,4 @@
 external-dns:
-  revisionHistoryLimit: 0
   sources:
     - ingress
     - service
