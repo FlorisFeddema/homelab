@@ -2,7 +2,7 @@ external-dns:
   sources:
     - ingress
     - service
-    - crd
+  #    - crd #TODO: Uncomment when it is fixed
 
   provider: cloudflare
 
