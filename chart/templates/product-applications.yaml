@@ -8,11 +8,11 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  {{ if $v.autoSync}}
+  {{- if $v.autoSync }}
   project: always-sync
-  {{ else }}
+  {{- else }}
   project: no-sync
-  {{ end }}
+  {{- end }}
   source:
     repoURL: https://github.com/FlorisFeddema/homelab.git
     targetRevision: HEAD
@@ -27,9 +27,9 @@ spec:
   syncPolicy:
     syncOptions:
       - RespectIgnoreDifferences=true
-    {{ if $v.serverSideApply }}
+    {{- if $v.serverSideApply }}
       - ServerSideApply=true
-    {{ end }}
+    {{- end }}
     automated:
       prune: true
       selfHeal: true
