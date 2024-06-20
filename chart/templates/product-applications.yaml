@@ -1,14 +1,17 @@
-{{ range $k, $v :=.Values.products }}
-{{ if $v.deploy }}
+{{ range $groupKey, $groupValue := .Values.products }}
+{{ range $productKey, $productValue := $groupValue }}
+{{ if $productValue.deploy }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ include "base.productName" (dict "key" $k "value" $v) }}
+  name: {{ include "base.productName" (dict "key" $productKey "value" $productValue) }}
   namespace: argocd
+  labels:
+    feddema.dev/group: {{ $groupKey }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  {{- if $v.autoSync }}
+  {{- if $productValue.autoSync }}
   project: always-sync
   {{- else }}
   project: no-sync
@@ -16,18 +19,18 @@ spec:
   source:
     repoURL: https://github.com/FlorisFeddema/homelab.git
     targetRevision: HEAD
-    path: products/{{ include "base.productName" (dict "key" $k "value" $v) }}
+    path: products/{{ include "base.productName" (dict "key" $productKey "value" $productValue) }}
   destination:
     server: https://kubernetes.default.svc
-    namespace: {{ default (include "base.productName" (dict "key" $k "value" $v)) $v.namespace }}
+    namespace: {{ default (include "base.productName" (dict "key" $productKey "value" $productValue)) $productValue.namespace }}
   revisionHistoryLimit: 1
-  {{- with $v.ignoreDifferences }}
-  ignoreDifferences: {{ toYaml $v.ignoreDifferences | nindent 4 }}
+  {{- with $productValue.ignoreDifferences }}
+  ignoreDifferences: {{ toYaml $productValue.ignoreDifferences | nindent 4 }}
   {{- end }}
   syncPolicy:
     syncOptions:
       - RespectIgnoreDifferences=true
-    {{- if $v.serverSideApply }}
+    {{- if $productValue.serverSideApply }}
       - ServerSideApply=true
     {{- end }}
     automated:
@@ -40,5 +43,6 @@ spec:
         factor: 2
         maxDuration: 10m
 ---
+{{ end -}}
 {{ end -}}
 {{ end -}}

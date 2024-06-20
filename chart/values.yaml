@@ -1,138 +1,145 @@
 products:
-  adguard:
-    deploy: true
-    autoSync: true
-  argoCd:
-    deploy: true
-    namespace: argocd
-  authentik:
-    deploy: true
-    autoSync: true
-  certManager:
-    deploy: true
-    autoSync: true
-  cilium:
-    deploy: true
-  cloudnativePg:
-    deploy: true
-    autoSync: true
-    serverSideApply: true
-    ignoreDifferences:
-      - group: admissionregistration.k8s.io
-        kind: MutatingWebhookConfiguration
-        jsonPointers:
-          - /webhooks/0/clientConfig/caBundle
-          - /webhooks/1/clientConfig/caBundle
-          - /webhooks/2/clientConfig/caBundle
-      - group: admissionregistration.k8s.io
-        kind: ValidatingWebhookConfiguration
-        jsonPointers:
-          - /webhooks/0/clientConfig/caBundle
-          - /webhooks/1/clientConfig/caBundle
-          - /webhooks/2/clientConfig/caBundle
-          - /webhooks/3/clientConfig/caBundle
-  descheduler:
-    deploy: true
-    autoSync: true
-  emqx:
-    deploy: true
-    autoSync: true
-  enphaseEnvoyPrometheusExporter:
-    deploy: true
-    autoSync: true
-  publicExternalDns:
-    deploy: true
-    autoSync: true
-  falco:
-    deploy: true
-    autoSync: true
-  gatus:
-    deploy: true
-    autoSync: true
-  genericDevicePlugin:
-    deploy: true
-    autoSync: true
-  grafana:
-    deploy: true
-    autoSync: true
-  homeAssistant:
-    deploy: true
-    autoSync: true
-  immich:
-    deploy: true
-    autoSync: true
-  infro:
-    deploy: true
-    autoSync: true
-  ingressNginx:
-    deploy: true
-    autoSync: true
-  intelDevicePluginsGpu:
-    deploy: true
-    autoSync: true
-    ignoreDifferences:
-      - group: "deviceplugin.intel.com"
-        kind: "GpuDevicePlugin"
-        jsonPointers:
-          - /spec/resourceManager
-  kepler:
-    deploy: false
-    autoSync: true
-  kubePrometheusStack:
-    deploy: true
-    autoSync: true
-    namespace: prometheus
-  kubernetesReplicator:
-    deploy: true
-    autoSync: true
-  loki:
-    deploy: true
-    autoSync: true
-  longhorn:
-    deploy: true
-    namespace: longhorn-system
-  metricsServer:
-    deploy: true
-    autoSync: true
-  minio:
-    deploy: true
-    autoSync: true
-  nextcloud:
-    deploy: true
-    autoSync: true
-  nodeFeatureDiscovery:
-    deploy: true
-    autoSync: true
-  nodeProblemDetector:
-    deploy: true
-    autoSync: true
-  privateExternalDns:
-    deploy: true
-    autoSync: true
-  prometheusCrd:
-    deploy: true
-    autoSync: true
-    namespace: default
-    serverSideApply: true
-  promtail:
-    deploy: true
-    autoSync: true
-  sealedSecrets:
-    deploy: true
-    autoSync: true
-  smartmeterGatewayPrometheusExporter:
-    deploy: true
-    autoSync: true
-  spegel:
-    deploy: true
-    autoSync: true
-  tetragon:
-    deploy: true
-    autoSync: true
-  vpa:
-    deploy: true
-    autoSync: true
-  zigbee2mqtt:
-    deploy: true
-    nameOverride: zigbee2mqtt
-    autoSync: true
+  core:
+    argoCd:
+      deploy: true
+      namespace: argocd
+    descheduler:
+      deploy: true
+      autoSync: true
+    infro:
+      deploy: true
+      autoSync: true
+    sealedSecrets:
+      deploy: true
+      autoSync: true
+    metricsServer:
+      deploy: true
+      autoSync: true
+    vpa:
+      deploy: true
+      autoSync: true
+    kubernetesReplicator:
+      deploy: true
+      autoSync: true
+    certManager:
+      deploy: true
+      autoSync: true
+    nodeProblemDetector:
+      deploy: true
+      autoSync: true
+  connectivity:
+    adguard:
+      deploy: true
+      autoSync: true
+    cilium:
+      deploy: true
+    publicExternalDns:
+      deploy: true
+      autoSync: true
+    privateExternalDns:
+      deploy: true
+      autoSync: true
+    spegel:
+      deploy: true
+      autoSync: true
+    ingressNginx:
+      deploy: true
+      autoSync: true
+  monitoring:
+    kubePrometheusStack:
+      deploy: true
+      autoSync: true
+      namespace: prometheus
+    promtail:
+      deploy: true
+      autoSync: true
+    loki:
+      deploy: true
+      autoSync: true
+    smartmeterGatewayPrometheusExporter:
+      deploy: true
+      autoSync: true
+    enphaseEnvoyPrometheusExporter:
+      deploy: true
+      autoSync: true
+    gatus:
+      deploy: true
+      autoSync: true
+    grafana:
+      deploy: true
+      autoSync: true
+    prometheusCrd:
+      deploy: true
+      autoSync: true
+      namespace: default
+      serverSideApply: true
+  home:
+    homeAssistant:
+      deploy: true
+      autoSync: true
+    immich:
+      deploy: true
+      autoSync: true
+    nextcloud:
+      deploy: true
+      autoSync: true
+  iot:
+    emqx:
+      deploy: true
+      autoSync: true
+    zigbee2mqtt:
+      deploy: true
+      nameOverride: zigbee2mqtt
+      autoSync: true
+  deviceOperators:
+    genericDevicePlugin:
+      deploy: true
+      autoSync: true
+    intelDevicePluginsGpu:
+      deploy: true
+      autoSync: true
+      ignoreDifferences:
+        - group: "deviceplugin.intel.com"
+          kind: "GpuDevicePlugin"
+          jsonPointers:
+            - /spec/resourceManager
+    nodeFeatureDiscovery:
+      deploy: true
+      autoSync: true
+  security:
+    falco:
+      deploy: true
+      autoSync: true
+    tetragon:
+      deploy: true
+      autoSync: true
+    authentik:
+      deploy: true
+      autoSync: true
+  storage:
+    longhorn:
+      deploy: true
+      namespace: longhorn-system
+    minio:
+      deploy: true
+      autoSync: true
+    cloudnativePg:
+      deploy: true
+      autoSync: true
+      serverSideApply: true
+      ignoreDifferences:
+        - group: admissionregistration.k8s.io
+          kind: MutatingWebhookConfiguration
+          jsonPointers:
+            - /webhooks/0/clientConfig/caBundle
+            - /webhooks/1/clientConfig/caBundle
+            - /webhooks/2/clientConfig/caBundle
+        - group: admissionregistration.k8s.io
+          kind: ValidatingWebhookConfiguration
+          jsonPointers:
+            - /webhooks/0/clientConfig/caBundle
+            - /webhooks/1/clientConfig/caBundle
+            - /webhooks/2/clientConfig/caBundle
+            - /webhooks/3/clientConfig/caBundle
+
+
