@@ -19,7 +19,7 @@ spec:
   source:
     repoURL: https://github.com/FlorisFeddema/homelab.git
     targetRevision: HEAD
-    path: products/{{ $groupKey }}/{{ include "base.productName" (dict "key" $productKey "value" $productValue) }}
+    path: products/{{ ( kebabcase $groupKey ) }}/{{ include "base.productName" (dict "key" $productKey "value" $productValue) }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ default (include "base.productName" (dict "key" $productKey "value" $productValue)) $productValue.namespace }}
