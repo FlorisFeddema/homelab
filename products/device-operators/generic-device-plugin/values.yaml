@@ -1,36 +1,14 @@
-revisionHistoryLimit: 0
+generic-device-plugin:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 10Mi
+    limits:
+      memory: 20Mi
 
-image:
-  registry: docker.io
-  repository: squat/generic-device-plugin
-  tag: latest #https://github.com/squat/generic-device-plugin/issues/24
-
-resources:
-  requests:
-    cpu: 50m
-    memory: 10Mi
-  limits:
-    memory: 20Mi
-
-podSecurityContext: {}
-
-securityContext:
-  privileged: false
-  allowPrivilegeEscalation: false
-  capabilities:
-    drop: [ "ALL" ]
-  readOnlyRootFilesystem: true
-  seccompProfile:
-    type: "RuntimeDefault"
-  seLinuxOptions:
-    type: "container_device_plugin_t"
-
-domain: device.local
-
-devices:
-  - name: zigbee
-    groups:
-      - paths:
-          - path: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20221130184109-if00
-            mountPath: /dev/ttyACM0
-#            mountPath: /dev/sonoff/zigbeedonglepluse
+  devices:
+    - name: zigbee
+      groups:
+        - paths:
+            - path: /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20221130184109-if00
+              mountPath: /dev/ttyACM0
