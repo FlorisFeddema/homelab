@@ -3,6 +3,14 @@ ingress-nginx:
     allowSnippetAnnotations: true
     config:
       use-forwarded-headers: "true"
+      keep-alive: 10
+      hide-headers: "Server,X-Powered-By"
+      enable-ocsp: "true"
+      hsts-preload: "true"
+      enable-modsecurity: "true"
+      enable-owasp-modsecurity-crs: "true"
+      enable-brotli: "true"
+      load-balance: "ewma"
     ingressClassResource:
       default: true
 
@@ -28,6 +36,8 @@ ingress-nginx:
     metrics:
       enabled: true
       serviceMonitor:
+        enabled: true
+      prometheusRule:
         enabled: true
 
   revisionHistoryLimit: 0
