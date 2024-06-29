@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: {{ template "immich.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "immich-server"
-    {{- include "labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
   replicas: {{ .Values.server.replicas }}
@@ -23,7 +23,7 @@ spec:
         app.kubernetes.io/name: {{ template "immich.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: "immich-server"
-        {{- include "labels" . | nindent 8 }}
+        {{- include "common.labels" . | nindent 8 }}
     spec:
       containers:
         - name: server

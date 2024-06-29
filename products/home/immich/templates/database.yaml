@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/name: {{ template "immich.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "immich"
-    {{- include "labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
 spec:
   instances: {{ .Values.database.replicas }}
   imageName: {{ .Values.database.image.registry }}/{{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
@@ -14,7 +14,6 @@ spec:
   postgresql:
     shared_preload_libraries:
       - "vectors.so"
-
 
   logLevel: warning
 
