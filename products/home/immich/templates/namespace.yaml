@@ -1,9 +1,0 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: {{ .Release.Namespace }}
-  labels:
-    app.kubernetes.io/name: {{ template "immich.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: "immich"
-    {{- include "common.labels" . | nindent 4 }}

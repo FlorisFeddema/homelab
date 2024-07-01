@@ -7,86 +7,86 @@ patchBackupPvcJob:
   pvcNames:
     - immich-library
 
-persistence:
-  size: 200Gi
-  storageClass: ''
-  accessMode: ReadWriteMany
+immich:
+  persistence:
+    size: 200Gi
+    storageClass: ''
+    accessMode: ReadWriteMany
 
-ingress:
-  enabled: true
-  domain: immich.feddema.dev
-  annotations:
-    # proxy-body-size is set to 0 to remove the body limit on file uploads
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    cert-manager.io/cluster-issuer: letsencrypt-dns
-  tls:
+  ingress:
     enabled: true
-    secretName: immich-tls
+    domain: immich.feddema.dev
+    annotations:
+      # proxy-body-size is set to 0 to remove the body limit on file uploads
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    tls:
+      enabled: true
+      secretName: immich-tls
 
-database:
-  image:
-    registry: ghcr.io
-    repository: tensorchord/cloudnative-pgvecto.rs
-    tag: 16.3
+  database:
+    image:
+      registry: ghcr.io
+      repository: tensorchord/cloudnative-pgvecto.rs
+      tag: 16.3
 
-  clusterName: immich-postgresql
-  replicas: 2
-  monitoring:
-    enabled: false
-  size: 32Gi
-  backups:
-    enabled: false
+    clusterName: immich-postgresql
+    replicas: 2
+    monitoring:
+      enabled: false
+    size: 32Gi
+    backups:
+      enabled: false
 
-machineLearning:
-  replicas: 1
-  image:
-    registry: ghcr.io
-    repository: immich-app/immich-machine-learning
-    tag: v1.106.4
-    pullPolicy: IfNotPresent
+  machineLearning:
+    replicas: 1
+    image:
+      registry: ghcr.io
+      repository: immich-app/immich-machine-learning
+      tag: v1.106.4
+      pullPolicy: IfNotPresent
 
-#  resources:
-#    requests:
-#      cpu: 10m
-#      memory: 128Mi
-#    limits:
-#      memory: 512Mi
+  #  resources:
+  #    requests:
+  #      cpu: 10m
+  #      memory: 128Mi
+  #    limits:
+  #      memory: 512Mi
 
-server:
-  replicas: 1
-  image:
-    registry: ghcr.io
-    repository: immich-app/immich-server
-    tag: v1.106.4
-    pullPolicy: IfNotPresent
+  server:
+    replicas: 1
+    image:
+      registry: ghcr.io
+      repository: immich-app/immich-server
+      tag: v1.106.4
+      pullPolicy: IfNotPresent
 
-#  resources:
-#    requests:
-#      cpu: 10m
-#      memory: 128Mi
-#    limits:
-#      memory: 512Mi
+  #  resources:
+  #    requests:
+  #      cpu: 10m
+  #      memory: 128Mi
+  #    limits:
+  #      memory: 512Mi
 
-microservices:
-  replicas: 1
-  image:
-    registry: ghcr.io
-    repository: immich-app/immich-server
-    tag: v1.106.4
-    pullPolicy: IfNotPresent
+  microservices:
+    replicas: 1
+    image:
+      registry: ghcr.io
+      repository: immich-app/immich-server
+      tag: v1.106.4
+      pullPolicy: IfNotPresent
 
-#  resources:
-#    requests:
-#      cpu: 10m
-#      memory: 128Mi
-#    limits:
-#      memory: 512Mi
+  #  resources:
+  #    requests:
+  #      cpu: 10m
+  #      memory: 128Mi
+  #    limits:
+  #      memory: 512Mi
 
-
-redis:
-  enabled: true
-  architecture: standalone
-  auth:
-    enabled: false
-  master:
-    revisionHistoryLimit: 0
+  redis:
+    enabled: true
+    architecture: standalone
+    auth:
+      enabled: false
+    master:
+      revisionHistoryLimit: 0
