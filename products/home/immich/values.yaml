@@ -25,68 +25,19 @@ immich:
       secretName: immich-tls
 
   database:
-    image:
-      registry: ghcr.io
-      repository: tensorchord/cloudnative-pgvecto.rs
-      tag: 16.3
-
     clusterName: immich-postgresql
     replicas: 2
     monitoring:
-      enabled: false
+      enabled: true
     size: 32Gi
     backups:
       enabled: false
 
   machineLearning:
     replicas: 1
-    image:
-      registry: ghcr.io
-      repository: immich-app/immich-machine-learning
-      tag: v1.106.4
-      pullPolicy: IfNotPresent
-
-  #  resources:
-  #    requests:
-  #      cpu: 10m
-  #      memory: 128Mi
-  #    limits:
-  #      memory: 512Mi
 
   server:
     replicas: 1
-    image:
-      registry: ghcr.io
-      repository: immich-app/immich-server
-      tag: v1.106.4
-      pullPolicy: IfNotPresent
-
-  #  resources:
-  #    requests:
-  #      cpu: 10m
-  #      memory: 128Mi
-  #    limits:
-  #      memory: 512Mi
 
   microservices:
     replicas: 1
-    image:
-      registry: ghcr.io
-      repository: immich-app/immich-server
-      tag: v1.106.4
-      pullPolicy: IfNotPresent
-
-  #  resources:
-  #    requests:
-  #      cpu: 10m
-  #      memory: 128Mi
-  #    limits:
-  #      memory: 512Mi
-
-  redis:
-    enabled: true
-    architecture: standalone
-    auth:
-      enabled: false
-    master:
-      revisionHistoryLimit: 0
