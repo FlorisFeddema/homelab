@@ -125,6 +125,8 @@ nextcloud:
 
   metrics:
     enabled: true
+    info:
+      apps: true
     serviceMonitor:
       enabled: true
 
