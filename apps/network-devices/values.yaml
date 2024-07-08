@@ -1,0 +1,15 @@
+records:
+- name: embla
+  ip: 10.0.10.10
+- name: truenas
+  ip: 10.0.10.100
+- name: k8s
+  ip: 10.0.10.110
+- name: laptop.rouke.work
+  ip: 10.0.20.161
+
+ingress:
+- name: robin
+  auth: true
+  zone: lot
+  ip: 10.0.30.45

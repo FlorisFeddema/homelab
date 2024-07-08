@@ -7,3 +7,6 @@ apps:
     deploy: true
   external-dns:
     deploy: true
+  network-devices:
+    deploy: true
+    autoSync: false
