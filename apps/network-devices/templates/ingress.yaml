@@ -32,7 +32,7 @@ spec:
           service:
             name: {{ $endpoint.name }}
             port:
-              name: http
+              number: 80
         pathType: Prefix
   tls:
   - hosts:
