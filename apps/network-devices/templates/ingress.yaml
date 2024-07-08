@@ -43,6 +43,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: '{{ $endpoint.name }}-auth'
+  namespace: authentik
 spec:
   rules:
   - host: '{{ $endpoint.name }}.mobrockers.com'
