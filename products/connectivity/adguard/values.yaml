@@ -30,8 +30,3 @@ adguard:
 
   sync:
     resources: {}
-    config:
-      secret:
-        name: adguard-sync-credentials
-        sealedValues:
-          password: AgBdNhUmvMPFgbpgcwpEy9FA6CxbkKiI2QxxQ113FuW9sxcV2khaHXVrOgQrACBQocYRmLJ/arFbRx8nWVK/TWxdciPdtA6s7NOlv44USlyoS0fvDttdbOfQkdBul7MRuysBcjF2FmqDb68qcN8BVaOl9tw2ehlVh0xFWykG++808lC8JrNntMzNFvbAknBIsEATUaKg5gCRpewhiSGLLgUxZKlj+vWAhmG91q+RWASNbYsHW2nuggbLt1MPZQ2b/lkzBr9WHuKXjugQOXxl2PeqCL/N7Akb6ducFU0vKw7UaPIkFMBbtcZ9gLirYr8wRhQYbC7NljkadWmDTjVhtUwXpHmZqmG4Oy7oSXwQHAz4+c9SBg5J+XJVCojDpOmcsBXFOm7gx73yHYp6Rp7YlqphsQTUALcdz9cYmj2AQtm7W1CiVfNHuyH1z5eOYgOUzXt4pGbAcPMITrOj4Fsp2YVj2CgBBb47V/iWMZasLCzw09gpQv6VU9ff3GH636GLRc/YEPRNmIb3Ow20HHsL1GbQbTV2sf5lfBGB+e6Um7S8LH+UrUZSmil8Lo13JFqdFjAgpH+JyJRc0sWsiOYpfaCW10lVy2/jHnLE7zzbz9tyTffY7CjKm/YCTnmV7hB/rUruhcIElPbgp/+QSyqZJby6C2Z7fLbxAG2a/PTJv7avGYEiJ8O1Hpfd6qL1MX0smNg8rAeFjsIIMYDzg9NJ5lpfc+HOi915SvpPSNYhCZdHQtrtDRKgxMicbt96aItmzbvEqs8+0i51lX4xA5/z7Y4e
