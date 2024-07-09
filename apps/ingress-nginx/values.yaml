@@ -28,4 +28,4 @@ ingress-nginx:
       update-status-on-shutdown: 'false'
     config:
       enable-ocsp: 'true'
-      strict-validate-path-type: 'false'
+      #strict-validate-path-type: 'false'
