@@ -5,13 +5,6 @@ metadata:
 spec:
   instances: {{ .Values.database.replicas }}
 
-  postgresql:
-
-  {{ if .Values.database.monitoring.enabled }}
-  monitoring:
-    enablePodMonitor: true
-  {{ end }}
-
   storage:
     size: {{ .Values.database.size }}
 

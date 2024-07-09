@@ -2,8 +2,6 @@ database:
   clusterName: authentik-postgres
   replicas: 2
   size: 32Gi
-  monitoring:
-    enabled: false
   backups:
     enabled: true
     schedule: "0 0 4 * * *"
