@@ -84,6 +84,10 @@ minio:
       policy: none
       purge: false
       versioning: false
+    - name: thanos
+      policy: none
+      purge: false
+      versioning: false
 
   customCommands:
     - command: ilm rule add --noncurrent-expire-days 2 myminio/loki-chunks
