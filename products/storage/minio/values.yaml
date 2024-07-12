@@ -62,6 +62,10 @@ minio:
       existingSecret: cnpg-svc-credentials
       existingSecretKey: secretKey
       policy: readwrite
+    - accessKey: thanos
+      existingSecret: thanos-svc-credentials
+      existingSecretKey: secretKey
+      policy: readwrite
 
   buckets:
     - name: loki-chunks
