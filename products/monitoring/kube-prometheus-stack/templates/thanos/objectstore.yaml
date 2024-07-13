@@ -1,0 +1,14 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: thanos-objstore
+  namespace: adguard
+spec:
+  encryptedData:
+    config: AgBdu4ZSwbvy8sgW50K+hwfR4jB5kQjcA2s99aeaV3prjybVOYMyQATx5RwZv0BX1uW3SF+I6Bpq0TsyBvrVYmi4NUYzTJC0kklPA1IHxal1OgAMGZ0JhntyLtC0tzfHVqlfs+2hxE2Z89e0SsQT7Rok+PKdm8vOT63SCrhk5yk7sl8Cx4pqzS75GbL+0vUXsWx4cTl8zQWsKxax34hKiZo4+0SPnC7eXLrqZ1e641dGV18REGLVEOdD4fbATm7SG0xhZ7XdB3guGI+aNiBSW5i9B0nwuBqRwfdxHK/soj8kgdK2xM/Hs/QvUzzmjlFMhb5I995ASIPjPCxGRoFqDS8OjEVBgLfe3vitGdtv+IziYZ0bMRUophnaBI0JnZR0k0wvofntEUDbUZFtc7TLkwWkVZBbMCpffDJ5zOCmlZr/dlyJRg/kWx7kJQvBUzrK2+i6R2JCDpsz/aufiUZWGzkgjFvUSJeOEsq7oxYrTrmMBSHPA56XRZHptN6bIgE16KUHMMVxQj1MQI7paSTmWOzveSQco4oU0+gEJ1Ef/iSV6Te5df8FTzz18ZcGSOAc+IWV8VaaLS+J5bcOBQhupgOXvTh4pzNI6G0ti5Fkx4jAZBw6jvtwxnJMHKeJkRfPx/AiAK5KlfOODu2h/c91yQi+QIXFMCxBuBm+kzE0Na3irMoU/hNCXIlbofVz9o6mgJOprb7pWj0KzCbq/Gn0lIeVPeHkF4CRaxNQhqiFaon1FXqac2RPsOi2ar/Rmeno4axkHW+zsGVWzOxzB0yUhuF0Krb2HdGst+y0Ro5J13MA5aGuGdHd6y5g9CcVat88mLMXdywW8ZjSt3Ym8dui5l6j6vvfuTmDVqzOyw4VPwqn+g5DG/Lj1BuQe00T/aI=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: thanos-objstore
+      namespace: adguard
