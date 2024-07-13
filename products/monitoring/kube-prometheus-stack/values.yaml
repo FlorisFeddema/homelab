@@ -156,7 +156,7 @@ thanos:
     enabled: true
     logLevel: warn
     refresh: 30m
-    replicaCount: 1
+    replicaCount: 2
     revisionHistoryLimit: 0
     resources: { }
     pdb:
@@ -211,17 +211,13 @@ thanos:
     pdb:
       create: false
 
-  ruler:
-    #  Enable from kube-prom-stack since it has hot reload for the rules
-    enabled: false
-
   receive:
     enabled: true
     logLevel: warn
     tsdbRetention: 7d
-
-  receiveDistributor:
-    enabled: false
+    replicaCount: 2
+    revisionHistoryLimit: 0
+    resources: { }
 
   metrics:
     enabled: true
