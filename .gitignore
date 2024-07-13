@@ -390,6 +390,7 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/osx,macos,windows,linux,git,visualstudiocode,jetbrains,intellij,goland,helm
 
 **/secret.yaml
+**/*.secret.yaml
 /secret/
 /talos/secrets.yaml
 /talos/talosconfig
