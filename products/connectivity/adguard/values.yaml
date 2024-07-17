@@ -27,6 +27,8 @@ adguard:
     domain: adguard.feddema.dev
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
+    tls:
+      enabled: true
 
   sync:
     resources: {}
