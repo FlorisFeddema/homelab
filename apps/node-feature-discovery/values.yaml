@@ -1,13 +1,13 @@
 node-feature-discovery:
   master:
-    revisionHistoryLimit: 0
+    revisionHistoryLimit: 1
     tolerations:
     - operator: Exists
   worker:
     tolerations:
     - operator: Exists
   gc:
-    revisionHistoryLimit: 0
+    revisionHistoryLimit: 1
     tolerations:
     - operator: Exists
   prometheus:
