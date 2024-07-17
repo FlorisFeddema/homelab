@@ -1,4 +1,10 @@
 node-feature-discovery:
+  master:
+    revisionHistoryLimit: 0
+  
+  gc: 
+    revisionHistoryLimit: 0
+
   worker:
     config:
       sources:
