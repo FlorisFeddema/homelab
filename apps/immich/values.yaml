@@ -4,6 +4,11 @@ immich:
     storageClass: ''
     accessMode: ReadWriteMany
 
+  database:
+    clusterName: immich-data
+    replicas: 2
+    size: 32Gi
+
   ingress:
     enabled: true
     domain: photos.mobrockers.com
@@ -13,7 +18,6 @@ immich:
     tls:
       enabled: true
 
-  database:
-    clusterName: immich-data
-    replicas: 2
-    size: 32Gi
+  server:
+    podSecurityContext:
+      fsGroup: 6000
