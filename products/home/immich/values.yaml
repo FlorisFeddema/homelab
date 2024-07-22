@@ -10,7 +10,7 @@ patchBackupPvcJob:
 immich:
   persistence:
     size: 200Gi
-    storageClass: ''
+    storageClass: 'longhorn'
     accessMode: ReadWriteMany
 
   ingress:
