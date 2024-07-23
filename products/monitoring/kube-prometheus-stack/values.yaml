@@ -136,7 +136,8 @@ kube-prometheus-stack:
 
     ingress:
       enabled: true
-      hostname: ruler.thanos.feddema.dev
+      hosts:
+        - ruler.thanos.feddema.dev
       annotations:
         nginx.ingress.kubernetes.io/auth-url: |-
           http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
@@ -148,7 +149,7 @@ kube-prometheus-stack:
           proxy_set_header X-Forwarded-Host $http_host;
         cert-manager.io/cluster-issuer: letsencrypt-dns
       tls:
-        - secretName: rulor-thanos-tls
+        - secretName: ruler-thanos-tls
           hosts:
           - ruler.thanos.feddema.dev
 
