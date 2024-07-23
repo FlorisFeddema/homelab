@@ -162,7 +162,6 @@ kube-prometheus-stack:
           - static_configs:
               - kube-prometheus-stack-thanos-query.prometheus
             scheme: http
-            timeout: 10s
       resources: { }
 
 
