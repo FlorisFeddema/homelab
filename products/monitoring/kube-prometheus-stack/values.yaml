@@ -196,7 +196,7 @@ thanos:
       create: false
     ingress:
       enabled: true
-      hostname: thanos.feddema.dev
+      hostname: bucketweb.thanos.feddema.dev
       annotations:
         nginx.ingress.kubernetes.io/auth-url: |-
           http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
