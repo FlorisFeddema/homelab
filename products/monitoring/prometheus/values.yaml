@@ -39,7 +39,7 @@ kube-prometheus-stack:
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:
-              app.kubernetes.io/instance: kube-prometheus-stack
+              app.kubernetes.io/instance: prometheus
               app.kubernetes.io/managed-by: prometheus-operator
               app.kubernetes.io/name: prometheus
               prometheus: kube-prometheus-stack
@@ -170,14 +170,14 @@ kube-prometheus-stack:
           alertmanagers:
             - api_version: v2
               static_configs:
-                - kube-prometheus-stack-alertmanager.prometheus:9093
+                - prometheus-alertmanager.prometheus:9093
               scheme: http
       externalPrefixNilUsesHelmValues: false
       objectStorageConfig:
         name: thanos-objstore
         key: objstore.yml
       queryEndpoints:
-        - kube-prometheus-stack-thanos-query:9090
+        - prometheus-thanos-query:9090
       resources: { }
 
 

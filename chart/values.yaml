@@ -46,10 +46,9 @@ products:
       deploy: true
       autoSync: true
   monitoring:
-    kubePrometheusStack:
+    prometheus:
       deploy: true
       autoSync: true
-      namespace: prometheus
     promtail:
       deploy: true
       autoSync: true
