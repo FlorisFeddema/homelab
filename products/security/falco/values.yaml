@@ -61,9 +61,6 @@ falco:
       tlsclient:
         cacertfile: ""
 
-#    config:
-#      alertmanager: TODO:
-
     resources:
       limits:
         memory: 128Mi
