@@ -126,12 +126,45 @@ kube-prometheus-stack:
 
   kube-state-metrics:
     revisionHistoryLimit: 0
-#    metricLabelsAllowlist:
-#      - nodes=[topology.kubernetes.io/zone]
 
   prometheus-node-exporter:
     revisionHistoryLimit: 0
     namespaceOverride: "prometheus-node-exporter"
+
+  thanosRuler:
+    enabled: true
+
+    thanosRulerSpec:
+      ruleSelectorNilUsesHelmValues: false
+      replicas: 1
+      logLevel: warn
+      retention: 24h
+      storageSpec:
+        volumeClaimTemplate:
+          spec:
+            resources:
+              requests:
+                storage: 20Gi
+      alertmanagersConfig:
+        secret:
+          alertmanagers:
+            - api_version: v2
+              static_configs:
+                - kube-prometheus-stack-alertmanager.prometheus
+              scheme: http
+              timeout: 10s
+      externalPrefixNilUsesHelmValues: false
+      objectStorageConfig:
+        name: thanos-objstore
+        key: objstore.yml
+      queryConfig:
+        secret:
+          - static_configs:
+              - kube-prometheus-stack-thanos-query.prometheus
+            scheme: http
+            timeout: 10s
+      resources: { }
+
 
 thanos:
   #  TODO: when redis operator in the cluster:
