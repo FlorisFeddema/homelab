@@ -58,8 +58,9 @@ falco:
         output:
           enabled: true
 
-    tlsclient:
-      cacertfile: ""
+    config:
+      tlsclient:
+        cacertfile: ""
 
     resources:
       limits:
