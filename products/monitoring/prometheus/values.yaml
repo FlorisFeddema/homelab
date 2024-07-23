@@ -1,4 +1,7 @@
 kube-prometheus-stack:
+
+  nameOverride: "prometheus"
+
   cleanPrometheusOperatorObjectNames: true
   crds:
     enabled: false
@@ -42,7 +45,7 @@ kube-prometheus-stack:
               app.kubernetes.io/instance: prometheus
               app.kubernetes.io/managed-by: prometheus-operator
               app.kubernetes.io/name: prometheus
-              prometheus: kube-prometheus-stack
+              prometheus: prometheus
 
   alertmanager:
     enabled: true
