@@ -69,7 +69,7 @@ falco:
         cpu: 20m
         memory: 64Mi
 
-      webui:
+    webui:
       enabled: true
       replicaCount: 1
       loglevel: "error"
