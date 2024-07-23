@@ -137,7 +137,7 @@ kube-prometheus-stack:
     thanosRulerSpec:
       ruleSelectorNilUsesHelmValues: false
       replicas: 1
-      logLevel: info
+      logLevel: warn
       retention: 24h
       storageSpec:
         volumeClaimTemplate:
