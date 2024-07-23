@@ -152,7 +152,6 @@ kube-prometheus-stack:
               static_configs:
                 - kube-prometheus-stack-alertmanager.prometheus
               scheme: http
-              timeout: 10s
       externalPrefixNilUsesHelmValues: false
       objectStorageConfig:
         name: thanos-objstore
