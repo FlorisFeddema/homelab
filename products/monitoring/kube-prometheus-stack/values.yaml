@@ -157,7 +157,7 @@ kube-prometheus-stack:
         name: thanos-objstore
         key: objstore.yml
       queryEndpoints:
-        - kube-prometheus-stack-thanos-query-grpc:10901
+        - kube-prometheus-stack-thanos-query:9090
       resources: { }
 
 
