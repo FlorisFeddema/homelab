@@ -58,6 +58,9 @@ falco:
         output:
           enabled: true
 
+      tlsclient:
+        cacertfile: ""
+
 #    config:
 #      alertmanager: TODO:
 
