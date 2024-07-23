@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: nextcloud-postgres
+  name: nextcloud-postgresql-monitor
 spec:
   selector:
     matchLabels:
