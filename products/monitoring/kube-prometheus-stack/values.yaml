@@ -150,7 +150,7 @@ kube-prometheus-stack:
           alertmanagers:
             - api_version: v2
               static_configs:
-                - kube-prometheus-stack-alertmanager.prometheus
+                - kube-prometheus-stack-alertmanager.prometheus:9093
               scheme: http
       externalPrefixNilUsesHelmValues: false
       objectStorageConfig:
@@ -159,7 +159,7 @@ kube-prometheus-stack:
       queryConfig:
         secret:
           - static_configs:
-              - kube-prometheus-stack-thanos-query.prometheus
+              - kube-prometheus-stack-thanos-query.prometheus:9090
             scheme: http
       resources: { }
 
