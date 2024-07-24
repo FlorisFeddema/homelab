@@ -21,7 +21,7 @@ kube-prometheus-stack:
     prometheusSpec:
       probeSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
-      ruleSelectorNilUsesHelmValues: false # TODO: Disable rules from prometheus, rules are managed by thanos-ruler
+      ruleSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
 
@@ -135,10 +135,6 @@ kube-prometheus-stack:
     namespaceOverride: "prometheus-node-exporter"
 
 thanos:
-  #  TODO: when redis operator in the cluster:
-  #  indexCacheConfig: "" https://thanos.io/tip/components/store.md/#redis-index-cache
-  #   bucketCacheConfig: "" https://thanos.io/tip/components/store.md/#caching-bucket
-
   existingObjstoreSecret: "thanos-objstore"
 
   query:
