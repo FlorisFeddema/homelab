@@ -29,6 +29,7 @@ cilium:
   
   gatewayAPI:
     enabled: true
+    externalTrafficPolicy: 'Local'
 
   hubble:
     enabled: true
