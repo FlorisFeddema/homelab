@@ -3,6 +3,11 @@ apps:
     deploy: true
     autoSync: false
     namespace: kube-system
+    ignoreDifferences:
+    - group: apps
+      kind: DaemonSet
+      jqPathExpressions:
+      - .spec.template.spec.containers[] | select(.volumeMounts[] | select(.readOnly == false))
   metrics-server:
     deploy: true
   argocd:
