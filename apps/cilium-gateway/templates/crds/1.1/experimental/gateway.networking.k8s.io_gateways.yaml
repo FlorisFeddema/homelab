@@ -3,8 +3,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/2997
-    gateway.networking.k8s.io/bundle-version: v1.1.0
-    gateway.networking.k8s.io/channel: standard
+    gateway.networking.k8s.io/bundle-version: v1.2.0-dev
+    gateway.networking.k8s.io/channel: experimental
   creationTimestamp: null
   name: gateways.gateway.networking.k8s.io
 spec:
@@ -147,6 +147,102 @@ spec:
                 maxLength: 253
                 minLength: 1
                 type: string
+              infrastructure:
+                description: |+
+                  Infrastructure defines infrastructure level attributes about this Gateway instance.
+
+
+                  Support: Core
+
+
+                properties:
+                  annotations:
+                    additionalProperties:
+                      description: |-
+                        AnnotationValue is the value of an annotation in Gateway API. This is used
+                        for validation of maps such as TLS options. This roughly matches Kubernetes
+                        annotation validation, although the length validation in that case is based
+                        on the entire size of the annotations struct.
+                      maxLength: 4096
+                      minLength: 0
+                      type: string
+                    description: |-
+                      Annotations that SHOULD be applied to any resources created in response to this Gateway.
+
+
+                      For implementations creating other Kubernetes objects, this should be the `metadata.annotations` field on resources.
+                      For other implementations, this refers to any relevant (implementation specific) "annotations" concepts.
+
+
+                      An implementation may chose to add additional implementation-specific annotations as they see fit.
+
+
+                      Support: Extended
+                    maxProperties: 8
+                    type: object
+                  labels:
+                    additionalProperties:
+                      description: |-
+                        AnnotationValue is the value of an annotation in Gateway API. This is used
+                        for validation of maps such as TLS options. This roughly matches Kubernetes
+                        annotation validation, although the length validation in that case is based
+                        on the entire size of the annotations struct.
+                      maxLength: 4096
+                      minLength: 0
+                      type: string
+                    description: |-
+                      Labels that SHOULD be applied to any resources created in response to this Gateway.
+
+
+                      For implementations creating other Kubernetes objects, this should be the `metadata.labels` field on resources.
+                      For other implementations, this refers to any relevant (implementation specific) "labels" concepts.
+
+
+                      An implementation may chose to add additional implementation-specific labels as they see fit.
+
+
+                      Support: Extended
+                    maxProperties: 8
+                    type: object
+                  parametersRef:
+                    description: |-
+                      ParametersRef is a reference to a resource that contains the configuration
+                      parameters corresponding to the Gateway. This is optional if the
+                      controller does not require any additional configuration.
+
+
+                      This follows the same semantics as GatewayClass's `parametersRef`, but on a per-Gateway basis
+
+
+                      The Gateway's GatewayClass may provide its own `parametersRef`. When both are specified,
+                      the merging behavior is implementation specific.
+                      It is generally recommended that GatewayClass provides defaults that can be overridden by a Gateway.
+
+
+                      Support: Implementation-specific
+                    properties:
+                      group:
+                        description: Group is the group of the referent.
+                        maxLength: 253
+                        pattern: ^$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                        type: string
+                      kind:
+                        description: Kind is kind of the referent.
+                        maxLength: 63
+                        minLength: 1
+                        pattern: ^[a-zA-Z]([-a-zA-Z0-9]*[a-zA-Z0-9])?$
+                        type: string
+                      name:
+                        description: Name is the name of the referent.
+                        maxLength: 253
+                        minLength: 1
+                        type: string
+                    required:
+                    - group
+                    - kind
+                    - name
+                    type: object
+                type: object
               listeners:
                 description: |-
                   Listeners associated with this Gateway. Listeners define
@@ -518,7 +614,7 @@ spec:
                         Support: Core
                       maxLength: 255
                       minLength: 1
-                      pattern: ^[a-zA-Z0-9]([-a-zSA-Z0-9]*[a-zA-Z0-9])?$|[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/[A-Za-z0-9]+$
+                      pattern: ^[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?$|[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/[A-Za-z0-9]+$
                       type: string
                     tls:
                       description: |-
@@ -626,6 +722,104 @@ spec:
                             type: object
                           maxItems: 64
                           type: array
+                        frontendValidation:
+                          description: |+
+                            FrontendValidation holds configuration information for validating the frontend (client).
+                            Setting this field will require clients to send a client certificate
+                            required for validation during the TLS handshake. In browsers this may result in a dialog appearing
+                            that requests a user to specify the client certificate.
+                            The maximum depth of a certificate chain accepted in verification is Implementation specific.
+
+
+                            Support: Extended
+
+
+                          properties:
+                            caCertificateRefs:
+                              description: |-
+                                CACertificateRefs contains one or more references to
+                                Kubernetes objects that contain TLS certificates of
+                                the Certificate Authorities that can be used
+                                as a trust anchor to validate the certificates presented by the client.
+
+
+                                A single CA certificate reference to a Kubernetes ConfigMap
+                                has "Core" support.
+                                Implementations MAY choose to support attaching multiple CA certificates to
+                                a Listener, but this behavior is implementation-specific.
+
+
+                                Support: Core - A single reference to a Kubernetes ConfigMap
+                                with the CA certificate in a key named `ca.crt`.
+
+
+                                Support: Implementation-specific (More than one reference, or other kinds
+                                of resources).
+
+
+                                References to a resource in a different namespace are invalid UNLESS there
+                                is a ReferenceGrant in the target namespace that allows the certificate
+                                to be attached. If a ReferenceGrant does not allow this reference, the
+                                "ResolvedRefs" condition MUST be set to False for this listener with the
+                                "RefNotPermitted" reason.
+                              items:
+                                description: |-
+                                  ObjectReference identifies an API object including its namespace.
+
+
+                                  The API object must be valid in the cluster; the Group and Kind must
+                                  be registered in the cluster for this reference to be valid.
+
+
+                                  References to objects with invalid Group and Kind are not valid, and must
+                                  be rejected by the implementation, with appropriate Conditions set
+                                  on the containing object.
+                                properties:
+                                  group:
+                                    description: |-
+                                      Group is the group of the referent. For example, "gateway.networking.k8s.io".
+                                      When unspecified or empty string, core API group is inferred.
+                                    maxLength: 253
+                                    pattern: ^$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                                    type: string
+                                  kind:
+                                    description: Kind is kind of the referent. For
+                                      example "ConfigMap" or "Service".
+                                    maxLength: 63
+                                    minLength: 1
+                                    pattern: ^[a-zA-Z]([-a-zA-Z0-9]*[a-zA-Z0-9])?$
+                                    type: string
+                                  name:
+                                    description: Name is the name of the referent.
+                                    maxLength: 253
+                                    minLength: 1
+                                    type: string
+                                  namespace:
+                                    description: |-
+                                      Namespace is the namespace of the referenced object. When unspecified, the local
+                                      namespace is inferred.
+
+
+                                      Note that when a namespace different than the local namespace is specified,
+                                      a ReferenceGrant object is required in the referent namespace to allow that
+                                      namespace's owner to accept the reference. See the ReferenceGrant
+                                      documentation for details.
+
+
+                                      Support: Core
+                                    maxLength: 63
+                                    minLength: 1
+                                    pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                                    type: string
+                                required:
+                                - group
+                                - kind
+                                - name
+                                type: object
+                              maxItems: 8
+                              minItems: 1
+                              type: array
+                          type: object
                         mode:
                           default: Terminate
                           description: |-
@@ -1180,6 +1374,102 @@ spec:
                 maxLength: 253
                 minLength: 1
                 type: string
+              infrastructure:
+                description: |+
+                  Infrastructure defines infrastructure level attributes about this Gateway instance.
+
+
+                  Support: Core
+
+
+                properties:
+                  annotations:
+                    additionalProperties:
+                      description: |-
+                        AnnotationValue is the value of an annotation in Gateway API. This is used
+                        for validation of maps such as TLS options. This roughly matches Kubernetes
+                        annotation validation, although the length validation in that case is based
+                        on the entire size of the annotations struct.
+                      maxLength: 4096
+                      minLength: 0
+                      type: string
+                    description: |-
+                      Annotations that SHOULD be applied to any resources created in response to this Gateway.
+
+
+                      For implementations creating other Kubernetes objects, this should be the `metadata.annotations` field on resources.
+                      For other implementations, this refers to any relevant (implementation specific) "annotations" concepts.
+
+
+                      An implementation may chose to add additional implementation-specific annotations as they see fit.
+
+
+                      Support: Extended
+                    maxProperties: 8
+                    type: object
+                  labels:
+                    additionalProperties:
+                      description: |-
+                        AnnotationValue is the value of an annotation in Gateway API. This is used
+                        for validation of maps such as TLS options. This roughly matches Kubernetes
+                        annotation validation, although the length validation in that case is based
+                        on the entire size of the annotations struct.
+                      maxLength: 4096
+                      minLength: 0
+                      type: string
+                    description: |-
+                      Labels that SHOULD be applied to any resources created in response to this Gateway.
+
+
+                      For implementations creating other Kubernetes objects, this should be the `metadata.labels` field on resources.
+                      For other implementations, this refers to any relevant (implementation specific) "labels" concepts.
+
+
+                      An implementation may chose to add additional implementation-specific labels as they see fit.
+
+
+                      Support: Extended
+                    maxProperties: 8
+                    type: object
+                  parametersRef:
+                    description: |-
+                      ParametersRef is a reference to a resource that contains the configuration
+                      parameters corresponding to the Gateway. This is optional if the
+                      controller does not require any additional configuration.
+
+
+                      This follows the same semantics as GatewayClass's `parametersRef`, but on a per-Gateway basis
+
+
+                      The Gateway's GatewayClass may provide its own `parametersRef`. When both are specified,
+                      the merging behavior is implementation specific.
+                      It is generally recommended that GatewayClass provides defaults that can be overridden by a Gateway.
+
+
+                      Support: Implementation-specific
+                    properties:
+                      group:
+                        description: Group is the group of the referent.
+                        maxLength: 253
+                        pattern: ^$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                        type: string
+                      kind:
+                        description: Kind is kind of the referent.
+                        maxLength: 63
+                        minLength: 1
+                        pattern: ^[a-zA-Z]([-a-zA-Z0-9]*[a-zA-Z0-9])?$
+                        type: string
+                      name:
+                        description: Name is the name of the referent.
+                        maxLength: 253
+                        minLength: 1
+                        type: string
+                    required:
+                    - group
+                    - kind
+                    - name
+                    type: object
+                type: object
               listeners:
                 description: |-
                   Listeners associated with this Gateway. Listeners define
@@ -1551,7 +1841,7 @@ spec:
                         Support: Core
                       maxLength: 255
                       minLength: 1
-                      pattern: ^[a-zA-Z0-9]([-a-zSA-Z0-9]*[a-zA-Z0-9])?$|[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/[A-Za-z0-9]+$
+                      pattern: ^[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?$|[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*\/[A-Za-z0-9]+$
                       type: string
                     tls:
                       description: |-
@@ -1659,6 +1949,104 @@ spec:
                             type: object
                           maxItems: 64
                           type: array
+                        frontendValidation:
+                          description: |+
+                            FrontendValidation holds configuration information for validating the frontend (client).
+                            Setting this field will require clients to send a client certificate
+                            required for validation during the TLS handshake. In browsers this may result in a dialog appearing
+                            that requests a user to specify the client certificate.
+                            The maximum depth of a certificate chain accepted in verification is Implementation specific.
+
+
+                            Support: Extended
+
+
+                          properties:
+                            caCertificateRefs:
+                              description: |-
+                                CACertificateRefs contains one or more references to
+                                Kubernetes objects that contain TLS certificates of
+                                the Certificate Authorities that can be used
+                                as a trust anchor to validate the certificates presented by the client.
+
+
+                                A single CA certificate reference to a Kubernetes ConfigMap
+                                has "Core" support.
+                                Implementations MAY choose to support attaching multiple CA certificates to
+                                a Listener, but this behavior is implementation-specific.
+
+
+                                Support: Core - A single reference to a Kubernetes ConfigMap
+                                with the CA certificate in a key named `ca.crt`.
+
+
+                                Support: Implementation-specific (More than one reference, or other kinds
+                                of resources).
+
+
+                                References to a resource in a different namespace are invalid UNLESS there
+                                is a ReferenceGrant in the target namespace that allows the certificate
+                                to be attached. If a ReferenceGrant does not allow this reference, the
+                                "ResolvedRefs" condition MUST be set to False for this listener with the
+                                "RefNotPermitted" reason.
+                              items:
+                                description: |-
+                                  ObjectReference identifies an API object including its namespace.
+
+
+                                  The API object must be valid in the cluster; the Group and Kind must
+                                  be registered in the cluster for this reference to be valid.
+
+
+                                  References to objects with invalid Group and Kind are not valid, and must
+                                  be rejected by the implementation, with appropriate Conditions set
+                                  on the containing object.
+                                properties:
+                                  group:
+                                    description: |-
+                                      Group is the group of the referent. For example, "gateway.networking.k8s.io".
+                                      When unspecified or empty string, core API group is inferred.
+                                    maxLength: 253
+                                    pattern: ^$|^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+                                    type: string
+                                  kind:
+                                    description: Kind is kind of the referent. For
+                                      example "ConfigMap" or "Service".
+                                    maxLength: 63
+                                    minLength: 1
+                                    pattern: ^[a-zA-Z]([-a-zA-Z0-9]*[a-zA-Z0-9])?$
+                                    type: string
+                                  name:
+                                    description: Name is the name of the referent.
+                                    maxLength: 253
+                                    minLength: 1
+                                    type: string
+                                  namespace:
+                                    description: |-
+                                      Namespace is the namespace of the referenced object. When unspecified, the local
+                                      namespace is inferred.
+
+
+                                      Note that when a namespace different than the local namespace is specified,
+                                      a ReferenceGrant object is required in the referent namespace to allow that
+                                      namespace's owner to accept the reference. See the ReferenceGrant
+                                      documentation for details.
+
+
+                                      Support: Core
+                                    maxLength: 63
+                                    minLength: 1
+                                    pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?$
+                                    type: string
+                                required:
+                                - group
+                                - kind
+                                - name
+                                type: object
+                              maxItems: 8
+                              minItems: 1
+                              type: array
+                          type: object
                         mode:
                           default: Terminate
                           description: |-
