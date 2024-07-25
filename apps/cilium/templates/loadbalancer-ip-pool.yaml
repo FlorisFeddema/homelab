@@ -3,5 +3,5 @@ kind: CiliumLoadBalancerIPPool
 metadata:
   name: core-network
 spec:
-  cidrs:
+  blocks:
     - cidr: 10.0.10.0/24
