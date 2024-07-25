@@ -30,6 +30,8 @@ cilium:
   gatewayAPI:
     enabled: true
     externalTrafficPolicy: 'Local'
+    enableAppProtocol: true 
+    enableAlpn: true # protocol negotiation (Http2)
 
   hubble:
     enabled: true
