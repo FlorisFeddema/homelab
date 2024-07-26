@@ -5,6 +5,7 @@ apps:
     deploy: true
   adguard:
     deploy: true
+    autoSyunc: false
   external-dns:
     deploy: true
   network-devices:
