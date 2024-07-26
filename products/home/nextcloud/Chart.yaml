@@ -1,8 +1,8 @@
 apiVersion: v2
 name: nextcloud
-version: 1.0.41
+version: 1.0.42
 
 dependencies:
   - name: nextcloud
-    version: 5.3.2
+    version: 5.4.0
     repository: https://nextcloud.github.io/helm
