@@ -11,6 +11,7 @@ home-assistant:
 
   ingress:
     enabled: true
+    class: nginx
     domain: home.mobrockers.com
     tls:
       enabled: true
