@@ -23,6 +23,9 @@ adguard:
       annotations:
         'io.cilium/lb-ipam-ips': 10.0.10.250
 
+    tolerations:
+      - key: essential
+        operator: Exists
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
