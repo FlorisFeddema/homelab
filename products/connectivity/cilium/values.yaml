@@ -2,6 +2,7 @@ cilium:
   k8sServiceHost: gerador.feddema.dev
   k8sServicePort: 6443
   kubeProxyReplacement: true
+  rollOutCiliumPods: true
 
   ipam:
     mode: kubernetes
@@ -13,6 +14,7 @@ cilium:
     capabilities:
       ciliumAgent: [ CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID ]
       cleanCiliumState: [ NET_ADMIN,SYS_ADMIN,SYS_RESOURCE ]
+
   cgroup:
     autoMount:
       enabled: false
@@ -31,7 +33,6 @@ cilium:
   certgen:
     ttlSecondsAfterFinished: null
 
-  rollOutCiliumPods: true
 
   hubble:
     enabled: true
@@ -84,8 +85,8 @@ cilium:
             hosts:
               - hubble.feddema.dev
 
-  monitor:
-    enabled: true
+#  monitor:
+#    enabled: true
 
   prometheus:
     enabled: true
@@ -93,7 +94,6 @@ cilium:
       enabled: true
   dashboards:
     enabled: true
-    namespace: grafana
     label: grafana_dashboard
 
   operator:
@@ -103,7 +103,7 @@ cilium:
       enabled: true
       serviceMonitor:
         enabled: true
+    rollOutPods: true
     dashboards:
       enabled: true
-      namespace: grafana
       label: grafana_dashboard
