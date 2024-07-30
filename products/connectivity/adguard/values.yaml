@@ -1,9 +1,23 @@
 adguard:
+  global:
+    persistence:
+      labels:
+        recurring-job.longhorn.io/source: enabled
+        recurring-job-group.longhorn.io/backup: enabled
+
   primary:
-    resources: {}
+    ingress:
+      domain: adguard.feddema.dev
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-dns
+      tls:
+        secretName: adguard-tls
 
   secondary:
-    resources: {}
+    service:
+      annotations:
+        'io.cilium/lb-ipam-ips': 192.168.102.20
+
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
@@ -13,22 +27,3 @@ adguard:
             app.kubernetes.io/component: adguard-secondary
             app.kubernetes.io/instance: adguard
             app.kubernetes.io/name: adguard
-
-  persistence:
-    labels:
-      recurring-job.longhorn.io/source: enabled
-      recurring-job-group.longhorn.io/backup: enabled
-
-  service:
-    annotations:
-      'io.cilium/lb-ipam-ips': 192.168.102.20
-
-  ingress:
-    domain: adguard.feddema.dev
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    tls:
-      enabled: true
-
-  sync:
-    resources: {}
