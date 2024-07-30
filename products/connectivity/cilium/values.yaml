@@ -33,7 +33,6 @@ cilium:
   certgen:
     ttlSecondsAfterFinished: null
 
-
   hubble:
     enabled: true
 

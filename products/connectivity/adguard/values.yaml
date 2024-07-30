@@ -29,6 +29,7 @@ adguard:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     tls:
       enabled: true
+      secretName: adguard-tls
 
   sync:
     resources: {}
