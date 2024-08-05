@@ -33,11 +33,11 @@ products:
       autoSync: true
     cilium:
       deploy: true
-      ignoreDifferences:
-      - group: apps
-        kind: DaemonSet
-        jqPathExpressions:
-        - .spec.template.spec.containers[] | select(.volumeMounts[] | select(.readOnly == false))
+      # ignoreDifferences:
+      # - group: apps
+      #   kind: DaemonSet
+      #   jqPathExpressions:
+      #   - .spec.template.spec.containers[] | select(.volumeMounts[] | select(.readOnly == false))
     publicExternalDns:
       deploy: true
       autoSync: true
