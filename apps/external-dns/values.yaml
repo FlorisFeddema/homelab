@@ -36,7 +36,7 @@ external-dns:
     - name: LOG_LEVEL
       value: debug
     - name: ADGUARD_URL
-      value: http://adguard-primary.adguard:3000
+      value: http://adguard-web.adguard:3000
     - name: ADGUARD_USER
       value: "admin"
     - name: ADGUARD_PASSWORD
