@@ -1,0 +1,9 @@
+cyberchef:
+  ingress:
+    enabled: true
+    domain: cyberchef.feddema.dev
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-dns
+    tls:
+      enabled: true
+      secretName: cyberchef-tls
