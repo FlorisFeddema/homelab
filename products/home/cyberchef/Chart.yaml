@@ -4,5 +4,5 @@ version: 1.0.0
 
 dependencies:
   - name: cyberchef
-    version: 1.0.0-cyberchef-initial-setuo.e2cd2e6
+    version: 1.0.0-cyberchef-initial-setuo.4cd26d3
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
