@@ -78,6 +78,9 @@ products:
       namespace: default
       serverSideApply: true
   home:
+    cyberchef:
+      deploy: true
+      autoSync: true
     homeAssistant:
       deploy: true
       autoSync: true
