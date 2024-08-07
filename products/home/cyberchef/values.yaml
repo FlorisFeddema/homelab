@@ -7,3 +7,6 @@ cyberchef:
     tls:
       enabled: true
       secretName: cyberchef-tls
+
+  nodeSelector:
+    kubernetes.io/arch: amd64
