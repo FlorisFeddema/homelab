@@ -2,6 +2,7 @@ cyberchef:
   ingress:
     enabled: true
     domain: cyberchef.feddema.dev
+    class: nginx
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     tls:
