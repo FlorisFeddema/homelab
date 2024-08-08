@@ -10,3 +10,9 @@ cyberchef:
 
   nodeSelector:
     kubernetes.io/arch: amd64
+
+  image:
+    registry: ghcr.io
+    repository: k8s-at-our-homes/cyberchef
+    tag: :10.18.9-cyberchef-initial-setuo.7d777dc
+    pullPolicy: IfNotPresent
