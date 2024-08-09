@@ -15,6 +15,7 @@ immich:
 
   ingress:
     enabled: true
+    class: nginx
     domain: immich.feddema.dev
     annotations:
       # proxy-body-size is set to 0 to remove the body limit on file uploads
