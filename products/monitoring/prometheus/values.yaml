@@ -30,6 +30,9 @@ kube-prometheus-stack:
       logLevel: warn
 
       remoteWriteDashboards: true
+      remoteWrite:
+        - url: http://prometheus-thanos-receive.prometheus:19291/api/v1/receive
+
 
       storageSpec:
         volumeClaimTemplate:
