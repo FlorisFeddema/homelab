@@ -29,6 +29,8 @@ kube-prometheus-stack:
       replicas: 2
       logLevel: warn
 
+      remoteWriteDashboards: true
+
       storageSpec:
         volumeClaimTemplate:
           spec:
