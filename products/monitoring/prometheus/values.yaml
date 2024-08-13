@@ -147,6 +147,8 @@ thanos:
     replicaCount: 2
     revisionHistoryLimit: 0
     resources: { }
+    replicaLabel:
+      - prometheus_replica
     pdb:
       create: false
     ingress:
