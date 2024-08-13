@@ -231,7 +231,7 @@ thanos:
   receive:
     enabled: true
     logLevel: info
-    tsdbRetention: 7d
+    tsdbRetention: 1d
     replicaCount: 2
     revisionHistoryLimit: 0
     resources:
