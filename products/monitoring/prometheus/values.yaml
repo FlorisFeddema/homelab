@@ -149,6 +149,7 @@ thanos:
     resources: { }
     replicaLabel:
       - prometheus_replica
+      - replica
     pdb:
       create: false
     ingress:
