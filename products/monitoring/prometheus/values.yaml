@@ -218,12 +218,9 @@ thanos:
     logLevel: warn
     existingConfigmap: ""
     replicaCount: 2
+    useEndpointGroup: true
     revisionHistoryLimit: 0
     resources: { }
-
-    persistence:
-      enabled: true
-      size: 32Gi
 
     pdb:
       create: false
