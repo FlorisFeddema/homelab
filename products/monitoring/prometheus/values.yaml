@@ -220,10 +220,10 @@ thanos:
     resources:
       requests:
         cpu: 100m
-        memory: 1500Mi
+        memory: 2500Mi
       limits:
         cpu: 200m
-        memory: 2500Mi
+        memory: 4000Mi
 
   metrics:
     enabled: true
