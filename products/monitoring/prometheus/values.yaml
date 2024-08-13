@@ -222,7 +222,7 @@ thanos:
         cpu: 300m
         memory: 3500Mi
       limits:
-        cpu: 500m
+        cpu: null
         memory: 4500Mi
 
   metrics:
