@@ -148,7 +148,6 @@ thanos:
     revisionHistoryLimit: 0
     resources: { }
     replicaLabel:
-      - prometheus_replica
       - replica
     pdb:
       create: false
@@ -195,21 +194,26 @@ thanos:
       tls: true
 
   compactor:
-    #  TODO: enable this
     enabled: false
     logLevel: warn
     retentionResolutionRaw: 7d
-    retentionResolution5m: 30d
-    retentionResolution1h: 10y
+    retentionResolution5m: 90d
+    retentionResolution1h: 0d
     consistencyDelay: 30m
     revisionHistoryLimit: 0
+    extraArgs:
+      - --compact.enable-vertical-compaction
+      - --deduplication.replica-label=replica
+      - --deduplication.func=penalty
+      - --delete-delay=12h
+
     cronJob:
       enabled: true
       schedule: "0 */6 * * *"
+      timeZone: "Europe/Amsterdam"
     resources: { }
 
     persistence:
-      enabled: true
       ephemeral: true
       size: 50Gi
 
