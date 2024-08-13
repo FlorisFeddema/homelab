@@ -219,11 +219,11 @@ thanos:
     revisionHistoryLimit: 0
     resources:
       requests:
-        cpu: 100m
-        memory: 2500Mi
+        cpu: 300m
+        memory: 3500Mi
       limits:
-        cpu: 200m
-        memory: 4000Mi
+        cpu: 500m
+        memory: 4500Mi
 
   metrics:
     enabled: true
