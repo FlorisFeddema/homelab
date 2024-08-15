@@ -5,8 +5,8 @@ home-assistant:
 
   securityContext:
     runAsGroup: 5000
-    capabilities:
-      add: []
+    # capabilities:
+    #   add: []
 
   persistence:
     size: 500Mi
