@@ -7,7 +7,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 200Mi
+      storage: 500Mi
 ---
 apiVersion: v1
 kind: PersistentVolume
