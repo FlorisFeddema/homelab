@@ -18,5 +18,5 @@ apps:
       deploy: true
     arr-dashboards:
       deploy: true
-      path: /apps/media/arr-dashboards
+      path: apps/media/arr-dashboards
       namespace: prometheus
