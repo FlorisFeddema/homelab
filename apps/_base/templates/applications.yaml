@@ -1,10 +1,13 @@
-{{- range $name, $app := .Values.apps }}
+{{- range $group, $apps := .Values.apps }}
+{{- range $name, $app := $apps }}
 {{- if $app.deploy }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ $name }}
   namespace: argocd
+  labels:
+    group: {{ $group }}
   {{- if list nil true | has $app.finalize }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -15,7 +18,7 @@ spec:
   source:
     repoURL: https://github.com/broersma-forslund/homelab.git
     targetRevision: HEAD
-    path: {{ $app.path | default (printf "apps/%s" $name) }}
+    path: {{ $app.path | default (printf "apps/%s/%s" $group $name) }}
     {{- with $app.valueFiles }}
     helm:
       valueFiles: {{ . | toYaml | nindent 8 }}
@@ -39,5 +42,6 @@ spec:
     # {{- else }}
     {{- end }}
 ---
+{{- end }}
 {{- end }}
 {{- end }}

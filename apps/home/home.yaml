@@ -1,0 +1,11 @@
+apps:
+  home:
+    cyberchef:
+      deploy: true
+    home-assistant:
+      deploy: true
+      autoSync: false
+    immich:
+      deploy: true
+    mealie:
+      deploy: true

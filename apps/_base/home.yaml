@@ -1,6 +1,0 @@
-apps:
-  home-assistant:
-    deploy: true
-    autoSync: false
-  mealie:
-    deploy: true

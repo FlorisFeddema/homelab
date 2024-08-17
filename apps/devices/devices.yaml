@@ -1,0 +1,17 @@
+apps:
+  devices:
+    generic-device-operator:
+      deploy: true
+    intel-device-operator:
+      deploy: true
+      ignoreDifferences:
+      - group: deviceplugin.intel.com
+        kind: GpuDevicePlugin
+        jsonPointers:
+        - /spec/resourceManager
+        - /spec/enableMonitoring
+    network-devices:
+      deploy: true
+      autoSync: false
+    node-feature-discovery:
+      deploy: true

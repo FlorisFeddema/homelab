@@ -1,0 +1,19 @@
+apps:
+  cluster:
+    argocd:
+      deploy: true
+      autoSync: false
+    authentik:
+      deploy: true
+    descheduler:
+      deploy: true
+    infro:
+      deploy: true
+    kubernetes-replicator:
+      deploy: true
+    metrics-server:
+      deploy: true
+    sealed-secrets:
+      deploy: true
+    node-problem-detector:
+      deploy: true

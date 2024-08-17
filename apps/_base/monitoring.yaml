@@ -1,8 +1,0 @@
-apps:
-  gatus:
-    deploy: true
-  kube-prometheus-stack:
-    deploy: true
-    namespace: prometheus
-  node-problem-detector:
-    deploy: true

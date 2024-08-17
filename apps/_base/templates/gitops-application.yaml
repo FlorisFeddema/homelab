@@ -10,15 +10,13 @@ spec:
     targetRevision: HEAD
     helm:
       valueFiles:
-      - core-apps.yaml
-      - storage.yaml
-      - connectivity-apps.yaml
-      - device-operators.yaml
-      - monitoring.yaml
-      - security.yaml
-      - home.yaml
-      - iot.yaml
-      - mediacenter.yaml
+      - ../cluster/cluster.yaml
+      - ../connectivity/connectivity.yaml
+      - ../devices/devices.yaml
+      - ../home/home.yaml
+      - ../media/media.yaml
+      - ../monitoring/monitoring.yaml
+      - ../storage/storage.yaml
   syncPolicy:
     syncOptions:
      - FailOnSharedResource=true

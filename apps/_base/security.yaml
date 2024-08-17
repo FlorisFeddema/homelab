@@ -1,5 +1,0 @@
-apps:
-  authentik:
-    deploy: true
-  kubernetes-replicator:
-    deploy: true

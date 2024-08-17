@@ -1,0 +1,25 @@
+apps:
+  connectivity:
+    adguard:
+      deploy: true
+    cert-manager:
+      deploy: true
+    cilium:
+      deploy: true
+      autoSync: false
+      namespace: kube-system
+      ignoreDifferences:
+      - group: apps
+        kind: DaemonSet
+        jqPathExpressions:
+        - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
+    cilium-gateway:
+      deploy: true
+    emqx:
+      deploy: true
+    external-dns:
+      deploy: true
+    ingress-nginx:
+      deploy: true
+    zigbee2mqtt:
+      deploy: true
