@@ -25,7 +25,7 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
 
-      retention: 365d
+      retention: 1d
       replicas: 2
       logLevel: warn
 
