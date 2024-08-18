@@ -195,7 +195,7 @@ thanos:
       tls: true
 
   compactor:
-    enabled: false
+    enabled: true
     logLevel: warn
     retentionResolutionRaw: 7d
     retentionResolution5m: 90d
@@ -207,13 +207,16 @@ thanos:
       - --deduplication.replica-label=replica
       - --deduplication.replica-label=prometheus_replica
       - --deduplication.func=penalty
-      - --delete-delay=12h
+      - --delete-delay=6h
 
     cronJob:
       enabled: true
       schedule: "0 */6 * * *"
       timeZone: "Europe/Amsterdam"
-    resources: { }
+    resources:
+      requests:
+        cpu: 300m
+        memory: 4500Mi
 
     persistence:
       ephemeral: true
