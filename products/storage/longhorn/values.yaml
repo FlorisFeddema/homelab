@@ -30,11 +30,6 @@ longhorn:
   longhornUI:
     replicas: 2
 
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-
   ingress:
     enabled: true
     host: longhorn.feddema.dev
@@ -50,3 +45,7 @@ longhorn:
       nginx.ingress.kubernetes.io/auth-snippet: |
         proxy_set_header X-Forwarded-Host $http_host;
       cert-manager.io/cluster-issuer: letsencrypt-dns
+
+  metrics:
+    serviceMonitor:
+      enabled: true
