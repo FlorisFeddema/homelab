@@ -46,7 +46,6 @@ loki:
       delete_request_store: s3
       retention_delete_delay: 1h
 
-
   write:
     replicas: 3
     persistence:
@@ -58,7 +57,7 @@ loki:
           name: loki-s3-credentials
 
   read:
-    replicas: 3
+    replicas: 1
     legacyReadTarget: false
     extraArgs:
       - '-config.expand-env=true'
@@ -67,7 +66,7 @@ loki:
           name: loki-s3-credentials
 
   backend:
-    replicas: 3
+    replicas: 1
     persistence:
       size: 50Gi
       enableStatefulSetAutoDeletePVC: false
@@ -79,7 +78,7 @@ loki:
 
   gateway:
     verboseLogging: false
-    replicas: 3
+    replicas: 1
     # extraArgs:
     #   - '-config.expand-env=true'
     # extraEnvFrom:
