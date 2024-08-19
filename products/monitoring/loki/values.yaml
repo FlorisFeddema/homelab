@@ -76,6 +76,9 @@ loki:
       - secretRef:
           name: loki-s3-credentials
 
+  chunksCache:
+    allocatedMemory: 3Gi
+
   gateway:
     verboseLogging: false
     replicas: 1
