@@ -28,10 +28,10 @@ authentik:
             name: authentik-secret
 
   worker:
-    replicas: 2
+    replicas: 1
 
   server:
-    replicas: 2
+    replicas: 1
 
     metrics:
       serviceMonitor:
