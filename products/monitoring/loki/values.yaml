@@ -77,7 +77,7 @@ loki:
           name: loki-s3-credentials
 
   chunksCache:
-    allocatedMemory: 3Gi
+    allocatedMemory: 5Gi
 
   gateway:
     verboseLogging: false
