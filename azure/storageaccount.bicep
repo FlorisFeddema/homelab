@@ -1,6 +1,7 @@
 param stName string
 param location string
 param containerName string
+param ipAddresses string[]
 
 resource stAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   name: stName
@@ -11,6 +12,19 @@ resource stAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
   kind: 'StorageV2'
   properties: {
     accessTier: 'Hot'
+    allowCrossTenantReplication: false
+    minimumTlsVersion: 'TLS1_2'
+    supportsHttpsTrafficOnly: true
+    networkAcls: {
+      bypass: 'AzureServices'
+      defaultAction: 'Deny'
+      ipRules: [
+        for ip in ipAddresses: {
+          value: ip
+          action: 'Allow'
+        }
+      ]
+    }
   }
 }
 
