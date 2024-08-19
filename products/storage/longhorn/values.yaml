@@ -9,9 +9,10 @@ longhorn:
     defaultClass: true
     defaultFsType: ext4
     defaultClassReplicaCount: 2
-    reclaimPolicy: Retain
+    reclaimPolicy: Delete
     defaultDataLocality: best-effort
     defaultReplicaAutoBalance: best-effort
+    migratable: true
 
   csi:
     attacherReplicaCount: 2
@@ -24,6 +25,14 @@ longhorn:
     backupTarget: azblob://backups@core.windows.net/
     backupTargetCredentialSecret: azblob-secret
     defaultLonghornStaticStorageClass: longhorn
+    defaultDataLocality: best-effort
+    storageOverProvisioningPercentage: 100
+    storageMinimalAvailablePercentage: 20
+    upgradeChecker: false
+    failedBackupTTL: 60
+    logLevel: Warn
+    backupCompressionMethod: lz4
+    v2DataEngine: false
     backupConcurrentLimit: 5
     restoreConcurrentLimit: 5
 
