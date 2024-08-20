@@ -24,8 +24,6 @@ kube-prometheus-stack:
     thanosServiceMonitor:
         enabled: true
 
-
-
     prometheusSpec:
       probeSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
@@ -33,8 +31,8 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
 
-      retention: 1d
-      replicas: 2
+      retention: 12h
+      replicas: 3
       logLevel: warn
 
       thanos:
