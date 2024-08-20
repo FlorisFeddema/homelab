@@ -17,7 +17,7 @@ adguard:
   secondary:
     resources:
       requests:
-        cpu: 150m
+        cpu: 100m
         memory: 250Mi
       limits:
         memory: 800Mi
