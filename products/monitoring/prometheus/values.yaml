@@ -240,7 +240,7 @@ thanos:
     logLevel: warn
     existingConfigmap: ""
     replicaCount: 2
-    useEndpointGroup: false
+    useEndpointGroup: true
     revisionHistoryLimit: 0
     resources: { }
 
