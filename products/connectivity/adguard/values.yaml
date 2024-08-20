@@ -15,6 +15,12 @@ adguard:
         secretName: adguard-tls
 
   secondary:
+    resources:
+      requests:
+        cpu: 150m
+        memory: 400Mi
+      limits:
+        memory: 800Mi
     service:
       annotations:
         'io.cilium/lb-ipam-ips': 192.168.102.20
