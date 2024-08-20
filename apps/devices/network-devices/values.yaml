@@ -5,8 +5,8 @@ records:
   ip: 10.0.10.100
 - name: k8s
   ip: 10.0.10.110
-- name: laptop.rouke.work
-  ip: 10.0.20.161
+- name: work.rouke
+  ip: 10.0.50.230
 
 ingress:
 - name: robin
