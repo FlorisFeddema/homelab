@@ -160,6 +160,10 @@ thanos:
     replicaLabel:
       - replica
       - prometheus_replica
+    dnsDiscovery:
+      enabled: true
+      sidecarsService: 'prometheus-thanos-discovery'
+      sidecarsNamespace: 'prometheus'
     pdb:
       create: false
     ingress:
