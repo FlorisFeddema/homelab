@@ -26,7 +26,7 @@ kube-prometheus-stack:
       serviceMonitorSelectorNilUsesHelmValues: false
 
       retention: 1d
-      replicas: 3
+      replicas: 2
       logLevel: warn
 
       remoteWriteDashboards: true
@@ -238,6 +238,7 @@ thanos:
     logLevel: info
     tsdbRetention: 1d
     replicaCount: 2
+    replicationFactor: 2
     revisionHistoryLimit: 0
     resources:
       requests:
