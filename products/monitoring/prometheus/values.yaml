@@ -147,8 +147,6 @@ thanos:
     replicaCount: 2
     revisionHistoryLimit: 0
     resources: { }
-    replicaLabel:
-      - replica
     pdb:
       create: false
     ingress:
