@@ -179,6 +179,17 @@ thanos:
         cert-manager.io/cluster-issuer: letsencrypt-dns
       tls: true
 
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: query
+              app.kubernetes.io/instance: prometheus
+              app.kubernetes.io/managed-by: Helm
+              app.kubernetes.io/name: thanos
+
   queryFrontend:
     enabled: false
 
@@ -241,12 +252,18 @@ thanos:
     useEndpointGroup: true
     revisionHistoryLimit: 0
     resources: { }
-
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/component: storegateway
+            app.kubernetes.io/instance: prometheus
+            app.kubernetes.io/managed-by: Helm
+            app.kubernetes.io/name: thanos
     pdb:
       create: false
-
-  receive:
-    enabled: false
 
   metrics:
     enabled: true
