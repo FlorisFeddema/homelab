@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  alertmanager.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: "Alertmanager"
+        type: alertmanager
+        uid: alertmanager
+        url: http://prometheus-alertmanager.prometheus:9093/
+        access: proxy
+        jsonData:
+          handleGrafanaManagedAlerts: false
+          implementation: prometheus
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_datasource: "1"
+  name: alertmanager-datasource
+  namespace: prometheus

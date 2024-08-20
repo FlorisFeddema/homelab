@@ -76,7 +76,7 @@ grafana:
       feedback_links_enabled: false
     log:
       mode: console
-      level: debug
+      level: warn
     grafana_net:
       url: https://grafana.net
     server:

@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  thanos.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: "Prometheus"
+        type: prometheus
+        uid: prometheus
+        url: http://prometheus-thanos-query.prometheus:9090/
+        access: proxy
+        isDefault: true
+        jsonData:
+          httpMethod: POST
+          timeInterval: 30s
+          implementation: prometheus
+kind: ConfigMap
+metadata:
+  labels:
+    grafana_datasource: "1"
+  name: thanos-datasource
+  namespace: prometheus
