@@ -18,6 +18,14 @@ kube-prometheus-stack:
         ttlSecondsAfterFinished: 15
         
   prometheus:
+    thanosService:
+        enabled: true
+
+    thanosServiceMonitor:
+        enabled: true
+
+
+
     prometheusSpec:
       probeSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
@@ -29,9 +37,11 @@ kube-prometheus-stack:
       replicas: 2
       logLevel: warn
 
-      remoteWriteDashboards: true
-      remoteWrite:
-        - url: http://prometheus-thanos-receive.prometheus:19291/api/v1/receive
+      thanos:
+        objectStorageConfig:
+          existingSecret:
+            key: objstore.yml
+            name: thanos-objstore
 
       storageSpec:
         volumeClaimTemplate:
@@ -234,18 +244,7 @@ thanos:
       create: false
 
   receive:
-    enabled: true
-    logLevel: info
-    tsdbRetention: 1d
-    replicaCount: 2
-    replicationFactor: 2
-    revisionHistoryLimit: 0
-    resources:
-      requests:
-        cpu: 300m
-        memory: 3500Mi
-      limits:
-        memory: 4500Mi
+    enabled: false
 
   metrics:
     enabled: true
