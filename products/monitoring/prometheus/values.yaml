@@ -147,6 +147,9 @@ thanos:
     replicaCount: 2
     revisionHistoryLimit: 0
     resources: { }
+    replicaLabel:
+      - replica
+      - prometheus_replica
     pdb:
       create: false
     ingress:
@@ -202,6 +205,7 @@ thanos:
     extraArgs:
       - --compact.enable-vertical-compaction
       - --deduplication.replica-label=replica
+      - --deduplication.replica-label=prometheus_replica
       - --deduplication.func=penalty
       - --delete-delay=6h
     cronJob:
