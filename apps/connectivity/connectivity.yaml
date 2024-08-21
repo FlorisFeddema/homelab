@@ -17,8 +17,12 @@ apps:
       deploy: true
     emqx:
       deploy: true
-    external-dns:
+    private-external-dns:
       deploy: true
+      autoSync: false
+    public-external-dns:
+      deploy: true
+      autoSync: false
     ingress-nginx:
       deploy: true
     zigbee2mqtt:

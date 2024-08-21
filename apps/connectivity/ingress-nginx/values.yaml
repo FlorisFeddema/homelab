@@ -15,9 +15,11 @@ ingress-nginx:
         enabled: false 
       internal:
         enabled: true
+        externalTrafficPolicy: Local
         annotations: 
           'io.cilium/lb-ipam-ips': 10.0.10.130
-        externalTrafficPolicy: Local
+        externalIPs:
+        - 31.187.193.174
 
     allowSnippetAnnotations: true
     ingressClassResource:

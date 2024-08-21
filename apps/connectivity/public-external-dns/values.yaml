@@ -1,0 +1,26 @@
+external-dns:
+  revisionHistoryLimit: 0
+
+  policy: sync
+  sources:
+    - ingress
+    - service
+
+  provider: cloudflare
+  cloudflare:
+    secretName: "cloudflare-api-token"
+    proxied: false
+  zoneIdFilters:
+  - 7ad202c85cb68e3a1df112d76d683078
+
+  resources:
+    limits:
+      memory: 50Mi
+    requests:
+      cpu: 10m
+      memory: 30Mi
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
