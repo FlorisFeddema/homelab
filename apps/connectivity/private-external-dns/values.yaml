@@ -13,6 +13,7 @@ external-dns:
 
   extraArgs:
     webhook-provider-url: http://localhost:8888
+    target-net-filter: 10.0.0.0/8
 
   sidecars:
   - name: adguard-webhook
