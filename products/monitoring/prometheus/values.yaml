@@ -196,7 +196,7 @@ thanos:
   bucketweb:
     enabled: true
     logLevel: warn
-    refresh: 30m
+    refresh: 10m
     replicaCount: 2
     revisionHistoryLimit: 0
     resources: { }
