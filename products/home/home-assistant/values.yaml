@@ -1,7 +1,11 @@
 home-assistant:
   nodeName: kashaylan-3
 
+  podSecurityContext:
+    fsGroup: 5000
+
   securityContext:
+    runAsGroup: 5000
     capabilities:
       drop: [ "ALL" ]
       add: [ "NET_RAW", "NET_BIND_SERVICE" ]
@@ -18,3 +22,7 @@ home-assistant:
       cert-manager.io/cluster-issuer: letsencrypt-dns
     tls:
       secretName: home-assistant-tls
+
+  config:
+    securityContext:
+      runAsGroup: 5000
