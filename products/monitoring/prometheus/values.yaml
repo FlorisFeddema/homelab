@@ -225,7 +225,7 @@ thanos:
     retentionResolution1h: 0d
     consistencyDelay: 30m
     revisionHistoryLimit: 0
-    extraArgs:
+    extraFlags:
       - --compact.enable-vertical-compaction
       - --deduplication.replica-label=replica
       - --deduplication.replica-label=prometheus_replica
