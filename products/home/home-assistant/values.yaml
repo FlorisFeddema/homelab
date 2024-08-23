@@ -2,10 +2,10 @@ home-assistant:
   nodeName: kashaylan-3
 
   podSecurityContext:
-    fsGroup: 5000
+    fsGroup: 0
 
   securityContext:
-    runAsGroup: 5000
+    runAsGroup: 0
     capabilities:
       drop: [ "ALL" ]
       add: [ "NET_RAW", "NET_BIND_SERVICE" ]
@@ -25,4 +25,4 @@ home-assistant:
 
   config:
     securityContext:
-      runAsGroup: 5000
+      runAsGroup: 0
