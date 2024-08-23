@@ -235,6 +235,8 @@ thanos:
       enabled: true
       schedule: "10 6 * * *"
       timeZone: "Europe/Amsterdam"
+      successfulJobsHistoryLimit: "1"
+      failedJobsHistoryLimit: "1"
     resources:
       requests:
         cpu: 300m
