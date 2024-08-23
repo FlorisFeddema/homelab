@@ -1,0 +1,8 @@
+homeassistant:
+  name: Home
+  unit_system: metric
+  temperature_unit: C
+  currency: EUR
+  external_url: https://home.feddema.dev
+  language: en
+  country: NL

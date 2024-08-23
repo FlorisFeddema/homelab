@@ -1,0 +1,10 @@
+afvalbeheer:
+  wastecollector: MijnAfvalwijzer
+  resources:
+    - restafval
+    - gft
+    - papier
+  postcode: 5628AN
+  streetnumber: 50
+  upcomingsensor: 1
+
