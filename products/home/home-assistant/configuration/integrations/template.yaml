@@ -1,1 +1,1 @@
-template: !include_dir_list ../templates
+template: !include_dir_merge_list ../templates
