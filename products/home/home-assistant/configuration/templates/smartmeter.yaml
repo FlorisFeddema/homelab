@@ -1,5 +1,4 @@
-template:
-  - binary_sensor:
-      - name: "Smartmeter connectivity status"
-        state: "{{ now() - states.sensor.smartmeter_wifi_signal_strength_rssi.last_changed < timedelta(minutes=10) }}"
-        device_class: connectivity
+- binary_sensor:
+    - name: "Smartmeter connectivity status"
+      state: "{{ now() - states.sensor.smartmeter_wifi_signal_strength_rssi.last_changed < timedelta(minutes=10) }}"
+      device_class: connectivity

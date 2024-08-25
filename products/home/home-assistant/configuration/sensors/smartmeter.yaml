@@ -1,42 +1,40 @@
-sensor:
-  # Calculations per period
-  - platform: template
-    sensors:
-      daily_energy_delivered:
-        friendly_name: Daily Energy Delivered
-        unit_of_measurement: kWh
-        value_template: "{{ (states('sensor.daily_energy_delivered_offpeak')|float + states('sensor.daily_energy_delivered_peak')|float | round(2)) }}"
-      monthly_energy_delivered:
-        friendly_name: Monthly Energy Delivered
-        unit_of_measurement: kWh
-        value_template: "{{ (states('sensor.monthly_energy_delivered_offpeak')|float + states('sensor.monthly_energy_delivered_peak')|float | round(2)) }}"
-      daily_energy_returned:
-        friendly_name: Daily Energy Returned
-        unit_of_measurement: kWh
-        value_template: "{{ (states('sensor.daily_energy_returned_offpeak')|float + states('sensor.daily_energy_returned_peak')|float | round(2)) }}"
-      monthly_energy_returned:
-        friendly_name: Monthly Energy Returned
-        unit_of_measurement: kWh
-        value_template: "{{ (states('sensor.monthly_energy_returned_offpeak')|float + states('sensor.monthly_energy_returned_peak')|float | round(2)) }}"
-      hourly_energy_returned:
-        friendly_name: Hourly Energy Returned
-        unit_of_measurement: kWh
-        value_template: "{{ (states('sensor.hourly_energy_returned_offpeak')|float + states('sensor.hourly_energy_returned_peak')|float | round(2)) }}"
+- platform: template
+  sensors:
+    daily_energy_delivered:
+      friendly_name: Daily Energy Delivered
+      unit_of_measurement: kWh
+      value_template: "{{ (states('sensor.daily_energy_delivered_offpeak')|float + states('sensor.daily_energy_delivered_peak')|float | round(2)) }}"
+    monthly_energy_delivered:
+      friendly_name: Monthly Energy Delivered
+      unit_of_measurement: kWh
+      value_template: "{{ (states('sensor.monthly_energy_delivered_offpeak')|float + states('sensor.monthly_energy_delivered_peak')|float | round(2)) }}"
+    daily_energy_returned:
+      friendly_name: Daily Energy Returned
+      unit_of_measurement: kWh
+      value_template: "{{ (states('sensor.daily_energy_returned_offpeak')|float + states('sensor.daily_energy_returned_peak')|float | round(2)) }}"
+    monthly_energy_returned:
+      friendly_name: Monthly Energy Returned
+      unit_of_measurement: kWh
+      value_template: "{{ (states('sensor.monthly_energy_returned_offpeak')|float + states('sensor.monthly_energy_returned_peak')|float | round(2)) }}"
+    hourly_energy_returned:
+      friendly_name: Hourly Energy Returned
+      unit_of_measurement: kWh
+      value_template: "{{ (states('sensor.hourly_energy_returned_offpeak')|float + states('sensor.hourly_energy_returned_peak')|float | round(2)) }}"
 
-      dsmr_reading_electricity_currently_delivered_watt:
-        friendly_name: sensor.dsmr_reading_electricity_currently_delivered_watt
-        unit_of_measurement: Wh
-        value_template: "{{ '%.0f'%(states('sensor.dsmr_reading_electricity_currently_delivered')|float * 1000 | float) | float }}"
+    dsmr_reading_electricity_currently_delivered_watt:
+      friendly_name: sensor.dsmr_reading_electricity_currently_delivered_watt
+      unit_of_measurement: Wh
+      value_template: "{{ '%.0f'%(states('sensor.dsmr_reading_electricity_currently_delivered')|float * 1000 | float) | float }}"
 
-      dsmr_reading_electricity_currently_returned_watt:
-        friendly_name: sensor.dsmr_reading_electricity_currently_returned_watt
-        unit_of_measurement: Wh
-        value_template: "{{ '%.0f'%(states('sensor.dsmr_reading_electricity_currently_returned')|float * 1000 | float) | float }}"
+    dsmr_reading_electricity_currently_returned_watt:
+      friendly_name: sensor.dsmr_reading_electricity_currently_returned_watt
+      unit_of_measurement: Wh
+      value_template: "{{ '%.0f'%(states('sensor.dsmr_reading_electricity_currently_returned')|float * 1000 | float) | float }}"
 
-      ##  smartmeter_last_changed
-      smartmeter_lastchanged:
-        value_template: >
-          {% set values = [
-            states.sensor.smartmeter_wifi_signal_strength_rssi.last_changed, ] %}
-          {{ values | min }}
-        device_class: timestamp
+    ##  smartmeter_last_changed
+    smartmeter_lastchanged:
+      value_template: >
+        {% set values = [
+          states.sensor.smartmeter_wifi_signal_strength_rssi.last_changed, ] %}
+        {{ values | min }}
+      device_class: timestamp
