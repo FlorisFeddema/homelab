@@ -1,0 +1,2 @@
+mqtt: !include ../mqtt_sensors.yaml
+mqtt split: !include_dir_list ../mqtts

@@ -1,0 +1,63 @@
+utility_meter:
+  gasusage_this_hour:
+    source: sensor.dsmr_consumption_gas_delivered
+    cycle: hourly
+  gasusage_today:
+    source: sensor.dsmr_consumption_gas_delivered
+    cycle: daily
+  gasusage_this_week:
+    source: sensor.dsmr_consumption_gas_delivered
+    cycle: weekly
+  gasusage_this_month:
+    source: sensor.dsmr_consumption_gas_delivered
+    cycle: monthly
+  gasusage_this_quarter:
+    source: sensor.dsmr_consumption_gas_delivered
+    cycle: quarterly
+  gasusage_this_year:
+    source: sensor.dsmr_consumption_gas_delivered
+    cycle: yearly
+
+  hourly_energy_delivered_offpeak:
+    source: sensor.dsmr_reading_electricity_delivered_1
+    cycle: hourly
+  hourly_energy_delivered_peak:
+    source: sensor.dsmr_reading_electricity_delivered_2
+    cycle: hourly
+
+  hourly_energy_returned_offpeak:
+    source: sensor.dsmr_reading_electricity_returned_1
+    cycle: hourly
+  hourly_energy_returned_peak:
+    source: sensor.dsmr_reading_electricity_returned_2
+    cycle: hourly
+
+  # Berekening van dagwaarden voor electriciteit hoog- en laagtarief
+  daily_energy_delivered_offpeak:
+    source: sensor.dsmr_reading_electricity_delivered_1
+    cycle: daily
+  daily_energy_delivered_peak:
+    source: sensor.dsmr_reading_electricity_delivered_2
+    cycle: daily
+
+  daily_energy_returned_offpeak:
+    source: sensor.dsmr_reading_electricity_returned_1
+    cycle: daily
+  daily_energy_returned_peak:
+    source: sensor.dsmr_reading_electricity_returned_2
+    cycle: daily
+
+  # Calculations per month
+  monthly_energy_delivered_offpeak:
+    source: sensor.dsmr_reading_electricity_delivered_1
+    cycle: monthly
+  monthly_energy_delivered_peak:
+    source: sensor.dsmr_reading_electricity_delivered_2
+    cycle: monthly
+
+  monthly_energy_returned_offpeak:
+    source: sensor.dsmr_reading_electricity_returned_1
+    cycle: monthly
+  monthly_energy_returned_peak:
+    source: sensor.dsmr_reading_electricity_returned_2
+    cycle: monthly
