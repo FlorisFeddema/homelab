@@ -30,11 +30,3 @@
       friendly_name: sensor.dsmr_reading_electricity_currently_returned_watt
       unit_of_measurement: Wh
       value_template: "{{ '%.0f'%(states('sensor.dsmr_reading_electricity_currently_returned')|float * 1000 | float) | float }}"
-
-    ##  smartmeter_last_changed
-    smartmeter_lastchanged:
-      value_template: >
-        {% set values = [
-          states.sensor.smartmeter_wifi_signal_strength_rssi.last_changed, ] %}
-        {{ values | min }}
-      device_class: timestamp
