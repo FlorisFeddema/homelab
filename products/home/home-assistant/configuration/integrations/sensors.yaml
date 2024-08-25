@@ -1,2 +1,2 @@
-#sensor: !include ../sensors.yaml
-sensor split: !include_dir_named ../sensors
+sensor: !include ../sensors.yaml
+sensor split: !include_dir_list ../sensors
