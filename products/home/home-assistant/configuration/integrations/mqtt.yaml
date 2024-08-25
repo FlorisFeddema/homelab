@@ -1,6 +1,6 @@
 mqtt:
-  sensor: !include ../mqtt_sensors.yaml
+#  sensor: !include ../mqtt_sensors.yaml
   sensor split: !include_dir_list ../mqtt_sensors
 
-  switch: !include ../mqtt_switches.yaml
+#  switch: !include ../mqtt_switches.yaml
   switch split: !include_dir_list ../mqtt_switches
