@@ -1,0 +1,4 @@
+- name: "SmartMeter Install firmware update?"
+  command_topic: "dsmr/smart_gateways/install_update"
+  payload_on: "yes"
+  payload_off: "no"
