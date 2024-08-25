@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mqtts-configuration
+  labels:
+    home-assistant-config: "1"
+  annotations:
+    io.home-assistant/config-folder: "/config/mqtts"
+data:
+{{ (.Files.Glob "configuration/mqtts/**.yaml").AsConfig | indent 2 }}
