@@ -1,3 +1,4 @@
+sensors:
 - platform: template
   sensors:
     daily_energy_delivered:
