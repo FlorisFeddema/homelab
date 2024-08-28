@@ -7,12 +7,9 @@ backups:
 longhorn:
   persistence:
     defaultClass: true
-    defaultFsType: ext4
     defaultClassReplicaCount: 2
-    reclaimPolicy: Delete
     defaultDataLocality: best-effort
     defaultReplicaAutoBalance: best-effort
-    migratable: true
 
   csi:
     attacherReplicaCount: 2
