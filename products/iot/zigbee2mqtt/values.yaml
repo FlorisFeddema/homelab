@@ -14,7 +14,7 @@ revisionHistoryLimit: 0
 image:
   registry: docker.io
   repository: koenkk/zigbee2mqtt
-  tag: 1.39.1
+  tag: 1.40.0
 
 resources:
   limits:
