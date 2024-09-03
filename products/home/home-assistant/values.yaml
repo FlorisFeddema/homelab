@@ -17,6 +17,7 @@ home-assistant:
     labels:
       recurring-job.longhorn.io/source: enabled
       recurring-job-group.longhorn.io/backup: enabled
+      blabla: blabla
 
   ingress:
     domain: home.feddema.dev
