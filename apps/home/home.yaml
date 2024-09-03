@@ -4,7 +4,6 @@ apps:
       deploy: true
     home-assistant:
       deploy: true
-      autoSync: false
     immich:
       deploy: true
     mealie:
