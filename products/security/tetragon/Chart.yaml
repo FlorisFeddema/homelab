@@ -1,8 +1,8 @@
 apiVersion: v2
 name: tetragon
-version: 1.0.9
+version: 1.0.10
 
 dependencies:
   - name: tetragon
-    version: 1.1.2
+    version: 1.2.0
     repository: https://helm.cilium.io/
