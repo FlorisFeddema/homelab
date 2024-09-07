@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "common.fullname" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  revisionHistoryLimit: 0
+  replicas: 0
+  selector:
+    matchLabels:
+      {{- include "common.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "common.selectorLabels" . | nindent 8 }}
+        config-hash: {{ print .Values.config.fileContent | sha1sum  }}
+    spec:
+      serviceAccountName: {{ template "common.fullname" . }}
+      tolerations: {{ toYaml .Values.tolerations | nindent 8 }}
+      securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: zigbee2mqtt
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: http
+          resources: {{ toYaml .Values.resources | nindent 12 }}
+          securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+            - mountPath: /app/data
+              name: config
+            - mountPath: /app/data
+              name: secret-config
+      volumes:
+        - name: config
+          configMap:
+            name: {{ .Values.config.configName }}
+        - name: secret-config
+          secret:
+            secretName: {{ .Values.config.secret.name }}
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: config
+        labels:
+          {{- include "common.selectorLabels" . | nindent 10 }}
+          {{ if .Values.persistence.labels }}
+          {{ toYaml .Values.persistence.labels | nindent 10 }}
+          {{ end }}
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
