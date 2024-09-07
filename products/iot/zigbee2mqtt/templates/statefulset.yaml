@@ -6,7 +6,7 @@ metadata:
     {{- include "common.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
@@ -55,7 +55,7 @@ spec:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: config
+        name: data
         labels:
           {{- include "common.selectorLabels" . | nindent 10 }}
           {{ if .Values.persistence.labels }}
