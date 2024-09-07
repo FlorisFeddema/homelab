@@ -80,7 +80,7 @@ spec:
       volumes:
         - name: default-config
           configMap:
-            name: {{ template "zigbee2mqtt.fullname" . }}
+            name: {{ template "common.fullname" . }}
         - name: secret-config
           secret:
             secretName: {{ .Values.config.secret.name }}
