@@ -5,32 +5,4 @@ metadata:
   labels:
     {{- include "common.labels" . | nindent 4 }}
 data:
-  configuration.yaml: |
-    devices: devices.yaml
-    groups: groups.yaml
-    permit_join: false
-    availability: true
-    homeassistant:
-      discovery_topic: homeassistant
-      status_topic: hass/status
-      legacy_entity_attributes: false
-      legacy_triggers: false
-    mqtt:
-      version: 5
-      base_topic: zigbee2mqtt
-      server: '!secret.yaml mqtt_server'
-      user: '!secret.yaml mqtt_user'
-      password: '!secret.yaml mqtt_password'
-    serial:
-      port: /dev/ttyACM0
-      adapter: ember
-      rtscts: false
-    frontend:
-      port: 8080
-      url: https://zigbee.feddema.dev
-    advanced:
-      network_key: '!secret.yaml advanced_network_key'
-      pan_id: 23016
-      ext_pan_id: [195, 192, 116, 85, 33, 65, 21, 93]
-      legacy_api: false
-      legacy_availability_payload: false
+  configuration.yaml: | {{ .Values.config.fileContent | toYaml | nindent 4 }}

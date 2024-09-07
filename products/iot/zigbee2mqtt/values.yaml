@@ -1,7 +1,7 @@
 image:
   registry: docker.io
   repository: koenkk/zigbee2mqtt
-  tag: 1.40.1
+  tag: 1.40.0
 
 resources:
   limits:
@@ -51,9 +51,47 @@ nodeSelector:
   sonoff.tech/zigbee-dongle-plus-e: "true"
 
 config:
-  configName: zigbee2mqtt
+  image:
+    registry: docker.io
+    repository: busybox
+    tag: 1.36.1
+
+  createFiles:
+    - devices.yaml
+    - groups.yaml
+
   secret:
     name: zigbee2mqtt-credentials
     # key is secret.yaml, if no value is given the sealedSecret is not created
     sealedValues:
       secretYaml: AgDkllakyO3wkfP4thrguhshrCAD3utiyUJNSERgrj1ShUGyaBTAP0OpZYJ+DJETE/yEKmxsH67ATGc0RLs+49PuKxC3H0cKnoNd9N8YQyIFeSgrvVQexwCWJM4KEI9htQTjC+ns5FP8fJf08g9AJpIFGca4NLKnoQK0/DWL3z5kg5PElqC6V1WFDNoBgpyvMx9PqUdn767OfBWF2IZVASm/Y0JmXGeIZJqeNMCmVkiF2Nia7giHv/XkMr5j/+rTWksCN4SPFqQ09wy8+5yg3KqmWofmSs7mIlJNa5ykmPGnw8NeTA+95+bHh0l7d/3Lz0muv5jZK9tRL3jQRkeM0tBVYhj8I++PkXus+e/CZlTXZwYHqEIB0OmvD8hTw+Xp7O/bJIzboIU9NVH0htnmZnp54/vTxsI4eNFN9GeLwFPhpV29PC7+RiOlLt1Mkst5XYhOGhxHQtraxgWHFPR1jaDyIq7h6mwuDAeVvpWwpe2QSxDwt2Lkt7CazDhjOtfFc6TCn+Wj/7r8OyOmL44e3/5qejmm/gB8gLIhA9ZvyxydiYPbBX6VnQiRSosfJ91f56FX8ed3Ki4nPeC5YelnwzMtxl9nr4w0t6UvfuHjuRP2rSDetedMa6TMiydnfNJTMbW6Cbfvl71GrnAlyjfZZ8I4OFU8cX8rfwhxWHnGM3IajmhYI1v8TT6IgPAXc1l6/MzHsPnY7FPoEY8dU4jrTeoXOtOpQOTQvCdBYIms/2y1c4nN66Jlah+aJWl11nvJ6SzzDVCCVM+L/tjraMdd2m/7ZHBMafnKW+Q3gULD0gAxQc51qHTnbD4QiIYhherWhS41qycYYFxL3PK6B10O0n7XL/cusSrlg8Ysk4IjM7klyIoS4pr7Xivaf9B5qcU9pv8e5g5acdPAfE0CSJEeJKhtuy/vgr5TeWqDMf3W9cJTRFD0IBDqmyDAmivV8MH5Oktz//6Oapt6STWlc7XAZ8vIcCMo7nRAH+sSGg284rBtfTYadNxm8oarrJEgwFEwJlsh
+
+  fileContent:
+    devices: devices.yaml
+    groups: groups.yaml
+    permit_join: false
+    availability: true
+    homeassistant:
+      discovery_topic: homeassistant
+      status_topic: hass/status
+      legacy_entity_attributes: false
+      legacy_triggers: false
+    mqtt:
+      version: 5
+      base_topic: zigbee2mqtt
+      server: '!secret.yaml mqtt_server'
+      user: '!secret.yaml mqtt_user'
+      password: '!secret.yaml mqtt_password'
+    serial:
+      port: /dev/ttyACM0
+      adapter: ember
+      rtscts: false
+    frontend:
+      port: 8080
+      url: https://zigbee.feddema.dev
+    advanced:
+      network_key: '!secret.yaml advanced_network_key'
+      pan_id: 23016
+      ext_pan_id: [195, 192, 116, 85, 33, 65, 21, 93]
+      legacy_api: false
+      legacy_availability_payload: false

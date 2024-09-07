@@ -18,6 +18,42 @@ spec:
     spec:
       tolerations: {{ toYaml .Values.tolerations | nindent 8 }}
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: copy-config
+          image: "{{ .Values.config.image.registry }}/{{ .Values.config.image.repository }}:{{ .Values.config.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - "sh"
+            - "-c"
+            - |
+              if [ -f /config/configuration.yaml ]; then
+                echo "Old config:"
+                cat /config/configuration.yaml
+                echo "Copy current config to /config/configuration.yaml.old"
+                cp /config/configuration.yaml /config/configuration.yaml.old
+              fi
+              cp /tmp/configuration.yaml /config/configuration.yaml
+              echo "==================================="
+              echo "New config:"
+              cat /config/configuration.yaml
+              if [ -f /config/secret.yaml ]; then
+                echo "Copy current secrets to /config/secret.yaml.old"
+                cp /config/secret.yaml /config/secret.yaml.old
+              fi
+              cp /tmp/secret.yaml /config/secret.yaml
+              touch $files
+          env:
+            - name: files
+              value: "{{ join " " .Values.config.createFiles }}"
+          volumeMounts:
+            - name: default-config
+              mountPath: /tmp/configuration.yaml
+              subPath: configuration.yaml
+            - name: secret-config
+              mountPath: /tmp/secret.yaml
+              subPath: secret.yaml
+            - name: data
+              mountPath: /config
       containers:
         - name: zigbee2mqtt
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -40,13 +76,11 @@ spec:
               port: http
           volumeMounts:
             - mountPath: /app/data
-              name: config
-            - mountPath: /app/data
-              name: secret-config
+              name: data
       volumes:
-        - name: config
+        - name: default-config
           configMap:
-            name: {{ .Values.config.configName }}
+            name: {{ template "zigbee2mqtt.fullname" . }}
         - name: secret-config
           secret:
             secretName: {{ .Values.config.secret.name }}
