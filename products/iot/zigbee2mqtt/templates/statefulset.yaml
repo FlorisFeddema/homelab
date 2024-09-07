@@ -16,7 +16,6 @@ spec:
         {{- include "common.selectorLabels" . | nindent 8 }}
         config-hash: {{ print .Values.config.fileContent | sha1sum  }}
     spec:
-      serviceAccountName: {{ template "common.fullname" . }}
       tolerations: {{ toYaml .Values.tolerations | nindent 8 }}
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
