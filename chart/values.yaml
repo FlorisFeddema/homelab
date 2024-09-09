@@ -98,6 +98,10 @@ products:
       deploy: true
       nameOverride: zigbee2mqtt
       autoSync: true
+  media:
+    jellyfin:
+      deploy: true
+      autoSync: true
   deviceOperators:
     genericDevicePlugin:
       deploy: true
