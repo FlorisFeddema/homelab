@@ -102,6 +102,9 @@ products:
     jellyfin:
       deploy: true
       autoSync: true
+    prowlarr:
+      deploy: true
+      autoSync: true
   deviceOperators:
     genericDevicePlugin:
       deploy: true
