@@ -7,7 +7,7 @@ securityContext: {}
 image:
   registry: ghcr.io
   repository: jellyfin/jellyfin
-  tag: 10.9.10
+  tag: 10.9.11
 
 persistance:
   media:
