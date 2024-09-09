@@ -41,6 +41,10 @@ spec:
               name: config
             - mountPath: /media
               name: media
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: {{ template "common.fullname" . }}-media
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
