@@ -39,6 +39,8 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
+            - mountPath: /media
+              name: media
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
