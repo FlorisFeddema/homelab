@@ -10,14 +10,11 @@ image:
   repository: jellyfin/jellyfin
   tag: 10.9.11
 
-persistance:
-  media:
-    size: 300Gi
-  config:
-    size: 1Gi
-    labels:
-      recurring-job.longhorn.io/source: enabled
-      recurring-job-group.longhorn.io/backup: enabled
+persistence:
+  size: 1Gi
+  labels:
+    recurring-job.longhorn.io/source: enabled
+    recurring-job-group.longhorn.io/backup: enabled
 
 ingress:
   enabled: true

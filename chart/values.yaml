@@ -99,12 +99,17 @@ products:
       nameOverride: zigbee2mqtt
       autoSync: true
   media:
-    jellyfin:
+    mediaServer: # only deploys namespace and pvc
       deploy: true
+      autoSync: true
+      namespace: media-server
+    jellyfin:
+      deploy: false
       autoSync: true
     prowlarr:
-      deploy: true
+      deploy: false
       autoSync: true
+      namespace: media-server
   deviceOperators:
     genericDevicePlugin:
       deploy: true

@@ -52,11 +52,11 @@ spec:
         name: config
         labels:
           {{- include "common.selectorLabels" . | nindent 10 }}
-          {{ if .Values.persistance.config.labels }}
-          {{ toYaml .Values.persistance.config.labels | nindent 10 }}
+          {{ if .Values.persistence.labels }}
+          {{ toYaml .Values.persistence.labels | nindent 10 }}
           {{ end }}
       spec:
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
-            storage: {{ .Values.persistance.config.size }}
+            storage: {{ .Values.persistence.size }}

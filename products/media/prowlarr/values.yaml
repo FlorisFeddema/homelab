@@ -10,7 +10,7 @@ image:
   repository: linuxserver/prowlarr
   tag: 1.23.1
 
-persistance:
+persistence:
   size: 1Gi
   labels:
     recurring-job.longhorn.io/source: enabled

@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ template "common.fullname" . }}
   labels:
@@ -7,8 +7,6 @@ metadata:
 spec:
   revisionHistoryLimit: 0
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
@@ -45,7 +43,18 @@ spec:
           volumeMounts:
             - mountPath: /config
               name: config
-      volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: {{ template "common.fullname" . }}-config
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: config
+        labels:
+          {{- include "common.selectorLabels" . | nindent 10 }}
+          {{ if .Values.persistence.labels }}
+          {{ toYaml .Values.persistence.labels | nindent 10 }}
+          {{ end }}
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.persistence.size }}
