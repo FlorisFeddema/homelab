@@ -1,8 +1,9 @@
-podSecurity: {}
 podSecurityContext: {}
-
-resources: {}
 securityContext: {}
+
+resources:
+  limits:
+    gpu.intel.com/i915: "1"
 
 image:
   registry: ghcr.io
