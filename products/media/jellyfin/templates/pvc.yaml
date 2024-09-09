@@ -9,4 +9,4 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: {{ .Values.persistance.size }}
+      storage: {{ .Values.persistance.media.size }}
