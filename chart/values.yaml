@@ -104,7 +104,7 @@ products:
       autoSync: true
       namespace: media-server
     jellyfin:
-      deploy: false
+      deploy: true
       autoSync: true
     prowlarr:
       deploy: true

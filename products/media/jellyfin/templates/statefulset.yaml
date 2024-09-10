@@ -44,7 +44,7 @@ spec:
       volumes:
         - name: media
           persistentVolumeClaim:
-            claimName: {{ template "common.fullname" . }}-media
+            claimName: {{ .Values.mediaPvcName}}
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
