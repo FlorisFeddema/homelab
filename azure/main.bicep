@@ -23,7 +23,7 @@ module storageAccount './storageaccount.bicep' = {
   }
 }
 
-resource budget 'Microsoft.Consumption/budgets@2023-11-01' = {
+resource budget 'Microsoft.Consumption/budgets@2024-08-01' = {
   name: 'default-budget'
   properties: {
     timePeriod: {
