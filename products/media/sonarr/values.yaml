@@ -1,0 +1,36 @@
+podSecurityContext:
+  fsGroup: 5000
+securityContext: {}
+
+mediaPvcName: media-server-media
+
+resources: {}
+
+image:
+  registry: ghcr.io
+  repository: linuxserver/sonarr
+  tag: 4.0.9
+
+persistence:
+  size: 1Gi
+  labels:
+    recurring-job.longhorn.io/source: enabled
+    recurring-job-group.longhorn.io/backup: enabled
+
+ingress:
+  enabled: true
+  domain: sonarr.feddema.dev
+  class: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+    nginx.ingress.kubernetes.io/auth-url: |-
+      http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
+    nginx.ingress.kubernetes.io/auth-signin: |-
+      https://sonarr.feddema.dev/outpost.goauthentik.io/start?rd=$escaped_request_uri
+    nginx.ingress.kubernetes.io/auth-response-headers: |-
+      Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
+    nginx.ingress.kubernetes.io/auth-snippet: |
+      proxy_set_header X-Forwarded-Host $http_host;
+  tls:
+    enabled: true
+    secretName: sonarr-tls

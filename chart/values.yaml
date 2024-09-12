@@ -115,6 +115,10 @@ products:
       deploy: true
       autoSync: true
       namespace: media-server
+    sonarr:
+      deploy: true
+      autoSync: true
+      namespace: media-server
   deviceOperators:
     genericDevicePlugin:
       deploy: true
