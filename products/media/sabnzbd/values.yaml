@@ -1,6 +1,8 @@
 podSecurityContext: {}
 securityContext: {}
 
+mediaPvcName: media-server-media
+
 resources: {}
 
 image:
@@ -8,7 +10,7 @@ image:
   repository: linuxserver/sabnzbd
   tag: 4.3.3
 
-persistance:
+persistence:
   size: 1Gi
   labels:
     recurring-job.longhorn.io/source: enabled
