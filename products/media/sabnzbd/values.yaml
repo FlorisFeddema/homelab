@@ -1,4 +1,5 @@
-podSecurityContext: {}
+podSecurityContext:
+  fsGroup: 5000
 securityContext: {}
 
 mediaPvcName: media-server-media
