@@ -111,6 +111,10 @@ products:
       deploy: true
       autoSync: true
       namespace: media-server
+    sabnzbd:
+      deploy: true
+      autoSync: true
+      namespace: media-server
   deviceOperators:
     genericDevicePlugin:
       deploy: true
