@@ -17,7 +17,7 @@ spec:
     spec:
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: sabnzdb
+        - name: sonarr
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           env:
             - name: TZ
