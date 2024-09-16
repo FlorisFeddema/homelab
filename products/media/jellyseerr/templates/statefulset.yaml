@@ -41,7 +41,7 @@ spec:
               path: /
               port: http
           volumeMounts:
-            - mountPath: /config
+            - mountPath: /app/config
               name: config
   volumeClaimTemplates:
     - apiVersion: v1
