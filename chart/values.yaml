@@ -107,6 +107,10 @@ products:
       deploy: true
       autoSync: true
       namespace: media-server
+    jellyserr:
+      deploy: true
+      autoSync: true
+      namespace: media-server
     prowlarr:
       deploy: true
       autoSync: true

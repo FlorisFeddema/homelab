@@ -1,0 +1,26 @@
+podSecurityContext:
+  fsGroup: 5000
+securityContext: {}
+
+resources: {}
+
+image:
+  registry: docker.io
+  repository:  fallenbagel/jellyseerr
+  tag: 1.9.2
+
+persistence:
+  size: 1Gi
+  labels:
+    recurring-job.longhorn.io/source: enabled
+    recurring-job-group.longhorn.io/backup: enabled
+
+ingress:
+  enabled: true
+  domain: jellyseerr.feddema.dev
+  class: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns
+  tls:
+    enabled: true
+    secretName: jellyseerr-tls
