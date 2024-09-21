@@ -15,7 +15,7 @@ machine:
     feddema.dev/talos-configfile: "controlplane-2"
 
   install:
-    disk: /dev/sdb
+    disk: /dev/sda
 
   disks:
     - device: /dev/nvme0n1
@@ -27,3 +27,6 @@ machine:
     - device: /dev/nvme2n1
       partitions:
         - mountpoint: /var/mnt/nvme3
+    - device: /dev/sdb
+      partitions:
+        - mountpoint: /var/mnt/hdd1
