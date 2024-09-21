@@ -10,6 +10,9 @@ longhorn:
     defaultClassReplicaCount: 2
     defaultDataLocality: best-effort
     defaultReplicaAutoBalance: best-effort
+    defaultDiskSelector:
+      enable: true
+      selector: "nvme"
 
   csi:
     attacherReplicaCount: 2
