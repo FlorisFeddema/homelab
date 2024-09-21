@@ -15,6 +15,7 @@ spec:
       labels:
         {{- include "common.selectorLabels" . | nindent 8 }}
     spec:
+      nodeSelector: {{ toYaml .Values.nodeSelector | nindent 8 }}
       securityContext: {{ toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: jellyseerr
