@@ -9,7 +9,7 @@ resources: {}
 image:
   registry: ghcr.io
   repository: linuxserver/radarr
-  tag: 5.9.1
+  tag: 5.10.4
 
 persistence:
   size: 1Gi
