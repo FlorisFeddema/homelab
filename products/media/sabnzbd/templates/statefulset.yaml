@@ -6,7 +6,7 @@ metadata:
     {{- include "common.labels" . | nindent 4 }}
 spec:
   revisionHistoryLimit: 0
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       {{- include "common.selectorLabels" . | nindent 6 }}
