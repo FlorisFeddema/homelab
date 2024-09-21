@@ -146,9 +146,6 @@ products:
     falco:
       deploy: true
       autoSync: true
-    tetragon:
-      deploy: false
-      autoSync: true
     authentik:
       deploy: true
       autoSync: true
