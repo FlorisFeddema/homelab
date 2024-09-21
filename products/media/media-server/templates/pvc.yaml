@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "common.labels" . | nindent 4 }}
 spec:
+  storageClassName: {{ .Values.persistence.storageClass }}
   accessModes:
     - ReadWriteMany
   resources:

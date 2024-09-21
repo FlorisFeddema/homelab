@@ -1,2 +1,3 @@
 persistence:
-  size: 300Gi
+  size: 10Ti
+  storageClass: longhorn-hdd
