@@ -147,7 +147,7 @@ products:
       deploy: true
       autoSync: true
     tetragon:
-      deploy: true
+      deploy: false
       autoSync: true
     authentik:
       deploy: true
