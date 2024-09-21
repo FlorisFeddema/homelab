@@ -36,6 +36,9 @@ spec:
             httpGet:
               path: /
               port: http
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /
