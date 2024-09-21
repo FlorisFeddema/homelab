@@ -39,6 +39,7 @@ spec:
             successThreshold: 1
             failureThreshold: 3
             timeoutSeconds: 10
+            periodSeconds: 20
           readinessProbe:
             httpGet:
               path: /
