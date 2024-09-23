@@ -150,12 +150,6 @@ products:
       deploy: true
       autoSync: true
   storage:
-    longhorn:
-      deploy: true
-      namespace: longhorn-system
-    minio:
-      deploy: true
-      autoSync: true
     cloudnativePg:
       deploy: true
       autoSync: true
@@ -174,5 +168,12 @@ products:
             - /webhooks/1/clientConfig/caBundle
             - /webhooks/2/clientConfig/caBundle
             - /webhooks/3/clientConfig/caBundle
-
-
+    dragonfly-operator:
+      deploy: true
+      autoSync: true
+    longhorn:
+      deploy: true
+      namespace: longhorn-system
+    minio:
+      deploy: true
+      autoSync: true
