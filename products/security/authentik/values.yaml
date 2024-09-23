@@ -68,3 +68,7 @@ authentik:
     architecture: standalone
     auth:
       enabled: false
+    master:
+      revisionHistoryLimit: 0
+      persistence:
+        size: 16Gi
