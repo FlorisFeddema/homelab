@@ -27,7 +27,4 @@ dragonfly-operator:
     enabled: true
 
   grafanaDashboard:
-    enabled: true
-    annotations: {}
-    labels:
-      grafana_dashboard: "1"
+    enabled: false
