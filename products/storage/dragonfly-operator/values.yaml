@@ -1,0 +1,23 @@
+dragonfly-operator:
+  replicaCount: 1
+
+  rbacProxy:
+    resources:
+      limits:
+        cpu: null
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
+
+  manager:
+    resources: {}
+
+  serviceMonitor:
+    enabled: true
+
+  grafanaDashboard:
+    enabled: true
+    annotations: {}
+    labels:
+      grafana_dashboard: "1"
