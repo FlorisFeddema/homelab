@@ -29,6 +29,7 @@ gatus:
   config:
     default-endpoint-external: &default-endpoint-external
       group: external
+      interval: 2m
       conditions:
         - '[STATUS] == 200'
       client:
@@ -36,7 +37,7 @@ gatus:
       alerts:
         - type: telegram
           send-on-resolved: true
-          failure-threshold: 4
+          failure-threshold: 5
           success-threshold: 1
 
     metrics: true
@@ -93,10 +94,29 @@ gatus:
       - name: zigbee2mqtt
         url: https://zigbee.feddema.dev
         <<: *default-endpoint-external
+      - name: jellyseerr
+        url: https://jellyseerr.feddema.dev
+        <<: *default-endpoint-external
+      - name: jellyfin
+        url: https://jellyfin.feddema.dev
+        <<: *default-endpoint-external
+      - name: prowlarr
+        url: https://prowlarr.feddema.dev
+        <<: *default-endpoint-external
+      - name: radarr
+        url: https://radarr.feddema.dev
+        <<: *default-endpoint-external
+      - name: sonarr
+        url: https://sonarr.feddema.dev
+        <<: *default-endpoint-external
+      - name: sabnzbd
+        url: https://sabnzbd.feddema.dev
+        <<: *default-endpoint-external
 
       # dns servers
       - name: adguard-dns-loadbalancer
         url: 192.168.102.20
+        interval: 30s
         group: dns
         dns:
           query-name: "test.feddema.dev"
