@@ -12,6 +12,8 @@ gatus:
     image: ghcr.io/kiwigrid/k8s-sidecar:1.28.0
     restartPolicy: Always
     env:
+    - name: NAMESPACE
+      value: ALL
     - name: IGNORE_ALREADY_PROCESSED
       value: "true"
     - name: LABEL
