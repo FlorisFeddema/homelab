@@ -36,6 +36,7 @@ gatus:
   
   serviceAccount:
     create: true
+    autoMount: true
   serviceMonitor:
     enabled: true
   config: null
