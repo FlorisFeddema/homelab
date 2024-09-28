@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: argocd-gatus-cm
   labels:
-    gatus-configfile: "1"
+    gatus-configfile: "1"   
 data:
   argocd.yaml: |
     endpoints:

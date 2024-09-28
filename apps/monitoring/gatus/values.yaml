@@ -32,6 +32,10 @@ gatus:
     - hosts:
       - status.mobrockers.com
   
+  serviceAccount:
+    create: true
+  serviceMonitor:
+    enabled: true
   config: null
 #   config:
 #     endpoints:
