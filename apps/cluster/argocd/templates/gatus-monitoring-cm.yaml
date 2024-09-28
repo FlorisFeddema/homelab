@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-gatus-cm
+  name: gatus-cm
   labels:
     gatus-configfile: "1"   
 data:

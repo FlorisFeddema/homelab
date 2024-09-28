@@ -48,11 +48,6 @@ gatus:
 #       group: internal
 #       conditions:
 #       - '[STATUS] == 200'
-#     - name: argocd
-#       url: https://argocd.mobrockers.com
-#       group: internal
-#       conditions:
-#       - '[STATUS] == 200'
 #     - name: tls-ldaps
 #       url: 'tls://ldap.mobrockers.com:636'
 #       group: internal
@@ -67,13 +62,6 @@ gatus:
 #       conditions:
 #       - '[STATUS] == any(200, 401)'
 # # external
-#     - name: argocd  
-#       url: https://argocd.mobrockers.com
-#       group: external
-#       conditions:
-#       - '[STATUS] == 200'
-#       client:
-#         dns-resolver: 'udp://1.1.1.1:53'
 #     - name: plex
 #       url: https://plex.mobrockers.com
 #       group: external
