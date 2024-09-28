@@ -42,12 +42,6 @@ gatus:
   config: null
 #   config:
 #     endpoints:
-# # internal
-#     - name: homeassistant
-#       url: https://home.mobrockers.com
-#       group: internal
-#       conditions:
-#       - '[STATUS] == 200'
 #     - name: tls-ldaps
 #       url: 'tls://ldap.mobrockers.com:636'
 #       group: internal
@@ -67,19 +61,5 @@ gatus:
 #       group: external
 #       conditions:
 #       - '[STATUS] == any(200, 401)'
-#       client:
-#         dns-resolver: 'udp://1.1.1.1:53'
-#     - name: overseerr
-#       url: https://overseerr.mobrockers.com
-#       group: external
-#       conditions:
-#       - '[STATUS] == 200'
-#       client:
-#         dns-resolver: 'udp://1.1.1.1:53'
-#     - name: homeassistant
-#       url: https://home.mobrockers.com
-#       group: external
-#       conditions:
-#       - '[STATUS] == 200'
 #       client:
 #         dns-resolver: 'udp://1.1.1.1:53'

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gatus-cm
+  labels:
+    gatus-configfile: "1"   
+data:
+  plex.yaml: |
+    endpoints:
+    - name: plex
+      url: https://plex.mobrockers.com
+      group: internal
+      conditions:
+      - '[STATUS] == any(200, 401)'
+    - name: plex  
+      url: https://plex.mobrockers.com
+      group: external
+      conditions:
+      - '[STATUS] == any(200, 401)'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
