@@ -11,10 +11,10 @@ vpa:
     replicaCount: 1
     resources:
       limits:
-        memory: 256Mi
+        memory: 120Mi
       requests:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 10m
+        memory: 80Mi
 
   updater:
     enabled: true
@@ -22,10 +22,10 @@ vpa:
     replicaCount: 1
     resources:
       limits:
-        memory: 256Mi
+        memory: 120Mi
       requests:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 10m
+        memory: 80Mi
 
   admissionController:
     revisionHistoryLimit: 0
@@ -34,7 +34,7 @@ vpa:
     replicaCount: 1
     resources:
       limits:
-        memory: 256Mi
+        memory: 120Mi
       requests:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 10m
+        memory: 80Mi
