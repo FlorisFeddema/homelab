@@ -43,7 +43,7 @@ talosctl gen config $clusterName https://"$nodeIP":6443 \
     --config-patch @cluster.yaml                      \
     --kubernetes-version "$kubernetesVersion"
 
-if [ -n "$dryRun" ]; then
+if [ -z "$dryRun" ]; then
   echo "⚙️ Applying Talos config for $nodeName"
   talosctl apply-config --nodes $nodeIP --file ./rendered/"$configFile".yaml
 else
