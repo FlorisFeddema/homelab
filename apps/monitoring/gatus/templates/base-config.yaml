@@ -5,4 +5,5 @@ metadata:
   labels:
     gatus-configfile: "1"   
 data:
-  base-config.yaml: {{ .Values.gatus.config | toYaml | nindent 6 }}
+  base-config.yaml: |
+    {{ .Values.gatus.config | toYaml | nindent 4 }}
