@@ -6,4 +6,4 @@ metadata:
     gatus-configfile: "1"   
 data:
   base-config.yaml: |
-    {{ .Values.gatus.config | toYaml | indent 6 }}
+    {{ .Values.gatus.config | toYaml | indent 4 }}
