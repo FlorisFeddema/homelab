@@ -5,7 +5,7 @@ machine:
   nodeLabels:
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"
-    feddema.dev/talos-configfile: "worker-0"
+    feddema.dev/talos-configfile: "kashaylan-2"
 
   install:
     disk: /dev/mmcblk0
