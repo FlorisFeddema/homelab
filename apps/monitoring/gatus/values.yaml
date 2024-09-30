@@ -39,7 +39,10 @@ gatus:
     autoMount: true
   serviceMonitor:
     enabled: true
-  config: null
+  config:
+    metrics: true
+    skip-invalid-config-update: true
+
 #   config:
 #     endpoints:
 #     - name: tls-ldaps

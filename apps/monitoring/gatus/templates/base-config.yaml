@@ -5,6 +5,4 @@ metadata:
   labels:
     gatus-configfile: "1"   
 data:
-  base-config.yaml: |
-    metrics: true
-    skip-invalid-config-update: true
+  base-config.yaml: {{ .Values.gatus.config | nindent 6 }}
