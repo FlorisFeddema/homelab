@@ -24,4 +24,3 @@ machine:
   kernel:
     modules:
       - name: rockchip-cpufreq
-
