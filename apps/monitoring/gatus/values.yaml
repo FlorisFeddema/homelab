@@ -42,6 +42,19 @@ gatus:
   config:
     metrics: true
     skip-invalid-config-update: true
+    endpoints:
+    - name: gatus
+      url: 'https://status.mobrockers.com'
+      group: internal
+      conditions:
+      - '[STATUS] == 200'
+    - name: gatus
+      url: 'https://status.mobrockers.com'
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
 
 #   config:
 #     endpoints:
