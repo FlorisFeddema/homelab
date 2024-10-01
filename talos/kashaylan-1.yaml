@@ -1,4 +1,6 @@
 machine:
+  type: controlplane
+
   network:
     hostname: kashaylan-1
 

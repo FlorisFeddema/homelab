@@ -39,7 +39,6 @@ talosctl gen config $clusterName https://"$nodeIP":6443 \
     --with-cluster-discovery=false                    \
     --with-secrets ./secrets.yaml                       \
     --config-patch @"$configFile".yaml   \
-    --config-patch @"$nodeType".yaml             \
     --config-patch @cluster.yaml                      \
     --kubernetes-version "$kubernetesVersion"
 

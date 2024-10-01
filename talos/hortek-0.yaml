@@ -1,4 +1,6 @@
 machine:
+  type: controlplane
+
   network:
     hostname: hortek-0
 

@@ -1,4 +1,6 @@
 machine:
+  type: worker
+
   network:
     hostname: kashaylan-2
 
