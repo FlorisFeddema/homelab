@@ -54,7 +54,7 @@ config:
   image:
     registry: docker.io
     repository: busybox
-    tag: 1.36.1
+    tag: 1.37.0
 
   createFiles:
     - devices.yaml
