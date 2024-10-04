@@ -49,7 +49,7 @@ authentik:
             - authentik.feddema.dev
 
   authentik:
-    log_level: info
+    log_level: warning
 
     postgresql:
       host: "authentik-postgres-rw"
