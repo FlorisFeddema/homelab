@@ -1,5 +1,5 @@
 cluster:
-  clusterName: k8s.broersma.com
+  clusterName: embla
   controlPlane:
     endpoint: https://k8s.mobrockers.com:6443
   

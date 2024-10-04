@@ -5,4 +5,4 @@ machine:
         busPath: "0*" # should select any hardware network device, if you have just one, it will be selected
       dhcp: true
       vip:
-        ip: 10.0.10.110
+        ip: 10.0.102.10
