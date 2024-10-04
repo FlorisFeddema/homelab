@@ -17,7 +17,7 @@ ingress-nginx:
         enabled: true
         externalTrafficPolicy: Local
         annotations: 
-          'io.cilium/lb-ipam-ips': 10.0.10.130
+          'io.cilium/lb-ipam-ips': 10.0.103.20
         externalIPs:
         - 31.187.193.174
 

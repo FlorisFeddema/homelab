@@ -8,7 +8,7 @@ spec:
   gatewayClassName: cilium
   infrastructure:
     annotations:
-      'io.cilium/lb-ipam-ips': 10.0.10.30
+      'io.cilium/lb-ipam-ips': 10.0.103.40
   listeners:
   # - name: web-http
   #   protocol: HTTP

@@ -1,7 +1,7 @@
 apiVersion: cilium.io/v2alpha1
 kind: CiliumLoadBalancerIPPool
 metadata:
-  name: core-network
+  name: loadbalancers
 spec:
   blocks:
-    - cidr: 10.0.10.0/24
+    - cidr: 10.0.103.0/24

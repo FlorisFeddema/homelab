@@ -28,7 +28,7 @@ adguard:
 
     service:
       annotations:
-        'io.cilium/lb-ipam-ips': 10.0.10.250
+        'io.cilium/lb-ipam-ips': 10.0.103.10,10.0.103.11
 
     tolerations:
       - key: essential
