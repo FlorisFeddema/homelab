@@ -24,6 +24,13 @@ spec:
         enable = false
       }
 
+      listeners.ssl.external {
+        bind = "0.0.0.0:8883"
+        ssl_options {
+          certfile = "/mounted/cert/mqtt-mobrockers-com/tls.crt"
+          keyfile = "/mounted/cert/mqtt-mobrockers-com/tls.key" 
+        }
+      }
 
       authentication = [{
         mechanism = "password_based"
