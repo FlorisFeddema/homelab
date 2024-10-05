@@ -45,7 +45,7 @@ spec:
               cp /tmp/secret.yaml /config/secret.yaml
           volumeMounts:
             - name: svc-cluster-local-bundle
-              mountPath: /etc/ssl
+              mountPath: /custom-ca
             - name: default-config
               mountPath: /tmp/configuration.yaml
               subPath: configuration.yaml
