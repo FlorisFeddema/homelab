@@ -1,10 +1,12 @@
 records:
+- name: vpn
+  ip: 87.212.193.86
 - name: embla
-  ip: 10.0.10.10
+  ip: 10.0.100.10
 - name: truenas
-  ip: 10.0.10.100
+  ip: 10.0.101.10
 - name: k8s
-  ip: 10.0.10.110
+  ip: 10.0.102.10
 - name: work.rouke
   ip: 10.0.50.230
 
