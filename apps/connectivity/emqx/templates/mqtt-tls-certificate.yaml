@@ -17,7 +17,7 @@ metadata:
 spec:
   secretName: mqtt-emqx-svc-tls
   dnsNames:
-  - 'mqtt.emqx.svc.cluster.local'
+  - 'emqx-listeners.emqx.svc.cluster.local'
   issuerRef:
     name: svc-cluster-local-issuer
     kind: ClusterIssuer
