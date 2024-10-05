@@ -18,7 +18,7 @@ metadata:
   name: {{ $endpoint.name }}
 spec:
   endpoints:
-  - dnsName: '{{ $endpoint.name }}.{{ $endpoint.zone }}.mobrockers.com'
+  - dnsName: '{{ $endpoint.name }}.internal'
     recordType: A
     targets:
     - {{ $endpoint.ip }}

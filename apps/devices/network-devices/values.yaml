@@ -11,5 +11,4 @@ records:
 ingress:
 - name: robin
   auth: true
-  zone: lot
   ip: 10.0.30.45
