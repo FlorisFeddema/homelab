@@ -85,6 +85,9 @@ spec:
         mountPath: /mounted/certs/mqtt-mobrockers-com
       - name: mqtt-emqx-svc-tls
         mountPath: /mounted/certs/mqtt-emqx-svc-tls
+      - name: mqtt-mobrockers-com-tls
+        mountPath: /mounted/cert
+
       tolerations:
       - key: essential
         operator: Exists
