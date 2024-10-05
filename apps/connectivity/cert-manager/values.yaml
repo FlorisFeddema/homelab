@@ -17,3 +17,15 @@ cert-manager:
     enabled: true
     servicemonitor:
       enabled: true
+
+trust-manager:
+  crds:
+    enabled: true
+    keep: false
+
+  app:
+    metrics:
+      service:
+        enabled: true
+        servicemonitor:
+          enabled: true

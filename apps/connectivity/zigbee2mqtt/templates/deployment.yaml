@@ -44,6 +44,8 @@ spec:
               fi
               cp /tmp/secret.yaml /config/secret.yaml
           volumeMounts:
+            - name: svc-cluster-local-bundle
+              mountPath: /etc/ssl
             - name: default-config
               mountPath: /tmp/configuration.yaml
               subPath: configuration.yaml
@@ -67,6 +69,9 @@ spec:
             - mountPath: /app/data
               name: data
       volumes:
+        - name: svc-cluster-local-bundle
+          configMap:
+            name: svc-cluster-local-bundle
         - name: data
           persistentVolumeClaim:
             claimName: zigbee2mqtt-data

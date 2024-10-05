@@ -1,11 +1,23 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: mqtt-tls-certificate
+  name: mqtt-mobrockers-com-tls
 spec:
-  secretName: mqtt-tls-certificate
+  secretName: mqtt-mobrockers-com-tls
   dnsNames:
   - 'mqtt.mobrockers.com'
   issuerRef:
     name: cloudflare-letsencrypt-dns
+    kind: ClusterIssuer
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mqtt-emqx-svc-tls
+spec:
+  secretName: mqtt-emqx-svc-tls
+  dnsNames:
+  - 'mqtt.emqx.svc.cluster.local'
+  issuerRef:
+    name: svc-cluster-local-issuer
     kind: ClusterIssuer

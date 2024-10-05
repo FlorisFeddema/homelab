@@ -17,19 +17,23 @@ spec:
       listeners.ws.default {
         enable = false
       }
-      listeners.ssl.default {
+      listeners.wss.default {
+        enable = false
+      }
+
+      listeners.ssl.internal {
+        bind = "0.0.0.0:8884"
         ssl_options {
-          certfile = "/mounted/cert/tls.crt"
-          keyfile = "/mounted/cert/tls.key" 
+          certfile = "/mounted/certs/mqtt-emqx-svc-tls/tls.crt"
+          keyfile = "/mounted/certs/mqtt-emqx-svc-tls/tls.key" 
         }
       }
-      listeners.wss.default {
+
+      listeners.ssl.external {
+        bind = "0.0.0.0:8883"
         ssl_options {
-          certfile = "/mounted/cert/tls.crt"
-          keyfile = "/mounted/cert/tls.key"
-        }
-        websocket {
-          mqtt_path = "/"
+          certfile = "/mounted/certs/mqtt-mobrockers-com/tls.crt"
+          keyfile = "/mounted/certs/mqtt-mobrockers-com/tls.key" 
         }
       }
 
@@ -65,17 +69,22 @@ spec:
       replicas: 2
       volumeClaimTemplates:
         accessModes:
-          - ReadWriteOnce
+        - ReadWriteOnce
         resources:
           requests:
             storage: 100Mi
       extraVolumes:
-        - name: emqx-tls
-          secret:
-            secretName: mqtt-tls-certificate
+      - name: mqtt-mobrockers-com-tls
+        secret:
+          secretName: mqtt-mobrockers-com-tls
+      - name: mqtt-emqx-svc-tls
+        secret:
+          secretName: mqtt-emqx-svc-tls
       extraVolumeMounts:
-        - name: emqx-tls
-          mountPath: /mounted/cert
+      - name: mqtt-mobrockers-com-tls
+        mountPath: /mounted/certs/mqtt-mobrockers-com
+      - name: mqtt-emqx-svc-tls
+        mountPath: /mounted/certs/mqtt-emqx-svc-tls
       tolerations:
       - key: essential
         operator: Exists

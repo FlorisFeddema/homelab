@@ -6,3 +6,6 @@ dependencies:
   - name: cert-manager
     version: v1.16.0
     repository: https://charts.jetstack.io
+  - name: trust-manager
+    version: v0.9.0
+    repository: https://charts.jetstack.io
