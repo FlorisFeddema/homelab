@@ -20,7 +20,9 @@ spec:
       listeners.wss.default {
         enable = false
       }
-
+      listeners.ssl.default {
+        enable = false
+      }
 
 
       authentication = [{
