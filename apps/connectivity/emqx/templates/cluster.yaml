@@ -24,7 +24,7 @@ spec:
       listeners.ssl.internal {
         bind = "0.0.0.0:8884"
         ssl_options {
-          cacertfile = "/mounted/certs/ca/trust-bundle.pem"
+          cacertfile = "/mounted/certs/mqtt-emqx-svc-tls/ca.crt"
           certfile = "/mounted/certs/mqtt-emqx-svc-tls/tls.crt"
           keyfile = "/mounted/certs/mqtt-emqx-svc-tls/tls.key" 
         }
@@ -75,9 +75,6 @@ spec:
           requests:
             storage: 100Mi
       extraVolumes:
-      - name: svc-cluster-local-bundle
-        configMap:
-          name: svc-cluster-local-bundle
       - name: mqtt-mobrockers-com-tls
         secret:
           secretName: mqtt-mobrockers-com-tls
@@ -85,8 +82,6 @@ spec:
         secret:
           secretName: mqtt-emqx-svc-tls
       extraVolumeMounts:
-      - name: svc-cluster-local-bundle
-        mountPath: /mounted/certs/ca
       - name: mqtt-mobrockers-com-tls
         mountPath: /mounted/certs/mqtt-mobrockers-com
       - name: mqtt-emqx-svc-tls
