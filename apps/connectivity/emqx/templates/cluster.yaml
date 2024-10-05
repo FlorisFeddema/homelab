@@ -21,24 +21,7 @@ spec:
         enable = false
       }
 
-      listeners.ssl.internal {
-        enabled = false
-        bind = "0.0.0.0:8884"
-        ssl_options {
-          cacertfile = "/mounted/cert/mqtt-emqx-svc-tls/ca.crt"
-          certfile = "/mounted/cert/mqtt-emqx-svc-tls/tls.crt"
-          keyfile = "/mounted/cert/mqtt-emqx-svc-tls/tls.key" 
-        }
-      }
 
-      listeners.ssl.external {
-        enabled = false
-        bind = "0.0.0.0:8883"
-        ssl_options {
-          certfile = "/mounted/cert/mqtt-mobrockers-com/tls.crt"
-          keyfile = "/mounted/cert/mqtt-mobrockers-com/tls.key" 
-        }
-      }
 
       authentication = [{
         mechanism = "password_based"
