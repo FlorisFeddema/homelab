@@ -65,16 +65,14 @@ spec:
       - name: mqtt-mobrockers-com-tls
         secret:
           secretName: mqtt-mobrockers-com-tls
-      # - name: mqtt-emqx-svc-tls
-      #   secret:
-      #     secretName: mqtt-emqx-svc-tls
+      - name: mqtt-emqx-svc-tls
+        secret:
+          secretName: mqtt-emqx-svc-tls
       extraVolumeMounts:
-      # - name: mqtt-mobrockers-com-tls
-      #   mountPath: /mounted/cert/mqtt-mobrockers-com
-      # - name: mqtt-emqx-svc-tls
-      #   mountPath: /mounted/cert/mqtt-emqx-svc-tls
       - name: mqtt-mobrockers-com-tls
-        mountPath: /mounted/cert
+        mountPath: /mounted/cert/mqtt-mobrockers-com
+      - name: mqtt-emqx-svc-tls
+        mountPath: /mounted/cert/mqtt-emqx-svc-tls
 
       tolerations:
       - key: essential
