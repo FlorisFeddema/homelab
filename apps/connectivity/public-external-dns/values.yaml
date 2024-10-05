@@ -13,7 +13,7 @@ external-dns:
   zoneIdFilters:
   - 7ad202c85cb68e3a1df112d76d683078
   extraArgs:
-    exclude-target-net: 10.0.0.0/8
+    exclude-target-net: 10.0.103.0/24
 
   resources:
     limits:
