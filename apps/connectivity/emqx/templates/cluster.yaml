@@ -22,19 +22,21 @@ spec:
       }
 
       listeners.ssl.internal {
+        enabled = false
         bind = "0.0.0.0:8884"
         ssl_options {
-          cacertfile = "/mounted/certs/mqtt-emqx-svc-tls/ca.crt"
-          certfile = "/mounted/certs/mqtt-emqx-svc-tls/tls.crt"
-          keyfile = "/mounted/certs/mqtt-emqx-svc-tls/tls.key" 
+          cacertfile = "/mounted/cert/mqtt-emqx-svc-tls/ca.crt"
+          certfile = "/mounted/cert/mqtt-emqx-svc-tls/tls.crt"
+          keyfile = "/mounted/cert/mqtt-emqx-svc-tls/tls.key" 
         }
       }
 
       listeners.ssl.external {
+        enabled = false
         bind = "0.0.0.0:8883"
         ssl_options {
-          certfile = "/mounted/certs/mqtt-mobrockers-com/tls.crt"
-          keyfile = "/mounted/certs/mqtt-mobrockers-com/tls.key" 
+          certfile = "/mounted/cert/mqtt-mobrockers-com/tls.crt"
+          keyfile = "/mounted/cert/mqtt-mobrockers-com/tls.key" 
         }
       }
 
@@ -78,14 +80,14 @@ spec:
       - name: mqtt-mobrockers-com-tls
         secret:
           secretName: mqtt-mobrockers-com-tls
-      - name: mqtt-emqx-svc-tls
-        secret:
-          secretName: mqtt-emqx-svc-tls
+      # - name: mqtt-emqx-svc-tls
+      #   secret:
+      #     secretName: mqtt-emqx-svc-tls
       extraVolumeMounts:
-      - name: mqtt-mobrockers-com-tls
-        mountPath: /mounted/certs/mqtt-mobrockers-com
-      - name: mqtt-emqx-svc-tls
-        mountPath: /mounted/certs/mqtt-emqx-svc-tls
+      # - name: mqtt-mobrockers-com-tls
+      #   mountPath: /mounted/cert/mqtt-mobrockers-com
+      # - name: mqtt-emqx-svc-tls
+      #   mountPath: /mounted/cert/mqtt-emqx-svc-tls
       - name: mqtt-mobrockers-com-tls
         mountPath: /mounted/cert
 
