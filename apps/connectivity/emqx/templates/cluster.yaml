@@ -24,6 +24,15 @@ spec:
         enable = false
       }
 
+      listeners.ssl.internal {
+        bind = "0.0.0.0:8884"
+        ssl_options {
+          cacertfile = "/mounted/cert/mqtt-emqx-svc/ca.crt"
+          certfile = "/mounted/cert/mqtt-emqx-svc/tls.crt"
+          keyfile = "/mounted/cert/mqtt-emqx-svc/tls.key" 
+        }
+      }
+
       listeners.ssl.external {
         bind = "0.0.0.0:8883"
         ssl_options {
