@@ -1,6 +1,6 @@
 records:
 - name: vpn
-  ip: 87.212.193.86
+  ip: 31.187.194.110
 - name: embla
   ip: 10.0.100.10
 - name: truenas
