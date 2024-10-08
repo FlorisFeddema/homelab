@@ -24,17 +24,11 @@ kube-prometheus-stack:
     thanosServiceMonitor:
         enabled: true
 
-    prometheusSpec:
-      probeSelector:
-        matchLabels: null
-      scrapeConfigSelector:
-        matchLabels: null
-      ruleSelector:
-        matchLabels: null
-      podMonitorSelector:
-        matchLabels: null
-      serviceMonitorSelector:
-        matchLabels: null
+    prometheusSpec:      
+      probeSelectorNilUsesHelmValues: false
+      ruleSelectorNilUsesHelmValues: false
+      podMonitorSelectorNilUsesHelmValues: false
+      serviceMonitorSelectorNilUsesHelmValues: false
 
       retention: 12h
       replicas: 3
