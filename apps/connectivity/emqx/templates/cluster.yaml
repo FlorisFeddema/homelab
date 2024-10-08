@@ -70,7 +70,7 @@ spec:
 
   coreTemplate:
     spec:
-      replicas: 2
+      replicas: 3
       volumeClaimTemplates:
         accessModes:
         - ReadWriteOnce
