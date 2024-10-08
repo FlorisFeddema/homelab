@@ -1,16 +1,11 @@
 machine:
-  type: controlplane
+  type: worker
 
   network:
     hostname: kashaylan-1
 
-    interfaces:
-      - interface: enx46a7e06dddf1
-        dhcp: true
-        vip:
-          ip: 192.168.4.9
-
   nodeLabels:
+    node-role.kubernetes.io/worker: ""
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "kashaylan-1"

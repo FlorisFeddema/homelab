@@ -2,7 +2,7 @@ cluster:
   controlPlane:
     endpoint: https://gerador.feddema.dev:6443
   clusterName: gerador
-  allowSchedulingOnControlPlanes: true
+  allowSchedulingOnControlPlanes: false
 
   network:
     cni:

@@ -1,17 +1,11 @@
 machine:
-  type: controlplane
+  type: worker
 
   network:
     hostname: hortek-0
 
-    interfaces:
-      - deviceSelector:
-          busPath: "0*" # should select any hardware network device, if you have just one, it will be selected
-        dhcp: true
-        vip:
-          ip: 192.168.4.9
-
   nodeLabels:
+    node-role.kubernetes.io/worker: ""
     topology.kubernetes.io/zone: "hortek"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "hortek-0"

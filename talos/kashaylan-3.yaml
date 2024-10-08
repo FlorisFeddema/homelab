@@ -5,6 +5,7 @@ machine:
     hostname: kashaylan-3
 
   nodeLabels:
+    node-role.kubernetes.io/worker: ""
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "kashaylan-3"
