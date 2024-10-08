@@ -19,7 +19,7 @@ ingress-nginx:
         annotations: 
           'io.cilium/lb-ipam-ips': 10.0.103.20
         externalIPs:
-        - 87.212.193.86
+        - 31.187.194.110
 
     allowSnippetAnnotations: true
     ingressClassResource:
