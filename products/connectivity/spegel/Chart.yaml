@@ -1,10 +1,10 @@
 apiVersion: v2
 name: spegel
-version: 1.0.4
+version: 1.0.5
 
 dependencies:
   - name: spegel
-    version: v0.0.26
+    version: v0.0.27
     repository: oci://ghcr.io/spegel-org/helm-charts
 
 
