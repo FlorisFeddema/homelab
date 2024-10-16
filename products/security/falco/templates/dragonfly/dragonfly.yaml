@@ -11,9 +11,9 @@ spec:
           resource: limits.memory
           divisor: 1Mi
   args:
-    - --maxmemory=$(MAX_MEMORY)Mi
-    - --proactor_threads=1
-    - --cluster_mode=emulated
+    - --maxmemory=$(MAX_MEMORY)Mi # Set max memory via the memory limit on the pod
+    - --proactor_threads=1 # Should be no less than 1 per 256Mi of memory
+{{/*    - --cluster_mode=emulated*/}}
   resources:
     limits:
       memory: 256Mi
@@ -28,4 +28,10 @@ spec:
       resources:
         requests:
           storage: 4Gi
-{{/*  topologySpreadConstraints:*/}}
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: "kubernetes.io/hostname"
+      whenUnsatisfiable: "DoNotSchedule"
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/part-of: dragonfly
