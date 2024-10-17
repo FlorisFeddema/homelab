@@ -1,8 +1,4 @@
  node-problem-detector:
-   image:
-     repository: registry.k8s.io/node-problem-detector/node-problem-detector
-     tag: v0.8.20
-
    resources: { }
 
    metrics:
