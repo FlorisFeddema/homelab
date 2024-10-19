@@ -1,6 +1,4 @@
 falco:
-  revisionHistoryLimit: 0
-
   metrics:
     enabled: true
 
@@ -40,7 +38,6 @@ falco:
   falcosidekick:
     enabled: true
     replicaCount: 1
-    revisionHistoryLimit: 0
 
     serviceMonitor:
       enabled: true
@@ -74,7 +71,6 @@ falco:
 
     webui:
       enabled: true
-      revisionHistoryLimit: 0
       replicaCount: 1
       loglevel: "error"
       ttl: 5
