@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/FlorisFeddema/GitOps-Glance.git
     targetRevision: HEAD
-    path: chart
+    path: gitops/chart
 
   destination:
     server: https://kubernetes.default.svc
