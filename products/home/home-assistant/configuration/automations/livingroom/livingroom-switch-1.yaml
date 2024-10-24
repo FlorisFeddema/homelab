@@ -4,7 +4,7 @@ triggers:
   - domain: mqtt
     device_id: 79c2aad66d0df5c3d8bbb4db105465b1
     type: action
-    subtype: single_left
+    subtype: single_right
     trigger: device
 conditions: []
 actions:
