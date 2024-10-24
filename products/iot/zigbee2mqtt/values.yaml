@@ -71,11 +71,6 @@ config:
     groups: groups.yaml
     permit_join: false
     availability: true
-    homeassistant:
-      discovery_topic: homeassistant
-      status_topic: homeassistant/status
-      legacy_entity_attributes: false
-      legacy_triggers: false
     mqtt:
       version: 5
       base_topic: zigbee2mqtt
