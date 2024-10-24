@@ -73,7 +73,7 @@ config:
     availability: true
     homeassistant:
       discovery_topic: homeassistant
-      status_topic: hass/status
+      status_topic: homeassistant/status
       legacy_entity_attributes: false
       legacy_triggers: false
     mqtt:
