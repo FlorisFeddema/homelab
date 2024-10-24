@@ -71,6 +71,7 @@ config:
     groups: groups.yaml
     permit_join: false
     availability: true
+    homeassistant: true
     mqtt:
       version: 5
       base_topic: zigbee2mqtt
