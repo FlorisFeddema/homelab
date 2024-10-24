@@ -1,0 +1,15 @@
+description: "Diningroom Virtual Switch 1"
+mode: single
+triggers:
+  - domain: mqtt
+    device_id: 79c2aad66d0df5c3d8bbb4db105465b1
+    type: action
+    subtype: single_right
+    trigger: device
+conditions: []
+actions:
+  - action: switch.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id: 5134a231021027aa1b408425142fa724
