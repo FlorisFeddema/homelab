@@ -126,9 +126,8 @@ Enable BGP by setting `bgpd=yes` in `/etc/frr/daemons`.
 
 Create BGP config in `/etc/frr/bgpd.conf`.
 
-```shell
-
 Chown BGP config to ffr user.
+
 
 ```shell
 chown frr:frr /etc/frr/bgpd.conf
