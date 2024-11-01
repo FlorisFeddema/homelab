@@ -12,7 +12,7 @@ image:
   tag: 4.0.10
 
 persistence:
-  size: 1Gi
+  size: 5Gi
   labels:
     recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
