@@ -1,5 +1,6 @@
 podSecurityContext: {}
-securityContext: {}
+securityContext:
+  privileged: true
 
 mediaPvcName: media-server-media
 
