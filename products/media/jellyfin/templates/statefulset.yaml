@@ -41,7 +41,11 @@ spec:
               name: config
             - mountPath: /media
               name: media
+            - mountPath: /cache
+              name: cache
       volumes:
+        - emptyDir: {}
+          name: cache
         - name: media
           persistentVolumeClaim:
             claimName: {{ .Values.mediaPvcName}}
