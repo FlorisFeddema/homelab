@@ -1,13 +1,10 @@
 podSecurityContext: {}
-securityContext:
-  privileged: true
+securityContext: {}
 
 mediaPvcName: media-server-media
 
 resources:
   limits:
-    gpu.intel.com/i915: "1"
-  requests:
     gpu.intel.com/i915: "1"
 
 image:

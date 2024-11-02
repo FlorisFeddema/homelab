@@ -43,7 +43,11 @@ spec:
               name: media
             - mountPath: /cache
               name: cache
+            - mountPath: /tmp
+              name: tmp
       volumes:
+        - emptyDir: {}
+          name: tmp
         - emptyDir: {}
           name: cache
         - name: media
