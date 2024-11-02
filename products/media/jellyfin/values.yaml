@@ -1,6 +1,4 @@
-podSecurityContext:
-  runAsUser: 1000
-  runAsGroup: 1000
+podSecurityContext: {}
 securityContext: {}
 
 mediaPvcName: media-server-media
