@@ -10,7 +10,7 @@ resources:
 image:
   registry: ghcr.io
   repository: jellyfin/jellyfin
-  tag: 10.10.0
+  tag: 10.10.1
 
 persistence:
   size: 1Gi
