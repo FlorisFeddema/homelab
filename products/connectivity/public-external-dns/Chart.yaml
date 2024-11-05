@@ -1,8 +1,8 @@
 apiVersion: v2
 name: external-dns
-version: 1.0.70
+version: 1.0.71
 
 dependencies:
   - name: external-dns
-    version: 8.3.12
+    version: 8.5.0
     repository: oci://registry-1.docker.io/bitnamicharts
