@@ -26,3 +26,4 @@ homekit:
       - sensor.*price*
       - sensor.*iphone*
       - sensor.dsmr_*
+      - automation.*
