@@ -1,8 +1,8 @@
 apiVersion: v2
 name: immich
-version: 1.0.38
+version: 1.0.39
 
 dependencies:
   - name: immich
-    version: 2.7.1
+    version: 2.8.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
