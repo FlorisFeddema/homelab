@@ -7,12 +7,16 @@ spegel:
         - ALL
     readOnlyRootFilesystem: true
 
+  podSecurityContext:
+    fsGroup: 2000
+
+  spegel:
+    logLevel: "WARN"
+    ontainerdRegistryConfigPath: /etc/cri/conf.d/hosts
+    
   serviceMonitor:
     enabled: true
 
   grafanaDashboard:
     enabled: true
 
-  spegel:
-    logLevel: "WARN"
-    ontainerdRegistryConfigPath: /etc/cri/conf.d/hosts
