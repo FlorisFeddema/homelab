@@ -3,4 +3,4 @@ kind: CoreProvider
 metadata:
   name: cluster-api
 spec:
-  version: v1.4.3
+  version: {{ .Values.providers.core.image.tag }}
