@@ -3,6 +3,6 @@ name: cluster-api-operator
 version: 0.0.0
 
 dependencies:
-  - name: capi-operator
-    version: v1.8.5
+  - name: cluster-api-operator
+    version: v0.14.0
     repository: https://kubernetes-sigs.github.io/cluster-api-operator
