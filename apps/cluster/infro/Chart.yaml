@@ -1,8 +1,0 @@
-apiVersion: v2
-name: infro
-version: 0.0.0
-
-dependencies:
-- name: infro
-  version: 1.0.6
-  repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
