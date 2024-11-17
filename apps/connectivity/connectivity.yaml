@@ -7,7 +7,6 @@ apps:
     cilium:
       deploy: true
       autoSync: false
-      namespace: kube-system
       ignoreDifferences:
       - group: apps
         kind: DaemonSet
