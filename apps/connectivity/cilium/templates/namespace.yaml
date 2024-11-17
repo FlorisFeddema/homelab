@@ -1,6 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: {{ .Release.Namespace }}
+  name: cilium
   labels:
     pod-security.kubernetes.io/enforce: privileged
