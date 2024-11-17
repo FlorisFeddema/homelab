@@ -1,0 +1,18 @@
+spegel:
+  revisionHistoryLimit: 0
+
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+
+  serviceMonitor:
+    enabled: true
+
+  grafanaDashboard:
+    enabled: true
+
+  spegel:
+    logLevel: "WARN"
+    ontainerdRegistryConfigPath: /etc/cri/conf.d/hosts

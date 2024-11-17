@@ -7,8 +7,6 @@ apps:
       deploy: true
     descheduler:
       deploy: true
-    infro:
-      deploy: true
     kubernetes-replicator:
       deploy: true
     metrics-server:
@@ -17,3 +15,6 @@ apps:
       deploy: true
     node-problem-detector:
       deploy: true
+    spegel:
+      deploy: true
+      autoSync: false
