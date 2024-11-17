@@ -1,0 +1,23 @@
+immich:
+  persistence:
+    size: 2Ti
+    storageClass: ''
+    accessMode: ReadWriteMany
+
+  database:
+    clusterName: immich-data
+    replicas: 2
+    size: 32Gi
+
+  ingress:
+    enabled: true
+    domain: photos.mobrockers.com
+    annotations:
+      # proxy-body-size is set to 0 to remove the body limit on file uploads
+      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    tls:
+      enabled: true
+
+  server:
+    podSecurityContext:
+      fsGroup: 6000

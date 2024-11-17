@@ -1,0 +1,5 @@
+apps:
+  infrastructure:
+    cluster-api-operator:
+      deploy: true
+      autoSync: false
