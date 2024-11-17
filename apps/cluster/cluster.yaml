@@ -16,5 +16,5 @@ apps:
     node-problem-detector:
       deploy: true
     spegel:
-      deploy: true
+      deploy: false
       autoSync: false
