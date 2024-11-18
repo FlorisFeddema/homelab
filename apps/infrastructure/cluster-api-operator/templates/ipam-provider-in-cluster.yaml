@@ -3,4 +3,4 @@ kind: IPAMProvider
 metadata:
   name: in-cluster
 spec:
-  version: {{ .Values.providers.bootstrap.talos.image.tag }}
+  version: {{ .Values.providers.ipam.image.tag }}
