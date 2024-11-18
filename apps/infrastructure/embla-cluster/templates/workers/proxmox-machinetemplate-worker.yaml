@@ -1,0 +1,22 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: ProxmoxMachineTemplate
+metadata:
+  name: {{ .Values.name }}-proxmox-worker-machine-template
+spec:
+  template:
+    spec:
+      full: true
+      sourceNode: {{ .Values.name }}
+      templateID: 201
+      format: qcow2
+      numSockets: 1
+      numCores: 4
+      memoryMiB: 16384
+      disks:
+        bootVolume:
+          disk: scsi0
+          sizeGb: 32
+      network:
+        default:
+          bridge: vmbr0
+          model: virtio

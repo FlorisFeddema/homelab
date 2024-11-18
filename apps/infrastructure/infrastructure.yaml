@@ -2,4 +2,6 @@ apps:
   infrastructure:
     cluster-api-operator:
       deploy: true
+    embla-cluster:
+      deploy: true
       autoSync: false

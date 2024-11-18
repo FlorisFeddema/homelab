@@ -1,0 +1,17 @@
+apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+kind: ProxmoxCluster
+metadata:
+  name: {{ .Values.name }}-proxmox-cluster
+spec:
+  credentialsRef:
+    name: proxmox-credentials
+  allowedNodes: [{{ .Values.name }}]
+  controlPlaneEndpoint:
+    host: https://kubernetes.default.svc
+    port: 443
+  dnsServers: 10.0.102.1
+  ipv4Config:
+    gateway: 10.0.102.1
+    prefix: 24
+    addresses:
+    - 10.102.50-10.0.102.60
