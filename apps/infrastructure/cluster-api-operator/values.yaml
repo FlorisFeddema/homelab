@@ -13,8 +13,8 @@ providers:
       image:
         repository: ghcr.io/siderolabs/cluster-api-talos-controller
         tag: v0.6.6
-    controlPlane:
-      talos:
-        image:
-          repository: ghcr.io/siderolabs/cluster-api-control-plane-talos-controller
-          tag: v0.5.7
+  controlPlane:
+    talos:
+      image:
+        repository: ghcr.io/siderolabs/cluster-api-control-plane-talos-controller
+        tag: v0.5.7
