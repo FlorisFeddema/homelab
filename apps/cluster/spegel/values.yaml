@@ -1,22 +1,18 @@
 spegel:
   revisionHistoryLimit: 0
 
-  # securityContext:
-  #   capabilities:
-  #     drop:
-  #       - ALL
-  #   readOnlyRootFilesystem: true
-
-  podSecurityContext:
-    fsGroup: 2000
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
 
   spegel:
     logLevel: "WARN"
-    ontainerdRegistryConfigPath: /etc/cri/conf.d/hosts
+    containerdRegistryConfigPath: /etc/cri/conf.d/hosts
 
   serviceMonitor:
     enabled: true
 
   grafanaDashboard:
     enabled: true
-
