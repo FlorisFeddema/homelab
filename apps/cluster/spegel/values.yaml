@@ -1,11 +1,11 @@
 spegel:
   revisionHistoryLimit: 0
 
- securityContext:
-   capabilities:
-     drop:
-     - ALL
-   readOnlyRootFilesystem: true
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
 
   spegel:
     logLevel: "WARN"
