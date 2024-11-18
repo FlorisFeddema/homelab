@@ -1,0 +1,6 @@
+apiVersion: operator.cluster.x-k8s.io/v1alpha2
+kind: BootstrapProvider
+metadata:
+  name: talos
+spec:
+  version: {{ .Values.providers.bootstrap.talos.image.tag }}
