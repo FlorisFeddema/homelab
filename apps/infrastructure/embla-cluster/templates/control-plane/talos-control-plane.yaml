@@ -11,6 +11,12 @@ spec:
       generateType: controlplane
       hostname:
         source: MachineName
+  strategicPatches:
+  - | {{ (.Files.Get "talos-patches/cluster.yaml") | nindent 4 }}
+  - | {{ (.Files.Get "talos-patches/control-plane-vip.yaml") | nindent 4 }}
+  - | {{ (.Files.Get "talos-patches/machine.yaml") | nindent 4 }}
+  - | {{ (.Files.Get "talos-patches/region-meijhorst.yaml") | nindent 4 }}
+  - | {{ (.Files.Get "talos-patches/zone-embla.yaml") | nindent 4 }}
   infrastructureTemplate:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: ProxmoxMachineTemplate
