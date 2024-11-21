@@ -3,7 +3,7 @@ patchBackupPvcJob:
   image:
     registry: docker.io
     repository: bitnami/kubectl
-    tag: 1.31.2
+    tag: 1.31.3
   pvcNames:
     - export-minio-0
     - export-minio-1
