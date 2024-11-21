@@ -5,12 +5,12 @@ metadata:
 spec:
   replicas: 1
   version: {{ .Values.kubernetes.version }}
+  infrastructureTemplate:
+    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+    kind: ProxmoxMachineTemplate
+    name: {{ .Values.name }}-proxmox-control-plane-machine-template
   controlPlaneConfig:
     controlplane:
-      infrastructureTemplate:
-        apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-        kind: ProxmoxMachineTemplate
-        name: {{ .Values.name }}-proxmox-control-plane-machine-template
       talosVersion: {{ .Values.talos.version }}
       generateType: controlplane
       hostname:
