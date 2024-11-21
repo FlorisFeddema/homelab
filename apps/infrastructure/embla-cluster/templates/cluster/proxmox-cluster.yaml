@@ -7,7 +7,7 @@ spec:
     name: proxmox-credentials
   allowedNodes: [{{ .Values.name }}]
   controlPlaneEndpoint:
-    host: https://kubernetes.default.svc
+    host: 10.0.102.50
     port: 443
   dnsServers: [10.0.102.1]
   ipv4Config:
