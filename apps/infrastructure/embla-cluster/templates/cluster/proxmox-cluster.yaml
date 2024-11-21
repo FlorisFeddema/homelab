@@ -9,7 +9,7 @@ spec:
   controlPlaneEndpoint:
     host: https://kubernetes.default.svc
     port: 443
-  dnsServers: 10.0.102.1
+  dnsServers: [10.0.102.1]
   ipv4Config:
     gateway: 10.0.102.1
     prefix: 24
