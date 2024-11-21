@@ -9,8 +9,9 @@ spec:
       sourceNode: {{ .Values.name }}
       templateID: 200
       format: qcow2
+      pool: clusterapitest
       numSockets: 1
-      numCores: 4
+      numCores: 2
       memoryMiB: 4096
       disks:
         bootVolume:
