@@ -7,7 +7,7 @@ spec:
     spec:
       full: true
       sourceNode: {{ .Values.name }}
-      templateID: 201
+      templateID: 300
       format: qcow2
       numSockets: 1
       numCores: 4
