@@ -6,8 +6,4 @@ spec:
   version: {{ .Values.providers.infrastructure.proxmox.image.tag }}
   manager:
     featureGates:
-      core:
-        ClusterTopology: true
-        MachinePool: true
-      proxmox:
-        ClusterTopology: true
+      ClusterTopology: true
