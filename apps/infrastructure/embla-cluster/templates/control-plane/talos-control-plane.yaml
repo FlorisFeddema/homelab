@@ -6,7 +6,7 @@ spec:
   replicas: 1
   version: {{ .Values.kubernetes.version }}
   infrastructureTemplate:
-    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+    apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
     kind: ProxmoxMachineTemplate
     name: {{ .Values.name }}-proxmox-control-plane-machine-template
   controlPlaneConfig:
