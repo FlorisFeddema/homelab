@@ -8,7 +8,7 @@ spec:
   allowedNodes: [{{ .Values.name }}]
   controlPlaneEndpoint:
     host: 10.0.102.50
-    port: 443
+    port: 6443
   dnsServers: [10.0.102.1]
   ipv4Config:
     gateway: 10.0.102.1
