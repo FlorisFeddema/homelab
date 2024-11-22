@@ -1,7 +1,7 @@
 cluster:
   clusterName: embla
   controlPlane:
-    endpoint: https://10.0.102.50:6443
+    endpoint: https://10.0.254.254:6443
   
   controllerManager:
     extraArgs:

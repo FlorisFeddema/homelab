@@ -7,11 +7,11 @@ spec:
     name: proxmox-credentials
   allowedNodes: [{{ .Values.name }}]
   controlPlaneEndpoint:
-    host: 10.0.102.50
+    host: 10.0.254.254
     port: 6443
-  dnsServers: [10.0.102.1]
+  dnsServers: [10.0.254.1]
   ipv4Config:
-    gateway: 10.0.102.1
+    gateway: 10.0.254.1
     prefix: 24
     addresses:
-    - 10.0.102.51-10.0.102.60
+    - 10.0.254.20-10.0.102.200
