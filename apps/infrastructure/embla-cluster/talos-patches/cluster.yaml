@@ -1,7 +1,7 @@
 cluster:
   clusterName: embla
-  # controlPlane:
-  #   endpoint: https://k8s.mobrockers.com:6443
+  controlPlane:
+    endpoint: https://10.0.102.50:6443
   
   controllerManager:
     extraArgs:
