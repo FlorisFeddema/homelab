@@ -4,3 +4,7 @@ metadata:
   name: cluster-api
 spec:
   version: {{ .Values.providers.core.image.tag }}
+  manager:
+    featureGates:
+      ClusterTopology: true
+      MachinePool: true
