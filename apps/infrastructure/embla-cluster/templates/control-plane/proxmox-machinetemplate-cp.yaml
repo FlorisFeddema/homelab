@@ -21,4 +21,4 @@ spec:
         default:
           bridge: vmbr0
           model: virtio
-          vlan: 102
+          vlan: 254
