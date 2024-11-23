@@ -22,5 +22,3 @@ spec:
           bridge: vmbr0
           model: virtio
           vlan: 254
-      checks:
-        skipCloudInitStatus: true

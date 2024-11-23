@@ -7,7 +7,3 @@ spec:
   manager:
     featureGates:
       ClusterTopology: true
-  fetchConfig:
-    selector:
-      matchLabels:
-        provider: proxmox
