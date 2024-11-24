@@ -8,7 +8,7 @@ patchBackupPvcJob:
     - nextcloud-nextcloud
 
 database:
-  size: 5Gi
+  size: 8Gi
   replicas: 2
 
 nextcloud:
