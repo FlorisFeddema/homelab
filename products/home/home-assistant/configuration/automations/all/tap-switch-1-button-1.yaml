@@ -1,0 +1,14 @@
+alias: "Virtual Tap Switch 1 Button 1"
+description: "Virtual Tap Switch 1 Button 1"
+mode: single
+triggers:
+  - domain: mqtt
+    device_id: 252a2832d4cc0636d05eae44c5a480b7
+    type: action
+    subtype: press_1
+    trigger: device
+conditions: []
+actions:
+  - action: light.turn_off
+    target:
+      entity_id: all
