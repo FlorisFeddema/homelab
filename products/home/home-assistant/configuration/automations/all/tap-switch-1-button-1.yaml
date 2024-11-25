@@ -12,3 +12,6 @@ actions:
   - action: light.turn_off
     target:
       entity_id: all
+  - action: switch.turn_off
+    target:
+      entity_id: all
