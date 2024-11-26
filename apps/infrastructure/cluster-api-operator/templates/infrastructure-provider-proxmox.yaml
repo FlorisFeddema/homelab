@@ -4,6 +4,8 @@ metadata:
   name: proxmox
 spec:
   version: {{ .Values.providers.infrastructure.proxmox.image.tag }}
+  fetchConfig:
+    url: https://github.com/isZumpo/cluster-api-provider-proxmox/releases/latest/infrastructure-components.yaml
   manager:
     featureGates:
       ClusterTopology: true
