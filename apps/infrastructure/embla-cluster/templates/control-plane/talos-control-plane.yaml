@@ -18,6 +18,4 @@ spec:
       strategicPatches:
       - | {{ (.Files.Get "talos-patches/cluster.yaml") | nindent 10 }}
       - | {{ (.Files.Get "talos-patches/control-plane-vip.yaml") | nindent 10 }}
-      - | {{ (.Files.Get "talos-patches/machine.yaml") | nindent 10 }}
-      - | {{ (.Files.Get "talos-patches/region-meijhorst.yaml") | nindent 10 }}
-      - | {{ (.Files.Get "talos-patches/zone-embla.yaml") | nindent 10 }}
+      - | {{ (.Files.Get "talos-patches/machine-cp.yaml") | nindent 10 }}
