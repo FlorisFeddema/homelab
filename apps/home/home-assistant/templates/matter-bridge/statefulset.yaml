@@ -20,7 +20,7 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: matter-hub
-        image: '{{ .Values.matter-hub.image.repository }}:{{ .Values.matter-hub.image.tag }}'
+        image: '{{ .Values.matterHub.image.repository }}:{{ .Values.matterHub.image.tag }}'
         ports:
         - name: http
           containerPort: 8482
