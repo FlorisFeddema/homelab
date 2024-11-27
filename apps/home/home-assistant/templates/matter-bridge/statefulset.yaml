@@ -25,6 +25,9 @@ spec:
         - name: http
           containerPort: 8482
         - name: mdns
+          containerPort: 5353
+          hostPort: 5353
+        - name: hub
           containerPort: 5540
           hostPort: 5540
         env:
