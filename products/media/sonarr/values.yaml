@@ -9,7 +9,7 @@ resources: {}
 image:
   registry: ghcr.io
   repository: linuxserver/sonarr
-  tag: 4.0.10
+  tag: 4.0.11
 
 persistence:
   size: 5Gi
