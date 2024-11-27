@@ -20,3 +20,8 @@ home-assistant:
   config:
     securityContext:
       runAsGroup: 5000
+
+matter-hub:
+  image:
+    repository: ghcr.io/t0bst4r/home-assistant-matter-hub
+    tag: 3.0.0-alpha.41

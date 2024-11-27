@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "common.fullname" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      targetPort: 8482
+      port: 8482
+      protocol: TCP
+  selector:
+    app.kubernetes.io/instance: matter-hub
+    app.kubernetes.io/name: matter-hub
