@@ -24,6 +24,9 @@ spec:
         ports:
         - name: http
           containerPort: 8482
+        - name: mdns
+          containerPort: 5540
+          hostPort: 5540
         env:
           - name: HAMH_HOME_ASSISTANT_URL
             value: http://home-assistant:8123
