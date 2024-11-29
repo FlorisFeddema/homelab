@@ -23,7 +23,7 @@ cilium:
   ipv4:
     enabled: true
   ipv6:
-    enabled: true
+    enabled: false
 
   bgpControlPlane:
     enabled: true
