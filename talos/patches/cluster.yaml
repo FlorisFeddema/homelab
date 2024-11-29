@@ -25,7 +25,7 @@ cluster:
       name: none
     podSubnets:
     - 10.244.0.0/16
-    - fd66:10d7:2dbd::/112
+    # - fd66:10d7:2dbd::/112
     serviceSubnets:
     - 10.96.0.0/12
-    - fd58:c686:6b39::/112
+    # - fd58:c686:6b39::/112
