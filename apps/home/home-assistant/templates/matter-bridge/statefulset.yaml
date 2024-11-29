@@ -1,52 +1,52 @@
-# apiVersion: apps/v1
-# kind: StatefulSet
-# metadata:
-#   name: matter-hub
-# spec:
-#   revisionHistoryLimit: 0
-#   replicas: 1
-#   serviceName: matter-hub
-#   selector:
-#     matchLabels:
-#       app.kubernetes.io/instance: matter-hub
-#       app.kubernetes.io/name: matter-hub
-#   template:
-#     metadata:
-#       labels:
-#         app.kubernetes.io/instance: matter-hub
-#         app.kubernetes.io/name: matter-hub
-#     spec:
-#       hostNetwork: true
-#       dnsPolicy: ClusterFirstWithHostNet
-#       containers:
-#       - name: matter-hub
-#         image: '{{ .Values.matterHub.image.repository }}:{{ .Values.matterHub.image.tag }}'
-#         ports:
-#         - name: http
-#           containerPort: 8482
-#         - name: mdns
-#           containerPort: 5353
-#           hostPort: 5353
-#         - name: hub
-#           containerPort: 5540
-#           hostPort: 5540
-#         env:
-#           - name: HAMH_HOME_ASSISTANT_URL
-#             value: http://home-assistant:8123
-#           - name: HAMH_HOME_ASSISTANT_ACCESS_TOKEN
-#             valueFrom:
-#               secretKeyRef:
-#                 name: home-assistant-matter-hub-credentials
-#                 key: access_token
-#         volumeMounts:
-#         - name: data
-#           mountPath: /data
-#   volumeClaimTemplates:
-#   - metadata:
-#       name: data
-#     spec:
-#       accessModes:
-#       - ReadWriteOnce
-#       resources:
-#         requests:
-#           storage: 500Mi
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: matter-hub
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  serviceName: matter-hub
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: matter-hub
+      app.kubernetes.io/name: matter-hub
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: matter-hub
+        app.kubernetes.io/name: matter-hub
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+      - name: matter-hub
+        image: '{{ .Values.matterHub.image.repository }}:{{ .Values.matterHub.image.tag }}'
+        ports:
+        - name: http
+          containerPort: 8482
+        - name: mdns
+          containerPort: 5353
+          hostPort: 5353
+        - name: hub
+          containerPort: 5540
+          hostPort: 5540
+        env:
+          - name: HAMH_HOME_ASSISTANT_URL
+            value: http://home-assistant:8123
+          - name: HAMH_HOME_ASSISTANT_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: home-assistant-matter-hub-credentials
+                key: access_token
+        volumeMounts:
+        - name: data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 500Mi
