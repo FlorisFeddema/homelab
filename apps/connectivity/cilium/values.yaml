@@ -20,6 +20,10 @@ cilium:
 
   ipam:
     mode: kubernetes
+  ipv4:
+    enabled: true
+  ipv6:
+    enabled: true
 
   bgpControlPlane:
     enabled: true
