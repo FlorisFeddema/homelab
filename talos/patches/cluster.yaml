@@ -2,6 +2,13 @@ cluster:
   clusterName: embla
   controlPlane:
     endpoint: https://k8s.mobrockers.com:6443
+  discovery:
+    enabled: true
+    registries:
+      service:
+        disabled: true
+      kubernetes:
+        disabled: false
   
   controllerManager:
     extraArgs:
