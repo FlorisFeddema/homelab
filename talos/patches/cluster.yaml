@@ -18,8 +18,14 @@ cluster:
     extraArgs:
       bind-address: 0.0.0.0
 
+  proxy:
+    disabled: true
   network:
     cni:
       name: none
-  proxy:
-    disabled: true
+    podSubnets:
+    - 10.244.0.0/16
+    - fd66:10d7:2dbd::/112
+    serviceSubnets:
+    - 10.96.0.0/12
+    - fd58:c686:6b39::/112
