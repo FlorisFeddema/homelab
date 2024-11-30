@@ -32,6 +32,7 @@ data:
     discovery.lua: |
       actions = {}
       actions["restart"] = {}
+      actions["restart"]["disabled"] = false
       return actions
     definitions:
     - name: restart
