@@ -29,11 +29,12 @@ data:
 
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     mergeBuiltinActions: true
+
     discovery.lua: |
-      actions = {}
+      local actions = {}
       actions["restart"] = {}
-      actions["restart"]["disabled"] = false
       return actions
+
     definitions:
     - name: restart
       action.lua: |
