@@ -27,6 +27,37 @@ data:
       clusters:
         - "*"
 
+  resource.customizations.actions.postgresql.cnpg.io_Cluster: |
+    mergeBuiltinActions: true
+    discovery.lua: |
+      actions = {}
+      actions["reload"] = {}
+      actions["restart"] = {}
+      return actions
+    definitions:
+    - name: reload
+      action.lua: |
+        local os = require("os")
+        if obj.spec.template.metadata == nil then
+          obj.spec.template.metadata = {}
+        end
+        if obj.spec.template.metadata.annotations == nil then
+          obj.spec.template.metadata.annotations = {}
+        end
+        obj.spec.template.metadata.annotations["cnpg.io/reloadedAt"] = os.date("!%Y-%m-%dT%XZ")
+        return obj
+    - name: restart
+      action.lua: |
+        local os = require("os")
+        if obj.spec.template.metadata == nil then
+          obj.spec.template.metadata = {}
+        end
+        if obj.spec.template.metadata.annotations == nil then
+          obj.spec.template.metadata.annotations = {}
+        end
+        obj.spec.template.metadata.annotations["kubectl.kubernetes.io/restartedAt"] = os.date("!%Y-%m-%dT%XZ")
+        return obj
+
   server.rbac.log.enforce.enable: "false"
 
   exec.enabled: "true"
@@ -40,3 +71,4 @@ data:
     clientSecret: $authentik-credentials:clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
     logoutURL: https://authentik.feddema.dev/application/o/argocd/end-session/
+
