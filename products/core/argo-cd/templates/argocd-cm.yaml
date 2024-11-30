@@ -38,24 +38,24 @@ data:
       - name: restart
         action.lua: |
           local os = require("os")
-          if obj.spec.template.metadata == nil then
-            obj.spec.template.metadata = {}
+          if obj.metadata == nil then
+            obj.metadata = {}
           end
-          if obj.spec.template.metadata.annotations == nil then
-            obj.spec.template.metadata.annotations = {}
+          if obj.metadata.annotations == nil then
+            obj.metadata.annotations = {}
           end
-          obj.spec.template.metadata.annotations["kubectl.kubernetes.io/restartedAt"] = os.date("!%Y-%m-%dT%XZ")
+          obj.metadata.annotations.annotations["kubectl.kubernetes.io/restartedAt"] = os.date("!%Y-%m-%dT%XZ")
           return obj
       - name: reload
         action.lua: |
           local os = require("os")
-          if obj.spec.template.metadata == nil then
-            obj.spec.template.metadata = {}
+          if obj.metadata == nil then
+            obj.metadata = {}
           end
-          if obj.spec.template.metadata.annotations == nil then
-            obj.spec.template.metadata.annotations = {}
+          if obj.metadata.annotations == nil then
+            obj.metadata.annotations = {}
           end
-          obj.spec.template.metadata.annotations["cnpg.io/reloadedAt"] = os.date("!%Y-%m-%dT%XZ")
+          obj.metadata.annotations["cnpg.io/reloadedAt"] = os.date("!%Y-%m-%dT%XZ")
           return obj
 
 
