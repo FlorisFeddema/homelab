@@ -13,7 +13,7 @@ home-assistant:
       add: [ "NET_RAW", "NET_BIND_SERVICE" ]
 
   persistence:
-    size: 5Gi
+    size: 10Gi
     labels:
       recurring-job.longhorn.io/source: enabled
       recurring-job-group.longhorn.io/backup: enabled
