@@ -28,7 +28,6 @@ data:
         - "*"
 
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
-    mergeBuiltinActions: true
     discovery.lua: |
       actions = {}
       actions["do-things"] = {}
