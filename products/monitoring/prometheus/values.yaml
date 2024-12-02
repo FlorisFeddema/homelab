@@ -30,8 +30,8 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
 
-      retention: 12h
-      replicas: 3
+      retention: 6h
+      replicas: 2
       logLevel: warn
 
       thanos:
@@ -45,7 +45,7 @@ kube-prometheus-stack:
           spec:
             resources:
               requests:
-                storage: 50Gi
+                storage: 100Gi
 
       topologySpreadConstraints:
         - maxSkew: 1
