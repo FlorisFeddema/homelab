@@ -26,6 +26,16 @@ authentik:
           secretKeyRef:
             key: databasePassword
             name: authentik-secret
+      - name: AUTHENTIK_EMAIL__USERNAME
+        valueFrom:
+          secretKeyRef:
+            key: emailUsername
+            name: authentik-secret
+      - name: AUTHENTIK_EMAIL__PASSWORD
+        valueFrom:
+          secretKeyRef:
+            key: emailPassword
+            name: authentik-secret
 
   worker:
     replicas: 1
@@ -58,6 +68,12 @@ authentik:
       port: 5432
     redis:
       host: "{{ .Release.Name }}-redis-master"
+
+  email:
+    host: "smtp.postmarkapp.com"
+    port: 587
+    use_tls: true
+    from: "admin@feddema.dev"
 
   prometheus:
     rules:
