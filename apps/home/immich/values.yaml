@@ -21,3 +21,11 @@ immich:
   server:
     podSecurityContext:
       fsGroup: 6000
+
+  machineLearning:
+   resources:
+     requests:
+       cpu: 1
+       memory: 1Gi
+     limits:
+       memory: 3Gi
