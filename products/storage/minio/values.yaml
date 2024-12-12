@@ -15,7 +15,7 @@ minio:
   replicas: 3
 
   persistence:
-    size: 100Gi
+    size: 200Gi
     # labels are added by patchBackupPvcJob
     labels:
       recurring-job.longhorn.io/source: enabled
