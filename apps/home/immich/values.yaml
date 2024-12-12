@@ -23,9 +23,12 @@ immich:
       fsGroup: 6000
 
   machineLearning:
-   resources:
-     requests:
-       cpu: 1
-       memory: 2Gi
-     limits:
-       memory: 3Gi
+    modelPreload:
+      objectRecognition: 'immich-app/ViT-L-16-SigLIP-384__webli'
+      faceRecognition: 'buffalo_l'
+    resources:
+      requests:
+        cpu: 1
+        memory: 2Gi
+      limits:
+        memory: 3Gi
