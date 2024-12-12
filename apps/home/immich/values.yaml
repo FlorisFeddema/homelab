@@ -3,6 +3,7 @@ immich:
     size: 2Ti
     storageClass: ''
     accessMode: ReadWriteMany
+    existingVolume: immich-library
 
   database:
     clusterName: immich-data
@@ -25,7 +26,7 @@ immich:
   machineLearning:
     modelPreload:
       objectRecognition: 'immich-app/ViT-L-16-SigLIP-384__webli'
-      faceRecognition: 'buffalo_l'
+      faceRecognition: 'immich-app/buffalo_l'
     resources:
       requests:
         cpu: 1
