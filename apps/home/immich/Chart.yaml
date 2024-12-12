@@ -4,5 +4,5 @@ version: 0.0.0
 
 dependencies:
   - name: immich
-    version: 3.0.0-immich-tz.c050f31
+    version: 3.0.0-immich-tz.acb4055
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
