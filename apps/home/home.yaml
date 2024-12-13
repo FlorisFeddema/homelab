@@ -6,6 +6,5 @@ apps:
       deploy: true
     immich:
       deploy: true
-      autoSync: false
     mealie:
       deploy: true
