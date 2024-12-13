@@ -7,6 +7,15 @@ spec:
 
   storage:
     size: 2Gi
+
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        "cnpg.io/cluster": authentik-data
+        "cnpg.io/podRole": instance
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
