@@ -34,6 +34,8 @@ democratic-csi:
       "csi.storage.k8s.io/fstype": "ext4"
   volumeSnapshotClasses:
   - name: truenas-iscsi-hdd
+    annotations:
+      snapshot.storage.kubernetes.io/is-default-class: "true"
     parameters:
       detachedSnapshots: "true"
   secrets:
