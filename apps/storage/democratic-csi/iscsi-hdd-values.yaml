@@ -32,7 +32,10 @@ democratic-csi:
     allowVolumeExpansion: true
     parameters:
       "csi.storage.k8s.io/fstype": "ext4"
-
+  volumeSnapshotClasses:
+  - name: truenas-iscsi-hdd
+    parameters:
+      detachedSnapshots: "true"
   secrets:
     provisioner-secret:
     controller-publish-secret:
