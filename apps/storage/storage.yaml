@@ -1,17 +1,8 @@
 apps:
   storage:
-    cloudnative-postgres:
+    snapshot-controller:
       deploy: true
-      serverSideApply: true
-      ignoreDifferences:
-      - group: admissionregistration.k8s.io
-        kind: MutatingWebhookConfiguration
-        jqPathExpressions:
-        - .webhooks[].clientConfig.caBundle
-      - group: admissionregistration.k8s.io
-        kind: ValidatingWebhookConfiguration
-        jqPathExpressions:
-        - .webhooks[].clientConfig.caBundle
+      autoSync: false
     democratic-csi-iscsi-hdd:
       deploy: true
       autoSync: false
@@ -24,5 +15,17 @@ apps:
       path: apps/storage/democratic-csi/chart
       valueFiles:
         - ../node-manual.yaml
+    cloudnative-postgres:
+      deploy: true
+      serverSideApply: true
+      ignoreDifferences:
+      - group: admissionregistration.k8s.io
+        kind: MutatingWebhookConfiguration
+        jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
+      - group: admissionregistration.k8s.io
+        kind: ValidatingWebhookConfiguration
+        jqPathExpressions:
+        - .webhooks[].clientConfig.caBundle
     truecommand:
       deploy: true

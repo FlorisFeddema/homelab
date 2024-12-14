@@ -1,0 +1,8 @@
+apiVersion: v2
+name: snapshot-controller
+version: 0.0.0
+
+dependencies:
+  - name: snapshot-controller
+    version: 0.2.4
+    repository: https://democratic-csi.github.io/charts
