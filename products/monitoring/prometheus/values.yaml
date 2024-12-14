@@ -242,7 +242,6 @@ thanos:
         memory: 4500Mi
 
     persistence:
-      ephemeral: true
       size: 100Gi
 
   storegateway:
