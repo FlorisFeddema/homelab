@@ -17,7 +17,7 @@ minio:
     existingClientIdKey: client-id
     existingClientSecretKey: client-secret
     claimName: policy
-    scopes: openid,profile,email,policy
+    scopes: openid,profile,email,offline_access,policy
     redirectUri: https://minio.mobrockers.com/oauth_callback
 
     # users:
