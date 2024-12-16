@@ -2,7 +2,6 @@ apps:
   storage:
     snapshot-controller:
       deploy: true
-      autoSync: false
     democratic-csi-iscsi-hdd:
       deploy: true
       autoSync: false
@@ -15,6 +14,9 @@ apps:
       path: apps/storage/democratic-csi/chart
       valueFiles:
         - ../node-manual.yaml
+    minio:
+      deploy: true
+      autoSync: false
     cloudnative-postgres:
       deploy: true
       serverSideApply: true
