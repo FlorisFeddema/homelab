@@ -11,6 +11,7 @@ minio:
 
   oidc:
     enabled: true
+    displayName: Authentik
     configUrl: https://authentik.mobrockers.com/application/o/minio/.well-known/openid-configuration
     existingClientSecretName: minio-oidc-credentials
     existingClientIdKey: client-id
