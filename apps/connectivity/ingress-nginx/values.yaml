@@ -41,8 +41,8 @@ ingress-nginx:
           app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
           app.kubernetes.io/instance: '{{ .Release.Name }}'
           app.kubernetes.io/component: controller
-        matchLabelKeys:
-        - pod-template-hash
+      matchLabelKeys:
+      - pod-template-hash
     affinity:
       nodeAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
