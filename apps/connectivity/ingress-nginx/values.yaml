@@ -2,12 +2,7 @@ ingress-nginx:
   revisionHistoryLimit: 0
 
   controller:
-    kind: DaemonSet
-
-    metrics:
-      enabled: true
-      serviceMonitor:
-        enabled: true
+    replicas: 2
     
     service:
       enabled: true
@@ -31,3 +26,39 @@ ingress-nginx:
     config:
       enable-ocsp: 'true'
       #strict-validate-path-type: 'false'
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+    
+    topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+          app.kubernetes.io/instance: '{{ .Release.Name }}'
+          app.kubernetes.io/component: controller
+        matchLabelKeys:
+        - pod-template-hash
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+            - key: topology.kubernetes.io/zone
+              operator: In
+              values:
+              - embla
+    tolerations:
+    - key: essential
+      operator: Exists
+
+  admissionWebhooks:
+    patch:
+      tolerations:
+      - key: essential
+        operator: Exists
