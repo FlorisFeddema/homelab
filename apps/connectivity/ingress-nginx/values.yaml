@@ -2,8 +2,9 @@ ingress-nginx:
   revisionHistoryLimit: 0
 
   controller:
-    replicas: 2
-    
+    replicaCount: 2
+    minReadySeconds: 1 # default is 0 but argocd doesn't like that
+
     service:
       enabled: true
       external:
