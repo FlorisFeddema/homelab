@@ -1,8 +1,8 @@
 apiVersion: v2
 name: adguard
-version: 1.0.20
+version: 1.0.21
 
 dependencies:
   - name: adguard
-    version: 3.3.6
+    version: 3.4.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
