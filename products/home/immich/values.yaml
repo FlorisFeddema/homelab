@@ -35,16 +35,17 @@ immich:
       enabled: false
 
   machineLearning:
-    replicas: 1
+    modelPreload:
+      objectRecognition: 'immich-app/ViT-L-16-SigLIP-384__webli'
+      faceRecognition: 'immich-app/buffalo_l'
     resources:
       requests:
-        cpu: 200m
-        memory: 512Mi
+        cpu: 400m
+        memory: 1Gi
       limits:
-        memory: 2Gi
+        memory: 5Gi
 
   server:
-    replicas: 1
     resources:
       requests:
         cpu: 50m
