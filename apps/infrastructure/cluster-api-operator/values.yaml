@@ -1,3 +1,6 @@
+cluster-api-operator:
+  metricsBindAddr: null
+
 providers:
   core:
     image:
