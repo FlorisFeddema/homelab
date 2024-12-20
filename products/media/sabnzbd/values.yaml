@@ -9,7 +9,7 @@ resources: {}
 image:
   registry: ghcr.io
   repository: linuxserver/sabnzbd
-  tag: 4.4.0
+  tag: 4.4.1
 
 persistence:
   size: 1Gi
