@@ -1,6 +1,6 @@
 param stName string
 param location string
-param containerName string
+param containerNames string[]
 param ipAddresses string[]
 
 resource stAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {
@@ -33,7 +33,7 @@ resource blobservice 'Microsoft.Storage/storageAccounts/blobServices@2023-05-01'
   parent: stAccount
 }
 
-resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
+resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = [for containerName in containerNames: {
   name: containerName
   parent: blobservice
-}
+}]

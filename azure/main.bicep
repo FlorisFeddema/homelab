@@ -1,7 +1,7 @@
 targetScope = 'subscription'
 
 param stName string = 'longhornbackups'
-param containerName string = 'backups'
+param containerNames string[]= ['backups', 'minio']
 param email string = 'admin@feddema.dev'
 param budgetAmount int = 100
 param ipAddresses string[] = ['95.98.178.131']
@@ -18,7 +18,7 @@ module storageAccount './storageaccount.bicep' = {
   params: {
     stName: stName
     location: location
-    containerName: containerName
+    containerNames: containerNames
     ipAddresses: ipAddresses
   }
 }
