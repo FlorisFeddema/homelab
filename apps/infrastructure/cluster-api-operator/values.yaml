@@ -1,5 +1,3 @@
-cluster-api-operator:
-  metricsBindAddr: ""
 
 providers:
   core:
