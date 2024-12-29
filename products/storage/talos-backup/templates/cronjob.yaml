@@ -60,11 +60,15 @@ spec:
               volumeMounts:
                 - mountPath: /tmp
                   name: tmp
+                - mountPath: /.talos
+                  name: talos
                 - mountPath: /var/run/secrets/talos.dev
                   name: {{ include "common.name" . }}-sa-token
           volumes:
             - emptyDir: {}
               name: tmp
+            - emptyDir: {}
+              name: talos
             - name: {{ include "common.name" . }}-sa-token
               secret:
                 secretName: {{ include "common.name" . }}-sa
