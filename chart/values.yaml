@@ -174,3 +174,6 @@ products:
     minio:
       deploy: true
       autoSync: true
+    talosBackup:
+      deploy: true
+      autoSync: true
