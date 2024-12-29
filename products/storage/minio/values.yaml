@@ -23,18 +23,6 @@ minio:
 
   ingress:
     enabled: false
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-      nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-    hosts:
-      - s3.minio.feddema.dev
-    tls:
-      - secretName: s3-minio-tls
-        hosts:
-          - s3.minio.feddema.dev
 
   consoleIngress:
     enabled: true
@@ -53,6 +41,17 @@ minio:
       memory: 512Mi
       cpu: 50m
 
+  oidc:
+    enabled: true
+    displayName: Authentik
+    configUrl: https://authentik.feddema.dev/application/o/minio/.well-known/openid-configuration
+    existingClientSecretName: minio-oidc-credentials
+    existingClientIdKey: clientId
+    existingClientSecretKey: clientSecret
+    claimName: policy
+    scopes: openid,profile,email,offline_access,policy
+    redirectUri: https://minio.feddema.dev/oauth_callback
+
   users:
     - accessKey: loki
       existingSecret: loki-svc-credentials
@@ -64,6 +63,10 @@ minio:
       policy: readwrite
     - accessKey: thanos
       existingSecret: thanos-svc-credentials
+      existingSecretKey: secretKey
+      policy: readwrite
+    - accessKey: talos-backup
+      existingSecret: talos-backup-svc-credentials
       existingSecretKey: secretKey
       policy: readwrite
 
