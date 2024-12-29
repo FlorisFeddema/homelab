@@ -49,7 +49,7 @@ minio:
     existingClientIdKey: clientId
     existingClientSecretKey: clientSecret
     claimName: policy
-    scopes: openid,profile,email,offline_access,policy
+    scopes: openid,profile,email,offline_access,minio
     redirectUri: https://minio.feddema.dev/oauth_callback
 
   users:
