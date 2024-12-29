@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "common.name" }}
+  name: {{ include "common.name" . }}
 spec:
   schedule: {{ .Values.config.schedule }}
   jobTemplate:
@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-            - name: {{ include "common.name" }}
+            - name: {{ include "common.name" . }}
               image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
               workingDir: /tmp
               imagePullPolicy: IfNotPresent
@@ -60,10 +60,10 @@ spec:
                 - mountPath: /tmp
                   name: tmp
                 - mountPath: /var/run/secrets/talos.dev
-                  name: {{ include "common.name" }}-sa-token
+                  name: {{ include "common.name" . }}-sa-token
           volumes:
             - emptyDir: {}
               name: tmp
-            - name: {{ include "common.name" }}-sa-token
+            - name: {{ include "common.name" . }}-sa-token
               secret:
-                secretName: {{ include "common.name" }}-sa
+                secretName: {{ include "common.name" . }}-sa
