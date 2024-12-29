@@ -8,6 +8,10 @@ spec:
     spec:
       template:
         spec:
+          tolerations:
+            - key: node-role.kubernetes.io/master
+              operator: Exists
+              effect: NoSchedule
           restartPolicy: OnFailure
           containers:
             - name: {{ include "common.name" . }}

@@ -24,10 +24,3 @@ machine:
     kubePrism:
       enabled: true
       port: 7445
-
-    kubernetesTalosAPIAccess:
-      enabled: true
-      allowedRoles:
-        - os:etcd:backup
-      allowedKubernetesNamespaces:
-        - etcd-backup

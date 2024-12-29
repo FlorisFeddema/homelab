@@ -1,5 +1,12 @@
 machine:
   type: controlplane
+  features:
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:etcd:backup
+      allowedKubernetesNamespaces:
+        - etcd-backup
 
   network:
     hostname: kashaylan-0
