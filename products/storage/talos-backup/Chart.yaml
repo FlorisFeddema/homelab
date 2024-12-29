@@ -1,0 +1,4 @@
+apiVersion: v2
+name: talos-backup
+version: 1.0.0
+

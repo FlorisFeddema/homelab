@@ -1,0 +1,15 @@
+image:
+  registry: ghcr.io
+  repository: siderolabs/talos-backup
+  tag: v0.1.0-beta.2
+
+config:
+  schedule: "0/10 * * * *"
+  existingSecretName: "talos-backup-credentials"
+  usePathStyle: false
+  region: "eu-west"
+  bucket: "etcd"
+  clusterName: "gerador"
+  publicKey: "age1feyr4wl59kj04sy689q4dc29969tdwp6fnk7c7xzphgpd9m4mpwqkxesfw"
+  endpoint: "http://minio.minio:9000"
+#  prefix: ""

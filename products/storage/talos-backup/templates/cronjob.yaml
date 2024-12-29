@@ -1,0 +1,69 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ include "common.name" }}
+spec:
+  schedule: {{ .Values.config.schedule }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: {{ include "common.name" }}
+              image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+              workingDir: /tmp
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      key: accessKeyId
+                      name: {{ .Values.config.existingSecretName }}
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: secretAccessKey
+                      name: {{ .Values.config.existingSecretName }}
+                - name: AGE_X25519_PUBLIC_KEY
+                  value: {{ .Values.config.publicKey }}
+                - name: AWS_REGION
+                  value: {{ .Values.config.region }}
+                {{ with .Values.config.endpoint }}
+                - name: CUSTOM_S3_ENDPOINT
+                  value: {{ . }}
+                {{ end }}
+                - name: BUCKET
+                  value: {{ .Values.config.bucket }}
+                - name: CLUSTER_NAME
+                  value: {{ .Values.config.clusterName }}
+                {{ with .Values.config.prefix }}
+                - name: S3_PREFIX
+                  value: {{ . }}
+                {{ end }}
+                {{ with .Values.config.usePathStyle }}
+                - name: USE_PATH_STYLE
+                  value: {{ . | quote}}
+                {{ end }}
+              securityContext:
+                runAsUser: 1000
+                runAsGroup: 1000
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                capabilities:
+                  drop:
+                    - ALL
+                seccompProfile:
+                  type: RuntimeDefault
+              command:
+                - /talos-backup
+              volumeMounts:
+                - mountPath: /tmp
+                  name: tmp
+                - mountPath: /var/run/secrets/talos.dev
+                  name: {{ include "common.name" }}-sa-token
+          volumes:
+            - emptyDir: {}
+              name: tmp
+            - name: {{ include "common.name" }}-sa-token
+              secret:
+                secretName: {{ include "common.name" }}-sa
