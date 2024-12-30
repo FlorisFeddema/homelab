@@ -6,6 +6,7 @@ spec:
   schedule: {{ .Values.config.schedule }}
   jobTemplate:
     spec:
+      backoffLimit: 0
       template:
         spec:
           tolerations:
@@ -14,7 +15,7 @@ spec:
               effect: NoSchedule
           nodeSelector:
             node-role.kubernetes.io/control-plane: ""
-          restartPolicy: OnFailure
+          restartPolicy: Never
           containers:
             - name: {{ include "common.name" . }}
               image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
