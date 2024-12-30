@@ -6,7 +6,7 @@ machine:
       allowedRoles:
         - os:etcd:backup
       allowedKubernetesNamespaces:
-        - etcd-backup
+        - talos-backup
 
   network:
     hostname: kashaylan-0
