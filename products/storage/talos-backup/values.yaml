@@ -6,7 +6,7 @@ image:
 config:
   schedule: "45 5 * * *"
   existingSecretName: "talos-backup-credentials"
-  usePathStyle: trye
+  usePathStyle: false
   region: "eu-west"
   bucket: "etcd"
   clusterName: "gerador"

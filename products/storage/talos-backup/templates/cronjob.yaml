@@ -47,10 +47,8 @@ spec:
                 - name: S3_PREFIX
                   value: {{ . }}
                 {{ end }}
-                {{ with .Values.config.usePathStyle }}
                 - name: USE_PATH_STYLE
-                  value: {{ . | quote}}
-                {{ end }}
+                  value: {{ .Values.config.usePathStyle  | quote}}
               securityContext:
                 runAsUser: 1000
                 runAsGroup: 1000
