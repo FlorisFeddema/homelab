@@ -1,4 +1,4 @@
-kubechecks: 
+kubechecks:
   configMap:
     create: true
     env:
@@ -50,9 +50,9 @@ kubechecks:
            - ALL
        readOnlyRootFilesystem: true
 
-  envFrom:
-    - secretRef:
-        name: kubechecks-config
+    envFrom:
+      - secretRef:
+          name: kubechecks-config
 
   ingress:
     create: true
