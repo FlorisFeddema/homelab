@@ -1,8 +1,8 @@
 apiVersion: v2
-name:
+name: kubechecks
 version: 1.0.0
 
 dependencies:
-  - name:
-    version:
-    repository:
+  - name: kubechecks
+    version: 2.1.0
+    repository: https://zapier.github.io/kubechecks/
