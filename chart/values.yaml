@@ -9,6 +9,9 @@ products:
     infro:
       deploy: true
       autoSync: true
+    kubechecks:
+      deploy: true
+      autoSync: true
     sealedSecrets:
       deploy: true
       autoSync: true
