@@ -1,6 +1,7 @@
 ingress-nginx:
   controller:
     allowSnippetAnnotations: true
+    enableAnnotationValidations: false
     config:
       use-forwarded-headers: "true"
       keep-alive: 10
@@ -11,6 +12,9 @@ ingress-nginx:
       enable-owasp-modsecurity-crs: "true"
       enable-brotli: "true"
       load-balance: "ewma"
+      annotations-risk-level: 'Critical'
+      allow-cross-namespace-resources: 'false'
+      strict-validate-path-type: 'false'
     ingressClassResource:
       default: true
 
