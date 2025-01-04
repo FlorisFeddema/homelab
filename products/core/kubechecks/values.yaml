@@ -2,13 +2,15 @@ kubechecks:
   configMap:
     create: true
     env:
-      KUBECHECKS_ARGOCD_API_INSECURE: "false"
+      KUBECHECKS_ARGOCD_API_INSECURE: "true"
       KUBECHECKS_ARGOCD_API_PLAINTEXT: "false"
       KUBECHECKS_ARGOCD_API_PATH_PREFIX: /
-      KUBECHECKS_ARGOCD_API_SERVER_ADDR: argocd.feddema.dev:443
+      KUBECHECKS_ARGOCD_API_SERVER_ADDR: argo-cd-argocd-server.argocd
       KUBECHECKS_ARGOCD_API_NAMESPACE: argocd
-      KUBECHECKS_ARGOCD_WEBHOOK_URL: https://argocd.feddema.dev/api/webhook
-
+      KUBECHECKS_ARGOCD_WEBHOOK_URL: https://argo-cd-argocd-server.argocd/api/webhook
+      KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: argo-cd-argocd-repo-server.argocd
+      KUBECHECKS_ARGOCD_REPOSITORY_INSECURE: "true"
+      
       KUBECHECKS_ENABLE_CONFTEST: "false"
       KUBECHECKS_ENABLE_HOOKS_RENDERER: "true"
       KUBECHECKS_ENABLE_KUBECONFORM: "false"
