@@ -39,17 +39,17 @@ kubechecks:
       tag: "v2.1.0"
 
     podSecurityContext:
-       runAsNonRoot: true
-       runAsUser: 32123
-       fsGroup: 32123
+#       runAsNonRoot: true
+#       runAsUser: 32123
+#       fsGroup: 32123
 
     securityContext:
-       allowPrivilegeEscalation: false
-       privileged: false
-       capabilities:
-         drop:
-           - ALL
-       readOnlyRootFilesystem: false
+#       allowPrivilegeEscalation: false
+#       privileged: false
+#       capabilities:
+#         drop:
+#           - ALL
+#       readOnlyRootFilesystem: false
 
     envFrom:
       - secretRef:
