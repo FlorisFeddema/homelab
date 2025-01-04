@@ -1,8 +1,9 @@
+
 providers:
   core:
     image:
       repository: registry.k8s.io/cluster-api/cluster-api-controller
-      tag: v1.8.5
+      tag: v1.9.3
   ipam:
     image:
       repository: registry.k8s.io/capi-ipam-ic/cluster-api-ipam-in-cluster-controller
@@ -21,4 +22,4 @@ providers:
     talos:
       image:
         repository: ghcr.io/siderolabs/cluster-api-control-plane-talos-controller
-        tag: v0.5.7
+        tag: v0.5.8
