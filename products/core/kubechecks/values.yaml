@@ -21,8 +21,8 @@ kubechecks:
       KUBECHECKS_NAMESPACE: kubechecks
       KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.feddema.dev
       KUBECHECKS_VCS_TYPE: "github"
-      KUBECHECKS_VCS_EMAIL: "kubechecks@feddema.dev"
-      KUBECHECKS_VCS_USERNAME: "Kubechecks Bot"
+      KUBECHECKS_VCS_EMAIL: "floris1996@hotmail.com"
+      KUBECHECKS_VCS_USERNAME: "FlorisFeddema"
 
   deployment:
     resources:
