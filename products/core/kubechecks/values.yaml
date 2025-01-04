@@ -14,10 +14,6 @@ kubechecks:
       KUBECHECKS_ENABLE_KUBECONFORM: "false"
       KUBECHECKS_ENABLE_PREUPGRADE: "false"
       KUBECHECKS_ENSURE_WEBHOOKS: "true"
-
-      KUBECHECKS_VCS_EMAIL: "floris1996@hotmail.com"
-      KUBECHECKS_VCS_USERNAME: "FlorisFeddema"
-
       KUBECHECKS_LOG_LEVEL: warn
       KUBECHECKS_MAX_CONCURRENCT_CHECKS: "10"
       KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: "hide"
@@ -25,6 +21,8 @@ kubechecks:
       KUBECHECKS_NAMESPACE: kubechecks
       KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.feddema.dev
       KUBECHECKS_VCS_TYPE: "github"
+      KUBECHECKS_VCS_EMAIL: "kubechecks@feddema.dev"
+      KUBECHECKS_VCS_USERNAME: "Kubechecks Bot"
 
   deployment:
     resources:
@@ -51,7 +49,7 @@ kubechecks:
        capabilities:
          drop:
            - ALL
-       readOnlyRootFilesystem: true
+       readOnlyRootFilesystem: false
 
     envFrom:
       - secretRef:
