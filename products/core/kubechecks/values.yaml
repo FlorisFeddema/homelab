@@ -5,7 +5,7 @@ kubechecks:
       KUBECHECKS_ARGOCD_API_INSECURE: "false"
       KUBECHECKS_ARGOCD_API_PLAINTEXT: "false"
       KUBECHECKS_ARGOCD_API_PATH_PREFIX: /
-      KUBECHECKS_ARGOCD_API_SERVER_ADDR: https://argocd.feddema.dev:443
+      KUBECHECKS_ARGOCD_API_SERVER_ADDR: argocd.feddema.dev:443
       KUBECHECKS_ARGOCD_API_NAMESPACE: argocd
       KUBECHECKS_ARGOCD_WEBHOOK_URL: https://argocd.feddema.dev/api/webhook
 
