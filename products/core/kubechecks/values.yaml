@@ -5,7 +5,7 @@ kubechecks:
       KUBECHECKS_ARGOCD_API_INSECURE: "true"
       KUBECHECKS_ARGOCD_API_PLAINTEXT: "true"
       KUBECHECKS_ARGOCD_API_PATH_PREFIX: /
-      KUBECHECKS_ARGOCD_API_SERVER_ADDR: argo-cd-argocd-server.argocd:8080
+      KUBECHECKS_ARGOCD_API_SERVER_ADDR: argo-cd-argocd-server.argocd
       KUBECHECKS_ARGOCD_API_NAMESPACE: argocd
       KUBECHECKS_ARGOCD_WEBHOOK_URL: http://argo-cd-argocd-server.argocd/api/webhook
       KUBECHECKS_ARGOCD_REPOSITORY_ENDPOINT: argo-cd-argocd-repo-server.argocd:8081
