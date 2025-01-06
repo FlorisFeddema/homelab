@@ -5,6 +5,8 @@ descheduler:
     requests:
       cpu: 30m
       memory: 128Mi
+    limits:
+      cpu: null
   deschedulerPolicyAPIVersion: descheduler/v1alpha2
   deschedulerPolicy:
     strategies: null
