@@ -25,6 +25,8 @@ descheduler:
           targetThresholds:
             cpu : 50
             memory: 50
+          metricsUtilization:
+            metricsServer: true
       - name: RemovePodsViolatingNodeAffinity
         args:
           nodeAffinityType:
