@@ -26,6 +26,7 @@ ingress-nginx:
       update-status-on-shutdown: 'false'
     config:
       enable-ocsp: 'true'
+      annotations-risk-level: 'Critical'
       #strict-validate-path-type: 'false'
 
     metrics:
