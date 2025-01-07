@@ -1,34 +1,6 @@
-# Install unifi utilities run script on boot - script
-
-```
-curl -fsL "https://raw.githubusercontent.com/unifi-utilities/unifios-utilities/HEAD/on-boot-script-2.x/remote_install.sh" | /bin/sh
-```
-
-# Create run on boot script to install ffr
-
-Create in `/data/on_boot.d/10-onboot-frr.sh`
-
-# Make run on boot script executable
-
-```
-chmod +x /data/on_boot.d/10-onboot-frr.sh
-/data/on_boot.d/10-onboot-frr.sh
-```
-
 # Enable bgp
 
-By setting `bgpd=yes` in `/etc/frr/daemons`
-
-# Create bgp config
-
-Create in `/etc/frr/bgpd.conf`
-
-# Chown bgp config to ffr user
-
-```
-chown frr:frr /etc/frr/bgpd.conf
-service frr restart
-```
+Upload bgpd.conf to unifi bgp settings
 
 # Check that it's working
 
