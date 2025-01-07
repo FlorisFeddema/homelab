@@ -88,4 +88,5 @@ spec:
         external-dns.alpha.kubernetes.io/hostname: {{ .Values.cluster.listener.service.hostname }}
     spec:
       type: {{ .Values.cluster.listener.service.type }}
+        externalTrafficPolicy: {{ .Values.cluster.listener.service.externalTrafficPolicy }}
   {{ end }}

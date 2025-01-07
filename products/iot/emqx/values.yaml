@@ -28,6 +28,7 @@ cluster:
       enabled: true
       type: LoadBalancer
       hostname: mqtt.feddema.dev
+      externalTrafficPolicy: Local
 
   certificate:
     domain: mqtt.feddema.dev
