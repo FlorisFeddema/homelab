@@ -24,3 +24,4 @@ apps:
       deploy: true
     zigbee2mqtt:
       deploy: true
+      autoSync: false
