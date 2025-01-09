@@ -62,7 +62,6 @@ spec:
             - containerPort: 8080
               protocol: TCP
               name: http
-          resources: {{ toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - mountPath: /app/data
               name: data

@@ -8,15 +8,11 @@ config:
     repository: busybox
     tag: 1.37.0
 
-resources:
-  limits: 
-    device.local/zigbee: 1
-
 frontend:
   port: 8080
   url: https://z2mqtt.mobrockers.com
 zigbee:
-  adapter: /dev/ttyACM0
+  adapter: tcp://10.0.30.51:6638
   pan_id: '23219'
   ext_pan_id: '[194, 57, 175, 193, 119, 126, 53, 38]'
 mqtt:
