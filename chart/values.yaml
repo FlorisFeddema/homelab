@@ -7,7 +7,7 @@ products:
       deploy: true
       autoSync: true
     infro:
-      deploy: true
+      deploy: false
       autoSync: true
     kubechecks:
       deploy: true
@@ -147,7 +147,7 @@ products:
       autoSync: true
   security:
     falco:
-      deploy: true
+      deploy: false #TODO: check how to make it work with talos 1.9
       autoSync: true
     authentik:
       deploy: true
