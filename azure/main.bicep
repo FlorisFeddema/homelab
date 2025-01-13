@@ -7,7 +7,7 @@ param budgetAmount int = 100
 param ipAddresses string[] = ['95.98.178.131']
 param location string = deployment().location
 
-resource rg 'Microsoft.Resources/resourceGroups@2024-08-01' = {
+resource rg 'Microsoft.Resources/resourceGroups@2024-11-01' = {
   name: 'longhorn-backups'
   location: location
 }
