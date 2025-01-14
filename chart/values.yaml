@@ -15,6 +15,7 @@ products:
     talosCloudControllerManager:
       deploy: true
       autoSync: true
+      namespace: kube-system
     metricsServer:
       deploy: true
       autoSync: true
