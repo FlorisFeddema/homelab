@@ -11,7 +11,7 @@ falco:
       memory: 256Mi
     limits:
       cpu: null
-      memory: 1024Mi
+      memory: 15Mi
 
   driver:
     kind: modern-bpf
