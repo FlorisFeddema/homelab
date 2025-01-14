@@ -144,7 +144,7 @@ products:
       autoSync: true
   security:
     falco:
-      deploy: false #TODO: check how to make it work with talos 1.9
+      deploy: true
       autoSync: true
     authentik:
       deploy: true
