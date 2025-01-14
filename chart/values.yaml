@@ -6,9 +6,6 @@ products:
     descheduler:
       deploy: true
       autoSync: true
-    infro:
-      deploy: false
-      autoSync: true
     kubechecks:
       deploy: true
       autoSync: true
