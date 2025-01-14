@@ -11,7 +11,7 @@ falco:
       memory: 256Mi
     limits:
       cpu: null
-      memory: 15Mi
+      memory: 1024Mi
 
   driver:
     kind: modern-bpf
@@ -30,7 +30,7 @@ falco:
     priority: info
     json_output: false
     buffered_outputs: true
-    log_level: warning
+    log_level: debug
 
     metrics:
       enabled: true
