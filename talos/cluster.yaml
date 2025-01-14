@@ -28,10 +28,10 @@ cluster:
       bind-address: 0.0.0.0
 
 machine:
-#  kubelet:
-#    extraArgs:
-#      cloud-provider: external
-#      rotate-server-certificates: true
+  kubelet:
+    extraArgs:
+      cloud-provider: external
+      rotate-server-certificates: true
 
   features:
     kubePrism:
