@@ -12,6 +12,9 @@ products:
     sealedSecrets:
       deploy: true
       autoSync: true
+    talosCloudControllerManager:
+      deploy: true
+      autoSync: true
     metricsServer:
       deploy: true
       autoSync: true
