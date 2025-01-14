@@ -5,7 +5,6 @@ machine:
     hostname: hortek-0
 
   nodeLabels:
-    node-role.kubernetes.io/worker: ""
     topology.kubernetes.io/zone: "hortek"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "hortek-0"

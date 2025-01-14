@@ -1,12 +1,15 @@
 machine:
   type: controlplane
+
   features:
     kubernetesTalosAPIAccess:
       enabled: true
       allowedRoles:
         - os:etcd:backup
+        - os:reader
       allowedKubernetesNamespaces:
         - talos-backup
+        - kube-system
 
   network:
     hostname: kashaylan-0
@@ -29,7 +32,3 @@ machine:
     - device: /dev/nvme0n1
       partitions:
         - mountpoint: /var/mnt/nvme1
-
-  kernel:
-    modules:
-      - name: rockchip-cpufreq

@@ -5,7 +5,6 @@ machine:
     hostname: kashaylan-3
 
   nodeLabels:
-    node-role.kubernetes.io/worker: ""
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "kashaylan-3"
@@ -17,7 +16,3 @@ machine:
     - device: /dev/nvme0n1
       partitions:
         - mountpoint: /var/mnt/nvme1
-
-  kernel:
-    modules:
-      - name: rockchip-cpufreq
