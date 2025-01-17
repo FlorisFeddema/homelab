@@ -25,4 +25,4 @@ gateway-helm:
         type: Kubernetes
       logging:
         level:
-          default: warning
+          default: warn
