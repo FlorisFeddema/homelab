@@ -45,6 +45,7 @@ products:
     envoyGateway:
       deploy: true
       autoSync: true
+      serverSideApply: true
     publicExternalDns:
       deploy: true
       autoSync: true
