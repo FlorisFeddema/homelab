@@ -42,6 +42,9 @@ products:
         kind: DaemonSet
         jqPathExpressions:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
+    envoyGateway:
+      deploy: true
+      autoSync: true
     publicExternalDns:
       deploy: true
       autoSync: true
