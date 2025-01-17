@@ -4,6 +4,10 @@ minio:
   persistence:
     size: 100Gi
 
+  resources:
+    requests:
+      memory: 0.5Gi
+
   consoleIngress:
     enabled: true
     hosts:
