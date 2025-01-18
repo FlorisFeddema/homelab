@@ -1,0 +1,32 @@
+cert-manager:
+  crds:
+    enabled: true
+    keep: false
+
+  global:
+    logLevel: 1
+    revisionHistoryLimit: 0
+    leaderElection:
+      namespace: cert-manager
+
+  prometheus:
+    enabled: true
+    servicemonitor:
+      enabled: true
+
+  enableCertificateOwnerRef: true
+  dns01RecursiveNameservers: 1.1.1.1:53,8.8.8.8:53
+  extraArgs:
+    - --enable-gateway-api
+
+trust-manager:
+  crds:
+    enabled: true
+    keep: false
+
+  app:
+    metrics:
+      service:
+        enabled: true
+        servicemonitor:
+          enabled: true
