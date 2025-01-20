@@ -16,16 +16,10 @@ products:
       deploy: true
       autoSync: true
       namespace: kube-system
-    metricsServer:
-      deploy: true
-      autoSync: true
     vpa:
       deploy: true
       autoSync: true
     kubernetesReplicator:
-      deploy: true
-      autoSync: true
-    nodeProblemDetector:
       deploy: true
       autoSync: true
   connectivity:
@@ -82,6 +76,12 @@ products:
       autoSync: true
       namespace: default
       serverSideApply: true
+    metricsServer:
+      deploy: true
+      autoSync: true
+    nodeProblemDetector:
+      deploy: true
+      autoSync: true
   home:
     cyberchef:
       deploy: true
