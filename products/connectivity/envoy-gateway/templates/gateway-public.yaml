@@ -6,6 +6,9 @@ metadata:
     'cert-manager.io/revision-history-limit': "1"
     'cert-manager.io/cluster-issuer': letsencrypt-dns
 spec:
+  addresses:
+    - value: 95.98.178.131
+      type: IPAddress
   gatewayClassName: envoy-gateway
   infrastructure:
     annotations:
