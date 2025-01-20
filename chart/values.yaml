@@ -110,11 +110,11 @@ products:
       namespace: media-server
     jellyfin:
       deploy: true
-      autoSync: true
+      autoSync: false
       namespace: media-server
     jellyseerr:
       deploy: true
-      autoSync: true
+      autoSync: false
       namespace: media-server
     prowlarr:
       deploy: true
