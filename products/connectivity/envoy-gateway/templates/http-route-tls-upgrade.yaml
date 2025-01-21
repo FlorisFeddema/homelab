@@ -4,7 +4,9 @@ metadata:
   name: tls-upgrade
 spec:
   parentRefs:
-  - name: envoy-gateway
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-gateway
     sectionName: web-http
   hostnames:
   - '*.feddema.dev'
@@ -13,4 +15,8 @@ spec:
      - type: RequestRedirect
        requestRedirect:
          scheme: https
-         port: 443
+         statusCode: 301
+     matches:
+       - path:
+           type: PathPrefix
+           value: /
