@@ -1,0 +1,23 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyProxy
+metadata:
+  name: envoy-gateway-public
+spec:
+  provider:
+    type: Kubernetes
+    kubernetes:
+      envoyDeployment:
+        replicas: 3
+        pod:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  gateway.envoyproxy.io/owning-gateway-name: envoy-gateway-public
+                  gateway.envoyproxy.io/owning-gateway-namespace: envoy-gateway
+      envoyService:
+        annotations:
+          'io.cilium/lb-ipam-ips': 192.168.102.30
+        externalTrafficPolicy: Local
