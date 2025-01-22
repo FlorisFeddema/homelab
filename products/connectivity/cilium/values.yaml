@@ -4,6 +4,14 @@ cilium:
   kubeProxyReplacement: true
   rollOutCiliumPods: true
 
+  k8sClientRateLimit:
+    qps: 5
+    burst: 10
+
+  envoy:
+    prometheus:
+      enabled: true
+
   ipam:
     mode: kubernetes
 
@@ -20,19 +28,11 @@ cilium:
       enabled: false
     hostRoot: /sys/fs/cgroup
 
-  resources:
-    limits:
-      memory: 1500Mi
-    requests:
-      memory: 512Mi
-      cpu: 100m
-
   bgpControlPlane:
     enabled: true
 
   certgen:
     ttlSecondsAfterFinished: null
-
 
   hubble:
     enabled: true
@@ -47,12 +47,10 @@ cilium:
       dashboards:
         enabled: true
         namespace: grafana
-        label: grafana_dashboard
 
     relay:
       enabled: true
       rollOutPods: true
-      resources: { }
       prometheus:
         enabled: true
         serviceMonitor:
@@ -61,10 +59,6 @@ cilium:
     ui:
       enabled: true
       rollOutPods: true
-      backend:
-        resources: { }
-      frontend:
-        resources: { }
 
       ingress:
         enabled: true
@@ -85,25 +79,18 @@ cilium:
             hosts:
               - hubble.feddema.dev
 
-#  monitor:
-#    enabled: true
-
   prometheus:
     enabled: true
     serviceMonitor:
       enabled: true
   dashboards:
     enabled: true
-    label: grafana_dashboard
 
   operator:
     replicas: 1
-    resources: { }
     prometheus:
-      enabled: true
       serviceMonitor:
         enabled: true
     rollOutPods: true
     dashboards:
       enabled: true
-      label: grafana_dashboard
