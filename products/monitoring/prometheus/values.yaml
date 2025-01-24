@@ -58,6 +58,18 @@ kube-prometheus-stack:
               app.kubernetes.io/name: prometheus
               prometheus: prometheus
 
+    route:
+      main:
+        enabled: true
+        apiVersion: gateway.networking.k8s.io/v1
+        kind: HTTPRoute
+        hostname: prometheus.feddema.dev
+
+        parentRefs:
+          - name: envoy-gateway-public
+            namespace: envoy-gateway
+            sectionName: web-https
+
   alertmanager:
     enabled: true
 
@@ -73,6 +85,18 @@ kube-prometheus-stack:
            resources:
              requests:
                storage: 2Gi
+
+    route:
+      main:
+        enabled: true
+        apiVersion: gateway.networking.k8s.io/v1
+        kind: HTTPRoute
+        hostname: alertmanager.feddema.dev
+
+        parentRefs:
+          - name: envoy-gateway-public
+            namespace: envoy-gateway
+            sectionName: web-https
 
     ingress:
       enabled: true
