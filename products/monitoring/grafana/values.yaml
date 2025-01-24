@@ -46,10 +46,14 @@ grafana:
     main:
       enabled: true
       apiVersion: gateway.networking.k8s.io/v1alpha2
-      kind: TLSRoute
+      kind: HTTPRoute
       hostname: grafana.feddema.dev
 
       matches: {}
+
+      parentRefs:
+      - name: envoy-gateway-public
+        sectionName: web-https
 
 
   extraSecretMounts:
