@@ -1,7 +1,7 @@
 external-dns:
   sources:
     - service
-#    - crd
+    - crd
     - gateway-httproute
     - gateway-tlsroute
     - gateway-udproute
@@ -60,7 +60,7 @@ external-dns:
   policy: sync
 
   crd:
-    create: false #TODO: Uncomment when it is fixed
+    create: true
 
   serviceAccount:
     automountServiceAccountToken: true
