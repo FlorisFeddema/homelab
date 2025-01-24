@@ -1,3 +1,12 @@
+route:
+  enabled: true
+  hostnames:
+    - falco.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 falco:
   metrics:
     enabled: true
