@@ -9,7 +9,6 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
   name: prometheus{{ if ne $name "main" }}-{{ $name }}{{ end }}
-  namespace: {{ template "grafana.namespace" $ }}
   labels:
     {{- with $route.labels }}
     {{- toYaml . | nindent 4 }}
