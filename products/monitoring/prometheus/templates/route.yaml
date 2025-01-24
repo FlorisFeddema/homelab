@@ -27,7 +27,7 @@ spec:
     {{- tpl (toYaml $route.additionalRules) $ | nindent 4 }}
     {{- end }}
     - backendRefs:
-        - name: $route.backend.name
+        - name: {{ $route.backend.name }}
           port: {{ $route.backend.port }}
       {{- with $route.filters }}
       filters:

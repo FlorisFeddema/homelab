@@ -1,15 +1,15 @@
 route:
-  thanos-bucket:
-    enabled: true
-    hostnames:
-      - thanos-bucket.feddema.dev
-    backend:
-      name: prometheus-thanos-bucketweb
-      port: 8080
-    parentRefs:
-      - name: envoy-gateway-public
-        namespace: envoy-gateway
-        sectionName: web-https
+#  thanos-bucket:
+#    enabled: true
+#    hostnames:
+#      - thanos-bucket.feddema.dev
+#    backend:
+#      name: prometheus-thanos-bucketweb
+#      port: 8080
+#    parentRefs:
+#      - name: envoy-gateway-public
+#        namespace: envoy-gateway
+#        sectionName: web-https
 
   thanos-query:
     enabled: true
