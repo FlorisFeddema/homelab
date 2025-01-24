@@ -4,9 +4,9 @@ metadata:
   name: thanos-bucket-security-policy
 spec:
   targetRefs:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      name: prometheus-thanos-bucket
+{{/*    - group: gateway.networking.k8s.io*/}}
+{{/*      kind: HTTPRoute*/}}
+{{/*      name: prometheus-thanos-bucket*/}}
   oidc:
     clientID: "OpGGr3ljeDtn9KxtooqpTwEEOi5eDfiNRdeFPF9C"
     clientSecret:

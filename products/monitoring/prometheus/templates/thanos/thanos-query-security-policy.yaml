@@ -4,9 +4,9 @@ metadata:
   name: thanos-query-security-policy
 spec:
   targetRefs:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      name: prometheus-thanos-query
+{{/*    - group: gateway.networking.k8s.io*/}}
+{{/*      kind: HTTPRoute*/}}
+{{/*      name: prometheus-thanos-query*/}}
   oidc:
     clientID: "yc0v8pHnrLKkVjztFbscqcfllrimU5reh8kQ45JO"
     clientSecret:
