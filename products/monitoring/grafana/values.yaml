@@ -45,10 +45,7 @@ grafana:
   route:
     main:
       enabled: true
-      apiVersion: gateway.networking.k8s.io/v1
-      kind: HTTPRoute
       hostname: grafana.feddema.dev
-
       parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
