@@ -3,8 +3,9 @@ route:
     enabled: true
     hostnames:
       - thanos-bucket.feddema.dev
-    backendName: prometheus-thanos-bucketweb
-    backendPort: 8080
+    backend:
+      name: prometheus-thanos-bucketweb
+      port: 8080
     parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
@@ -14,8 +15,9 @@ route:
     enabled: true
     hostnames:
       - thanos-query.feddema.dev
-    backendName: prometheus-thanos-query
-    backendPort: 9090
+    backend:
+      name: prometheus-thanos-query
+      port: 9090
     parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
