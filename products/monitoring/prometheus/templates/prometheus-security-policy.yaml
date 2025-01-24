@@ -1,0 +1,20 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: prometheus-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: prometheus-prometheus
+  oidc:
+    clientID: "wypK6TtAm6Yj2BpOEbpYPidHBQkDXCCd7hfyzlLL"
+    clientSecret:
+      name: prometheus-oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/prometheus/
+{{/*      authorizationEndpoint: https://authentik.feddema.dev/application/o/authorize/*/}}
+{{/*      tokenEndpoint: https://authentik.feddema.dev/application/o/token/*/}}
+    redirectURL: https://prometheus.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
