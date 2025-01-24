@@ -45,7 +45,8 @@ grafana:
   route:
     main:
       enabled: true
-      hostname: grafana.feddema.dev
+      hostnames:
+        - grafana.feddema.dev
       parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
