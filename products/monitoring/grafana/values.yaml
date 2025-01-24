@@ -49,6 +49,9 @@ grafana:
       kind: TLSRoute
       hostname: grafana.feddema.dev
 
+      matches: {}
+
+
   extraSecretMounts:
     - name: auth-generic-oauth-secret-mount
       secretName: grafana-oauth-credentials
