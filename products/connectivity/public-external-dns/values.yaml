@@ -2,10 +2,10 @@ external-dns:
   sources:
     - ingress
     - service
-  #    - crd #TODO: Uncomment when it is fixed
+    - crd
 
   provider: cloudflare
-
+  revisionHistoryLimit: 0
   extraArgs:
     exclude-target-net: 192.168.0.0/16
 
@@ -21,7 +21,7 @@ external-dns:
   policy: sync
 
   crd:
-    create: false #TODO: Uncomment when it is fixed
+    create: false #managed by private-external-dns
 
   serviceAccount:
     automountServiceAccountToken: true
