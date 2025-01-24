@@ -1,8 +1,11 @@
 external-dns:
   sources:
-    - ingress
     - service
-#    - crd #TODO: Uncomment when it is fixed
+    - crd
+    - gateway-httproute
+    - gateway-tlsroute
+    - gateway-udproute
+    - gateway-tcproute
 
   provider: webhook
 
