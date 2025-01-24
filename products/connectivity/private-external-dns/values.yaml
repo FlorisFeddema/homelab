@@ -8,7 +8,7 @@ external-dns:
     - gateway-tcproute
 
   provider: webhook
-
+  revisionHistoryLimit: 0
   extraArgs:
     webhook-provider-url: http://localhost:8888
     target-net-filter: 192.168.0.0/16
