@@ -14,7 +14,8 @@ database:
 
 route:
   enabled: true
-  hostname: authentik.feddema.dev
+  hostnames:
+    - authentik.feddema.dev
   parentRefs:
     - name: envoy-gateway-public
       namespace: envoy-gateway

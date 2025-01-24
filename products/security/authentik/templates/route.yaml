@@ -16,8 +16,10 @@ spec:
   parentRefs:
     {{- toYaml . | nindent 4 }}
   {{- end }}
+  {{- with .Values.route.hostnames }}
   hostnames:
-    - {{- .Values.route.hostname}}
+    {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
   rules:
     {{- if .Values.route.additionalRules }}
     {{- tpl (toYaml .Values.route.additionalRules) $ | nindent 4 }}
