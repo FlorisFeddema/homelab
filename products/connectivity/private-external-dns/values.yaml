@@ -1,7 +1,7 @@
 external-dns:
   sources:
     - service
-    - crd
+#    - crd
     - gateway-httproute
     - gateway-tlsroute
     - gateway-udproute
