@@ -13,8 +13,6 @@ spec:
       name: prometheus-oidc-secret
     provider:
       issuer: https://authentik.feddema.dev/application/o/prometheus/
-{{/*      authorizationEndpoint: https://authentik.feddema.dev/application/o/authorize/*/}}
-{{/*      tokenEndpoint: https://authentik.feddema.dev/application/o/token/*/}}
     redirectURL: https://prometheus.feddema.dev/oauth2/callback
     logoutPath: /oauth2/logout
 
