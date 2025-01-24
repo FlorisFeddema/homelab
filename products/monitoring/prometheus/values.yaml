@@ -61,7 +61,8 @@ kube-prometheus-stack:
     route:
       main:
         enabled: true
-        hostname: prometheus.feddema.dev
+        hostnames:
+          - prometheus.feddema.dev
         parentRefs:
           - name: envoy-gateway-public
             namespace: envoy-gateway
@@ -86,7 +87,8 @@ kube-prometheus-stack:
     route:
       main:
         enabled: true
-        hostname: alertmanager.feddema.dev
+        hostnames:
+          - alertmanager.feddema.dev
         parentRefs:
           - name: envoy-gateway-public
             namespace: envoy-gateway
