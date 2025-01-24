@@ -6,6 +6,7 @@ external-dns:
     - gateway-tlsroute
     - gateway-udproute
     - gateway-tcproute
+    - gateway-grpcroute
 
   provider: webhook
   revisionHistoryLimit: 0
