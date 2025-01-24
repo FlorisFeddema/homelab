@@ -1,3 +1,26 @@
+route:
+  thanos-bucket:
+    enabled: true
+    hostnames:
+      - thanos-bucket.feddema.dev
+    backendName: prometheus-thanos-bucketweb
+    backendPort: 8080
+    parentRefs:
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
+
+  thanos-query:
+    enabled: true
+    hostnames:
+      - thanos-query.feddema.dev
+    backendName: prometheus-thanos-query
+    backendPort: 9090
+    parentRefs:
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
+
 kube-prometheus-stack:
   nameOverride: "prometheus"
 
