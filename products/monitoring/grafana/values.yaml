@@ -49,13 +49,10 @@ grafana:
       kind: HTTPRoute
       hostname: grafana.feddema.dev
 
-      matches: {}
-
       parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
         sectionName: web-https
-
 
   extraSecretMounts:
     - name: auth-generic-oauth-secret-mount
