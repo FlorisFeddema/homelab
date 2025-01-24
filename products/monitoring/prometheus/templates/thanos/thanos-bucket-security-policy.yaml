@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: thanos-bucket-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: prometheus-thanos-bucket
+  oidc:
+    clientID: "OpGGr3ljeDtn9KxtooqpTwEEOi5eDfiNRdeFPF9C"
+    clientSecret:
+      name: thanos-bucket-oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/thanos-bucket/
+    redirectURL: https://thanos-bucket.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+

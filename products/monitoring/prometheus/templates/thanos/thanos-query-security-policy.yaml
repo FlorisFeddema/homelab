@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: thanos-query-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: prometheus-thanos-query
+  oidc:
+    clientID: "yc0v8pHnrLKkVjztFbscqcfllrimU5reh8kQ45JO"
+    clientSecret:
+      name: thanos-query-oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/thanos-query/
+    redirectURL: https://thanos-query.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
