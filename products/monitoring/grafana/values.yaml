@@ -43,10 +43,11 @@ grafana:
         secretName: "grafana-tls"
 
   route:
-    enabled: true
-    apiVersion: gateway.networking.k8s.io/v1alpha2
-    kind: TLSRoute
-    hostname: grafana.feddema.dev
+    main:
+      enabled: true
+      apiVersion: gateway.networking.k8s.io/v1alpha2
+      kind: TLSRoute
+      hostname: grafana.feddema.dev
 
   extraSecretMounts:
     - name: auth-generic-oauth-secret-mount
