@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: falco-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: falco
+  oidc:
+    clientID: "7nIWpjdede4G0Po4UbvTtQYYQma1j2cGF5jx70py"
+    clientSecret:
+      name: oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/falco/
+    redirectURL: https://falco.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
