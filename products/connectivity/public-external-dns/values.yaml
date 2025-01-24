@@ -2,7 +2,7 @@ external-dns:
   sources:
     - ingress
     - service
-    - crd
+#    - crd
 
   provider: cloudflare
   revisionHistoryLimit: 0
