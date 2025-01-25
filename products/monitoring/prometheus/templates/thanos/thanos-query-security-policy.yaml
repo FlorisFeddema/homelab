@@ -13,6 +13,6 @@ spec:
       name: thanos-query-oidc-secret
     provider:
       issuer: https://authentik.feddema.dev/application/o/thanosquery/
-    redirectURL: https://thanos-query.feddema.dev/oauth2/callback
+    redirectURL: https://thanosquery.feddema.dev/oauth2/callback
     logoutPath: /oauth2/logout
 
