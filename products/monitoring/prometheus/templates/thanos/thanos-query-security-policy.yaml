@@ -8,11 +8,11 @@ spec:
       kind: HTTPRoute
       name: prometheus-thanos-query
   oidc:
-    clientID: "yc0v8pHnrLKkVjztFbscqcfllrimU5reh8kQ45JO"
+    clientID: "LMBK9ZcOFJdFrRYoluJi6OyIprvpek2jvlRbW13V"
     clientSecret:
       name: thanos-query-oidc-secret
     provider:
-      issuer: https://authentik.feddema.dev/application/o/thanos-query/
+      issuer: https://authentik.feddema.dev/application/o/thanosquery/
     redirectURL: https://thanos-query.feddema.dev/oauth2/callback
     logoutPath: /oauth2/logout
 
