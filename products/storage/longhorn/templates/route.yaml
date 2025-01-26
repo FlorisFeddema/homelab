@@ -26,7 +26,7 @@ spec:
     {{- end }}
     - backendRefs:
         - name: longhorn-frontend
-          port: 8080
+          port: 80
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
