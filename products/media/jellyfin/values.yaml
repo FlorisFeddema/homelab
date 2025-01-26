@@ -27,3 +27,12 @@ ingress:
   tls:
     enabled: true
     secretName: jellyfin-tls
+
+route:
+  enabled: true
+  hostnames:
+    - jellyfin.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
