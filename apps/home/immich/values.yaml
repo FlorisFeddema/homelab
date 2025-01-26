@@ -24,9 +24,9 @@ immich:
       fsGroup: 6000
 
   machineLearning:
-    modelPreload:
-      objectRecognition: 'immich-app/ViT-L-16-SigLIP-384__webli'
-      faceRecognition: 'immich-app/buffalo_l'
+    # modelPreload:
+    #   objectRecognition: 'immich-app/ViT-L-16-SigLIP-384__webli'
+    #   faceRecognition: 'immich-app/buffalo_l'
     resources:
       requests:
         cpu: 1000m
