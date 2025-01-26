@@ -28,3 +28,12 @@ ingress:
   tls:
     enabled: true
     secretName: jellyseerr-tls
+
+route:
+  enabled: true
+  hostnames:
+    - jellyseerr.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
