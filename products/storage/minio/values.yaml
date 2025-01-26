@@ -9,6 +9,15 @@ patchBackupPvcJob:
     - export-minio-1
     - export-minio-2
 
+route:
+  enabled: true
+  hostnames:
+    - minio.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 minio:
   existingSecret: "minio-credentials"
 
@@ -99,12 +108,6 @@ minio:
       policy: none
       purge: false
       versioning: false
-
-  customCommands:
-#    - command: ilm rule add --noncurrent-expire-days 2 myminio/loki-chunks
-#    - command: ilm rule add --noncurrent-expire-days 2 myminio/loki-admin
-#    - command: ilm rule add --noncurrent-expire-days 2 myminio/loki-ruler
-#    - command: ilm rule add --noncurrent-expire-days 7 myminio/cnpg
 
   metrics:
     serviceMonitor:
