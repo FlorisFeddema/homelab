@@ -34,3 +34,12 @@ ingress:
   tls:
     enabled: true
     secretName: sabnzbd-tls
+
+route:
+  enabled: true
+  hostnames:
+    - sabnzbd.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https

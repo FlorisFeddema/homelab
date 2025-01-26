@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: sabnzbd-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sabnzbd
+  oidc:
+    clientID: "edrU1inLXLIi4ukXKZChdrUIvRk6ptyS6RolDy5u"
+    clientSecret:
+      name: sabnzbd-oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/sabnzbd/
+    redirectURL: https://sabnzbd.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
