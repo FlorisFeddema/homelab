@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: sonarr-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sonarr
+  oidc:
+    clientID: "yV4uuaj4rHO6U46gq8pbAD9xsMGPVZRuCGihHrPg"
+    clientSecret:
+      name: sonarr-oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/sonarr/
+    redirectURL: https://sonarr.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
