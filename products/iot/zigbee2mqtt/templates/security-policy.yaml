@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: zigbee2mqtt-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: zigbee2mqtt
+  oidc:
+    clientID: "mhRFPjpCQnYZPVKufPgSMLcVpjHBzxqBv56twKhm"
+    clientSecret:
+      name: oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/zigbee/
+    redirectURL: https://zigbee.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+

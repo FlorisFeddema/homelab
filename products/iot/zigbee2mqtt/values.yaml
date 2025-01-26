@@ -30,6 +30,15 @@ persistence:
     recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 
+route:
+  enabled: true
+  hostnames:
+    - zigbee.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 ingress:
   enabled: true
   domain: zigbee.feddema.dev
