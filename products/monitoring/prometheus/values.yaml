@@ -208,6 +208,8 @@ thanos:
       sidecarsNamespace: 'prometheus'
     pdb:
       create: false
+    networkPolicy:
+      enabled: false
     ingress:
       enabled: true
       hostname: thanos.feddema.dev
@@ -243,6 +245,8 @@ thanos:
     refresh: 10m
     replicaCount: 2
     revisionHistoryLimit: 0
+    networkPolicy:
+      enabled: false
     resources: { }
     pdb:
       create: false
@@ -269,6 +273,8 @@ thanos:
     retentionResolution1h: 0d
     consistencyDelay: 30m
     revisionHistoryLimit: 0
+    networkPolicy:
+      enabled: false
     extraFlags:
       - --compact.enable-vertical-compaction
       - --deduplication.replica-label=replica
@@ -296,6 +302,8 @@ thanos:
     replicaCount: 2
     useEndpointGroup: true
     revisionHistoryLimit: 0
+    networkPolicy:
+      enabled: false
     resources: { }
     topologySpreadConstraints:
       - maxSkew: 1
