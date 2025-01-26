@@ -2,7 +2,7 @@ route:
   thanos-query:
     enabled: true
     hostnames:
-      - thanosquery.feddema.dev
+      - thanos-query.feddema.dev
     backend:
       name: prometheus-thanos-query
       port: 9090
