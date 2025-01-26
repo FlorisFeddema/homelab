@@ -1,4 +1,4 @@
-\]{{- if .Values.route.enabled -}}
+{{- if .Values.route.enabled -}}
 apiVersion: {{ .Values.route.apiVersion | default "gateway.networking.k8s.io/v1" }}
 kind: {{ .Values.route.kind | default "HTTPRoute" }}
 metadata:
