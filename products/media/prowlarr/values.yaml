@@ -33,3 +33,12 @@ ingress:
   tls:
     enabled: true
     secretName: prowlarr-tls
+
+route:
+  enabled: true
+  hostnames:
+    - prowlarr.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https

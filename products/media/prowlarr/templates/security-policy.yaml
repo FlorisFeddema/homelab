@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: prowlarr-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: prowlarr
+  oidc:
+    clientID: "JHeAaudq3qBK31QWlM1P2giPytO7UBuLbawsCnh0"
+    clientSecret:
+      name: prowlarr-oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/prowlarr/
+    redirectURL: https://prowlarr.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
