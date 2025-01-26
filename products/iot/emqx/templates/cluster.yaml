@@ -1,12 +1,12 @@
 apiVersion: apps.emqx.io/v2beta1
 kind: EMQX
 metadata:
-  name: {{ template "emqx.fullname" . }}
+  name: {{ template "common.fullname" . }}
   labels:
-    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/name: {{ template "common.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "emqx"
-    {{- include "labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
 spec:
   image: '{{ .Values.cluster.image.repository }}:{{ .Values.cluster.image.tag }}'
   revisionHistoryLimit: 0
@@ -77,7 +77,7 @@ spec:
       extraVolumes:
         - name: emqx-tls
           secret:
-            secretName: {{ template "emqx.fullname" . }}-listener-tls
+            secretName: {{ template "common.fullname" . }}-listener-tls
       extraVolumeMounts:
         - name: emqx-tls
           mountPath: /mounted/cert

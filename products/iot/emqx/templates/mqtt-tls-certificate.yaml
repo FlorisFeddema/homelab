@@ -1,14 +1,14 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name:  {{ template "emqx.fullname" . }}-listener-tls
+  name:  {{ template "common.fullname" . }}-listener-tls
   labels:
-    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/name: {{ template "common.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "emqx"
-    {{- include "labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
 spec:
-  secretName: {{ template "emqx.fullname" . }}-listener-tls
+  secretName: {{ template "common.fullname" . }}-listener-tls
   dnsNames:
     - {{ .Values.cluster.certificate.domain }}
   issuerRef:

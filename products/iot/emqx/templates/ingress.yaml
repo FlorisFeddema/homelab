@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ template "emqx.fullname" . }}
+  name: {{ template "common.fullname" . }}
   annotations: {{ toYaml .Values.cluster.ingress.annotations | nindent 4 }}
   labels:
-    app.kubernetes.io/name: {{ template "emqx.name" . }}
+    app.kubernetes.io/name: {{ template "common.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/component: "emqx"
-    {{- include "labels" . | nindent 4 }}
+    {{- include "common.labels" . | nindent 4 }}
 spec:
   ingressClassName: nginx
   rules:
@@ -16,7 +16,7 @@ spec:
         paths:
           - backend:
               service:
-                name:  {{ template "emqx.fullname" . }}-dashboard
+                name:  {{ template "common.fullname" . }}-dashboard
                 port:
                   name: dashboard
             path: /
