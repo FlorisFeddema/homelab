@@ -7,6 +7,15 @@ patchBackupPvcJob:
   pvcNames:
     - nextcloud-nextcloud
 
+route:
+  enabled: true
+  hostnames:
+    - nextcloud.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 database:
   size: 8Gi
   replicas: 2
