@@ -1,3 +1,12 @@
+route:
+  enabled: true
+  hostnames:
+    - longhorn.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 backups:
   enabled: true
   schedule: "0 6 * * 0" #At 06:00 on Sunday
