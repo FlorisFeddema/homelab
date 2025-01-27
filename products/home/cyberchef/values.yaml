@@ -8,3 +8,12 @@ cyberchef:
     tls:
       enabled: true
       secretName: cyberchef-tls
+
+  route:
+    enabled: true
+    hostnames:
+      - cyberchef.feddema.dev
+    parentRefs:
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
