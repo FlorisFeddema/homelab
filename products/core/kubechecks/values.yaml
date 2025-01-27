@@ -1,3 +1,16 @@
+route:
+  enabled: true
+  hostnames:
+    - kubechecks.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+  matches:
+    - path:
+        type: PathPrefix
+        value: "/hooks"
+
 kubechecks:
   configMap:
     create: true
