@@ -6,7 +6,7 @@ metadata:
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  name: kubechecks
+  name: argocd
   labels:
     {{- with .Values.route.labels }}
     {{- toYaml . | nindent 4 }}
@@ -25,8 +25,8 @@ spec:
     {{- tpl (toYaml .Values.route.additionalRules) $ | nindent 4 }}
     {{- end }}
     - backendRefs:
-        - name: kubechecks
-          port: 8080
+        - name: argo-cd-argocd-server
+          port: 80
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
