@@ -25,8 +25,8 @@ spec:
     {{- tpl (toYaml .Values.route.additionalRules) $ | nindent 4 }}
     {{- end }}
     - backendRefs:
-        - name: authentik-server
-          port: 80
+        - name: kubechecks
+          port: 8080
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
