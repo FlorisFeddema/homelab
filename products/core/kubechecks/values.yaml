@@ -7,9 +7,9 @@ route:
       namespace: envoy-gateway
       sectionName: web-https
   matches:
-#    - path:
-#        type: PathPrefix
-#        value: "/hooks"
+    - path:
+        type: PathPrefix
+        value: "/hooks"
 
 kubechecks:
   configMap:
