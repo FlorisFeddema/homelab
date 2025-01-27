@@ -1,3 +1,12 @@
+route:
+  enabled: true
+  hostnames:
+    - hubble.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 cilium:
   k8sServiceHost: localhost
   k8sServicePort: 7445
