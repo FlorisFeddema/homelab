@@ -18,6 +18,15 @@ home-assistant:
       recurring-job.longhorn.io/source: enabled
       recurring-job-group.longhorn.io/backup: enabled
 
+  route:
+    enabled: true
+    hostnames:
+      - home.feddema.dev
+    parentRefs:
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
+
   ingress:
     domain: home.feddema.dev
     class: nginx
