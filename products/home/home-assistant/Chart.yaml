@@ -1,8 +1,8 @@
 apiVersion: v2
 name: home-assistant
-version: 2.0.28
+version: 2.0.29
 
 dependencies:
   - name: home-assistant
-    version: 1.10.3
+    version: 1.11.0
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
