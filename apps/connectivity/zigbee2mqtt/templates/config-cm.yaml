@@ -20,4 +20,4 @@ data:
       pan_id: {{ .Values.zigbee.pan_id }}
       ext_pan_id: {{ .Values.zigbee.ext_pan_id }}
       network_key: '!secret.yaml network_key'
-      transmit_power: 10
+      transmit_power: 5
