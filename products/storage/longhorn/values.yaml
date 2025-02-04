@@ -14,6 +14,9 @@ backups:
   concurrency: 5
 
 longhorn:
+  image:
+    pullPolicy: Always
+
   persistence:
     defaultClass: true
     defaultClassReplicaCount: 2
@@ -30,6 +33,7 @@ longhorn:
     snapshotterReplicaCount: 2
 
   defaultSettings:
+    systemManagedPodsImagePullPolicy: Always
     defaultReplicaCount: 2
     backupTarget: azblob://backups@core.windows.net/
     backupTargetCredentialSecret: azblob-secret
