@@ -35,8 +35,8 @@ longhorn:
     backupTargetCredentialSecret: azblob-secret
     defaultLonghornStaticStorageClass: longhorn
     defaultDataLocality: best-effort
-    storageOverProvisioningPercentage: 100
-    storageMinimalAvailablePercentage: 20
+    storageOverProvisioningPercentage: 150
+    storageMinimalAvailablePercentage: 10
     upgradeChecker: false
     failedBackupTTL: 60
     logLevel: Warn
