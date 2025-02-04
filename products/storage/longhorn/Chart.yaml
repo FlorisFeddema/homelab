@@ -1,8 +1,8 @@
 apiVersion: v2
 name: longhorn
-version: 1.0.9
+version: 1.0.10
 
 dependencies:
   - name: longhorn
-    version: 1.7.2
+    version: 1.8.0
     repository: https://charts.longhorn.io
