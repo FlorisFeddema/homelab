@@ -6,16 +6,4 @@ spec:
   instances: 2
 
   storage:
-    size: 10Gi
-
-{{/*  backup:*/}}
-{{/*    barmanObjectStore:*/}}
-{{/*      destinationPath: s3://pg-backup-gatus/*/}}
-{{/*      endpointURL: https://s3.minio.feddema.dev*/}}
-{{/*      s3Credentials:*/}}
-{{/*        accessKeyId:*/}}
-{{/*          name: minio-secret*/}}
-{{/*          key: MINIO_ACCESS_KEY*/}}
-{{/*        secretAccessKey:*/}}
-{{/*          name: minio-secret*/}}
-{{/*          key: MINIO_SECRET_KEY*/}}
+    size: 20Gi

@@ -106,6 +106,9 @@ gatus:
       - name: jellyseerr
         url: https://jellyseerr.feddema.dev
         <<: *default-endpoint-external
+      - name: longhorn
+        url: https://longhorn.feddema.dev
+        <<: *default-endpoint-external
       - name: jellyfin
         url: https://jellyfin.feddema.dev
         <<: *default-endpoint-external
