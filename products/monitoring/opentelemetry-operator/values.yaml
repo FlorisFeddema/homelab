@@ -1,16 +1,17 @@
 opentelemetry-operator:
-  resources:
-    limits:
-      cpu: null
-      memory: 128Mi
-    requests:
-      cpu: 100m
-      memory: 64Mi
+  manager:
+    resources:
+      limits:
+        cpu: null
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 64Mi
 
-  serviceMonitor:
-    enabled: true
-
-  prometheusRule:
-    enabled: true
-    defaultRules:
+    serviceMonitor:
       enabled: true
+
+    prometheusRule:
+      enabled: true
+      defaultRules:
+        enabled: true
