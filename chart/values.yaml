@@ -82,6 +82,9 @@ products:
     nodeProblemDetector:
       deploy: true
       autoSync: true
+    opentelemetryOperator:
+      deploy: true
+      autoSync: false
   home:
     cyberchef:
       deploy: true
