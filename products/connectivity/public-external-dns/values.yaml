@@ -2,7 +2,7 @@ external-dns:
   sources:
 #    - ingress
     - service
-    - crd
+#    - crd
     - gateway-httproute
     - gateway-tlsroute
     - gateway-udproute
