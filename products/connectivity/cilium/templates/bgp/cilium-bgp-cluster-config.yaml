@@ -1,0 +1,19 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumBGPClusterConfig
+metadata:
+  name: cilium-bgp
+spec:
+  nodeSelector:
+    matchExpressions:
+      - key: somekey
+        operator: NotIn
+        values: [ 'never-used-value' ]
+  bgpInstances:
+    - name: "64512"
+      localASN: 64512
+      peers:
+        - name: "udm-se-64512"
+          peerASN: 64512
+          peerAddress: 192.168.4.1
+          peerConfigRef:
+            name: "cilium-peer"
