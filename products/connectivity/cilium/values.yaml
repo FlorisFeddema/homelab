@@ -13,13 +13,12 @@ cilium:
   kubeProxyReplacement: true
   rollOutCiliumPods: true
 
-  k8sClientRateLimit:
-    qps: 5
-    burst: 10
-
   envoy:
+    rollOutPods: true
     prometheus:
       enabled: true
+      serviceMonitor:
+        enabled: true
 
   ipam:
     mode: kubernetes
@@ -27,11 +26,11 @@ cilium:
   hostFirewall:
     enabled: true
 
+  # Talos config
   securityContext:
     capabilities:
       ciliumAgent: [ CHOWN,KILL,NET_ADMIN,NET_RAW,IPC_LOCK,SYS_ADMIN,SYS_RESOURCE,DAC_OVERRIDE,FOWNER,SETGID,SETUID ]
       cleanCiliumState: [ NET_ADMIN,SYS_ADMIN,SYS_RESOURCE ]
-
   cgroup:
     autoMount:
       enabled: false
@@ -39,24 +38,25 @@ cilium:
 
   bgpControlPlane:
     enabled: true
+    statusReport:
+      enabled: true
 
   certgen:
     ttlSecondsAfterFinished: null
 
   hubble:
-    enabled: true
-
-    tls:
-      auto:
-        method: cronJob
-
     metrics:
       serviceMonitor:
         enabled: true
       dashboards:
         enabled: true
-        namespace: grafana
-
+    tls:
+      auto:
+        method: certmanager
+        certManagerIssuerRef:
+          group: cert-manager.io
+          kind: Issuer
+          name: hubble-issuer
     relay:
       enabled: true
       rollOutPods: true
@@ -64,31 +64,14 @@ cilium:
         enabled: true
         serviceMonitor:
           enabled: true
-
     ui:
       enabled: true
       rollOutPods: true
 
-      ingress:
-        enabled: true
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: |-
-            http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
-          nginx.ingress.kubernetes.io/auth-signin: |-
-            https://hubble.feddema.dev/outpost.goauthentik.io/start?rd=$escaped_request_uri
-          nginx.ingress.kubernetes.io/auth-response-headers: |-
-            Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
-          nginx.ingress.kubernetes.io/auth-snippet: |
-            proxy_set_header X-Forwarded-Host $http_host;
-          cert-manager.io/cluster-issuer: letsencrypt-dns
-        hosts:
-          - hubble.feddema.dev
-        tls:
-          - secretName: hubble-tls
-            hosts:
-              - hubble.feddema.dev
-
+  monitor:
+    enabled: true
   prometheus:
+    metricsService: true
     enabled: true
     serviceMonitor:
       enabled: true
@@ -96,8 +79,8 @@ cilium:
     enabled: true
 
   operator:
-    replicas: 1
     prometheus:
+      metricsService: true
       serviceMonitor:
         enabled: true
     rollOutPods: true
