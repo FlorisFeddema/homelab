@@ -1,7 +1,7 @@
 image:
   registry: docker.io
   repository: koenkk/zigbee2mqtt
-  tag: 1.42.0
+  tag: 2.1.0
 
 resources:
   limits:
@@ -78,9 +78,11 @@ config:
   fileContent:
     devices: devices.yaml
     groups: groups.yaml
-    permit_join: false
-    availability: true
-    homeassistant: true
+    availability:
+      enabled: true
+    homeassistant:
+      enabled: true
+      experimental_event_entities: true
     mqtt:
       version: 5
       base_topic: zigbee2mqtt
@@ -98,5 +100,4 @@ config:
       network_key: '!secret.yaml advanced_network_key'
       pan_id: 23016
       ext_pan_id: [195, 192, 116, 85, 33, 65, 21, 93]
-      legacy_api: false
-      legacy_availability_payload: false
+
