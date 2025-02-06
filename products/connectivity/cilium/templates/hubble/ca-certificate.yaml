@@ -7,6 +7,6 @@ spec:
   commonName: hubble-ca-certificate
   secretName: hubble-ca-certificate
   issuerRef:
-    name: selfsigned-issuer
+    name: ca-issuer.yaml
     kind: Issuer
     group: cert-manager.io
