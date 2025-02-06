@@ -1,8 +1,13 @@
 external-dns:
   sources:
-    - ingress
+#    - ingress
     - service
-#    - crd
+    - crd
+    - gateway-httproute
+    - gateway-tlsroute
+    - gateway-udproute
+    - gateway-tcproute
+    - gateway-grpcroute
 
   provider: cloudflare
   revisionHistoryLimit: 0

@@ -1,5 +1,6 @@
 external-dns:
   sources:
+#    - ingress
     - service
     - crd
     - gateway-httproute
