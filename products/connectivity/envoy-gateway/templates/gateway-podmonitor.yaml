@@ -7,6 +7,9 @@ spec:
     - port: metrics
       scheme: http
       path: /stats/prometheus
+  namespaceSelector:
+    matchNames:
+      - envoy-gateway
   selector:
     matchLabels:
       app.kubernetes.io/component: proxy
