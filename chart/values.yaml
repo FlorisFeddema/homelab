@@ -28,6 +28,7 @@ products:
       autoSync: true
     cilium:
       deploy: true
+      serverSideApply: true
       ignoreDifferences:
       - group: apps
         kind: DaemonSet
