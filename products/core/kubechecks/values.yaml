@@ -22,7 +22,8 @@ kubechecks:
 
       KUBECHECKS_ENABLE_CONFTEST: "false"
       KUBECHECKS_ENABLE_HOOKS_RENDERER: "true"
-      KUBECHECKS_ENABLE_KUBECONFORM: "false"
+      KUBECHECKS_ENABLE_KUBECONFORM: "true"
+      KUBECHECKS_SCHEMAS_LOCATION: https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json # Kubeconform schemas
       KUBECHECKS_ENABLE_PREUPGRADE: "true"
       KUBECHECKS_ENSURE_WEBHOOKS: "true"
       KUBECHECKS_LOG_LEVEL: warn
