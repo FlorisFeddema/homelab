@@ -2,16 +2,17 @@ kubechecks:
   configMap:
     create: true
     env:
-      KUBECHECKS_ARGOCD_API_INSECURE: "true"
-      KUBECHECKS_ARGOCD_API_PLAINTEXT: "true"
+      KUBECHECKS_ARGOCD_API_INSECURE: 'true'
+      KUBECHECKS_ARGOCD_API_PLAINTEXT: 'true'
+      KUBECHECKS_ARGOCD_API_SERVER_ADDR: argocd-server.argocd
 
-      KUBECHECKS_ENSURE_WEBHOOKS: "true"
-      KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: "delete"
-      KUBECHECKS_MAX_CONCURRENCT_CHECKS: "10"
+      KUBECHECKS_ENSURE_WEBHOOKS: 'true'
+      KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: delete
+      KUBECHECKS_MAX_CONCURRENCT_CHECKS: '10'
       KUBECHECKS_LOG_LEVEL: warn
 
       KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.mobrockers.com
-      KUBECHECKS_VCS_TYPE: "github"
+      KUBECHECKS_VCS_TYPE: github
 
   deployment:
     resources:
@@ -24,8 +25,8 @@ kubechecks:
     replicaCount: 1
 
     image:
-      name: "ghcr.io/zapier/kubechecks"
-      tag: "v2.1.0"
+      name: ghcr.io/zapier/kubechecks
+      tag: v2.1.0
 
     podSecurityContext:
 #       runAsNonRoot: true
