@@ -6,6 +6,8 @@ kubechecks:
       KUBECHECKS_ARGOCD_API_PLAINTEXT: 'true'
       KUBECHECKS_ARGOCD_API_SERVER_ADDR: argocd-server.argocd
 
+      KUBECHECKS_SCHEMAS_LOCATION: https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json
+
       KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: delete
       KUBECHECKS_MAX_CONCURRENCT_CHECKS: '10'
       KUBECHECKS_LOG_LEVEL: warn
