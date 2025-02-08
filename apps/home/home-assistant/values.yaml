@@ -8,7 +8,7 @@ home-assistant:
     capabilities: {}
 
   persistence:
-    size: 5Gi
+    size: 10Gi
 
   ingress:
     enabled: true
