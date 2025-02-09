@@ -33,28 +33,30 @@ kube-prometheus-stack:
   defaultRules:
     rules:
       kubeProxy: false
-      etcd: false
       windows: false
 
   prometheusOperator:
     revisionHistoryLimit: 0
+    logLevel: warn
     admissionWebhooks:
       patch:
         ttlSecondsAfterFinished: 15
-        
+
   prometheus:
     thanosService:
         enabled: true
 
     thanosServiceMonitor:
-        enabled: true
+      enabled: true
 
     prometheusSpec:      
       probeSelectorNilUsesHelmValues: false
       ruleSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
+      scrapeConfigSelectorNilUsesHelmValues: false
 
+      externalUrl: https://prometheus.feddema.dev
       retention: 6h
       replicas: 2
       logLevel: warn
@@ -94,9 +96,10 @@ kube-prometheus-stack:
             sectionName: web-https
 
   alertmanager:
-    enabled: true
+    forceDeployDashboards: true
 
     alertmanagerSpec:
+      logLevel: warn
       useExistingSecret: true
       configSecret: 'alertmanager-config'
       externalUrl: https://alertmanager.feddema.dev
@@ -119,42 +122,35 @@ kube-prometheus-stack:
             namespace: envoy-gateway
             sectionName: web-https
 
-    ingress:
-      enabled: true
-      hosts:
-        - alertmanager.feddema.dev
-
-      tls:
-        - secretName: alertmanager-tls
-          hosts:
-            - alertmanager.feddema.dev
-
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: |-
-          http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin: |-
-          https://alertmanager.feddema.dev/outpost.goauthentik.io/start?rd=$escaped_request_uri
-        nginx.ingress.kubernetes.io/auth-response-headers: |-
-          Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
-        nginx.ingress.kubernetes.io/auth-snippet: |
-          proxy_set_header X-Forwarded-Host $http_host;
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-
   grafana:
     enabled: false
-    forceDeployDatasources: false
     forceDeployDashboards: true
     defaultDashboardsTimezone: Europe/Amsterdam
     defaultDashboardsEditable: false
 
   kubeEtcd:
-    enabled: false
+    service:
+      selector:
+        k8s-app: kube-controller-manager
+    serviceMonitor:
+      relabelings:   # Add nodename label
+        - sourceLabels: [__meta_kubernetes_pod_node_name]
+          separator: ;
+          regex: ^(.*)$
+          targetLabel: nodename
+          replacement: $1
+          action: replace
+      metricRelabelings:   # Remove pod label
+        - action: labeldrop
+          regex: pod
+
+  nodeExporter:
+    forceDeployDashboards: true
 
   kubeProxy:
     enabled: false
 
   kubeScheduler:
-    enabled: true
     service:
       selector:
         k8s-app: kube-scheduler
@@ -186,6 +182,9 @@ kube-prometheus-stack:
   kube-state-metrics:
     revisionHistoryLimit: 0
 
+    selfMonitor:
+      enabled: true
+
   prometheus-node-exporter:
     revisionHistoryLimit: 0
     namespaceOverride: "prometheus-node-exporter"
@@ -210,31 +209,17 @@ thanos:
       create: false
     networkPolicy:
       enabled: false
-    ingress:
-      enabled: true
-      hostname: thanos.feddema.dev
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: |-
-          http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin: |-
-          https://thanos.feddema.dev/outpost.goauthentik.io/start?rd=$escaped_request_uri
-        nginx.ingress.kubernetes.io/auth-response-headers: |-
-          Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
-        nginx.ingress.kubernetes.io/auth-snippet: |
-          proxy_set_header X-Forwarded-Host $http_host;
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-      tls: true
 
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: ScheduleAnyway
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: query
-              app.kubernetes.io/instance: prometheus
-              app.kubernetes.io/managed-by: Helm
-              app.kubernetes.io/name: thanos
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/component: query
+            app.kubernetes.io/instance: prometheus
+            app.kubernetes.io/managed-by: Helm
+            app.kubernetes.io/name: thanos
 
   queryFrontend:
     enabled: false
@@ -250,20 +235,6 @@ thanos:
     resources: { }
     pdb:
       create: false
-    ingress:
-      enabled: true
-      hostname: bucketweb.thanos.feddema.dev
-      annotations:
-        nginx.ingress.kubernetes.io/auth-url: |-
-          http://ak-outpost-authentik-embedded-outpost.authentik.svc.cluster.local:9000/outpost.goauthentik.io/auth/nginx
-        nginx.ingress.kubernetes.io/auth-signin: |-
-          https://bucketweb.thanos.feddema.dev/outpost.goauthentik.io/start?rd=$escaped_request_uri
-        nginx.ingress.kubernetes.io/auth-response-headers: |-
-          Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid
-        nginx.ingress.kubernetes.io/auth-snippet: |
-          proxy_set_header X-Forwarded-Host $http_host;
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-      tls: true
 
   compactor:
     enabled: true
