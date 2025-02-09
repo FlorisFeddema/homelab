@@ -41,6 +41,19 @@ minio:
       memory: 1024Mi
       cpu: 50m
 
+  nodeSelector:
+    kubernetes.io/arch: arm64
+    kubernetes.io/os: linux
+
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app: minio
+          release: minio
+
   oidc:
     enabled: true
     displayName: Authentik
