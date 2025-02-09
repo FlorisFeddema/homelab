@@ -15,9 +15,9 @@ spec:
       destinationPath: {{ .Values.database.backups.path | quote }}
       azureCredentials:
         storageAccount:
-          key: azure-credentials
+          key: authentik-postgres-backup-credentials
           name: AZURE_STORAGE_ACCOUNT
         storageSasToken:
-          key: azure-credentials
+          key: authentik-postgres-backup-credentials
           name: AZURE_STORAGE_SAS_TOKEN
   {{ end }}
