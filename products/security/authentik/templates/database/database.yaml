@@ -13,12 +13,14 @@ spec:
     retentionPolicy: {{ .Values.database.backups.retention }}
     barmanObjectStore:
       destinationPath: {{ .Values.database.backups.path | quote }}
-      endpointURL: {{ .Values.database.backups.endpoint }}
-      s3Credentials:
-        accessKeyId:
-          name: {{ .Values.database.clusterName }}-backup-credentials
-          key: ACCESS_KEY
-        secretAccessKey:
-          name: {{ .Values.database.clusterName }}-backup-credentials
-          key: SECRET_KEY
+      azureCredentials:
+        connectionString:
+          key: azure-credentials
+          name: AZURE_CONNECTION_STRING
+        storageAccount:
+          key: azure-credentials
+          name: AZURE_STORAGE_ACCOUNT
+        storageSasToken:
+          key: azure-credentials
+          name: AZURE_STORAGE_SAS_TOKEN
   {{ end }}
