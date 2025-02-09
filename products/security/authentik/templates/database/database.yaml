@@ -14,9 +14,6 @@ spec:
     barmanObjectStore:
       destinationPath: {{ .Values.database.backups.path | quote }}
       azureCredentials:
-        connectionString:
-          key: azure-credentials
-          name: AZURE_CONNECTION_STRING
         storageAccount:
           key: azure-credentials
           name: AZURE_STORAGE_ACCOUNT
