@@ -22,6 +22,7 @@ cilium:
 
   ipam:
     mode: kubernetes
+    multiPoolPreAllocation: null
 
   hostFirewall:
     enabled: true
