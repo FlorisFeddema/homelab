@@ -79,6 +79,8 @@ cilium:
       enabled: true
   dashboards:
     enabled: true
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true
 
   operator:
     prometheus:
@@ -88,3 +90,5 @@ cilium:
     rollOutPods: true
     dashboards:
       enabled: true
+      annotations:
+        argocd.argoproj.io/sync-options: ServerSideApply=true
