@@ -34,20 +34,11 @@ minio:
     enabled: false
 
   consoleIngress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-      nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    hosts:
-      - minio.feddema.dev
-    tls:
-      - secretName: minio-tls
-        hosts:
-          - minio.feddema.dev
+    enabled: false
 
   resources:
     requests:
-      memory: 512Mi
+      memory: 1024Mi
       cpu: 50m
 
   oidc:
@@ -66,10 +57,6 @@ minio:
       existingSecret: loki-svc-credentials
       existingSecretKey: secretKey
       policy: readwrite
-    - accessKey: cnpg
-      existingSecret: cnpg-svc-credentials
-      existingSecretKey: secretKey
-      policy: readwrite
     - accessKey: thanos
       existingSecret: thanos-svc-credentials
       existingSecretKey: secretKey
@@ -81,22 +68,6 @@ minio:
 
   buckets:
     - name: loki-chunks
-      policy: none
-      purge: false
-      versioning: false
-    - name: loki-admin
-      policy: none
-      purge: false
-      versioning: false
-    - name: loki-ruler
-      policy: none
-      purge: false
-      versioning: false
-    - name: loki-compactor
-      policy: none
-      purge: false
-      versioning: false
-    - name: cnpg
       policy: none
       purge: false
       versioning: false
