@@ -3,6 +3,7 @@ gatus:
     annotateConfigChecksum: false
   env:
     GATUS_CONFIG_PATH: /configfiles
+    GATUS_LOG_LEVEL: DEBUG
   extraVolumeMounts:
   - name: config
     mountPath: /configfiles
