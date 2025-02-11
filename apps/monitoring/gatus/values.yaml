@@ -41,6 +41,7 @@ gatus:
   serviceMonitor:
     enabled: true
   config:
+    debug: true
     metrics: true
     skip-invalid-config-update: true
     endpoints:
