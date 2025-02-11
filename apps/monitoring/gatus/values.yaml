@@ -57,6 +57,13 @@ gatus:
       - '[STATUS] == 200'
       client:
         dns-resolver: 'udp://1.1.1.1:53'
+    - name: google
+      url: 'https://google.com'
+      group: external
+      conditions:
+      - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
 
 #   config:
 #     endpoints:
