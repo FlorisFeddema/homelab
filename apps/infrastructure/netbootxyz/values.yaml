@@ -1,5 +1,5 @@
 image:
-  regisrty: ghcr.io
+  registry: ghcr.io
   repository: linuxserver/netbootxyz
   tag: 0.7.4
 
