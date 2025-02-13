@@ -10,22 +10,22 @@ spec:
   ingressClassName: {{ .Values.ingress.class }}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.domain }}
-      http:
-        paths:
-          - backend:
-              service:
-                name: {{ template "common.fullname" . }}
-                port:
-                  name: http
-            path: /
-            pathType: Prefix
+  - host: {{ .Values.ingress.domain }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ template "common.fullname" . }}
+            port:
+              name: web
+        path: /
+        pathType: Prefix
   {{- if .Values.ingress.tls.enabled }}
   tls:
-    - hosts:
-        - {{ .Values.ingress.domain }}
-      {{- with .Values.ingress.tls.secretName }}
-      secretName: {{ . }}
-      {{- end }}
+  - hosts:
+    - {{ .Values.ingress.domain }}
+    {{- with .Values.ingress.tls.secretName }}
+    secretName: {{ . }}
+    {{- end }}
   {{- end }}
 {{ end }}
