@@ -2,7 +2,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "common.fullname" . }}-assets
-  labels: {{- include "common.labels" . | nindent 4 }}
+  labels: 
+    app.kubernetes.io/component: "assets"
+    {{- include "common.labels" . | nindent 4 }}
   annotations: {{- .Values.tftp.annotations | toYaml | nindent 4 }}
 spec:
   type: LoadBalancer

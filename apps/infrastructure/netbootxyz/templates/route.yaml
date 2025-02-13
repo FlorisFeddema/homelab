@@ -16,7 +16,7 @@ spec:
   {{- end }}
   rules:
     - backendRefs:
-        - name: {{ template "common.fullname" . }}
+        - name: {{ template "common.fullname" . }}-web
           port: 8080
       {{- with .Values.route.filters }}
       filters:
