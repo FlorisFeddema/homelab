@@ -51,4 +51,5 @@ ingress:
     secretName:
 
 tftp:
-  annotations: {}
+  annotations:
+    'io.cilium/lb-ipam-ips': 10.0.103.12
