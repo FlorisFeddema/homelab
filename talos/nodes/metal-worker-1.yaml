@@ -1,6 +1,6 @@
 machine:
   network:
-    hostname: metal-control-plane-0
+    hostname: metal-worker-1
   nodeLabels:
     topology.kubernetes.io/zone: "metal"
   install:
