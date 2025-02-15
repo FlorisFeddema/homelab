@@ -1,14 +1,9 @@
 cluster:
-  clusterName: embla
+  clusterName: njord
   controlPlane:
     endpoint: https://k8s.mobrockers.com:6443
   discovery:
-    enabled: true
-    registries:
-      service:
-        disabled: true
-      kubernetes:
-        disabled: false
+    enabled: false
   
   controllerManager:
     extraArgs:

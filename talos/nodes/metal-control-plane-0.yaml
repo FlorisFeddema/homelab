@@ -1,0 +1,5 @@
+machine:
+  network:
+    hostname: metal-control-plane-0
+  nodeLabels:
+    topology.kubernetes.io/zone: "metal"

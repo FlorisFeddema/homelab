@@ -1,3 +1,5 @@
 machine:
+  network:
+    hostname: embla-worker-0
   nodeLabels:
     topology.kubernetes.io/zone: "embla"

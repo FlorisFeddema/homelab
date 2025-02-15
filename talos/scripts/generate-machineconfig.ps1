@@ -1,8 +1,10 @@
 param(
-    [string]$repoPath = "/home/mobrockers/git/homelab",
-    [boolean]$extendedConfig = $false,
-    [boolean]$applyConfig = $false,
-    [boolean]$writeConfig = $applyConfig
+    [Parameter(Mandatory)][string]$NodeName,
+    [string]$NodeIp = "",
+    [string]$NodeType = "",
+    [boolean]$Apply = $false,
+    [boolean]$Insecure = $false,
+    [string]$RepoPath = "/home/mobrockers/git/homelab"
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,123 +14,83 @@ if(-not (Get-Module powershell-yaml -ListAvailable)) {
     Install-Module powershell-yaml -Scope CurrentUser -Force
 }
 
-$nodes = Get-Content "$repoPath/talos/nodes/nodes.yaml" | ConvertFrom-Yaml
+function New-NodeConfig ($NodeName, $NodeType) {
+
+    if(-not $NodeType) {
+        $NodeType = "worker"
+
+        $isControlPlane = (kubectl get node $NodeName -o yaml | ConvertFrom-Yaml).metadata.labels.contains("node-role.kubernetes.io/control-plane")
+
+        if($isControlPlane) {
+            $NodeType = "controlplane"
+        }
+    }
+
+    Write-Host "⚙️ Node $NodeName is a $NodeType"
+
+    if(-not $NodeIp) {
+        $NodeIP =  ((kubectl get node $NodeName -o yaml | ConvertFrom-Yaml).status.addresses | Where-Object { $_.type -eq "InternalIP" } | Select-Object address).address
+    }
+
+    Write-Host "⚙️ Generating $NodeName machineconfig for $NodeIp"
+
+    $endpoint = "https://$($NodeIp):6443"
+
+    $genArgList = @(
+        "gen", "config", "njord", $endpoint,
+        "--output=$RepoPath/talos/rendered/$NodeName.yaml",
+        "--output-types=$NodeType",
+        "--with-examples=false",
+        "--with-docs=false",
+        "--with-secrets=$RepoPath/secrets.yaml",
+        "--config-patch-control-plane=@$RepoPath/talos/patches/control-plane-vip.yaml",
+        "--config-patch=@$RepoPath/talos/patches/cluster.yaml",
+        "--config-patch=@$RepoPath/talos/patches/machine.yaml",
+        "--config-patch=@$RepoPath/talos/patches/region-meijhorst.yaml",
+        "--config-patch=@$RepoPath/talos/nodes/$NodeName.yaml",
+        "--kubernetes-version=$kubernetesVersion"
+        "--force"
+    )
+
+    &talosctl $genArgList
+
+    return $NodeIp
+}
+
+function Write-NodeConfig ($NodeName, $NodeIp) {
+
+    Write-Host "⚙️ Applying $NodeName machineconfig to $NodeIp"
+
+    $applyArgList = @(
+        "apply-config",
+        "--talosconfig=$RepoPath/talosconfig",
+        "--nodes=$NodeIp",
+        "--file=$RepoPath/talos/rendered/$NodeName.yaml"
+    )
+
+    if($Insecure) {
+        $applyArgList += "--insecure"
+    }
+
+    &talosctl $applyArgList
+}
+
 $kubernetesVersion = (kubectl version -o yaml | ConvertFrom-Yaml).serverVersion.gitVersion.Replace("v", "")
 
-$intelWorkers = $nodes.ips.intelWorkers
-for ($node=0; $node -lt $intelWorkers.Count; $node++) {
+if($NodeName -eq "ALL") {
+    $nodeNames = (kubectl get nodes -o yaml | ConvertFrom-Yaml).items.metadata.name
 
-    Write-Host "Generating worker $node machineconfig"
+    foreach($nodeName in $nodeNames) {
+        $nodeIp = New-NodeConfig -NodeName $NodeName -NodeType $NodeType
 
-    $nodeIp = $intelWorkers[$node]
-    $endpoint = "https://$($nodeIp):6443"
-    $output = $writeConfig ? "$repoPath/talos/rendered/worker-$node.yaml" : "-"
-
-    $genArgList = @(
-        "gen", "config", "talos-broersma", $endpoint,              
-        "--output=$output",
-        "--output-types=worker",
-        "--with-docs=$extendedConfig",
-        "--with-examples=$extendedConfig",
-        "--with-secrets=$repoPath/secrets.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster.yaml",
-        "--config-patch=@$repoPath/talos/patches/machine.yaml",
-        "--config-patch=@$repoPath/talos/patches/region-meijhorst.yaml",
-        "--config-patch=@$repoPath/talos/patches/zone-embla.yaml",
-        "--config-patch-worker=@$repoPath/talos/nodes/worker-$node.yaml",
-        "--kubernetes-version=$kubernetesVersion"
-        "--force"
-    )
-
-    &talosctl $genArgList
-
-    $applyArgList = @(
-        "apply",
-        "--talosconfig=$repoPath/talosconfig",
-        "--nodes=$nodeIp",
-        "--file=$repoPath/talos/rendered/worker-$node.yaml"
-    )
-
-    if($applyConfig) {
-        &talosctl $applyArgList
+        if ($Apply) {
+            Write-NodeConfig -NodeName $nodeName -NodeIp $nodeIp
+        }
     }
-}
+} else {
+    $nodeIp = New-NodeConfig -NodeName $NodeName -NodeType $NodeType
 
-$piWorkers = $nodes.ips.piWorkers
-for ($node=0; $node -lt $piWorkers.Count; $node++) {
-
-    Write-Host "Generating worker pi $node machineconfig"
-
-    $nodeIp = $piWorkers[$node]
-    $endpoint = "https://$($nodeIp):6443"
-    $output = $writeConfig ? "$repoPath/talos/rendered/worker-pi-$node.yaml" : "-"
-
-    $genArgList = @(
-        "gen", "config", "talos-broersma", $endpoint,              
-        "--output=$output",
-        "--output-types=worker",
-        "--with-docs=$extendedConfig",
-        "--with-examples=$extendedConfig",
-        "--with-secrets=$repoPath/secrets.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster.yaml",
-        "--config-patch=@$repoPath/talos/patches/machine.yaml",
-        "--config-patch=@$repoPath/talos/patches/region-meijhorst.yaml",
-        "--config-patch=@$repoPath/talos/patches/zone-pi.yaml",
-        "--config-patch-worker=@$repoPath/talos/nodes/worker-pi-$node.yaml",
-        "--kubernetes-version=$kubernetesVersion"
-        "--force"
-    )
-
-    &talosctl $genArgList
-
-    $applyArgList = @(
-        "apply",
-        "--talosconfig=$repoPath/talosconfig",
-        "--nodes=$nodeIp",
-        "--file=$repoPath/talos/rendered/worker-pi-$node.yaml"
-    )
-
-    if($applyConfig) {
-        &talosctl $applyArgList
-    }
-}
-
-$controlPlanes = $nodes.ips.controlPlanes
-for ($node=0; $node -lt $controlPlanes.Count; $node++) {
-
-    Write-Host "Generating control plane $node machineconfig"
-
-    $nodeIp = $controlPlanes[$node]
-    $endpoint = "https://$($nodeIp):6443"
-    $output = $writeConfig ? "$repoPath/talos/rendered/control-plane-$node.yaml" : "-"
-
-    $genArgList = @(
-        "gen", "config", "talos-broersma", $endpoint,              
-        "--output=$output",
-        "--output-types=controlplane",
-        "--with-docs=$extendedConfig",
-        "--with-examples=$extendedConfig",
-        "--with-secrets=$repoPath/secrets.yaml",
-        "--config-patch=@$repoPath/talos/patches/cluster.yaml",
-        "--config-patch=@$repoPath/talos/patches/machine.yaml",
-        "--config-patch=@$repoPath/talos/patches/region-meijhorst.yaml",
-        "--config-patch=@$repoPath/talos/patches/zone-embla.yaml",
-        "--config-patch-control-plane=@$repoPath/talos/patches/control-plane-vip.yaml",
-        "--config-patch-control-plane=@$repoPath/talos/nodes/control-plane-$node.yaml",
-        "--kubernetes-version=$kubernetesVersion"
-        "--force"
-    )
-
-    &talosctl $genArgList
-
-    $applyArgList = @(
-        "apply",
-        "--talosconfig=$repoPath/talosconfig",
-        "--nodes=$nodeIp",
-        "--file=$repoPath/talos/rendered/control-plane-$node.yaml"
-    )
-
-    if($applyConfig) {
-        &talosctl $applyArgList
+    if ($Apply) {
+        Write-NodeConfig -NodeName $NodeName -NodeIp $nodeIp
     }
 }

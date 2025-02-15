@@ -1,5 +1,0 @@
-machine:
-  network:
-    hostname: talos-worker-1
-  # nodeLabels:
-  #   intel.feature.node.kubernetes.io/gpu: 'true'
