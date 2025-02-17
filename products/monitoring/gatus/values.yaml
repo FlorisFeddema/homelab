@@ -49,8 +49,6 @@ gatus:
           failure-threshold: 5
           success-threshold: 1
 
-    metrics: true
-    disable-monitoring-lock: true
     connectivity:
       checker:
         target: 1.1.1.1:53
@@ -64,10 +62,6 @@ gatus:
         token: ${TELEGRAM_TOKEN}
         id: ${TELEGRAM_ID}
     endpoints:
-      - name: Gatus - Rouke
-        url: https://status.mobrockers.com
-        <<: *default-endpoint-external
-
       - name: adguard
         url: https://adguard.feddema.dev
         <<: *default-endpoint-external
