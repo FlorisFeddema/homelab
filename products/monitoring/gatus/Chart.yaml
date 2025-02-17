@@ -4,5 +4,5 @@ version: 1.0.4
 
 dependencies:
   - name: gatus
-    version: 1.1.0
-    repository: https://twin.github.io/helm-charts
+    version: 1.0.0-add-gatus.0a61044
+    repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts

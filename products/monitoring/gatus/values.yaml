@@ -8,32 +8,13 @@ route:
       sectionName: web-https
 
 gatus:
-  deployment:
-    annotateConfigChecksum: false
-
-  ingress:
-    enabled: true
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    hosts:
-      - gatus.feddema.dev
-    tls:
-      - hosts:
-          - gatus.feddema.dev
-        secretName: status-tls
-
   resources: {}
-
-  secrets: true
 
   env:
     POSTGRES_DB: app
     POSTGRES_HOST: gatus-postgres-rw.gatus
     POSTGRES_PORT: "5432"
     POSTGRES_USER: app
-
-  serviceMonitor:
-    enabled: true
 
   config:
     default-endpoint-external: &default-endpoint-external
