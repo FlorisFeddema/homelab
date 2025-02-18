@@ -9,8 +9,10 @@ gatus:
         namespace: envoy-gateway
         sectionName: web-https
 
-  dashboard:
-    enabled: true
+  grafana:
+    dashboard:
+      enabled: true
+
   gatus:
     resources: {}
 
