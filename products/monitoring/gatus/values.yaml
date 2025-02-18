@@ -1,121 +1,125 @@
-route:
-  enabled: true
-  hostnames:
-    - gatus.feddema.dev
-  parentRefs:
-    - name: envoy-gateway-public
-      namespace: envoy-gateway
-      sectionName: web-https
-
 gatus:
-  resources: {}
+  route:
+    enabled: true
+    hostnames:
+      - gatus.feddema.dev
+      - status.feddema.dev
+    parentRefs:
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
 
-  env:
-    POSTGRES_DB: app
-    POSTGRES_HOST: gatus-postgres-rw.gatus
-    POSTGRES_PORT: "5432"
-    POSTGRES_USER: app
+  dashboard:
+    enabled: true
+  gatus:
+    resources: {}
 
-  config:
-    default-endpoint-external: &default-endpoint-external
-      group: external
-      interval: 2m
-      conditions:
-        - '[STATUS] == 200'
-      client:
-        dns-resolver: 'udp://1.1.1.1:53'
-      alerts:
-        - type: telegram
-          send-on-resolved: true
-          failure-threshold: 5
-          success-threshold: 1
+    env:
+      POSTGRES_DB: app
+      POSTGRES_HOST: gatus-postgres-rw.gatus
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: app
 
-    connectivity:
-      checker:
-        target: 1.1.1.1:53
-        interval: 10s
-    storage:
-      type: postgres
-      path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
-      caching: true
-    alerting:
-      telegram:
-        token: ${TELEGRAM_TOKEN}
-        id: ${TELEGRAM_ID}
-    endpoints:
-      - name: adguard
-        url: https://adguard.feddema.dev
-        <<: *default-endpoint-external
-      - name: argocd
-        url: https://argocd.feddema.dev
-        <<: *default-endpoint-external
-      - name: authentik
-        url: https://authentik.feddema.dev
-        <<: *default-endpoint-external
-      - name: hubble
-        url: https://hubble.feddema.dev
-        <<: *default-endpoint-external
-      - name: emqx
-        url: https://emqx.feddema.dev
-        <<: *default-endpoint-external
-      - name: falco
-        url: https://falco.feddema.dev
-        <<: *default-endpoint-external
-      - name: gatus
-        url: https://gatus.feddema.dev
-        <<: *default-endpoint-external
-      - name: grafana
-        url: https://grafana.feddema.dev
-        <<: *default-endpoint-external
-      - name: homeassistant
-        url: https://home.feddema.dev
-        <<: *default-endpoint-external
-      - name: immich
-        url: https://immich.feddema.dev
-        <<: *default-endpoint-external
-      - name: minio
-        url: https://minio.feddema.dev
-        <<: *default-endpoint-external
-      - name: nextcloud
-        url: https://nextcloud.feddema.dev
-        <<: *default-endpoint-external
-      - name: zigbee2mqtt
-        url: https://zigbee.feddema.dev
-        <<: *default-endpoint-external
-      - name: jellyseerr
-        url: https://jellyseerr.feddema.dev
-        <<: *default-endpoint-external
-      - name: longhorn
-        url: https://longhorn.feddema.dev
-        <<: *default-endpoint-external
-      - name: jellyfin
-        url: https://jellyfin.feddema.dev
-        <<: *default-endpoint-external
-      - name: prowlarr
-        url: https://prowlarr.feddema.dev
-        <<: *default-endpoint-external
-      - name: radarr
-        url: https://radarr.feddema.dev
-        <<: *default-endpoint-external
-      - name: sonarr
-        url: https://sonarr.feddema.dev
-        <<: *default-endpoint-external
-      - name: sabnzbd
-        url: https://sabnzbd.feddema.dev
-        <<: *default-endpoint-external
-
-      # dns servers
-      - name: adguard-dns-loadbalancer
-        url: 192.168.102.20
-        interval: 30s
-        group: dns
-        dns:
-          query-name: "test.feddema.dev"
-          query-type: "A"
+    config:
+      default-endpoint-external: &default-endpoint-external
+        group: external
+        interval: 2m
         conditions:
-          - "[DNS_RCODE] == NOERROR"
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://1.1.1.1:53'
         alerts:
           - type: telegram
             send-on-resolved: true
-            failure-threshold: 2
+            failure-threshold: 5
             success-threshold: 1
+
+      connectivity:
+        checker:
+          target: 1.1.1.1:53
+          interval: 10s
+      storage:
+        type: postgres
+        path: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}"
+        caching: true
+      alerting:
+        telegram:
+          token: ${TELEGRAM_TOKEN}
+          id: ${TELEGRAM_ID}
+      endpoints:
+        - name: adguard
+          url: https://adguard.feddema.dev
+          <<: *default-endpoint-external
+        - name: argocd
+          url: https://argocd.feddema.dev
+          <<: *default-endpoint-external
+        - name: authentik
+          url: https://authentik.feddema.dev
+          <<: *default-endpoint-external
+        - name: hubble
+          url: https://hubble.feddema.dev
+          <<: *default-endpoint-external
+        - name: emqx
+          url: https://emqx.feddema.dev
+          <<: *default-endpoint-external
+        - name: falco
+          url: https://falco.feddema.dev
+          <<: *default-endpoint-external
+        - name: gatus
+          url: https://gatus.feddema.dev
+          <<: *default-endpoint-external
+        - name: grafana
+          url: https://grafana.feddema.dev
+          <<: *default-endpoint-external
+        - name: homeassistant
+          url: https://home.feddema.dev
+          <<: *default-endpoint-external
+        - name: immich
+          url: https://immich.feddema.dev
+          <<: *default-endpoint-external
+        - name: minio
+          url: https://minio.feddema.dev
+          <<: *default-endpoint-external
+        - name: nextcloud
+          url: https://nextcloud.feddema.dev
+          <<: *default-endpoint-external
+        - name: zigbee2mqtt
+          url: https://zigbee.feddema.dev
+          <<: *default-endpoint-external
+        - name: jellyseerr
+          url: https://jellyseerr.feddema.dev
+          <<: *default-endpoint-external
+        - name: longhorn
+          url: https://longhorn.feddema.dev
+          <<: *default-endpoint-external
+        - name: jellyfin
+          url: https://jellyfin.feddema.dev
+          <<: *default-endpoint-external
+        - name: prowlarr
+          url: https://prowlarr.feddema.dev
+          <<: *default-endpoint-external
+        - name: radarr
+          url: https://radarr.feddema.dev
+          <<: *default-endpoint-external
+        - name: sonarr
+          url: https://sonarr.feddema.dev
+          <<: *default-endpoint-external
+        - name: sabnzbd
+          url: https://sabnzbd.feddema.dev
+          <<: *default-endpoint-external
+
+        # dns servers
+        - name: adguard-dns-loadbalancer
+          url: 192.168.102.20
+          interval: 30s
+          group: dns
+          dns:
+            query-name: "test.feddema.dev"
+            query-type: "A"
+          conditions:
+            - "[DNS_RCODE] == NOERROR"
+          alerts:
+            - type: telegram
+              send-on-resolved: true
+              failure-threshold: 2
+              success-threshold: 1
