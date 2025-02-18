@@ -16,6 +16,7 @@ gatus:
   gatus:
     resources: {}
 
+    secrets: true
     env:
       POSTGRES_DB: app
       POSTGRES_HOST: gatus-postgres-rw.gatus
