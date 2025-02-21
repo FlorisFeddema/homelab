@@ -1,8 +1,8 @@
 apiVersion: v2
 name: grafana
-version: 1.0.92
+version: 1.0.93
 
 dependencies:
   - name: grafana
-    version: 8.10.0
+    version: 8.10.1
     repository: https://grafana.github.io/helm-charts
