@@ -1,0 +1,16 @@
+1machine:
+  network:
+    hostname: tasuq-2
+
+  nodeLabels:
+    topology.kubernetes.io/zone: "tasuq"
+    topology.kubernetes.io/region: "salioca"
+    feddema.dev/talos-configfile: "tasuq-2"
+
+  install:
+    disk: /dev/sda
+
+  disks:
+    - device: /dev/sdb
+      partitions:
+        - mountpoint: /var/mnt/ssd1

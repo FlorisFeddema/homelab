@@ -1,0 +1,19 @@
+machine:
+  network:
+    hostname: tasuq-0
+
+    interfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: 192.168.4.9
+
+  nodeLabels:
+    topology.kubernetes.io/zone: "tasuq"
+    topology.kubernetes.io/region: "salioca"
+    feddema.dev/talos-configfile: "tasuq-0"
+
+  install:
+    disk: /dev/sda
+

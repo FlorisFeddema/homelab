@@ -1,13 +1,11 @@
 machine:
-  type: worker
-
   network:
-    hostname: kashaylan-3
+    hostname: kashaylan-1
 
   nodeLabels:
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"
-    feddema.dev/talos-configfile: "kashaylan-3"
+    feddema.dev/talos-configfile: "kashaylan-1"
 
   install:
     disk: /dev/mmcblk0

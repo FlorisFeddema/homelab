@@ -1,10 +1,9 @@
 #!/bin/sh
 
-while getopts n:c:i: flag
+while getopts n:i: flag
 do
     case "${flag}" in
         n) nodeName=${OPTARG};;
-        c) talosConfig=${OPTARG};;
         i) installerImage=${OPTARG};;
     esac
 done
@@ -19,14 +18,9 @@ if [ -z "$installerImage" ]; then
   exit 1
 fi
 
-if [ -z "$talosConfig" ]; then
-  echo "talosConfig is empty"
-  exit 1
-fi
-
 nodeIP=$(kubectl get node "$nodeName" -o yaml | yq '.status.addresses[] | select(.type == "InternalIP") | .address')
 
 echo "⚙️ Updating Talos on node $nodeName"
-talosctl upgrade --talosconfig $talosConfig --nodes $nodeIP --image $installerImage --preserve --wait
+talosctl upgrade --nodes "$nodeIP" --image "$installerImage" --preserve --wait
 
 echo "⚙️ Upgraded node $nodeName successfully"

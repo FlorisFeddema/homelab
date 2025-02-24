@@ -1,26 +1,10 @@
-cluster:
-  etcd:
-    extraArgs:
-      listen-metrics-urls: http://0.0.0.0:2381
-
 machine:
-  type: controlplane
-
-  features:
-    kubernetesTalosAPIAccess:
-      enabled: true
-      allowedRoles:
-        - os:etcd:backup
-        - os:reader
-      allowedKubernetesNamespaces:
-        - talos-backup
-        - kube-system
-
   network:
     hostname: kashaylan-0
 
     interfaces:
-      - interface: enx123f45f82894
+      - deviceSelector:
+          physical: true
         dhcp: true
         vip:
           ip: 192.168.4.9
