@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.appName }}-monitor
+  labels:
+    gatus-configfile: "1"
+data:
+  {{ .Values.appName }}-monitor.yaml: |
+    default-endpoint-external: &default-endpoint-external
+      group: external
+      interval: 2m
+      conditions:
+        - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://1.1.1.1:53'
+      alerts:
+        - type: telegram
+          send-on-resolved: true
+          failure-threshold: 5
+          success-threshold: 1
+
+    default-endpoint-internal: &default-endpoint-internal
+      group: internal
+      interval: 2m
+      conditions:
+        - '[STATUS] == 200'
+      client:
+        dns-resolver: 'udp://192.168.102.20:53'
+
+    endpoints:
+    {{- range .Values.publicEndpoints }}
+      - name: {{ .name }}
+        url: {{ default (print "https://" .name ".feddema.dev"  ) .url }}
+        <<: *default-endpoint-external
+    {{- end }}
+    {{- range .Values.privateEndpoints }}
+      - name: {{ .name }}
+        url: {{ default (print "https://" .name ".feddema.dev"  ) .url }}
+        <<: *default-endpoint-internal
+    {{- end }}
+
+    {{- with .Values.extraEndpoints }}
+    {{- toYaml . | nindent 6 }}
+    {{- end }}

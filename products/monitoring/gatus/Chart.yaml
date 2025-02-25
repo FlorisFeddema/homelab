@@ -6,3 +6,6 @@ dependencies:
   - name: gatus
     version: 1.0.0-add-gatus.e46a93c
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
+  - name: gatus-monitor
+    repository: file://../monitoring/gatus-monitor
+    version: 1.0.0

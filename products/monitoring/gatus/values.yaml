@@ -1,3 +1,12 @@
+gatus-monitor:
+  appName: gatus
+  publicEndpoints:
+    - name: gatus
+    - name: status
+  privateEndpoints:
+    - name: gatus
+    - name: status
+
 gatus:
   route:
     enabled: true
@@ -24,27 +33,6 @@ gatus:
       POSTGRES_USER: app
 
     config:
-      default-endpoint-external: &default-endpoint-external
-        group: external
-        interval: 2m
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://1.1.1.1:53'
-        alerts:
-          - type: telegram
-            send-on-resolved: true
-            failure-threshold: 5
-            success-threshold: 1
-
-      default-endpoint-internal: &default-internal-external
-        group: internal
-        interval: 2m
-        conditions:
-          - '[STATUS] == 200'
-        client:
-          dns-resolver: 'udp://192.168.102.20:53'
-
       connectivity:
         checker:
           target: 1.1.1.1:53
@@ -57,77 +45,59 @@ gatus:
         telegram:
           token: ${TELEGRAM_TOKEN}
           id: ${TELEGRAM_ID}
-      endpoints:
-        - name: adguard
-          url: https://adguard.feddema.dev
-          <<: *default-endpoint-external
-        - name: argocd
-          url: https://argocd.feddema.dev
-          <<: *default-endpoint-external
-        - name: authentik
-          url: https://authentik.feddema.dev
-          <<: *default-endpoint-external
-        - name: hubble
-          url: https://hubble.feddema.dev
-          <<: *default-endpoint-external
-        - name: emqx
-          url: https://emqx.feddema.dev
-          <<: *default-endpoint-external
-        - name: falco
-          url: https://falco.feddema.dev
-          <<: *default-endpoint-external
-        - name: grafana
-          url: https://grafana.feddema.dev
-          <<: *default-endpoint-external
-        - name: homeassistant
-          url: https://home.feddema.dev
-          <<: *default-endpoint-external
-        - name: immich
-          url: https://immich.feddema.dev
-          <<: *default-endpoint-external
-        - name: minio
-          url: https://minio.feddema.dev
-          <<: *default-endpoint-external
-        - name: nextcloud
-          url: https://nextcloud.feddema.dev
-          <<: *default-endpoint-external
-        - name: zigbee2mqtt
-          url: https://zigbee.feddema.dev
-          <<: *default-endpoint-external
-        - name: jellyseerr
-          url: https://jellyseerr.feddema.dev
-          <<: *default-endpoint-external
-        - name: longhorn
-          url: https://longhorn.feddema.dev
-          <<: *default-endpoint-external
-        - name: jellyfin
-          url: https://jellyfin.feddema.dev
-          <<: *default-endpoint-external
-        - name: prowlarr
-          url: https://prowlarr.feddema.dev
-          <<: *default-endpoint-external
-        - name: radarr
-          url: https://radarr.feddema.dev
-          <<: *default-endpoint-external
-        - name: sonarr
-          url: https://sonarr.feddema.dev
-          <<: *default-endpoint-external
-        - name: sabnzbd
-          url: https://sabnzbd.feddema.dev
-          <<: *default-endpoint-external
 
-        # dns servers
-        - name: adguard-dns-loadbalancer
-          url: 192.168.102.20
-          interval: 30s
-          group: dns
-          dns:
-            query-name: "test.feddema.dev"
-            query-type: "A"
-          conditions:
-            - "[DNS_RCODE] == NOERROR"
-          alerts:
-            - type: telegram
-              send-on-resolved: true
-              failure-threshold: 2
-              success-threshold: 1
+
+#        - name: adguard
+#          url: https://adguard.feddema.dev
+#        - name: argocd
+#          url: https://argocd.feddema.dev
+#        - name: authentik
+#          url: https://authentik.feddema.dev
+#        - name: hubble
+#          url: https://hubble.feddema.dev
+#        - name: emqx
+#          url: https://emqx.feddema.dev
+#        - name: falco
+#          url: https://falco.feddema.dev
+#        - name: grafana
+#          url: https://grafana.feddema.dev
+#        - name: homeassistant
+#          url: https://home.feddema.dev
+#        - name: immich
+#          url: https://immich.feddema.dev
+#        - name: minio
+#          url: https://minio.feddema.dev
+#        - name: nextcloud
+#          url: https://nextcloud.feddema.dev
+#        - name: zigbee2mqtt
+#          url: https://zigbee.feddema.dev
+#        - name: jellyseerr
+#          url: https://jellyseerr.feddema.dev
+#        - name: longhorn
+#          url: https://longhorn.feddema.dev
+#        - name: jellyfin
+#          url: https://jellyfin.feddema.dev
+#        - name: prowlarr
+#          url: https://prowlarr.feddema.dev
+#        - name: radarr
+#          url: https://radarr.feddema.dev
+#        - name: sonarr
+#          url: https://sonarr.feddema.dev
+#        - name: sabnzbd
+#          url: https://sabnzbd.feddema.dev
+#
+#        # dns servers
+#        - name: adguard-dns-loadbalancer
+#          url: 192.168.102.20
+#          interval: 30s
+#          group: dns
+#          dns:
+#            query-name: "test.feddema.dev"
+#            query-type: "A"
+#          conditions:
+#            - "[DNS_RCODE] == NOERROR"
+#          alerts:
+#            - type: telegram
+#              send-on-resolved: true
+#              failure-threshold: 2
+#              success-threshold: 1
