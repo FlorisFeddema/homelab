@@ -37,6 +37,14 @@ gatus:
             failure-threshold: 5
             success-threshold: 1
 
+      default-endpoint-internal: &default-internal-external
+        group: internal
+        interval: 2m
+        conditions:
+          - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://192.168.102.20:53'
+
       connectivity:
         checker:
           target: 1.1.1.1:53
@@ -67,9 +75,6 @@ gatus:
           <<: *default-endpoint-external
         - name: falco
           url: https://falco.feddema.dev
-          <<: *default-endpoint-external
-        - name: gatus
-          url: https://gatus.feddema.dev
           <<: *default-endpoint-external
         - name: grafana
           url: https://grafana.feddema.dev
