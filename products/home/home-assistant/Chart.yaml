@@ -6,3 +6,6 @@ dependencies:
   - name: home-assistant
     version: 1.13.5
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
