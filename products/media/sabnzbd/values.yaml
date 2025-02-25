@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: sabnzbd
+  publicEndpoints:
+    - name: sabnzbd
+  privateEndpoints:
+    - name: sabnzbd
+
 podSecurityContext:
   fsGroup: 5000
 securityContext: {}
