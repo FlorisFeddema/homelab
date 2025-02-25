@@ -6,3 +6,6 @@ dependencies:
   - name: falco
     version: 4.20.1
     repository: https://falcosecurity.github.io/charts
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
