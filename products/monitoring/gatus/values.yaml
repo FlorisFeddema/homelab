@@ -46,6 +46,7 @@ gatus:
           token: ${TELEGRAM_TOKEN}
           id: ${TELEGRAM_ID}
 
+      endpoints: []
 
 #        - name: adguard
 #          url: https://adguard.feddema.dev
