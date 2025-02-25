@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: jellyseerr
+  publicEndpoints:
+    - name: jellyseerr
+  privateEndpoints:
+    - name: jellyseerr
+
 podSecurityContext:
   fsGroup: 5000
 
