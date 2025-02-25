@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: grafana
+  publicEndpoints:
+    - name: grafana
+  privateEndpoints:
+    - name: grafana
+
 grafana:
   assertNoLeakedSecrets: false
 
