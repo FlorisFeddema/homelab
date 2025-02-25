@@ -6,3 +6,6 @@ dependencies:
   - name: longhorn
     version: 1.8.0
     repository: https://charts.longhorn.io
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0

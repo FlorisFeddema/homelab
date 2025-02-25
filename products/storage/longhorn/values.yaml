@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: longhorn
+  publicEndpoints:
+    - name: longhorn
+  privateEndpoints:
+    - name: longhorn
+
 route:
   enabled: true
   hostnames:
