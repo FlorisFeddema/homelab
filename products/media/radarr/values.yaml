@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: radarr
+  publicEndpoints:
+    - name: radarr
+  privateEndpoints:
+    - name: radarr
+
 podSecurityContext:
   fsGroup: 5000
 securityContext: {}
