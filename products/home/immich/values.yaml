@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: immich
+  publicEndpoints:
+    - name: immich
+  privateEndpoints:
+    - name: immich
+
 patchBackupPvcJob:
   enabled: true
   image:
@@ -21,18 +28,6 @@ immich:
       - name: envoy-gateway-public
         namespace: envoy-gateway
         sectionName: web-https
-
-  ingress:
-    enabled: true
-    class: nginx
-    domain: immich.feddema.dev
-    annotations:
-      # proxy-body-size is set to 0 to remove the body limit on file uploads
-      nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    tls:
-      enabled: true
-      secretName: immich-tls
 
   database:
     clusterName: immich-postgresql
