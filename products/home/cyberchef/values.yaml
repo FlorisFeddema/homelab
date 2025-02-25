@@ -1,18 +1,18 @@
-cyberchef:
-  ingress:
-    enabled: true
-    domain: cyberchef.feddema.dev
-    class: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    tls:
-      enabled: true
-      secretName: cyberchef-tls
+gatus-monitor:
+  appName: cyberchef
+  publicEndpoints:
+    - name: cyberchef
+    - name: tools
+  privateEndpoints:
+    - name: cyberchef
+    - name: tools
 
+cyberchef:
   route:
     enabled: true
     hostnames:
       - cyberchef.feddema.dev
+      - tools.feddema.dev
     parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
