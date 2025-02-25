@@ -1,3 +1,53 @@
+gatus-monitor:
+  appName: adguard
+  publicEndpoints:
+    - name: adguard
+  privateEndpoints:
+    - name: adguard
+  extraEndpoints:
+    - name: adguard-dns
+      url: 192.168.102.20
+      interval: 15s
+      group: dns
+      dns:
+        query-name: "test.feddema.dev"
+        query-type: "A"
+      conditions:
+        - "[DNS_RCODE] == NOERROR"
+      alerts:
+        - type: telegram
+          send-on-resolved: true
+          failure-threshold: 2
+          success-threshold: 1
+    - name: cloudflare-dns
+      url: 1.1.1.1
+      interval: 15s
+      group: dns
+      dns:
+        query-name: "test.feddema.dev"
+        query-type: "A"
+      conditions:
+        - "[DNS_RCODE] == NOERROR"
+      alerts:
+        - type: telegram
+          send-on-resolved: true
+          failure-threshold: 2
+          success-threshold: 1
+    - name: quad9-dns
+      url: 9.9.9.9
+      interval: 15s
+      group: dns
+      dns:
+        query-name: "test.feddema.dev"
+        query-type: "A"
+      conditions:
+        - "[DNS_RCODE] == NOERROR"
+      alerts:
+        - type: telegram
+          send-on-resolved: true
+          failure-threshold: 2
+          success-threshold: 1
+
 adguard:
   global:
     persistence:
@@ -6,14 +56,6 @@ adguard:
         recurring-job-group.longhorn.io/backup: enabled
 
   primary:
-    ingress:
-      domain: adguard.feddema.dev
-      class: nginx
-      annotations:
-        cert-manager.io/cluster-issuer: letsencrypt-dns
-      tls:
-        secretName: adguard-tls
-
     route:
       enabled: true
       hostnames:
