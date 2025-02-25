@@ -31,12 +31,12 @@ data:
     {{- range .Values.publicEndpoints }}
       - name: {{ .name }}
         url: {{ default (print "https://" .name ".feddema.dev"  ) .url }}
-        <<: *{{ .Values.appName }}-endpoint-external
+        <<: *{{ $.Values.appName }}-endpoint-external
     {{- end }}
     {{- range .Values.privateEndpoints }}
       - name: {{ .name }}
         url: {{ default (print "https://" .name ".feddema.dev"  ) .url }}
-        <<: *{{ .Values.appName }}-endpoint-internal
+        <<: *{{ $.Values.appName }}-endpoint-internal
     {{- end }}
 
     {{- with .Values.extraEndpoints }}
