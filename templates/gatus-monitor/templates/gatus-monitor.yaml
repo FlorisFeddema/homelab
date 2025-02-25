@@ -6,7 +6,7 @@ metadata:
     gatus-configfile: "1"
 data:
   {{ .Values.appName }}-monitor.yaml: |
-    default-endpoint-external: &default-endpoint-external
+    {{ .Values.appName }}-endpoint-external: &{{ .Values.appName }}-endpoint-external
       group: ingress-external
       interval: 2m
       conditions:
@@ -19,7 +19,7 @@ data:
           failure-threshold: 5
           success-threshold: 1
 
-    default-endpoint-internal: &default-endpoint-internal
+    {{ .Values.appName }}-endpoint-internal: &{{ .Values.appName }}-endpoint-internal
       group: ingress-internal
       interval: 2m
       conditions:
@@ -31,12 +31,12 @@ data:
     {{- range .Values.publicEndpoints }}
       - name: {{ .name }}
         url: {{ default (print "https://" .name ".feddema.dev"  ) .url }}
-        <<: *default-endpoint-external
+        <<: *{{ .Values.appName }}-endpoint-external
     {{- end }}
     {{- range .Values.privateEndpoints }}
       - name: {{ .name }}
         url: {{ default (print "https://" .name ".feddema.dev"  ) .url }}
-        <<: *default-endpoint-internal
+        <<: *{{ .Values.appName }}-endpoint-internal
     {{- end }}
 
     {{- with .Values.extraEndpoints }}
