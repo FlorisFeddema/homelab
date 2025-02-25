@@ -6,3 +6,7 @@ dependencies:
   - name: nextcloud
     version: 6.6.4
     repository: https://nextcloud.github.io/helm
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
+
