@@ -1,3 +1,16 @@
+gatus-monitor:
+  appName: prometheus
+  publicEndpoints:
+    - name: prometheus
+    - name: alertmanager
+    - name: thanos-query
+    - name: thanos-bucket
+  privateEndpoints:
+    - name: prometheus
+    - name: alertmanager
+    - name: thanos-query
+    - name: thanos-bucket
+
 route:
   thanos-query:
     enabled: true

@@ -9,3 +9,6 @@ dependencies:
   - name: thanos
     version: 15.12.4
     repository: oci://registry-1.docker.io/bitnamicharts
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
