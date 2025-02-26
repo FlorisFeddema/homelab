@@ -2,8 +2,10 @@ gatus-monitor:
   appName: kubechecks
   publicEndpoints:
     - name: kubechecks
+      url: http://kubechecks.feddema.dev/live
   privateEndpoints:
     - name: kubechecks
+      url: http://kubechecks.feddema.dev/live
 
 route:
   enabled: true
