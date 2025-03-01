@@ -1,10 +1,10 @@
 apiVersion: v2
 name: nextcloud
-version: 1.0.67
+version: 1.0.68
 
 dependencies:
   - name: nextcloud
-    version: 6.6.5
+    version: 6.6.6
     repository: https://nextcloud.github.io/helm
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
