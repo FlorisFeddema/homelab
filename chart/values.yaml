@@ -45,9 +45,6 @@ products:
     spegel:
       deploy: true
       autoSync: true
-    ingressNginx:
-      deploy: true
-      autoSync: true
   monitoring:
     prometheus:
       deploy: true
