@@ -7,7 +7,7 @@ metadata:
 data:
   {{ .Values.appName }}-monitor.yaml: |
     {{ .Values.appName }}-endpoint-external: &{{ .Values.appName }}-endpoint-external
-      group: ingress-external
+      group: http-external
       interval: 2m
       conditions:
         - '[STATUS] == 200'
@@ -20,7 +20,7 @@ data:
           success-threshold: 1
 
     {{ .Values.appName }}-endpoint-internal: &{{ .Values.appName }}-endpoint-internal
-      group: ingress-internal
+      group: http-internal
       interval: 2m
       conditions:
         - '[STATUS] == 200'
