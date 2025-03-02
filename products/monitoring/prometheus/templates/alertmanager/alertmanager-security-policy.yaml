@@ -1,18 +1,18 @@
-apiVersion: gateway.envoyproxy.io/v1alpha1
-kind: SecurityPolicy
-metadata:
-  name: alertmanager-security-policy
-spec:
-  targetRefs:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      name: prometheus-alertmanager
-  oidc:
-    clientID: "2mW0FjErN9VQTJQapGrS8f8Tz1UOKxxSvFykT31R"
-    clientSecret:
-      name: alertmanager-oidc-secret
-    provider:
-      issuer: https://authentik.feddema.dev/application/o/alertmanager/
-    redirectURL: https://alertmanager.feddema.dev/oauth2/callback
-    logoutPath: /oauth2/logout
+{{/*apiVersion: gateway.envoyproxy.io/v1alpha1*/}}
+{{/*kind: SecurityPolicy*/}}
+{{/*metadata:*/}}
+{{/*  name: alertmanager-security-policy*/}}
+{{/*spec:*/}}
+{{/*  targetRefs:*/}}
+{{/*    - group: gateway.networking.k8s.io*/}}
+{{/*      kind: HTTPRoute*/}}
+{{/*      name: prometheus-alertmanager*/}}
+{{/*  oidc:*/}}
+{{/*    clientID: "2mW0FjErN9VQTJQapGrS8f8Tz1UOKxxSvFykT31R"*/}}
+{{/*    clientSecret:*/}}
+{{/*      name: alertmanager-oidc-secret*/}}
+{{/*    provider:*/}}
+{{/*      issuer: https://authentik.feddema.dev/application/o/alertmanager/*/}}
+{{/*    redirectURL: https://alertmanager.feddema.dev/oauth2/callback*/}}
+{{/*    logoutPath: /oauth2/logout*/}}
 
