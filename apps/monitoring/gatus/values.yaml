@@ -1,90 +1,37 @@
 gatus:
-  deployment:
-    annotateConfigChecksum: false
-  env:
-    GATUS_CONFIG_PATH: /configfiles
-    GATUS_LOG_LEVEL: DEBUG
-  extraVolumeMounts:
-  - name: config
-    mountPath: /configfiles
 
-  extraInitContainers:
-  - name: config-loader
-    image: ghcr.io/kiwigrid/k8s-sidecar:1.30.1
-    restartPolicy: Always
-    env:
-    - name: NAMESPACE
-      value: ALL
-    - name: IGNORE_ALREADY_PROCESSED
-      value: "true"
-    - name: LABEL
-      value: "gatus-configfile"
-    - name: FOLDER
-      value: /configfiles
-    - name: RESOURCE
-      value: "both"
-    volumeMounts:
-      - name: config
-        mountPath: /configfiles
+  grafana:
+    dashboard:
+      enabled: true
 
-  ingress:
-    enabled: true
-    hosts:
-    - status.mobrockers.com
-    tls:
-    - hosts:
+  gatus:
+    ingress:
+      enabled: true
+      hosts:
       - status.mobrockers.com
-  
-  serviceAccount:
-    create: true
-    autoMount: true
-  serviceMonitor:
-    enabled: true
-  config:
-    debug: true
-    metrics: true
-    skip-invalid-config-update: true
-    endpoints:
-    - name: gatus
-      url: 'https://status.mobrockers.com'
-      group: internal
-      conditions:
-      - '[STATUS] == 200'
-    - name: gatus
-      url: 'https://status.mobrockers.com'
-      group: external
-      conditions:
-      - '[STATUS] == 200'
-      client:
-        dns-resolver: 'udp://1.1.1.1:53'
-    - name: google
-      url: 'https://google.com'
-      group: external
-      conditions:
-      - '[STATUS] == 200'
-      client:
-        dns-resolver: 'udp://1.1.1.1:53'
-
-#   config:
-#     endpoints:
-#     - name: tls-ldaps
-#       url: 'tls://ldap.mobrockers.com:636'
-#       group: internal
-#       conditions:
-#         - '[CONNECTED] == true'
-#         - '[CERTIFICATE_EXPIRATION] > 48h'
-#       client:
-#         insecure: true
-#     - name: plex
-#       url: https://plex.mobrockers.com
-#       group: internal
-#       conditions:
-#       - '[STATUS] == any(200, 401)'
-# # external
-#     - name: plex
-#       url: https://plex.mobrockers.com
-#       group: external
-#       conditions:
-#       - '[STATUS] == any(200, 401)'
-#       client:
-#         dns-resolver: 'udp://1.1.1.1:53'
+      tls:
+      - hosts:
+        - status.mobrockers.com
+        
+    config:
+      debug: true
+      endpoints:
+      - name: gatus
+        url: 'https://status.mobrockers.com'
+        group: internal
+        conditions:
+        - '[STATUS] == 200'
+      - name: gatus
+        url: 'https://status.mobrockers.com'
+        group: external
+        conditions:
+        - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://1.1.1.1:53'
+      - name: google
+        url: 'https://google.com'
+        group: external
+        conditions:
+        - '[STATUS] == 200'
+        client:
+          dns-resolver: 'udp://1.1.1.1:53'
