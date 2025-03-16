@@ -3,12 +3,20 @@ records:
   ip: 31.187.194.110
 - name: embla
   ip: 10.0.100.10
+- name: embla-1
+  ip: 10.0.100.51
+- name: embla-2
+  ip: 10.0.100.52
+- name: embla-3
+  ip: 10.0.100.53
+- name: embla-4
+  ip: 10.0.100.54
+- name: embla-5
+  ip: 10.0.100.55
 - name: truenas
   ip: 10.0.101.10
 - name: k8s
   ip: 10.0.102.10
-- name: work.rouke
-  ip: 10.0.50.230
 
 ingress:
 - name: robin

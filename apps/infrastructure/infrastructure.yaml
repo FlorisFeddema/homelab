@@ -6,5 +6,5 @@ apps:
       deploy: false
       autoSync: false
     netbootxyz:
-      deploy: true
+      deploy: false
       autoSync: false
