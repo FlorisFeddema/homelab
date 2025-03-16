@@ -46,7 +46,6 @@ function New-NodeConfig ($NodeName, $NodeType) {
         "--config-patch-control-plane=@$RepoPath/talos/patches/control-plane-vip.yaml",
         "--config-patch=@$RepoPath/talos/patches/cluster.yaml",
         "--config-patch=@$RepoPath/talos/patches/machine.yaml",
-        "--config-patch=@$RepoPath/talos/patches/region-meijhorst.yaml",
         "--config-patch=@$RepoPath/talos/nodes/$NodeName.yaml",
         "--kubernetes-version=$kubernetesVersion"
         "--force"

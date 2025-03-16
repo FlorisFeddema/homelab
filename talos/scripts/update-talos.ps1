@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory)][string]$NodeName,
     [Parameter(Mandatory)][string]$Version,
+    [string]$UpdateImage,
     [string]$RepoPath = "/home/mobrockers/git/homelab"
 )
 
@@ -18,8 +19,12 @@ function Update-Node ($NodeName) {
 
     Write-Host "⚙️ Updating $NodeName with IP $nodeIp to version $Version"
 
-    $nodeSchematic = $node.metadata.annotations.'extensions.talos.dev/schematic'
-    $updateImage = "factory.talos.dev/installer/$($nodeSchematic):v$($Version)"
+    if(-not $UpdateImage) {
+        $nodeSchematic = $node.metadata.annotations.'extensions.talos.dev/schematic'
+        $updateImage = "factory.talos.dev/installer/$($nodeSchematic):v$($Version)"
+    } else {
+        $updateImage = $UpdateImage
+    }
 
     talosctl upgrade --talosconfig "$RepoPath/talosconfig" --nodes $nodeIp --image $updateImage --wait
 
