@@ -1,8 +1,8 @@
 records:
 - name: vpn
-  ip: 31.187.194.110
+  ip: 87.210.161.33
 - name: embla
-  ip: 10.0.100.10
+  ip: 10.0.100.51
 - name: embla-1
   ip: 10.0.100.51
 - name: embla-2

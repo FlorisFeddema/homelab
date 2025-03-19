@@ -1,5 +1,0 @@
-machine:
-  network:
-    hostname: embla-control-plane-0
-  nodeLabels:
-    topology.kubernetes.io/zone: "embla"
