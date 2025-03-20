@@ -14,9 +14,6 @@ apps:
       path: apps/storage/democratic-csi/chart
       valueFiles:
         - ../node-manual.yaml
-    minio:
-      deploy: true
-      autoSync: false
     cloudnative-postgres:
       deploy: true
       serverSideApply: true
