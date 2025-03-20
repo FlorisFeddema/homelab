@@ -24,21 +24,17 @@ adguard:
           proxy_set_header X-Forwarded-Host $http_host;
 
   secondary:
-    replicas: 2
+    replicas: 3
 
     service:
       annotations:
         'io.cilium/lb-ipam-ips': 10.0.103.10,10.0.103.11
 
-    tolerations:
-      - key: essential
-        operator: Exists
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
         whenUnsatisfiable: ScheduleAnyway
         labelSelector:
           matchLabels:
-            app.kubernetes.io/component: adguard-secondary
             app.kubernetes.io/instance: adguard
             app.kubernetes.io/name: adguard
