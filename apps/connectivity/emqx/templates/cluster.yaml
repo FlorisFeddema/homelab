@@ -90,10 +90,6 @@ spec:
       - name: mqtt-emqx-svc-tls
         mountPath: /mounted/cert/mqtt-emqx-svc
 
-      tolerations:
-      - key: essential
-        operator: Exists
-
   listenersServiceTemplate:
     metadata:
       annotations:

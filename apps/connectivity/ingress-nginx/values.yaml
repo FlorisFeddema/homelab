@@ -34,9 +34,6 @@ ingress-nginx:
       serviceMonitor:
         enabled: true
     
-    tolerations:
-    - key: essential
-      operator: Exists
     topologySpreadConstraints:
     - maxSkew: 1
       topologyKey: kubernetes.io/hostname
@@ -48,19 +45,3 @@ ingress-nginx:
           app.kubernetes.io/component: controller
       matchLabelKeys:
       - pod-template-hash
-    affinity:
-      nodeAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference:
-            matchExpressions:
-            - key: topology.kubernetes.io/zone
-              operator: In
-              values:
-              - embla
-
-  admissionWebhooks:
-    patch:
-      tolerations:
-      - key: essential
-        operator: Exists
