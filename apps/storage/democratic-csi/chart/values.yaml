@@ -1,18 +1,16 @@
 democratic-csi:
   controller:
     priorityClassName: system-cluster-critical
+    replicaCount: 2
     driver:
       image: ghcr.io/democratic-csi/democratic-csi:v1.9.3 # chart default is latest
     tolerations:
-    - key: essential
+    - key: node-role.kubernetes.io/control-plane
       operator: Exists
   node:
     priorityClassName: system-node-critical
     driver:
       image: ghcr.io/democratic-csi/democratic-csi:v1.9.3 # chart default is latest
-    tolerations:
-    - key: essential
-      operator: Exists
 
 # driverConfigFileSealed: 
 #   value: 
