@@ -27,6 +27,7 @@ argo-cd:
 
   controller:
     replicas: 1
+    revisionHistoryLimit: 0
     metrics:
       enabled: true
       serviceMonitor:
