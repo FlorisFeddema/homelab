@@ -51,6 +51,7 @@ gatus-monitor:
 adguard:
   global:
     persistence:
+      size: 3Gi
       labels:
         recurring-job.longhorn.io/source: enabled
         recurring-job-group.longhorn.io/backup: enabled
