@@ -1,0 +1,12 @@
+rook-ceph:
+  revisionHistoryLimit: 0
+  csi:
+    clusterName: njord
+    enableMetadata: true
+    topology:
+      enabled: false
+      domainLabels: kubernetes.io/hostname,topology.kubernetes.io/zone
+    serviceMonitor:
+      enabled: true
+  monitoring:
+    enabled: true

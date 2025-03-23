@@ -1,7 +1,8 @@
 apps:
   storage:
-    snapshot-controller:
+    rook-ceph:
       deploy: true
+      autoSync: false
     democratic-csi-iscsi-hdd:
       deploy: true
       autoSync: false
