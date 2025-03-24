@@ -1,5 +1,4 @@
 talos-cloud-controller-manager:
-  fullnameOverride: talos-ccm
 
   daemonSet:
     enabled: true

@@ -1,6 +1,6 @@
 apps:
   cluster:
-    talos-ccm:
+    talos-cloud-controller-manager:
       deploy: true
       namespace: kube-system
       autoSync: false
