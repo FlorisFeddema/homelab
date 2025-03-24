@@ -1,5 +1,6 @@
 talos-cloud-controller-manager:
 
+  logVerbosityLevel: 5
   daemonSet:
     enabled: true
   enabledControllers:
