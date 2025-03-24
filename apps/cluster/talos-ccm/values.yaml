@@ -26,3 +26,14 @@ talos-cloud-controller-manager:
     labels:
       topology.kubernetes.io/zone: |
         '{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}'
+  - name: worker
+    nodeSelector:
+    - matchExpressions:
+      - key: hostname
+        operator: Regexp
+        values:
+        - ^talos-worker-.+$
+    features:
+      publicIPDiscovery: true
+    labels:
+      node-role.kubernetes.io/worker: ""
