@@ -20,7 +20,7 @@ talos-cloud-controller-manager:
     nodeSelector:
     - matchExpressions:
       - key: hostname
-        operator: exists
+        operator: Exists
     features:
       publicIPDiscovery: true
     labels:
