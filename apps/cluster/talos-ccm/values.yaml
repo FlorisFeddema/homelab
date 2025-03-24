@@ -16,7 +16,7 @@ talos-cloud-controller-manager:
     node-role.kubernetes.io/control-plane: ""
 
   transformations:
-  - name: ipAddress
+  - name: publicIPDiscovery
     nodeSelector:
     - matchExpressions:
       - key: platform
