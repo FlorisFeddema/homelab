@@ -16,15 +16,21 @@ talos-cloud-controller-manager:
     node-role.kubernetes.io/control-plane: ""
 
   transformations:
+  - name: ipAddress
+    nodeSelector:
+    - matchExpressions:
+      - key: platform
+        operator: Exists
+    features:
+      publicIPDiscovery: true
   - name: zone
     nodeSelector:
     - matchExpressions:
       - key: hostname
         operator: Exists
-    features:
-      publicIPDiscovery: true
-    labels:
-      topology.kubernetes.io/zone: |
+    platformMetadata:
+      Region: "njord-on-proxmox"
+      Zone: |
         '{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}'
   - name: worker
     nodeSelector:
@@ -33,7 +39,5 @@ talos-cloud-controller-manager:
         operator: Regexp
         values:
         - ^talos-worker-.+$
-    features:
-      publicIPDiscovery: true
     labels:
       node-role.kubernetes.io/worker: ""
