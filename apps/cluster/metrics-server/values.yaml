@@ -2,8 +2,6 @@ metrics-server:
 
   revisionHistoryLimit: 0
   replicas: 3
-  args:
-  - --kubelet-insecure-tls
 
   service:
     labels:
