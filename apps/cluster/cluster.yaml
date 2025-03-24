@@ -2,6 +2,7 @@ apps:
   cluster:
     talos-ccm:
       deploy: true
+      namespace: kube-system
       autoSync: false
     argocd:
       deploy: true

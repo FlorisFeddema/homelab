@@ -4,6 +4,7 @@ param(
     [string]$NodeType = "",
     [boolean]$Apply = $false,
     [boolean]$Insecure = $false,
+    [boolean]$Init = $False,
     [string]$RepoPath = "/home/mobrockers/git/homelab"
 )
 
@@ -28,13 +29,13 @@ function New-NodeConfig ($NodeName, $NodeType) {
 
     Write-Host "⚙️ Node $NodeName is a $NodeType"
 
-    if(-not $NodeIp) {
-        $NodeIP =  ((kubectl get node $NodeName -o yaml | ConvertFrom-Yaml).status.addresses | Where-Object { $_.type -eq "InternalIP" } | Select-Object address).address
+    if(-not $Init) {
+        $nodeIp =  ((kubectl get node $NodeName -o yaml | ConvertFrom-Yaml).status.addresses | Where-Object { $_.type -eq "InternalIP" } | Select-Object address).address
     }
 
-    Write-Host "⚙️ Generating $NodeName machineconfig for $NodeIp"
+    Write-Host "⚙️ Generating $NodeName machineconfig for $nodeIp"
 
-    $endpoint = "https://$($NodeIp):6443"
+    $endpoint = "https://$($nodeIp):6443"
 
     $genArgList = @(
         "gen", "config", "njord", $endpoint,
@@ -44,6 +45,7 @@ function New-NodeConfig ($NodeName, $NodeType) {
         "--with-docs=false",
         "--with-secrets=$RepoPath/secrets.yaml",
         "--config-patch-control-plane=@$RepoPath/talos/patches/control-plane-vip.yaml",
+        "--config-patch-control-plane=@$RepoPath/talos/patches/talos-api-access.yaml",
         "--config-patch=@$RepoPath/talos/patches/cluster.yaml",
         "--config-patch=@$RepoPath/talos/patches/machine.yaml",
         "--config-patch=@$RepoPath/talos/nodes/$NodeName.yaml",
@@ -53,7 +55,7 @@ function New-NodeConfig ($NodeName, $NodeType) {
 
     &talosctl $genArgList
 
-    return $NodeIp
+    return $nodeIp
 }
 
 function Write-NodeConfig ($NodeName, $NodeIp) {
@@ -80,7 +82,7 @@ if($NodeName -eq "ALL") {
     $nodeNames = (kubectl get nodes -o yaml | ConvertFrom-Yaml).items.metadata.name
 
     foreach($nodeName in $nodeNames) {
-        $nodeIp = New-NodeConfig -NodeName $NodeName -NodeType $NodeType
+        $nodeIp = New-NodeConfig -NodeName $nodeName -NodeType $NodeType
 
         if ($Apply) {
             Write-NodeConfig -NodeName $nodeName -NodeIp $nodeIp

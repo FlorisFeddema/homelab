@@ -12,12 +12,6 @@ machine:
       cloud-provider: external
       rotate-server-certificates: true
   features:
-    kubernetesTalosAPIAccess:
-      enabled: true
-      allowedRoles:
-        - os:reader
-      allowedKubernetesNamespaces:
-        - talos-ccm
     hostDNS:
       enabled: false
       forwardKubeDNSToHost: false
