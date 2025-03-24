@@ -1,5 +1,8 @@
 apps:
   cluster:
+    talos-ccm:
+      deploy: true
+      autoSync: false
     argocd:
       deploy: true
       autoSync: false

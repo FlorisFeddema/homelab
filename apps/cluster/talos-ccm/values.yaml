@@ -1,0 +1,26 @@
+talos-cloud-controller-manager:
+
+  daemonSet:
+    enabled: true
+  enabledControllers:
+    - cloud-node
+    - node-csr-approval
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: ""
+
+  transformations:
+  - name: zone
+    nodeSelector:
+      - matchExpressions:
+          - key: hostname
+            operator: exists
+    features:
+      publicIPDiscovery: true
+    labels:
+      topology.kubernetes.io/zone: "{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}"
