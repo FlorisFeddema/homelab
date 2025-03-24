@@ -23,4 +23,4 @@ talos-cloud-controller-manager:
     features:
       publicIPDiscovery: true
     labels:
-      topology.kubernetes.io/zone: "{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}"
+      topology.kubernetes.io/zone: '{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}'
