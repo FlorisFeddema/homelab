@@ -1,10 +1,11 @@
 talos-cloud-controller-manager:
+  fullnameOverride: talos-ccm
 
   daemonSet:
     enabled: true
   enabledControllers:
-    - cloud-node
-    - node-csr-approval
+  - cloud-node
+  - node-csr-approval
 
   resources:
     requests:
@@ -17,10 +18,11 @@ talos-cloud-controller-manager:
   transformations:
   - name: zone
     nodeSelector:
-      - matchExpressions:
-          - key: hostname
-            operator: exists
+    - matchExpressions:
+      - key: hostname
+        operator: exists
     features:
       publicIPDiscovery: true
     labels:
-      topology.kubernetes.io/zone: '{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}'
+      topology.kubernetes.io/zone: |
+        '{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}'
