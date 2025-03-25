@@ -7,7 +7,6 @@ on:
 
 jobs:
   release:
-    working-directory: templates/gatus-monitor
     permissions:
       contents: write
       packages: write
@@ -37,6 +36,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push charts to GHCR
+        working-directory: templates/gatus-monitor
         run: |
           VERSION=$(yq ".version" Chart.yaml)
           helm package . --version VERSION
