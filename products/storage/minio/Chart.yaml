@@ -6,4 +6,7 @@ dependencies:
   - name: minio-operator
     version: 4.3.7
     repository: https://operator.min.io
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
 
