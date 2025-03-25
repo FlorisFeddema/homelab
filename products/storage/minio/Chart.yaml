@@ -1,11 +1,9 @@
 apiVersion: v2
 name: minio
-version: 1.0.6
+version: 1.0.0
 
 dependencies:
-  - name: minio
-    version: 5.4.0
-    repository: https://charts.min.io
-  - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
-    version: 1.0.0
+  - name: minio-operator
+    version: 7.0.1
+    repository: https://operator.min.io
+

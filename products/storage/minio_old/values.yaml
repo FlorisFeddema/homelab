@@ -1,0 +1,106 @@
+gatus-monitor:
+  appName: minio
+  publicEndpoints:
+    - name: minio
+  privateEndpoints:
+    - name: minio
+
+patchBackupPvcJob:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/kubectl
+    tag: 1.32.3
+  pvcNames:
+    - export-minio-0
+    - export-minio-1
+    - export-minio-2
+
+route:
+  enabled: true
+  hostnames:
+    - minio.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
+minio:
+  existingSecret: "minio-credentials"
+
+  replicas: 3
+
+  persistence:
+    size: 200Gi
+    # labels are added by patchBackupPvcJob
+    labels:
+      recurring-job.longhorn.io/source: enabled
+      recurring-job-group.longhorn.io/backup: enabled
+
+  ingress:
+    enabled: false
+
+  consoleIngress:
+    enabled: false
+
+  resources:
+    requests:
+      memory: 1024Mi
+      cpu: 50m
+
+  nodeSelector:
+    kubernetes.io/arch: arm64
+    kubernetes.io/os: linux
+
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app: minio
+          release: minio
+
+  oidc:
+    enabled: true
+    displayName: Authentik
+    configUrl: https://authentik.feddema.dev/application/o/minio/.well-known/openid-configuration
+    existingClientSecretName: minio-oidc-credentials
+    existingClientIdKey: clientId
+    existingClientSecretKey: clientSecret
+    claimName: policy
+    scopes: openid,profile,email,offline_access,minio
+    redirectUri: https://minio.feddema.dev/oauth_callback
+
+  users:
+    - accessKey: loki
+      existingSecret: loki-svc-credentials
+      existingSecretKey: secretKey
+      policy: readwrite
+    - accessKey: thanos
+      existingSecret: thanos-svc-credentials
+      existingSecretKey: secretKey
+      policy: readwrite
+    - accessKey: talos-backup
+      existingSecret: talos-backup-svc-credentials
+      existingSecretKey: secretKey
+      policy: readwrite
+
+  buckets:
+    - name: loki-chunks
+      policy: none
+      purge: false
+      versioning: false
+    - name: thanos
+      policy: none
+      purge: false
+      versioning: false
+    - name: etcd
+      policy: none
+      purge: false
+      versioning: false
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+      includeNode: true
