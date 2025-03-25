@@ -4,6 +4,6 @@ version: 1.0.0
 
 dependencies:
   - name: minio-operator
-    version: 7.0.1
+    version: 4.3.7
     repository: https://operator.min.io
 
