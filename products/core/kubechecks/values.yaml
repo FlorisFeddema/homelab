@@ -34,6 +34,8 @@ kubechecks:
       KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.feddema.dev
       KUBECHECKS_VCS_TYPE: github
 
+      KUBECHECKS_ENABLE_PREUPGRADE: false
+
   deployment:
     resources:
       limits:
