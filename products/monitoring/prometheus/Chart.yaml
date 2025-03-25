@@ -10,5 +10,5 @@ dependencies:
     version: 15.13.2
     repository: oci://registry-1.docker.io/bitnamicharts
   - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
+    repository: oci://ghcr.io/florisfeddema/homelab
     version: 1.0.0

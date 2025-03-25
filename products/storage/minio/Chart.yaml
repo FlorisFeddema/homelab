@@ -7,5 +7,5 @@ dependencies:
     version: 5.4.0
     repository: https://charts.min.io
   - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
+    repository: oci://ghcr.io/florisfeddema/homelab
     version: 1.0.0
