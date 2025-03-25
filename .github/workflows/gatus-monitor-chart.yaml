@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-  paths:
-    - 'templates/gatus-monitor/**'
+    paths:
+      - 'templates/gatus-monitor/**'
 
 jobs:
   release:
