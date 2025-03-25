@@ -22,6 +22,10 @@ data:
     requestedScopes: ['openid', 'profile', 'email', 'groups', 'offline_access']
   accounts.kubechecks: apiKey
 
+  resource.compareoptions: |
+    # disables status field diffing in specified resource types
+    ignoreAggregatedRoles: true
+
   resource.customizations.ignoreDifferences.argoproj.io_Application: |
     jqPathExpressions:
       - .metadata.finalizers[]? | select(. == "post-delete-finalizer.argocd.argoproj.io" or . == "post-delete-finalizer.argocd.argoproj.io/cleanup")
