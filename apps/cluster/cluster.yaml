@@ -4,6 +4,9 @@ apps:
       deploy: true
       namespace: kube-system
       autoSync: false
+    kyverno:
+      deploy: true
+      autoSync: false
     argocd:
       deploy: true
       autoSync: false
