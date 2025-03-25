@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'templates/gatus-monitor/**'
+      - '.github/workflows/gatus-monitor-chart.yaml'
 
 jobs:
   release:
