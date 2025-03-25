@@ -1,0 +1,43 @@
+name: Release gatus-monitor Chart
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    working-directory: templates/gatus-monitor
+    permissions:
+      contents: write
+      packages: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.12.0
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push charts to GHCR
+        run: |
+          VERSION=$(yq ".version" Chart.yaml)
+          helm package . --version VERSION
+          helm push gatus-monitor-$VERSION.tgz oci://ghcr.io/${{ github.repository_owner }}/homelab
