@@ -29,7 +29,7 @@ kubechecks:
       KUBECHECKS_SCHEMAS_LOCATION: https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json # Kubeconform schemas
       KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: delete
       KUBECHECKS_MAX_CONCURRENCT_CHECKS: '10'
-      KUBECHECKS_LOG_LEVEL: warn
+      KUBECHECKS_LOG_LEVEL: debug
 
       KUBECHECKS_WEBHOOK_URL_BASE: https://kubechecks.feddema.dev
       KUBECHECKS_VCS_TYPE: github
