@@ -35,6 +35,7 @@ products:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
     envoyGateway:
       deploy: true
+      autoSync: true
       serverSideApply: true
     publicExternalDns:
       deploy: true
