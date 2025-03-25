@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  paths:
+    - 'templates/gatus-monitor/**'
 
 jobs:
   release:
@@ -39,5 +41,5 @@ jobs:
         working-directory: templates/gatus-monitor
         run: |
           VERSION=$(yq ".version" Chart.yaml)
-          helm package . --version VERSION
+          helm package . --version $VERSION
           helm push gatus-monitor-$VERSION.tgz oci://ghcr.io/${{ github.repository_owner }}/homelab
