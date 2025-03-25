@@ -72,6 +72,7 @@ spec:
     spec:
       replicas: 3
       volumeClaimTemplates:
+        storageClassName: truenas-iscsi-hdd-delete
         accessModes:
         - ReadWriteOnce
         resources:
