@@ -7,11 +7,20 @@ kyverno:
       enabled: false
 
   admissionController:
+    revisionHistoryLimit: 0
     replicas: 3
 
+    apiPriorityAndFairness: true
+    extraArgs:
+    - --forceFailurePolicyIgnore
+
   backgroundController:
+    revisionHistoryLimit: 0
     replicas: 2
   cleanupController:
+    revisionHistoryLimit: 0
     replicas: 2
   reportsController:
+    revisionHistoryLimit: 0
     replicas: 2
+    apiPriorityAndFairness: true
