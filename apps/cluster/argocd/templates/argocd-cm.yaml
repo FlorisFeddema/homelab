@@ -25,6 +25,14 @@ data:
   resource.compareoptions: |
     # disables status field diffing in specified resource types
     ignoreAggregatedRoles: true
+    ignoreResourceStatusField: all
+
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
+    jqPathExpressions:
+    - '.webhooks[]?.clientConfig.caBundle'
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+    jqPathExpressions:
+    - '.webhooks[]?.clientConfig.caBundle'
 
   resource.customizations.ignoreDifferences.argoproj.io_Application: |
     jqPathExpressions:
