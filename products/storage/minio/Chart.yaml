@@ -1,11 +1,12 @@
 apiVersion: v2
 name: minio
-version: 1.0.6
+version: 1.0.0
 
 dependencies:
-  - name: minio
-    version: 5.4.0
-    repository: https://charts.min.io
+  - name: minio-operator
+    version: 4.3.7
+    repository: https://operator.min.io
   - name: gatus-monitor
     repository: oci://ghcr.io/florisfeddema/homelab
     version: 1.0.0
+
