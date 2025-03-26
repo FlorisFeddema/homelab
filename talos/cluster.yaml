@@ -28,6 +28,13 @@ cluster:
       bind-address: 0.0.0.0
 
 machine:
+  files:
+    - path: /etc/cri/conf.d/20-customization.part
+      op: create
+      content: |
+        [plugins."io.containerd.cri.v1.images"]
+          discard_unpacked_layers = false
+
   kubelet:
     extraArgs:
       cloud-provider: external

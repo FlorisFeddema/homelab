@@ -14,7 +14,6 @@ if [ -z "$nodeName" ]; then
   exit 1
 fi
 
-
 nodeType="worker"
 controlPlane=$(kubectl get node "$nodeName" -o yaml | yq '.metadata.labels | contains({"node-role.kubernetes.io/control-plane": ""})')
 if [ "$controlPlane" = "true" ]; then
