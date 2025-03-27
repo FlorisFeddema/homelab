@@ -27,6 +27,7 @@ cilium:
     enabled: true
     secretsNamespace:
       create: false
+      name: cilium
 
   hostFirewall:
     enabled: true
@@ -79,13 +80,17 @@ cilium:
 
   tls:
     secretsNamespace:
+      create: false
       name: cilium
   gatewayAPI:
     secretsNamespace:
+      create: false
       name: cilium
   ingressController:
     secretsNamespace:
+      create: false
       name: cilium
   envoyConfig:
     secretsNamespace:
+      create: false
       name: cilium
