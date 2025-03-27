@@ -27,5 +27,4 @@ apps:
         kind: ValidatingWebhookConfiguration
         jqPathExpressions:
         - .webhooks[].clientConfig.caBundle
-    truecommand:
-      deploy: true
+
