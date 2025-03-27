@@ -1,5 +1,8 @@
 apps:
   devices:
+    intel-gpu-resource-driver:
+      deploy: true
+      autoSync: false
     generic-device-operator:
       deploy: true
     intel-device-operator:

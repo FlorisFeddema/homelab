@@ -1,0 +1,5 @@
+intel-gpu-resource-driver:
+
+  nodeSelector:
+    intel.feature.node.kubernetes.io/gpu: "true"
+  tolerations: []

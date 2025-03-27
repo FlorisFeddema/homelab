@@ -11,14 +11,18 @@ machine:
     extraArgs:
       cloud-provider: external
       rotate-server-certificates: true
+      feature-gates: DynamicResourceAllocation=true
   features:
     hostDNS:
       enabled: false
       forwardKubeDNSToHost: false
   files:
   # Spegel needs unpacked layers
-  - path: /etc/cri/conf.d/20-spegel-disable-discard-unpacked-layers.part
+  - path: /etc/cri/conf.d/20-customization.part
     op: create
     content: |
       [plugins."io.containerd.cri.v1.images"]
         discard_unpacked_layers = false
+      [plugins."io.containerd.grpc.v1.cri"]
+        enable_cdi = true
+        cdi_specs_dir = ["/etc/cdi", "/var/run/cdi"]

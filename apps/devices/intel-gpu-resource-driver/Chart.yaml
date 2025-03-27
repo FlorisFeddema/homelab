@@ -1,0 +1,8 @@
+apiVersion: v2
+name: intel-gpu-resource-driver
+version: 0.0.0
+
+dependencies:
+  - name: intel-gpu-resource-driver
+    version: 0.7.0
+    repository: https://intel.github.io/helm-charts/
