@@ -17,7 +17,7 @@ machine:
       forwardKubeDNSToHost: false
   files:
   # Spegel needs unpacked layers
-  - path: /etc/cri/conf.d/20-customization.part
+  - path: /etc/cri/conf.d/20-spegel-disable-discard-unpacked-layers.part
     op: create
     content: |
       [plugins."io.containerd.cri.v1.images"]
