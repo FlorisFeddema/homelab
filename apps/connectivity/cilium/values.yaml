@@ -25,9 +25,8 @@ cilium:
 
   bgpControlPlane:
     enabled: true
-    secretNamespace:
+    secretsNamespace:
       create: false
-      name: cilium
 
   hostFirewall:
     enabled: true
