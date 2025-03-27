@@ -76,3 +76,7 @@ cilium:
       enabled: true
   dashboards:
     enabled: true
+
+  tls:
+    secretsNamespace:
+      name: cilium
