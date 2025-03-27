@@ -13,8 +13,6 @@ apps:
         kind: DaemonSet
         jqPathExpressions:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
-    cilium-gateway:
-      deploy: true
     emqx:
       deploy: true
     private-external-dns:
