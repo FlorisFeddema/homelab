@@ -32,8 +32,10 @@ spec:
           - name: VERSION
             value: docker
         resources: 
-          limits: 
-            gpu.intel.com/i915: "1" 
+        #   limits: 
+        #     gpu.intel.com/i915: "1"
+          claims:
+          - name: i915
         volumeMounts:
         - name: pms-transcode
           mountPath: /transcode
@@ -69,6 +71,9 @@ spec:
       - name: tautulli-data
         persistentVolumeClaim:
           claimName: tautulli-data
+      resourceClaims:
+      - name: i915
+        resourceClaimTemplateName: i915
   volumeClaimTemplates:
   - metadata:
       name: pms-config
