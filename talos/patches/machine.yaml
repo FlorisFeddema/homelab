@@ -25,4 +25,4 @@ machine:
         discard_unpacked_layers = false
       [plugins."io.containerd.grpc.v1.cri"]
         enable_cdi = true
-        cdi_specs_dir = ["/etc/cdi", "/var/run/cdi"]
+        cdi_specs_dir = ["/var/cdi/etc/cdi", "/var/cdi/run/cdi"]
