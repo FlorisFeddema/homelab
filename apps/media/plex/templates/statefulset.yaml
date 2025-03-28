@@ -32,8 +32,6 @@ spec:
           - name: VERSION
             value: docker
         resources: 
-        #   limits: 
-        #     gpu.intel.com/i915: "1"
           claims:
           - name: i915
         volumeMounts:
