@@ -6,4 +6,5 @@ spec:
   spec:
     devices:
       requests:
-      -  deviceClassName: gpu.intel.com
+      - name: i915
+        deviceClassName: gpu.intel.com
