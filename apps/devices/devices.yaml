@@ -5,14 +5,6 @@ apps:
       autoSync: false
     generic-device-operator:
       deploy: true
-    intel-device-operator:
-      deploy: true
-      ignoreDifferences:
-      - group: deviceplugin.intel.com
-        kind: GpuDevicePlugin
-        jsonPointers:
-        - /spec/resourceManager
-        - /spec/enableMonitoring
     network-devices:
       deploy: true
       autoSync: false
