@@ -7,4 +7,4 @@ apps:
     immich:
       deploy: true
     mealie:
-      deploy: true
+      deploy: false
