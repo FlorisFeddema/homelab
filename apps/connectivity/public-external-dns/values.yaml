@@ -5,6 +5,7 @@ external-dns:
   sources:
     - ingress
     - service
+    - crd
 
   provider: cloudflare
   cloudflare:
