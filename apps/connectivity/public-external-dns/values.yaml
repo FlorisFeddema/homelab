@@ -1,4 +1,6 @@
 external-dns:
+  crd:
+    create: true
   revisionHistoryLimit: 0
 
   policy: sync
