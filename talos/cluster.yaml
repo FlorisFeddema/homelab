@@ -5,12 +5,7 @@ cluster:
   allowSchedulingOnControlPlanes: false
 
   discovery:
-    enabled: true
-    registries:
-      service:
-        disabled: true
-      kubernetes:
-        disabled: false
+    enabled: false
 
   network:
     cni:
@@ -19,13 +14,20 @@ cluster:
   proxy:
     disabled: true
 
+  apiServer:
+    extraArgs:
+      feature-gates: DynamicResourceAllocation=true
+      runtime-config: resource.k8s.io/v1beta1=true # Enables the API (CRD)
+
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0
+      feature-gates: DynamicResourceAllocation=true
 
   scheduler:
     extraArgs:
       bind-address: 0.0.0.0
+      feature-gates: DynamicResourceAllocation=true
 
 machine:
   files:
@@ -34,11 +36,15 @@ machine:
       content: |
         [plugins."io.containerd.cri.v1.images"]
           discard_unpacked_layers = false
+        # Set cdi dirs to /var/ because default locations are not writeable in talos
+        [plugins."io.containerd.cri.v1.runtime"]
+          cdi_spec_dirs = ["/var/cdi/static", "/var/cdi/dynamic"]      
 
   kubelet:
     extraArgs:
       cloud-provider: external
       rotate-server-certificates: true
+      feature-gates: DynamicResourceAllocation=true
 
   features:
     kubePrism:

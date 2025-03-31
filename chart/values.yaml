@@ -133,6 +133,9 @@ products:
     genericDevicePlugin:
       deploy: true
       autoSync: true
+    intelGpuResourceDriver:
+      deploy: true
+      autoSync: true
     intelDevicePluginsGpu:
       deploy: true
       autoSync: true

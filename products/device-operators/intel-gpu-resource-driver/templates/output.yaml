@@ -1,0 +1,189 @@
+---
+# Source: intel-gpu-resource-driver/templates/resource-driver-namespace.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: intel-gpu-resource-driver
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+---
+# Source: intel-gpu-resource-driver/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: intel-gpu-sa
+  namespace: intel-gpu-resource-driver
+  labels:
+    helm.sh/chart: intel-gpu-resource-driver-0.7.0
+    app.kubernetes.io/version: "v0.7.0"
+    app.kubernetes.io/managed-by: Helm
+automountServiceAccountToken: true
+---
+# Source: intel-gpu-resource-driver/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: intel-gpu-resource-driver-role
+  namespace: intel-gpu-resource-driver
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["get"]
+- apiGroups: ["resource.k8s.io"]
+  resources: ["resourceslices"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: ["resource.k8s.io"]
+  resources: ["resourceclaims"]
+  verbs: ["get"]
+---
+# Source: intel-gpu-resource-driver/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: intel-gpu-resource-driver-rolebinding
+  namespace: intel-gpu-resource-driver
+subjects:
+- kind: ServiceAccount
+  name: intel-gpu-sa
+  namespace: intel-gpu-resource-driver
+roleRef:
+  kind: ClusterRole
+  name: intel-gpu-resource-driver-role
+  apiGroup: rbac.authorization.k8s.io
+---
+# Source: intel-gpu-resource-driver/templates/resource-driver.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: intel-gpu-resource-driver-kubelet-plugin
+  namespace: intel-gpu-resource-driver
+  labels:
+    helm.sh/chart: intel-gpu-resource-driver-0.7.0
+    app.kubernetes.io/version: "v0.7.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    matchLabels:
+      app: intel-gpu-resource-driver
+  template:
+    metadata:
+      labels:
+        app: intel-gpu-resource-driver
+    spec:
+      serviceAccountName: intel-gpu-sa
+      containers:
+      - name: kubelet-plugin
+        image: intel/intel-gpu-resource-driver:v0.7.0
+        imagePullPolicy: IfNotPresent
+        command: ["/kubelet-gpu-plugin"]
+        env:
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: SYSFS_ROOT
+          value: "/sysfs"
+        volumeMounts:
+        - name: plugins-registry
+          mountPath: /var/lib/kubelet/plugins_registry
+        - name: plugins
+          mountPath: /var/lib/kubelet/plugins
+        - name: cdi
+          mountPath: /etc/cdi
+        - name: varruncdi
+          mountPath: /var/run/cdi
+        # when using fake sysfs - mount at the same place as on host
+        - name: sysfs
+          mountPath: "/sysfs"
+        securityContext:
+          privileged: false
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop: ["ALL"]
+          readOnlyRootFilesystem: true
+          runAsUser: 0
+          seccompProfile:
+            type: RuntimeDefault
+      volumes:
+      - name: plugins-registry
+        hostPath:
+          path: /var/lib/kubelet/plugins_registry
+      - name: plugins
+        hostPath:
+          path: /var/lib/kubelet/plugins
+      - name: cdi
+        hostPath:
+          path: /etc/cdi
+      - name: varruncdi
+        hostPath:
+          path: /var/run/cdi
+      - name: sysfs
+        hostPath:
+          path: /sys
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+          operator: Exists
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+          operator: Exists
+        - effect: NoSchedule
+          key: node.kubernetes.io/gpu
+          operator: Exists
+---
+# Source: intel-gpu-resource-driver/templates/device-class.yaml
+apiVersion: resource.k8s.io/v1beta1
+kind: DeviceClass
+metadata:
+  name: gpu.intel.com
+
+spec:
+  selectors:
+  - cel:
+      expression: device.driver == "gpu.intel.com"
+---
+# Source: intel-gpu-resource-driver/templates/validating-admission-policy.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: resourceslices-policy-dra-kubelet-plugin-gpu
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+    - apiGroups:   ["resource.k8s.io"]
+      apiVersions: ["v1beta1"]
+      operations:  ["CREATE", "UPDATE", "DELETE"]
+      resources:   ["resourceslices"]
+  matchConditions:
+  - name: isRestrictedUser
+    expression: >-
+      request.userInfo.username == "system:serviceaccount:intel-gpu-resource-driver:intel-gpu-sa"
+  variables:
+  - name: userNodeName
+    expression: >-
+      request.userInfo.extra[?'authentication.kubernetes.io/node-name'][0].orValue('')
+  - name: objectNodeName
+    expression: >-
+      (request.operation == "DELETE" ? oldObject : object).spec.?nodeName.orValue("")
+  validations:
+  - expression: variables.userNodeName != ""
+    message: >-
+      no node association found for user, this user must run in a pod on a node and ServiceAccountTokenPodNodeInfo must be enabled
+  - expression: variables.userNodeName == variables.objectNodeName
+    messageExpression: >-
+      "this user running on node '"+variables.userNodeName+"' may not modify " +
+      (variables.objectNodeName == "" ?"cluster resourceslices" : "resourceslices on node '"+variables.objectNodeName+"'")
+---
+# Source: intel-gpu-resource-driver/templates/validating-admission-policy-binding.yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: resourceslices-policy-dra-kubelet-plugin-gpu
+spec:
+  policyName: resourceslices-policy-dra-kubelet-plugin-gpu
+  validationActions: [Deny]
