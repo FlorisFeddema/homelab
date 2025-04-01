@@ -1,10 +1,10 @@
 apiVersion: v2
 name: argo-cd
-version: 1.0.149
+version: 1.0.150
 
 dependencies:
   - name: argo-cd
-    version: 7.8.18
+    version: 7.8.19
     repository: https://argoproj.github.io/argo-helm
   - name: gatus-monitor
     repository: oci://ghcr.io/florisfeddema/homelab
