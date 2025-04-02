@@ -8,4 +8,3 @@ spec:
       requests:
         - name: i915
           deviceClassName: gpu.intel.com
-g
