@@ -11,8 +11,12 @@ securityContext: {}
 mediaPvcName: media-server-media
 
 resources:
-  limits:
-    gpu.intel.com/i915: "1"
+  claims:
+    - name: i915
+
+resourceClaims:
+  - name: i915
+    resourceClaimTemplateName: i915
 
 image:
   registry: ghcr.io
