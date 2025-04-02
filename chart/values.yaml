@@ -136,14 +136,6 @@ products:
     intelGpuResourceDriver:
       deploy: true
       autoSync: true
-    intelDevicePluginsGpu:
-      deploy: false
-      autoSync: true
-      ignoreDifferences:
-        - group: "deviceplugin.intel.com"
-          kind: "GpuDevicePlugin"
-          jsonPointers:
-            - /spec/resourceManager
     nodeFeatureDiscovery:
       deploy: true
       autoSync: true
