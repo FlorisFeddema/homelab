@@ -7,6 +7,6 @@ dependencies:
     version: 4.3.7
     repository: https://operator.min.io
   - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
+    repository: oci://ghcr.io/florisfeddema/homelab
     version: 1.0.0
 

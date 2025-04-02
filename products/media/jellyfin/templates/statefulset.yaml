@@ -53,6 +53,7 @@ spec:
         - name: media
           persistentVolumeClaim:
             claimName: {{ .Values.mediaPvcName}}
+      resourceClaims: {{ toYaml .Values.resourceClaims | nindent 8 }}
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim

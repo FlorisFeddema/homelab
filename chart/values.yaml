@@ -35,6 +35,7 @@ products:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
     envoyGateway:
       deploy: true
+      autoSync: true
       serverSideApply: true
     publicExternalDns:
       deploy: true
@@ -132,14 +133,9 @@ products:
     genericDevicePlugin:
       deploy: true
       autoSync: true
-    intelDevicePluginsGpu:
+    intelGpuResourceDriver:
       deploy: true
       autoSync: true
-      ignoreDifferences:
-        - group: "deviceplugin.intel.com"
-          kind: "GpuDevicePlugin"
-          jsonPointers:
-            - /spec/resourceManager
     nodeFeatureDiscovery:
       deploy: true
       autoSync: true

@@ -1,11 +1,11 @@
 apiVersion: v2
 name: authentik
-version: 1.0.33
+version: 1.0.34
 
 dependencies:
   - name: authentik
-    version: 2025.2.2
+    version: 2025.2.3
     repository: https://charts.goauthentik.io/
   - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
+    repository: oci://ghcr.io/florisfeddema/homelab
     version: 1.0.0
