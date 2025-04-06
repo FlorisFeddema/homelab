@@ -1,5 +1,4 @@
 machine:
-
   network:
     hostname: talos-worker-3
     interfaces:
