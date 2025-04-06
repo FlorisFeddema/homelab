@@ -5,11 +5,10 @@ rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: false
+  dashboard:
+    ssl: false
   ingress:
     dashboard:
-      annotations:
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-        nginx.ingress.kubernetes.io/proxy-ssl-verify: "off"
       host:
         name: ceph.mobrockers.com
       tls:
