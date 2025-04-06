@@ -5,8 +5,7 @@ rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: false
-  dashboard:
-    ssl: false
+
   ingress:
     dashboard:
       host:
@@ -32,6 +31,8 @@ rook-ceph-cluster:
       modules:
       - name: pg_autoscaler
         enabled: true
+    dashboard:
+      ssl: false
 
     network:
       provider: host
