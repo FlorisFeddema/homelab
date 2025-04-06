@@ -20,10 +20,10 @@ rook-ceph-cluster:
       image: quay.io/ceph/ceph:v19.2.1
 
     mon:
-      count: 1
+      count: 2
       failureDomainLabel: topology.kubernetes.io/zone
       zones:
-      - name: '1'
+      # - name: '1'
       - name: '2'
       - name: '3'
 
