@@ -5,27 +5,27 @@ rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: false
-  # ingress:
-  #   dashboard:
-  #     annotations:
-  #       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-  #     host:
-  #       name: ceph.mobrockers.com
-  #     tls:
-  #     - hosts:
-  #       - ceph.mobrockers.com
+  ingress:
+    dashboard:
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      host:
+        name: ceph.mobrockers.com
+      tls:
+      - hosts:
+        - ceph.mobrockers.com
 
   cephClusterSpec:
     cephVersion:
       image: quay.io/ceph/ceph:v19.2.1
 
     mon:
-      count: 2
-      failureDomainLabel: topology.kubernetes.io/zone
-      zones:
+      count: 3
+      # failureDomainLabel: topology.kubernetes.io/zone
+      # zones:
       # - name: '1'
-      - name: '2'
-      - name: '3'
+      # - name: '2'
+      # - name: '3'
 
     mgr:
       count: 2
