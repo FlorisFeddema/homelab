@@ -1,13 +1,12 @@
 machine:
-  sysctls:
-    # Matter mdns https://github.com/project-chip/matter.js/blob/main/docs/TROUBLESHOOTING.md
-    net.ipv6.conf.all.forwarding: 0
-    net.ipv6.conf.all.accept_ra: 1
-    net.ipv6.conf.all.accept_ra_rt_info_max_plen: 64
-    # Quic UDP https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
-    net.core.rmem_max: 7500000
-    net.core.wmem_max: 7500000
+
+  install:
+    diskSelector:
+      size: '<= 50GB'
+
   kubelet:
+    nodeIP:
+      validSubnets: ['10.0.102.0/24'] # Make sure nodes subnet IP is picked
     extraArgs:
       cloud-provider: external
       rotate-server-certificates: true
@@ -16,6 +15,16 @@ machine:
     hostDNS:
       enabled: false
       forwardKubeDNSToHost: false
+
+  sysctls:
+    # Matter mdns https://github.com/project-chip/matter.js/blob/main/docs/TROUBLESHOOTING.md
+    net.ipv6.conf.all.forwarding: 0
+    net.ipv6.conf.all.accept_ra: 1
+    net.ipv6.conf.all.accept_ra_rt_info_max_plen: 64
+    # Quic UDP https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
+    net.core.rmem_max: 7500000
+    net.core.wmem_max: 7500000
+
   files:
   - path: /etc/cri/conf.d/20-customization.part
     op: create
@@ -26,3 +35,6 @@ machine:
       # Set cdi dirs to /var/ because default locations are not writeable in talos
       [plugins."io.containerd.cri.v1.runtime"]
         cdi_spec_dirs = ["/var/cdi/static", "/var/cdi/dynamic"]
+# # Enables NRI api in containerd, used by network dra device drivers, potentially insecure
+# [plugins."io.containerd.nri.v1.nri"]
+#   disable = false

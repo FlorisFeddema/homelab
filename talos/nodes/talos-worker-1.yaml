@@ -1,3 +1,16 @@
 machine:
   network:
     hostname: talos-worker-1
+    interfaces:
+    - interface: enp0s18 # net0 - kubernetes
+      dhcp: true
+    - interface: enp2s27u1 # usb0 - ceph
+      dhcp: false
+      addresses:
+      - 10.0.104.51/24
+      routes:
+      - network: 10.0.104.0/24
+        gateway: 10.0.104.1
+
+  nodeLabels:
+    topology.kubernetes.io/zone: '1'
