@@ -44,6 +44,8 @@ authentik:
 
   redis:
     enabled: true
+    global:
+      defaultStorageClass: ceph-block
 
   prometheus:
     rules: 
