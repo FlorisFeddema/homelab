@@ -42,3 +42,7 @@ immich:
         memory: 2Gi
       limits:
         memory: 6Gi
+
+  redis:
+    global:
+      defaultStorageClass: ceph-block
