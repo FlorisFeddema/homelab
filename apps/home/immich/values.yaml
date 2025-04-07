@@ -9,6 +9,7 @@ immich:
     clusterName: immich-data
     replicas: 2
     size: 32Gi
+    storageClass: ceph-block
 
   ingress:
     enabled: true
