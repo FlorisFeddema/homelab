@@ -11,6 +11,14 @@ immich:
     size: 32Gi
     storageClass: ceph-block
 
+    topologySpreadConstraints: 
+    - maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+
   ingress:
     enabled: true
     domain: photos.mobrockers.com
