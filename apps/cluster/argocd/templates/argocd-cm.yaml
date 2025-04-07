@@ -75,7 +75,7 @@ data:
           local os = require("os")
           local nextIndex = 0
           for index, node in pairs(obj.status.instancesStatus.healthy) do
-            if node == obj.status.targetPrimary then
+            if node == obj.status.currentPrimary then
               nextIndex = index + 1
               if nextIndex > #obj.status.instancesStatus.healthy then
                 nextIndex = 1
