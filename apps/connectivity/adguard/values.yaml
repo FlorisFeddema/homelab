@@ -27,7 +27,7 @@ adguard:
     replicas: 3
 
     persistence:
-      storageClass: rook-ceph-block
+      storageClass: ceph-block
 
     service:
       annotations:
