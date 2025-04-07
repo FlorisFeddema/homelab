@@ -1,6 +1,9 @@
 global:
   resyncPeriod: 15m
 
+crd:
+  annotations:
+    argocd.argoproj.io/sync-options: ServerSideApply=true
 
 grafana:
   enabled: true
