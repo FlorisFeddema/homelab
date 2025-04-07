@@ -2,7 +2,6 @@ apps:
   connectivity:
     adguard:
       deploy: true
-      autoSync: false
     cert-manager:
       deploy: true
     cilium:
