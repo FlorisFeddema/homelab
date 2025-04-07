@@ -29,6 +29,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
+            storageClassName: ceph-block
             resources:
               requests:
                 storage: 100Gi
@@ -80,8 +81,8 @@ kube-prometheus-stack:
       hosts: 
       - grafana.mobrockers.com
       tls:
-        - hosts:
-          - grafana.mobrockers.com
+      - hosts:
+        - grafana.mobrockers.com
     env:
       GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: true
     grafana.ini:
