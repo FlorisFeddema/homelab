@@ -9,6 +9,9 @@ products:
     kubechecks:
       deploy: true
       autoSync: true
+    kyverno:
+      deploy: true
+      autoSync: true
     sealedSecrets:
       deploy: true
       autoSync: true

@@ -1,0 +1,89 @@
+global:
+  resyncPeriod: 15m
+
+
+grafana:
+  enabled: true
+
+features:
+  admissionReports:
+    enabled: true
+  aggregateReports:
+    enabled: true
+  policyReports:
+    enabled: true
+  validatingAdmissionPolicyReports:
+    enabled: false
+  reporting:
+    validate: true
+    mutate: true
+    mutateExisting: true
+    imageVerify: true
+    generate: true
+  autoUpdateWebhooks:
+    enabled: true
+  backgroundScan:
+    enabled: true
+    backgroundScanWorkers: 2
+  configMapCaching:
+    enabled: true
+  deferredLoading:
+    enabled: true
+  dumpPayload:
+    enabled: false
+  forceFailurePolicyIgnore:
+    enabled: false
+  generateValidatingAdmissionPolicy:
+    enabled: false
+  dumpPatches:
+    enabled: false
+  logging:
+    format: json
+  policyExceptions:
+    enabled: false
+  protectManagedResources:
+    enabled: false
+  registryClient:
+    allowInsecure: false
+  tuf:
+    enabled: false
+
+admissionController:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+  serviceMonitor:
+    enabled: true
+
+  metering:
+    disabled: true
+
+backgroundController:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+  serviceMonitor:
+    enabled: true
+
+  metering:
+    disabled: true
+
+cleanupController:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+  serviceMonitor:
+    enabled: true
+
+  metering:
+    disabled: true
+
+reportsController:
+  replicas: 2
+  revisionHistoryLimit: 0
+
+  serviceMonitor:
+    enabled: true
+
+  metering:
+    disabled: true
