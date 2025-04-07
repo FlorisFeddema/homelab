@@ -70,7 +70,7 @@ spec:
 
   coreTemplate:
     spec:
-      replicas: 3
+      replicas: 2
       volumeClaimTemplates:
         storageClassName: ceph-block
         accessModes:
