@@ -70,14 +70,14 @@ spec:
 
   coreTemplate:
     spec:
-      replicas: 2
+      replicas: 3
       volumeClaimTemplates:
         storageClassName: ceph-block
         accessModes:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 100Mi
+            storage: 50Mi
       extraVolumes:
       - name: mqtt-mobrockers-com-tls
         secret:
