@@ -72,7 +72,7 @@ spec:
     spec:
       replicas: 3
       volumeClaimTemplates:
-        storageClassName: truenas-iscsi-hdd-delete
+        storageClassName: ceph-block
         accessModes:
         - ReadWriteOnce
         resources:
