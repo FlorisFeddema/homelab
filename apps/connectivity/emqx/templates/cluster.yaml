@@ -79,6 +79,8 @@ spec:
           requests:
             storage: 50Mi
       extraVolumes:
+      - name: empty-dir
+        emptyDir: {}
       - name: mqtt-mobrockers-com-tls
         secret:
           secretName: mqtt-mobrockers-com-tls
