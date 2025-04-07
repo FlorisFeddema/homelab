@@ -44,6 +44,7 @@ data:
       actions = {}
       actions["restart"] = {}
       actions["reload"] = {}
+      actions["failover"] = {}
       return actions
 
     definitions:
@@ -69,3 +70,20 @@ data:
           end
           obj.metadata.annotations["cnpg.io/reloadedAt"] = os.date("!%Y-%m-%dT%XZ")
           return obj
+      - name: failover
+        action.lua: |
+          local os = require("os")
+          local nextIndex = 0
+          for index, node in pairs(obj.status.instancesStatus.healthy) do
+            if node == obj.status.targetPrimary then
+              nextIndex = index + 1
+              if nextIndex > #obj.status.instancesStatus.healthy then
+                nextIndex = 1
+              end
+              break
+            end
+          end
+          if nextIndex > 0 then
+            obj.status.targetPrimary = obj.status.instancesStatus.healthy[nextIndex]
+            obj.status.targetPrimaryTimestamp = os.date("!%Y-%m-%dT%XZ")
+          end
