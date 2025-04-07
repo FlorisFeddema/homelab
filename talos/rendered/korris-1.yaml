@@ -71,7 +71,7 @@ machine:
         #         - fdc7::/16
     # Provides machine specific network configuration options.
     network:
-        hostname: tasuq-1 # Used to statically set the hostname for the machine.
+        hostname: korris-1 # Used to statically set the hostname for the machine.
         
         # # `interfaces` is used to define the network interface configuration.
         # interfaces:
@@ -280,7 +280,7 @@ machine:
         #         - kube-system
     # Configures the node labels for the machine.
     nodeLabels:
-        feddema.dev/talos-configfile: tasuq-1
+        feddema.dev/talos-configfile: korris-1
         topology.kubernetes.io/region: salioca
         topology.kubernetes.io/zone: korris
     

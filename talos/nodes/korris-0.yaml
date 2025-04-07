@@ -2,15 +2,17 @@ machine:
   network:
     hostname: korris-0
 
+    interfaces:
+      - deviceSelector:
+          physical: true
+        dhcp: true
+        vip:
+          ip: 192.168.4.9
+
   nodeLabels:
-    topology.kubernetes.io/zone: "korris"
+    topology.kubernetes.io/zone: "tasuq"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "korris-0"
 
   install:
     disk: /dev/sda
-
-  disks:
-    - device: /dev/nvme0n1
-      partitions:
-        - mountpoint: /var/mnt/nvme1

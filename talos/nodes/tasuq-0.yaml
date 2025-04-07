@@ -16,4 +16,3 @@ machine:
 
   install:
     disk: /dev/sda
-
