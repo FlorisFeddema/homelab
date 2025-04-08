@@ -12,20 +12,17 @@ rook-ceph-cluster:
           size: 3
       dataPool:
         failureDomain: zone
-        erasureCoded:
-          dataChunks: 2
-          codingChunks: 1
-        parameters:
-          bulk: "true"
+        replicated:
+          size: 3
       allowUsersInNamespaces: ['*']
       gateway:
         port: 80
-        resources:
-          limits:
-            memory: "2Gi"
-          requests:
-            cpu: "1000m"
-            memory: "1Gi"
+        # resources:
+        #   limits:
+        #     memory: "2Gi"
+        #   requests:
+        #     cpu: "1000m"
+        #     memory: "1Gi"
         # securePort: 443
         # sslCertificateRef:
         instances: 1
