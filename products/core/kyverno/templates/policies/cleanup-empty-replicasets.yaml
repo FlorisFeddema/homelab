@@ -44,7 +44,7 @@ metadata:
   name: kyverno:cleanup-replicasets
 rules:
   - apiGroups:
-      - "apps/v1"
+      - "apps"
     resources:
       - replicasets
     verbs:
