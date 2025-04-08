@@ -1,10 +1,8 @@
 rook-ceph-cluster:
 
-  dataDirHostPath: /var/lib/rook
-
   monitoring:
     enabled: true
-    createPrometheusRules: false
+    createPrometheusRules: true
 
   ingress:
     dashboard:

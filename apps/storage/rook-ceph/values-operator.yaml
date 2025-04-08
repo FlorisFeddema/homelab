@@ -6,8 +6,8 @@ rook-ceph:
     topology:
       enabled: true
       domainLabels: kubernetes.io/hostname,topology.kubernetes.io/zone
+    enableLiveness: true
     serviceMonitor:
       enabled: true
-    enableLiveness: true
   monitoring:
     enabled: true
