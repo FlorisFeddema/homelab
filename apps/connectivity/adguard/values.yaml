@@ -7,8 +7,6 @@ adguard:
         replicator.v1.mittwald.de/replication-allowed-namespaces: "private-external-dns"
 
   primary:
-    persistence:
-     existingVolume: pvc-ba4ddfd8-4881-433b-9a04-9e24a8018776
 
     ingress:
       class: nginx
