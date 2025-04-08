@@ -33,3 +33,39 @@ spec:
         operator: GreaterThan
         value: "0h0m30s"
   schedule: "*/1 * * * *"
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/component: cleanup-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/part-of: kyverno
+  name: kyverno:cleanup-replicasets
+rules:
+  - apiGroups:
+      - "apps/v1"
+    resources:
+      - replicasets
+    verbs:
+      - get
+      - watch
+      - list
+      - delete
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kyverno:cleanup-replicasets
+  labels:
+    app.kubernetes.io/component: cleanup-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/part-of: kyverno
+subjects:
+  - kind: ServiceAccount
+    name: kyverno-cleanup-controller
+    namespace: kyverno
+roleRef:
+  kind: ClusterRole
+  name: kyverno:cleanup-replicasets
+  apiGroup: rbac.authorization.k8s.io
