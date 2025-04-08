@@ -35,14 +35,3 @@ spec:
   resources:
     requests:
       storage: 2Ti
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: tautulli-data
-spec:
-  accessModes:
-    - ReadWriteOncePod
-  resources:
-    requests:
-      storage: 200Mi

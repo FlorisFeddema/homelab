@@ -81,3 +81,11 @@ spec:
       resources:
         requests:
           storage: 50Gi
+  - metadata:
+      name: tautulli-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 200Mi
