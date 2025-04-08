@@ -13,7 +13,7 @@ rook-ceph-cluster:
     storageClass:
       enabled: true
       name: ceph-block
-      isDefault: false
+      isDefault: true
       annotations: {}
       labels: {}
       reclaimPolicy: Delete
@@ -38,7 +38,7 @@ rook-ceph-cluster:
   cephBlockPoolsVolumeSnapshotClass:
     enabled: false
     name: ceph-block
-    isDefault: false
+    isDefault: true
     deletionPolicy: Delete
     annotations: {}
     labels: {}
