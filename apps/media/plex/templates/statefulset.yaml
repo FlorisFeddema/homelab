@@ -22,6 +22,12 @@ spec:
         ports:
         - name: http
           containerPort: 32400
+        resources: 
+          requests:
+            cpu: 50m
+            memory: 4Gi
+          claims:
+          - name: i915
         env:
           - name: TZ
             value: Europe/Amsterdam
@@ -31,9 +37,6 @@ spec:
             value: '5000'
           - name: VERSION
             value: docker
-        resources: 
-          claims:
-          - name: i915
         volumeMounts:
         - name: pms-transcode
           mountPath: /transcode
@@ -46,6 +49,10 @@ spec:
         ports:
         - name: tautulli-http
           containerPort: 8181
+        resources: 
+          requests:
+            cpu: 10m
+            memory: 100Mi
         env:
           - name: TZ
             value: Europe/Amsterdam
