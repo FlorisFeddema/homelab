@@ -1,4 +1,4 @@
-perfectscale:
+exporter:
   secret:
     create: false
   settings:
