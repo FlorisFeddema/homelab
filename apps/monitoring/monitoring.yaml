@@ -5,3 +5,6 @@ apps:
     kube-prometheus-stack:
       deploy: true
       namespace: prometheus
+    perfectscale:
+      deploy: true
+      autoSync: false
