@@ -12,13 +12,13 @@ rook-ceph-cluster:
       - hosts:
         - ceph.mobrockers.com
 
-  csi:
-    readAffinity:
-      enabled: true
-
   cephClusterSpec:
     cephVersion:
       image: quay.io/ceph/ceph:v19.2.1
+
+    csi:
+      readAffinity:
+        enabled: true
 
     mon:
       count: 3
