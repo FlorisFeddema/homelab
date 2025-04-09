@@ -1,6 +1,12 @@
 rook-ceph:
 
   revisionHistoryLimit: 0
+  resources:
+    requests:
+      cpu: 2
+      memory: 128Mi
+    limits:
+      memory: 1Gi
   csi:
     enableMetadata: true
     topology:
