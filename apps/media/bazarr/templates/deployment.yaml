@@ -22,6 +22,10 @@ spec:
       containers:
         - name: bazarr
           image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+          resources:
+            requests:
+              cpu: 0.25
+              memory: 1Gi
           env:
             - name: TZ
               value: Europe/Amsterdam
