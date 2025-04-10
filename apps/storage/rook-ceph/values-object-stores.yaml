@@ -9,11 +9,11 @@ rook-ceph-cluster:
       metadataPool:
         failureDomain: zone
         replicated:
-          size: 3
+          size: 2
       dataPool:
         failureDomain: zone
         replicated:
-          size: 3
+          size: 2
       allowUsersInNamespaces: ['*']
       gateway:
         port: 80

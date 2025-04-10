@@ -6,7 +6,7 @@ rook-ceph-cluster:
     spec:
       failureDomain: zone
       replicated:
-        size: 3
+        size: 2
       # Enables collecting RBD per-image IO statistics by enabling dynamic OSD performance counters. Defaults to false.
       # For reference: https://docs.ceph.com/docs/latest/mgr/prometheus/#rbd-io-statistics
       enableRBDStats: true
