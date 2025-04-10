@@ -25,11 +25,14 @@ kube-prometheus-stack:
       serviceMonitorSelectorNilUsesHelmValues: false
       replicas: 2
       retention: 365d
+      resources:
+        requests:
+          cpu: 300m
+          memory: 2400Mi
 
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: ceph-block
             resources:
               requests:
                 storage: 100Gi
