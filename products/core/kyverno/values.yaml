@@ -71,28 +71,8 @@ policy-reporter:
     revisionHistoryLimit: 0
 
     openIDConnect:
-      enabled: false
-      # -- OpenID Connect Discovery URL
-      discoveryUrl: ""
-      # -- OpenID Connect Callback URL
-      callbackUrl: ""
-      # -- OpenID Connect ClientID
-      clientId: ""
-      # -- OpenID Connect ClientSecret
-      clientSecret: ""
-      # -- Optional Group Claim to map user groups to the profile
-      # groups can be used to define access control for clusters, boards and custom boards.
-      groupClaim: ""
-      # -- OpenID Connect allowed Scopes
-      scopes: []
-      # -- Skip TLS Verification
-      skipTLS: false
-      # -- TLS Certificate file path
-      certificate: ""
-      # -- Secret to rea
-      # -- Provide OpenID Connect configuration via Secret
-      # supported keys: `discoveryUrl`, `clientId`, `clientSecret`, `certificate`, `skipTLS`
-      secretRef: ""
+      enabled: true
+      secretRef: "oidc-credentials"
 
   plugin:
     kyverno:
