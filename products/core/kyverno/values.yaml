@@ -82,7 +82,7 @@ policy-reporter:
 
     openIDConnect:
       enabled: true
-      callback: https://kyverno.feddema.dev/callback
+      callbackUrl: https://kyverno.feddema.dev/callback
       secretRef: "oidc-credentials"
 
   plugin:
