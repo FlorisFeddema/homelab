@@ -1,3 +1,8 @@
+database:
+  clusterName: kyverno
+  replicas: 2
+  size: 10Gi
+
 kyverno:
   global:
     resyncPeriod: 15m
@@ -8,49 +13,6 @@ kyverno:
 
   grafana:
     enabled: true
-
-  features:
-    admissionReports:
-      enabled: true
-    aggregateReports:
-      enabled: true
-    policyReports:
-      enabled: true
-    validatingAdmissionPolicyReports:
-      enabled: false
-    reporting:
-      validate: true
-      mutate: true
-      mutateExisting: true
-      imageVerify: true
-      generate: true
-    autoUpdateWebhooks:
-      enabled: true
-    backgroundScan:
-      enabled: true
-      backgroundScanWorkers: 2
-    configMapCaching:
-      enabled: true
-    deferredLoading:
-      enabled: true
-    dumpPayload:
-      enabled: false
-    forceFailurePolicyIgnore:
-      enabled: false
-    generateValidatingAdmissionPolicy:
-      enabled: false
-    dumpPatches:
-      enabled: false
-    logging:
-      format: json
-    policyExceptions:
-      enabled: false
-    protectManagedResources:
-      enabled: false
-    registryClient:
-      allowInsecure: false
-    tuf:
-      enabled: false
 
   admissionController:
     replicas: 2
@@ -91,3 +53,60 @@ kyverno:
 
     metering:
       disabled: true
+
+policy-reporter:
+  replicaCount: 2
+  revisionHistoryLimit: 0
+
+  metrics:
+    enabled: true
+
+  database:
+    type: "postgres"
+    database: ""
+    username: ""
+    password: ""
+    host: ""
+    dsn: ""
+    # -- Read configuration from an existing Secret
+    # supported fields: username, password, host, dsn, database
+    secretRef: ""
+
+  ui:
+    enabled: true
+    replicaCount: 2
+    revisionHistoryLimit: 0
+
+    openIDConnect:
+      enabled: false
+      # -- OpenID Connect Discovery URL
+      discoveryUrl: ""
+      # -- OpenID Connect Callback URL
+      callbackUrl: ""
+      # -- OpenID Connect ClientID
+      clientId: ""
+      # -- OpenID Connect ClientSecret
+      clientSecret: ""
+      # -- Optional Group Claim to map user groups to the profile
+      # groups can be used to define access control for clusters, boards and custom boards.
+      groupClaim: ""
+      # -- OpenID Connect allowed Scopes
+      scopes: []
+      # -- Skip TLS Verification
+      skipTLS: false
+      # -- TLS Certificate file path
+      certificate: ""
+      # -- Secret to rea
+      # -- Provide OpenID Connect configuration via Secret
+      # supported keys: `discoveryUrl`, `clientId`, `clientSecret`, `certificate`, `skipTLS`
+      secretRef: ""
+
+  plugin:
+    kyverno:
+      enabled: true
+
+      replicaCount: 2
+      revisionHistoryLimit: 0
+
+  monitoring:
+    enabled: true
