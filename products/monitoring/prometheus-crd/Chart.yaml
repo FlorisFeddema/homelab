@@ -1,8 +1,8 @@
 apiVersion: v2
 name: prometheus-crd
-version: 1.0.21
+version: 1.0.22
 
 dependencies:
   - name: prometheus-operator-crds
-    version: 19.0.0
+    version: 19.1.0
     repository: https://prometheus-community.github.io/helm-charts
