@@ -3,6 +3,16 @@ database:
   replicas: 2
   size: 10Gi
 
+
+route:
+  enabled: true
+  hostnames:
+    - kyverno.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
 kyverno:
   global:
     resyncPeriod: 15m
