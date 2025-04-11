@@ -1,15 +1,13 @@
 immich:
   persistence:
-    size: 2Ti
-    storageClass: ''
+    size: 500Gi
+    storageClass: 'ceph-filesystem'
     accessMode: ReadWriteMany
-    existingVolume: immich-library
 
   database:
     clusterName: immich-data
     replicas: 2
     size: 32Gi
-    storageClass: ceph-block
 
     topologySpreadConstraints: 
     - maxSkew: 1
@@ -42,7 +40,3 @@ immich:
         memory: 2Gi
       limits:
         memory: 6Gi
-
-  redis:
-    global:
-      defaultStorageClass: ceph-block
