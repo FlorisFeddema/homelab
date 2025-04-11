@@ -63,14 +63,7 @@ policy-reporter:
 
   database:
     type: "postgres"
-    database: ""
-    username: ""
-    password: ""
-    host: ""
-    dsn: ""
-    # -- Read configuration from an existing Secret
-    # supported fields: username, password, host, dsn, database
-    secretRef: ""
+    secretRef: "database-credentials"
 
   ui:
     enabled: true
