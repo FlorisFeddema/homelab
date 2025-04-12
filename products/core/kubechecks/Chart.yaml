@@ -7,5 +7,5 @@ dependencies:
     version: 0.5.4
     repository: https://zapier.github.io/kubechecks/
   - name: gatus-monitor
-    repository: oci://ghcr.io/florisfeddema/homelab
+    repository: file://../../../templates/gatus-monitor
     version: 1.0.0

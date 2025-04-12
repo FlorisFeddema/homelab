@@ -7,6 +7,6 @@ dependencies:
     version: 3.8.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
-    repository: oci://ghcr.io/florisfeddema/homelab
+    repository: file://../../../templates/gatus-monitor
     version: 1.0.0
 

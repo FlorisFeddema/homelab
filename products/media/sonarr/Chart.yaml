@@ -4,5 +4,5 @@ version: 1.0.0
 
 dependencies:
   - name: gatus-monitor
-    repository: oci://ghcr.io/florisfeddema/homelab
+    repository:
     version: 1.0.0

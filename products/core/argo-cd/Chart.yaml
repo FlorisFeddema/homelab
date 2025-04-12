@@ -7,5 +7,5 @@ dependencies:
     version: 7.8.23
     repository: https://argoproj.github.io/argo-helm
   - name: gatus-monitor
-    repository: oci://ghcr.io/florisfeddema/homelab
+    repository: file://../../../templates/gatus-monitor
     version: 1.0.0

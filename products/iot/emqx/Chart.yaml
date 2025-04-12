@@ -7,5 +7,5 @@ dependencies:
     version: 2.2.28
     repository: https://repos.emqx.io/charts
   - name: gatus-monitor
-    repository: oci://ghcr.io/florisfeddema/homelab
+    repository: file://../../../templates/gatus-monitor
     version: 1.0.0
