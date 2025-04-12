@@ -80,6 +80,8 @@ policy-reporter:
     replicaCount: 2
     revisionHistoryLimit: 0
 
+    banner: "Gerador"
+
     openIDConnect:
       enabled: true
       callbackUrl: https://kyverno.feddema.dev/callback
