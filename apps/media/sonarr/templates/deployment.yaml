@@ -21,60 +21,60 @@ spec:
       securityContext:
         fsGroup: 5000
       containers:
-        - name: sonarr
-          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-          env:
-            - name: TZ
-              value: Europe/Amsterdam
-            - name: PUID
-              value: '1000'
-            - name: PGID
-              value: '5000'
-          ports:
-            - containerPort: 8989
-              name: http
-              protocol: TCP
-          volumeMounts:
-            - name: data
-              mountPath: /config
-            - name: media
-              mountPath: /media
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-        - name: exportarr
-          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
-          args:
-            - sonarr
-          env:
-            - name: PORT
-              value: "9707"
-            - name: URL
-              value: "http://localhost:8989"
-            - name: ENABLE_ADDITIONAL_METRICS
-              value: "true"
-            - name: CONFIG
-              value: /config/config.xml
-          ports:
-            - name: metrics
-              containerPort: 9707
-          volumeMounts:
-            - name: data
-              mountPath: /config
-              readOnly: true
-      volumes:
+      - name: sonarr
+        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        env:
+        - name: TZ
+          value: Europe/Amsterdam
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '5000'
+        ports:
+        - containerPort: 8989
+          name: http
+          protocol: TCP
+        volumeMounts:
         - name: data
-          persistentVolumeClaim:
-            claimName: sonarr-data
+          mountPath: /config
         - name: media
-          persistentVolumeClaim:
-            claimName: media-library
+          mountPath: /media
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          failureThreshold: 5
+          periodSeconds: 10
+      - name: exportarr
+        image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
+        args:
+        - sonarr
+        env:
+        - name: PORT
+          value: "9707"
+        - name: URL
+          value: "http://localhost:8989"
+        - name: ENABLE_ADDITIONAL_METRICS
+          value: "true"
+        - name: CONFIG
+          value: /config/config.xml
+        ports:
+        - name: metrics
+          containerPort: 9707
+        volumeMounts:
+        - name: data
+          mountPath: /config
+          readOnly: true
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: sonarr-data
+      - name: media
+        persistentVolumeClaim:
+          claimName: media-library

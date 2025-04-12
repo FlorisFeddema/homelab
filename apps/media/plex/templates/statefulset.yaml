@@ -29,14 +29,14 @@ spec:
           claims:
           - name: i915
         env:
-          - name: TZ
-            value: Europe/Amsterdam
-          - name: PUID
-            value: '1000'
-          - name: PGID
-            value: '5000'
-          - name: VERSION
-            value: docker
+        - name: TZ
+          value: Europe/Amsterdam
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '5000'
+        - name: VERSION
+          value: docker
         volumeMounts:
         - name: pms-transcode
           mountPath: /transcode
@@ -54,12 +54,12 @@ spec:
             cpu: 10m
             memory: 100Mi
         env:
-          - name: TZ
-            value: Europe/Amsterdam
-          - name: PUID
-            value: '1000'
-          - name: PGID
-            value: '5000'
+        - name: TZ
+          value: Europe/Amsterdam
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '5000'
         volumeMounts:
         - name: tautulli-data
           mountPath: /config 

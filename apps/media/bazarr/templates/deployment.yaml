@@ -20,63 +20,63 @@ spec:
       automountServiceAccountToken: false
       securityContext:
       containers:
-        - name: bazarr
-          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-          resources:
-            requests:
-              cpu: 0.25
-              memory: 1Gi
-          env:
-            - name: TZ
-              value: Europe/Amsterdam
-            - name: PUID
-              value: '1000'
-            - name: PGID
-              value: '5000'
-          ports:
-            - containerPort: 6767
-              name: http
-              protocol: TCP
-          volumeMounts:
-            - name: data
-              mountPath: /config
-            - name: media
-              mountPath: /media
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-        - name: exportarr
-          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
-          args:
-            - bazarr
-          env:
-            - name: PORT
-              value: "9707"
-            - name: URL
-              value: "http://localhost:6767"
-            - name: ENABLE_ADDITIONAL_METRICS
-              value: "true"
-            - name: APIKEY
-              valueFrom:
-                secretKeyRef:
-                  name: api-key-secret
-                  key: api-key
-          ports:
-            - name: metrics
-              containerPort: 9707
-          volumeMounts:
-            - name: data
-              mountPath: /config
-              readOnly: true
+      - name: bazarr
+        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        resources:
+          requests:
+            cpu: 0.25
+            memory: 1Gi
+        env:
+        - name: TZ
+          value: Europe/Amsterdam
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '5000'
+        ports:
+        - containerPort: 6767
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - name: data
+          mountPath: /config
+        - name: media
+          mountPath: /media
+        # livenessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: http
+        #   failureThreshold: 5
+        #   periodSeconds: 10
+        # readinessProbe:
+        #   httpGet:
+        #     path: /
+        #     port: http
+        #   failureThreshold: 5
+        #   periodSeconds: 10
+      - name: exportarr
+        image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
+        args:
+        - bazarr
+        env:
+        - name: PORT
+          value: "9707"
+        - name: URL
+          value: "http://localhost:6767"
+        - name: ENABLE_ADDITIONAL_METRICS
+          value: "true"
+        - name: APIKEY
+          valueFrom:
+            secretKeyRef:
+              name: api-key-secret
+              key: api-key
+        ports:
+        - name: metrics
+          containerPort: 9707
+        volumeMounts:
+        - name: data
+          mountPath: /config
+          readOnly: true
       volumes:
       - name: data
         persistentVolumeClaim:

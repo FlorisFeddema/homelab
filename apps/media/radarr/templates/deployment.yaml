@@ -21,61 +21,60 @@ spec:
       securityContext:
         fsGroup: 5000
       containers:
-        - name: radarr
-          image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
-          env:
-            - name: TZ
-              value: Europe/Amsterdam
-            - name: PUID
-              value: '1000'
-            - name: PGID
-              value: '5000'
-          ports:
-            - name: http
-              protocol: TCP
-              containerPort: 7878
-          volumeMounts:
-            - name: data
-              mountPath: /config
-            - name: media
-              mountPath: /media
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-            failureThreshold: 5
-            periodSeconds: 10
-        - name: exportarr
-          image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
-          args:
-            - radarr
-          env:
-            - name: PORT
-              value: "9707"
-            - name: URL
-              value: "http://localhost:7878"
-            - name: ENABLE_ADDITIONAL_METRICS
-              value: "true"
-            - name: CONFIG
-              value: /config/config.xml
-          ports:
-            - name: metrics
-              containerPort: 9707
-          volumeMounts:
-            - name: data
-              mountPath: /config
-              readOnly: true
-      volumes:
+      - name: radarr
+        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        env:
+        - name: TZ
+          value: Europe/Amsterdam
+        - name: PUID
+          value: '1000'
+        - name: PGID
+          value: '5000'
+        ports:
+        - name: http
+          protocol: TCP
+          containerPort: 7878
+        volumeMounts:
         - name: data
-          persistentVolumeClaim:
-            claimName: radarr-data
+          mountPath: /config
         - name: media
-          persistentVolumeClaim:
-            claimName: media-library
-  
+          mountPath: /media
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          failureThreshold: 5
+          periodSeconds: 10
+      - name: exportarr
+        image: '{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}'
+        args:
+        - radarr
+        env:
+        - name: PORT
+          value: "9707"
+        - name: URL
+          value: "http://localhost:7878"
+        - name: ENABLE_ADDITIONAL_METRICS
+          value: "true"
+        - name: CONFIG
+          value: /config/config.xml
+        ports:
+        - name: metrics
+          containerPort: 9707
+        volumeMounts:
+        - name: data
+          mountPath: /config
+        readOnly: true
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: radarr-data
+      - name: media
+        persistentVolumeClaim:
+          claimName: media-library
