@@ -12,37 +12,47 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: radarr-media
+  annotations:
+    pv.kubernetes.io/provisioned-by: rook-ceph.cephfs.csi.ceph.com
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: pvc-67c659f3-838f-47d5-9c15-7d80c8710cfc-radarr
 spec:
   accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
-  mountOptions:
-    - nfsvers=3
-    - nolock
-    - noatime
+  - ReadWriteMany
   capacity:
-    storage: 1Ti
+    storage: 2Ti
   csi:
-    driver: org.democratic-csi.node-manual
-    readOnly: false
-    fsType: nfs
-    volumeHandle: ddb83394-6b14-4596-ab89-59036555af69
+    driver: rook-ceph.cephfs.csi.ceph.com
     volumeAttributes:
-      server: truenas.mobrockers.com
-      share: /mnt/slow/media
-      node_attach_driver: nfs
-      provisioner_driver: node-manual
+      staticVolume: "true"
+      clusterID: rook-ceph
+      fsName: ceph-filesystem
+      pool: ceph-filesystem-data0
+      storage.kubernetes.io/csiProvisionerIdentity: 1744229175725-2701-rook-ceph.cephfs.csi.ceph.com
+      subvolumeName: csi-vol-734b5df5-5692-45b5-bdb3-07963cdf7d88
+      rootPath: /volumes/csi/csi-vol-734b5df5-5692-45b5-bdb3-07963cdf7d88/cf58ab99-94c4-47fe-bdca-58959952b69d
+      subvolumePath: /volumes/csi/csi-vol-734b5df5-5692-45b5-bdb3-07963cdf7d88/cf58ab99-94c4-47fe-bdca-58959952b69d
+    volumeHandle: 0001-0009-rook-ceph-0000000000000001-734b5df5-5692-45b5-bdb3-07963cdf7d88-radarr
+    controllerExpandSecretRef:
+      name: rook-csi-cephfs-provisioner
+      namespace: rook-ceph
+    nodeStageSecretRef:
+      name: rook-csi-cephfs-node-user
+      namespace: rook-ceph
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: ceph-filesystem
+  volumeMode: Filesystem
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: radarr-media
+  name: media-library
 spec:
-  storageClassName: ""
-  volumeName: radarr-media
+  storageClassName: ceph-filesystem
+  volumeName: pvc-67c659f3-838f-47d5-9c15-7d80c8710cfc-radarr
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Ti
+      storage: 2Ti
