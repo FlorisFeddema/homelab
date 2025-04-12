@@ -1,10 +1,10 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: disallow-default-namespace
+  name: prevent-default-namespace
   annotations:
     pod-policies.kyverno.io/autogen-controllers: none
-    policies.kyverno.io/title: Disallow Default Namespace in CEL expressions
+    policies.kyverno.io/title: Prevent Default Namespace
     policies.kyverno.io/minversion: 1.11.0
     policies.kyverno.io/category: Prevent
     kyverno.io/kubernetes-version: "1.26-1.27"

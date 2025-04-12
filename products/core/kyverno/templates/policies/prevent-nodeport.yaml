@@ -1,9 +1,9 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: restrict-nodeport
+  name: prevent-nodeport
   annotations:
-    policies.kyverno.io/title: Disallow NodePort in CEL expressions
+    policies.kyverno.io/title: Prevent NodePort
     policies.kyverno.io/category: Prevent
     policies.kyverno.io/minversion: 1.11.0
     kyverno.io/kubernetes-version: "1.26-1.27"

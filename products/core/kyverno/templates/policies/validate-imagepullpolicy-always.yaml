@@ -3,8 +3,8 @@ kind: ClusterPolicy
 metadata:
   name: imagepullpolicy-always
   annotations:
-    policies.kyverno.io/title: Require imagePullPolicy Always
-    policies.kyverno.io/category: Mutate
+    policies.kyverno.io/title: Validate imagePullPolicy Always
+    policies.kyverno.io/category: Validate
     policies.kyverno.io/severity: medium
     policies.kyverno.io/subject: Pod
     policies.kyverno.io/minversion: 1.6.0
