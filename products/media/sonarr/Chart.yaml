@@ -4,5 +4,5 @@ version: 1.0.0
 
 dependencies:
   - name: gatus-monitor
-    repository:
+    repository: file://../../../templates/gatus-monitor
     version: 1.0.0
