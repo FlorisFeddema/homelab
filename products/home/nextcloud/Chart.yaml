@@ -7,6 +7,6 @@ dependencies:
     version: 6.6.9
     repository: https://nextcloud.github.io/helm
   - name: gatus-monitor
-    repository: oci://ghcr.io/florisfeddema/homelab
+    repository: file://../../../templates/gatus-monitor
     version: 1.0.0
 
