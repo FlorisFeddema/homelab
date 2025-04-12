@@ -72,7 +72,7 @@ spec:
         emptyDir: {}
       - name: media
         persistentVolumeClaim:
-          claimName: plex-media
+          claimName: media-library
       - name: tautulli-data
         persistentVolumeClaim:
           claimName: tautulli-data

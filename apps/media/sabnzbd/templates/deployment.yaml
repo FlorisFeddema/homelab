@@ -92,4 +92,4 @@ spec:
             claimName: sabnzbd-data
         - name: media
           persistentVolumeClaim:
-            claimName: sabnzbd-media
+            claimName: media-library

@@ -77,4 +77,4 @@ spec:
             claimName: sonarr-data
         - name: media
           persistentVolumeClaim:
-            claimName: sonarr-media
+            claimName: media-library

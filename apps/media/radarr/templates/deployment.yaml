@@ -77,5 +77,5 @@ spec:
             claimName: radarr-data
         - name: media
           persistentVolumeClaim:
-            claimName: radarr-media
+            claimName: media-library
   
