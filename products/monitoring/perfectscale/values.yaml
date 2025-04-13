@@ -1,0 +1,12 @@
+exporter:
+  secret:
+    create: false
+  settings:
+    clusterName: gerador
+    deployKubeStateMetrics: false
+    deployWindowsExporter: false
+    ksmAddress: 'http://kube-prometheus-stack-kube-state-metrics.prometheus.svc:8080'
+    scraper:
+      scrapeExternalKSM: true
+      numberOfScrapers: 1
+      scrapeNamespace: prometheus
