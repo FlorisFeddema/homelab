@@ -78,6 +78,9 @@ cilium:
       enabled: true
       rollOutPods: true
 
+  socketLB:g
+    hostNamespaceOnly: true
+
   monitor:
     enabled: true
   prometheus:
