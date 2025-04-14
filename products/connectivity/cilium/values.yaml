@@ -78,7 +78,7 @@ cilium:
       enabled: true
       rollOutPods: true
 
-  socketLB:g
+  socketLB:
     hostNamespaceOnly: true
 
   monitor:
