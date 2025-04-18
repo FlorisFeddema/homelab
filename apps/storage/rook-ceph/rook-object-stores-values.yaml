@@ -17,23 +17,23 @@ rook-ceph-cluster:
       allowUsersInNamespaces: ['*']
       gateway:
         port: 80
-        # resources:
-        #   limits:
-        #     memory: "2Gi"
-        #   requests:
-        #     cpu: "1000m"
-        #     memory: "1Gi"
+        resources:
+          requests:
+            cpu: 10m
+            memory: 200Mi
+          limits:
+            memory: 500Mi
         # securePort: 443
         # sslCertificateRef:
         instances: 1
         priorityClassName: system-cluster-critical
-        # opsLogSidecar:
-        #   resources:
-        #     limits:
-        #       memory: "100Mi"
-        #     requests:
-        #       cpu: "100m"
-        #       memory: "40Mi"
+        opsLogSidecar:
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 100Mi
     storageClass:
       enabled: true
       name: ceph-bucket

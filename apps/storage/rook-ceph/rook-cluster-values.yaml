@@ -16,6 +16,18 @@ rook-ceph-cluster:
     cephVersion:
       image: quay.io/ceph/ceph:v19.2.2
 
+    network:
+      provider: host
+      encryption:
+        enabled: false
+      compression:
+        enabled: false
+      addressRanges:
+        public: ['10.0.102.0/24']
+        cluster: ['10.0.104.0/24']
+    dashboard:
+      ssl: false
+
     csi:
       readAffinity:
         enabled: true
@@ -33,18 +45,60 @@ rook-ceph-cluster:
       modules:
       - name: pg_autoscaler
         enabled: true
-    dashboard:
-      ssl: false
 
-    network:
-      provider: host
-      encryption:
-        enabled: false
-      compression:
-        enabled: false
-      addressRanges:
-        public: ['10.0.102.0/24']
-        cluster: ['10.0.104.0/24']
+  resources:
+    mgr:
+      requests:
+        cpu: 0.5
+        memory: 512Mi
+      limits:
+        memory: 1Gi
+    mon:
+      requests:
+        cpu: 1
+        memory: 1Gi
+      limits:
+        memory: 2Gi
+    osd:
+      requests:
+        cpu: 0.5
+        memory: 3Gi
+      limits:
+        memory: 5Gi
+    prepareosd:
+      requests:
+        cpu: 0.5
+        memory: 50Mi
+    mgr-sidecar:
+      requests:
+        cpu: 100m
+        memory: 40Mi
+      limits:
+        memory: 100Mi
+    crashcollector:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        memory: 100Mi
+    logcollector:
+      requests:
+        cpu: 10m
+        memory: 10Mi
+      limits:
+        memory: 100Mi
+    cleanup:
+      requests:
+        cpu: 500m
+        memory: 100Mi
+      limits:
+        memory: 1Gi
+    exporter:
+      requests:
+        cpu: 50m
+        memory: 50Mi
+      limits:
+        memory: 128Mi
 
     storage:
       useAllNodes: false
