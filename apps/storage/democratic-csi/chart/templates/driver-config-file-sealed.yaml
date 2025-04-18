@@ -1,9 +1,0 @@
-{{- if .Values.driverConfigFileSealed }}
-apiVersion: bitnami.com/v1alpha1
-kind: SealedSecret
-metadata:
-  name: '{{ index .Values "democratic-csi" "driver" "existingConfigSecret" }}'
-spec:
-  encryptedData:
-    driver-config-file.yaml: {{ .Values.driverConfigFileSealed.value }}
-{{- end }}
