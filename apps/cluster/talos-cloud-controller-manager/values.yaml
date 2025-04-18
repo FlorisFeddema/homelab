@@ -16,22 +16,6 @@ talos-cloud-controller-manager:
     node-role.kubernetes.io/control-plane: ""
 
   transformations:
-  - name: publicIPDiscovery
-    nodeSelector:
-    - matchExpressions:
-      - key: platform
-        operator: Exists
-    features:
-      publicIPDiscovery: true
-  - name: zone
-    nodeSelector:
-    - matchExpressions:
-      - key: hostname
-        operator: Exists
-    platformMetadata:
-      Region: "njord-on-proxmox"
-      Zone: |
-        '{{ regexFindString "^.*-([a-z0-9]+)$" .Hostname 1 }}'
   - name: worker
     nodeSelector:
     - matchExpressions:
