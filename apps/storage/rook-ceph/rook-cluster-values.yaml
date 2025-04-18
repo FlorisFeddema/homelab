@@ -79,25 +79,25 @@ rook-ceph-cluster:
     resources:
       mgr:
         requests:
-          cpu: 0.5
+          cpu: 500m
           memory: 512Mi
         limits:
           memory: 1Gi
       mon:
         requests:
-          cpu: 1
+          cpu: 1000m
           memory: 1Gi
         limits:
           memory: 2Gi
       osd:
         requests:
-          cpu: 0.5
+          cpu: 500m
           memory: 3Gi
         limits:
           memory: 5Gi
       prepareosd:
         requests:
-          cpu: 0.5
+          cpu: 500m
           memory: 50Mi
       mgr-sidecar:
         requests:
