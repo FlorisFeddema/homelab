@@ -6,5 +6,8 @@ apps:
       deploy: true
     immich:
       deploy: true
+    dawarich:
+      deploy: true
+      autoSync: false
     mealie:
       deploy: false
