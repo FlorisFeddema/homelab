@@ -17,6 +17,10 @@ dawarich:
     tls:
       enabled: true
 
+  photon:
+    persistence:
+      size: 300Gi
+
   redis:
     master:
       resources:
