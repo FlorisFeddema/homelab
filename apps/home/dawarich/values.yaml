@@ -16,3 +16,18 @@ dawarich:
       nginx.ingress.kubernetes.io/proxy-body-size: "100m"
     tls:
       enabled: true
+
+  redis:
+    master:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/instance: dawarich
+                  app.kubernetes.io/managed-by: Helm
+                  app.kubernetes.io/name: dawarich
+                  app.kubernetes.io/part-of: dawarich
+              topologyKey: "kubernetes.io/hostname"
