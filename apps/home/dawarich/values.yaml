@@ -19,6 +19,12 @@ dawarich:
 
   redis:
     master:
+      resources:
+        requests:
+          cpu: 200m
+          memory: 250Mi
+        limits:
+          memory: 500Mi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
