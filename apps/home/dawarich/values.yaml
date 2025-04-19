@@ -12,5 +12,7 @@ dawarich:
   ingress:
     enabled: true
     domain: timeline.mobrockers.com
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: "100m"
     tls:
       enabled: true
