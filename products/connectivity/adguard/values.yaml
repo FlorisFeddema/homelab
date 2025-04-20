@@ -17,7 +17,7 @@ gatus-monitor:
       alerts:
         - type: telegram
           send-on-resolved: true
-          failure-threshold: 2
+          failure-threshold: 4
           success-threshold: 1
     - name: cloudflare-dns
       url: 1.1.1.1
