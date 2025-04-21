@@ -50,10 +50,10 @@ authentik:
             name: authentik-secret
 
   worker:
-    replicas: 1
+    replicas: 2
 
   server:
-    replicas: 1
+    replicas: 2
 
     metrics:
       serviceMonitor:
