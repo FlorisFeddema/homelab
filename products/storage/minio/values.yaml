@@ -5,17 +5,6 @@ gatus-monitor:
   privateEndpoints:
     - name: minio
 
-patchBackupPvcJob:
-  enabled: true
-  image:
-    registry: docker.io
-    repository: bitnami/kubectl
-    tag: 1.32.3
-  pvcNames:
-    - export-minio-0
-    - export-minio-1
-    - export-minio-2
-
 route:
   enabled: true
   hostnames:
