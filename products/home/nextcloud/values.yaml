@@ -91,7 +91,7 @@ nextcloud:
   persistence:
     enabled: true
     accessMode: ReadWriteOnce
-    size: 16Gi
+    size: 50Gi
     # labels are added by hand
     labels:
       recurring-job.longhorn.io/source: enabled
