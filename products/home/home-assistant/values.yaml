@@ -38,12 +38,7 @@ home-assistant:
         sectionName: web-https
 
   ingress:
-    domain: home.feddema.dev
-    class: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    tls:
-      secretName: home-assistant-tls
+    enabled: false
 
   config:
     securityContext:

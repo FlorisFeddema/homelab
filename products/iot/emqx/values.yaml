@@ -50,7 +50,3 @@ cluster:
     domain: mqtt.feddema.dev
     issuer: letsencrypt-dns
 
-  ingress:
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    domain: emqx.feddema.dev
