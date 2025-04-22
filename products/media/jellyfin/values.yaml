@@ -29,16 +29,6 @@ persistence:
     recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 
-ingress:
-  enabled: true
-  domain: jellyfin.feddema.dev
-  class: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns
-  tls:
-    enabled: true
-    secretName: jellyfin-tls
-
 route:
   enabled: true
   hostnames:

@@ -26,16 +26,6 @@ persistence:
     recurring-job.longhorn.io/source: enabled
     recurring-job-group.longhorn.io/backup: enabled
 
-ingress:
-  enabled: true
-  domain: jellyseerr.feddema.dev
-  class: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns
-  tls:
-    enabled: true
-    secretName: jellyseerr-tls
-
 route:
   enabled: true
   hostnames:
