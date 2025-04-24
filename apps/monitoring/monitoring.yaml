@@ -7,4 +7,3 @@ apps:
       namespace: prometheus
     perfectscale:
       deploy: true
-      autoSync: false
