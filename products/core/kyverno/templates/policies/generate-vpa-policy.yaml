@@ -26,24 +26,24 @@ spec:
       generate:
         apiVersion: autoscaling.k8s.io/v1
         kind: VerticalPodAutoscaler
-        name: "{{request.object.metadata.name}}"
-        namespace: "{{request.object.metadata.namespace}}"
+        name: "{{`{{request.object.metadata.name}}`}}"
+        namespace: "{{`{{request.object.metadata.namespace}}`}}"
         synchronize: true
         data:
           metadata:
             labels:
               generated-by: kyverno
             ownerReferences:
-              - apiVersion: "{{request.object.apiVersion}}"
-                kind: "{{request.object.kind}}"
-                name: "{{request.object.metadata.name}}"
-                uid: "{{request.object.metadata.uid}}"
+              - apiVersion: "{{`{{request.object.apiVersion}}`}}"
+                kind: "{{`{{request.object.kind}}`}}"
+                name: "{{`{{request.object.metadata.name}}`}}"
+                uid: "{{`{{request.object.metadata.uid}}`}}"
                 controller: true
                 blockOwnerDeletion: true
           spec:
             targetRef:
-              apiVersion: "{{request.object.apiVersion}}"
-              kind: "{{request.object.kind}}"
-              name: "{{request.object.metadata.name}}"
+              apiVersion: "{{`{{request.object.apiVersion}}`}}"
+              kind: "{{`{{request.object.kind}}`}}"
+              name: "{{`{{request.object.metadata.name}}`}}"
             updatePolicy:
-              updateMode: "Off"
+              updateMode: "Auto"
