@@ -46,4 +46,4 @@ spec:
               kind: "{{`{{request.object.kind}}`}}"
               name: "{{`{{request.object.metadata.name}}`}}"
             updatePolicy:
-              updateMode: "Auto"
+              updateMode: "Off"
