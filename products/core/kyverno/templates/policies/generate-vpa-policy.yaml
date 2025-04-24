@@ -1,0 +1,49 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: generate-vpa-for-workloads
+spec:
+  generateExisting: true
+  rules:
+    - name: generate-vpa
+      match:
+        resources:
+          kinds:
+            - Deployment
+            - StatefulSet
+            - DaemonSet
+      exclude:
+        resources:
+          namespaces:
+            - kube-system
+            - kyverno
+            - longhorn-system
+            - kube-public
+            - kube-node-lease
+          selector:
+            matchLabels:
+              feddema.dev/vpa-autogen: "false"
+      generate:
+        apiVersion: autoscaling.k8s.io/v1
+        kind: VerticalPodAutoscaler
+        name: "{{request.object.metadata.name}}"
+        namespace: "{{request.object.metadata.namespace}}"
+        synchronize: true
+        data:
+          metadata:
+            labels:
+              generated-by: kyverno
+            ownerReferences:
+              - apiVersion: "{{request.object.apiVersion}}"
+                kind: "{{request.object.kind}}"
+                name: "{{request.object.metadata.name}}"
+                uid: "{{request.object.metadata.uid}}"
+                controller: true
+                blockOwnerDeletion: true
+          spec:
+            targetRef:
+              apiVersion: "{{request.object.apiVersion}}"
+              kind: "{{request.object.kind}}"
+              name: "{{request.object.metadata.name}}"
+            updatePolicy:
+              updateMode: "Off"
