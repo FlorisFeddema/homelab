@@ -63,17 +63,31 @@ rules:
       - verticalpodautoscalers
     verbs:
       - get
-      - watch
-      - list
       - delete
       - update
-      - patch
       - create
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
+  name: kyverno:generate-vpa-policy-background
+  labels:
+    app.kubernetes.io/component: background-controller
+    app.kubernetes.io/instance: kyverno
+    app.kubernetes.io/part-of: kyverno
+subjects:
+  - kind: ServiceAccount
+    name: kyverno-background-controller
+    namespace: kyverno
+roleRef:
+  kind: ClusterRole
   name: kyverno:generate-vpa-policy
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: kyverno:generate-vpa-policy-admission
   labels:
     app.kubernetes.io/component: admission-controller
     app.kubernetes.io/instance: kyverno
