@@ -6,7 +6,7 @@ vpa:
       v: "4"
       pod-recommendation-min-cpu-millicores: 5
       pod-recommendation-min-memory-mb: 10
-      prometheus-address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
+      prometheus-address: http://prometheus-prometheus.prometheus.svc.cluster.local:9090
       storage: prometheus
     replicaCount: 2
     podMonitor:
