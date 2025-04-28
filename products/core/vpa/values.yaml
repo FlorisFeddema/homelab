@@ -8,7 +8,9 @@ vpa:
       pod-recommendation-min-memory-mb: 10
       prometheus-address: http://prometheus-kube-prometheus-prometheus.prometheus.svc.cluster.local:9090
       storage: prometheus
-    replicaCount: 1
+    replicaCount: 2
+    podMonitor:
+      enabled: true
     resources:
       limits:
         memory: 120Mi
@@ -19,7 +21,9 @@ vpa:
   updater:
     enabled: true
     revisionHistoryLimit: 0
-    replicaCount: 1
+    replicaCount: 2
+    podMonitor:
+      enabled: true
     resources:
       limits:
         memory: 120Mi
@@ -31,7 +35,10 @@ vpa:
     revisionHistoryLimit: 0
     enabled: true
     generateCertificate: true
-    replicaCount: 1
+    registerWebhook: true
+    replicaCount: 2
+    podMonitor:
+      enabled: true
     resources:
       limits:
         memory: 120Mi
