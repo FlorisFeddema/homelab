@@ -5,6 +5,9 @@
   "argocd": {
     "fileMatch": ["\\.yaml$"]
   },
+  "helm-values": {
+    "enabled": true
+  },
   "regexManagers": [
     {
       "fileMatch": ["^values\\.yaml$"],
