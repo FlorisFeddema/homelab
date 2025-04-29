@@ -4,5 +4,14 @@
   ],
   "argocd": {
     "fileMatch": ["\\.yaml$"]
-  }
+  },
+  "regexManagers": [
+    {
+      "fileMatch": ["^values\\.yaml$"],
+      "matchStrings": [
+        "name:\\s*(?<depName>ghcr\\.io/zapier/kubechecks)\\s*tag:\\s*(?<currentValue>v?[\\d\\.]+)"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
 }

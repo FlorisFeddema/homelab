@@ -51,20 +51,7 @@ kubechecks:
 
     image:
       name: ghcr.io/zapier/kubechecks
-      tag: v2.1.0
-
-    podSecurityContext:
-#       runAsNonRoot: true
-#       runAsUser: 32123
-#       fsGroup: 32123
-
-    securityContext:
-#       allowPrivilegeEscalation: false
-#       privileged: false
-#       capabilities:
-#         drop:
-#           - ALL
-#       readOnlyRootFilesystem: false
+      tag: v2.4.2
 
     envFrom:
       - secretRef:
