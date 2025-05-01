@@ -15,7 +15,6 @@ dawarich:
         topologyKey: topology.kubernetes.io/zone
         whenUnsatisfiable: ScheduleAnyway
 
-cyberchef:
   route:
     enabled: true
     hostnames:
