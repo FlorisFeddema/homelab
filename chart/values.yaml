@@ -89,7 +89,7 @@ products:
     cyberchef:
       deploy: true
       autoSync: true
-    darwarich:
+    dawarich:
       deploy: true
       autoSync: true
     homeAssistant:

@@ -1,9 +1,9 @@
 gatus-monitor:
-  appName: darwarich
+  appName: dawarich
   publicEndpoints:
-    - name: darwarich
+    - name: dawarich
   privateEndpoints:
-    - name: darwarich
+    - name: dawarich
 
 dawarich:
   database:
@@ -18,7 +18,7 @@ dawarich:
   route:
     enabled: true
     hostnames:
-      - darwarich.feddema.dev
+      - dawarich.feddema.dev
     parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
