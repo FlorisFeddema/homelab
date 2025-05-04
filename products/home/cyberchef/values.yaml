@@ -8,6 +8,9 @@ gatus-monitor:
     - name: tools
 
 cyberchef:
+  ingress:
+    enabled: false
+
   route:
     enabled: true
     hostnames:
