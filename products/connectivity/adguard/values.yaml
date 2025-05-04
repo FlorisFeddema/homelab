@@ -57,6 +57,9 @@ adguard:
         recurring-job-group.longhorn.io/backup: enabled
 
   primary:
+    ingress:
+      enabled: false
+
     route:
       enabled: true
       hostnames:
