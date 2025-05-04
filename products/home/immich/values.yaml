@@ -20,6 +20,9 @@ immich:
     storageClass: 'longhorn'
     accessMode: ReadWriteMany
 
+  ingress:
+    enabled: false
+
   route:
     enabled: true
     hostnames:
