@@ -37,17 +37,7 @@ grafana:
   revisionHistoryLimit: 0
 
   ingress:
-    enabled: true
-    annotations:
-      ingress.kubernetes.io/rewrite-target: /
-      cert-manager.io/cluster-issuer: letsencrypt-dns
-    path: /
-    hosts:
-      - grafana.feddema.dev
-    tls:
-      - hosts:
-          - grafana.feddema.dev
-        secretName: "grafana-tls"
+    enabled: false
 
   route:
     main:
