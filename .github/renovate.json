@@ -3,8 +3,8 @@
     "github>florisfeddema/renovate-config:default.json"
   ],
   "argocd": {
-    "fileMatch": [
-      "\\.yaml$"
+    "managerFilePatterns": [
+      "/\\.yaml$/"
     ]
   },
   "helm-values": {
@@ -13,8 +13,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^values\\.yaml$"
+      "managerFilePatterns": [
+        "/^values\\.yaml$/"
       ],
       "matchStrings": [
         "name:\\s*(?<depName>ghcr\\.io/zapier/kubechecks)\\s*tag:\\s*(?<currentValue>v?[\\d\\.]+)"
