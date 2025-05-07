@@ -36,7 +36,7 @@ spec:
       - ServerSideApply=true
     {{- end }}
     automated:
-      {{- if hasKey $app "autoSync") }}
+      {{- if hasKey $app "autoSync" }}
       enabled: $app.autoSync
       {{- else }}
       enabled: true
