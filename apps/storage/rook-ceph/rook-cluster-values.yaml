@@ -27,6 +27,7 @@ rook-ceph-cluster:
         cluster: ['10.0.104.0/24']
     dashboard:
       ssl: false
+      prometheusEndpoint: http://kube-prometheus-stack-prometheus.prometheus.svc:9090
 
     csi:
       readAffinity:
@@ -50,6 +51,8 @@ rook-ceph-cluster:
       count: 2
       modules:
       - name: pg_autoscaler
+        enabled: true
+      - name: insights
         enabled: true
 
     storage:
