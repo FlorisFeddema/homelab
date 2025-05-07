@@ -6,7 +6,6 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
 data:
-  application.resourceTrackingMethod: annotation
   admin.enabled: 'false'
   exec.enabled: 'true'
   url: https://argocd.mobrockers.com
@@ -21,11 +20,6 @@ data:
     clientSecret: $authentik-credentials:client_secret
     requestedScopes: ['openid', 'profile', 'email', 'groups', 'offline_access']
   accounts.kubechecks: apiKey
-
-  resource.compareoptions: |
-    # disables status field diffing in specified resource types
-    ignoreAggregatedRoles: true
-    ignoreResourceStatusField: all
 
   resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
     jqPathExpressions:
