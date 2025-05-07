@@ -32,13 +32,19 @@ rook-ceph-cluster:
       readAffinity:
         enabled: true
 
+    placement:
+      mon:
+        topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
+      mgr:
+        topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: DoNotSchedule
     mon:
       count: 3
-      failureDomainLabel: topology.kubernetes.io/zone
-      zones:
-      - name: '1'
-      - name: '2'
-      - name: '3'
 
     mgr:
       count: 2
