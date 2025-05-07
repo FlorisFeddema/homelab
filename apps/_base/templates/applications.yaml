@@ -37,7 +37,7 @@ spec:
     {{- end }}
     automated:
       {{- if hasKey $app "autoSync" }}
-      enabled: $app.autoSync
+      enabled: {{ $app.autoSync }}
       {{- else }}
       enabled: true
       {{- end }}
