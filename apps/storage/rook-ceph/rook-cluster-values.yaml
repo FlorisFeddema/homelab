@@ -34,11 +34,11 @@ rook-ceph-cluster:
 
     mon:
       count: 3
-      failureDomainLabel: topology.kubernetes.io/zone
-      zones:
-      - name: '1'
-      - name: '2'
-      - name: '3'
+      # failureDomainLabel: topology.kubernetes.io/host
+      # zones:
+      # - name: '1'
+      # - name: '2'
+      # - name: '3'
 
     mgr:
       count: 2
