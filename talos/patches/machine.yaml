@@ -2,7 +2,7 @@ machine:
 
   install:
     diskSelector:
-      size: '<= 50GB'
+      size: '<= 200GB'
 
   kubelet:
     nodeIP:
