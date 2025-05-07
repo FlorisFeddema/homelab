@@ -54,6 +54,10 @@ rook-ceph-cluster:
         enabled: true
       - name: insights
         enabled: true
+      - name: rook
+        enabled: true
+      - name: rgw
+        enabled: true
 
     storage:
       useAllNodes: false
