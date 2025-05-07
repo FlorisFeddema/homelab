@@ -44,7 +44,7 @@ spec:
       {{- end }}
       prune: true
       selfHeal: true
-    {{- end }
+    {{- end }}
 ---
 {{- end }}
 {{- end }}
