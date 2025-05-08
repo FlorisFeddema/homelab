@@ -23,4 +23,3 @@ kyverno:
   reportsController:
     revisionHistoryLimit: 0
     replicas: 2
-    apiPriorityAndFairness: true
