@@ -1,13 +1,13 @@
 apiVersion: v2
 name: prometheus
-version: 1.1.133
+version: 1.1.134
 
 dependencies:
   - name: kube-prometheus-stack
     version: 72.0.1
     repository: https://prometheus-community.github.io/helm-charts
   - name: thanos
-    version: 16.0.5
+    version: 16.0.6
     repository: oci://registry-1.docker.io/bitnamicharts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
