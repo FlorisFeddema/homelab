@@ -12,7 +12,6 @@ spec:
       valueFiles:
       - ../cluster/cluster.yaml
       - ../connectivity/connectivity.yaml
-      - ../infrastructure/infrastructure.yaml
       - ../devices/devices.yaml
       - ../home/home.yaml
       - ../media/media.yaml
