@@ -1,7 +1,0 @@
-name: embla
-
-talos:
-  version: v1.9.0
-
-kubernetes:
-  version: v1.30.3

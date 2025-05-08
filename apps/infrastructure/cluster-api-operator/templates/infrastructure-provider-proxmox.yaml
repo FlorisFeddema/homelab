@@ -1,9 +1,0 @@
-apiVersion: operator.cluster.x-k8s.io/v1alpha2
-kind: InfrastructureProvider
-metadata:
-  name: proxmox
-spec:
-  version: {{ .Values.providers.infrastructure.proxmox.image.tag }}
-  manager:
-    featureGates:
-      ClusterTopology: true
