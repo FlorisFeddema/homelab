@@ -24,7 +24,5 @@ apps:
       deploy: true
     spegel:
       deploy: true
-      autoSync: false
     kubechecks:
       deploy: true
-      autoSync: false
