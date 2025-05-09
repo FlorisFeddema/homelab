@@ -1,5 +1,9 @@
 intel-gpu-resource-driver:
 
-  nodeSelector:
-    intel.feature.node.kubernetes.io/gpu: "true"
   tolerations: []
+  cdi:
+    staticPath: /var/cdi/static
+    dynamicPath: /var/cdi/dynamic
+
+  nodeFeatureRules:
+    enabled: true
