@@ -8,5 +8,6 @@ apps:
       deploy: true
     dawarich:
       deploy: true
+      autoSync: false
     mealie:
       deploy: false
