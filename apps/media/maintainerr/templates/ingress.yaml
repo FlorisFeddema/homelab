@@ -17,7 +17,7 @@ spec:
                   number: 9000
   tls:
     - hosts:
-        - bazarr.mobrockers.com
+        - maintainerr.mobrockers.com
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
