@@ -10,7 +10,6 @@ kyverno:
     revisionHistoryLimit: 0
     replicas: 3
 
-    apiPriorityAndFairness: true
     extraArgs:
     - --forceFailurePolicyIgnore
 
