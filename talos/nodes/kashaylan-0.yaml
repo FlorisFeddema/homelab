@@ -2,13 +2,6 @@ machine:
   network:
     hostname: kashaylan-0
 
-    interfaces:
-      - deviceSelector:
-          physical: true
-        dhcp: true
-        vip:
-          ip: 192.168.4.9
-
   nodeLabels:
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"
@@ -16,3 +9,8 @@ machine:
 
   install:
     disk: /dev/mmcblk0
+
+  disks:
+    - device: /dev/nvme0n1
+      partitions:
+        - mountpoint: /var/mnt/nvme1
