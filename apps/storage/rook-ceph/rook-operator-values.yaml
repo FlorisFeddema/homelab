@@ -9,12 +9,23 @@ rook-ceph:
       memory: 1Gi
   monitoring:
     enabled: true
+
+  enableDiscoveryDaemon: true
+  # discover:
+  #   resources:
+  #   - requests:
+  #       cpu: 100m
+  #       memory: 128Mi
+  #   - limits:
+  #       memory: 512Mi
+
   csi:
     enableMetadata: true
     enableOMAPGenerator: true
     enableLiveness: true
     serviceMonitor:
       enabled: true
+
     topology:
       enabled: true
       domainLabels:
