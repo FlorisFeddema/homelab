@@ -89,6 +89,8 @@ kube-prometheus-stack:
     env:
       GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: true
     grafana.ini:
+      security:
+        allow_embedding: true
       auth.basic:
         enabled: false
       auth:

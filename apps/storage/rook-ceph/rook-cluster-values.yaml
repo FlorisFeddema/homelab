@@ -25,6 +25,17 @@ rook-ceph-cluster:
       addressRanges:
         public: ['10.0.102.0/24']
         cluster: ['10.0.104.0/24']
+      
+    cephConfig:
+      mgr:
+        mgr/dashboard/GRAFANA_API_URL: "https://grafana.mobrockers.com"
+
+    # cephConfigFromSecret:
+    #   mgr:
+    #     mgr/dashboard/GRAFANA_API_PASSWORD:
+    #       name: grafana-api-credential # name of the Kubernetes secret
+    #       key: password
+
     dashboard:
       ssl: false
       prometheusEndpoint: http://kube-prometheus-stack-prometheus.prometheus.svc:9090
