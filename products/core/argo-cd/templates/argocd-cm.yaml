@@ -9,7 +9,6 @@ metadata:
 data:
   url: https://argocd.feddema.dev
 
-  application.resourceTrackingMethod: annotation
   users.anonymous.enabled: "false"
 
   accounts.infro: "apiKey"
@@ -32,7 +31,6 @@ data:
     jqPathExpressions:
     - .metadata.finalizers[]? | select(. == "post-delete-finalizer.argocd.argoproj.io" or . == "post-delete-finalizer.argocd.argoproj.io/cleanup")
     - if (.metadata.finalizers | length) == 0 then .metadata.finalizers else empty end
-
 
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
