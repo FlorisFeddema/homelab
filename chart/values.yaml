@@ -180,7 +180,8 @@ products:
     longhorn:
       deploy: true
       namespace: longhorn-system
-    minio:
+      serverSideApply: true
+    minio:g
       deploy: true
       autoSync: true
     talosBackup:
