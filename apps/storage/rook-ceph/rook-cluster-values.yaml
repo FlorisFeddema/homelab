@@ -28,7 +28,7 @@ rook-ceph-cluster:
       
     cephConfig:
       mgr:
-        mgr/dashboard/STANDBY_BEHAVIOUR: 'error'
+        mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
         mgr/dashboard/FEATURE_TOGGLE_ISCSI: 'false'
         mgr/dashboard/FEATURE_TOGGLE_MIRRORING: 'false'
