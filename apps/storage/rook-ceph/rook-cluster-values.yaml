@@ -28,7 +28,7 @@ rook-ceph-cluster:
       
     cephConfig:
       mgr:
-        mgr/dashboard/GRAFANA_API_URL: "https://grafana.mobrockers.com"
+        mgr/dashboard/STANDBY_BEHAVIOR: 'error'
 
     # cephConfigFromSecret:
     #   mgr:
