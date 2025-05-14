@@ -181,8 +181,13 @@ products:
       deploy: true
       namespace: longhorn-system
       serverSideApply: true
+      ignoreDifferences:
+        - group: apiextensions.k8s.io
+          kind: CustomResourceDefinition
+          jsonPointers:
+            - /spec/preserveUnknownFields
     minio:
-      deploy: true
+      deploy:g true
       autoSync: true
     talosBackup:
       deploy: true
