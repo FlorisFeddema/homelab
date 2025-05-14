@@ -30,6 +30,7 @@ spec:
   syncPolicy:
     syncOptions:
       - RespectIgnoreDifferences=true
+      - FailOnSharedResource=true
     {{- if $productValue.serverSideApply }}
       - ServerSideApply=true
     {{- end }}
