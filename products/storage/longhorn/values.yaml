@@ -15,6 +15,10 @@ route:
       sectionName: web-https
       group: gateway.networking.k8s.io
       kind: Gateway
+  matches:
+    - path:
+        type: PathPrefix
+        value: /
 
 backups:
   enabled: true

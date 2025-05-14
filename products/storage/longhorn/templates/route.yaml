@@ -29,6 +29,7 @@ spec:
           port: 80
           group: ''
           kind: Service
+          weight: 1
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
