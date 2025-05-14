@@ -187,7 +187,7 @@ products:
           jsonPointers:
             - /spec/preserveUnknownFields
     minio:
-      deploy:g true
+      deploy: true
       autoSync: true
     talosBackup:
       deploy: true
