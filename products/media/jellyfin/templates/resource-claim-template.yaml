@@ -10,3 +10,5 @@ spec:
       requests:
         - name: i915
           deviceClassName: gpu.intel.com
+          count: 1
+          allocationMode: ExactCount
