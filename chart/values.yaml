@@ -189,6 +189,9 @@ products:
     minio:
       deploy: true
       autoSync: true
+    rookCeph:
+        deploy: true
+        autoSync: true
     talosBackup:
       deploy: true
-      autoSync: true
+      autoSync: false
