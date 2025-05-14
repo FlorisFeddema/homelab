@@ -13,6 +13,8 @@ route:
     - name: envoy-gateway-public
       namespace: envoy-gateway
       sectionName: web-https
+      group: gateway.networking.k8s.io
+      kind: Gateway
 
 backups:
   enabled: true
