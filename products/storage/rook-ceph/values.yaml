@@ -215,8 +215,8 @@ rook-ceph-cluster:
       requireMsgr2: true
       provider: host
       addressRanges:
-        public: ['10.0.104.0/24']
-        cluster: ['10.0.105.0/24']
+        public: ['192.168.4.0/24']
+        cluster: ['192.168.5.0/24']
 
     cephConfig:
       mgr:
