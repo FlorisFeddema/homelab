@@ -273,11 +273,15 @@ ceph-rook-cluster:
       useAllNodes: false
       useAllDevices: false
       allowDeviceClassUpdate: true
-#      nodes:
-#        - name: talos-worker-1
-#          devices:
-#            - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1
-#              deviceClass: nvme
+      nodes:
+        - name: hotrek-0
+          devices:
+            - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030303937365031313130-4c6578617220535344204e4d36323020325442-00000001
+              deviceClass: nvme
+            - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030323137395031313130-4c6578617220535344204e4d36323020325442-00000001
+              deviceClass: nvme
+            - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030343131325031313130-4c6578617220535344204e4d36323020325442-00000001
+              deviceClass: nvme
 
     resources:
       mgr:
@@ -332,3 +336,96 @@ ceph-rook-cluster:
           memory: 50Mi
         limits:
           memory: 128Mi
+
+
+  cephBlockPools:
+    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
+    - name: ceph-blockpool
+      spec:
+        failureDomain: zone
+        replicated:
+          size: 2
+        enableRBDStats: true
+      storageClass:
+        enabled: true
+        name: ceph-block
+        isDefault: false
+        reclaimPolicy: Delete
+        allowVolumeExpansion: true
+        volumeBindingMode: Immediate
+  cephBlockPoolsVolumeSnapshotClass:
+    enabled: false
+    name: ceph-block
+    isDefault: false
+    deletionPolicy: Delete
+
+  cephFileSystems:
+    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
+    - name: ceph-filesystem
+      spec:
+        metadataPool:
+          failureDomain: zone
+          replicated:
+            size: 2
+        dataPools:
+          - name: data0
+            failureDomain: zone
+            replicated:
+              size: 2
+        metadataServer:
+          activeCount: 1
+          activeStandby: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 1Gi
+            limits:
+              memory: 3Gi
+      storageClass:
+        enabled: true
+        isDefault: false
+        name: ceph-filesystem
+        pool: data0
+        reclaimPolicy: Delete
+        allowVolumeExpansion: true
+        volumeBindingMode: "Immediate"
+  cephFileSystemVolumeSnapshotClass:
+    enabled: false
+    name: ceph-filesystem
+    isDefault: false
+    deletionPolicy: Delete
+
+  cephObjectStores:
+    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration
+    - name: ceph-objectstore
+      spec:
+        metadataPool:
+          failureDomain: zone
+          replicated:
+            size: 2
+        dataPool:
+          failureDomain: zone
+          replicated:
+            size: 2
+        allowUsersInNamespaces: ['*']
+        gateway:
+          port: 80
+          resources:
+            requests:
+              cpu: 10m
+              memory: 200Mi
+            limits:
+              memory: 500Mi
+          instances: 2
+          opsLogSidecar:
+            resources:
+              requests:
+                cpu: 10m
+                memory: 10Mi
+              limits:
+                memory: 100Mi
+      storageClass:
+        enabled: true
+        name: ceph-bucket
+        reclaimPolicy: Delete
+        volumeBindingMode: Immediate
