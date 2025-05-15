@@ -197,12 +197,8 @@ rook-ceph:
           limits:
             memory: 100Mi
 
-
-
-
-
 #######################################################
-ceph-rook-cluster:
+rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: true
