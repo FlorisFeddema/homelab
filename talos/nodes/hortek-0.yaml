@@ -3,6 +3,16 @@ machine:
 
   network:
     hostname: hortek-0
+    interfaces:
+      - interface: enp1s0f1 # node
+        dhcp: true
+      - interface: enp1s0f0 # storage
+        dhcp: false
+        addresses:
+          - 192.168.5.15/24
+        routes:
+          - network: 192.168.5.0/24
+            gateway: 192.168.5.1
 
   nodeLabels:
     topology.kubernetes.io/zone: "hortek"

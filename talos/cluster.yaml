@@ -41,6 +41,8 @@ machine:
           cdi_spec_dirs = ["/var/cdi/static", "/var/cdi/dynamic"]      
 
   kubelet:
+    nodeIP:
+      validSubnets: ['192.168.4.0/24'] # Make sure nodes subnet IP is picked
     extraArgs:
       cloud-provider: external
       rotate-server-certificates: true
