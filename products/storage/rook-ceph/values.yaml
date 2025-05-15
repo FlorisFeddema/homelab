@@ -196,3 +196,139 @@ rook-ceph:
             memory: 15Mi
           limits:
             memory: 100Mi
+
+
+
+
+
+#######################################################
+ceph-rook-cluster:
+  monitoring:
+    enabled: true
+    createPrometheusRules: true
+
+  cephClusterSpec:
+    cephVersion:
+      image: quay.io/ceph/ceph:v19.2.2
+
+    network:
+      encryption:
+        enabled: true
+      compression:
+        enabled: true
+      requireMsgr2: true
+      provider: host
+      addressRanges:
+        public: ['10.0.104.0/24']
+        cluster: ['10.0.105.0/24']
+
+    cephConfig:
+      mgr:
+        mgr/dashboard/standby_behaviour: 'error'
+        mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
+        mgr/dashboard/FEATURE_TOGGLE_ISCSI: 'false'
+        mgr/dashboard/FEATURE_TOGGLE_MIRRORING: 'false'
+
+    # cephConfigFromSecret:
+    #   mgr:
+    #     mgr/dashboard/GRAFANA_API_PASSWORD:
+    #       name: grafana-api-credential # name of the Kubernetes secret
+    #       key: password
+
+    dashboard:
+      ssl: false
+      prometheusEndpoint: http:/prometheus-thanos-query.prometheus.svc:9090
+
+    csi:
+      readAffinity:
+        enabled: true
+
+    placement:
+      mon:
+        topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: topology.kubernetes.io/zone
+            whenUnsatisfiable: DoNotSchedule
+      mgr:
+        topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: topology.kubernetes.io/zone
+            whenUnsatisfiable: DoNotSchedule
+    mon:
+      count: 3
+
+    mgr:
+      count: 2
+      modules:
+        - name: pg_autoscaler
+          enabled: true
+        - name: insights
+          enabled: true
+        - name: rook
+          enabled: true
+        - name: rgw
+          enabled: true
+
+    storage:
+      useAllNodes: false
+      useAllDevices: false
+      allowDeviceClassUpdate: true
+#      nodes:
+#        - name: talos-worker-1
+#          devices:
+#            - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1
+#              deviceClass: nvme
+
+    resources:
+      mgr:
+        requests:
+          cpu: 500m
+          memory: 512Mi
+        limits:
+          memory: 1Gi
+      mon:
+        requests:
+          cpu: 1000m
+          memory: 1Gi
+        limits:
+          memory: 2Gi
+      osd:
+        requests:
+          cpu: 500m
+          memory: 3Gi
+        limits:
+          memory: 5Gi
+      prepareosd:
+        requests:
+          cpu: 500m
+          memory: 50Mi
+      mgr-sidecar:
+        requests:
+          cpu: 100m
+          memory: 40Mi
+        limits:
+          memory: 100Mi
+      crashcollector:
+        requests:
+          cpu: 10m
+          memory: 50Mi
+        limits:
+          memory: 100Mi
+      logcollector:
+        requests:
+          cpu: 10m
+          memory: 10Mi
+        limits:
+          memory: 100Mi
+      cleanup:
+        requests:
+          cpu: 500m
+          memory: 100Mi
+        limits:
+          memory: 1Gi
+      exporter:
+        requests:
+          cpu: 50m
+          memory: 50Mi
+        limits:
+          memory: 128Mi
