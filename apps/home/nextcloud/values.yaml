@@ -19,11 +19,23 @@ nextcloud:
   nextcloud:
     host: nextcloud.mobrockers.com
 
-    existingSecret:
-      enabled: true
-      secretName: nextcloud-credentials
-      usernameKey: username
-      passwordKey: password
+    objectStore:
+      s3:
+        enabled: true
+        host: rook-ceph-rgw-ceph-objectstore.rook-ceph.svc
+        port: 80
+        bucket: nextcloud-7c6ee2db-1c20-4088-9e57-ab57fef65a3b
+        usePathStyle: true
+        existingSecret: nextcloud-bucket
+        secretKeys:
+          accessKey: AWS_ACCESS_KEY_ID
+          secretKey: AWS_SECRET_ACCESS_KEY
+
+    # existingSecret:
+    #   enabled: true
+    #   secretName: nextcloud-credentials
+    #   usernameKey: username
+    #   passwordKey: password
 
     mail:
       enabled: false
@@ -58,24 +70,12 @@ nextcloud:
     accessMode: ReadWriteMany
     size: 8Gi
 
-  objectStore:
-    s3:
-      enabled: true
-      host: rook-ceph-rgw-ceph-objectstore.rook-ceph.svc
-      port: 80
-      bucket: nextcloud-7c6ee2db-1c20-4088-9e57-ab57fef65a3b
-      usePathStyle: true
-      existingSecret: nextcloud-bucket
-      secretKeys:
-        accessKey: AWS_ACCESS_KEY_ID
-        secretKey: AWS_SECRET_ACCESS_KEY
-
-  resources:
-    limits:
-      memory: 512Mi
-    requests:
-      cpu: 90m
-      memory: 128Mi
+  # resources:
+  #   limits:
+  #     memory: 512Mi
+  #   requests:
+  #     cpu: 90m
+  #     memory: 128Mi
 
   metrics:
     enabled: true
