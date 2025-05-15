@@ -26,9 +26,6 @@ machine:
     - device: /dev/nvme0n1
       partitions:
         - mountpoint: /var/mnt/nvme1
-    - device: /dev/nvme1n1
-      partitions:
-        - mountpoint: /var/mnt/nvme2
     - device: /dev/nvme2n1
       partitions:
         - mountpoint: /var/mnt/nvme3
