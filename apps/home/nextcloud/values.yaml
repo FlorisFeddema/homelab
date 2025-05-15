@@ -11,7 +11,8 @@ nextcloud:
   ingress:
     enabled: true
     tls:
-    - host: nextcloud.mobrockers.com
+    - hosts:
+      - nextcloud.mobrockers.com
 
   nginx:
     enabled: true
