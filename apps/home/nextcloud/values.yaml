@@ -25,6 +25,7 @@ nextcloud:
         enabled: true
         host: rook-ceph-rgw-ceph-objectstore.rook-ceph.svc
         port: 80
+        ssl: false
         bucket: nextcloud-7c6ee2db-1c20-4088-9e57-ab57fef65a3b
         usePathStyle: true
         existingSecret: nextcloud-bucket
