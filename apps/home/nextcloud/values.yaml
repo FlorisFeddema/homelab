@@ -49,27 +49,27 @@ nextcloud:
     #     cpu: 100m
     #     memory: 128Mi
 
-  extraInitContainers :
-  - name: config-loader
-    image: ghcr.io/kiwigrid/k8s-sidecar/1.30.3
-    restartPolicy: Always]
-    securityContext:
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop: [ "ALL" ]
-    env:
-    - name: IGNORE_ALREADY_PROCESSED
-      value: "true"
-    - name: LABEL
-      value: "nextcloud-config"
-    - name: FOLDER
-      value: /config
-    - name: RESOURCE
-      value: "both"
-    volumeMounts:
-    - name: nextcloud-main
-      mountPath: /config
-      subPath: config
+    extraInitContainers :
+    - name: config-loader
+      image: ghcr.io/kiwigrid/k8s-sidecar/1.30.3
+      restartPolicy: Always]
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: [ "ALL" ]
+      env:
+      - name: IGNORE_ALREADY_PROCESSED
+        value: "true"
+      - name: LABEL
+        value: "nextcloud-config"
+      - name: FOLDER
+        value: /config
+      - name: RESOURCE
+        value: "both"
+      volumeMounts:
+      - name: nextcloud-main
+        mountPath: /config
+        subPath: config
 
   internalDatabase:
     enabled: false
