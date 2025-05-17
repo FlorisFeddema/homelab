@@ -36,12 +36,13 @@ spec:
         - mountPath: /config
           name: nextcloud-main
           subPath: config
+        securiryContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
       securityContext:
         fsGroup: 82
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
       volumes:
         - name: nextcloud-main
           persistentVolumeClaim:
