@@ -13,8 +13,6 @@ records:
   ip: 10.0.100.54
 - name: embla-5
   ip: 10.0.100.55
-- name: truenas
-  ip: 10.0.101.10
 - name: k8s
   ip: 10.0.102.10
 
