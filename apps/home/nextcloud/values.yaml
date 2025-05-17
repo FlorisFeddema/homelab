@@ -52,7 +52,7 @@ nextcloud:
     extraInitContainers :
     - name: config-loader
       image: ghcr.io/kiwigrid/k8s-sidecar/1.30.3
-      restartPolicy: Always]
+      restartPolicy: Always
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
