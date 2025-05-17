@@ -58,11 +58,11 @@ nextcloud:
           accessKey: AWS_ACCESS_KEY_ID
           secretKey: AWS_SECRET_ACCESS_KEY
 
-    # existingSecret:
-    #   enabled: true
-    #   secretName: nextcloud-credentials
-    #   usernameKey: username
-    #   passwordKey: password
+    existingSecret:
+      enabled: true
+      secretName: nextcloud-credentials
+      usernameKey: username
+      passwordKey: password
 
     mail:
       enabled: false
@@ -79,7 +79,6 @@ nextcloud:
   externalDatabase:
     enabled: true
     type: postgresql
-
     existingSecret:
       enabled: true
       secretName: nextcloud-db-app
