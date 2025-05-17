@@ -6,7 +6,7 @@ spec:
   instances: 2
 
   storage:
-    size: 500Mi
+    size: 1Gi
 
   topologySpreadConstraints:
   - maxSkew: 1
