@@ -1,5 +1,5 @@
 nextcloud:
-  replicaCount: 1
+  replicaCount: 2
 
   image:
     flavor: fpm
