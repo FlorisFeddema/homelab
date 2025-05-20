@@ -9,7 +9,7 @@ apps:
       autoSync: false
     argocd:
       deploy: true
-      autoSync: false
+      autoSync: true
     authentik:
       deploy: true
     descheduler:
