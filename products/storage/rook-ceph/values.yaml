@@ -353,60 +353,50 @@ rook-ceph-cluster:
 
   cephBlockPools:
     # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
-    - name: ceph-blockpool
+    - name: ceph-blockpool-nvme
       spec:
         failureDomain: zone
         replicated:
           size: 2
         enableRBDStats: true
+        deviceClass: nvme
       storageClass:
         enabled: true
-        name: ceph-block
+        name: ceph-block-nvme
         isDefault: false
         reclaimPolicy: Delete
         allowVolumeExpansion: true
         volumeBindingMode: Immediate
-  cephBlockPoolsVolumeSnapshotClass:
-    enabled: false
-    name: ceph-block
-    isDefault: false
-    deletionPolicy: Delete
-
-  cephFileSystems:
-    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Shared-Filesystem/ceph-filesystem-crd.md#filesystem-settings for available configuration
-    - name: ceph-filesystem
+        parameters:
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+          csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+    - name: ceph-blockpool-hdd
       spec:
-        metadataPool:
-          failureDomain: zone
-          replicated:
-            size: 2
-        dataPools:
-          - name: data0
-            failureDomain: zone
-            replicated:
-              size: 2
-        metadataServer:
-          activeCount: 1
-          activeStandby: true
-          resources:
-            requests:
-              cpu: 10m
-              memory: 1Gi
-            limits:
-              memory: 3Gi
+        failureDomain: zone
+        replicated:
+          size: 1
+        enableRBDStats: true
+        deviceClass: hdd
       storageClass:
         enabled: true
+        name: ceph-block-hdd
         isDefault: false
-        name: ceph-filesystem
-        pool: data0
         reclaimPolicy: Delete
         allowVolumeExpansion: true
-        volumeBindingMode: "Immediate"
-  cephFileSystemVolumeSnapshotClass:
-    enabled: false
-    name: ceph-filesystem
-    isDefault: false
-    deletionPolicy: Delete
+        volumeBindingMode: Immediate
+        parameters:
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+          csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+
+  cephFileSystems: []
 
   cephObjectStores:
     # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration

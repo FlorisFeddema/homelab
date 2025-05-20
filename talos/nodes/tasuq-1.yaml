@@ -3,7 +3,7 @@ machine:
     hostname: tasuq-1
 
   nodeLabels:
-    topology.kubernetes.io/zone: "korris"
+    topology.kubernetes.io/zone: "tasuq"
     topology.kubernetes.io/region: "salioca"
     feddema.dev/talos-configfile: "tasuq-1"
 
