@@ -191,7 +191,7 @@ products:
       autoSync: true
     rookCeph:
         deploy: true
-        autoSync: true
+        autoSync: false
     talosBackup:
       deploy: true
       autoSync: false
