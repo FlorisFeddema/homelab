@@ -40,11 +40,9 @@ data:
       if health == "HEALTH_OK" then
         hs.status = "Healthy"
         hs.message = "Ceph health is OK"
-        hs.message = "Ceph cluster health: " .. tostring(health)
       elseif health == "HEALTH_WARN" then
         hs.status = "Progressing"
         hs.message = "Ceph cluster has warnings"
-        hs.message = "Ceph cluster health: " .. tostring(health)
       elseif health == "HEALTH_ERR" then
         hs.status = "Degraded"
         hs.message = "Ceph cluster is in error state"
