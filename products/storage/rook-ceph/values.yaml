@@ -245,7 +245,7 @@ rook-ceph-cluster:
 
     dashboard:
       ssl: false
-      prometheusEndpoint: http://prometheus-thanos-query.prometheus:9090/
+#      prometheusEndpoint: http://prometheus-thanos-query.prometheus:9090/
 
     csi:
       readAffinity:
@@ -270,6 +270,7 @@ rook-ceph-cluster:
           - maxSkew: 1
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: DoNotSchedule
+
     mon:
       count: 3
 
@@ -315,9 +316,9 @@ rook-ceph-cluster:
       osd:
         requests:
           cpu: 500m
-          memory: 3Gi
+          memory: 2Gi
         limits:
-          memory: 5Gi
+          memory: 4Gi
       prepareosd:
         requests:
           cpu: 500m
