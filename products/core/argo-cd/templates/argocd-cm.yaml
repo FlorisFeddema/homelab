@@ -31,7 +31,32 @@ data:
     jqPathExpressions:
     - .metadata.finalizers[]? | select(. == "post-delete-finalizer.argocd.argoproj.io" or . == "post-delete-finalizer.argocd.argoproj.io/cleanup")
     - if (.metadata.finalizers | length) == 0 then .metadata.finalizers else empty end
+  
+  resource.customizations.health.ceph.rook.io_CephCluster: |
+    hs = {}
 
+    if obj.status ~= nil and obj.status.ceph ~= nil then
+      local health = obj.status.ceph.health
+      if health == "HEALTH_OK" then
+        hs.status = "Healthy"
+        hs.message = "Ceph health is OK"
+      elseif health == "HEALTH_WARN" then
+        hs.status = "Progressing"
+        hs.message = "Ceph cluster has warnings"
+      elseif health == "HEALTH_ERR" then
+        hs.status = "Degraded"
+        hs.message = "Ceph cluster is in error state"
+      else
+        hs.status = "Unknown"
+        hs.message = "Ceph cluster health: " .. tostring(health)
+      end
+    else
+      hs.status = "Progressing"
+      hs.message = "CephCluster status not available"
+    end
+
+    return hs
+    
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
       actions = {}
