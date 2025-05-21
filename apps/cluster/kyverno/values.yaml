@@ -52,6 +52,7 @@ policy-reporter:
       - host: kyverno.mobrockers.com
         paths:
         - path: /
+          pathType: Prefix
       tls:
       - hosts:
         - kyverno.mobrockers.com
