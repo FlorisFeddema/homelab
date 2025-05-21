@@ -5,10 +5,10 @@ version: 0.0.0
 dependencies:
   - name: kyverno
     version: 3.4.1
-    repository: oci://ghcr.io/kyverno/charts/kyverno
+    repository: oci://ghcr.io/kyverno/charts
   - name: policy-reporter
     version: 3.1.4
-    repository: oci://ghcr.io/kyverno/charts/policy-reporter
+    repository: oci://ghcr.io/kyverno/charts
   # - name: kyverno-policies
   #   version: 1.13.0
-  #   repository: oci://ghcr.io/kyverno/charts/kyverno-policies
+  #   repository: oci://ghcr.io/kyverno/charts
