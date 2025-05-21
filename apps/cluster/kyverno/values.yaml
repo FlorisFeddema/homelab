@@ -1,24 +1,75 @@
 kyverno:
-
   crds:
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
-    migration:
-      enabled: false
+
+  grafana:
+    enabled: true
 
   admissionController:
     revisionHistoryLimit: 0
     replicas: 3
 
-    extraArgs:
-    - --forceFailurePolicyIgnore
+    serviceMonitor:
+      enabled: true
 
   backgroundController:
     revisionHistoryLimit: 0
     replicas: 2
+
+    serviceMonitor:
+      enabled: true
+
   cleanupController:
     revisionHistoryLimit: 0
     replicas: 2
+
+    serviceMonitor:
+      enabled: true
+
   reportsController:
-    revisionHistoryLimit: 0
     replicas: 2
+    revisionHistoryLimit: 0
+
+    serviceMonitor:
+      enabled: true
+
+policy-reporter:
+  revisionHistoryLimit: 0
+  replicaCount: 1
+
+  metrics:
+    enabled: true
+
+  ui:
+    enabled: true
+    revisionHistoryLimit: 0
+    replicaCount: 1
+
+    ingress:
+      enabled: true
+      hosts:
+      - host: kyverno.mobrockers.com
+        paths:
+        - path: /
+      tls:
+      - hosts:
+        - kyverno.mobrockers.com
+
+
+    openIDConnect:
+      enabled: true
+      callbackUrl: https://kyverno.mobrockers.com/callback
+      secretRef: authentik-credentials
+
+  plugin:
+    kyverno:
+      enabled: true
+
+      revisionHistoryLimit: 0
+      replicaCount: 2
+
+  monitoring:
+    enabled: true
+    grafana:
+      namespace: kyverno
