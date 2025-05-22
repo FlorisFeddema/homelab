@@ -1,8 +1,8 @@
 apiVersion: v2
 name: node-problem-detector
-version: 1.0.2
+version: 1.0.3
 
 dependencies:
   - name: node-problem-detector
-    version: 2.3.20
+    version: 2.3.21
     repository: oci://ghcr.io/deliveryhero/helm-charts
