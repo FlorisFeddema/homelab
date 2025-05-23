@@ -1,10 +1,10 @@
 apiVersion: v2
 name: adguard
-version: 1.0.39
+version: 1.0.40
 
 dependencies:
   - name: adguard
-    version: 3.9.3
+    version: 3.9.5
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
