@@ -8,7 +8,6 @@ metadata:
     'policies.kyverno.io/subject': 'TopologySpreadConstraints'
     'policies.kyverno.io/description': 'Ensures Deployments and StatefulSets have topology spread constraints for high availability.'
 spec:
-  validationFailureAction: Audit
   rules:
     - name: add-topology-spread-to-workloads
       match:

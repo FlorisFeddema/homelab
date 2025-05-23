@@ -8,7 +8,6 @@ metadata:
     'policies.kyverno.io/subject': 'TopologySpreadConstraints'
     'policies.kyverno.io/description': 'Ensures CloudNativePG Cluster pods have topology spread constraints for each pod role for high availability.'
 spec:
-  validationFailureAction: Audit
   rules:
     - name: add-topology-spread-to-cnpg-cluster-podroles
       match:
