@@ -20,7 +20,8 @@ spec:
             - CREATE
             - UPDATE
       celPreconditions:
-        - expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
+        - name: 'missing-topologySpreadConstraints'
+          expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
           message: 'Workload already has topologySpreadConstraints'
       mutate:
         patchStrategicMerge:
@@ -38,3 +39,4 @@ spec:
                     whenUnsatisfiable: 'DoNotSchedule'
                     labelSelector:
                       matchLabels: '{{`{{ spec.template.metadata.labels }}`}}'
+                      

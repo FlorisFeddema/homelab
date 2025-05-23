@@ -19,7 +19,8 @@ spec:
             - CREATE
             - UPDATE
       celPreconditions:
-        - expression: '!has(object.spec.topologySpreadConstraints)'
+        - name: 'missing-topologySpreadConstraints'
+          expression: '!has(object.spec.topologySpreadConstraints)'
           message: 'PostgresCluster already has topologySpreadConstraints'
       mutate:
         patchStrategicMerge:
@@ -85,3 +86,4 @@ spec:
                   matchLabels:
                     cnpg.io/cluster: '{{`{{ name }}`}}'
                     cnpg.io/podRole: backup
+                    
