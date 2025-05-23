@@ -45,3 +45,13 @@ ingress-nginx:
           app.kubernetes.io/component: controller
       matchLabelKeys:
       - pod-template-hash
+    - maxSkew: 1
+      topologyKey: kubernetes.io/zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+          app.kubernetes.io/instance: '{{ .Release.Name }}'
+          app.kubernetes.io/component: controller
+      matchLabelKeys:
+      - pod-template-hash
