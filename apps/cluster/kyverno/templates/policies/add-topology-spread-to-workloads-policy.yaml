@@ -3,10 +3,10 @@ kind: ClusterPolicy
 metadata:
   name: add-topology-spread-to-workloads
   annotations:
-    "policies.kyverno.io/title": "Add Topology Spread Constraints to Workloads"
-    "policies.kyverno.io/category": "Best Practices"
-    "policies.kyverno.io/subject": "TopologySpreadConstraints"
-    "policies.kyverno.io/description": "Ensures Deployments and StatefulSets have topology spread constraints for high availability."
+    'policies.kyverno.io/title': 'Add Topology Spread Constraints to Workloads'
+    'policies.kyverno.io/category': 'Best Practices'
+    'policies.kyverno.io/subject': 'TopologySpreadConstraints'
+    'policies.kyverno.io/description': 'Ensures Deployments and StatefulSets have topology spread constraints for high availability.'
 spec:
   validationFailureAction: Audit
   rules:
@@ -20,8 +20,8 @@ spec:
             - CREATE
             - UPDATE
       celPreconditions:
-        - expression: "!has(object.spec.template.spec.topologySpreadConstraints)"
-          message: "Workload already has topologySpreadConstraints"
+        - expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
+          message: 'Workload already has topologySpreadConstraints'
       mutate:
         patchStrategicMerge:
           spec:
@@ -29,12 +29,12 @@ spec:
               spec:
                 topologySpreadConstraints:
                   - maxSkew: 1
-                    topologyKey: "kubernetes.io/hostname"
-                    whenUnsatisfiable: "ScheduleAnyway"
+                    topologyKey: 'kubernetes.io/hostname'
+                    whenUnsatisfiable: 'ScheduleAnyway'
                     labelSelector:
-                      matchLabels: {{`{{ spec.template.metadata.labels }}`}}
+                      matchLabels: '{{`{{ spec.template.metadata.labels }}`}}'
                   - maxSkew: 1
-                    topologyKey: "topology.kubernetes.io/zone"
-                    whenUnsatisfiable: "DoNotSchedule"
+                    topologyKey: 'topology.kubernetes.io/zone'
+                    whenUnsatisfiable: 'DoNotSchedule'
                     labelSelector:
-                      matchLabels: {{`{{ spec.template.metadata.labels }}`}}
+                      matchLabels: '{{`{{ spec.template.metadata.labels }}`}}'
