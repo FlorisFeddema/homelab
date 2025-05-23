@@ -1,6 +1,6 @@
 kyverno-policies:
   podSecurityStandard: restricted
-  podSecuritySeverity: high
+  podSecuritySeverity: low
 
 kyverno:
   crds:
