@@ -22,7 +22,6 @@ spec:
       celPreconditions:
         - name: 'missing-topologySpreadConstraints'
           expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
-          message: 'Workload already has topologySpreadConstraints'
       mutate:
         patchStrategicMerge:
           spec:
