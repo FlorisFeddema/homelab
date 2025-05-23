@@ -46,7 +46,7 @@ ingress-nginx:
       matchLabelKeys:
       - pod-template-hash
     - maxSkew: 1
-      topologyKey: kubernetes.io/zone
+      topologyKey: topology.kubernetes.io/zone
       whenUnsatisfiable: DoNotSchedule
       labelSelector:
         matchLabels:
