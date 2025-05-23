@@ -4,7 +4,7 @@ metadata:
   name: add-topology-spread-to-cnpg-clusters
   annotations:
     'policies.kyverno.io/title': 'Add Topology Spread Constraints to CNPG Clusters'
-    'policies.kyverno.io/category': 'Best Practices'
+    'policies.kyverno.io/category': 'CloudnativePG'
     'policies.kyverno.io/subject': 'TopologySpreadConstraints'
     'policies.kyverno.io/description': 'Ensures CloudNativePG Cluster pods have topology spread constraints for each pod role for high availability.'
 spec:
