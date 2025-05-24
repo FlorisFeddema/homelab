@@ -4,5 +4,5 @@ version: 0.0.0
 
 dependencies:
   - name: immich
-    version: 4.0.0
+    version: 5.0.0-immich-migrate-vectorchord.98affd4
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
