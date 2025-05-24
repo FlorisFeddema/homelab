@@ -21,6 +21,15 @@ spec:
       celPreconditions:
         - name: 'missing-topologySpreadConstraints'
           expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
+      exclude:
+        any:
+          - resources:
+              name: "*"
+              namespace: "*"
+              selector:
+                matchExpressions:
+                  - key: metadata.deletionTimestamp
+                    operator: Exists
       mutate:
         patchStrategicMerge:
           spec:
