@@ -7,7 +7,7 @@ spec:
 
   storage:
     storageClass: ceph-block
-    size: 3Gi
+    size: 5Gi
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
