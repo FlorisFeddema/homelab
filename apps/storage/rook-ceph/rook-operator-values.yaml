@@ -1,4 +1,6 @@
 rook-ceph:
+
+  revisionHistoryLimit: '0'
   resources:
     requests:
       cpu: 1
