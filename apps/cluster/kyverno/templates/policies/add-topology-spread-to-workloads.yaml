@@ -3,10 +3,10 @@ kind: ClusterPolicy
 metadata:
   name: add-topology-spread-to-workloads
   annotations:
-    'policies.kyverno.io/title': 'Add Topology Spread Constraints to Workloads'
-    'policies.kyverno.io/category': 'High Availability'
-    'policies.kyverno.io/subject': 'TopologySpreadConstraints'
-    'policies.kyverno.io/description': 'Ensures Deployments and StatefulSets have topology spread constraints for high availability.'
+    policies.kyverno.io/title: Add Topology Spread Constraints to Workloads
+    policies.kyverno.io/category: High Availability
+    policies.kyverno.io/subject: TopologySpreadConstraints
+    policies.kyverno.io/description: Ensures Deployments and StatefulSets have topology spread constraints for high availability.
 spec:
   rules:
     - name: add-topology-spread-to-workloads
