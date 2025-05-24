@@ -11,23 +11,24 @@ spec:
   rules:
     - name: set-revisionhistorylimit-zero
       match:
-        resources:
-          kinds:
-            - Deployment
-            - StatefulSet
-            - DaemonSet
-        operations:
-          - CREATE
-          - UPDATE
-      exclude:
         any:
-          - resources:
-              name: "*"
-              namespace: "*"
-              selector:
-                matchExpressions:
-                  - key: metadata.deletionTimestamp
-                    operator: Exists
+        - resources:
+            kinds:
+              - Deployment
+              - StatefulSet
+              - DaemonSet
+            operations:
+              - CREATE
+              - UPDATE
+      # exclude:
+      #   any:
+      #     - resources:
+      #         name: "*"
+      #         namespace: "*"
+      #         selector:
+      #           matchExpressions:
+      #             - key: metadata.deletionTimestamp
+      #               operator: Exists
       mutate:
         patchStrategicMerge:
           spec:

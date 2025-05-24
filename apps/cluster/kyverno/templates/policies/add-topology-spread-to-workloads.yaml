@@ -11,25 +11,26 @@ spec:
   rules:
     - name: add-topology-spread-to-workloads
       match:
-        resources:
-          kinds:
-            - Deployment
-            - StatefulSet
-        operations:
-          - CREATE
-          - UPDATE
+        any:
+        - resources:
+            kinds:
+              - Deployment
+              - StatefulSet
+            operations:
+              - CREATE
+              - UPDATE
       celPreconditions:
         - name: 'missing-topologySpreadConstraints'
           expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
-      exclude:
-        any:
-          - resources:
-              name: "*"
-              namespace: "*"
-              selector:
-                matchExpressions:
-                  - key: metadata.deletionTimestamp
-                    operator: Exists
+      # exclude:
+      #   any:
+      #     - resources:
+      #         name: "*"
+      #         namespace: "*"
+      #         selector:
+      #           matchExpressions:
+      #             - key: metadata.deletionTimestamp
+      #               operator: Exists
       mutate:
         patchStrategicMerge:
           spec:
