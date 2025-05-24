@@ -16,9 +16,9 @@ spec:
             - Deployment
             - StatefulSet
             - DaemonSet
-          operations:
-            - CREATE
-            - UPDATE
+        operations:
+          - CREATE
+          - UPDATE
       exclude:
         any:
           - resources:

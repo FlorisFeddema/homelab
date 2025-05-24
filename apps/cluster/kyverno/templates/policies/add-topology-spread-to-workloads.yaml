@@ -15,9 +15,9 @@ spec:
           kinds:
             - Deployment
             - StatefulSet
-          operations:
-            - CREATE
-            - UPDATE
+        operations:
+          - CREATE
+          - UPDATE
       celPreconditions:
         - name: 'missing-topologySpreadConstraints'
           expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
