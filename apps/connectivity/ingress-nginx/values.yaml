@@ -1,4 +1,5 @@
 ingress-nginx:
+  revisionHistoryLimit: 0
 
   controller:
     replicaCount: 2

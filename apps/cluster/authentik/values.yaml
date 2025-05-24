@@ -1,4 +1,6 @@
 global:
+  revisionHistoryLimit: 0
+
   volumes:
   - name: postgres-credentials
     secret:
