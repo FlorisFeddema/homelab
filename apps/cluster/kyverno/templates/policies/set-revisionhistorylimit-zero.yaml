@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: set-revisionhistorylimit-zero
+  annotations:
+    policies.kyverno.io/title: Set revisionHistoryLimit to Zero
+    policies.kyverno.io/category: GitOps
+    policies.kyverno.io/subject: Workloads
+    policies.kyverno.io/description: >-
+      Ensure all Deployments, StatefulSets, and DaemonSets have revisionHistoryLimit set to 0 to avoid retaining old ReplicaSets and Pods.
+spec:
+  validationFailureAction: enforce
+  background: true
+  rules:
+    - name: set-revisionhistorylimit-zero
+      match:
+        any:
+          - resources:
+              kinds:
+                - Deployment
+                - StatefulSet
+                - DaemonSet
+      mutate:
+        patchStrategicMerge:
+          spec:
+            revisionHistoryLimit: 0
