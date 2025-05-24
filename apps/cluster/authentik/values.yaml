@@ -46,6 +46,8 @@ authentik:
     enabled: true
     global:
       defaultStorageClass: ceph-block
+    master:
+      revisionHistoryLimit: 0
 
   prometheus:
     rules: 
