@@ -3,7 +3,6 @@ kind: StatefulSet
 metadata:
   name: plex
 spec:
-  revisionHistoryLimit: 0
   replicas: 1
   serviceName: plex
   selector:

@@ -1,6 +1,4 @@
 spegel:
-  revisionHistoryLimit: 0
-
   securityContext:
     capabilities:
       drop:

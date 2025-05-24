@@ -1,6 +1,5 @@
 argo-cd:
   global:
-    revisionHistoryLimit: 0
     domain: argocd.mobrockers.com
 
   dex:
@@ -27,7 +26,6 @@ argo-cd:
 
   controller:
     replicas: 1
-    revisionHistoryLimit: 0
     metrics:
       enabled: true
       serviceMonitor:

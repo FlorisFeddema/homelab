@@ -1,6 +1,5 @@
 metrics-server:
 
-  revisionHistoryLimit: 0
   replicas: 3
 
   service:

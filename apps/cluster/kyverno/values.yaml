@@ -11,21 +11,18 @@ kyverno:
     enabled: true
 
   admissionController:
-    revisionHistoryLimit: 0
     replicas: 3
 
     serviceMonitor:
       enabled: true
 
   backgroundController:
-    revisionHistoryLimit: 0
     replicas: 2
 
     serviceMonitor:
       enabled: true
 
   cleanupController:
-    revisionHistoryLimit: 0
     replicas: 2
 
     serviceMonitor:
@@ -33,13 +30,11 @@ kyverno:
 
   reportsController:
     replicas: 2
-    revisionHistoryLimit: 0
 
     serviceMonitor:
       enabled: true
 
 policy-reporter:
-  revisionHistoryLimit: 0
   replicaCount: 1
 
   metrics:
@@ -47,7 +42,6 @@ policy-reporter:
 
   ui:
     enabled: true
-    revisionHistoryLimit: 0
     replicaCount: 1
 
     ingress:
@@ -70,8 +64,6 @@ policy-reporter:
   plugin:
     kyverno:
       enabled: true
-
-      revisionHistoryLimit: 0
       replicaCount: 2
 
   monitoring:

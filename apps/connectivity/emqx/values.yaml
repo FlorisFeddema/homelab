@@ -1,5 +1,4 @@
 emqx-operator:
-  revisionHistoryLimit: 0
   replicaCount: 1
 
 cluster:

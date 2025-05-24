@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: config-loader
 spec:
-  revisionHistoryLimit: 0
   replicas: 1
   strategy: 
     type: Recreate

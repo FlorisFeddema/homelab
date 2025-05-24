@@ -12,7 +12,6 @@ kube-prometheus-stack:
 
   cleanPrometheusOperatorObjectNames: true
   prometheusOperator:
-    revisionHistoryLimit: 0
     admissionWebhooks:
       patch:
         ttlSecondsAfterFinished: 5
@@ -38,12 +37,10 @@ kube-prometheus-stack:
                 storage: 100Gi
 
   kube-state-metrics:
-    revisionHistoryLimit: 0
     metricLabelsAllowlist: 
     - nodes=[topology.kubernetes.io/zone]
 
   prometheus-node-exporter:
-    revisionHistoryLimit: 0
     namespaceOverride: 'prometheus-node-exporter'
 
   kubeScheduler:
@@ -75,7 +72,6 @@ kube-prometheus-stack:
             insecureSkipVerify: true
 
   grafana:
-    revisionHistoryLimit: 0
     replicas: 1
     initChownData: false
     defaultDashboardsTimezone: Europe/Amsterdam

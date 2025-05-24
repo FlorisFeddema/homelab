@@ -4,7 +4,6 @@ cert-manager:
     keep: false
 
   global:
-    revisionHistoryLimit: 0
     leaderElection:
       namespace: cert-manager
 

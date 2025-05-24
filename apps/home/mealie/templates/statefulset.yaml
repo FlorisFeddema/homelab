@@ -3,7 +3,6 @@ kind: StatefulSet
 metadata:
   name: mealie
 spec:
-  revisionHistoryLimit: 0
   replicas: 1
   serviceName: mealie
   selector:
