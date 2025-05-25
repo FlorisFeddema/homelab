@@ -295,7 +295,11 @@ rook-ceph-cluster:
           devices:
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030303937365031313130-4c6578617220535344204e4d36323020325442-00000001
               deviceClass: nvme
-            - name: g
+            - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030323137395031313130-4c6578617220535344204e4d36323020325442-00000001
+              deviceClass: nvme
+            - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030343131325031313130-4c6578617220535344204e4d36323020325442-00000001
+              deviceClass: nvme
+
     resources:
       mgr:
         requests:
