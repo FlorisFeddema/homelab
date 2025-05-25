@@ -10,7 +10,3 @@ machine:
   install:
     disk: /dev/sda
 
-  disks:
-    - device: /dev/nvme0n1
-      partitions:
-        - mountpoint: /var/mnt/nvme1

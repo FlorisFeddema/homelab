@@ -186,12 +186,6 @@ products:
           kind: CustomResourceDefinition
           jsonPointers:
             - /spec/preserveUnknownFields
-    minio:
-      deploy: true
-      autoSync: true
     rookCeph:
         deploy: true
         autoSync: false
-    talosBackup:
-      deploy: true
-      autoSync: false
