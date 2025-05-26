@@ -10,8 +10,8 @@ spec:
   sourceHydrator:
     drySource:
       repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo.git
-      path: config/development
-      targetRevision: main
+      path: config/developmen
+      targetRetvision: main
     syncSource:
       path: .
       targetBranch: environments/development
