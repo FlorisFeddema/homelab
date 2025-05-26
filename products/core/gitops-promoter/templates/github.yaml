@@ -1,0 +1,21 @@
+apiVersion: promoter.argoproj.io/v1alpha1
+kind: ScmProvider
+metadata:
+  name: github-app
+spec:
+  secretRef:
+    name: github-app-secret
+  github:
+    appID: 1325818
+    installationID: 68456195
+---
+apiVersion: promoter.argoproj.io/v1alpha1
+kind: GitRepository
+metadata:
+  name: demo-repo
+spec:
+  github:
+    name: gitops-promoter-demo
+    owner: FlorisFeddema
+  scmProviderRef:
+    name: github-app
