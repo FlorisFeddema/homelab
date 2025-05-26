@@ -10,9 +10,6 @@ metadata:
   name: argocd-commit-server
   namespace: argocd
 spec:
-  clusterIP: 10.111.46.230
-  clusterIPs:
-    - 10.111.46.230
   internalTrafficPolicy: Cluster
   ipFamilies:
     - IPv4
