@@ -11,4 +11,4 @@ spec:
     - autoMerge: false
       branch: environment/production
   gitRepositoryRef:
-    name: gitops-promoter-demo
+    name: demo-repo
