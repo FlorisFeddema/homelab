@@ -31,6 +31,7 @@ argo-cd:
 
     params:
       server.insecure: true
+      hydrator.enabled: "true"
 
     rbac:
       create: false
