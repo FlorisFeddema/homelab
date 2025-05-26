@@ -16,4 +16,8 @@ spec:
       path: .
       targetBranch: environments/development
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
