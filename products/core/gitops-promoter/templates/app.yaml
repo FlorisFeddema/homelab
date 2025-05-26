@@ -11,7 +11,7 @@ spec:
     drySource:
       repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo.git
       path: config/developmen
-      targetRetvision: main
+      targetRevision: HEAD
     syncSource:
       path: .
       targetBranch: environments/development
