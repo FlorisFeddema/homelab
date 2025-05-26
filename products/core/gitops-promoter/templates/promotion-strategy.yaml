@@ -1,0 +1,14 @@
+apiVersion: promoter.argoproj.io/v1alpha1
+kind: PromotionStrategy
+metadata:
+  name: demo
+spec:
+  environments:
+    - autoMerge: false
+      branch: environment/development
+    - autoMerge: false
+      branch: environment/staging
+    - autoMerge: false
+      branch: environment/production
+  gitRepositoryRef:
+    name: gitops-promoter-demo
