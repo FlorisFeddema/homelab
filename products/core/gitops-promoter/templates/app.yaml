@@ -12,8 +12,6 @@ spec:
       repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo
       path: config/development
       targetRevision: HEAD
-    hydrateTo:
-      targetBranch: environments/development-next
     syncSource:
       path: .
       targetBranch: environments/development
