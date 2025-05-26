@@ -15,5 +15,3 @@ spec:
     syncSource:
       path: .
       targetBranch: environments/development
-    hydrateTo:
-      targetBranch: environments/development-next
