@@ -6,6 +6,7 @@ spec:
   environments:
     - autoMerge: false
       branch: environments/development
-    - branch: environments/staging
+    - autoMerge: false
+      branch: environments/staging
   gitRepositoryRef:
     name: demo-repo
