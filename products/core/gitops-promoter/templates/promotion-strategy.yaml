@@ -5,10 +5,10 @@ metadata:
 spec:
   environments:
     - autoMerge: false
-      branch: environment/development
+      branch: environments/development
     - autoMerge: false
-      branch: environment/staging
+      branch: environments/staging
     - autoMerge: false
-      branch: environment/production
+      branch: environments/production
   gitRepositoryRef:
     name: demo-repo
