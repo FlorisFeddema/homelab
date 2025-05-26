@@ -109,3 +109,7 @@ argo-cd:
       
   notifications:
     enabled: false
+
+  commitServer:
+    enabled: true
+
