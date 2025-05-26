@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dry-source
+  name: development
   namespace: argocd
 spec:
   destination:
@@ -18,5 +18,28 @@ spec:
       targetBranch: environments/development
     hydrateTo:
       targetBranch: environments/development-next
+  syncPolicy:
+    automated: {}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staging
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: staging
+  project: default
+  sourceHydrator:
+    drySource:
+      repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo.git
+      path: config/staging
+      targetRevision: HEAD
+    syncSource:
+      path: .
+      targetBranch: environments/staging
+    hydrateTo:
+      targetBranch: environments/staging-next
   syncPolicy:
     automated: {}
