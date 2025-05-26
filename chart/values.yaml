@@ -8,7 +8,6 @@ products:
       autoSync: true
     gitops-promoter:
       deploy: true
-      autoSync: false
       namespace: promoter-system
     kubechecks:
       deploy: true
