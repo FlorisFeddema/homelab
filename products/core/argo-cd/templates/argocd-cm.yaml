@@ -9,6 +9,8 @@ metadata:
 data:
   url: https://argocd.feddema.dev
 
+  hydrator.enabled: "true"
+
   users.anonymous.enabled: "false"
 
   accounts.infro: "apiKey"
