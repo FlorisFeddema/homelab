@@ -6,6 +6,10 @@ products:
     descheduler:
       deploy: true
       autoSync: true
+    gitops-promoter:
+      deploy: true
+      autoSync: false
+      namespace: gitops-promoter
     kubechecks:
       deploy: true
       autoSync: true
