@@ -8,7 +8,5 @@ spec:
       branch: environments/development
     - autoMerge: false
       branch: environments/staging
-    - autoMerge: false
-      branch: environments/production
   gitRepositoryRef:
     name: demo-repo
