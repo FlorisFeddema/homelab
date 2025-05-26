@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dry-source
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  project: default
+  sourceHydrator:
+    drySource:
+      repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo
+      path: chart
+      targetRevision: HEAD
+    hydrateTo:
+      targetBranch: environments/development-next
+      syncSource:
+        path: config
+        targetBranch: environments/development
