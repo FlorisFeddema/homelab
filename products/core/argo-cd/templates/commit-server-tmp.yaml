@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: commit-server
+    app.kubernetes.io/instance: argo-cd
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argocd-commit-server
+    app.kubernetes.io/part-of: argocd
+  name: argocd-commit-server
+  namespace: argocd
+spec:
+  clusterIP: 10.111.46.230
+  clusterIPs:
+    - 10.111.46.230
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: server
+      port: 8086
+      protocol: TCP
+      targetPort: 8086
+  selector:
+    app.kubernetes.io/instance: argo-cd
+    app.kubernetes.io/name: argocd-commit-server
+  sessionAffinity: None
+  type: ClusterIP
