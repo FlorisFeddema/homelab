@@ -1,45 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: development
+  name: hydrator-demo-app
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: development
   project: default
   sourceHydrator:
-    drySource:
-      repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo.git
-      path: config/development
-      targetRevision: HEAD
-    syncSource:
-      path: .
-      targetBranch: environments/development
-    hydrateTo:
-      targetBranch: environments/development-next
-  syncPolicy:
-    automated: {}
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: staging
-  namespace: argocd
-spec:
+  source:
+    repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo.git
+    targetRevision: HEAD
+    path: apps
   destination:
     server: https://kubernetes.default.svc
-    namespace: staging
-  project: default
-  sourceHydrator:
-    drySource:
-      repoURL: https://github.com/FlorisFeddema/gitops-promoter-demo.git
-      path: config/staging
-      targetRevision: HEAD
-    syncSource:
-      path: .
-      targetBranch: environments/staging
-    hydrateTo:
-      targetBranch: environments/staging-next
+    namespace: demo-apps
+  revisionHistoryLimit: 2
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 5
+        maxDuration: 10m
