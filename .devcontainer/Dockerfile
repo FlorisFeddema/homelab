@@ -1,4 +1,4 @@
-ARG BASE_IMAGE_VERSION="2"
+ARG BASE_IMAGE_VERSION="3"
 FROM mcr.microsoft.com/devcontainers/universal:${BASE_IMAGE_VERSION}
 
 ARG KUBESEAL_VERION="0.19.2"
