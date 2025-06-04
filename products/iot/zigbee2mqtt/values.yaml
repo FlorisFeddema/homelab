@@ -8,7 +8,7 @@ gatus-monitor:
 image:
   registry: docker.io
   repository: koenkk/zigbee2mqtt
-  tag: 2.3.0
+  tag: 2.4.0
 
 resources:
   limits:
@@ -84,7 +84,9 @@ config:
       adapter: ember
       rtscts: false
     frontend:
+      enabled: true
       port: 8080
+      package: zigbee2mqtt-windfront
       url: https://zigbee.feddema.dev
     advanced:
       network_key: '!secret.yaml advanced_network_key'
