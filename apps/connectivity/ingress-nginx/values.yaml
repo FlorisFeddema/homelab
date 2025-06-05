@@ -47,7 +47,7 @@ ingress-nginx:
       - pod-template-hash
     - maxSkew: 1
       topologyKey: topology.kubernetes.io/zone
-      whenUnsatisfiable: DoNotSchedule
+      whenUnsatisfiable: ScheduleAnyway
       labelSelector:
         matchLabels:
           app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
