@@ -42,6 +42,6 @@ spec:
                       matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
                   - maxSkew: 1
                     topologyKey: 'topology.kubernetes.io/zone'
-                    whenUnsatisfiable: 'DoNotSchedule'
+                    whenUnsatisfiable: 'ScheduleAnyway'
                     labelSelector:
                       matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'

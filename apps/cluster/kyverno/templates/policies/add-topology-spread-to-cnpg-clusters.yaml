@@ -41,7 +41,7 @@ spec:
                     cnpg.io/podRole: instance
               - maxSkew: 1
                 topologyKey: 'topology.kubernetes.io/zone'
-                whenUnsatisfiable: 'DoNotSchedule'
+                whenUnsatisfiable: 'ScheduleAnyway'
                 labelSelector:
                   matchLabels:
                     cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
