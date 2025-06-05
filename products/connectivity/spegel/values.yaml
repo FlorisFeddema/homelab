@@ -1,4 +1,6 @@
 spegel:
+  revisionHistoryLimit: 0
+
   podSecurityContext:
    fsGroup: 2000
 
