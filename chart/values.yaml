@@ -101,7 +101,7 @@ products:
       autoSync: true
     immich:
       deploy: true
-      autoSync: false
+      autoSync: true
     nextcloud:
       deploy: true
       autoSync: true
