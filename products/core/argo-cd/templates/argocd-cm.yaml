@@ -26,6 +26,13 @@ data:
         - CiliumIdentity
       clusters:
         - "*"
+    - apiGroups:
+        - reports.kyverno.io
+      kinds:
+        - EphemeralReport
+        - ClusterEphemeralReport
+      clusters:
+        - "*"
 
   resource.customizations.ignoreDifferences.argoproj.io_Application: |
     jqPathExpressions:
