@@ -12,4 +12,5 @@ metrics-server:
     enabled: false
 
   tolerations:
-  - operator: Exists
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
