@@ -231,6 +231,9 @@ rook-ceph-cluster:
         cluster: ['192.168.5.0/24']
 
     cephConfig:
+      global:
+        osd_pool_default_size: '2'
+        osd_pool_default_min_size: '1'
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
