@@ -1,11 +1,20 @@
  node-problem-detector:
-   resources: { }
 
-   metrics:
-     enabled: true
-     serviceMonitor:
-       enabled: true
-     prometheusRule:
-       enabled: true
-       defaultRules:
-         create: true
+  tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+  - key: node.cilium.io/agent-not-ready
+    operator: Exists
+  - key: node.kubernetes.io/unreachable
+    operator: Exists
+
+  resources: { }
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
+      defaultRules:
+        create: true
