@@ -359,8 +359,28 @@ rook-ceph-cluster:
 
 
   cephBlockPools:
-    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
-    - name: ceph-blockpool-nvme
+    - name: ceph-block-nvme-1
+      spec:
+        failureDomain: zone
+        replicated:
+          size: 1
+        enableRBDStats: true
+        deviceClass: nvme
+      storageClass:
+        enabled: true
+        name: ceph-block-nvme-1
+        isDefault: false
+        reclaimPolicy: Delete
+        allowVolumeExpansion: true
+        volumeBindingMode: Immediate
+        parameters:
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+          csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+    - name: ceph-block-nvme-2
       spec:
         failureDomain: zone
         replicated:
@@ -369,7 +389,7 @@ rook-ceph-cluster:
         deviceClass: nvme
       storageClass:
         enabled: true
-        name: ceph-block-nvme
+        name: ceph-block-nvme-2
         isDefault: false
         reclaimPolicy: Delete
         allowVolumeExpansion: true
@@ -381,7 +401,7 @@ rook-ceph-cluster:
           csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
           csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
           csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
-    - name: ceph-blockpool-hdd
+    - name: ceph-block-hdd-1
       spec:
         failureDomain: zone
         replicated:
@@ -390,7 +410,7 @@ rook-ceph-cluster:
         deviceClass: hdd
       storageClass:
         enabled: true
-        name: ceph-block-hdd
+        name: ceph-block-hdd-1
         isDefault: false
         reclaimPolicy: Delete
         allowVolumeExpansion: true
@@ -403,20 +423,59 @@ rook-ceph-cluster:
           csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
           csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
 
-  cephFileSystems: []
-
-  cephObjectStores:
-    # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Object-Storage/ceph-object-store-crd.md#object-store-settings for available configuration
-    - name: ceph-objectstore
+  cephFileSystems:
+    - name: ceph-file-nvme-2
       spec:
         metadataPool:
           failureDomain: zone
           replicated:
             size: 2
+        dataPools:
+          - name: data0
+            failureDomain: zone
+            replicated:
+              size: 2
+        metadataServer:
+          activeCount: 1
+          activeStandby: true
+          resources:
+            requests:
+              cpu: 10m
+              memory: 1Gi
+            limits:
+              memory: 3Gi
+      storageClass:
+        enabled: true
+        isDefault: false
+        name: ceph-file-nvme-2
+        pool: data0
+        reclaimPolicy: Delete
+        allowVolumeExpansion: true
+        volumeBindingMode: "Immediate"
+        annotations: { }
+        labels: { }
+        mountOptions: [ ]
+        parameters:
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+          csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+
+  cephObjectStores:
+    - name: ceph-object-nvme-2
+      spec:
+        metadataPool:
+          failureDomain: zone
+          replicated:
+            size: 2
+          deviceClass: nvme
         dataPool:
           failureDomain: zone
           replicated:
             size: 2
+          deviceClass: nvme
         allowUsersInNamespaces: ['*']
         gateway:
           port: 80
@@ -436,6 +495,6 @@ rook-ceph-cluster:
                 memory: 100Mi
       storageClass:
         enabled: true
-        name: ceph-bucket
+        name: ceph-object-nvme-2
         reclaimPolicy: Delete
         volumeBindingMode: Immediate
