@@ -61,7 +61,7 @@ products:
       deploy: true
       autoSync: true
     loki:
-      deploy: true
+      deploy: false
       autoSync: true
     smartmeterGatewayPrometheusExporter:
       deploy: true
