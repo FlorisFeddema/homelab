@@ -10,15 +10,6 @@ rook-ceph:
   monitoring:
     enabled: true
 
-  enableDiscoveryDaemon: true
-  # discover:
-  #   resources:
-  #   - requests:
-  #       cpu: 100m
-  #       memory: 128Mi
-  #   - limits:
-  #       memory: 512Mi
-
   csi:
     enableMetadata: true
     enableLiveness: true

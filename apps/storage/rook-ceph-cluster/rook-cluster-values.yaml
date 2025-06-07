@@ -72,7 +72,7 @@ rook-ceph-cluster:
       - name: insights
         enabled: true
       - name: rook
-        enabled: true
+        enabled: false
       - name: rgw
         enabled: true
 
