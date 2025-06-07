@@ -274,7 +274,7 @@ thanos:
     persistence:
       ephemeral: true
       storageClass: "ceph-block-nvme-1"
-      size: 100Gi
+      size: 30Gi
 
   storegateway:
     enabled: true
