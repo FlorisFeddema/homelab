@@ -29,7 +29,7 @@ rook-ceph-cluster:
             memory: 500Mi
         # securePort: 443
         # sslCertificateRef:
-        instances: 1
+        instances: 2
         priorityClassName: system-cluster-critical
         opsLogSidecar:
           resources:
