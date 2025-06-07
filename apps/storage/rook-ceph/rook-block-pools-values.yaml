@@ -23,7 +23,7 @@ rook-ceph-cluster:
         csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
   - name: block-nrs
     spec:
-      failureDomain: zone
+      failureDomain: osd
       replicated:
         size: 1
       enableRBDStats: true

@@ -21,10 +21,14 @@ rook-ceph:
 
   csi:
     enableMetadata: true
-    enableOMAPGenerator: true
     enableLiveness: true
+
     serviceMonitor:
       enabled: true
+
+    # csiAddons in the context of rook-ceph does not add many benefits without manually running fstrim operations
+    csiAddons:
+      enabled: false
 
     topology:
       enabled: true
@@ -32,9 +36,6 @@ rook-ceph:
       - kubernetes.io/hostname
       - topology.kubernetes.io/zone
 
-    # -- CEPH CSI RBD provisioner resource requirement list
-    # csi-omap-generator resources will be applied only if `enableOMAPGenerator` is set to `true`
-    # @default -- see values.yaml
     csiRBDProvisionerResource: |
       - name : csi-provisioner
         resource:
@@ -91,8 +92,6 @@ rook-ceph:
             memory: 15Mi
           limits:
             memory: 100Mi
-    # -- CEPH CSI RBD plugin resource requirement list
-    # @default -- see values.yaml
     csiRBDPluginResource: |
       - name : driver-registrar
         resource:
@@ -122,9 +121,6 @@ rook-ceph:
             memory: 15Mi
           limits:
             memory: 100Mi
-
-    # -- CEPH CSI CephFS provisioner resource requirement list
-    # @default -- see values.yaml
     csiCephFSProvisionerResource: |
       - name : csi-cephfsplugin
         resource:
@@ -175,9 +171,6 @@ rook-ceph:
             memory: 15Mi
           limits:
             memory: 100Mi
-
-    # -- CEPH CSI CephFS plugin resource requirement list
-    # @default -- see values.yaml
     csiCephFSPluginResource: |
       - name : csi-cephfsplugin
         resource:
