@@ -3,5 +3,5 @@ kind: ObjectBucketClaim
 metadata:
   name: thanos-bucket
 spec:
-  generateBucketName: thanos
+  bucketName: thanos
   storageClassName: ceph-object-nvme-2
