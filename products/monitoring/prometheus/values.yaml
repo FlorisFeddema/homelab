@@ -83,6 +83,7 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
+            storageClassName: "ceph-block-nvme-1"
             resources:
               requests:
                 storage: 100Gi
@@ -120,6 +121,7 @@ kube-prometheus-stack:
       storage:
        volumeClaimTemplate:
          spec:
+           storageClassName: "ceph-block-nvme-1"
            accessModes: ["ReadWriteOnce"]
            resources:
              requests:
