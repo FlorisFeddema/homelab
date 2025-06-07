@@ -222,8 +222,6 @@ thanos:
       sidecarsNamespace: 'prometheus'
     pdb:
       create: false
-    networkPolicy:
-      enabled: false
 
     topologySpreadConstraints:
       - maxSkew: 1
@@ -245,8 +243,6 @@ thanos:
     refresh: 10m
     replicaCount: 2
     revisionHistoryLimit: 0
-    networkPolicy:
-      enabled: false
     resources: { }
     pdb:
       create: false
@@ -257,10 +253,7 @@ thanos:
     retentionResolutionRaw: 7d
     retentionResolution5m: 90d
     retentionResolution1h: 0d
-    consistencyDelay: 30m
     revisionHistoryLimit: 0
-    networkPolicy:
-      enabled: false
     extraFlags:
       - --compact.enable-vertical-compaction
       - --deduplication.replica-label=replica
@@ -279,6 +272,8 @@ thanos:
         memory: 4500Mi
 
     persistence:
+      ephemeral: true
+      storageClass: "ceph-block-nvme-1"
       size: 100Gi
 
   storegateway:
@@ -288,8 +283,6 @@ thanos:
     replicaCount: 2
     useEndpointGroup: true
     revisionHistoryLimit: 0
-    networkPolicy:
-      enabled: false
     resources: { }
     topologySpreadConstraints:
       - maxSkew: 1
@@ -303,6 +296,8 @@ thanos:
             app.kubernetes.io/name: thanos
     pdb:
       create: false
+    persistence:
+      storageClass: "ceph-block-nvme-1"
 
   metrics:
     enabled: true
