@@ -8,6 +8,11 @@ dawarich:
     tls:
       enabled: true
 
+  database:
+    persistence:
+      storageClass: ceph-block-nrs
+
   photon:
     persistence:
       size: 500Gi
+      storageClass: ceph-block-nrs
