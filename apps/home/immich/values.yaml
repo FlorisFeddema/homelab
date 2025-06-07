@@ -6,6 +6,7 @@ immich:
 
   database:
     clusterName: immich-data
+    storageClass: ceph-block-nrs
     replicas: 2
     size: 32Gi
 
@@ -32,3 +33,8 @@ immich:
         memory: 2Gi
       limits:
         memory: 6Gi
+
+redis:
+  master:
+    persistence:
+      storageClass: ceph-block-nrs
