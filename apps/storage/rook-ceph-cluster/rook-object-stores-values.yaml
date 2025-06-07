@@ -1,0 +1,58 @@
+rook-ceph-cluster:
+  cephObjectStores:
+  - name: ceph-objectstore
+    spec:
+      metadataPool:
+        enableCrushUpdates: true
+        failureDomain: zone
+        replicated:
+          size: 2
+          hybridStorage:
+            primaryDeviceClass: nvme
+            secondaryDeviceClass: hdd
+      dataPool:
+        enableCrushUpdates: true
+        failureDomain: zone
+        replicated:
+          size: 2
+          hybridStorage:
+            primaryDeviceClass: nvme
+            secondaryDeviceClass: hdd
+      allowUsersInNamespaces: ['*']
+      gateway:
+        port: 80
+        resources:
+          requests:
+            cpu: 10m
+            memory: 200Mi
+          limits:
+            memory: 500Mi
+        # securePort: 443
+        # sslCertificateRef:
+        instances: 2
+        priorityClassName: system-cluster-critical
+        opsLogSidecar:
+          resources:
+            requests:
+              cpu: 10m
+              memory: 10Mi
+            limits:
+              memory: 100Mi
+    storageClass:
+      enabled: true
+      name: ceph-bucket
+      reclaimPolicy: Delete
+      volumeBindingMode: Immediate
+    ingress:
+      # Enable an ingress for the ceph-objectstore
+      enabled: false
+      # annotations: {}
+      host:
+        name: s3.mobrockers.com
+      #   path: /
+      #   pathType: Prefix
+      tls:
+      - hosts:
+        - s3.mobrockers.com
+      #   secretName: ceph-objectstore-tls
+      # ingressClassName: nginx

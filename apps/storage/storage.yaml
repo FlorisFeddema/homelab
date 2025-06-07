@@ -2,13 +2,24 @@ apps:
   storage:
     rook-ceph:
       deploy: true
+      autoSync: false
+      finalize: false
       valueFiles:
       - rook-block-pools-values.yaml
       - rook-cluster-values.yaml
       - rook-file-systems-values.yaml
       - rook-object-stores-values.yaml
       - rook-operator-values.yaml
+    rook-ceph-cluster:
+      deploy: true
       autoSync: false
+      finalize: false
+      namespace: rook-ceph
+      valueFiles:
+      - rook-block-pools-values.yaml
+      - rook-cluster-values.yaml
+      - rook-file-systems-values.yaml
+      - rook-object-stores-values.yaml
     cloudnative-postgres:
       deploy: true
       serverSideApply: true
