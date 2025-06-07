@@ -9,8 +9,7 @@ dawarich:
       enabled: true
 
   database:
-    persistence:
-      storageClass: ceph-block-nrs
+    storageClass: ceph-block-nrs
 
   photon:
     persistence:
