@@ -27,6 +27,7 @@ data:
       kinds:
       - ClusterPolicyReport
       - PolicyReport
+      - EphemeralReport
       clusters:
       - "*"
 
