@@ -86,7 +86,7 @@ kube-prometheus-stack:
             storageClassName: "ceph-block-nvme-1"
             resources:
               requests:
-                storage: 100Gi
+                storage: 30Gi
 
       topologySpreadConstraints:
         - maxSkew: 1
@@ -274,7 +274,7 @@ thanos:
     persistence:
       ephemeral: true
       storageClass: "ceph-block-nvme-1"
-      size: 30Gi
+      size: 100Gi
 
   storegateway:
     enabled: true
