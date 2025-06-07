@@ -1,5 +1,8 @@
 rook-ceph-cluster:
 
+  toolbox:
+    enabled: true
+
   monitoring:
     enabled: true
     createPrometheusRules: true
