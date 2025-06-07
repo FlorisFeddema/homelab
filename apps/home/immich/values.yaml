@@ -34,7 +34,6 @@ immich:
       limits:
         memory: 6Gi
 
-redis:
-  master:
-    persistence:
-      storageClass: ceph-block-nrs
+  redis:
+    global:
+      defaultStorageClass: ceph-block-nrs
