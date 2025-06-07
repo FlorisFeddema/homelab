@@ -24,9 +24,11 @@ data:
   resource.exclusions: |
     - apiGroups:
       - wgpolicyk8s.io
+      - reports.kyverno.io
       kinds:
       - ClusterPolicyReport
       - PolicyReport
+      - ClusterEphemeralReport
       - EphemeralReport
       clusters:
       - "*"
