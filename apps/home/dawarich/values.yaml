@@ -11,24 +11,3 @@ dawarich:
   photon:
     persistence:
       size: 500Gi
-
-  redis:
-    master:
-      resources:
-        requests:
-          cpu: 200m
-          memory: 250Mi
-        limits:
-          memory: 500Mi
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/instance: dawarich
-                  app.kubernetes.io/managed-by: Helm
-                  app.kubernetes.io/name: dawarich
-                  app.kubernetes.io/part-of: dawarich
-              topologyKey: "kubernetes.io/hostname"
