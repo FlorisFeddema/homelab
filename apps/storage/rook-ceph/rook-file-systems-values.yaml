@@ -3,14 +3,22 @@ rook-ceph-cluster:
   - name: ceph-filesystem
     spec:
       metadataPool:
+        enableCrushUpdates: true
         failureDomain: zone
         replicated:
           size: 2
+          hybridStorage:
+            primaryDeviceClass: nvme
+            secondaryDeviceClass: hdd
       dataPools:
       - name: data0
+        enableCrushUpdates: true
         failureDomain: zone
         replicated:
           size: 2
+          hybridStorage:
+            primaryDeviceClass: nvme
+            secondaryDeviceClass: hdd
       metadataServer:
         activeCount: 1
         activeStandby: true

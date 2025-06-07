@@ -3,13 +3,21 @@ rook-ceph-cluster:
   - name: ceph-objectstore
     spec:
       metadataPool:
+        enableCrushUpdates: true
         failureDomain: zone
         replicated:
           size: 2
+          hybridStorage:
+            primaryDeviceClass: nvme
+            secondaryDeviceClass: hdd
       dataPool:
+        enableCrushUpdates: true
         failureDomain: zone
         replicated:
           size: 2
+          hybridStorage:
+            primaryDeviceClass: nvme
+            secondaryDeviceClass: hdd
       allowUsersInNamespaces: ['*']
       gateway:
         port: 80
