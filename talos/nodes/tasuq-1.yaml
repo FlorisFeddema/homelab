@@ -1,16 +1,16 @@
 machine:
   network:
     hostname: tasuq-1
-#    interfaces:
-#      - interface: enp1s0 # node
-#        dhcp: true
-#      - interface: enp0s20f0u3 # storage
-#        dhcp: false
-#        addresses:
-#          - 192.168.5.19/24
-#        routes:
-#          - network: 192.168.5.0/24
-#            gateway: 192.168.5.1
+    interfaces:
+      - interface: enp1s0 # node
+        dhcp: true
+      - interface: enp0s20f0u3 # storage
+        dhcp: false
+        addresses:
+          - 192.168.5.18/24
+        routes:
+          - network: 192.168.5.0/24
+            gateway: 192.168.5.1
 
   nodeLabels:
     topology.kubernetes.io/zone: "tasuq"

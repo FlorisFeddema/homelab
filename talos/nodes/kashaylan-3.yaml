@@ -1,6 +1,16 @@
 machine:
   network:
     hostname: kashaylan-3
+    interfaces:
+      - interface: end0 # node
+        dhcp: true
+      - interface: enP1p49s0u1 # storage
+        dhcp: false
+        addresses:
+          - 192.168.5.18/24
+        routes:
+          - network: 192.168.5.0/24
+            gateway: 192.168.5.1
 
   nodeLabels:
     topology.kubernetes.io/zone: "kashaylan"
