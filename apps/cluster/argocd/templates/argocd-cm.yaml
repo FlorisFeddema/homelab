@@ -21,6 +21,15 @@ data:
     requestedScopes: ['openid', 'profile', 'email', 'groups', 'offline_access']
   accounts.kubechecks: apiKey
 
+  resource.exclusions: |
+    - apiGroups:
+      - wgpolicyk8s.io
+      kinds:
+      - ClusterPolicyReport
+      - PolicyReport
+      clusters:
+      - "*"
+
   resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
     jqPathExpressions:
     - '.webhooks[]?.clientConfig.caBundle'
