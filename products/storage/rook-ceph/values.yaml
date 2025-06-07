@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: ceph
+  publicEndpoints:
+    - name: ceph
+  privateEndpoints:
+    - name: ceph
+
 route:
   enabled: true
   hostnames:
