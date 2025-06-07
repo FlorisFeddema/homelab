@@ -6,7 +6,7 @@ spec:
   instances: 2
 
   storage:
-    storageClass: ceph-block
+    storageClass: ceph-block-nrs
     size: 10Gi
 ---
 apiVersion: monitoring.coreos.com/v1
