@@ -280,6 +280,7 @@ thanos:
     enabled: true
     logLevel: warn
     existingConfigmap: ""
+    extraEnvVarsSecret: "thanos-bucket"
     replicaCount: 2
     useEndpointGroup: true
     revisionHistoryLimit: 0
