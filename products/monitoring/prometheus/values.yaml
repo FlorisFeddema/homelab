@@ -211,6 +211,7 @@ thanos:
     enabled: true
     logLevel: warn
     replicaCount: 2
+    extraEnvVarsSecret: "thanos-bucket"
     revisionHistoryLimit: 0
     resources: { }
     replicaLabel:
@@ -240,6 +241,7 @@ thanos:
   bucketweb:
     enabled: true
     logLevel: warn
+    extraEnvVarsSecret: "thanos-bucket"
     refresh: 10m
     replicaCount: 2
     revisionHistoryLimit: 0
@@ -250,6 +252,7 @@ thanos:
   compactor:
     enabled: true
     logLevel: info
+    extraEnvVarsSecret: "thanos-bucket"
     retentionResolutionRaw: 7d
     retentionResolution5m: 90d
     retentionResolution1h: 0d
