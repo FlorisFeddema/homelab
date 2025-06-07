@@ -25,7 +25,7 @@ adguard:
     replicas: 3
 
     persistence:
-      storageClass: ceph-block
+      storageClass: ceph-block-nrs
 
     service:
       annotations:
