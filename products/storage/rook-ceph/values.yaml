@@ -400,7 +400,7 @@ rook-ceph-cluster:
       storageClass:
         enabled: true
         name: ceph-block-nvme-2
-        isDefault: false
+        isDefault: true
         reclaimPolicy: Delete
         allowVolumeExpansion: true
         volumeBindingMode: Immediate
@@ -456,7 +456,7 @@ rook-ceph-cluster:
               memory: 3Gi
       storageClass:
         enabled: true
-        isDefault: true
+        isDefault: false
         name: ceph-file-nvme-2
         pool: data0
         reclaimPolicy: Delete
