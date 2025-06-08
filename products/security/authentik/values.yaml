@@ -9,7 +9,7 @@ database:
   clusterName: authentik-postgres
   replicas: 2
   storageClass: ceph-block-nvme-1
-  size: 10Gi
+  size: 64Gi
   backups:
     enabled: true
     schedule: "0 0 4 * * *"
