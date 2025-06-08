@@ -6,4 +6,5 @@ spec:
   instances: 2
 
   storage:
+    storageClass: ceph-block-nvme-1
     size: 20Gi
