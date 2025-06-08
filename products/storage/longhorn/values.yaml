@@ -31,7 +31,7 @@ longhorn:
     pullPolicy: Always
 
   persistence:
-    defaultClass: true
+    defaultClass: false
     defaultClassReplicaCount: 2
     defaultDataLocality: best-effort
     defaultReplicaAutoBalance: best-effort

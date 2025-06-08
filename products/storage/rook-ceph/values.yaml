@@ -456,7 +456,7 @@ rook-ceph-cluster:
               memory: 3Gi
       storageClass:
         enabled: true
-        isDefault: false
+        isDefault: true
         name: ceph-file-nvme-2
         pool: data0
         reclaimPolicy: Delete
