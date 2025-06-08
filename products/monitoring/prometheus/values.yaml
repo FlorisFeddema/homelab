@@ -57,7 +57,7 @@ kube-prometheus-stack:
 
   prometheus:
     thanosService:
-        enabled: true
+      enabled: true
 
     thanosServiceMonitor:
       enabled: true
@@ -68,6 +68,12 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
+
+      containers:
+        - name: thanos-sidecar
+          envFrom:
+            - secretRef:
+                name: thanos-bucket
 
       externalUrl: https://prometheus.feddema.dev
       retention: 6h
