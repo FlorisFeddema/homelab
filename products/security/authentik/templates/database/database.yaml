@@ -6,6 +6,7 @@ spec:
   instances: {{ .Values.database.replicas }}
 
   storage:
+    storageClass: {{ .Values.database.storageClass | quote }}
     size: {{ .Values.database.size }}
 
   {{ if .Values.database.backups.enabled }}
