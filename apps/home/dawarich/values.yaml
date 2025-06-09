@@ -12,6 +12,9 @@ dawarich:
     storageClass: ceph-block-nrs
 
   photon:
+    config:
+      country: NL
+      logLevel: DEBUG
     persistence:
       size: 500Gi
       storageClass: ceph-block-nrs
