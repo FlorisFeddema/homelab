@@ -38,6 +38,7 @@ immich:
     monitoring:
       enabled: true
     size: 32Gi
+    storageClass: ceph-block-nvme-1
     backups:
       enabled: false
 
