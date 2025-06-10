@@ -7,6 +7,7 @@ gatus-monitor:
 
 dawarich:
   database:
+    storageClass: ceph-block-nvme-1
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
