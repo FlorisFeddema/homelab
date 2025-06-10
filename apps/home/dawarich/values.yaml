@@ -13,7 +13,8 @@ dawarich:
 
   photon:
     config:
-      country: NL
+      country: nl
+      updateInterval: '168h'
       logLevel: DEBUG
     persistence:
       size: 500Gi
