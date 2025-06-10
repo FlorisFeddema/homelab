@@ -2,7 +2,7 @@ database:
   clusterName: kyverno
   replicas: 2
   size: 10Gi
-
+  storageClass: ceph-block-nvme-1
 
 route:
   enabled: true

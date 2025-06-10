@@ -7,3 +7,4 @@ spec:
 
   storage:
     size: {{ .Values.database.size }}
+    storageClass: {{ .Values.database.storageClass }}
