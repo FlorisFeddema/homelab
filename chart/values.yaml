@@ -95,7 +95,7 @@ products:
       autoSync: true
     dawarich:
       deploy: true
-      autoSync: false
+      autoSync: trueg
     homeAssistant:
       deploy: true
       autoSync: true
