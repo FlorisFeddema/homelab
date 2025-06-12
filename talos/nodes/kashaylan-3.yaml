@@ -19,8 +19,3 @@ machine:
 
   install:
     disk: /dev/mmcblk0
-
-  disks:
-    - device: /dev/nvme0n1
-      partitions:
-        - mountpoint: /var/mnt/nvme1
