@@ -27,7 +27,7 @@ dawarich:
 
   photon:
     config:
-      country: NL
+      country: nl
       updateInterval: '168h'
     persistence:
       storageClass: ceph-block-nvme-1
