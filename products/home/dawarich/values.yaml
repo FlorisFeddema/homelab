@@ -25,6 +25,13 @@ dawarich:
         namespace: envoy-gateway
         sectionName: web-https
 
+  photon:
+    config:
+      country: NL
+      updateInterval: '168h'
+    persistence:
+      storageClass: ceph-block-nvme-1
+
   ingress:
     enabled: false
 
