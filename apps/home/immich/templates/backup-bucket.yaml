@@ -1,7 +1,7 @@
 apiVersion: objectbucket.io/v1alpha1
 kind: ObjectBucketClaim
 metadata:
-  name: cnpg-backups-bucket
+  name: immich-db-backup-bucket
 spec:
-  bucketName : cnpg-backups
+  bucketName : immich-db-backups
   storageClassName: ceph-bucket
