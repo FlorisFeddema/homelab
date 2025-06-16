@@ -4,3 +4,9 @@ snapshot-controller:
     args:
       # automaxprocs: true # not yet released
       feature-gates: CSIVolumeGroupSnapshot=true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 20Mi
+      limits:
+        memory: 50Mi
