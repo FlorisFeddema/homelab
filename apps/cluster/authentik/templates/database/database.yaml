@@ -4,7 +4,11 @@ metadata:
   name: authentik-data
 spec:
   instances: 2
-
+  plugins:
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    parameters:
+      barmanObjectName: ceph-bucket-backup-store
   storage:
     storageClass: ceph-block-nrs
     size: 10Gi
