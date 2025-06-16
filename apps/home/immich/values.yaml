@@ -12,7 +12,7 @@ immich:
     backups:
       enabled: true
       useBarmanCloudPlugin: true
-      endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
+      endpoint: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
       path: s3://immich-db-backups/
       retention: '14d'
       compression: bzip2
