@@ -1,0 +1,20 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: ceph-bucket
+spec:
+  configuration:
+    retentionPolicy: "14d"
+    destinationPath: s3://backups/
+    endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
+    s3Credentials:
+      accessKeyId:
+        name: cnpg-backups-bucket
+        key: AWS_ACCESS_KEY_ID
+      secretAccessKey:
+        name: cnpg-backups-bucket
+        key: AWS_SECRET_ACCESS_KEY
+    data:
+      compression: bzip2
+    wal:
+      compression: bzip2
