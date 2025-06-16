@@ -1,12 +1,12 @@
 cloudnative-pg:
-  fullnameOverride: cnpg
+  fullnameOverride: cloudnative-pg
   monitoring:
     podMonitorEnabled: true
     grafanaDashboard:
       create: true
 
 plugin-barman-cloud:
-  fullnameOverride: cnpg-plugin-barman-cloud
+  fullnameOverride: cloudnative-pg-plugin-barman-cloud
 #   resources:
 #     requests:
 #       cpu: 100m
