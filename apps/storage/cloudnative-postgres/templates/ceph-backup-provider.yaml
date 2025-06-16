@@ -1,7 +1,7 @@
 apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
-  name: ceph-bucket
+  name: ceph-bucket-backup-store
 spec:
   configuration:
     retentionPolicy: "14d"
