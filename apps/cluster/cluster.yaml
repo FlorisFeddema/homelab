@@ -6,7 +6,6 @@ apps:
       autoSync: false
     snapshot-controller:
       deploy: true
-      autoSync: false
     kyverno:
       deploy: true
       autoSync: false
