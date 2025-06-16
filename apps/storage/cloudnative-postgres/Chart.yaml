@@ -6,10 +6,6 @@ dependencies:
   - name: cloudnative-pg
     version: 0.24.0
     repository: oci://ghcr.io/cloudnative-pg/charts
-  - name: cluster
-    alias: dashboard
-    version: 0.0.4
-    repository: oci://ghcr.io/cloudnative-pg/grafana-dashboards
   - name: plugin-barman-cloud
     version: 0.1.2
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
