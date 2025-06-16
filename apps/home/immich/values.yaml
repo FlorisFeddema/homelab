@@ -15,6 +15,7 @@ immich:
       endpoint: rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
       path: s3://immich-db-backups/
       retention: '14d'
+      compression: bzip2
       secretName: immich-db-backup-bucket
       accessKeyName: AWS_ACCESS_KEY_ID
       secretKeyName: AWS_SECRET_ACCESS_KEY
