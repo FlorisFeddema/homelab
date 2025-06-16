@@ -16,5 +16,4 @@ apps:
       - rook-object-stores-values.yaml
     cloudnative-postgres:
       deploy: true
-      autoSync: false
       serverSideApply: true
