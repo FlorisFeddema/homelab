@@ -95,10 +95,10 @@ products:
       autoSync: true
     dawarich:
       deploy: true
-      autoSync: trueg
+      autoSync: true
     homeAssistant:
       deploy: true
-      autoSync: true
+      autoSync: false
     immich:
       deploy: true
       autoSync: true
@@ -112,7 +112,7 @@ products:
     zigbee2mqtt:
       deploy: true
       nameOverride: zigbee2mqtt
-      autoSync: false
+      autoSync: true
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true

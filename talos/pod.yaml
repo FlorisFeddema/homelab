@@ -19,4 +19,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: adguard-primary
+      claimName: data-zigbee2mqtt-0
