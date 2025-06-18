@@ -32,7 +32,7 @@ products:
   connectivity:
     adguard:
       deploy: true
-      autoSync: true
+      autoSync: false
     cilium:
       deploy: true
       ignoreDifferences:
@@ -136,7 +136,7 @@ products:
       namespace: media-server
     sabnzbd:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     sonarr:
       deploy: true

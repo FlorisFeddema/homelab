@@ -19,4 +19,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: config-radarr-0
+      claimName: config-sabnzbd-0
