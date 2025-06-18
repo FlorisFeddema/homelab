@@ -4,10 +4,14 @@ metadata:
   name: copy-data
 spec:
   restartPolicy: Never
+  # securityContext:
+  #   fsGroup: 0
   containers:
   - name: copy
     image: busybox
-    command: ["sh", "-c", "cp -a /mnt/src/* /mnt/dst/"]
+    command: ["sh", "-c", "cp -ar /mnt/src/. /mnt/dst/"]
+    # securityContext:
+    #   runAsGroup: 0
     volumeMounts:
     - name: src
       mountPath: /mnt/src
@@ -19,4 +23,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: data-zigbee2mqtt-0
+      claimName: config-home-assistant-0

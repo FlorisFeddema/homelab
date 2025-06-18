@@ -98,13 +98,13 @@ products:
       autoSync: true
     homeAssistant:
       deploy: true
-      autoSync: false
+      autoSync: true
     immich:
       deploy: true
       autoSync: true
     nextcloud:
       deploy: true
-      autoSync: true
+      autoSync: false
   iot:
     emqx:
       deploy: true
