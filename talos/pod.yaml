@@ -19,4 +19,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: config-jellyseerr-0
+      claimName: config-radarr-0

@@ -132,11 +132,11 @@ products:
       namespace: media-server
     radarr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     sabnzbd:
       deploy: true
-      autoSync: true
+      autoSync: false
       namespace: media-server
     sonarr:
       deploy: true
