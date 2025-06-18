@@ -23,4 +23,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: config-home-assistant-0
+      claimName: nextcloud-nextcloud

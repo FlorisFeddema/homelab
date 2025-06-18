@@ -23,9 +23,6 @@ home-assistant:
 
   persistence:
     size: 10Gi
-    labels:
-      recurring-job.longhorn.io/source: enabled
-      recurring-job-group.longhorn.io/backup: enabled
 
   route:
     enabled: true

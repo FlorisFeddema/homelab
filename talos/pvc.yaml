@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: config-home-assistant-0
+  name: nextcloud-nextcloud
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 50Gi
 
 
 # get next: kgpvc | grep longhorn
@@ -15,7 +15,6 @@ spec:
 # steps:
 # create backup
 # update pvc.yaml and pod.yaml with pvc name and new volume size 
-# set storageclassname? immich & nextcloud?
 # turn autosync off
 # scale down workload in argo ui
 # remove old pvc

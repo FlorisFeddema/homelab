@@ -5,15 +5,6 @@ gatus-monitor:
   privateEndpoints:
     - name: nextcloud
 
-patchBackupPvcJob:
-  enabled: true
-  image:
-    registry: docker.io
-    repository: bitnami/kubectl
-    tag: 1.33.1
-  pvcNames:
-    - nextcloud-nextcloud
-
 route:
   enabled: true
   hostnames:
@@ -92,10 +83,6 @@ nextcloud:
     enabled: true
     accessMode: ReadWriteOnce
     size: 50Gi
-    # labels are added by hand
-    labels:
-      recurring-job.longhorn.io/source: enabled
-      recurring-job-group.longhorn.io/backup: enabled
 
   resources:
     limits:
