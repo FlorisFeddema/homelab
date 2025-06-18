@@ -128,7 +128,7 @@ products:
       namespace: media-server
     prowlarr:
       deploy: true
-      autoSync: true
+      autoSync: false
       namespace: media-server
     radarr:
       deploy: true
