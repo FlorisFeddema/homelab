@@ -32,7 +32,7 @@ products:
   connectivity:
     adguard:
       deploy: true
-      autoSync: false
+      autoSync: true
     cilium:
       deploy: true
       ignoreDifferences:
@@ -112,7 +112,7 @@ products:
     zigbee2mqtt:
       deploy: true
       nameOverride: zigbee2mqtt
-      autoSync: true
+      autoSync: false
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true

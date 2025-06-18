@@ -19,4 +19,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: config-sabnzbd-0
+      claimName: adguard-primary
