@@ -41,6 +41,7 @@ rook-ceph:
     enableLiveness: true
     serviceMonitor:
       enabled: true
+    cephFSKernelMountOptions: "ms_mode=secure"
 
     topology:
       enabled: true
