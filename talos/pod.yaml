@@ -19,4 +19,4 @@ spec:
       claimName: temp-pvc
   - name: dst
     persistentVolumeClaim:
-      claimName: config-jellyfin-0
+      claimName: config-jellyseerr-0

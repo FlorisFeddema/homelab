@@ -124,7 +124,7 @@ products:
       namespace: media-server
     jellyseerr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     prowlarr:
       deploy: true
@@ -132,7 +132,7 @@ products:
       namespace: media-server
     radarr:
       deploy: true
-      autoSync: true
+      autoSync: false
       namespace: media-server
     sabnzbd:
       deploy: true
