@@ -7,4 +7,26 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
+      storage: 3Gi
+
+
+# get next: kgpvc | grep longhorn
+
+# steps:
+# set retainpolicy on pv: kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+# shrink old volume in longhorn ui
+# update pvc.yaml and pod.yaml with pvc name and new volume size 
+# set storageclassname? immich & nextcloud?
+# turn autosync off
+# scale down workload in argo ui
+# remove old pvc
+# create temp-pvc via longhorn ui
+# create original pvc again: kubectl apply -f pvc.yaml
+# create migeration pod: kubectl apply -f pod.yaml
+# delete pod: kubectl delete -f pod.yaml
+# scale up workload in argo ui
+# check if it works
+# clean up temp pvc: kubectl delete pvc temp-pvc
+# clean up volume in longhorn ui
+# turn autosync on
+# profit

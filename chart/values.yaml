@@ -120,7 +120,7 @@ products:
       namespace: media-server
     jellyfin:
       deploy: true
-      autoSync: true
+      autoSync: false
       namespace: media-server
     jellyseerr:
       deploy: true
@@ -140,7 +140,7 @@ products:
       namespace: media-server
     sonarr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
   deviceOperators:
     genericDevicePlugin:
