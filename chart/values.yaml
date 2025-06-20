@@ -2,6 +2,7 @@ products:
   core:
     argoCd:
       deploy: true
+      autoSync: false
       namespace: argocd
     descheduler:
       deploy: true
@@ -35,6 +36,7 @@ products:
       autoSync: true
     cilium:
       deploy: true
+      autoSync: false
       ignoreDifferences:
       - group: apps
         kind: DaemonSet
@@ -101,7 +103,7 @@ products:
       autoSync: true
     immich:
       deploy: true
-      autoSync: true
+      autoSync: false
     nextcloud:
       deploy: true
       autoSync: true
@@ -183,6 +185,7 @@ products:
             - /webhooks/3/clientConfig/caBundle
     longhorn:
       deploy: true
+      autoSync: false
       namespace: longhorn-system
       serverSideApply: true
       ignoreDifferences:
