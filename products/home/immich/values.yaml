@@ -9,7 +9,7 @@ gatus-monitor:
 immich:
   persistence:
     size: 200Gi
-    storageClass: 'longhorn'
+    storageClass: 'ceph-file-nvme-2'
     accessMode: ReadWriteMany
 
   ingress:
