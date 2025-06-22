@@ -228,11 +228,12 @@ rook-ceph-cluster:
       image: quay.io/ceph/ceph:v19.2.2
 
     network:
-      encryption:
-        enabled: true
-      compression:
-        enabled: true
-      requireMsgr2: true
+      connections:
+        encryption:
+          enabled: true
+        compression:
+          enabled: true
+        requireMsgr2: true
       provider: host
       addressRanges:
         public: ['192.168.4.0/24']

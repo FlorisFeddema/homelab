@@ -1,13 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nextcloud-nextcloud
+  name: immich-library
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 200Gi
+  storageClassName: ceph-file-nvme-2
 
 
 # get next: kgpvc | grep longhorn
