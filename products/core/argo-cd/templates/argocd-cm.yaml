@@ -48,7 +48,7 @@ data:
         hs.status = "Healthy"
         hs.message = "Ceph health is OK"
       elseif health == "HEALTH_WARN" then
-        hs.status = "Progressing"
+        hs.status = "Healthy"
         hs.message = "Ceph cluster has warnings"
       elseif health == "HEALTH_ERR" then
         hs.status = "Degraded"
