@@ -1,8 +1,8 @@
 apiVersion: v2
 name: perfectscale
-version: 1.0.5
+version: 1.0.6
 
 dependencies:
   - name: exporter
-    version: v1.0.61
+    version: v1.0.62
     repository: https://perfectscale-io.github.io
