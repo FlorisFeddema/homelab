@@ -84,9 +84,6 @@ products:
     nodeProblemDetector:
       deploy: true
       autoSync: true
-    perfectscale:
-      deploy: true
-      autoSync: true
   home:
     cyberchef:
       deploy: true
