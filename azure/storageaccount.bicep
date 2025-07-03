@@ -3,7 +3,7 @@ param location string
 param containerNames string[]
 param ipAddresses string[]
 
-resource stAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
+resource stAccount 'Microsoft.Storage/storageAccounts@2025-01-01' = {
   name: stName
   location: location
   sku: {
