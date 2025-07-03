@@ -287,8 +287,6 @@ rook-ceph-cluster:
           enabled: true
         - name: insights
           enabled: true
-        - name: rook
-          enabled: true
         - name: rgw
           enabled: true
 
@@ -380,6 +378,7 @@ rook-ceph-cluster:
           size: 1
         enableRBDStats: true
         deviceClass: nvme
+        enableCrushUpdates: true
       storageClass:
         enabled: true
         name: ceph-block-nvme-1
@@ -401,6 +400,7 @@ rook-ceph-cluster:
           size: 2
         enableRBDStats: true
         deviceClass: nvme
+        enableCrushUpdates: true
       storageClass:
         enabled: true
         name: ceph-block-nvme-2
@@ -422,6 +422,7 @@ rook-ceph-cluster:
           size: 1
         enableRBDStats: true
         deviceClass: hdd
+        enableCrushUpdates: true
       storageClass:
         enabled: true
         name: ceph-block-hdd-1
@@ -441,11 +442,13 @@ rook-ceph-cluster:
     - name: ceph-file-nvme-2
       spec:
         metadataPool:
+          enableCrushUpdates: true
           failureDomain: zone
           replicated:
             size: 2
         dataPools:
           - name: data0
+            enableCrushUpdates: true
             failureDomain: zone
             replicated:
               size: 2
