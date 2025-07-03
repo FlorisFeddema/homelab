@@ -28,7 +28,7 @@ resource stAccount 'Microsoft.Storage/storageAccounts@2024-01-01' = {
   }
 }
 
-resource blobservice 'Microsoft.Storage/storageAccounts/blobServices@2024-01-01' = {
+resource blobservice 'Microsoft.Storage/storageAccounts/blobServices@2025-01-01' = {
   name: 'default'
   parent: stAccount
 }
