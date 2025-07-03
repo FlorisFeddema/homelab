@@ -33,7 +33,7 @@ resource blobservice 'Microsoft.Storage/storageAccounts/blobServices@2024-01-01'
   parent: stAccount
 }
 
-resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2024-01-01' = [for containerName in containerNames: {
+resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2025-01-01' = [for containerName in containerNames: {
   name: containerName
   parent: blobservice
 }]
