@@ -36,7 +36,7 @@ kube-prometheus-stack:
             storageClassName: ceph-block-nrs
             resources:
               requests:
-                storage: 100Gi
+                storage: 110Gi
 
   kube-state-metrics:
     revisionHistoryLimit: 0
