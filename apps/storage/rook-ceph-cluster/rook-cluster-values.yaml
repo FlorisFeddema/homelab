@@ -105,7 +105,7 @@ rook-ceph-cluster:
           deviceClass: nvme
       - name: talos-worker-4
         devices:
-        - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1
+        - name: /dev/disk/by-id/nvme-Lexar_SSD_NM710_2TB_PM40364101942P2703
           deviceClass: nvme
       - name: talos-worker-5
         devices:
