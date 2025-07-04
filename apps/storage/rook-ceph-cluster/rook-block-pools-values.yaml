@@ -28,7 +28,7 @@ rook-ceph-cluster:
   - name: block-nrs
     spec:
       enableCrushUpdates: true
-      failureDomain: osd
+      failureDomain: host
       replicated:
         size: 1
         requireSafeReplicaSize: false
