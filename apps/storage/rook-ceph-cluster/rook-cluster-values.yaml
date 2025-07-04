@@ -22,9 +22,10 @@ rook-ceph-cluster:
     network:
       connections:
         encryption:
-          enabled: false
+          enabled: true
         compression:
-          enabled: false
+          enabled: true
+        requireMsgr2: false
       provider: host
       addressRanges:
         public: ['10.0.102.0/24']
