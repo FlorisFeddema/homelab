@@ -64,7 +64,6 @@ function Write-NodeConfig ($NodeName, $NodeIp) {
 
     $applyArgList = @(
         "apply-config",
-        "--talosconfig=$RepoPath/talosconfig",
         "--nodes=$NodeIp",
         "--file=$RepoPath/talos/rendered/$NodeName.yaml"
     )

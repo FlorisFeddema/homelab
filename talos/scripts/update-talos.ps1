@@ -1,8 +1,7 @@
 param(
     [Parameter(Mandatory)][string]$NodeName,
     [Parameter(Mandatory)][string]$Version,
-    [string]$UpdateImage,
-    [string]$RepoPath = "/home/mobrockers/git/homelab"
+    [string]$UpdateImage
 )
 
 $ErrorActionPreference = "Stop"
@@ -26,7 +25,7 @@ function Update-Node ($NodeName) {
         $updateImage = $UpdateImage
     }
 
-    talosctl upgrade --talosconfig "$RepoPath/talosconfig" --nodes $nodeIp --image $updateImage --wait
+    talosctl upgrade --nodes $nodeIp --image $updateImage --wait
 
     Write-Host "⚙️ Update $NodeName succeeeded"
 }
