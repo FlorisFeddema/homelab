@@ -13,6 +13,10 @@ rook-ceph:
   csi:
     enableMetadata: true
     enableLiveness: true
+
+    readAffinity:
+      enabled: true
+
     cephFSKernelMountOptions: ms_mode=secure
 
     serviceMonitor:

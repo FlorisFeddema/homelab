@@ -19,6 +19,9 @@ rook-ceph-cluster:
     cephVersion:
       image: quay.io/ceph/ceph:v19.2.2
 
+    global:
+      mon_warn_on_pool_no_redundancy: "false"
+
     network:
       connections:
         encryption:
