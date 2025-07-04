@@ -1,11 +1,11 @@
 apiVersion: v2
 name: kyverno
-version: 1.0.10
+version: 1.0.11
 
 dependencies:
   - name: kyverno
     version: 3.4.4
     repository: https://kyverno.github.io/kyverno/
   - name: policy-reporter
-    version: 3.2.1
+    version: 3.2.2
     repository: https://kyverno.github.io/policy-reporter
