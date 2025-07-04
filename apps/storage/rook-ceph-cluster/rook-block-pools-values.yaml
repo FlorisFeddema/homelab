@@ -17,7 +17,7 @@ rook-ceph-cluster:
       isDefault: false
       reclaimPolicy: Delete
       allowVolumeExpansion: true
-      volumeBindingMode: Immediate
+      volumeBindingMode: WaitForFirstConsumer
       parameters:
         csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
         csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
@@ -42,7 +42,7 @@ rook-ceph-cluster:
       isDefault: false
       reclaimPolicy: Delete
       allowVolumeExpansion: true
-      volumeBindingMode: Immediate
+      volumeBindingMode: WaitForFirstConsumer
       mountOptions:
       - discard
       parameters:
@@ -68,7 +68,7 @@ rook-ceph-cluster:
       isDefault: true
       reclaimPolicy: Delete
       allowVolumeExpansion: true
-      volumeBindingMode: Immediate
+      volumeBindingMode: WaitForFirstConsumer
       mountOptions:
       - discard
       parameters:
