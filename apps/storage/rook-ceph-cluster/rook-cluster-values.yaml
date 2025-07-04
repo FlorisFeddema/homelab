@@ -19,9 +19,6 @@ rook-ceph-cluster:
     cephVersion:
       image: quay.io/ceph/ceph:v19.2.2
 
-    global:
-      mon_warn_on_pool_no_redundancy: "false"
-
     network:
       connections:
         encryption:
@@ -35,6 +32,8 @@ rook-ceph-cluster:
         cluster: ['10.0.104.0/24']
       
     cephConfig:
+      global:
+        mon_warn_on_pool_no_redundancy: 'false'
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
