@@ -14,7 +14,7 @@ rook-ceph-cluster:
     storageClass:
       enabled: true
       name: ceph-block
-      isDefault: false
+      isDefault: true
       reclaimPolicy: Delete
       allowVolumeExpansion: true
       volumeBindingMode: WaitForFirstConsumer
@@ -65,7 +65,7 @@ rook-ceph-cluster:
     storageClass:
       enabled: true
       name: ceph-block-zrs
-      isDefault: true
+      isDefault: false
       reclaimPolicy: Delete
       allowVolumeExpansion: true
       volumeBindingMode: WaitForFirstConsumer
