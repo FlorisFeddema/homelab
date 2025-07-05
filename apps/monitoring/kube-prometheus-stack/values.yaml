@@ -33,7 +33,6 @@ kube-prometheus-stack:
       storageSpec:
         volumeClaimTemplate:
           spec:
-            storageClassName: ceph-block-nrs
             resources:
               requests:
                 storage: 110Gi

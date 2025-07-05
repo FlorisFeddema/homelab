@@ -44,8 +44,6 @@ authentik:
 
   redis:
     enabled: true
-    global:
-      defaultStorageClass: ceph-block-zrs
     master:
       revisionHistoryLimit: 0
 

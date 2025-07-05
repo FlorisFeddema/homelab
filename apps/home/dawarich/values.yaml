@@ -8,9 +8,6 @@ dawarich:
     tls:
       enabled: true
 
-  database:
-    storageClass: ceph-block-nrs
-
   photon:
     config:
       country: nl
@@ -18,4 +15,3 @@ dawarich:
       logLevel: DEBUG
     persistence:
       size: 500Gi
-      storageClass: ceph-block-nrs

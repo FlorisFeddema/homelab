@@ -72,7 +72,6 @@ spec:
     spec:
       replicas: 3
       volumeClaimTemplates:
-        storageClassName: ceph-block-nrs
         accessModes:
         - ReadWriteOnce
         resources:
