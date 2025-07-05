@@ -23,7 +23,7 @@ kube-prometheus-stack:
       ruleSelectorNilUsesHelmValues: false
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
-      replicas: 0
+      replicas: 2
       retention: 365d
       resources:
         requests:
