@@ -30,7 +30,7 @@ rook-ceph-cluster:
       enableCrushUpdates: true
       failureDomain: host
       replicated:
-        size: 1
+        size: 2
         requireSafeReplicaSize: false
         hybridStorage:
           primaryDeviceClass: nvme
