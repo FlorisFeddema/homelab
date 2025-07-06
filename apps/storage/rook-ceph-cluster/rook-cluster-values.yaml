@@ -33,7 +33,7 @@ rook-ceph-cluster:
       
     cephConfig:
       global:
-        mon_warn_on_pool_no_redundancy: 'false'
+        mon_warn_on_pool_no_redundancy: 'true'
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
