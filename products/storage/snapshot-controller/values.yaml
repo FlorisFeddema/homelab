@@ -11,5 +11,5 @@ snapshot-controller:
       limits:
         memory: 50Mi
 
-  serviceMonitor:
-    create: true
+    serviceMonitor:
+      create: true
