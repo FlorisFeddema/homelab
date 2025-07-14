@@ -235,6 +235,7 @@ rook-ceph-cluster:
 
     cephConfig:
       global:
+        mon_warn_on_pool_no_redundancy: 'false'
         osd_pool_default_size: '2'
         osd_pool_default_min_size: '1'
       mgr:
@@ -243,15 +244,9 @@ rook-ceph-cluster:
         mgr/dashboard/FEATURE_TOGGLE_ISCSI: 'false'
         mgr/dashboard/FEATURE_TOGGLE_MIRRORING: 'false'
 
-    # cephConfigFromSecret:
-    #   mgr:
-    #     mgr/dashboard/GRAFANA_API_PASSWORD:
-    #       name: grafana-api-credential # name of the Kubernetes secret
-    #       key: password
-
     dashboard:
       ssl: false
-#      prometheusEndpoint: http://prometheus-thanos-query.prometheus:9090/
+      prometheusEndpoint: http://prometheus-prometheus.prometheus.svc:9090/
 
     csi:
       readAffinity:
@@ -369,6 +364,16 @@ rook-ceph-cluster:
         limits:
           memory: 128Mi
 
+  cephBlockPoolsVolumeSnapshotClass:
+    enabled: true
+    name: ceph-block
+    isDefault: true
+    deletionPolicy: Delete
+  cephFileSystemVolumeSnapshotClass:
+    enabled: true
+    name: ceph-filesystem
+    isDefault: false
+    deletionPolicy: Delete
 
   cephBlockPools:
     - name: ceph-block-nvme-1
