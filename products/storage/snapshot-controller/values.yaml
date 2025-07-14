@@ -1,0 +1,12 @@
+snapshot-controller:
+  controller:
+    revisionHistoryLimit: 0
+    args:
+      automaxprocs: true
+      feature-gates: CSIVolumeGroupSnapshot=true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 20Mi
+      limits:
+        memory: 50Mi

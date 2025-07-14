@@ -187,5 +187,8 @@ products:
           jsonPointers:
             - /spec/preserveUnknownFields
     rookCeph:
-        deploy: true
-        autoSync: false
+      deploy: true
+      autoSync: false
+    snapshotController:
+      deploy: true
+      autoSync: true
