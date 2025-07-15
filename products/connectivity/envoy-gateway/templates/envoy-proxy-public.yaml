@@ -14,7 +14,7 @@ spec:
               cpu: 200m
               memory: 512Mi
             limits:
-              memory: 1024Mi
+              memory: 2Gi
         pod:
           topologySpreadConstraints:
             - maxSkew: 1
