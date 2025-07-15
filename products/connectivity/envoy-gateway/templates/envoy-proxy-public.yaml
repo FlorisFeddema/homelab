@@ -16,10 +16,10 @@ spec:
         container:
           resources:
             requests:
-              cpu: 200m
-              memory: 512Mi
+              cpu: 150m
+              memory: 256Mi
             limits:
-              memory: 2Gi
+              memory: 1Gi
         pod:
           topologySpreadConstraints:
             - maxSkew: 1
