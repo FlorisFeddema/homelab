@@ -7,6 +7,11 @@ spec:
     type: Kubernetes
     kubernetes:
       envoyDeployment:
+        patch:
+          type: StrategicMerge
+          value:
+            spec:
+              revisionHistoryLimit: 0
         replicas: 3
         container:
           resources:
