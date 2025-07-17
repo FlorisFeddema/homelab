@@ -38,6 +38,7 @@ rook-ceph-cluster:
         osd_recovery_max_active: "20"
         osd_recovery_op_priority: "10"
         osd_client_op_priority: "63"
+      osd:
         osd_recovery_sleep: "0"
         osd_recovery_threads: "4"
         mclock_scheduler_background_recovery_res: "0.5"
@@ -45,10 +46,12 @@ rook-ceph-cluster:
         mclock_scheduler_client_wgt: "1"
 
         # defaults
+        # global
         # osd_max_backfills: "1"
         # osd_recovery_max_active: "3"
         # osd_recovery_op_priority: "3"
         # osd_client_op_priority: "63"
+        # osd
         # osd_recovery_sleep: "0.1"
         # osd_recovery_threads: "1"
         # mclock_scheduler_background_recovery_res: "0.1"
