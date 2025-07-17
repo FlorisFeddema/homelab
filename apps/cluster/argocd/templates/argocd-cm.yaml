@@ -45,7 +45,7 @@ data:
       - .metadata.finalizers[]? | select(. == "post-delete-finalizer.argocd.argoproj.io" or . == "post-delete-finalizer.argocd.argoproj.io/cleanup")
       - if (.metadata.finalizers | length) == 0 then .metadata.finalizers else empty end
 
-  resource.customizations.health.postgresql.cnpg.io_CLuster: |
+  resource.customizations.health.postgresql.cnpg.io_Cluster: |
     local hs = {}
 
     local cnpgStatus = {
