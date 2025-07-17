@@ -34,6 +34,26 @@ rook-ceph-cluster:
     cephConfig:
       global:
         mon_warn_on_pool_no_redundancy: 'true'
+        osd_max_backfills: "8"
+        osd_recovery_max_active: "20"
+        osd_recovery_op_priority: "10"
+        osd_client_op_priority: "63"
+        osd_recovery_sleep: "0"
+        osd_recovery_threads: "4"
+        mclock_scheduler_background_recovery_res: "0.5"
+        mclock_scheduler_recovery_wgt: "10"
+        mclock_scheduler_client_wgt: "1"
+
+        # defaults
+        # osd_max_backfills: "1"
+        # osd_recovery_max_active: "3"
+        # osd_recovery_op_priority: "3"
+        # osd_client_op_priority: "63"
+        # osd_recovery_sleep: "0.1"
+        # osd_recovery_threads: "1"
+        # mclock_scheduler_background_recovery_res: "0.1"
+        # mclock_scheduler_recovery_wgt: "100"
+        # mclock_scheduler_client_wgt: "500"
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
