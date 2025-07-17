@@ -1,8 +1,9 @@
 rook-ceph-cluster:
 
   cephBlockPools:
-  - name: .mgr
+  - name: builtin-mgr
     spec:
+      name: .mgr
       enableCrushUpdates: true
       failureDomain: zone
       replicated:
