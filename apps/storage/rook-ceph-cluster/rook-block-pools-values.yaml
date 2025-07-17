@@ -39,10 +39,9 @@ rook-ceph-cluster:
   - name: block-nrs
     spec:
       enableCrushUpdates: true
-      failureDomain: host
+      failureDomain: zone
       replicated:
         size: 2
-        requireSafeReplicaSize: false
         hybridStorage:
           primaryDeviceClass: nvme
           secondaryDeviceClass: hdd
