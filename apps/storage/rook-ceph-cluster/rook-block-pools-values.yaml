@@ -1,6 +1,12 @@
 rook-ceph-cluster:
 
   cephBlockPools:
+  - name: .mgr
+    spec:
+      enableCrushUpdates: true
+      failureDomain: zone
+      replicated:
+        size: 3
   - name: ceph-blockpool
     spec:
       enableCrushUpdates: true
