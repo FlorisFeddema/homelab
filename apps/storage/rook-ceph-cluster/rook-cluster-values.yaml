@@ -32,14 +32,7 @@ rook-ceph-cluster:
         cluster: ['10.0.104.0/24']
       
     cephConfig:
-      global:
-        mon_warn_on_pool_no_redundancy: 'true'
-        osd_max_backfills: "1"
-        osd_recovery_max_active: "3"
-        osd_recovery_op_priority: "3"
-        osd_client_op_priority: "63"
       osd:
-        osd_recovery_sleep: "0.1"
         osd_mclock_profile: "high_recovery_ops"
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
