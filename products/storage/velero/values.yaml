@@ -1,0 +1,35 @@
+velero:
+  revisionHistoryLimit: 0
+  resources: { }
+
+  initContainers:
+  # - name: velero-plugin-for-aws
+  #   image: velero/velero-plugin-for-aws:v1.12.1
+  #   imagePullPolicy: IfNotPresent
+  #   volumeMounts:
+  #     - mountPath: /target
+  #       name: plugins
+
+  containerSecurityContext:
+     allowPrivilegeEscalation: false
+     capabilities:
+       drop: ["ALL"]
+       add: []
+     readOnlyRootFilesystem: true
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+
+    prometheusRule:
+      enabled: true
+
+  configuration:
+    # Parameters for the BackupStorageLocation(s). Configure multiple by adding other element(s) to the backupStorageLocation slice.
+    # See https://velero.io/docs/v1.6/api-types/backupstoragelocation/
+    backupStorageLocation: []
+
+    # Parameters for the VolumeSnapshotLocation(s). Configure multiple by adding other element(s) to the volumeSnapshotLocation slice.
+    # See https://velero.io/docs/v1.6/api-types/volumesnapshotlocation/
+    volumeSnapshotLocation: []
+

@@ -192,3 +192,6 @@ products:
     snapshotController:
       deploy: true
       autoSync: true
+    velero:
+      deploy: true
+      autoSync: true
