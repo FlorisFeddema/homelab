@@ -3,12 +3,12 @@ velero:
   resources: { }
 
   initContainers:
-  # - name: velero-plugin-for-aws
-  #   image: velero/velero-plugin-for-aws:v1.12.1
-  #   imagePullPolicy: IfNotPresent
-  #   volumeMounts:
-  #     - mountPath: /target
-  #       name: plugins
+   - name: velero-plugin-for-microsoft-azure
+     image: velero/velero-plugin-for-microsoft-azure:v1.11.0
+     imagePullPolicy: IfNotPresent
+     volumeMounts:
+       - mountPath: /target
+         name: plugins
 
   containerSecurityContext:
      allowPrivilegeEscalation: false
@@ -21,16 +21,30 @@ velero:
     serviceMonitor:
       enabled: true
 
-    prometheusRule:
-      enabled: true
-
   configuration:
-    # Parameters for the BackupStorageLocation(s). Configure multiple by adding other element(s) to the backupStorageLocation slice.
-    # See https://velero.io/docs/v1.6/api-types/backupstoragelocation/
-    backupStorageLocation: []
+    backupStorageLocation:
+      - name: azure
+        provider: azure
+        bucket: velero-backup
+        default: true
+        credential:
+          name: velero-credentials
+          key: credentials
+        config:
+          useAAD: "true"
+          resourceGroup: "velero"
+          storageAccount: "feddemadevvelero"
+          subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
-    # Parameters for the VolumeSnapshotLocation(s). Configure multiple by adding other element(s) to the volumeSnapshotLocation slice.
-    # See https://velero.io/docs/v1.6/api-types/volumesnapshotlocation/
-    volumeSnapshotLocation: []
+    volumeSnapshotLocation:
+    - name: azure
+      provider: azure
+      credential:
+        name: velero-credentials
+        key: credentials
+      config:
+        apiTimeout: "30s"
+        resourceGroup: "velero"
+        subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
     features: EnableCSI
