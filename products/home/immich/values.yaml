@@ -23,6 +23,8 @@ immich:
       - name: envoy-gateway-public
         namespace: envoy-gateway
         sectionName: web-https
+    timeouts:
+      request: "3600s"
 
   database:
     clusterName: immich-postgresql
