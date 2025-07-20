@@ -33,3 +33,4 @@ velero:
     # See https://velero.io/docs/v1.6/api-types/volumesnapshotlocation/
     volumeSnapshotLocation: []
 
+    features: EnableCSI
