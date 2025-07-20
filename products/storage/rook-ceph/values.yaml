@@ -369,11 +369,15 @@ rook-ceph-cluster:
     name: ceph-block
     isDefault: true
     deletionPolicy: Delete
+    labels:
+      velero.io/csi-volumesnapshot-class: "true"
   cephFileSystemVolumeSnapshotClass:
     enabled: true
     name: ceph-filesystem
     isDefault: false
     deletionPolicy: Delete
+    labels:
+      velero.io/csi-volumesnapshot-class: "true"
 
   cephBlockPools:
     - name: ceph-block-nvme-1
