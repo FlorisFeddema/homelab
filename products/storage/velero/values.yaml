@@ -23,7 +23,7 @@ velero:
 
   configuration:
     backupStorageLocation:
-      - name: azure
+      - name: default
         provider: azure
         bucket: velero-backup
         default: true
@@ -37,7 +37,7 @@ velero:
           subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
     volumeSnapshotLocation:
-    - name: azure
+    - name: default
       provider: azure
       credential:
         name: velero-credentials
