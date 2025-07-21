@@ -1,8 +1,0 @@
-apiVersion: v2
-name:
-version: 1.0.0
-
-dependencies:
-  - name:
-    version:
-    repository:

@@ -42,8 +42,8 @@ velero:
         subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
     features: EnableCSI
-#    logFormat: json
-#    logLevel: info
+    logFormat: json
+    logLevel: info
 
   deployNodeAgent: true
 
