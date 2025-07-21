@@ -47,7 +47,6 @@ velero:
         name: velero-credentials
         key: credentials
       config:
-        apiTimeout: "30s"
         resourceGroup: "velero"
         subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
