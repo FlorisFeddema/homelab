@@ -20,10 +20,6 @@ velero:
   metrics:
     serviceMonitor:
       enabled: true
-    nodeAgentPodMonitor:
-      enabled: true
-
-  deployNodeAgent: true
 
   configuration:
     backupStorageLocation:
