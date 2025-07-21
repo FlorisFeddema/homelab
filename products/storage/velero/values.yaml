@@ -20,6 +20,10 @@ velero:
   metrics:
     serviceMonitor:
       enabled: true
+    nodeAgentPodMonitor:
+      enabled: true
+
+  deployNodeAgent: true
 
   configuration:
     backupStorageLocation:
@@ -49,4 +53,18 @@ velero:
 
     features: EnableCSI
     logFormat: json
-    logLevel: warning
+    logLevel: info
+
+  schedules:
+    testbackup:
+      disabled: false
+      schedule: "0 0 * * *"
+      useOwnerReferencesInBackup: false
+      paused: false
+      skipImmediately: false
+      template:
+        ttl: "240h"
+        storageLocation: default
+        includedNamespaces:
+        - foo
+        # See: https://velero.io/docs/v1.14/resource-filtering/#excludes
