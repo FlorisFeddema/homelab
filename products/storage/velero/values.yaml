@@ -11,11 +11,11 @@ velero:
          name: plugins
 
   containerSecurityContext:
-     allowPrivilegeEscalation: false
-     capabilities:
-       drop: ["ALL"]
-       add: []
-     readOnlyRootFilesystem: true
+#     allowPrivilegeEscalation: false
+#     capabilities:
+#       drop: ["ALL"]
+#       add: []
+#     readOnlyRootFilesystem: true
 
   metrics:
     serviceMonitor:
