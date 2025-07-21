@@ -10,7 +10,7 @@ velero:
        - mountPath: /target
          name: plugins
 
-  containerSecurityContext:
+#  containerSecurityContext:
 #     allowPrivilegeEscalation: false
 #     capabilities:
 #       drop: ["ALL"]
