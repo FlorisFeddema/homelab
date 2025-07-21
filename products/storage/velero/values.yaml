@@ -20,6 +20,8 @@ velero:
   metrics:
     serviceMonitor:
       enabled: true
+    nodeAgentPodMonitor:
+      enabled: true
 
   configuration:
     backupStorageLocation:
@@ -49,6 +51,8 @@ velero:
     features: EnableCSI
 #    logFormat: json
 #    logLevel: info
+
+  deployNodeAgent: true
 
   schedules:
     testbackup:
