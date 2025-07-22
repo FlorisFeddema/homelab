@@ -1,10 +1,10 @@
 apiVersion: v2
 name: authentik
-version: 1.0.41
+version: 1.0.42
 
 dependencies:
   - name: authentik
-    version: 2025.6.3
+    version: 2025.6.4
     repository: https://charts.goauthentik.io/
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
