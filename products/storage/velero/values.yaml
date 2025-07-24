@@ -49,14 +49,10 @@ velero:
 
   schedules:
     testbackup:
-      disabled: false
       schedule: "0 0 * * *"
-      useOwnerReferencesInBackup: false
-      paused: false
-      skipImmediately: false
       template:
         ttl: "240h"
         storageLocation: default
+        snapshotMoveData: true
         includedNamespaces:
         - foo
-        # See: https://velero.io/docs/v1.14/resource-filtering/#excludes

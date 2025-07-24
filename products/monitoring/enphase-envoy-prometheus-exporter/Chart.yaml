@@ -1,8 +1,0 @@
-apiVersion: v2
-name: enphase-envoy-prometheus-exporter
-version: 1.0.1
-
-dependencies:
-  - name: enphase-envoy-prometheus-exporter
-    version: 0.1.2
-    repository: https://florisfeddema.github.io/enphase-envoy-prometheus-exporter/
