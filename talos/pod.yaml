@@ -4,14 +4,14 @@ metadata:
   name: copy-data
 spec:
   restartPolicy: Never
-  # securityContext:
-  #   fsGroup: 0
+  securityContext:
+    fsGroup: 5000
   containers:
   - name: copy
     image: busybox
     command: ["sh", "-c", "cp -ar /mnt/src/. /mnt/dst/"]
-    # securityContext:
-    #   runAsGroup: 0
+    securityContext:
+      runAsGroup: 5000
     volumeMounts:
     - name: src
       mountPath: /mnt/src
@@ -20,7 +20,7 @@ spec:
   volumes:
   - name: src
     persistentVolumeClaim:
-      claimName: temp-pvc
+      claimName: media-server-media
   - name: dst
     persistentVolumeClaim:
-      claimName: immich-library
+      claimName: temp-pvc
