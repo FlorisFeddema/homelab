@@ -15,6 +15,7 @@ route:
       sectionName: web-https
 
 argo-cd:
+  nameOverride: argocd
   global:
     revisionHistoryLimit: 0
     logging:
