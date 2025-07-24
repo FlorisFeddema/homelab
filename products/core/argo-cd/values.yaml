@@ -16,6 +16,7 @@ route:
 
 argo-cd:
   nameOverride: argocd
+  fullnameOverride: argocd
   global:
     revisionHistoryLimit: 0
     logging:
