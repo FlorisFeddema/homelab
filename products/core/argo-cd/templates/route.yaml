@@ -25,7 +25,7 @@ spec:
     {{- tpl (toYaml .Values.route.additionalRules) $ | nindent 4 }}
     {{- end }}
     - backendRefs:
-        - name: argo-cd-argocd-server
+        - name: argocd-server
           port: 80
       {{- with .Values.route.filters }}
       filters:
