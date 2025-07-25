@@ -5,14 +5,10 @@ metadata:
 spec:
   nodeName: hortek-0
   restartPolicy: Never
-  securityContext:
-    fsGroup: 5000
   containers:
   - name: copy
     image: busybox
     command: ["sh", "-c", "cp -ar /mnt/src/. /mnt/dst/"]
-    securityContext:
-      runAsGroup: 5000
     volumeMounts:
     - name: src
       mountPath: /mnt/src
