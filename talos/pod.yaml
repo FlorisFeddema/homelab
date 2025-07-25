@@ -3,6 +3,7 @@ kind: Pod
 metadata:
   name: copy-data
 spec:
+  nodeName: hortek-0
   restartPolicy: Never
   securityContext:
     fsGroup: 5000
@@ -23,4 +24,4 @@ spec:
       claimName: media-server-media
   - name: dst
     persistentVolumeClaim:
-      claimName: temp-pvc
+      claimName: tmp-pvc
