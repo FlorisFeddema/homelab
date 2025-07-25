@@ -48,11 +48,11 @@ velero:
   deployNodeAgent: true
 
   schedules:
-    testbackup:
-      schedule: "0 0 * * *"
-      template:
-        ttl: "240h"
-        storageLocation: default
-        snapshotMoveData: true
-        includedNamespaces:
-        - foo
+#    testbackup:
+#      schedule: "0 0 * * *"
+#      template:
+#        ttl: "240h"
+#        storageLocation: default
+#        snapshotMoveData: true
+#        includedNamespaces:
+#        - foo
