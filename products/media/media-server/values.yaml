@@ -1,3 +1,3 @@
 persistence:
   size: 5Ti
-  storageClass: ceph-block-hdd-1
+  storageClass: ceph-file-hdd-1
