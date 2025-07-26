@@ -449,12 +449,15 @@ rook-ceph-cluster:
     - name: ceph-file-nvme-2
       spec:
         metadataPool:
+          enableRBDStats: true
+          deviceClass: nvme
           enableCrushUpdates: true
-          failureDomain: zone
           replicated:
             size: 2
         dataPools:
           - name: data0
+            enableRBDStats: true
+            deviceClass: nvme
             enableCrushUpdates: true
             failureDomain: zone
             replicated:
@@ -492,14 +495,18 @@ rook-ceph-cluster:
       spec:
         metadataPool:
           failureDomain: zone
+          enableRBDStats: true
+          deviceClass: nvme
+          enableCrushUpdates: true
           replicated:
             size: 2
-          deviceClass: nvme
         dataPool:
           failureDomain: zone
+          enableRBDStats: true
+          deviceClass: nvme
+          enableCrushUpdates: true
           replicated:
             size: 2
-          deviceClass: nvme
         allowUsersInNamespaces: ['*']
         gateway:
           port: 80
