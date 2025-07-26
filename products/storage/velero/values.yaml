@@ -48,11 +48,16 @@ velero:
   deployNodeAgent: true
 
   schedules:
-#    testbackup:
-#      schedule: "0 0 * * *"
-#      template:
-#        ttl: "240h"
-#        storageLocation: default
-#        snapshotMoveData: true
-#        includedNamespaces:
-#        - foo
+    backup:
+      schedule: "0 0 * * *"
+      template:
+        ttl: "240h"
+        storageLocation: default
+        snapshotMoveData: true
+        includedNamespaces:
+#        - adguard
+        - home-assistant
+#        - immich
+#        - media-server
+#        - nextcloud
+#        - zigbee2mqtt
