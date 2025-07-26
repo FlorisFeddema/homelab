@@ -105,31 +105,31 @@ products:
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true
-      autoSync: false
+      autoSync: trueg
       namespace: media-server
     jellyfin:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     jellyseerr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     prowlarr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     radarr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     sabnzbd:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     sonarr:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
   deviceOperators:
     genericDevicePlugin:
