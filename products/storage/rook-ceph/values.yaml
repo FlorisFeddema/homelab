@@ -520,13 +520,13 @@ rook-ceph-cluster:
           resources:
             requests:
               cpu: 10m
-              memory: 1Gi
+              memory: 512Mi
             limits:
               memory: 3Gi
       storageClass:
         enabled: true
         isDefault: false
-        name: ceph-file-nvme-2
+        name: ceph-file-hdd-1
         pool: data0
         reclaimPolicy: Delete
         allowVolumeExpansion: true
