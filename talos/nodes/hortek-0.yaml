@@ -21,8 +21,3 @@ machine:
 
   install:
     disk: /dev/sda
-
-  disks:
-    - device: /dev/sdb
-      partitions:
-        - mountpoint: /var/mnt/hdd1
