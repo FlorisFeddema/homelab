@@ -18,7 +18,7 @@ nodeSelector:
 image:
   registry: docker.io
   repository:  fallenbagel/jellyseerr
-  tag: preview-pr184@sha256:b81f50f8496c7eac1f1a2c03407231286328c2c20ec9c2f3b736bc2943e5f9bc
+  tag: preview-OIDC
 
 persistence:
   size: 1Gi
