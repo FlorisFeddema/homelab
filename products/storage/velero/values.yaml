@@ -58,7 +58,7 @@ velero:
           matchLabels:
             feddema.dev/backup: "true"
         includedNamespaces:
-        - adguard
+#        - adguard
         - home-assistant
 #        - immich
 #        - media-server
