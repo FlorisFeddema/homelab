@@ -10,3 +10,6 @@ cloudnative-pg:
      requests:
        cpu: 20m
        memory: 64Mi
+
+plugin-barman-cloud:
+  fullnameOverride: cloudnative-pg-plugin-barman-cloud

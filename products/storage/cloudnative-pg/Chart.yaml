@@ -6,3 +6,6 @@ dependencies:
   - name: cloudnative-pg
     version: 0.25.0
     repository: https://cloudnative-pg.github.io/charts
+  - name: plugin-barman-cloud
+    version: 0.1.7
+    repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
