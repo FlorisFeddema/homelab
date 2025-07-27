@@ -44,3 +44,33 @@
 #   capacity:
 #     storage: 5Gi
 #   phase: Bound
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-db-3
+  annotations:
+    cnpg.io/nodeSerial: "3"
+    cnpg.io/operatorVersion: 1.26.0
+    cnpg.io/pvcStatus: ready
+  labels:
+    cnpg.io/cluster: nextcloud-db
+    cnpg.io/instanceName: nextcloud-db-3
+    cnpg.io/instanceRole: primary
+    cnpg.io/pvcRole: PG_DATA
+    role: primary
+  ownerReferences:
+  - apiVersion: postgresql.cnpg.io/v1
+    controller: true
+    kind: Cluster
+    name: nextcloud-db
+    uid: b71fdeca-f9fa-4140-a5e0-cbc9b2a52c8b
+spec:
+  dataSource:
+    name: nextcloud-db-3-snapshot
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
