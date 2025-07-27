@@ -4,7 +4,7 @@ version: 1.0.89
 
 dependencies:
   - name: immich
-    version: 5.4.2
+    version: 5.5.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
