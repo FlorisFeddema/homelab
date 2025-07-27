@@ -44,32 +44,32 @@
 #   capacity:
 #     storage: 5Gi
 #   phase: Bound
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: dawarich-4
-  annotations:
-    cnpg.io/nodeSerial: "4"
-    cnpg.io/operatorVersion: 1.26.0
-  labels:
-    cnpg.io/cluster: dawarich
-    cnpg.io/instanceName: dawarich-4
-    cnpg.io/instanceRole: primary
-    cnpg.io/pvcRole: PG_DATA
-    role: primary
-  ownerReferences:
-  - apiVersion: postgresql.cnpg.io/v1
-    controller: true
-    kind: Cluster
-    name: dawarich
-    uid: 8cf0423e-6c42-4c24-9275-925022f9688c
-spec:
-  dataSource:
-    name: dawarich-4-snapshot
-    kind: VolumeSnapshot
-    apiGroup: snapshot.storage.k8s.io
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: dawarich-4
+#   annotations:
+#     cnpg.io/nodeSerial: "4"
+#     cnpg.io/operatorVersion: 1.26.0
+#   labels:
+#     cnpg.io/cluster: dawarich
+#     cnpg.io/instanceName: dawarich-4
+#     cnpg.io/instanceRole: primary
+#     cnpg.io/pvcRole: PG_DATA
+#     role: primary
+#   ownerReferences:
+#   - apiVersion: postgresql.cnpg.io/v1
+#     controller: true
+#     kind: Cluster
+#     name: dawarich
+#     uid: 8cf0423e-6c42-4c24-9275-925022f9688c
+# spec:
+#   dataSource:
+#     name: dawarich-4-snapshot
+#     kind: VolumeSnapshot
+#     apiGroup: snapshot.storage.k8s.io
+#   accessModes:
+#   - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi

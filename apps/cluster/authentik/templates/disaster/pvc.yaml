@@ -44,3 +44,33 @@
 #   capacity:
 #     storage: 10Gi
 #   phase: Bound
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: authentik-data-12
+  annotations:
+    cnpg.io/nodeSerial: "12"
+    cnpg.io/operatorVersion: 1.26.0
+    cnpg.io/pvcStatus: ready
+  labels:
+    cnpg.io/cluster: authentik-data
+    cnpg.io/instanceName: authentik-data-12
+    cnpg.io/instanceRole: primary
+    cnpg.io/pvcRole: PG_DATA
+    role: primary
+  ownerReferences:
+  - apiVersion: postgresql.cnpg.io/v1
+    controller: true
+    kind: Cluster
+    name: authentik-data
+    uid: cb08921c-858a-44db-946d-afddf6118991
+spec:
+  dataSource:
+    name: authentik-data-12-snapshot
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
