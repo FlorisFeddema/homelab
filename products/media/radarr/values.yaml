@@ -20,6 +20,8 @@ image:
 
 persistence:
   size: 1Gi
+  labels:
+    feddema.dev/backup: "true"
 
 route:
   enabled: true

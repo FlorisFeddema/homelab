@@ -33,6 +33,8 @@ securityContext:
 persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
+  labels:
+    feddema.dev/backup: "true"
 
 route:
   enabled: true

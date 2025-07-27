@@ -54,6 +54,9 @@ velero:
         ttl: "240h"
         storageLocation: default
         snapshotMoveData: true
+        labelSelector:
+          matchLabels:
+            feddema.dev/backup: "true"
         includedNamespaces:
 #        - adguard
         - home-assistant

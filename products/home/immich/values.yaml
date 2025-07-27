@@ -11,6 +11,8 @@ immich:
     size: 200Gi
     storageClass: 'ceph-file-nvme-2'
     accessMode: ReadWriteMany
+    labels:
+      feddema.dev/backup: "true".
 
   ingress:
     enabled: false

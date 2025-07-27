@@ -52,6 +52,8 @@ adguard:
   global:
     persistence:
       size: 3Gi
+      labels:
+        feddema.dev/backup: "true"
 
   primary:
     ingress:
