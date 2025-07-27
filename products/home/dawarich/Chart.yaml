@@ -5,7 +5,7 @@ version: 1.0.11
 
 dependencies:
   - name: dawarich
-    version: 4.0.0-renovate-redis-21-x.336e7ab
+    version: 4.0.0
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
