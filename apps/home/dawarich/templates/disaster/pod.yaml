@@ -13,5 +13,5 @@ spec:
   volumes:
     - name: restore-vol
       persistentVolumeClaim:
-        claimName: dawarich-4-snapshot-restore
+        claimName: dawarich-4
   restartPolicy: Never
