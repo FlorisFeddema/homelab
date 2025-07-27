@@ -1,0 +1,12 @@
+apiVersion: ceph.rook.io/v1
+kind: CephBlockPool
+metadata:
+  name: mgr
+spec:
+  name: ".mgr"
+  deviceClass: nvme
+  enableCrushUpdates: true
+  enableRBDStats: true
+  failureDomain: zone
+  replicated:
+    size: 3
