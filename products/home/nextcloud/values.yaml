@@ -28,12 +28,11 @@ nextcloud:
     enabled: true
     protocol: https
 
-  readinessProbe:
+  startupProbe:
     enabled: true
-    initialDelaySeconds: 30
-    periodSeconds: 15
-    timeoutSeconds: 10
-    failureThreshold: 10
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    failureThreshold: 50
     successThreshold: 1
 
   nginx:
