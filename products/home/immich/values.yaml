@@ -12,7 +12,7 @@ immich:
     storageClass: 'ceph-file-nvme-2'
     accessMode: ReadWriteMany
     labels:
-      feddema.dev/backup: "true".
+      feddema.dev/backup: "true"
 
   ingress:
     enabled: false
