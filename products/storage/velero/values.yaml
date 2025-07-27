@@ -49,7 +49,7 @@ velero:
 
   schedules:
     backup:
-      schedule: "0 0 * * *"
+      schedule: "23 3 * * *"
       template:
         ttl: "240h"
         storageLocation: default
@@ -58,9 +58,9 @@ velero:
           matchLabels:
             feddema.dev/backup: "true"
         includedNamespaces:
-#        - adguard
+        - adguard
         - home-assistant
-#        - immich
-#        - media-server
-#        - nextcloud
-#        - zigbee2mqtt
+        - immich
+        - media-server
+        - nextcloud
+        - zigbee2mqtt
