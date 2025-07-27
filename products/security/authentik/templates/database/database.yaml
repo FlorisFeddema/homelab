@@ -8,17 +8,3 @@ spec:
   storage:
     storageClass: {{ .Values.database.storageClass | quote }}
     size: {{ .Values.database.size }}
-
-  {{ if .Values.database.backups.enabled }}
-  backup:
-    retentionPolicy: {{ .Values.database.backups.retention }}
-    barmanObjectStore:
-      destinationPath: {{ .Values.database.backups.path | quote }}
-      azureCredentials:
-        storageAccount:
-          key: AZURE_STORAGE_ACCOUNT
-          name: authentik-postgres-backup-credentials
-        storageSasToken:
-          key: AZURE_STORAGE_SAS_TOKEN
-          name: authentik-postgres-backup-credentials
-  {{ end }}

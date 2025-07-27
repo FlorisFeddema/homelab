@@ -10,11 +10,6 @@ database:
   replicas: 2
   storageClass: ceph-block-nvme-1
   size: 64Gi
-  backups:
-    enabled: true
-    schedule: "0 0 4 * * *"
-    retention: '5d'
-    path: https://longhornbackups.blob.core.windows.net/cnpg/authentik
 
 authentik:
   global:
