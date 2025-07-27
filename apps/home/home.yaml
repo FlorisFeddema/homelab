@@ -6,8 +6,10 @@ apps:
       deploy: true
     immich:
       deploy: true
+      autoSync: false
     nextcloud:
       deploy: true
+      autoSync: false
     dawarich:
       deploy: true
       autoSync: false

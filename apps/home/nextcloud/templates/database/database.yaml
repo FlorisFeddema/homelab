@@ -2,6 +2,8 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: nextcloud-db
+  annotations:
+    cnpg.io/reconciliationLoop: "disabled"
 spec:
   instances: 2
 
