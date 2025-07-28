@@ -6,3 +6,5 @@ spec:
   cluster:
     name: dawarich
   method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
