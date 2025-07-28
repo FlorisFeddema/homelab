@@ -5,4 +5,4 @@ metadata:
 spec:
   cluster:
     name: dawarich
-  method: VolumeSnapshot
+  method: volumeSnapshot
