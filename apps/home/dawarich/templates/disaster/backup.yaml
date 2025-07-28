@@ -1,8 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Backup
 metadata:
-  name: dawarich-backup
+  name: dr-backup
 spec:
   cluster:
     name: dawarich
-  method: volumeSnapshot
+  method: plugin
