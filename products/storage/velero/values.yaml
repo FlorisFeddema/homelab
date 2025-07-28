@@ -55,9 +55,6 @@ velero:
         csiSnapshotTimeout: 30m0s
         storageLocation: default
         snapshotMoveData: true
-        labelSelector:
-          matchLabels:
-            feddema.dev/backup: "true"
         includedNamespaces:
         - adguard
         - home-assistant
