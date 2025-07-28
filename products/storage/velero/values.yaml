@@ -20,7 +20,7 @@ velero:
     backupStorageLocation:
       - name: default
         provider: azure
-        bucket: velero-backup
+        bucket: velero
         default: true
         credential:
           name: velero-credentials
@@ -28,7 +28,7 @@ velero:
         config:
           useAAD: "true"
           resourceGroup: "velero"
-          storageAccount: "feddemadevvelero"
+          storageAccount: "a88d2ea1-5ce5-4bb9-9726-c545f46fbb22"
           subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
     volumeSnapshotLocation:
@@ -52,6 +52,7 @@ velero:
       schedule: "23 3 * * *"
       template:
         ttl: "240h"
+        csiSnapshotTimeout: 30m0s
         storageLocation: default
         snapshotMoveData: true
         labelSelector:
