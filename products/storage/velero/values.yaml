@@ -52,13 +52,12 @@ velero:
       schedule: "23 3 * * *"
       template:
         ttl: "240h"
-        csiSnapshotTimeout: 1h0m0s
         storageLocation: default
         snapshotMoveData: true
         includedNamespaces:
-        - adguard
-        - home-assistant
+#        - adguard
+#        - home-assistant
         - immich
-        - media-server
-        - nextcloud
-        - zigbee2mqtt
+#        - media-server
+#        - nextcloud
+#        - zigbee2mqtt
