@@ -33,7 +33,7 @@ rook-ceph:
     serviceMonitor:
       enabled: true
     cephFSKernelMountOptions: "ms_mode=secure"
-    provisionerReplicas: 2
+    provisionerReplicas: 1
     csiAddons:
       enabled: false
 
