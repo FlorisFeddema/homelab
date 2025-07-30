@@ -1,4 +1,4 @@
-apiVersion: cilium.io/v2
+apiVersion: cilium.io/v2alpha1
 kind: CiliumBGPAdvertisement
 metadata:
   name: cilium-bgp-advertisement
