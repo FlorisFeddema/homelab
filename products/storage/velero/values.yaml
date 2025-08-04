@@ -20,15 +20,15 @@ velero:
     backupStorageLocation:
       - name: default
         provider: azure
-        bucket: velero-backup
+        bucket: velero
         default: true
         credential:
           name: velero-credentials
           key: credentials
         config:
           useAAD: "true"
-          resourceGroup: "velero"
-          storageAccount: "feddemadevvelero"
+          resourceGroup: "homelab"
+          storageAccount: "feddemadevbackups"
           subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
     volumeSnapshotLocation:
@@ -38,7 +38,7 @@ velero:
         name: velero-credentials
         key: credentials
       config:
-        resourceGroup: "velero"
+        resourceGroup: "homelab"
         subscriptionId: "d6b524dd-32ef-4b34-a63c-12a0d389e4bf"
 
     features: EnableCSI
