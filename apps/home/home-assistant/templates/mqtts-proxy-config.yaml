@@ -14,3 +14,8 @@ data:
     connect = emqx-listeners.emqx.svc.cluster.local:8884
     CAfile = /ca/trust-bundle.pem
     verify = 2
+    socket = l:TCP_NODELAY=1
+    socket = r:TCP_NODELAY=1
+    TIMEOUTidle = 60
+    TIMEOUTconnect = 10
+    debug = 7
