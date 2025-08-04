@@ -7,6 +7,22 @@ data:
   velero-node-agent-config.json: |
     {
       "backupPVC": {
+        "ceph-block-hdd-1": {
+          "storageClass": "ceph-block-hdd-1",
+          "readOnly": true
+        },
+        "ceph-block-nvme-1": {
+          "storageClass": "ceph-block-nvme-1",
+          "readOnly": true
+        },
+        "ceph-block-nvme-2": {
+          "storageClass": "ceph-block-nvme-2",
+          "readOnly": true
+        },
+        "ceph-file-hdd-1": {
+          "storageClass": "ceph-block-nvme-2",
+          "readOnly": true
+        },
         "ceph-file-nvme-2": {
           "storageClass": "ceph-file-nvme-2",
           "readOnly": true
