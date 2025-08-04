@@ -52,6 +52,8 @@ velero:
       schedule: "23 3 * * *"
       template:
         ttl: "240h"
+        csiSnapshotTimeout: 4h
+        itemOperationTimeout: 4h
         storageLocation: default
         snapshotMoveData: true
         includedNamespaces:
