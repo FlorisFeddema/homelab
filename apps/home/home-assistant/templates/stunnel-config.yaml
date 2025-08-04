@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: stunnel-config
-  namespace: home-assistant
+  name: mqtts-proxy-config
 data:
   stunnel.conf: |
     foreground = yes
