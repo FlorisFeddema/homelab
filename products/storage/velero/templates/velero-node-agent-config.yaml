@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: velero-node-agent-config
+  namespace: velero
+data:
+  velero-node-agent-config.json: |
+    {
+      "backupPVC": {
+        "ceph-file-nvme-2": {
+          "storageClass": "ceph-file-nvme-2",
+          "readOnly": true
+        }
+      }
+    }
