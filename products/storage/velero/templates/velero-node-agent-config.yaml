@@ -9,19 +9,19 @@ data:
       "backupPVC": {
         "ceph-block-hdd-1": {
           "storageClass": "ceph-block-hdd-1",
-          "readOnly": true
+          "readOnly": false
         },
         "ceph-block-nvme-1": {
           "storageClass": "ceph-block-nvme-1",
-          "readOnly": true
+          "readOnly": false
         },
         "ceph-block-nvme-2": {
           "storageClass": "ceph-block-nvme-2",
-          "readOnly": true
+          "readOnly": false
         },
         "ceph-file-hdd-1": {
-          "storageClass": "ceph-block-nvme-2",
-          "readOnly": true
+          "storageClass": "ceph-file-hdd-1",
+          "readOnly": false
         },
         "ceph-file-nvme-2": {
           "storageClass": "ceph-file-nvme-2",
