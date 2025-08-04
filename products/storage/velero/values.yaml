@@ -48,7 +48,7 @@ velero:
   deployNodeAgent: true
   nodeAgent:
     extraArgs:
-      - -node-agent-configmap=velero-node-agent-config
+      - --node-agent-configmap=velero-node-agent-config
   schedules:
     backup:
       schedule: "23 3 * * *"
