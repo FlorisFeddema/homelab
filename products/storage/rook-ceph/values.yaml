@@ -238,6 +238,7 @@ rook-ceph-cluster:
         mon_warn_on_pool_no_redundancy: 'false'
         osd_pool_default_size: '2'
         osd_pool_default_min_size: '1'
+        mon_data_avail_warn: '20'
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
