@@ -256,12 +256,12 @@ rook-ceph-cluster:
       mon:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: topology.kubernetes.io/zone
-                    operator: NotIn
-                    values:
-                      - kashaylan
+            - preference:
+                matchExpressions:
+                - key: topology.kubernetes.io/zone
+                  operator: NotIn
+                  values:
+                    - kashaylan
         topologySpreadConstraints:
           - maxSkew: 1
             topologyKey: topology.kubernetes.io/zone
