@@ -18,4 +18,3 @@ data:
     socket = r:TCP_NODELAY=1
     TIMEOUTidle = 60
     TIMEOUTconnect = 10
-    debug = 7
