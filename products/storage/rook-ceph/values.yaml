@@ -255,7 +255,7 @@ rook-ceph-cluster:
     placement:
       mon:
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
+          preferredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: topology.kubernetes.io/zone
