@@ -265,6 +265,7 @@ rook-ceph-cluster:
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: DoNotSchedule
 
+    skipUpgradeChecks: true
     mon:
       count: 3
 
