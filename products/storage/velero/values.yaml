@@ -57,9 +57,9 @@ velero:
         storageLocation: default
         snapshotMoveData: true
         includedNamespaces:
-#        - adguard
-#        - home-assistant
+        - adguard
+        - home-assistant
         - immich
-#        - media-server
-#        - nextcloud
-#        - zigbee2mqtt
+        - media-server
+        - nextcloud
+        - zigbee2mqtt
