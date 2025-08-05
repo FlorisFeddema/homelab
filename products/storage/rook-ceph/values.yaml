@@ -302,10 +302,11 @@ rook-ceph-cluster:
           devices:
             - name: /dev/disk/by-id/nvme-eui.0025385a91b29401
               deviceClass: nvme
-#        - name: kashaylan-3
-#          devices:
-#            - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aeeb60d
-#              deviceClass: nvme
+        - name: kashaylan-3
+          devices:
+            - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aeeb60d
+              deviceClass: nvme
+
     resources:
       mgr:
         requests:
