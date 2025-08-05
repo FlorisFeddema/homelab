@@ -30,7 +30,12 @@ kyverno:
 
   reportsController:
     replicas: 2
-
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 500m
+        memory: 129Mi
     serviceMonitor:
       enabled: true
 
