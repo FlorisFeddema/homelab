@@ -247,7 +247,7 @@ rook-ceph-cluster:
 
     dashboard:
       ssl: false
-      prometheusEndpoint: http://prometheus-prometheus.prometheus.svc:9090/
+      prometheusEndpoint: http://prometheus-thanos-query.prometheus:9090/
 
     csi:
       readAffinity:
