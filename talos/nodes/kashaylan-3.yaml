@@ -7,7 +7,7 @@ machine:
       - interface: enP1p49s0u1 # storage
         dhcp: false
         addresses:
-          - 192.168.5.18/24
+          - 192.168.5.14/24
         routes:
           - network: 192.168.5.0/24
             gateway: 192.168.5.1
