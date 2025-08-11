@@ -17,7 +17,6 @@ loki:
       chunk_encoding: snappy
       wal:
         enabled: true
-        dir: /data/loki/wal
     querier:
       max_concurrent: 4
     pattern_ingester:
