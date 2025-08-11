@@ -1,7 +1,10 @@
-apiVersion: objectbucket.io/v1alpha1
-kind: ObjectBucketClaim
-metadata:
-  name: loki-admin
-spec:
-  bucketName : loki-admin
-  storageClassName: ceph-object-nvme-2
+{{/*apiVersion: objectbucket.io/v1alpha1*/}}
+{{/*kind: ObjectBucketClaim*/}}
+{{/*metadata:*/}}
+{{/*  name: loki-admin*/}}
+{{/*spec:*/}}
+{{/*  bucketName : loki-admin*/}}
+{{/*  storageClassName: ceph-object-nvme-2*/}}
+{{/*  additionalConfig:*/}}
+{{/*    bucketOwner: "loki-svc"*/}}
+

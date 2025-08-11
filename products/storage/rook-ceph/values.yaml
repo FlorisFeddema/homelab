@@ -25,6 +25,7 @@ rook-ceph:
 
   monitoring:
     enabled: true
+  obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
   csi:
     enableMetadata: true

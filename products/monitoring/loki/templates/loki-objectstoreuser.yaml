@@ -1,0 +1,8 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: loki-svc
+spec:
+  displayName: "Loki service user"
+  quotas:
+    maxBuckets: 10
