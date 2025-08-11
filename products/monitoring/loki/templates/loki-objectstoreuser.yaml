@@ -4,6 +4,7 @@ metadata:
   name: loki-svc
   namespace: rook-ceph
 spec:
+  store: ceph-object-nvme-2
   displayName: "Loki service user"
   quotas:
     maxBuckets: 10
