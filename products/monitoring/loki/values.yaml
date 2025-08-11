@@ -1,6 +1,7 @@
 loki:
   deploymentMode: SimpleScalable
   loki:
+    revisionHistoryLimit: 0
     schemaConfig:
       configs:
         - from: 2024-04-01
@@ -62,3 +63,12 @@ loki:
     extraEnvFrom:
       - secretRef:
           name: rook-ceph-object-user-ceph-object-nvme-2-loki-svc
+
+  gateway:
+    replicas: 2
+
+  resultsCache:
+    allocatedMemory: 1024
+
+  chunkCache:
+    allocatedMemory: 1024
