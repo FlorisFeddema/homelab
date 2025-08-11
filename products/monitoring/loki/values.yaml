@@ -68,7 +68,7 @@ loki:
     replicas: 2
 
   resultsCache:
-    allocatedMemory: 1024
+    allocatedMemory: 512
 
   chunksCache:
-    allocatedMemory: 1024
+    allocatedMemory: 512
