@@ -31,7 +31,6 @@ loki:
       per_stream_rate_limit: 3MB
       per_stream_rate_limit_burst: 6MB
       max_global_streams_per_user: 5000
-      querier_max_concurrent: 4
     storage:
       type: s3
       bucketNames:
