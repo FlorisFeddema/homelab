@@ -21,7 +21,7 @@ loki:
     limits_config:
       allow_structured_metadata: true
       volume_enabled: true
-      retention_period: 672h
+      retention_period: 336h
     storage:
       type: s3
       bucketNames:
@@ -29,10 +29,9 @@ loki:
         ruler: loki-ruler
         admin: loki-admin
       s3:
-        endpoint: http://minio.minio:9000
-        region: eu
-        secretAccessKey: ${S3_SECRET_KEY}
-        accessKeyId: ${S3_ACCESS_KEY}
+        endpoint: ${Endpoint}
+        secretAccessKey: ${SecretKey}
+        accessKeyId: ${AccessKey}
         s3ForcePathStyle: true
         insecure: true
     compactor:
@@ -46,7 +45,7 @@ loki:
       - '-config.expand-env=true'
     extraEnvFrom:
       - secretRef:
-          name: loki-s3-credentials
+          name: rook-ceph-object-user-ceph-object-nvme-2-loki-svc
 
   read:
     replicas: 2
@@ -54,7 +53,7 @@ loki:
       - '-config.expand-env=true'
     extraEnvFrom:
       - secretRef:
-          name: loki-s3-credentials
+          name: rook-ceph-object-user-ceph-object-nvme-2-loki-svc
 
   backend:
     replicas: 2
@@ -62,4 +61,4 @@ loki:
       - '-config.expand-env=true'
     extraEnvFrom:
       - secretRef:
-          name: loki-s3-credentials
+          name: rook-ceph-object-user-ceph-object-nvme-2-loki-svc
