@@ -1,7 +1,4 @@
 promtail:
-  daemonset:
-    enabled: true
-
   resources:
     limits:
       memory: 386Mi
@@ -11,17 +8,10 @@ promtail:
 
   revisionHistoryLimit: 0
 
-  service:
-    labels:
-      fixme: promtail
-    annotations:
-      fixme: promtail
-
   serviceMonitor:
     enabled: true
 
   config:
-    logLevel: info
-    serverPort: 3101
+    logLevel: warn
     clients:
       - url: http://loki-gateway.loki/loki/api/v1/push
