@@ -95,3 +95,13 @@ loki:
 
   chunksCache:
     allocatedMemory: 512
+
+  monitoring:
+    dashboards:
+      enabled: true
+    rules:
+      enabled: true
+    serviceMonitor:
+      enabled: true
+      metricsInstance:
+        enabled: false
