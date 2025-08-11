@@ -1,5 +1,6 @@
 loki:
   deploymentMode: SimpleScalable
+  auth_enabled: false
   loki:
     revisionHistoryLimit: 0
     schemaConfig:
