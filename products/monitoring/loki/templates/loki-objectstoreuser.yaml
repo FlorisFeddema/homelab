@@ -3,6 +3,7 @@ kind: CephObjectStoreUser
 metadata:
   name: loki-svc
 spec:
+  store: "ceph-object-nvme-2"
   displayName: "Loki service user"
   quotas:
     maxBuckets: 10
