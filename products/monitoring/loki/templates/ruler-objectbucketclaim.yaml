@@ -1,9 +1,9 @@
-{{/*apiVersion: objectbucket.io/v1alpha1*/}}
-{{/*kind: ObjectBucketClaim*/}}
-{{/*metadata:*/}}
-{{/*  name: loki-ruler*/}}
-{{/*spec:*/}}
-{{/*  bucketName : loki-ruler*/}}
-{{/*  storageClassName: ceph-object-nvme-2*/}}
-{{/*  additionalConfig:*/}}
-{{/*    bucketOwner: "loki-svc"*/}}
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: loki-ruler
+spec:
+  bucketName : loki-ruler
+  storageClassName: ceph-object-nvme-2
+  additionalConfig:
+    bucketOwner: "loki-svc"
