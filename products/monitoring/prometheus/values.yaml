@@ -213,6 +213,11 @@ kube-prometheus-stack:
 thanos:
   existingObjstoreSecret: "thanos-objstore"
 
+  image:
+    registry: quay.io
+    repository: thanos/thanos
+    tag: v0.39.2
+
   query:
     enabled: true
     logLevel: warn
