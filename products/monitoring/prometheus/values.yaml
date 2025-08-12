@@ -213,6 +213,10 @@ kube-prometheus-stack:
 thanos:
   existingObjstoreSecret: "thanos-objstore"
 
+  global:
+    security:
+      allowInsecureImages: true
+
   image:
     registry: quay.io
     repository: thanos/thanos
