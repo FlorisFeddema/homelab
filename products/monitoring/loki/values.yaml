@@ -65,6 +65,8 @@ loki:
 
   write:
     replicas: 3
+    persistence:
+      storageClass: ceph-block-nvme-1
     extraArgs:
       - '-config.expand-env=true'
     extraEnvFrom:
@@ -81,6 +83,8 @@ loki:
 
   backend:
     replicas: 2
+    persistence:
+      storageClass: ceph-block-nvme-1
     extraArgs:
       - '-config.expand-env=true'
     extraEnvFrom:
