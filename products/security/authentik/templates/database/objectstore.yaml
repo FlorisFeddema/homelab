@@ -4,7 +4,7 @@ metadata:
   name: azure-authentik-db-store
 spec:
   configuration:
-    destinationPath: https://feddemadevbackups.blob.core.windows.net/authentik-db
+    destinationPath: https://feddemadevbackups.blob.core.windows.net/cnpg
     azureCredentials:
       connectionString:
         name: azure-authentik-db-store
