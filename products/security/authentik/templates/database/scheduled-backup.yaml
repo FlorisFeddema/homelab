@@ -5,7 +5,7 @@ metadata:
 spec:
   cluster:
     name: {{ .Values.database.clusterName }}
-  schedule: '"23 4 * * * *'
+  schedule: '23 4 * * * *'
   backupOwnerReference: self
   method: plugin
   pluginConfiguration:
