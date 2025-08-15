@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: azure-db-store
+  namespace: authentik
+spec:
+  encryptedData:
+    AZURE_CONNECTION_STRING: AgC5h+fCMeNpZxfWNI84sNn1eKTEuxm05oSWnO5Q2su7Y35c9cjkpR+B48NJnrtVjWOKaqXZR6CRyV9lvdV3hk4NPsBzbsRuQVBc17kEXNVK5ZwY8RwDcnVN8Wkcxoanm+Mf3SMDPASo07r/VTrH7lyb0glzDty8wRx0deFZ0AQr1LK0SgrW6Q653jAzIdmqJhW39KP5XPpnXROqR1YoMTPrhBfhzYLK6Zv/eUaJegvgtEEo3Cxec4AtuYyizSlCdM9TInYH4QttmG7OUorYj4Rj0xlPXEihrtkoYDQTqadWq0fvxnCL6voNIo08CL5yuseWhCvqJVREqIofXTGGUTrDM7ZOhfII9rbmAKHueaqi4Yl+q6rfkwcqDv0I8xpVYjEHA4Kh48QUQX9ukmj/4GoLM3L/g68U8p5el+VBYw6fxE40beCqlyqWChCbPdBZT5kdPXLe4AIP22jpiLx9b5sT0Ga2a+IdqDik//nbn7jOh04ngYlvP89A2HlikK8RIm9squl2DHUpWz9RWBaKOlYc9j+n7t4VDn3BQCd5m05iUrVapXKcRXi3KwfBb28zkRalQqn2GwohCB2Wx/q3dEFJr2m55MAn0yNMDj6sX60cYjvjpsDdHM4VEviWuOIALVdlZq9mzzLhtYZkAlHN0X9oT8Y65adAu1kLd0Tus6nJKIjp9ZEqb/6yvw2mBuh6pjZuHBR49hiaw218rL+vaC7wRoV8tFp6GwwNqi37xJOPkpBcxmlzpeIa8mJWYCv9KkNhpHyL8GjeK8lehAvgT2u/jcfO/v8iNsOFQM9vkDlh/gImr3yKD8F8WOeirBiolXKbcdl3LpIzKG9vl5f6leHU7SFRQrzIL6PY0EPaxzpFQX49tKddWLL50s2PJnMcUqeQuN6AJsd5/ClWN4fR59VM0Pnh0jiyHu4Er+mofC8PPhkyDVrciUPwKHntzffBujY=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: azure-db-store
+      namespace: authentik

@@ -8,7 +8,7 @@ spec:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
       parameters:
-        barmanObjectName: azure-authentik-db-store
+        barmanObjectName: azure-db-store
 
   storage:
     storageClass: {{ .Values.database.storageClass | quote }}
