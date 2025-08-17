@@ -18,13 +18,6 @@ spec:
       kind: EnvoyProxy
       name: envoy-gateway-public
   listeners:
-   - name: web-http
-     protocol: HTTP
-     port: 80
-     hostname: '*.feddema.dev'
-     allowedRoutes:
-       namespaces:
-         from: Same
    - name: web-https
      protocol: HTTPS
      port: 443
