@@ -7,6 +7,15 @@ gatus-monitor:
 
 dawarich:
   database:
+    backups:
+      enabled: true
+      destination: 'https://feddemadevbackups.blob.core.windows.net/cnpg'
+      retention: '14d'
+      schedule: '23 4 * * * *'
+      secretName: 'azure-db-store'
+      azure:
+        connectionStringKeyName: 'CONNECTION_STRING'
+
     storageClass: ceph-block-nvme-1
     topologySpreadConstraints:
       - maxSkew: 1
