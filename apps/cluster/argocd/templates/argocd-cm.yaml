@@ -201,6 +201,7 @@ data:
           local instance = actionParams["instance"]
           local healthy = obj.status.instancesStatus.healthy
           local selected = nil
+          error(type(healthy))
 
           if instance == "any" then
               -- Select next healthy instance after currentPrimary
@@ -221,7 +222,7 @@ data:
               -- Select by instance number
               local suffix = "-" .. instance
               for _, node in ipairs(healthy) do
-                  if node:sub(-#suffix) == suffix then
+                  if type(node) == "string" and node:sub(-#suffix) == suffix then
                       selected = node
                       break
                   end
@@ -245,3 +246,4 @@ data:
               error("Could not find a healthy instance matching the criteria: " .. tostring(instance))
           end
           return obj
+
