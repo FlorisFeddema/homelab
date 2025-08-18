@@ -200,8 +200,12 @@ data:
           local os = require("os")
           local instance = actionParams["instance"]
           local healthy = obj.status.instancesStatus.healthy
-          local selected = nil
-          error(type(healthy))
+          local selected = ""
+
+          for _, node in ipairs(healthy) do
+            selected = selected .. "," .. node
+          end
+          error(selected)
 
           if instance == "any" then
               -- Select next healthy instance after currentPrimary
