@@ -84,13 +84,13 @@ products:
       autoSync: true
     dawarich:
       deploy: true
-      autoSync: true
+      autoSync: false
     homeAssistant:
       deploy: true
       autoSync: true
     immich:
       deploy: true
-      autoSync: true
+      autoSync: false
     nextcloud:
       deploy: true
       autoSync: true
