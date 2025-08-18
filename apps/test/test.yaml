@@ -1,3 +1,4 @@
 apps:
   test:
-    deploy: true
+    cluster:
+      deploy: true
