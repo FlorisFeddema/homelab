@@ -156,10 +156,7 @@ data:
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
       local actions = {}
-      actions["restart"] = {
-          ["iconClass"] = "fa fa-fw fa-plus",
-          ["displayName"] = "Rollout restart Cluster"
-      }
+      actions["restart"] = {}
       actions["reload"] = {
           ["iconClass"] = "fa fa-fw fa-rotate-right",
           ["displayName"] = "Reload all Configuration"
