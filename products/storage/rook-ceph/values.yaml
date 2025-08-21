@@ -28,6 +28,7 @@ rook-ceph:
   obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
   csi:
+    rookUseCsiOperator: false
     enableMetadata: true
     enableOMAPGenerator: true
     enableLiveness: true
