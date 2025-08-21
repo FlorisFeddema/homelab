@@ -173,6 +173,7 @@ products:
     rookCeph:
       deploy: true
       autoSync: false
+      serverSideApply: true
     snapshotController:
       deploy: true
       autoSync: true
