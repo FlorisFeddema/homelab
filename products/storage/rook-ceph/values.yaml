@@ -5,15 +5,6 @@ gatus-monitor:
   privateEndpoints:
     - name: ceph
 
-route:
-  enabled: true
-  hostnames:
-    - ceph.feddema.dev
-  parentRefs:
-    - name: envoy-gateway-public
-      namespace: envoy-gateway
-      sectionName: web-https
-
 rook-ceph:
   revisionHistoryLimit: "0"
   resources:
@@ -214,6 +205,19 @@ rook-ceph:
 rook-ceph-cluster:
   toolbox:
     enabled: true
+
+  route:
+    dashboard:
+      host:
+        name: ceph.feddema.dev
+        path: "/"
+        pathType: PathPrefix
+      parentRefs:
+        - group: gateway.networking.k8s.io
+          kind: Gateway
+          name: envoy-gateway-public
+          namespace: envoy-gateway
+          sectionName: web-https
 
   monitoring:
     enabled: true
