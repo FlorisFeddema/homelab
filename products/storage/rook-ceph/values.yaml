@@ -208,6 +208,8 @@ rook-ceph-cluster:
 
   route:
     dashboard:
+      annotations:
+        "argocd.argoproj.io/sync-options": "ServerSideApply=false"
       host:
         name: ceph.feddema.dev
         path: "/"
