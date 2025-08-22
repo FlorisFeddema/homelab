@@ -19,7 +19,7 @@ rook-ceph:
   obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
   csi:
-    rookUseCsiOperator: false
+    rookUseCsiOperator: true
     enableMetadata: true
     enableOMAPGenerator: true
     enableLiveness: true
@@ -258,6 +258,17 @@ rook-ceph-cluster:
     csi:
       readAffinity:
         enabled: true
+        crushLocationLabels:
+          - "kubernetes.io/hostname"
+          - "topology.kubernetes.io/region"
+          - "topology.kubernetes.io/zone"
+          - "topology.rook.io/chassis"
+          - "topology.rook.io/rack"
+          - "topology.rook.io/row"
+          - "topology.rook.io/pdu"
+          - "topology.rook.io/pod"
+          - "topology.rook.io/room"
+          - "topology.rook.io/datacenter"
 
     placement:
       mon:
