@@ -15,6 +15,11 @@ external-dns:
     - ingress
     - service
     - crd
+    - gateway-httproute
+    - gateway-tlsroute
+    - gateway-udproute
+    - gateway-tcproute
+    - gateway-grpcroute
 
   provider: cloudflare
   cloudflare:
