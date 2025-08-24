@@ -22,7 +22,7 @@ authentik:
   authentik:
     postgresql:
       # host: env://AUTHENTIK_DATA_POOLER_RW_SERVICE_HOST
-      host: env://AUTHENTIK_DATA_RW_SERVICE_HOST
+      host: env://AUTHENTIK_DB_RW_SERVICE_HOST
       name: file:///postgres-credentials/dbname
       user: file:///postgres-credentials/username
       password: file:///postgres-credentials/password
