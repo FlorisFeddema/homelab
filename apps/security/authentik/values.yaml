@@ -34,13 +34,15 @@ authentik:
       serviceMonitor:
         enabled: true
 
-    ingress:
-      enabled: true
-      hosts:
+    route:
+      main:
+        enabled: true
+        hostnames:
         - authentik.mobrockers.com
-      tls:
-        - hosts:
-          - authentik.mobrockers.com
+        parentRefs:
+        - name: envoy-gateway
+          namespace: envoy-gateway
+          sectionName: web-https
 
   worker:
     replicas: 2
