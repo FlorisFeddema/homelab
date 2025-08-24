@@ -28,7 +28,7 @@ authentik:
       password: file:///postgres-credentials/password
 
   server:
-    replicas: 0
+    replicas: 2
     metrics:
       enabled: true
       serviceMonitor:
@@ -43,7 +43,7 @@ authentik:
           - authentik.mobrockers.com
 
   worker:
-    replicas: 0
+    replicas: 2
   redis:
     enabled: true
     master:
