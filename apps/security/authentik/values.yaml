@@ -4,7 +4,7 @@ global:
   volumes:
   - name: postgres-credentials
     secret:
-      secretName: authentik-data-app
+      secretName: authentik-db-app
   volumeMounts:
     - name: postgres-credentials
       mountPath: /postgres-credentials
