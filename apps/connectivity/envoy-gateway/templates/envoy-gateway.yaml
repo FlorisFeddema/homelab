@@ -7,8 +7,10 @@ metadata:
     'cert-manager.io/cluster-issuer': cloudflare-letsencrypt-dns
 spec:
   addresses:
-    - value: {{ .Values.publicIp }}
+  {{- with .Values.publicIp }}
+    - value: {{ . }}
       type: IPAddress
+  {{- end }}
     - value: {{ .Values.privateIp }}
       type: IPAddress
   gatewayClassName: envoy-gateway
