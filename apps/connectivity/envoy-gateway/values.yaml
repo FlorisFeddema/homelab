@@ -1,4 +1,4 @@
-publicIp: 87.212.115.7
+# publicIp: 87.212.115.7
 privateIp: 10.0.103.21
 
 gateway-helm:
