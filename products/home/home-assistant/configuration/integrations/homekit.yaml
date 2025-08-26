@@ -8,6 +8,7 @@ homekit:
       - switch.bedroom_switch_1
       - switch.diningroom_switch_1
       - switch.livingroom_switch_1
+      - switch.office_switch_1
     exclude_entities:
       - sensor.hacs
     exclude_entity_globs:

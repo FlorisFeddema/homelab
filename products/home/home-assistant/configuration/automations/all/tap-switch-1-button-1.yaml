@@ -8,10 +8,10 @@ triggers:
     subtype: press_1
     trigger: device
 conditions: []
-actions:
-  - action: light.turn_off
-    target:
-      entity_id: all
-  - action: switch.turn_off
-    target:
-      entity_id: all
+actions: []
+#  - action: light.turn_off
+#    target:
+#      entity_id: all
+#  - action: switch.turn_off
+#    target:
+#      entity_id: all
