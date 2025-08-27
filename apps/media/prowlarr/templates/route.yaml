@@ -27,7 +27,7 @@ spec:
     {{- end }}
     - backendRefs:
         - name: {{ template "common.fullname" . }}
-          port: http
+          port: 9696
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
