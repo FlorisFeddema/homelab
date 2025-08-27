@@ -10,7 +10,7 @@ config:
 
 frontend:
   port: 8080
-  url: https://z2mqtt.mobrockers.com
+  url: https://zigbee2mqtt.mobrockers.com
 zigbee:
   adapter: tcp://10.0.30.51:6638
   pan_id: '23219'
