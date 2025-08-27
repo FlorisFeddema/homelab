@@ -12,6 +12,6 @@ spec:
       issuer: https://authentik.mobrockers.com/application/o/{{ template "common.fullname" . }}/
     redirectURL: https://{{ template "common.fullname" . }}.mobrockers.com/oauth2/callback
     logoutPath: /oauth2/logout
-    clientID: cXpfzkGOSmnMLdPgar6u6AzrDHwQ3r8h2TwYxNJm
+    clientID: 4mIaXlIdot3h3GbJcJQsAQrAQYScrUUIB5KecSiN
     clientSecret:
       name: route-oidc-secret
