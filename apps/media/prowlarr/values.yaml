@@ -10,8 +10,8 @@ metrics:
 route:
   enabled: true
   hostnames:
-    - prowlarr.mobrockers.com
+  - prowlarr.mobrockers.com
   parentRefs:
-    - name: envoy-gateway
-      namespace: envoy-gateway
-      sectionName: web-https
+  - name: envoy-gateway
+    namespace: envoy-gateway
+    sectionName: web-https

@@ -10,8 +10,8 @@ metrics:
 route:
   enabled: true
   hostnames:
-    - radarr.mobrockers.com
+  - radarr.mobrockers.com
   parentRefs:
-    - name: envoy-gateway
-      namespace: envoy-gateway
-      sectionName: web-https
+  - name: envoy-gateway
+    namespace: envoy-gateway
+    sectionName: web-https
