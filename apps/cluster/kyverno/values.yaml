@@ -5,7 +5,7 @@ kyverno-policies:
 route:
   enabled: true
   hostnames:
-    - kyverno.mobrockers.dev
+    - kyverno.mobrockers.com
   parentRefs:
     - name: envoy-gateway
       namespace: envoy-gateway
