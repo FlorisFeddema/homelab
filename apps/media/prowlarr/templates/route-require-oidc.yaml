@@ -9,8 +9,8 @@ spec:
       name: {{ template "common.fullname" . }}
   oidc:
     provider:
-      issuer: https://authentik.mobrockers.com/application/o/{{ template "common.fullname" . }}/
-    redirectURL: https://{{ template "common.fullname" . }}.mobrockers.com/oauth2/callback
+      issuer: https://authentik.mobrockers.com/application/o/prowlarr/
+    redirectURL: https://prowlarr.mobrockers.com/oauth2/callback
     logoutPath: /oauth2/logout
     clientID: 4mIaXlIdot3h3GbJcJQsAQrAQYScrUUIB5KecSiN
     clientSecret:
