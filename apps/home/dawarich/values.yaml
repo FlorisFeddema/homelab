@@ -2,12 +2,12 @@ dawarich:
   database:
     backups:
       enabled: true
-      destination: 'https://feddemadevbackups.blob.core.windows.net/cnpg'
+      endpoint: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
+      path: s3://dawarich-db-backups/
       retention: '14d'
-      schedule: '0 23 4 * * *'
-      secretName: 'azure-db-store'
-      azure:
-        connectionStringKeyName: 'CONNECTION_STRING'
+      secretName: immich-db-backup-bucket
+      accessKeyName: AWS_ACCESS_KEY_ID
+      secretKeyName: AWS_SECRET_ACCESS_KEY
 
   ingress:
     enabled: false
