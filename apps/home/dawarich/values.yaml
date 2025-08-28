@@ -2,13 +2,15 @@ dawarich:
   database:
     backups:
       enabled: true
-      endpoint: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
-      path: s3://dawarich-db-backups/
-      retention: '14d'
-      secretName: immich-db-backup-bucket
-      accessKeyName: AWS_ACCESS_KEY_ID
-      secretKeyName: AWS_SECRET_ACCESS_KEY
-
+      destination: s3://dawarich-db-backups/
+      retention: 14d
+      schedule: '0 0 0 * * *'
+      secretName: dawarich-db-backup-bucket
+      provider: s3
+      s3:
+        endpoint: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
+        accessKeyName: AWS_ACCESS_KEY_ID
+        secretKeyName: AWS_SECRET_ACCESS_KEY
   ingress:
     enabled: false
   route:
