@@ -16,11 +16,11 @@ dawarich:
   route:
     enabled: true
     hostnames:
-      - timeline.mobrockers.com
+    - timeline.mobrockers.com
     parentRefs:
-      - name: envoy-gateway
-        namespace: envoy-gateway
-        sectionName: web-https
+    - name: envoy-gateway
+      namespace: envoy-gateway
+      sectionName: web-https
 
   photon:
     config:
