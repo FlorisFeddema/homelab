@@ -24,7 +24,7 @@ image:
   tag: 10.10.7
 
 persistence:
-  size: 1Gi
+  size: 4Gi
   labels:
     feddema.dev/backup: "true"
 
