@@ -1,10 +1,10 @@
 apiVersion: v2
 name: grafana
-version: 1.0.130
+version: 1.0.131
 
 dependencies:
   - name: grafana
-    version: 9.4.3
+    version: 9.4.4
     repository: https://grafana.github.io/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
