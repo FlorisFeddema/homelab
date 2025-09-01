@@ -4,5 +4,5 @@ version: 0.0.0
 
 dependencies:
 - name: dawarich
-  version: 7.0.0-copilot-fix-b1e7f59f-06cb-4428-ad2b-f23ad7dad330.b74b39d
+  version: 7.0.0-copilot-fix-b1e7f59f-06cb-4428-ad2b-f23ad7dad330.2a4666d
   repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
