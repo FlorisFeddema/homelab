@@ -31,10 +31,10 @@ dawarich:
       size: 500Gi
 
 
-redis:
-  master:
-    resources:
-      requests:
-        memory: 256Mi
-      limits:
-        memory: 1Gi
+  redis:
+    master:
+      resources:
+        requests:
+          memory: 256Mi
+        limits:
+          memory: 1Gi
