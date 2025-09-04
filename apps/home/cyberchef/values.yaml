@@ -13,8 +13,3 @@ cyberchef:
     - name: envoy-gateway
       namespace: envoy-gateway
       sectionName: web-https
-  image:
-    registry: ghcr.io
-    repository: k8s-at-our-homes/cyberchef
-    tag: 10.19.4-copilot-fix-217
-    pullPolicy: Always
