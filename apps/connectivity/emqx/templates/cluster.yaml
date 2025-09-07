@@ -89,6 +89,8 @@ spec:
         mountPath: /mounted/cert/mqtt-mobrockers-com
       - name: mqtt-emqx-svc-tls
         mountPath: /mounted/cert/mqtt-emqx-svc
+      - name: mqtt-emqx-svc-tls
+        mountPath: /mounted/blablablatemp
 
   listenersServiceTemplate:
     metadata:
