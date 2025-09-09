@@ -85,16 +85,16 @@ rook-ceph-cluster:
       useAllDevices: false
       allowDeviceClassUpdate: true
       nodes:
-      - name: talos-worker-1
-        devices:
-        - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1
-          deviceClass: nvme
-        - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
-          deviceClass: nvme
-        - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi3
-          deviceClass: hdd
-        - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi4
-          deviceClass: hdd
+      # - name: talos-worker-1
+      #   devices:
+      #   - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1
+      #     deviceClass: nvme
+      #   - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi2
+      #     deviceClass: nvme
+      #   - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi3
+      #     deviceClass: hdd
+      #   - name: /dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi4
+      #     deviceClass: hdd
       - name: talos-worker-2
         devices:
         - name: /dev/disk/by-id/nvme-Lexar_SSD_NM710_2TB_PMT466R005385P2703
