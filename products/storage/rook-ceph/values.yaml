@@ -538,7 +538,7 @@ rook-ceph-cluster:
       storageClass:
         enabled: true
         isDefault: false
-        name: ceph-file-hdd-1
+        name: ceph-file-hdd-2
         pool: data0
         reclaimPolicy: Delete
         allowVolumeExpansion: true
