@@ -1,7 +1,0 @@
-machine:
-  network:
-    interfaces:
-    - interface: enp0s18
-      dhcp: true
-      vip:
-        ip: 10.0.102.10

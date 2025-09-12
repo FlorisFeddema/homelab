@@ -1,0 +1,15 @@
+cluster:
+  apiServer:
+    extraArgs:
+      feature-gates: DynamicResourceAllocation=true
+      runtime-config: resource.k8s.io/v1beta1=true
+  controllerManager:
+    extraArgs:
+      feature-gates: DynamicResourceAllocation=true
+  scheduler:
+    extraArgs:
+      feature-gates: DynamicResourceAllocation=true
+machine:
+  kubelet:
+    extraArgs:
+      feature-gates: DynamicResourceAllocation=true

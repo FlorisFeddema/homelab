@@ -44,12 +44,12 @@ function New-NodeConfig ($NodeName, $NodeType) {
         "--with-examples=false",
         "--with-docs=false",
         "--with-secrets=$RepoPath/secrets.yaml",
-        "--config-patch-control-plane=@$RepoPath/talos/patches/control-plane-vip.yaml",
         "--config-patch-control-plane=@$RepoPath/talos/patches/talos-api-access.yaml",
         "--config-patch=@$RepoPath/talos/patches/cluster.yaml",
+        "--config-patch=@$RepoPath/talos/patches/feature-gates.yaml",
         "--config-patch=@$RepoPath/talos/patches/machine.yaml",
         "--config-patch=@$RepoPath/talos/nodes/$NodeName.yaml",
-        "--kubernetes-version=$kubernetesVersion"
+        "--kubernetes-version=$kubernetesVersion",
         "--force"
     )
 
