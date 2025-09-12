@@ -4,6 +4,7 @@ metadata:
   name: authentik-backup-provider
 spec:
   configuration:
+    retentionPolicy: 8
     destinationPath: s3://authentik-db-backups/
     endpointURL: http://rook-ceph-rgw-ceph-objectstore.rook-ceph.svc:80
     s3Credentials:
