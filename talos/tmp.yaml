@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: osd-repair
+  namespace: rook-ceph
+spec:
+  nodeName: hortek-0
+  hostPID: true
+  containers:
+  - name: tools
+    image: quay.io/ceph/ceph:v19.2.3
+    command: ["sleep", "infinity"]
+    securityContext:
+      privileged: true          # needed for direct disk access
+    volumeMounts:
+    - name: osd-dir
+      mountPath: /var/lib/ceph/osd/ceph-4
+  volumes:
+  - name: osd-dir
+    hostPath:
+      path: /var/lib/rook/rook-ceph/8af28776-cbbc-422c-9060-247dcd543657_ec00b3d5-8c46-476d-b04f-9a9a647fac40
+      type: Directory
+  restartPolicy: Never 
