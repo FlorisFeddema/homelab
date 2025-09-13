@@ -298,8 +298,8 @@ rook-ceph-cluster:
               deviceClass: nvme
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030343131325031313130-4c6578617220535344204e4d36323020325442-00000001
               deviceClass: nvme
-            - name: /dev/disk/by-id/wwn-0x5000c500e5d07909
-              deviceClass: hdd
+#            - name: /dev/disk/by-id/wwn-0x5000c500e5d07909
+#              deviceClass: hdd
         - name: korris-1
           devices:
             - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aee9594
