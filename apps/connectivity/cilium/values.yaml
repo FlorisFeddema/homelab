@@ -1,5 +1,5 @@
 cilium:
-  mtu: 1450
+  MTU: 1450
   k8sServiceHost: localhost
   k8sServicePort: 7445
 
