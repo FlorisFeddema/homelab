@@ -11,6 +11,7 @@ machine:
       routes:
       - network: 10.0.104.0/24
         gateway: 10.0.104.1
+      mtu: 9000
 
   nodeLabels:
     topology.kubernetes.io/zone: '2'
