@@ -49,7 +49,7 @@ products:
       deploy: true
       autoSync: true
     spegel:
-      deploy: false
+      deploy: true
       autoSync: true
   monitoring:
     prometheus:
