@@ -242,8 +242,8 @@ rook-ceph-cluster:
     cephConfig:
       global:
         mon_warn_on_pool_no_redundancy: 'false'
-        osd_pool_default_size: '2'
-        osd_pool_default_min_size: '1'
+        osd_pool_default_size: '3'
+        osd_pool_default_min_size: '2'
         mon_data_avail_warn: '15'
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
@@ -388,7 +388,7 @@ rook-ceph-cluster:
       spec:
         failureDomain: zone
         replicated:
-          size: 1
+          size: 2
         enableRBDStats: true
         deviceClass: nvme
         enableCrushUpdates: true
