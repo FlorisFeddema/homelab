@@ -2,8 +2,7 @@ machine:
 
   install:
     image: factory.talos.dev/metal-installer/ee827ee541fb06e742e6d183f4e3c1a62a2d63d945cbbd0b1e76da9221af9d27:v1.10.3
-    diskSelector:
-      size: '<= 200GB'
+    # disk: /dev/sda
 
   kubelet:
     nodeIP:
