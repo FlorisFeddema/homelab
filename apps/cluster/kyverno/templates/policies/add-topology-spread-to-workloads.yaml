@@ -21,9 +21,9 @@ spec:
           - UPDATE
     preconditions:
       all:
-      - key: '{{`{{ has(request.object.spec.template.spec.topologySpreadConstraints) }}`}}'
+      - key: '{{`{{ request.object.spec.template.spec.topologySpreadConstraints }}`}}'
         operator: Equals
-        value: false
+        value: null
     exclude:
       any:
       - resources:
