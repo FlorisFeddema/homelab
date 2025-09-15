@@ -19,6 +19,9 @@ rook-ceph-cluster:
             primaryDeviceClass: nvme
             secondaryDeviceClass: hdd
       allowUsersInNamespaces: ['*']
+      hosting:
+        dnsNames:
+        - 's3.mobrockers.com'
       gateway:
         port: 80
         resources:
@@ -43,16 +46,3 @@ rook-ceph-cluster:
       name: ceph-bucket
       reclaimPolicy: Delete
       volumeBindingMode: WaitForFirstConsumer
-    ingress:
-      # Enable an ingress for the ceph-objectstore
-      enabled: false
-      # annotations: {}
-      host:
-        name: s3.mobrockers.com
-      #   path: /
-      #   pathType: Prefix
-      tls:
-      - hosts:
-        - s3.mobrockers.com
-      #   secretName: ceph-objectstore-tls
-      # ingressClassName: nginx
