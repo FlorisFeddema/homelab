@@ -388,7 +388,7 @@ rook-ceph-cluster:
       spec:
         failureDomain: zone
         replicated:
-          size: 2
+          size: 1
         enableRBDStats: true
         deviceClass: nvme
         enableCrushUpdates: true
