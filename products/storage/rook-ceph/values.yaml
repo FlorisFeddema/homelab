@@ -473,62 +473,62 @@ rook-ceph-cluster:
           csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
           csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
           csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
-#    - name: ceph-file-hdd-2
-#      spec:
-#        metadataPool:
-#          enableRBDStats: true
-#          enableCrushUpdates: true
-#          replicated:
-#            size: 2
-#            hybridStorage:
-#              primaryDeviceClass: hdd
-#              secondaryDeviceClass: nvme
-#        dataPools:
-#          - name: data0
-#            enableRBDStats: true
-#            enableCrushUpdates: true
-#            failureDomain: zone
-#            replicated:
-#              size: 2
-#              hybridStorage:
-#                primaryDeviceClass: hdd
-#                secondaryDeviceClass: nvme
-#        metadataServer:
-#          activeCount: 1
-#          activeStandby: false
-#          placement:
-#            nodeAffinity:
-#              requiredDuringSchedulingIgnoredDuringExecution:
-#                nodeSelectorTerms:
-#                  - matchExpressions:
-#                      - key: kubernetes.io/hostname
-#                        operator: In
-#                        values:
-#                          - hortek-0
-#          resources:
-#            requests:
-#              cpu: 10m
-#              memory: 512Mi
-#            limits:
-#              memory: 3Gi
-#      storageClass:
-#        enabled: true
-#        isDefault: false
-#        name: ceph-file-hdd-2
-#        pool: data0
-#        reclaimPolicy: Delete
-#        allowVolumeExpansion: true
-#        volumeBindingMode: "Immediate"
-#        annotations: { }
-#        labels: { }
-#        mountOptions: [ ]
-#        parameters:
-#          csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
-#          csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
-#          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
-#          csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
-#          csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
-#          csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
+    - name: ceph-file-hdd
+      spec:
+        metadataPool:
+          enableRBDStats: true
+          enableCrushUpdates: true
+          replicated:
+            size: 2
+            hybridStorage:
+              primaryDeviceClass: hdd
+              secondaryDeviceClass: nvme
+        dataPools:
+          - name: data0
+            enableRBDStats: true
+            enableCrushUpdates: true
+            failureDomain: zone
+            replicated:
+              size: 2
+              hybridStorage:
+                primaryDeviceClass: hdd
+                secondaryDeviceClass: nvme
+        metadataServer:
+          activeCount: 1
+          activeStandby: false
+          placement:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: kubernetes.io/hostname
+                        operator: In
+                        values:
+                          - hortek-0
+          resources:
+            requests:
+              cpu: 10m
+              memory: 512Mi
+            limits:
+              memory: 3Gi
+      storageClass:
+        enabled: true
+        isDefault: false
+        name: ceph-file-hdd
+        pool: data0
+        reclaimPolicy: Delete
+        allowVolumeExpansion: true
+        volumeBindingMode: "Immediate"
+        annotations: { }
+        labels: { }
+        mountOptions: [ ]
+        parameters:
+          csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+          csi.storage.k8s.io/provisioner-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+          csi.storage.k8s.io/controller-expand-secret-namespace: "{{ .Release.Namespace }}"
+          csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+          csi.storage.k8s.io/node-stage-secret-namespace: "{{ .Release.Namespace }}"
 
   cephObjectStores:
     - name: ceph-object-nvme-2
