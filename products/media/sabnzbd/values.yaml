@@ -11,7 +11,12 @@ securityContext: {}
 
 mediaPvcName: media-server-media
 
-resources: {}
+resources:
+  requests:
+    cpu: 50m
+    memory: 700Mi
+  limits:
+    memory: 2000Mi
 
 image:
   registry: ghcr.io
