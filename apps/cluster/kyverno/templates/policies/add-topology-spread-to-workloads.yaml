@@ -9,39 +9,41 @@ metadata:
     policies.kyverno.io/description: Ensures Deployments and StatefulSets have topology spread constraints for high availability.
 spec:
   rules:
-    - name: add-topology-spread-to-workloads
-      match:
-        any:
-        - resources:
-            kinds:
-              - Deployment
-              - StatefulSet
-            operations:
-              - CREATE
-              - UPDATE
-      celPreconditions:
-        - name: 'missing-topologySpreadConstraints'
-          expression: '!has(object.spec.template.spec.topologySpreadConstraints)'
-      exclude:
-        any:
-          - resources:
-              selector:
-                matchExpressions:
-                  - key: metadata.deletionTimestamp
-                    operator: Exists
-      mutate:
-        patchStrategicMerge:
-          spec:
-            template:
-              spec:
-                topologySpreadConstraints:
-                  - maxSkew: 1
-                    topologyKey: 'kubernetes.io/hostname'
-                    whenUnsatisfiable: 'ScheduleAnyway'
-                    labelSelector:
-                      matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
-                  - maxSkew: 1
-                    topologyKey: 'topology.kubernetes.io/zone'
-                    whenUnsatisfiable: 'ScheduleAnyway'
-                    labelSelector:
-                      matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
+  - name: add-topology-spread-to-workloads
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          - StatefulSet
+          operations:
+          - CREATE
+          - UPDATE
+    preconditions:
+      all:
+      - key: "{{ has(request.object.spec.template.spec.topologySpreadConstraints) }}"
+        operator: Equals
+        value: false
+    exclude:
+      any:
+      - resources:
+          selector:
+            matchExpressions:
+            - key: metadata.deletionTimestamp
+              operator: Exists
+    mutate:
+      patchStrategicMerge:
+        spec:
+          template:
+            spec:
+              topologySpreadConstraints:
+              - maxSkew: 1
+                topologyKey: 'kubernetes.io/hostname'
+                whenUnsatisfiable: 'ScheduleAnyway'
+                labelSelector:
+                  matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
+              - maxSkew: 1
+                topologyKey: 'topology.kubernetes.io/zone'
+                whenUnsatisfiable: 'ScheduleAnyway'
+                labelSelector:
+                  matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'

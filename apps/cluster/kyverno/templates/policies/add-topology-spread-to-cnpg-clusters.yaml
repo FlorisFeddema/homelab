@@ -9,40 +9,42 @@ metadata:
     policies.kyverno.io/description: Ensures CloudNativePG Cluster pods have topology spread constraints for each pod role for high availability.
 spec:
   rules:
-    - name: add-topology-spread-to-cnpg-cluster-podroles
-      match:
-        any:
-        - resources:
-            kinds:
-              - postgresql.cnpg.io/v1/Cluster
-            operations:
-              - CREATE
-              - UPDATE
-      celPreconditions:
-        - name: 'missing-topologySpreadConstraints'
-          expression: '!has(object.spec.topologySpreadConstraints)'
-      exclude:
-        any:
-          - resources:
-              selector:
-                matchExpressions:
-                  - key: metadata.deletionTimestamp
-                    operator: Exists
-      mutate:
-        patchStrategicMerge:
-          spec:
-            topologySpreadConstraints:
-              - maxSkew: 1
-                topologyKey: 'kubernetes.io/hostname'
-                whenUnsatisfiable: 'ScheduleAnyway'
-                labelSelector:
-                  matchLabels:
-                    cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
-                    cnpg.io/podRole: instance
-              - maxSkew: 1
-                topologyKey: 'topology.kubernetes.io/zone'
-                whenUnsatisfiable: 'ScheduleAnyway'
-                labelSelector:
-                  matchLabels:
-                    cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
-                    cnpg.io/podRole: instance
+  - name: add-topology-spread-to-cnpg-cluster-podroles
+    match:
+      any:
+      - resources:
+          kinds:
+          - postgresql.cnpg.io/v1/Cluster
+          operations:
+          - CREATE
+          - UPDATE
+    preconditions:
+      all:
+      - key: "{{ has(request.object.spec.topologySpreadConstraints) }}"
+        operator: Equals
+        value: false
+    exclude:
+      any:
+      - resources:
+          selector:
+            matchExpressions:
+            - key: metadata.deletionTimestamp
+              operator: Exists
+    mutate:
+      patchStrategicMerge:
+        spec:
+          topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: 'kubernetes.io/hostname'
+            whenUnsatisfiable: 'ScheduleAnyway'
+            labelSelector:
+              matchLabels:
+                cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
+                cnpg.io/podRole: instance
+          - maxSkew: 1
+            topologyKey: 'topology.kubernetes.io/zone'
+            whenUnsatisfiable: 'ScheduleAnyway'
+            labelSelector:
+              matchLabels:
+                cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
+                cnpg.io/podRole: instance
