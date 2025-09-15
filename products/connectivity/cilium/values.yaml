@@ -15,6 +15,7 @@ route:
       sectionName: web-https
 
 cilium:
+  MTU: 1450
   k8sServiceHost: localhost
   k8sServicePort: 7445
   kubeProxyReplacement: true
