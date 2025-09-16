@@ -10,6 +10,14 @@
   "helm-values": {
     "enabled": true
   },
+  "packageRules": [
+    {
+      "description": "Only allow stable Ceph versions (x.2.y) - ignore development (x.0.y) and release candidate (x.1.y) versions",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["quay.io/ceph/ceph"],
+      "allowedVersions": "/^v\\d+\\.2\\.\\d+$/"
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
