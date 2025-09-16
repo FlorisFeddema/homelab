@@ -20,7 +20,10 @@ spec:
           - UPDATE
     preconditions:
       all:
-      - key: '{{`{{ length(request.object.spec.topologySpreadConstraints || []) }}`}}'
+      - key: '{{`{{ contains(keys(request.object.spec.topologySpreadConstraints), 'topologySpreadConstraints') }}`}}'
+        operator: Equals
+        value: true
+      - key: '{{`{{ length(request.object.spec.topologySpreadConstraints) }}`}}'
         operator: Equals
         value: 0
     exclude:
