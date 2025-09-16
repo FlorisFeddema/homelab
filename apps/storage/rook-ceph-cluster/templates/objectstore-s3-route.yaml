@@ -16,6 +16,11 @@ spec:
       kind: Service
       name: rook-ceph-rgw-ceph-objectstore
       port: 80
+      weight: 1
+    matches:
+    - path:
+        type: PathPrefix
+        value: /
     timeouts:
       request: 0s
       backendRequest: 0s
