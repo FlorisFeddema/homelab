@@ -19,12 +19,14 @@ spec:
           operations:
           - CREATE
           - UPDATE
+    context:
+    - name: topologySpreadConstraints
+      variable:
+        jmesPath: request.object.spec.template.spec.topologySpreadConstraints
+        default: []
     preconditions:
       all:
-      - key: '{{`{{ contains(keys(request.object.spec.template.spec), 'topologySpreadConstraints') }}`}}'
-        operator: Equals
-        value: true
-      - key: '{{`{{ length(request.object.spec.template.spec.topologySpreadConstraints || []) }}`}}'
+      - key: '{{`{{ length(topologySpreadConstraints) }}`}}'
         operator: Equals
         value: 0
     exclude:
