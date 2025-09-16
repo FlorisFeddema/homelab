@@ -1,8 +1,8 @@
 apiVersion: v2
 name: talos-cloud-controller-manager
-version: 1.0.4
+version: 1.0.5
 
 dependencies:
   - name: talos-cloud-controller-manager
-    version: 0.5.0
+    version: 0.5.1
     repository: oci://ghcr.io/siderolabs/charts
