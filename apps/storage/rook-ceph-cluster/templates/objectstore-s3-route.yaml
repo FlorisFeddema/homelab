@@ -4,13 +4,17 @@ metadata:
   name: rook-ceph-objectstore-s3-route
 spec:
   parentRefs:
-  - name: envoy-gateway
+  - group: gateway.networking.k8s.io
+    kind: Gateway
+    name: envoy-gateway
     namespace: envoy-gateway
     sectionName: s3-https
-  hostnames: ["*.s3.mobrockers.com"]
+  hostnames: ['s3.mobrockers.com', '*.s3.mobrockers.com']
   rules:
   - backendRefs:
-    - name: rook-ceph-rgw-ceph-objectstore
+    - group: ''
+      kind: Service
+      name: rook-ceph-rgw-ceph-objectstore
       port: 80
     timeouts:
       request: 0s
