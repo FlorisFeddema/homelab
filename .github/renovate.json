@@ -1,4 +1,4 @@
-  "additionalBranchPrefix": "{{parentDir}}-",{
+{
   "extends": [
     "github>florisfeddema/renovate-config:default.json"
   ],
