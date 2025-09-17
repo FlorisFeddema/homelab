@@ -1,7 +1,14 @@
-{
+  "additionalBranchPrefix": "{{parentDir}}-",{
   "extends": [
     "github>florisfeddema/renovate-config:default.json"
   ],
+  "dependencyDashboard": true,
+  "prConcurrentLimit": 0,
+  "separateMinorPatch": true,
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true,
+  "commitMessagePrefix": "[{{parentDir}}]",
+  "additionalBranchPrefix": "{{parentDir}}-",
   "argocd": {
     "managerFilePatterns": [
       "/\\.yaml$/"
@@ -11,6 +18,12 @@
     "enabled": true
   },
   "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true
+    },
     {
       "description": "Only allow stable Ceph versions (x.2.y) - ignore development (x.0.y) and release candidate (x.1.y) versions",
       "matchDatasources": ["docker"],
