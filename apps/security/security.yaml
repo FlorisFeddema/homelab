@@ -1,5 +1,7 @@
 apps:
   security:
+    kyverno:
+      deploy: true
     authentik:
       deploy: true
       autoSync: false

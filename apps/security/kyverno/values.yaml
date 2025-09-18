@@ -1,0 +1,81 @@
+kyverno-policies:
+  podSecurityStandard: restricted
+  podSecuritySeverity: low
+
+route:
+  enabled: true
+  hostnames:
+  - kyverno.mobrockers.com
+  parentRefs:
+  - name: envoy-gateway
+    namespace: envoy-gateway
+    sectionName: web-https
+
+kyverno:
+  crds:
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true
+
+  grafana:
+    enabled: true
+
+  admissionController:
+    replicas: 3
+
+    serviceMonitor:
+      enabled: true
+
+  backgroundController:
+    replicas: 1
+
+    serviceMonitor:
+      enabled: true
+
+  cleanupController:
+    replicas: 1
+
+    serviceMonitor:
+      enabled: true
+
+  reportsController:
+    replicas: 1
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 500m
+        memory: 129Mi
+    serviceMonitor:
+      enabled: true
+
+policy-reporter:
+  replicaCount: 1
+
+  metrics:
+    enabled: true
+
+  ui:
+    enabled: true
+    replicaCount: 1
+
+    openIDConnect:
+      enabled: true
+      callbackUrl: https://kyverno.mobrockers.com/callback
+      secretRef: authentik-credentials
+
+  plugin:
+    kyverno:
+      enabled: true
+      replicaCount: 1
+      blockReports:
+        enabled: true
+        results:
+          keepOnlyLatest: true
+          source: 'Kyverno Event'
+    trivy:
+      enabled: true
+
+  monitoring:
+    enabled: true
+    grafana:
+      namespace: kyverno

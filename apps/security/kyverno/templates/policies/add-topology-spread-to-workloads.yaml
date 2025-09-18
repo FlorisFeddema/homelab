@@ -1,0 +1,54 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-topology-spread-to-workloads
+  annotations:
+    policies.kyverno.io/title: Add Topology Spread Constraints to Workloads
+    policies.kyverno.io/category: High Availability
+    policies.kyverno.io/subject: TopologySpreadConstraints
+    policies.kyverno.io/description: Ensures Deployments and StatefulSets have topology spread constraints for high availability.
+spec:
+  rules:
+  - name: add-topology-spread-to-workloads
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          - StatefulSet
+          operations:
+          - CREATE
+          - UPDATE
+    context:
+    - name: topologySpreadConstraints
+      variable:
+        jmesPath: request.object.spec.template.spec.topologySpreadConstraints
+        default: []
+    preconditions:
+      all:
+      - key: '{{`{{ length(topologySpreadConstraints) }}`}}'
+        operator: Equals
+        value: 0
+    exclude:
+      any:
+      - resources:
+          selector:
+            matchExpressions:
+            - key: metadata.deletionTimestamp
+              operator: Exists
+    mutate:
+      patchStrategicMerge:
+        spec:
+          template:
+            spec:
+              topologySpreadConstraints:
+              - maxSkew: 1
+                topologyKey: 'kubernetes.io/hostname'
+                whenUnsatisfiable: 'ScheduleAnyway'
+                labelSelector:
+                  matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
+              - maxSkew: 1
+                topologyKey: 'topology.kubernetes.io/zone'
+                whenUnsatisfiable: 'ScheduleAnyway'
+                labelSelector:
+                  matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'

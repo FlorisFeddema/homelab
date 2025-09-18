@@ -1,0 +1,31 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: prevent-cpu-limits
+  annotations:
+    policies.kyverno.io/title: Prevent CPU Limits
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Setting of CPU limits is a debatable poor practice as it can result, when defined, in potentially starving
+      applications of much-needed CPU cycles even when they are available. Ensuring that CPU limits are not
+      set may ensure apps run more effectively. This policy forbids any container in a Pod from defining CPU limits.
+spec:
+  validationFailureAction: Audit
+  rules:
+    - name: check-cpu-limits
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+              operations:
+                - CREATE
+                - UPDATE
+      validate:
+        cel:
+          expressions:
+            - expression: >-
+                !object.spec.containers.exists(container,
+                container.?resources.?limits.?cpu.hasValue())
+              message: Containers may not define CPU limits.

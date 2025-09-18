@@ -5,8 +5,6 @@ apps:
       namespace: kube-system
     snapshot-controller:
       deploy: true
-    kyverno:
-      deploy: true
     argocd:
       deploy: true
       autoSync: true
