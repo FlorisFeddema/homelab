@@ -1,6 +1,13 @@
 trivy-operator:
-  builtInTrivyServer: true
   targetNamespaces: radarr
+  operator:
+    builtInTrivyServer: true
+    configAuditScannerEnabled: false
+    rbacAssessmentScannerEnabled: false
+    infraAssessmentScannerEnabled: false
+    clusterComplianceEnabled: false
+    exposedSecretScannerEnabled: false
+
 
 trivy-operator-polr-adapter:
   adapters:
