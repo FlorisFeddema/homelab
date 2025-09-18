@@ -2,11 +2,9 @@ apps:
   devices:
     intel-gpu-resource-driver:
       deploy: true
-      autoSync: false
     generic-device-operator:
       deploy: true
     network-devices:
       deploy: true
-      autoSync: false
     node-feature-discovery:
       deploy: true

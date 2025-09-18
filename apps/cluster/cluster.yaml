@@ -3,12 +3,10 @@ apps:
     talos-cloud-controller-manager:
       deploy: true
       namespace: kube-system
-      autoSync: false
     snapshot-controller:
       deploy: true
     kyverno:
       deploy: true
-      autoSync: false
     argocd:
       deploy: true
       autoSync: true
