@@ -105,7 +105,7 @@ products:
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true
-      autoSync: trueg
+      autoSync: false
       namespace: media-server
     jellyfin:
       deploy: true
