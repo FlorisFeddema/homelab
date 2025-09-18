@@ -3,10 +3,12 @@ cert-manager:
     enabled: true
     keep: false
 
+  global:
+    leaderElection:
+      namespace: cert-manager
+
   enableCertificateOwnerRef: true
   config:
-    apiVersion: controller.config.cert-manager.io/v1alpha1
-    kind: ControllerConfiguration
     leaderElectionConfig:
       namespace: cert-manager
     acmeDNS01Config:
