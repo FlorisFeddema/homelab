@@ -3,15 +3,23 @@ cert-manager:
     enabled: true
     keep: false
 
-  global:
-    leaderElection:
-      namespace: cert-manager
-
   enableCertificateOwnerRef: true
-  dns01RecursiveNameservers: 1.1.1.1:53,8.8.8.8:53
-  featureGates: ACMEHTTP01IngressPathTypeExact=false # Disable this feature because otherwise ingress-nginx will deny the Ingress admission
-  extraArgs:
-  - --enable-gateway-api
+  config:
+    apiVersion: controller.config.cert-manager.io/v1alpha1
+    kind: ControllerConfiguration
+    leaderElectionConfig:
+      namespace: cert-manager
+    acmeDNS01Config:
+      recursiveNameservers:
+      - 1.1.1.1:53
+      - 8.8.8.8:53
+    acmeHTTP01Config:
+      solverNameservers:
+      - 1.1.1.1:53
+      - 8.8.8.8:53
+    enableGatewayAPI: true
+    featureGates:
+      ACMEHTTP01IngressPathTypeExact: false
 
   prometheus:
     enabled: true
