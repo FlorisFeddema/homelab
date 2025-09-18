@@ -480,7 +480,7 @@ rook-ceph-cluster:
           deviceClass: nvme
           enableCrushUpdates: true
           replicated:
-            size: 2
+            size: 1
             # hybridStorage:
             #   primaryDeviceClass: hdd
             #   secondaryDeviceClass: nvme
