@@ -1,5 +1,4 @@
 trivy-operator:
-  targetNamespaces: radarr
   operator:
     builtInTrivyServer: true
     configAuditScannerEnabled: false
