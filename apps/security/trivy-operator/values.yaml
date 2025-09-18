@@ -1,0 +1,23 @@
+trivy-operator:
+  builtInTrivyServer: true
+  targetNamespaces: 
+  - radarr
+
+trivy-operator-polr-adapter:
+  adapters:
+    vulnerabilityReports:
+      enabled: true
+    clusterVulnerabilityReports:
+      enabled: true
+    configAuditReports:
+      enabled: true
+    rbacAssessmentReports:
+      enabled: true
+    exposedSecretReports:
+      enabled: true
+    complianceReports:
+      enabled: true
+    infraAssessmentReports:
+      enabled: true
+    clusterInfraAssessmentReports:
+      enabled: true
