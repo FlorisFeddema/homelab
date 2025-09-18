@@ -4,6 +4,7 @@ apps:
       deploy: true
     cert-manager:
       deploy: true
+      autoSync: false
     cilium:
       deploy: true
       serverSideApply: true
