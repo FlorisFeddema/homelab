@@ -477,22 +477,24 @@ rook-ceph-cluster:
       spec:
         metadataPool:
           enableRBDStats: true
+          deviceClass: nvme
           enableCrushUpdates: true
           replicated:
             size: 2
-            hybridStorage:
-              primaryDeviceClass: hdd
-              secondaryDeviceClass: nvme
+            # hybridStorage:
+            #   primaryDeviceClass: hdd
+            #   secondaryDeviceClass: nvme
         dataPools:
           - name: data0
             enableRBDStats: true
+            deviceClass: nvme
             enableCrushUpdates: true
             failureDomain: zone
             replicated:
               size: 2
-              hybridStorage:
-                primaryDeviceClass: hdd
-                secondaryDeviceClass: nvme
+              # hybridStorage:
+              #   primaryDeviceClass: hdd
+              #   secondaryDeviceClass: nvme
         metadataServer:
           activeCount: 1
           activeStandby: false
