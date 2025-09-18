@@ -20,8 +20,6 @@ cert-manager:
       - 1.1.1.1:53
       - 8.8.8.8:53
     enableGatewayAPI: true
-    featureGates:
-      ACMEHTTP01IngressPathTypeExact: false
 
   prometheus:
     enabled: true
