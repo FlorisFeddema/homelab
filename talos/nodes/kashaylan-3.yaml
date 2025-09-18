@@ -4,7 +4,7 @@ machine:
     interfaces:
       - interface: end0 # node
         dhcp: true
-      - interface: enP1p49s0u1 # storage
+      - interface: enP1p49s0u2 # storage
         dhcp: false
         addresses:
           - 192.168.5.14/24
