@@ -19,9 +19,10 @@ kyverno:
   openreports:
     enabled: true
     installCrds: true
-  wgpolicyk8s:
-    clusterpolicyreports: false
-    policyreports: false
+  groups:
+    wgpolicyk8s:
+      clusterpolicyreports: false
+      policyreports: false
 
   grafana:
     enabled: true
