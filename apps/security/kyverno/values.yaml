@@ -15,14 +15,14 @@ kyverno:
   crds:
     annotations:
       argocd.argoproj.io/sync-options: ServerSideApply=true
+    groups:
+      wgpolicyk8s:
+        clusterpolicyreports: false
+        policyreports: false
 
   openreports:
     enabled: true
     installCrds: true
-  groups:
-    wgpolicyk8s:
-      clusterpolicyreports: false
-      policyreports: false
 
   grafana:
     enabled: true
