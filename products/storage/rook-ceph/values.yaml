@@ -299,7 +299,7 @@ rook-ceph-cluster:
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030323137395031313130-4c6578617220535344204e4d36323020325442-00000001
               deviceClass: hdd
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030343131325031313130-4c6578617220535344204e4d36323020325442-00000001
-              deviceClass: nvme
+              deviceClass: hdd
             # - name: /dev/disk/by-id/ata-OOS22000G_00003A41
             #   deviceClass: hdd
         - name: korris-1
@@ -390,7 +390,7 @@ rook-ceph-cluster:
       spec:
         failureDomain: zone
         replicated:
-          size: 1
+          size: 2
         enableRBDStats: true
         deviceClass: nvme
         enableCrushUpdates: true
