@@ -480,9 +480,10 @@ rook-ceph-cluster:
         metadataPool:
           enableRBDStats: true
           deviceClass: hdd
+          failureDomain: osd
           enableCrushUpdates: true
           replicated:
-            size: 1
+            size: 2
             # hybridStorage:
             #   primaryDeviceClass: hdd
             #   secondaryDeviceClass: nvme
