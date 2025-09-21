@@ -99,7 +99,6 @@ data:
       - discovery.k8s.io
       kinds:
       - Endpoints
-      - EndpointSlice
     ### Internal Kubernetes resources excluded reduce the number of watched events
     - apiGroups:
       - coordination.k8s.io
