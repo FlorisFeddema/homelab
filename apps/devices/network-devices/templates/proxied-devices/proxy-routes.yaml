@@ -12,7 +12,7 @@ spec:
    - {{ $route.name}}.mobrockers.com
   rules:
   - backendRefs:
-    - name: {{ $route.name }}-proxy-service
+    - name: proxy-{{ $route.name }}
       port: {{ $route.port }}
 ---
 {{- end }}
