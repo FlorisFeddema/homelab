@@ -11,16 +11,16 @@ spec:
     - {{ $endpoint.ip }}
 ---
 {{- end }}
-{{- range $endpoint := .Values.ingress }}
+{{- range $route := .Values.routes }}
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: {{ $endpoint.name }}
+  name: {{ $route.name }}
 spec:
   endpoints:
-  - dnsName: '{{ $endpoint.name }}.internal'
+  - dnsName: '{{ $route.name }}.internal'
     recordType: A
     targets:
-    - {{ $endpoint.ip }}
+    - {{ $route.ip }}
 ---
 {{- end }}

@@ -1,10 +1,6 @@
 records:
 - name: vpn
   ip: 87.212.115.7
-- name: embla
-  ip: 10.0.100.51
-- name: embla-1
-  ip: 10.0.100.51
 - name: embla-2
   ip: 10.0.100.52
 - name: embla-3
@@ -16,7 +12,9 @@ records:
 - name: k8s
   ip: 10.0.102.10
 
-ingress:
+routes:
 - name: robin
-  auth: true
+  clientID: 9XuNncO5i9nKVPbjpgjiadXFoEMLUOKyvJXLELj9
+  clientSecretSealed: AgDaPF+s/Y0UbQ4hmGhJDuVXgQZbkX0xNUgYuzL60UxXwef++zfgutOTPWHg3hcJzLzBHUTMxlJrBmXY9UwG2/vKfFG1RA7F8aaFhsRBMgAk/1PlXDj8SqVVyIJKqWmo5ti2cAEBRl7TX1G3rSNpeTBKOQAv0gnuo4lTZ7pBfs0bIDOuub9Hn+3TTiSFaezAViDLctIBm4xPgZ0msA2cZr+7+xlxxQBPCyf1loaU4j8qkqqvtx9CUREZHWcrIE5MItfMY8pA4U1PJoEY22EQjE5sw6NauID++bvMK+NfYE9vpcnGIlfJYOEC++5e/7FsatezkMrpdY3vICL2NjvEKpYW6AWymVhedP/5rrkp+p9tZ+U23ISfUepPZHlNNPInun7Fg9Lniu8jlFyH0gsGWi5vMO9B89cbdPE0FxviMq2d5qMpfEKuWimYmEDh9PG+FRzI90t2Z+QqJkjQGsiWLU4a8W0zp34XOUcGmrDo5XwpcVKBDBkDA57o7IrpK7GyYJ2gEpeKW9LStwwKvu1/s8nXU4sXTpISo2DnU7suBpjTKq/8XdHyhOzLesHtoTgievQ+rk8fRuBsdIuV+tk3jDlhkSdMvsHdd4JyNIgNn/w+NN/uYiWiHwCW/t9FFI8IeH6BOungm/QBvz0oOR0+e3yfq69mwBljWBv1Tj/t/Z9jZj4Wqgqi4C1WW1OoHyVkTdshY+D6RI0sd9fpgnsyQLWP1HReyg2SRQc5VucD9uNmuOIXxMJm48oRhy4Fi73uOcM9BFE5GtSDyLVne70BiPvMK+Tt8K4EW5+o1zxXIsTm9Ace5IGlOplgg/TDCF6tG5T+QFho27LhpiNIWF0V7dJkIeqgPQavo7MDnFSTWB3lOA==
   ip: 10.0.30.45
+  port: 80

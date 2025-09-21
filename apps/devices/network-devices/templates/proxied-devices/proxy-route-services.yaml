@@ -1,0 +1,10 @@
+{{- range $route := .Values.routes }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $route.name }}-proxy-service
+spec:
+  type: ExternalName
+  externalName: '{{ $route.name }}.internal'
+---
+{{- end }}

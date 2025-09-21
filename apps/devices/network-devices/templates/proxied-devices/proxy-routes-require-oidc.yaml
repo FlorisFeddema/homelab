@@ -1,0 +1,20 @@
+{{- range $route := .Values.routes }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: {{ $route.name }}-proxy-route-require-oidc
+spec:
+  targetRefs:
+  - group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: {{ $route.name }}-proxy-route
+  oidc:
+    provider:
+      issuer: https://authentik.mobrockers.com/application/o/{{ $route.name }}/
+    redirectURL: https://{{ $route.name }}.mobrockers.com/oauth2/callback
+    logoutPath: /oauth2/logout
+    clientID: {{ $route.clientID }}
+    clientSecret:
+      name: {{ $route.name }}-proxy-routes-oidc-secret
+---
+{{- end }}
