@@ -1,4 +1,4 @@
-{{- range $route := .Values.routes }}
+{{- $route := range .Values.routes }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
