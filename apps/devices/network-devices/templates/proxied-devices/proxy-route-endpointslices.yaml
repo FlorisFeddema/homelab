@@ -1,0 +1,15 @@
+{{- range $route := .Values.routes }}
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: proxy-{{ $route.name }}
+  labels:
+    kubernetes.io/service-name: proxy-{{ $route.name }}
+addressType: IPv4
+ports:
+- name: http
+  port: {{ $route.port }}
+endpoints:
+- addresses:
+  - {{ $route.ip }}
+{{- end }}

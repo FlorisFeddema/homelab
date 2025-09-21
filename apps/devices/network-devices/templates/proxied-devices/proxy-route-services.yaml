@@ -2,9 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ $route.name }}-proxy-service
+  name: proxy-{{ $route.name }}
 spec:
-  type: ExternalName
-  externalName: '{{ $route.name }}.internal'
+  ports:
+  - name: http
+    port: {{ $route.port }}
+    targetPort: {{ $route.port }}
 ---
 {{- end }}
