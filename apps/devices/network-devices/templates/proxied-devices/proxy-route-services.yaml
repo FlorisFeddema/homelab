@@ -1,4 +1,4 @@
-{{- $route := range .Values.routes }}
+{{- range $route := .Values.routes }}
 apiVersion: v1
 kind: Service
 metadata:
