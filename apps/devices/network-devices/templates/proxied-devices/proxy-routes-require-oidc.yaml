@@ -15,6 +15,6 @@ spec:
     logoutPath: /oauth2/logout
     clientID: {{ $route.clientID }}
     clientSecret:
-      name: {{ $route.name }}-proxy-routes-oidc-secret
+      name: {{ $route.name }}-proxy-route-oidc-secret
 ---
 {{- end }}
