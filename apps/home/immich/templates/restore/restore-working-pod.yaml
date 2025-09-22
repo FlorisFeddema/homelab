@@ -7,7 +7,7 @@ spec:
   volumes:
     - name: library-data
       persistentVolumeClaim:
-        claimName: immich-library-restore
+        claimName: restored-immich-library
     - name: tools
       emptyDir: {}
   initContainers:
