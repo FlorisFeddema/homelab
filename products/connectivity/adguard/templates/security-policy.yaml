@@ -13,6 +13,6 @@ spec:
       name: oidc-secret
     provider:
       issuer: https://authentik.feddema.dev/application/o/adguard/
-    redirectURL: https://falco.feddema.dev/oauth2/callback
+    redirectURL: https://adguard.feddema.dev/oauth2/callback
     logoutPath: /oauth2/logout
 
