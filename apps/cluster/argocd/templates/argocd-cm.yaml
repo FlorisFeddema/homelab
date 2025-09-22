@@ -136,7 +136,10 @@ data:
       - kyverno.io
       - reports.kyverno.io
       - wgpolicyk8s.io
+      - openreports.io
       kinds:
+      - Report
+      - ClusterReport
       - PolicyReport
       - ClusterPolicyReport
       - EphemeralReport
@@ -146,6 +149,22 @@ data:
       - BackgroundScanReport
       - ClusterBackgroundScanReport
       - UpdateRequest
+    ### Trivy Operator intermediate and reporting resources excluded reduce the number of watched events and improve performance
+    - apiGroups:
+      - aquasecurity.github.io
+      kinds:
+      - SbomReport
+      - ClusterSbomReport
+      - VulnerabilityReport
+      - ClusterVulnerabilityReport
+      - ConfigAuditReport
+      - ClusterConfigAuditReport
+      - RbacAssessmentReport
+      - ClusterRbacAssessmentReport
+      - ComplianceReport
+      - ClusterComplianceReport
+      - InfraAssessmentReport
+      - ClusterInfraAssessmentReport
 
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
