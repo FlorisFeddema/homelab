@@ -15,6 +15,7 @@ route:
       sectionName: web-https
 
 database:
+  clusterName: nextcloud-postgres
   size: 8Gi
   replicas: 2
 
