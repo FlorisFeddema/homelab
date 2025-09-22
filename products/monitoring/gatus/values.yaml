@@ -7,6 +7,12 @@ gatus-monitor:
     - name: gatus
     - name: status
 
+database:
+  clusterName: gatus-postgres
+  size: 20Gi
+  replicas: 2
+  storageClass: ceph-block-nvme-1
+
 gatus:
   route:
     enabled: true
