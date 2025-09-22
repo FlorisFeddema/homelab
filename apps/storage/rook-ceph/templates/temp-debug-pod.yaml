@@ -6,13 +6,11 @@ metadata:
 spec:
   restartPolicy: Never
   containers:
-  - name: ceph
-    image: quay.io/ceph/ceph:v19
+  - name: deb
+    image: debian:bookworm-slim
     securityContext:
       privileged: true
-      allowPrivilegeEscalation: true
-      capabilities:
-        add: ["SYS_ADMIN"]
+      capabilities: { add: ["SYS_ADMIN"] }
     command: ["bash","-lc","sleep infinity"]
     volumeMounts:
     - name: ceph-conf
@@ -22,8 +20,6 @@ spec:
   volumes:
   - name: ceph-conf
     secret:
-      secretName: rook-ceph-mon       # contains ceph.conf and admin keyring
+      secretName: rook-ceph-mon     # standard Rook secret with admin creds
   - name: fuse
-    hostPath:
-      path: /dev/fuse
-      type: CharDevice
+    hostPath: { path: /dev/fuse, type: CharDevice }
