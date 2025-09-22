@@ -8,18 +8,15 @@ spec:
   containers:
   - name: deb
     image: debian:bookworm-slim
-    securityContext:
-      privileged: true
-      capabilities: { add: ["SYS_ADMIN"] }
+    securityContext: { privileged: true, capabilities: { add: ["SYS_ADMIN"] } }
     command: ["bash","-lc","sleep infinity"]
     volumeMounts:
-    - name: ceph-conf
-      mountPath: /etc/ceph
+    - name: rook-mon   # mount secret here, NOT /etc/ceph
+      mountPath: /rook/mon
     - name: fuse
       mountPath: /dev/fuse
   volumes:
-  - name: ceph-conf
-    secret:
-      secretName: rook-ceph-mon     # standard Rook secret with admin creds
+  - name: rook-mon
+    secret: { secretName: rook-ceph-mon }
   - name: fuse
     hostPath: { path: /dev/fuse, type: CharDevice }
