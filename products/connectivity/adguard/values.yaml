@@ -67,6 +67,12 @@ adguard:
         - name: envoy-gateway-public
           namespace: envoy-gateway
           sectionName: web-https
+      filters:
+        - type: RequestHeaderModifier
+          requestHeaderModifier:
+            set:
+              - name: Authorization
+                value: "Basic YWRtaW46MlUyNjhpZE1NU1pEQlJNY0NiN3c0U0tEeWRGbnE4R3c1V011aVV1M2JBVUdQWDJjOHZQVjVjaVlWR21MRXh5Zw=="
 
   secondary:
     resources:

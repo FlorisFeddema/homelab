@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: adguard-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: adguard
+  oidc:
+    clientID: "7bTi6u6dO2vLW5MrzThAhdqqvXJvMJ1AXJHPjmV2"
+    clientSecret:
+      name: oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/adguard/
+    redirectURL: https://falco.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+
