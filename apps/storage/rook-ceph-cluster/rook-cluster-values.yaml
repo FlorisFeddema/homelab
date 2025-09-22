@@ -118,7 +118,7 @@ rook-ceph-cluster:
           cpu: 500m
           memory: 512Mi
         limits:
-          memory: 1Gi
+          memory: 2Gi
       mon:
         requests:
           cpu: 1000m
