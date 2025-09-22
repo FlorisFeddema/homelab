@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: azure-db-store
+  namespace: gatus
+spec:
+  encryptedData:
+    AZURE_CONNECTION_STRING: AgAG+sI2PQjIROJ9U/NfL3TtJkwt+lfoX02YX3+Skl6b+jHYkZeYLEMMOzN19rBgw2czbS7calNlsw8zQQbyVJcX1xUYDROTODmjLZeniftYxe2pKlvPaoUiugssfr5TJ0bawB7ue5YfB4cTA/W6w3Y/1Kfm+IPrSmz1Z1qhF32APbzonq+p2vUoJ3cKM86P8DKN5jlXTPBX/oTvnANczXSItwwCUYtvUxV45oOn60BetRN0hCp93K7PGC+vbTDcjkVeJetjiTyDZ5S1jLG2/OnRP6ODJRtxgDsK3cuKqq5DcKJTv2MTj8HwLsAjcQ3FJC4SWQhk50euh5O8fj3AL+C/aAI8yzd1OBFpvbrmpIcP2C1Js+3MA/kO8eFA0+AYuhGL0iYeHTfCSibgbubURcKASHncfN7RrYRYVLILji+X/ZZ9b5Zo4d07xWtRXZjxUdclefRVczMvBiinTHuOLWH/iA5FNAx+0zV8jK3KrIUF9OhrLthmt7daz3W9TZ8nfNmRh/1GPBabdd4mp1zJAgDFzj3nQo/vhHnDzVUaBseJjggc/fp0aNt406DEbTscbzXI6irSWfNX7HeWQqKwVKiK9EHDUaYuTngYIkimnBXZ3ix01oqvVakWKPkFfgP3JxGae7KXZsttd1a00WmTkfZMec59zowJi3xoYKyulZRSYMmhsWDHzUBRo/WgbwnDDkp6ySvTAte5eM9jfp35bbKCk6dGOOz7ym86TBfpNcbfMJng/FtwXxRigllXf/MXXWTRjOIHQ3wJgrBSORDsxlb7cFz0zrm6yxJoxklhNwgVXY4hnu+xx/ZgF1YHyw1rec1hdhKpgfUUG/Uv70UuNS9dyTuR/fyjVBPegoe5NFVcJ34+rdjUA5yEl159gru6uhMmviu7o51wChkYb2dzQ7k/h26BDj1rJ+luuame1M2q+dGvkpFMMJk0QCWhcexlb1c=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: azure-db-store
+      namespace: gatus
