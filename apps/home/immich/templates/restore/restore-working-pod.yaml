@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: immich-importer
+spec:
+  restartPolicy: Never
+  volumes:
+    - name: library-data
+      persistentVolumeClaim:
+        claimName: immich-library-restore
+    - name: tools
+      emptyDir: {}
+  initContainers:
+    - name: fetch-immich-go
+      image: debian:bookworm-slim
+      command: ["/bin/bash","-ceu"]
+      args:
+        - |
+          apt-get update
+          apt-get install -y --no-install-recommends curl ca-certificates tar xz-utils
+          curl -L -o /tmp/immich-go.tar.gz \
+            https://github.com/simulot/immich-go/releases/download/v0.28.0/immich-go_Linux_x86_64.tar.gz
+          tar -xzf /tmp/immich-go.tar.gz -C /work
+          chmod +x /work/immich-go
+      volumeMounts:
+        - name: tools
+          mountPath: /work
+  containers:
+    - name: shell
+      image: debian:bookworm-slim
+      command: ["/bin/bash","-lc"]
+      args:
+        - |
+          apt-get update
+          apt-get install -y --no-install-recommends bash coreutils findutils procps jq less \
+            ca-certificates curl tar xz-utils
+          cp /tools/immich-go /usr/local/bin/
+          echo "immich-go version:"; immich-go --version || true
+          sleep infinity
+      volumeMounts:
+        - name: tools
+          mountPath: /tools
+          readOnly: true
+        - name: library-data
+          mountPath: /data
