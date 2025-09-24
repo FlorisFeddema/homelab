@@ -1,12 +1,11 @@
 trivy-operator:
   operator:
     builtInTrivyServer: true
-    configAuditScannerEnabled: false
-    rbacAssessmentScannerEnabled: false
-    infraAssessmentScannerEnabled: false
-    clusterComplianceEnabled: false
-    exposedSecretScannerEnabled: false
-
+    configAuditScannerEnabled: false # We use Kyverno for this purpose
+    rbacAssessmentScannerEnabled: true
+    infraAssessmentScannerEnabled: true
+    clusterComplianceEnabled: true
+    exposedSecretScannerEnabled: true
 
 trivy-operator-polr-adapter:
   openreports:
