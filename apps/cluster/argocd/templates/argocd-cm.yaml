@@ -162,7 +162,6 @@ data:
       - RbacAssessmentReport
       - ClusterRbacAssessmentReport
       - ComplianceReport
-      - ClusterComplianceReport
       - InfraAssessmentReport
       - ClusterInfraAssessmentReport
 
