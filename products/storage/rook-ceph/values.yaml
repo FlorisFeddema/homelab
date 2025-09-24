@@ -245,6 +245,8 @@ rook-ceph-cluster:
         osd_pool_default_size: '3'
         osd_pool_default_min_size: '2'
         mon_data_avail_warn: '15'
+      osd:
+        osd_mclock_profile: "balanced"
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
