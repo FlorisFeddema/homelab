@@ -99,7 +99,7 @@ rook-ceph-cluster:
         devices:
         - name: /dev/disk/by-id/nvme-Lexar_SSD_NM710_2TB_PMT466R005385P2703
           deviceClass: nvme
-      - name: talos-worker-4 # njord-3-cp1
+      - name: njord-3-cp1
         devices:
         - name: /dev/disk/by-id/nvme-Lexar_SSD_NM710_2TB_PM40364101942P2703
           deviceClass: nvme
