@@ -6,7 +6,7 @@ machine:
       dhcp: true
       vip:
         ip: 10.0.102.10
-    - interface: enp0s20f0u3u3 # usb0 - ceph
+    - interface: enp0s20f0u3u3 # usb - ceph
       dhcp: false
       addresses:
       - 10.0.104.51/24

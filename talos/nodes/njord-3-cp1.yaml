@@ -1,13 +1,15 @@
 machine:
   network:
-    hostname: talos-worker-5
+    hostname: njord-3-cp1
     interfaces:
-    - interface: enp0s18 # net0 - kubernetes
+    - interface: enp3s0 # onboard - kubernetes
       dhcp: true
-    - interface: enp2s27u1 # usb0 - ceph
+      vip:
+        ip: 10.0.102.10
+    - interface: enp0s20f0u4 # usb - ceph
       dhcp: false
       addresses:
-      - 10.0.104.55/24
+      - 10.0.104.53/24
       routes:
       - network: 10.0.104.0/24
         gateway: 10.0.104.1
