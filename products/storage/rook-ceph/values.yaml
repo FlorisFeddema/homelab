@@ -392,7 +392,7 @@ rook-ceph-cluster:
         replicated:
           size: 2
         parameters:
-          min_size: 1
+          min_size: '1'
         enableRBDStats: true
         deviceClass: nvme
         enableCrushUpdates: true
@@ -416,7 +416,7 @@ rook-ceph-cluster:
         replicated:
           size: 3
         parameters:
-          min_size: 2
+          min_size: '2'
         enableRBDStats: true
         deviceClass: nvme
         enableCrushUpdates: true
@@ -445,7 +445,7 @@ rook-ceph-cluster:
           replicated:
             size: 3
           parameters:
-            min_size: 2
+            min_size: '2'
             
         dataPools:
           - name: data0
@@ -456,7 +456,7 @@ rook-ceph-cluster:
             replicated:
               size: 3
             parameters:
-              min_size: 2
+              min_size: '2'
         metadataServer:
           activeCount: 1
           activeStandby: true
@@ -492,7 +492,7 @@ rook-ceph-cluster:
           failureDomain: osd
           enableCrushUpdates: true
           parameters:
-            min_size: 1
+            min_size: '1'
           replicated:
             size: 2
             # hybridStorage:
@@ -506,6 +506,8 @@ rook-ceph-cluster:
             failureDomain: zone
             replicated:
               size: 2
+            parameters:
+              min_size: '1'
         metadataServer:
           activeCount: 1
           activeStandby: false
@@ -554,7 +556,7 @@ rook-ceph-cluster:
           replicated:
             size: 3
           parameters:
-            min_size: 2
+            min_size: '2'
         dataPool:
           failureDomain: zone
           enableRBDStats: true
@@ -563,7 +565,7 @@ rook-ceph-cluster:
           replicated:
             size: 3
           parameters:
-            min_size: 2
+            min_size: '2'
         allowUsersInNamespaces: ['*']
         gateway:
           port: 80
