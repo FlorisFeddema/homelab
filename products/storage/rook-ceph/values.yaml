@@ -503,7 +503,7 @@ rook-ceph-cluster:
             enableRBDStats: true
             deviceClass: hdd
             enableCrushUpdates: true
-            failureDomain: zone
+            failureDomain: osd
             replicated:
               size: 2
             parameters:
