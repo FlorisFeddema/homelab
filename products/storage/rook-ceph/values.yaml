@@ -501,7 +501,7 @@ rook-ceph-cluster:
         dataPools:
           - name: data0
             enableRBDStats: true
-            deviceClass: nvme
+            deviceClass: hdd
             enableCrushUpdates: true
             failureDomain: zone
             replicated:
