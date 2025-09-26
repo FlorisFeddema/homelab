@@ -20,7 +20,7 @@ fi
 schematic=$(kubectl get node "$nodeName" -o yaml | yq '.metadata.annotations."extensions.talos.dev/schematic"')
 nodeIP=$(kubectl get node "$nodeName" -o yaml | yq '.status.addresses[] | select(.type == "InternalIP") | .address')
 
-installerImage="factory.talos.dev/installer/$schematic/v$version"
+installerImage="factory.talos.dev/metal-installer/$schematic:v$version"
 
 echo "⚙️ Updating Talos on node $nodeName"
 talosctl upgrade --nodes "$nodeIP" --image "$installerImage" --preserve --wait

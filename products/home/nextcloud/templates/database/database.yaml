@@ -4,6 +4,14 @@ metadata:
   name: {{ .Values.database.clusterName }}
 spec:
   instances: {{ .Values.database.replicas }}
+
+  logLevel: error
+  plugins:
+    - isWALArchiver: true
+      name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: immich-postgresql-backup-store
+
   postgresql:
     parameters:
       pgaudit.log: "all, -misc"

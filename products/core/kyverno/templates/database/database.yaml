@@ -5,6 +5,13 @@ metadata:
 spec:
   instances: {{ .Values.database.replicas }}
 
+  logLevel: error
+  plugins:
+    - isWALArchiver: true
+      name: barman-cloud.cloudnative-pg.io
+      parameters:
+        barmanObjectName: immich-postgresql-backup-store
+
   storage:
     size: {{ .Values.database.size }}
     storageClass: {{ .Values.database.storageClass }}
