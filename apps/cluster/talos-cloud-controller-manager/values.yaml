@@ -22,6 +22,6 @@ talos-cloud-controller-manager:
       - key: hostname
         operator: Regexp
         values:
-        - ^talos-worker-.+$
+        - .*-app\d+$
     labels:
       node-role.kubernetes.io/worker: ""
