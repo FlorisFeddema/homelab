@@ -50,3 +50,12 @@ matterHub:
   image:
     repository: ghcr.io/t0bst4r/home-assistant-matter-hub
     tag: 3.0.0-alpha.41
+
+  route:
+    enabled: true
+    hostnames:
+      - matter-hub.mobrockers.com
+    parentRefs:
+      - name: envoy-gateway
+        namespace: envoy-gateway
+        sectionName: web-https

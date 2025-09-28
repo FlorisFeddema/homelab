@@ -1,0 +1,17 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: matter-hub-route-require-oidc
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: matter-hub
+  oidc:
+    provider:
+      issuer: https://authentik.mobrockers.com/application/o/matter-hub/
+    redirectURL: https://matter-hub.mobrockers.com/oauth2/callback
+    logoutPath: /oauth2/logout
+    clientID: ETawDtH9GOI044njMbImOHi7Hc83Cc1tCwlqL2zm
+    clientSecret:
+      name: matter-hub-route-oidc-secret
