@@ -17,6 +17,14 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values: ['njord-2-cp1', 'njord-2-app1', 'njord-3-app1']
       containers:
       - name: matter-hub
         image: '{{ .Values.matterHub.image.repository }}:{{ .Values.matterHub.image.tag }}'
