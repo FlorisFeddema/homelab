@@ -5,13 +5,9 @@ metadata:
 spec:
   rules:
     - name: "label-each-interface"
-      labelsTemplate: |
-        {{`{{ range .network.device }}`}}
-        net.iface/{{`{{ .attributes.name }}`}}=true
-        {{`{{ end }}`}}
       matchFeatures:
         - feature: network.device
-          matchExpressions:
-            - path: "attributes.name"
-              op: Exists
-  
+      labelsTemplate: |
+        {{`{{- range .network.device }}`}}
+        net.iface/{{`{{ .attributes.name }}`}}=true
+        {{`{{- end }}`}}
