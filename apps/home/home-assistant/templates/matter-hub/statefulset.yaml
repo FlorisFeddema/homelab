@@ -34,8 +34,8 @@ spec:
             value: http://home-assistant:8123
           - name: HAMH_LOG_LEVEL
             value: debug
-          - name: HAMH_MDNS_NETWORK_INTERFACE
-            value: enp1s0
+          # - name: HAMH_MDNS_NETWORK_INTERFACE
+          #   value: enp1s0
           - name: HAMH_HOME_ASSISTANT_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
