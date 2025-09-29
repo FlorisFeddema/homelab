@@ -24,7 +24,7 @@ spec:
             - matchExpressions:
               - key: topology.kubernetes.io/zone
                 operator: NotIn
-                values: ['zone1']
+                values: ['1']
       containers:
       - name: matter-hub
         image: '{{ .Values.matterHub.image.repository }}:{{ .Values.matterHub.image.tag }}'
