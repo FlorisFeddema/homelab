@@ -17,6 +17,14 @@ spec:
     spec:
       hostNetwork: true
       dnsPolicy: ClusterFirstWithHostNet
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: NotIn
+                values: ['1']
       containers:
       - name: matter-hub
         image: '{{ .Values.matterHub.image.repository }}:{{ .Values.matterHub.image.tag }}'
@@ -32,6 +40,10 @@ spec:
         env:
           - name: HAMH_HOME_ASSISTANT_URL
             value: http://home-assistant:8123
+          - name: HAMH_LOG_LEVEL
+            value: debug
+          - name: HAMH_MDNS_NETWORK_INTERFACE
+            value: enp1s0
           - name: HAMH_HOME_ASSISTANT_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
