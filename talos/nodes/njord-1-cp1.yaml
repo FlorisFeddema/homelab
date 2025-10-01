@@ -6,6 +6,12 @@ machine:
       dhcp: true
       vip:
         ip: 10.0.102.10
+      addresses:
+       - fdf9:dc00:d0eb:66::21/64
+      routes:
+      - network: ::/0
+        gateway: fdf9:dc00:d0eb:0066::1
+        metric: 2048
     - interface: enp0s20f0u3u3 # usb - ceph
       dhcp: false
       addresses:
