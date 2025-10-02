@@ -19,3 +19,4 @@ apps:
     cloudnative-postgres:
       deploy: true
       serverSideApply: true
+      autoSync: false
