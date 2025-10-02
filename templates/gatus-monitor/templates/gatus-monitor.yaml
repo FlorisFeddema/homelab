@@ -8,7 +8,7 @@ data:
   {{ .Values.appName }}-monitor.yaml: |
     {{ .Values.appName }}-endpoint-external: &{{ .Values.appName }}-endpoint-external
       group: http-external
-      interval: 2m
+      interval: 3m
       conditions:
         - '[STATUS] == 200'
       client:
@@ -16,17 +16,16 @@ data:
       alerts:
         - type: telegram
           send-on-resolved: true
-          failure-threshold: 5
+          failure-threshold: 6
           success-threshold: 1
 
     {{ .Values.appName }}-endpoint-internal: &{{ .Values.appName }}-endpoint-internal
       group: http-internal
-      interval: 2m
+      interval: 3m
       conditions:
         - '[STATUS] == 200'
       client:
         dns-resolver: 'udp://192.168.102.20:53'
-
     endpoints:
     {{- range .Values.publicEndpoints }}
       - name: {{ .name }}
