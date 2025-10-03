@@ -1,11 +1,11 @@
 apiVersion: v2
 name: envoy-gateway
-version: 1.0.16
+version: 1.0.17
 
 dependencies:
   - name: gateway-helm
     version: 1.5.1
     repository: oci://docker.io/envoyproxy
   - name: gateway-addons-helm
-    version: 1.5.1
+    version: 1.5.2
     repository: oci://docker.io/envoyproxy
