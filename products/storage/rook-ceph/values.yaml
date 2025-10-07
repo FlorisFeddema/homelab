@@ -442,7 +442,8 @@ rook-ceph-cluster:
           enableRBDStats: true
           deviceClass: nvme
           enableCrushUpdates: true
-          replicated:
+          failureDomain: zone  
+          replicated:            
             size: 3
           parameters:
             min_size: '2'
@@ -495,9 +496,6 @@ rook-ceph-cluster:
             min_size: '1'
           replicated:
             size: 2
-            # hybridStorage:
-            #   primaryDeviceClass: hdd
-            #   secondaryDeviceClass: nvme
         dataPools:
           - name: data0
             enableRBDStats: true
