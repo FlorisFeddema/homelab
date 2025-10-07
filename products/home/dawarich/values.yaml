@@ -40,6 +40,7 @@ dawarich:
       updateInterval: '168h'
     persistence:
       storageClass: ceph-block-nvme-1
+      size: 20Gi
 
   ingress:
     enabled: false
