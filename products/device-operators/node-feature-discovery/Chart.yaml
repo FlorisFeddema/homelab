@@ -1,8 +1,8 @@
 apiVersion: v2
 name: node-feature-discovery
-version: 1.0.23
+version: 1.0.24
 
 dependencies:
   - name: node-feature-discovery
-    version: 0.18.0
+    version: 0.18.1
     repository: oci://registry.k8s.io/nfd/charts
