@@ -12,3 +12,4 @@ spec:
         exactly:
           deviceClassName: gpu.intel.com
           count: 1
+          allocationMode: ExactCount
