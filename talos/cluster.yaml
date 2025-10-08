@@ -5,7 +5,10 @@ cluster:
   allowSchedulingOnControlPlanes: false
 
   discovery:
-    enabled: false
+    enabled: true
+    registries:
+      service:
+        disabled: true
 
   network:
     cni:
