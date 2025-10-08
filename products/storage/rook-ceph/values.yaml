@@ -443,11 +443,11 @@ rook-ceph-cluster:
           deviceClass: nvme
           enableCrushUpdates: true
           failureDomain: zone  
-          replicated:            
+          replicated:
             size: 3
           parameters:
             min_size: '2'
-            
+
         dataPools:
           - name: data0
             enableRBDStats: true
