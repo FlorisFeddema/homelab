@@ -11,4 +11,5 @@ spec:
       - name: i915
         exactly:
           deviceClassName: gpu.intel.com
+          allocationMode: ExactCount
           count: 1
