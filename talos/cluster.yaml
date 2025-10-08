@@ -16,18 +16,16 @@ cluster:
 
   apiServer:
     extraArgs:
-      feature-gates: DynamicResourceAllocation=true
-      runtime-config: resource.k8s.io/v1beta1=true # Enables the API (CRD)
+      feature-gates: DRAExtendedResource=true,DRAPartitionableDevices=true,ResourceHealthStatus=true
 
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0
-      feature-gates: DynamicResourceAllocation=true
 
   scheduler:
     extraArgs:
       bind-address: 0.0.0.0
-      feature-gates: DynamicResourceAllocation=true
+      feature-gates: DRAExtendedResource=true,DRAPartitionableDevices=true
 
 machine:
   files:
@@ -46,7 +44,7 @@ machine:
     extraArgs:
       cloud-provider: external
       rotate-server-certificates: true
-      feature-gates: DynamicResourceAllocation=true
+      feature-gates: DRAExtendedResource=true,ResourceHealthStatus=true
 
   features:
     kubePrism:
