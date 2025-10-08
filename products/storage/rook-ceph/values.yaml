@@ -302,10 +302,10 @@ rook-ceph-cluster:
               deviceClass: hdd
             - name: /dev/disk/by-id/ata-OOS20000G_0004WR10
               deviceClass: hdd
-#        - name: korris-1
-#          devices:
-#            - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aee9594
-#              deviceClass: nvme
+        - name: korris-1
+          devices:
+            - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aee9594
+              deviceClass: nvme
         - name: tasuq-1
           devices:
             - name: /dev/disk/by-id/nvme-eui.0025385a91b29401
