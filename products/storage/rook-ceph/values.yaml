@@ -273,7 +273,6 @@ rook-ceph-cluster:
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: DoNotSchedule
 
-#    skipUpgradeChecks: true
     mon:
       count: 3
 
@@ -286,18 +285,22 @@ rook-ceph-cluster:
           enabled: true
         - name: rgw
           enabled: true
+        - name: rook
+          enabled: true
 
     storage:
       useAllNodes: false
       useAllDevices: false
       allowDeviceClassUpdate: true
+      config:
+        enableCrushUpdates: 'true'
       nodes:
         - name: hortek-0
           devices:
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030303937365031313130-4c6578617220535344204e4d36323020325442-00000001
               deviceClass: nvme
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030323137395031313130-4c6578617220535344204e4d36323020325442-00000001
-              deviceClass: hdd
+              deviceClass: nvme
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030343131325031313130-4c6578617220535344204e4d36323020325442-00000001
               deviceClass: hdd
             - name: /dev/disk/by-id/ata-OOS20000G_0004WR10
