@@ -397,7 +397,7 @@ rook-ceph-cluster:
         parameters:
           min_size: '1'
         enableRBDStats: true
-        deviceClass: nvme
+        # deviceClass: nvme
         enableCrushUpdates: true
       storageClass:
         enabled: true
@@ -421,7 +421,7 @@ rook-ceph-cluster:
         parameters:
           min_size: '2'
         enableRBDStats: true
-        deviceClass: nvme
+        # deviceClass: nvme
         enableCrushUpdates: true
       storageClass:
         enabled: true
@@ -443,7 +443,7 @@ rook-ceph-cluster:
       spec:
         metadataPool:
           enableRBDStats: true
-          deviceClass: nvme
+          # deviceClass: nvme
           enableCrushUpdates: true
           failureDomain: zone  
           replicated:
@@ -454,7 +454,7 @@ rook-ceph-cluster:
         dataPools:
           - name: data0
             enableRBDStats: true
-            deviceClass: nvme
+            # deviceClass: nvme
             enableCrushUpdates: true
             failureDomain: zone
             replicated:
@@ -492,7 +492,7 @@ rook-ceph-cluster:
       spec:
         metadataPool:
           enableRBDStats: true
-          deviceClass: hdd
+          # deviceClass: hdd
           failureDomain: osd
           enableCrushUpdates: true
           parameters:
@@ -502,7 +502,7 @@ rook-ceph-cluster:
         dataPools:
           - name: data0
             enableRBDStats: true
-            deviceClass: hdd
+            # deviceClass: hdd
             enableCrushUpdates: true
             failureDomain: osd
             replicated:
@@ -552,7 +552,7 @@ rook-ceph-cluster:
         metadataPool:
           failureDomain: zone
           enableRBDStats: true
-          deviceClass: nvme
+          # deviceClass: nvme
           enableCrushUpdates: true
           replicated:
             size: 3
@@ -561,7 +561,7 @@ rook-ceph-cluster:
         dataPool:
           failureDomain: zone
           enableRBDStats: true
-          deviceClass: nvme
+          # deviceClass: nvme
           enableCrushUpdates: true
           replicated:
             size: 3
