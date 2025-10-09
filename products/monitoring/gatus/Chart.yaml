@@ -1,10 +1,10 @@
 apiVersion: v2
 name: gatus
-version: 1.0.18
+version: 1.0.19
 
 dependencies:
   - name: gatus
-    version: 1.4.2
+    version: 1.4.3
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
