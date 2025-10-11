@@ -92,7 +92,7 @@ kube-prometheus-stack:
             storageClassName: "ceph-block-nvme-1"
             resources:
               requests:
-                storage: 30Gi
+                storage: 20Gi
 
       topologySpreadConstraints:
         - maxSkew: 1
