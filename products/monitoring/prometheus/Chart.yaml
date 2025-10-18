@@ -1,10 +1,10 @@
 apiVersion: v2
 name: prometheus
-version: 1.1.218
+version: 1.1.219
 
 dependencies:
   - name: kube-prometheus-stack
-    version: 78.1.0
+    version: 78.3.2
     repository: https://prometheus-community.github.io/helm-charts
   - name: thanos
     version: 17.3.1
