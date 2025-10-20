@@ -398,6 +398,8 @@ rook-ceph-cluster:
       storageClass:
         enabled: true
         name: ceph-block-nvme-1
+        annotations:
+          reclaimspace.csiaddons.openshift.io/schedule: "@midnight"
         isDefault: false
         reclaimPolicy: Delete
         allowVolumeExpansion: true
@@ -422,6 +424,8 @@ rook-ceph-cluster:
       storageClass:
         enabled: true
         name: ceph-block-nvme-2
+        annotations:
+          reclaimspace.csiaddons.openshift.io/schedule: "@midnight"
         isDefault: true
         reclaimPolicy: Delete
         allowVolumeExpansion: true
