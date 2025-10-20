@@ -5,15 +5,6 @@ gatus-monitor:
   privateEndpoints:
     - name: argocd
 
-route:
-  enabled: true
-  hostnames:
-    - argocd.feddema.dev
-  parentRefs:
-    - name: envoy-gateway-public
-      namespace: envoy-gateway
-      sectionName: web-https
-
 argo-cd:
   nameOverride: argocd
   fullnameOverride: argocd
@@ -71,6 +62,15 @@ argo-cd:
 
   server:
     replicas: 1
+
+    httproute:
+      enabled: true
+      hostnames:
+        - argocd.feddema.dev
+      parentRefs:
+        - name: envoy-gateway-public
+          namespace: envoy-gateway
+          sectionName: web-https
 
     resources:
       limits:
