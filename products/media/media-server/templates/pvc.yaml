@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ template "common.fullname" . }}-media
   labels:
+    feddema.dev/backup: "false"
     {{- include "common.labels" . | nindent 4 }}
 spec:
   storageClassName: {{ .Values.persistence.storageClass }}
