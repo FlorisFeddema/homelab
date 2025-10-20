@@ -28,7 +28,7 @@ rook-ceph:
     cephFSKernelMountOptions: "ms_mode=secure"
     provisionerReplicas: 1
     csiAddons:
-      enabled: false
+      enabled: true
 
     topology:
       enabled: true
