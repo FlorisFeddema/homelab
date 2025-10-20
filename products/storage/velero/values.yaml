@@ -2,6 +2,8 @@ velero:
   revisionHistoryLimit: 0
   resources: { }
 
+  upgradeCRDs: false
+
   initContainers:
    - name: velero-plugin-for-microsoft-azure
      image: velero/velero-plugin-for-microsoft-azure:v1.13.0
@@ -63,3 +65,6 @@ velero:
         - media-server
         - nextcloud
         - zigbee2mqtt
+        resourcePolicy:
+          kind: configmap
+          name: resource-policy
