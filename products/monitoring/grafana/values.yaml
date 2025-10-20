@@ -63,6 +63,7 @@ grafana:
       enabled: true
       name: Authentik
       scopes: "openid email profile"
+      auto_login: true
       auth_url: "https://authentik.feddema.dev/application/o/authorize/"
       token_url: "https://authentik.feddema.dev/application/o/token/"
       api_url: "https://authentik.feddema.dev/application/o/userinfo/"
