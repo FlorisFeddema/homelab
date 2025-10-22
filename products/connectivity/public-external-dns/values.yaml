@@ -7,9 +7,8 @@ external-dns:
     repository: external-dns/external-dns
     tag: v0.19.0
   sources:
-#    - ingress
     - service
-#    - crd
+    - crd
     - gateway-httproute
     - gateway-tlsroute
     - gateway-udproute
