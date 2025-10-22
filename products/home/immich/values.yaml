@@ -8,9 +8,11 @@ gatus-monitor:
 
 immich:
   redis:
-    persistence:
-      labels:
-        feddema.dev/backup: "false"
+    master:
+      persistence:
+        labels:
+          feddema.dev/backup: "false"
+
   persistence:
     size: 200Gi
     storageClass: 'ceph-file-nvme-2'
