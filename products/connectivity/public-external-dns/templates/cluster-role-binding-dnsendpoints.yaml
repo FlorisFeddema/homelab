@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: public-external-dns-dnsendpoints
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: public-external-dns-dnsendpoints
+subjects:
+  - kind: ServiceAccount
+    name: public-external-dns
+    namespace: public-external-dns

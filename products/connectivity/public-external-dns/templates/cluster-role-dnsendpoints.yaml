@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: public-external-dns-dnsendpoints
+rules:
+  - apiGroups:
+      - externaldns.k8s.io
+    resources:
+      - dnsendpoints
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - externaldns.k8s.io
+    resources:
+      - dnsendpoints/status
+    verbs:
+      - update
