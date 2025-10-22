@@ -73,6 +73,9 @@ adguard:
                 value: "Basic YWRtaW46MlUyNjhpZE1NU1pEQlJNY0NiN3c0U0tEeWRGbnE4R3c1V011aVV1M2JBVUdQWDJjOHZQVjVjaVlWR21MRXh5Zw=="
 
   secondary:
+    persistence:
+      labels:
+        feddema.dev/backup: "false"
     resources:
       requests:
         cpu: 100m
