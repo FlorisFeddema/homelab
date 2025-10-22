@@ -305,10 +305,10 @@ rook-ceph-cluster:
           devices:
             - name: /dev/disk/by-id/nvme-nvme.1e4b-4e4448353735523030323137395031313130-4c6578617220535344204e4d36323020325442-00000001
               deviceClass: nvme
-        - name: tasuq-1
-          devices:
-            - name: /dev/disk/by-id/nvme-eui.0025385a91b29401
-              deviceClass: nvme
+#        - name: tasuq-1
+#          devices:
+#            - name: /dev/disk/by-id/nvme-eui.0025385a91b29401
+#              deviceClass: nvme
         - name: kashaylan-3
           devices:
             - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aeeb60d
