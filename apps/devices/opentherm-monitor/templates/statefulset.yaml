@@ -15,7 +15,7 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: sonarr
-        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}@{{ .Values.image.sha }}
         env:
         - name: TZ
           value: Europe/Amsterdam
