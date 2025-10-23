@@ -14,7 +14,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       containers:
-      - name: sonarr
+      - name: {{ template "common.fullname" . }}
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}@{{ .Values.image.sha }}
         env:
         - name: TZ
