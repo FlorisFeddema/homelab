@@ -39,12 +39,9 @@ spec:
       volumes:
       - name: logs
         emptyDir: {}
-      - name: data
-        persistentVolumeClaim:
-          claimName: data
   volumeClaimTemplates:
   - metadata:
-      name: pdata
+      name: data
     spec:
       accessModes:
       - ReadWriteOnce
