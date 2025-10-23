@@ -49,7 +49,15 @@ machine:
       rotate-server-certificates: true
       feature-gates: DRAExtendedResource=true,ResourceHealthStatus=true
 
+  time:
+    servers:
+      - europe.pool.ntp.org
+
   features:
+    rbac: true
+    stableHostname: true
+    apidCheckExtKeyUsage: true
+    diskQuotaSupport: true
     kubePrism:
       enabled: true
       port: 7445
