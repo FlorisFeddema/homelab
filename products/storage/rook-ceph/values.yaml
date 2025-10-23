@@ -564,9 +564,9 @@ rook-ceph-cluster:
           # deviceClass: nvme
           enableCrushUpdates: true
           replicated:
-            size: 3
+            size: 2
           parameters:
-            min_size: '2'
+            min_size: '1'
         allowUsersInNamespaces: ['*']
         gateway:
           port: 80
