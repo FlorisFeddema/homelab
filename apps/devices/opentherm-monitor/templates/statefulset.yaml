@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "common.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "common.labels" . | nindent 8 }}
+  template:
+    metadata:
+      labels:
+        {{- include "common.labels" . | nindent 10 }}
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: sonarr
+        image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+        env:
+        - name: TZ
+          value: Europe/Amsterdam
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - name: logs
+          mountPath: /log
+        - name: data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+      volumes:
+      - name: logs
+        emptyDir: {}
+      - name: data
+        persistentVolumeClaim:
+          claimName: data
+  volumeClaimTemplates:
+  - metadata:
+      name: pdata
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi

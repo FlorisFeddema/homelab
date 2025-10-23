@@ -8,3 +8,5 @@ apps:
       deploy: true
     node-feature-discovery:
       deploy: true
+    opentherm-monitor:
+      deploy: true
