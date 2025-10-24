@@ -419,9 +419,9 @@ rook-ceph-cluster:
       spec:
         failureDomain: zone
         replicated:
-          size: 3
+          size: 2
         parameters:
-          min_size: '2'
+          min_size: '1'
         enableRBDStats: true
         # deviceClass: nvme
         enableCrushUpdates: true
@@ -451,9 +451,9 @@ rook-ceph-cluster:
           enableCrushUpdates: true
           failureDomain: zone  
           replicated:
-            size: 3
+            size: 2
           parameters:
-            min_size: '2'
+            min_size: '1'
 
         dataPools:
           - name: data0
@@ -462,9 +462,9 @@ rook-ceph-cluster:
             enableCrushUpdates: true
             failureDomain: zone
             replicated:
-              size: 3
+              size: 2
             parameters:
-              min_size: '2'
+              min_size: '1'
         metadataServer:
           activeCount: 1
           activeStandby: true
@@ -559,9 +559,9 @@ rook-ceph-cluster:
           # deviceClass: nvme
           enableCrushUpdates: true
           replicated:
-            size: 3
+            size: 2
           parameters:
-            min_size: '2'
+            min_size: '1'
         dataPool:
           failureDomain: zone
           enableRBDStats: true
