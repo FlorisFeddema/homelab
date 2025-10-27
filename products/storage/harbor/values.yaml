@@ -37,7 +37,7 @@ harbor:
       type: s3
       s3:
         existingSecret: "harbor-s3-credentials"
-        region: ''
+        region: 'eu'
         bucket: harbor
         regionendpoint: http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc:80
         secure: false
