@@ -1,14 +1,6 @@
 records:
 - name: vpn
   ip: 87.212.115.7
-- name: embla-2
-  ip: 10.0.100.52
-- name: embla-3
-  ip: 10.0.100.53
-- name: embla-4
-  ip: 10.0.100.54
-- name: embla-5
-  ip: 10.0.100.55
 - name: k8s
   ip: 10.0.102.10
 
