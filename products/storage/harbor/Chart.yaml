@@ -2,7 +2,7 @@ apiVersion: v2
 name: harbor
 version: 1.0.0
 
-#dependencies:
-#  - name: harbor
-#    version: 1.18.0
-#    repository: https://helm.goharbor.io
+dependencies:
+  - name: harbor
+    version: 1.18.0
+    repository: https://helm.goharbor.io
