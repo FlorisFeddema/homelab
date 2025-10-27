@@ -22,13 +22,6 @@ harbor:
   persistence:
     enabled: true
     persistentVolumeClaim:
-      registry:
-        size: 5Gi
-      jobservice:
-        jobLog:
-          size: 1Gi
-      database:
-        size: 1Gi
       redis:
         size: 1Gi
       trivy:
