@@ -57,48 +57,27 @@ harbor:
       enabled: true
 
   nginx:
-    image:
-      repository: docker.io/goharbor/nginx-photon
-#      tag: dev
     replicas: 1
     revisionHistoryLimit: 0
 
   portal:
-    image:
-      repository: docker.io/goharbor/harbor-portal
-#      tag: dev
     replicas: 1
     revisionHistoryLimit: 0
 
   core:
-    image:
-      repository: docker.io/goharbor/harbor-core
-#      tag: dev
     replicas: 1
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     existingXsrfSecret: "harbor-credentials"
 
   jobservice:
-    image:
-      repository: docker.io/goharbor/harbor-jobservice
-#      tag: dev
     replicas: 1
     revisionHistoryLimit: 0
-    maxJobWorkers: 10
     jobLoggers:
       - stdout
     existingSecret: "harbor-credentials"
 
   registry:
-    registry:
-      image:
-        repository: docker.io/goharbor/registry-photon
-#        tag: dev
-    controller:
-      image:
-        repository: docker.io/goharbor/harbor-registryctl
-#        tag: dev
     replicas: 1
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
@@ -107,9 +86,6 @@ harbor:
 
   trivy:
     enabled: true
-    image:
-      repository: docker.io/goharbor/trivy-adapter-photon
-#      tag: dev
     replicas: 1
     vulnType: "os,library"
     severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
@@ -126,14 +102,7 @@ harbor:
 
   redis:
     type: internal
-    internal:
-      image:
-        repository: docker.io/goharbor/redis-photon
-#        tag: dev
 
   exporter:
-    image:
-      repository: docker.io/goharbor/harbor-exporter
-#      tag: dev
     replicas: 1
     revisionHistoryLimit: 0
