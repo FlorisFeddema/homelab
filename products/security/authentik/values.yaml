@@ -87,4 +87,3 @@ authentik:
         size: 16Gi
       nodeSelector:
         kubernetes.io/arch: amd64
-        kubernetes.io/hostname: hortek-0
