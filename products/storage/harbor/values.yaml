@@ -57,20 +57,28 @@ harbor:
       enabled: true
 
   nginx:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     replicas: 1
     revisionHistoryLimit: 0
 
   portal:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     replicas: 1
     revisionHistoryLimit: 0
 
   core:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     replicas: 1
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     existingXsrfSecret: "harbor-credentials"
 
   jobservice:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     replicas: 1
     revisionHistoryLimit: 0
     jobLoggers:
@@ -83,6 +91,8 @@ harbor:
     existingSecret: "harbor-credentials"
     credentials:
       existingSecret: "harbor-credentials"
+    nodeSelector:
+      kubernetes.io/arch: amd64
 
   trivy:
     enabled: true
@@ -90,6 +100,8 @@ harbor:
     vulnType: "os,library"
     severity: "UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL"
     insecure: true
+    nodeSelector:
+      kubernetes.io/arch: amd64
 
   database:
     type: external
@@ -102,7 +114,11 @@ harbor:
 
   redis:
     type: internal
+    nodeSelector:
+      kubernetes.io/arch: amd64
 
   exporter:
+    nodeSelector:
+      kubernetes.io/arch: amd64
     replicas: 1
     revisionHistoryLimit: 0
