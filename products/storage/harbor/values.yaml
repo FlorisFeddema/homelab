@@ -114,8 +114,9 @@ harbor:
 
   redis:
     type: internal
-    nodeSelector:
-      kubernetes.io/arch: amd64
+    internal:
+      nodeSelector:
+        kubernetes.io/arch: amd64
 
   exporter:
     nodeSelector:
