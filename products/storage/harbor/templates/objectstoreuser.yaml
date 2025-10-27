@@ -1,0 +1,17 @@
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStoreUser
+metadata:
+  name: harbor-svc
+spec:
+  store: ceph-object-nvme-2
+  clusterNamespace: rook-ceph
+  displayName: "Harbor service user"
+  quotas:
+    maxBuckets: 10
+  keys:
+    - accessKeyRef:
+        name: harbor-s3-credentials
+        key: REGISTRY_STORAGE_S3_ACCESSKEY
+      secretKeyRef:
+        name:  harbor-s3-credentials
+        key: REGISTRY_STORAGE_S3_SECRETKEY
