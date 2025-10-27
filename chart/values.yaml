@@ -172,7 +172,7 @@ products:
             - /webhooks/3/clientConfig/caBundle
     harbor:
       deploy: true
-      autoSync: false
+      autoSync: true
     kubernetesCsiAddons:
       deploy: true
       autoSync: true
