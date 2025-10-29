@@ -1,13 +1,13 @@
 apiVersion: v2
 name: rook-ceph
-version: 1.0.25
+version: 1.0.26
 
 dependencies:
   - name: rook-ceph
     version: v1.18.6
     repository: https://charts.rook.io/release
   - name: rook-ceph-cluster
-    version: v1.18.5
+    version: v1.18.6
     repository: https://charts.rook.io/release
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
