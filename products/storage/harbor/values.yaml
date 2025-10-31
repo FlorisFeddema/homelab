@@ -52,13 +52,13 @@ harbor:
   portal:
     nodeSelector:
       kubernetes.io/arch: amd64
-    replicas: 1
+    replicas: 2
     revisionHistoryLimit: 0
 
   core:
     nodeSelector:
       kubernetes.io/arch: amd64
-    replicas: 1
+    replicas: 2
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     existingXsrfSecret: "harbor-credentials"
@@ -66,14 +66,14 @@ harbor:
   jobservice:
     nodeSelector:
       kubernetes.io/arch: amd64
-    replicas: 1
+    replicas: 2
     revisionHistoryLimit: 0
     jobLoggers:
       - stdout
     existingSecret: "harbor-credentials"
 
   registry:
-    replicas: 1
+    replicas: 2
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     credentials:
@@ -108,5 +108,5 @@ harbor:
   exporter:
     nodeSelector:
       kubernetes.io/arch: amd64
-    replicas: 1
+    replicas: 2
     revisionHistoryLimit: 0
