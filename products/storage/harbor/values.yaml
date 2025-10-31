@@ -49,12 +49,6 @@ harbor:
     serviceMonitor:
       enabled: true
 
-  nginx:
-    nodeSelector:
-      kubernetes.io/arch: amd64
-    replicas: 1
-    revisionHistoryLimit: 0
-
   portal:
     nodeSelector:
       kubernetes.io/arch: amd64
