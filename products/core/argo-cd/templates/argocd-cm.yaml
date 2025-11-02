@@ -150,7 +150,29 @@ data:
     end
 
     return hs
-    
+
+  resource.customizations.health.csiaddons.openshift.io_ReclaimSpaceJob: |
+    hs = {}
+    status = obj.status or {}
+
+    if status.phase == "Succeeded" then
+      hs.status = "Healthy"
+      hs.message = "ReclaimSpaceJob completed successfully."
+    elseif status.phase == "Running" then
+      hs.status = "Progressing"
+      hs.message = "ReclaimSpaceJob is running."
+    elseif status.phase == "Pending" or status.phase == "Init" then
+      hs.status = "Progressing"
+      hs.message = "ReclaimSpaceJob is pending or initializing."
+    elseif status.phase == "Failed" then
+      hs.status = "Degraded"
+      hs.message = "ReclaimSpaceJob failed."
+    else
+      hs.status = "Unknown"
+      hs.message = "ReclaimSpaceJob status is unknown."
+    end
+    return hs
+
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
       actions = {}
