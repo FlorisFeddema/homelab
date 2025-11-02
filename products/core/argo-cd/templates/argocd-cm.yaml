@@ -193,6 +193,35 @@ data:
     end
     return hs
 
+  resource.customizations.health.velero.io_v1_Backup: |
+    hs = {}
+    status = obj.status or {}
+    phase  = status.phase or ""
+    message = status.message or ""
+    if phase == "Completed" then
+      hs.status = "Healthy"
+      hs.message = "Backup succeeded. " .. (message or "")
+    elseif phase == "PartiallyFailed" then
+      hs.status = "Degraded"
+      hs.message = "Backup completed with partial failures. " .. (message or "")
+    elseif phase == "Failed" or phase == "FailedValidation" then
+      hs.status = "Degraded"
+      hs.message = "Backup failed (" .. phase .. "). " .. (message or "")
+    elseif phase == "Deleting" then
+      hs.status = "Progressing"
+      hs.message = "Backup is being deleted."
+    elseif phase == "InProgress" then
+      hs.status = "Progressing"
+      hs.message = "Backup in progress. " .. (message or "")
+    elseif phase == "New" then
+      hs.status = "Progressing"
+      hs.message = "Backup created, awaiting start."
+    else
+      hs.status = "Unknown"
+      hs.message = "Backup phase unknown (" .. phase .. "). " .. (message or "")
+    end
+    return hs
+
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
       actions = {}
