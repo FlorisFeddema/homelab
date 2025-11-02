@@ -2,6 +2,14 @@ apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
   name: generate-vpa-for-workloads
+  annotations:
+    policies.kyverno.io/title: Add VPA resource for workload
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/description: >-
+        This policy automatically generates a VerticalPodAutoscaler (VPA) resource for Deployments, StatefulSets, and DaemonSets to help manage and optimize resource usage.
+        The VPA resource is created in the same namespace as the workload and is linked via owner references.
+        Namespaces such as kube-system, kyverno, longhorn-system, kube-public, and kube-node-lease are excluded from this policy.
+        Additionally, workloads labeled with 'feddema.dev/vpa-autogen: "false"' will not have a VPA generated.
 spec:
   generateExisting: true
   rules:

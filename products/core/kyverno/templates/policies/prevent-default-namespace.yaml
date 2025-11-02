@@ -3,13 +3,8 @@ kind: ClusterPolicy
 metadata:
   name: prevent-default-namespace
   annotations:
-    pod-policies.kyverno.io/autogen-controllers: none
     policies.kyverno.io/title: Prevent Default Namespace
-    policies.kyverno.io/minversion: 1.11.0
-    policies.kyverno.io/category: Prevent
-    kyverno.io/kubernetes-version: "1.26-1.27"
-    policies.kyverno.io/severity: medium
-    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/category: Best Practices
     policies.kyverno.io/description: >-
       Kubernetes Namespaces are an optional feature that provide a way to segment and
       isolate cluster resources across multiple applications and users. As a best
@@ -19,8 +14,7 @@ metadata:
       due to Pod controllers need to specify the `namespace` field under the top-level `metadata`
       object and not at the Pod template level.
 spec:
-  validationFailureAction: Audit
-  background: true
+  validationFailureAction: Enforce
   rules:
     - name: validate-namespace
       match:

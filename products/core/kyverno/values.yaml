@@ -93,6 +93,9 @@ policy-reporter:
         results:
           keepOnlyLatest: true
           source: 'Kyverno Event'
+    trivy:
+      enabled: true
+      revisionHistoryLimit: 0
 
   monitoring:
     enabled: true

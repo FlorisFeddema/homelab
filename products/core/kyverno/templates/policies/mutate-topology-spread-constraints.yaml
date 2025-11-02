@@ -1,27 +1,14 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: topologyspreadconstraints-policy
+  name: add-topology-spread-to-workloads
   annotations:
-    policies.kyverno.io/title: Mutate Spread Pods Across Nodes & Zones
-    kyverno.io/kubernetes-version: "1.26-1.27"
-    kyverno.io/kyverno-version: 1.11.0
-    policies.kyverno.io/category: Mutate
-    policies.kyverno.io/description: >-
-      Deployments to a Kubernetes cluster with multiple availability zones often need to
-      distribute those replicas to align with those zones to ensure site-level failures
-      do not impact availability. This policy ensures topologySpreadConstraints are defined,
-      to spread pods over nodes and zones. Deployments or Statefulsets with less than 3
-      replicas are skipped.
-    policies.kyverno.io/minversion: 1.11.0
-    policies.kyverno.io/severity: medium
-    policies.kyverno.io/subject: Deployment, StatefulSet
+    policies.kyverno.io/title: Add Topology Spread Constraints to Workloads
+    policies.kyverno.io/category: High Availability
+    policies.kyverno.io/description: Ensures Deployments and StatefulSets have topology spread constraints for high availability.
 spec:
-  background: true
-  failurePolicy: Ignore
-  validationFailureAction: Audit
   rules:
-    - name: spread-pods
+    - name: add-topology-spread-to-workloads
       match:
         any:
           - resources:
@@ -31,12 +18,80 @@ spec:
               operations:
                 - CREATE
                 - UPDATE
-      celPreconditions:
-        - name: "replicas-must-be-3-or-more"
-          expression: "object.spec.replicas >= 3"
-      validate:
-        cel:
-          expressions:
-            - expression: >-
-                size(object.spec.template.spec.?topologySpreadConstraints.orValue([]).filter(t, t.topologyKey == 'kubernetes.io/hostname' || t.topologyKey == 'topology.kubernetes.io/zone')) == 2
-              message: "topologySpreadConstraint for kubernetes.io/hostname & topology.kubernetes.io/zone are required"
+      context:
+        - name: topologySpreadConstraints
+          variable:
+            jmesPath: request.object.spec.template.spec.topologySpreadConstraints
+            default: []
+      preconditions:
+        all:
+          - key: '{{`{{ length(topologySpreadConstraints) }}`}}'
+            operator: Equals
+            value: 0
+      exclude:
+        any:
+          - resources:
+              selector:
+                matchExpressions:
+                  - key: metadata.deletionTimestamp
+                    operator: Exists
+      mutate:
+        patchStrategicMerge:
+          spec:
+            template:
+              spec:
+                topologySpreadConstraints:
+                  - maxSkew: 1
+                    topologyKey: 'kubernetes.io/hostname'
+                    whenUnsatisfiable: 'ScheduleAnyway'
+                    labelSelector:
+                      matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
+                  - maxSkew: 1
+                    topologyKey: 'topology.kubernetes.io/zone'
+                    whenUnsatisfiable: 'ScheduleAnyway'
+                    labelSelector:
+                      matchLabels: '{{`{{ request.object.spec.selector.matchLabels }}`}}'
+    - name: add-topology-spread-to-cnpg-cluster-podroles
+      match:
+        any:
+          - resources:
+              kinds:
+                - postgresql.cnpg.io/v1/Cluster
+              operations:
+                - CREATE
+                - UPDATE
+      context:
+        - name: topologySpreadConstraints
+          variable:
+            jmesPath: request.object.spec.topologySpreadConstraints
+            default: []
+      preconditions:
+        all:
+          - key: '{{`{{ length(topologySpreadConstraints) }}`}}'
+            operator: Equals
+            value: 0
+      exclude:
+        any:
+          - resources:
+              selector:
+                matchExpressions:
+                  - key: metadata.deletionTimestamp
+                    operator: Exists
+      mutate:
+        patchStrategicMerge:
+          spec:
+            topologySpreadConstraints:
+              - maxSkew: 1
+                topologyKey: 'kubernetes.io/hostname'
+                whenUnsatisfiable: 'ScheduleAnyway'
+                labelSelector:
+                  matchLabels:
+                    cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
+                    cnpg.io/podRole: instance
+              - maxSkew: 1
+                topologyKey: 'topology.kubernetes.io/zone'
+                whenUnsatisfiable: 'ScheduleAnyway'
+                labelSelector:
+                  matchLabels:
+                    cnpg.io/cluster: '{{`{{ request.object.metadata.name }}`}}'
+                    cnpg.io/podRole: instance

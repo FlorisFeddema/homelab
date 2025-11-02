@@ -3,13 +3,8 @@ kind: ClusterPolicy
 metadata:
   name: require-pod-probes
   annotations:
-    pod-policies.kyverno.io/autogen-controllers: DaemonSet,Deployment,StatefulSet
     policies.kyverno.io/title: Prevent no Pod Probes
-    policies.kyverno.io/category: Prevent
-    policies.kyverno.io/minversion: 1.11.0
-    kyverno.io/kubernetes-version: "1.26-1.27"
-    policies.kyverno.io/severity: medium
-    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/category: Best Practices
     policies.kyverno.io/description: >-
       Liveness and readiness probes need to be configured to correctly manage a Pod's
       lifecycle during deployments, restarts, and upgrades. For each Pod, a periodic
@@ -20,7 +15,6 @@ metadata:
       or startupProbe defined.
 spec:
   validationFailureAction: Audit
-  background: true
   rules:
   - name: validate-probes
     match:

@@ -4,18 +4,14 @@ metadata:
   name: imagepullpolicy-always
   annotations:
     policies.kyverno.io/title: Validate imagePullPolicy Always
-    policies.kyverno.io/category: Validate
-    policies.kyverno.io/severity: medium
-    policies.kyverno.io/subject: Pod
-    policies.kyverno.io/minversion: 1.6.0
+    policies.kyverno.io/category: Best Practices
     policies.kyverno.io/description: >-
       If the `latest` tag is allowed for images, it is a good idea to have the
       imagePullPolicy field set to `Always` to ensure should that tag be overwritten that future
       pulls will get the updated image. This policy validates the imagePullPolicy is set to `Always`
       when the `latest` tag is specified explicitly or where a tag is not defined at all.
 spec:
-  validationFailureAction: Audit
-  background: true
+  validationFailureAction: Enforce
   rules:
     - name: imagepullpolicy-always
       match:
