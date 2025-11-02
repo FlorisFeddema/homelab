@@ -45,6 +45,7 @@ dawarich:
   ingress:
     enabled: false
 
+  app:
     resources:
       requests:
         cpu: 50m
