@@ -158,15 +158,9 @@ data:
     if status.result == "Succeeded" then
       hs.status = "Healthy"
       hs.message = "ReclaimSpaceJob completed successfully."
-    elseif status.result == "Running" then
-      hs.status = "Progressing"
-      hs.message = "ReclaimSpaceJob is running."
-    elseif status.result == "Pending" or status.phase == "Init" then
-      hs.status = "Progressing"
-      hs.message = "ReclaimSpaceJob is pending or initializing."
     elseif status.result == "Failed" then
-      hs.status = "Degraded"
-      hs.message = "ReclaimSpaceJob failed."
+      hs.status = "Progressing"
+      hs.message = "ReclaimSpaceJob is progressing."
     else
       hs.status = "Unknown"
       hs.message = "ReclaimSpaceJob status is unknown."
