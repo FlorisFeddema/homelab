@@ -167,7 +167,7 @@ data:
     end
     return hs
 
-  resource.customizations.health.velero.io_v2alpha1_DataUpload: |
+  resource.customizations.health.velero.io_DataUpload: |
     hs = {}
     status = obj.status or {}
     phase  = status.phase or ""
@@ -193,7 +193,7 @@ data:
     end
     return hs
 
-  resource.customizations.health.velero.io_v1_Backup: |
+  resource.customizations.health.velero.io_Backup: |
     hs = {}
     status = obj.status or {}
     phase  = status.phase or ""
