@@ -151,6 +151,9 @@ products:
     falco:
       deploy: true
       autoSync: true
+    trivyOperator:
+      deploy: true
+      autoSync: true
   storage:
     cloudnativePg:
       deploy: true
