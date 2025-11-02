@@ -94,17 +94,6 @@ kube-prometheus-stack:
               requests:
                 storage: 20Gi
 
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: ScheduleAnyway
-          labelSelector:
-            matchLabels:
-              app.kubernetes.io/instance: prometheus
-              app.kubernetes.io/managed-by: prometheus-operator
-              app.kubernetes.io/name: prometheus
-              prometheus: prometheus
-
     route:
       main:
         enabled: true
@@ -228,7 +217,6 @@ thanos:
     replicaCount: 2
     extraEnvVarsSecret: "thanos-bucket"
     revisionHistoryLimit: 0
-    resources: { }
     replicaLabel:
       - replica
       - prometheus_replica
@@ -238,17 +226,6 @@ thanos:
       sidecarsNamespace: 'prometheus'
     pdb:
       create: false
-
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/component: query
-            app.kubernetes.io/instance: prometheus
-            app.kubernetes.io/managed-by: Helm
-            app.kubernetes.io/name: thanos
 
   queryFrontend:
     enabled: false
@@ -260,7 +237,6 @@ thanos:
     refresh: 10m
     replicaCount: 2
     revisionHistoryLimit: 0
-    resources: { }
     pdb:
       create: false
 
@@ -302,17 +278,6 @@ thanos:
     replicaCount: 2
     useEndpointGroup: true
     revisionHistoryLimit: 0
-    resources: { }
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/component: storegateway
-            app.kubernetes.io/instance: prometheus
-            app.kubernetes.io/managed-by: Helm
-            app.kubernetes.io/name: thanos
     pdb:
       create: false
     persistence:

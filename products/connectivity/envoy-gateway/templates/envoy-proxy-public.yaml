@@ -20,15 +20,6 @@ spec:
               memory: 256Mi
             limits:
               memory: 1Gi
-        pod:
-          topologySpreadConstraints:
-            - maxSkew: 1
-              topologyKey: kubernetes.io/hostname
-              whenUnsatisfiable: DoNotSchedule
-              labelSelector:
-                matchLabels:
-                  gateway.envoyproxy.io/owning-gateway-name: envoy-gateway-public
-                  gateway.envoyproxy.io/owning-gateway-namespace: envoy-gateway
       envoyService:
         annotations:
           'io.cilium/lb-ipam-ips': 192.168.102.30

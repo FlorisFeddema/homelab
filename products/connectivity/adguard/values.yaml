@@ -85,13 +85,3 @@ adguard:
     service:
       annotations:
         'io.cilium/lb-ipam-ips': 192.168.102.20
-
-    topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
-        labelSelector:
-          matchLabels:
-            app.kubernetes.io/component: adguard-secondary
-            app.kubernetes.io/instance: adguard
-            app.kubernetes.io/name: adguard

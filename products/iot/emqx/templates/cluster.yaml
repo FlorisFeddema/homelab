@@ -59,15 +59,6 @@ spec:
   coreTemplate:
     spec:
       replicas: {{ .Values.cluster.replicas }}
-      topologySpreadConstraints:
-        - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
-          whenUnsatisfiable: ScheduleAnyway
-          labelSelector:
-            matchLabels:
-              apps.emqx.io/db-role: core
-              apps.emqx.io/instance: emqx
-              apps.emqx.io/managed-by: emqx-operator
       volumeClaimTemplates:
         accessModes:
           - {{ .Values.cluster.persistence.accessMode }}
