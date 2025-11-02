@@ -167,6 +167,32 @@ data:
     end
     return hs
 
+  resource.customizations.health.velero.io_v2alpha1_DataUpload: |
+    hs = {}
+    status = obj.status or {}
+    phase  = status.phase or ""
+    message = status.message or ""
+    if phase == "Completed" then
+      hs.status = "Healthy"
+      hs.message = "DataUpload completed successfully. " .. message
+    elseif phase == "Failed" then
+      hs.status = "Degraded"
+      hs.message = "DataUpload failed. " .. message
+    elseif phase == "Cancelled" or phase == "Canceled" then
+      hs.status = "Degraded"
+      hs.message = "DataUpload was cancelled. " .. message
+    elseif phase == "InProgress" then
+      hs.status = "Progressing"
+      hs.message = "DataUpload in progress. " .. message
+    elseif phase == "Accepted" or phase == "Pending" then
+      hs.status = "Progressing"
+      hs.message = "DataUpload accepted / pending. " .. message
+    else
+      hs.status = "Unknown"
+      hs.message = "DataUpload phase unknown (" .. phase .. "). " .. message
+    end
+    return hs
+
   resource.customizations.actions.postgresql.cnpg.io_Cluster: |
     discovery.lua: |
       actions = {}
