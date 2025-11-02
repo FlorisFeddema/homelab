@@ -10,6 +10,21 @@ spec:
       parameters:
         barmanObjectName: azure-db-store
 
+  topologySpreadConstraints:
+    - labelSelector:
+        matchLabels:
+          cnpg.io/cluster: {{ .Values.database.clusterName }}
+          cnpg.io/podRole: instance
+      maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+    - labelSelector:
+        matchLabels:
+          cnpg.io/cluster: {{ .Values.database.clusterName }}
+          cnpg.io/podRole: instance
+      maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
   storage:
     storageClass: {{ .Values.database.storageClass | quote }}
     size: {{ .Values.database.size }}

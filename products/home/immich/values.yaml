@@ -33,6 +33,13 @@ immich:
       enabled: true
     size: 32Gi
     storageClass: ceph-block-nvme-1
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: ScheduleAnyway
     backups:
       enabled: true
       destination: 'https://feddemadevbackups.blob.core.windows.net/cnpg'

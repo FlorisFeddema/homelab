@@ -5,6 +5,21 @@ metadata:
 spec:
   instances: {{ .Values.database.replicas }}
 
+  topologySpreadConstraints:
+    - labelSelector:
+        matchLabels:
+          cnpg.io/cluster: {{ .Values.database.clusterName }}
+          cnpg.io/podRole: instance
+      maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+    - labelSelector:
+        matchLabels:
+          cnpg.io/cluster: {{ .Values.database.clusterName }}
+          cnpg.io/podRole: instance
+      maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
   logLevel: error
   plugins:
     - isWALArchiver: true
