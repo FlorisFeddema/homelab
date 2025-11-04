@@ -33,7 +33,7 @@ harbor:
         existingSecret: "harbor-s3-credentials"
         region: 'eu'
         bucket: harbor
-        regionendpoint: http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc.cluster.local:80
+        regionendpoint: http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc:80
         secure: false
 
   existingSecretAdminPassword: "harbor-credentials"
