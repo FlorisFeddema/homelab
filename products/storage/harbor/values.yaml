@@ -27,6 +27,7 @@ harbor:
       trivy:
         size: 5Gi
     imageChartStorage:
+      disableredirect: true
       type: s3
       s3:
         existingSecret: "harbor-s3-credentials"
