@@ -3,7 +3,7 @@ kind: ObjectStore
 metadata:
   name: azure-db-store
 spec:
-  retentionPolicy: "10d"
+  retentionPolicy: "5d"
   configuration:
     destinationPath: https://feddemadevbackups.blob.core.windows.net/cnpg
     azureCredentials:
