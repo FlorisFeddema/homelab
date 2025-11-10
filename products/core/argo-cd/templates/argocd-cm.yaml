@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
 data:
-  url: https://argocd.feddema.dev
+  url: "https://argocd.feddema.dev"
 
   users.anonymous.enabled: "false"
 
@@ -16,8 +16,15 @@ data:
 
   admin.enabled: "false"
 
-  timeout.reconciliation: 180s
+  timeout.reconciliation: "180s"
   cluster.inClusterEnabled: "true"
+
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_ValidatingWebhookConfiguration: |
+    jqPathExpressions:
+    - '.webhooks[]?.clientConfig.caBundle'
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+    jqPathExpressions:
+    - '.webhooks[]?.clientConfig.caBundle'
 
   resource.customizations.ignoreResourceUpdates.all: |
     jsonPointers:
@@ -72,7 +79,6 @@ data:
       - discovery.k8s.io
       kinds:
       - Endpoints
-      - EndpointSlice
     ### Internal Kubernetes resources excluded reduce the number of watched events
     - apiGroups:
       - coordination.k8s.io
@@ -110,7 +116,10 @@ data:
       - kyverno.io
       - reports.kyverno.io
       - wgpolicyk8s.io
+      - openreports.io
       kinds:
+      - Report
+      - ClusterReport
       - PolicyReport
       - ClusterPolicyReport
       - EphemeralReport
@@ -120,6 +129,21 @@ data:
       - BackgroundScanReport
       - ClusterBackgroundScanReport
       - UpdateRequest
+    ### Trivy Operator intermediate and reporting resources excluded reduce the number of watched events and improve performance
+    - apiGroups:
+      - aquasecurity.github.io
+      kinds:
+      - SbomReport
+      - ClusterSbomReport
+      - VulnerabilityReport
+      - ClusterVulnerabilityReport
+      - ConfigAuditReport
+      - ClusterConfigAuditReport
+      - RbacAssessmentReport
+      - ClusterRbacAssessmentReport
+      - ComplianceReport
+      - InfraAssessmentReport
+      - ClusterInfraAssessmentReport
 
   resource.customizations.ignoreDifferences.argoproj.io_Application: |
     jqPathExpressions:
