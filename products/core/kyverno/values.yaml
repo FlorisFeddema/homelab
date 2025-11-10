@@ -1,9 +1,3 @@
-database:
-  clusterName: kyverno
-  replicas: 2
-  size: 10Gi
-  storageClass: ceph-block-nvme-1
-
 route:
   enabled: true
   hostnames:
@@ -63,15 +57,11 @@ kyverno:
 
 policy-reporter:
   revisionHistoryLimit: 0
-#  periodicSync:
-#    enabled: true
+  periodicSync:
+    enabled: true
 
   metrics:
     enabled: true
-#
-#  database:
-#    type: "postgres"
-#    secretRef: "database-credentials"
 
   ui:
     enabled: true
@@ -88,14 +78,14 @@ policy-reporter:
     kyverno:
       enabled: true
       revisionHistoryLimit: 0
-#      blockReports:
-#        enabled: true
-#        results:
-#          keepOnlyLatest: true
-#          source: 'Kyverno Event'
-#    trivy:
-#      enabled: true
-#      revisionHistoryLimit: 0
+      blockReports:
+        enabled: true
+        results:
+          keepOnlyLatest: true
+          source: 'Kyverno Event'
+    trivy:
+      enabled: true
+      revisionHistoryLimit: 0
 
   monitoring:
     enabled: true
