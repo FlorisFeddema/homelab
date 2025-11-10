@@ -2,7 +2,6 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: azure-db-store
   namespace: nextcloud
 spec:
@@ -10,6 +9,5 @@ spec:
     AZURE_CONNECTION_STRING: AgBLegwTYkdDH2ZjtG1V4qs/ro3VbQb928Zj7VwY66rLE+yfAY0/std63eSVY0Glk+Z6v7E6+3mtqSd1729vXm8sRFRPb3AFAWlU8rea0G8kfpm6L6JudJu+YluYk1C5Vzr/IdWDyBWdQDR2JsCtvl7kH4Jur2KPrjkbbMYiHNPpwHjmfXAdPprYcn4XFB530o682hMUqcjTz4yVUTh/H8e+1wcNi6j5i47tJhAbVMB2Ki+BI33LBG+gTCKpddfaej5LacoVpGzXOEpJrAjeh3T4iuu6xL6oIYlTPi7ZzHnaOyr0L1KxI7j/S+K2zZmpWqcctFbX3NXY1yRvvZxoYleCdZaAg+k8zT1oa2LcVw5CPnHDBbRKnitrVhmJI6JsC4B9+gnO44C1oNKNxQ1OVx/wv6vbjOWcojcpLzjSuekkpS8KPjOz2No+UB1wOzoVNfikm2/lAhdrDk5qzWJeg8z+PhIr1OoknZVn1RLO7LGRORxQRrDI9m/nyr2b+HPQVECxI+pX0SU577ka8FIvawlkSGkl8amW97Ji/oK2oM3m+Zc/bUNX0YyzkRg3RJ9JH7igOvsaiz0UMiX8/uWRqaiqGmMWkfzaRqBmTxOS2ai6vjOc9DWl3zYp2veKboAOrwmHppWscBdL5i52ARALkZXMocqnqwnkDZsk1fGvbjcbmmNl9oAFeWk+ZVHRWPdIsQfi+Er4p/f1t++9YBvEUPOb+J592IM86hrM7zsHrnAcsIMSRPwa/9dcQ0sbeGLxcr23akiox/SdNxNbsjBu6W1q/+imQ/+MZ65c6hE46RyQFNMhbkWlZLc/SkhXjMCAupjqbafMmwkvgPkcfXr1yyePQ3cnmN4bYZ576NjXBJ+5HUGQg4OPMjtyb5fd3vB550z1ipfWOXfIDZ3zNshQPS+gzm/R+wImfnUzLXC3YU3ZdTrQpZvbmUlvEm9taY22hf0=
   template:
     metadata:
-      creationTimestamp: null
       name: azure-db-store
       namespace: nextcloud

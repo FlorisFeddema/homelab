@@ -2,7 +2,6 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: azure-db-store
   namespace: immich
 spec:
@@ -10,6 +9,5 @@ spec:
     CONNECTION_STRING: AgABJT4zrHoFSAsgtMGLA0BHoYNmrmlen7XiHrC4GsGCdEfAy8HtWpKCdymKaG4MTVzMYQggupcxDM5ybgL+cw+o9cZkkmrjlJyBZBLEje8aJMVMDkI0bt1xCGcXRUusWHCQ59kMWhS5q9RJUE9Z7vQKF880yat1GRd37+2GQaw0pnQKbPVuQRZyOxXSgj2QygCTgEqhUwrdnznTXpoOKoCOQ62JRzpx6tI+sbFwH5qX+UC0DqoFExxlCDy8brwNzrP/g6/ISv37yEKLDgROGkQ8TD6KVQdQ+fmqMkKOPf5kSnVxA3NWaV0p7KsV9c/eWKeldAIWKf02AxHIubVhRWLo0eRbzYK/83aWScuUWIM9haEG+zPbD9vQDiu5PLl2k5Xl44FRg6K7CqhhNqQnS5Xd4yNF59srzI+w0WtXmhqyicEDi3TU8FVNYe3LDsxtm7OIsM4r9LV7mq23gCSdF9MpKcBugjM3Zn9dXzXm3mzUHFGimipkXhnuyUEQPpJuQahGKGOSwZAYr93OpNwQY2rcnFywsTO+lJNKwMrHSurm8Q5ffx4I6YU/x1G+RlshwnWrGVswtO+c8m3vLm59bKMp3GlqFte6n832urYgqUlAZ/Z3u+SvX9jlUM9fbfqgWuNP4GLeN7DVDb9wFpYw5ECOMnIEh8odnI3WihYAXWraCEZsQTy5W2KYNBZXAQNhJzGlyBUhNPcUaHGfrFivazRx0edWLRPafVYtwXlW09TiadK0gM8KwHx0eLEXHb6jpBKINhsmAen8XCYQR8mvYo3HP5fSq2xKZlCJGe1BV6Ty92vwqoJ01XNpW7Piuu1UM1mAYk38ezqYkPgcah3+6lCWQ589m5ITijUaJeustqMUReNCTwqe9iiFwy5XWLeJ4Fc9Njdmfr8+8l/ysmMVypgwQapbyDLz9rNYixTYrCHQuSe7xbXuDgmCe8rk8c+dbts=
   template:
     metadata:
-      creationTimestamp: null
       name: azure-db-store
       namespace: immich

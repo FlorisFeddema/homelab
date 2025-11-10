@@ -2,7 +2,6 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: thanos-objstore
   namespace: prometheus
 spec:
@@ -10,6 +9,5 @@ spec:
     objstore.yml: AgApSqlQk1BoNan8FQEGHvvz2v9vGDTka7HsZYlKTwXf2/sNtYrZv6VugC5iwaV5pJ8Er5r8V9iJgqNDti1Eho31sBzoBGFSllGTbkQDTHD34IdDYF1Lw4YTVk/+K/dtvSe9WbF1gT4zUd4skf6ADYvp1l2qDhu+TyjGYzT2vuyaXgSJw7ix6mKF2fjbAQyRR5z0/+Wuu7dxQUb7jDmm2nBAyxLtCBWNH9CkecAZ4xjSyM3TtxS7rQv3hafpgmXeqx3oHikYUev2Er+YJraVgkOl0+imCYAUxqVpYDVyx7lUbkKgqXioS1n8OaZvq8WiSglZzRA/MAaD1g42zHzukKl5HdA63fQBAZDwiVc/KNrHGcFjlH785nhBZYSrioDgkSTChN2wFWAgGOeeyhcJJaDNM3Grn7TmH3ZnfwDxj/enaChtTF1jmNVQQfRR6EsGGEny8bcrBwi6r261qBoNosKBVWHozd8JwWbIxOy0MegGnFYrlvYrw4Zp3eM3gq0OJ2Gbsvp8Q4csrn+bqV5gZdPFKPpNNcVA1vfDkpSk+zWNIpseeNczCVapkRw4vds1ne7e3i+/83hl9LluyVY+YNTsIPreDB+KeIZRXuh7uPFM5nHepAs9/98kVXZBSyXsOXQ0W0llV05WgqNb59yvdyoFgOQmVBHHbR1i4EbxLBDuibROVgQJKXogPkp+mDPKDQsq2lJ2kzp/BmbfCl7Qn0Xzwinjz101mMYqBruvao+doQQUBw5x4b5t9U0huMqNIza8kYlL0YgFeVDy+mu/xIu7cURxO4g9Jd36IGmH2zaImSixW7AH69fLH99fz7GqHYl6i5YBFvx/jny0Vargaw7vw/ug6UcIhXuhc8Hev8w18M9zbXJ3ug==
   template:
     metadata:
-      creationTimestamp: null
       name: thanos-objstore
       namespace: prometheus

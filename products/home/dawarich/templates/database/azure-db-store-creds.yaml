@@ -2,7 +2,6 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: azure-db-store
   namespace: dawarich
 spec:
@@ -10,6 +9,5 @@ spec:
     CONNECTION_STRING: AgAai1K1yrzo+nx0vd+zQAXgNQvA9s65Y7AksNJ1WrZM1RhJnk70JDrsW95Lb7oe22FaLfJVfd2Ye/Crlj954smMJ2gb8WeUrgflWVl1IYjHtj2IL7Qj7hI7qU4PFX/udkqqTgcqfml0LCiIOs4lCIx73TI9lMfNC40LbRA4r03iFnNT3w/l43ifIwY46w3MIlRnJqXBSlPcPxq7kf5FcWZ/k6Ey8OEDft19nU9SVeOimd1pbmnanc/kCF+ZF6Q/ryBMWjFKh/6ZuD4quQtNlEG5FFoGPaeuY2U/nkvZVwuJ/kXSkK0h5lAn0VARjhanfChZNxv+qcJOeFK2sbOW0MjgMDc5DeJ60XowSegb1CUxTVlaI1GdkfEs+C1GjvlmJrDoMJEClYMLe0d/u1SMq++lgAaE9s2vsBAVYyqNO7xXFldhPB5aElxLorq0+fWuJlV91Dz1siKFutMnZyPr1QPCIT2KbyFwineqFVqr1LB1pW3a9E9uC2L9vGDiQJrIKMDed9IfzKKzGxm185nb64/+1HGxINkILGrGrl8Y/f144paWN3/ZeCveqvdTQ1YxpA0EQ0hj89NzqxJclJdNcgX6Z8B6zqTY31oQvjRRlFrJCQk3YmDT4hPihEODX6ylXPFjdCWtqsRjDmDgr1FyWnXs+HhJygnwWqmE8xYf8FSmUzXvwZJq1sHiSNyEkqw4PNYHzsvFEGJSJTz676MNSOQaimO4CUQ7dCM3cijr/4Y0MfHZy4pdjfZwDqy1v8fzO9n+i2Cquh33Z6eEpM5GXAwXdrEGyIE9DMlx/aTGwtoXGkDFT+Rm7YOA/CCrntSzJaJNcQ3Hbt7oiA/PEjheLm5+4UhaSaRsnBcrj6bIgFnVLn2Uc0oBlDF0bay9jaNOEcqoFsIWj+AuYVVQYXFmZcLQWX/5LygLro0uXHUCkbOa7bCqgN7wYueQhAcz8aF0xro=
   template:
     metadata:
-      creationTimestamp: null
       name: azure-db-store
       namespace: dawarich

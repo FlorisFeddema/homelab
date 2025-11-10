@@ -2,7 +2,6 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: azure-db-store
   namespace: kyverno
 spec:
@@ -10,6 +9,5 @@ spec:
     AZURE_CONNECTION_STRING: AgDGAAoEDHkyslNloyd/d/X/NAlZwzNnRWyCH1KJv+hAstQd9ImRjrw8l60sw5QXl/tY/+dfR6HnQhIe5pcAdV5ObLjStoC0ZH8qN8+/x4kBmPZn4AHUsC4Gt//b0Fd/aNiNuYS0SFHcpywNTUsYUTPPHir4mI+zejYT+M13cOgcnNo6f9WjqlHYq68yFUiC0zLdZB4bnYcxLA/POSvhLI0kapWFpQx/hVjOdiIm3jQCHlubmiK7i4tcHUEAKFSNUT+F9VikAPt4W02TxtvzN0PsNSezSKhYxe26om2OfbECEjkdffBBIfBBaZP1JhlOTUfVenbupWIJOVFMX0LtXzQVtGIu2Ym1gxBsxobhWoomhQKXYgGChNyqIlijbb32CRf1lKqh3+/aKAkLxhouZd+z6JT5O4/QvhtmQzuIJj4X4hXFyeuHtIG2QiW15syTFZB5qlwCPv8XcUjnTZYoIv9lNaIZ9sPifquSYNCAd6WLy3Nu8tItSlInLQHV4ISpPZFr2CXUlrUw6ZaHRQqXwIKIsZipggjRCBmAp3yPg7Hlhs46sTmmkuZXxbjU6UlZiZ0OksiKK/wEznQP/n/KZWmx6aT+MiPi6XvLzmzWr476EAPRrkHlZplR+hA4Dz8d1WyfX0QMrHroVUT/S4EZCKWpRPqtV+lquHs0bB3odo0MMNz8/bqXe7ZXW9bCcBvZo06yGesf5pFFnZYGAHso4RKXp87QJ10jQswRiUuSV+AssmsgjPHGkSU4nfLDu/c64nDpB+Qlixb8heprbrKSTwVIcT/Lq4WRVT0JFNep3bLIDDfRUXdqUoTcWU6rE7vjThsecpsRvL0Fx/DddIYDYSToLIHEL5R06cGjw+9hJXSuoFFYzF57XwianvhI+U038Dk3wiUy8wykDg3XTBfeqR6yif1/I7rC3sBksnvhL+YycdVdWaTwlzkdkqbm8762o7Q=
   template:
     metadata:
-      creationTimestamp: null
       name: azure-db-store
       namespace: kyverno

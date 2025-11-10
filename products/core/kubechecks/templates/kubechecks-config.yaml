@@ -2,7 +2,6 @@
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
-  creationTimestamp: null
   name: kubechecks-config
   namespace: kubechecks
 spec:
@@ -14,7 +13,6 @@ spec:
     KUBECHECKS_WEBHOOK_SECRET: AgBOX9m2DWyyp8+VZgNWnzz8DtVb9jDodCP89v5GfKOtK+fzOaYTRGPrriubH+7hVUJJQhm/7UzvypDH3saThuokRlK5wQl7h/e8RbiIE6sUD1ji1ku9YvxI21DCHVGidHF4B1Sqdfn5odF/m38Fwkm3PfjgVGx6yhBU8WaQYMzCxp62nxAq8wOTB2OsMXyWeawHSHjhvNMCdJ6boMFzQYFRZ/Le/ZZsip/MptP13HMDWY06QTiZB5rSKGkAfd4kwt5rpcBQdcVeTGTM2esHVAyafYmQduNSIyeXJBvZ+2qcvhBdz29WsLZlrmX6eqOrMRg5wmzYvLSLdYwKqceAbffFenEhTieogMg0oKmjW35y7HaGhNApNpDcc1edc0nCJQGtQLINdLgSDWugYvNvkKiu5x/XbM7ZO8Bo2D2dB11nr95cxW9GcuOyE4Uq4xhwI2XRzTrvjBQaZdt1vaBZ0YWr50Jj7GiZiZ6WF+zqhAl5J+DeZNTC3ToaTgBjoSjlfHDy+EU/APAqYq1/ziISXJrZ+U5AsDrsiw7/vSygg0HQz7CXovtU3msCN3q/NrmVAgbmYwnyJToNAuLMSUVKf0Zt2UsKZvyKQVNq/XxB5xTYUE/WznNxqViImIiQUXcdMGqtUvM/ON38E6g9MxV4QvmK/hKehoBaCeYjDoEUHlKaD3ZjLYFkLPQGcLwWPlHzAYduPo8Tz871Qqkdgu1m6UhRwUvB9GA5Cy4zKeCuei5h0M5XoDzFDPGJLKYB61qnSYjrDlF4xNdeZuXCXQ0J93Q4
   template:
     metadata:
-      creationTimestamp: null
       name: kubechecks-config
       namespace: kubechecks
     type: Opaque
