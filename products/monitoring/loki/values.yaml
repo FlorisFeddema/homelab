@@ -96,9 +96,11 @@ loki:
 
   resultsCache:
     allocatedMemory: 512
+    topologySpreadConstraints: nil
 
   chunksCache:
     allocatedMemory: 512
+    topologySpreadConstraints: nil
 
   monitoring:
     dashboards:
