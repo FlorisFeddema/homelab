@@ -95,48 +95,11 @@ loki:
     replicas: 2
 
   resultsCache:
-    allocatedMemory: 512
-    topologySpreadConstraints:
-      - labelSelector:
-        matchLabels:
-          app.kubernetes.io/component: memcached-results-cache
-          app.kubernetes.io/instance: loki
-          app.kubernetes.io/name: loki
-          name: memcached-results-cache
-        maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
-      - labelSelector:
-          matchLabels:
-            app.kubernetes.io/component: memcached-results-cache
-            app.kubernetes.io/instance: loki
-            app.kubernetes.io/name: loki
-            name: memcached-results-cache
-        maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone
-        whenUnsatisfiable: ScheduleAnyway
+    enabled: false
 
   chunksCache:
-    allocatedMemory: 512
-    topologySpreadConstraints:
-      - labelSelector:
-        matchLabels:
-          app.kubernetes.io/component: memcached-chunks-cache
-          app.kubernetes.io/instance: loki
-          app.kubernetes.io/name: loki
-          name: memcached-chunks-cache
-        maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
-      - labelSelector:
-          matchLabels:
-            app.kubernetes.io/component: memcached-chunks-cache
-            app.kubernetes.io/instance: loki
-            app.kubernetes.io/name: loki
-            name: memcached-chunks-cache
-        maxSkew: 1
-        topologyKey: topology.kubernetes.io/zone
-        whenUnsatisfiable: ScheduleAnyway
+    enabled: false
+
   monitoring:
     dashboards:
       enabled: true
