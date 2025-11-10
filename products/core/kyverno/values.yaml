@@ -21,9 +21,9 @@ kyverno:
 
   features:
     mutatingAdmissionPolicyReports:
-      enabled: true
+      enabled: false # Can enable from 1.34?
     generateMutatingAdmissionPolicy:
-      enabled: true
+      enabled: false # Can enable from 1.34?
     policyExceptions:
       enabled: true
 
