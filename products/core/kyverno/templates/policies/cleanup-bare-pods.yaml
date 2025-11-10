@@ -22,7 +22,7 @@ spec:
       - key: {{`"{{ target.metadata.ownerReferences[] || '[]' }}"`}}
         operator: Equals
         value: []
-  schedule: "*/5 * * * *"
+  schedule: "* */5 * * *"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

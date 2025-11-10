@@ -27,7 +27,7 @@ spec:
       - key: {{`"{{ time_diff('{{target.metadata.creationTimestamp}}','{{ time_now_utc() }}') }}"`}}
         operator: GreaterThan
         value: "0h0m30s"
-  schedule: "*/1 * * * *"
+  schedule: "* */1 * * *"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
