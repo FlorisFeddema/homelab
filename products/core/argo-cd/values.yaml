@@ -14,6 +14,10 @@ argo-cd:
       format: json
       level: warn
 
+  crds:
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true
+
   configs:
     cm:
       create: false
@@ -113,5 +117,5 @@ argo-cd:
     enabled: false
 
   commitServer:
-    enabled: true
+    enabled: false
 
