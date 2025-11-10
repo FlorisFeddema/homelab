@@ -63,8 +63,8 @@ kyverno:
 
 policy-reporter:
   revisionHistoryLimit: 0
-  periodicSync:
-    enabled: true
+#  periodicSync:
+#    enabled: true
 
   metrics:
     enabled: true
@@ -88,11 +88,11 @@ policy-reporter:
     kyverno:
       enabled: true
       revisionHistoryLimit: 0
-      blockReports:
-        enabled: true
-        results:
-          keepOnlyLatest: true
-          source: 'Kyverno Event'
+#      blockReports:
+#        enabled: true
+#        results:
+#          keepOnlyLatest: true
+#          source: 'Kyverno Event'
 #    trivy:
 #      enabled: true
 #      revisionHistoryLimit: 0
