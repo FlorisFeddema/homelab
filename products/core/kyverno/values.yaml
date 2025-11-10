@@ -68,10 +68,10 @@ policy-reporter:
 
   metrics:
     enabled: true
-
-  database:
-    type: "postgres"
-    secretRef: "database-credentials"
+#
+#  database:
+#    type: "postgres"
+#    secretRef: "database-credentials"
 
   ui:
     enabled: true
