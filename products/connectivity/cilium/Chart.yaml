@@ -1,10 +1,10 @@
 apiVersion: v2
 name: cilium
-version: 1.0.32
+version: 1.0.33
 
 dependencies:
   - name: cilium
-    version: 1.18.3
+    version: 1.18.4
     repository: https://helm.cilium.io/
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
