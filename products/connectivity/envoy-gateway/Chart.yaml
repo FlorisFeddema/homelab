@@ -7,5 +7,5 @@ dependencies:
     version: 1.6.0
     repository: oci://docker.io/envoyproxy
   - name: gateway-addons-helm
-    version: v1.5.4
+    version: 1.6.0
     repository: oci://docker.io/envoyproxy
