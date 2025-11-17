@@ -18,7 +18,7 @@ spec:
     mode: Merge
     data: |
       listeners.tcp.default {
-        enable = false
+        enable = true
       }
       listeners.ws.default {
         enable = false
