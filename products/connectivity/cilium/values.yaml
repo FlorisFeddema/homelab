@@ -64,10 +64,6 @@ cilium:
     tls:
       auto:
         method: certmanager
-        certManagerIssuerRef:
-          group: cert-manager.io
-          kind: Issuer
-          name: hubble-issuer
     relay:
       enabled: true
       rollOutPods: true
