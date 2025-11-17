@@ -144,6 +144,7 @@ data:
       - ComplianceReport
       - InfraAssessmentReport
       - ClusterInfraAssessmentReport
+      - ExposedSecretReport
 
   resource.customizations.ignoreDifferences.argoproj.io_Application: |
     jqPathExpressions:
