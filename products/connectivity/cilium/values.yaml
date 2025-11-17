@@ -63,7 +63,7 @@ cilium:
           argocd.argoproj.io/sync-options: ServerSideApply=true
     tls:
       auto:
-        method: certmanager
+        method: cronJob
     relay:
       enabled: true
       rollOutPods: true
