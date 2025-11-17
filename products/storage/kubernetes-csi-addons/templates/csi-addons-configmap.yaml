@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: csi-addons-config
 data:
-  "reclaim-space-timeout": "5m"
+  "reclaim-space-timeout": "15m"
   "max-concurrent-reconciles": "1"
   "max-group-pvcs": "1"
