@@ -15,7 +15,7 @@ resources: {}
 image:
   registry: ghcr.io
   repository: linuxserver/prowlarr
-  tag: 2.1.5
+  tag: 2.3.0
 
 persistence:
   size: 1Gi
