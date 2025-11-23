@@ -1,4 +1,5 @@
 exporter:
+  revisionHistoryLimit: 0
   secret:
     create: false
   settings:
