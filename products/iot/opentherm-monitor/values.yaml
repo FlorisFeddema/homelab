@@ -37,7 +37,7 @@ cluster:
 
   image:
     repository: emqx/emqx
-    tag: 5.8.8
+    tag: 6.0.1
 
   listener:
     service:
