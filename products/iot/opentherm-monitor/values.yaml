@@ -5,11 +5,12 @@ gatus-monitor:
   privateEndpoints:
     - name: opentherm-gateway
 
-route:
-  enabled: true
-  hostnames:
-    - opentherm-gateway.feddema.dev
-  parentRefs:
-    - name: envoy-gateway-public
-      namespace: envoy-gateway
-      sectionName: web-https
+opentherm-monitor:
+  route:
+    enabled: true
+    hostnames:
+      - opentherm-gateway.feddema.dev
+    parentRefs:
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
