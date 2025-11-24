@@ -104,7 +104,7 @@ loki:
     dashboards:
       enabled: true
     rules:
-      enabled: true
+      enabled: false
     serviceMonitor:
       enabled: true
       metricsInstance:
