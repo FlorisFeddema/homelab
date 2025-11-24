@@ -98,6 +98,9 @@ products:
     emqx:
       deploy: true
       autoSync: true
+    openthermMonitor:
+      deploy: true
+      autoSync: true
     zigbee2mqtt:
       deploy: true
       nameOverride: zigbee2mqtt

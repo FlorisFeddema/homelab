@@ -1,0 +1,11 @@
+apiVersion: v2
+name: opentherm-monitor
+version: 1.0.0
+
+dependencies:
+  - name: opentherm-monitor
+    version: 1.0.0-add-opentherm-monitor-chart
+    repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0

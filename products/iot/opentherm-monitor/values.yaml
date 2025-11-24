@@ -1,0 +1,52 @@
+gatus-monitor:
+  appName: emqx
+  publicEndpoints:
+    - name: emqx
+  privateEndpoints:
+    - name: emqx
+
+route:
+  enabled: true
+  hostnames:
+    - emqx.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+
+emqx-operator:
+  revisionHistoryLimit: 0
+  replicaCount: 1
+
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 20m
+      memory: 64Mi
+
+cluster:
+  replicas: 3
+
+  replicant:
+    replicas: 0
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 500Mi
+
+  image:
+    repository: emqx/emqx
+    tag: 5.8.8
+
+  listener:
+    service:
+      enabled: true
+      type: LoadBalancer
+      hostname: mqtt.feddema.dev
+      externalTrafficPolicy: Local
+
+  certificate:
+    domain: mqtt.feddema.dev
+    issuer: letsencrypt-dns
+
