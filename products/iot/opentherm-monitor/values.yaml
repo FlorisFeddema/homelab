@@ -1,15 +1,15 @@
 gatus-monitor:
-  appName: opentherm-gateway
+  appName: opentherm-monitor
   publicEndpoints:
-    - name: opentherm-gateway
+    - name: opentherm-monitor
   privateEndpoints:
-    - name: opentherm-gateway
+    - name: opentherm-monitor
 
 opentherm-monitor:
   route:
     enabled: true
     hostnames:
-      - opentherm-gateway.feddema.dev
+      - opentherm-monitor.feddema.dev
     parentRefs:
       - name: envoy-gateway-public
         namespace: envoy-gateway
