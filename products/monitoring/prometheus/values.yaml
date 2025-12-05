@@ -193,11 +193,6 @@ kube-prometheus-stack:
     revisionHistoryLimit: 0
     rbac:
       extraRules:
-        - apiGroups: [customresourcedefinitions.apiextensions.k8s.io]
-          resources: [customresourcedefinitions]
-          verbs:
-            - list
-            - watch
         - apiGroups:
             - autoscaling.k8s.io
           resources:
