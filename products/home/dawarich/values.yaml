@@ -52,24 +52,3 @@ dawarich:
         memory: 400Mi
       limits:
         memory: 800Mi
-
-  redis:
-    master:
-      resources:
-        requests:
-          cpu: 80m
-          memory: 150Mi
-        limits:
-          memory: 300Mi
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - weight: 100
-              podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    app.kubernetes.io/instance: dawarich
-                    app.kubernetes.io/managed-by: Helm
-                    app.kubernetes.io/name: dawarich
-                    app.kubernetes.io/part-of: dawarich
-                topologyKey: "kubernetes.io/hostname"
