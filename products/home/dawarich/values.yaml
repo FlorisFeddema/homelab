@@ -52,3 +52,12 @@ dawarich:
         memory: 400Mi
       limits:
         memory: 800Mi
+
+  config:
+    oidc:
+      enabled: true
+      autoRegister: true
+      providerName: Authentik
+      issuerUrl: https://authentik.feddema.dev/application/o/dawarich/
+      clientId: VMg5Qzbuu4jbhdZaP1QFGGsJsCAc1qFpSq3iO8kH
+      secretName: oidc-credentials
