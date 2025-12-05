@@ -53,6 +53,7 @@ dawarich:
       limits:
         memory: 800Mi
 
+  hostname: dawarich.feddema.dev
   config:
     oidc:
       enabled: true
