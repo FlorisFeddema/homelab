@@ -49,7 +49,7 @@ dawarich:
     resources:
       requests:
         cpu: 100m
-        memory: 600Mi
+        memory: 1000Mi
       limits:
         memory: 1000Mi
 
