@@ -49,9 +49,9 @@ dawarich:
     resources:
       requests:
         cpu: 100m
-        memory: 1000Mi
+        memory: 2000Mi
       limits:
-        memory: 1000Mi
+        memory: 2000Mi
 
   hostname: dawarich.feddema.dev
   config:
