@@ -48,19 +48,19 @@ dawarich:
   app:
     resources:
       requests:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 100m
+        memory: 400Mi
       limits:
-        memory: 512Mi
+        memory: 800Mi
 
   redis:
     master:
       resources:
         requests:
-          cpu: 200m
-          memory: 250Mi
+          cpu: 80m
+          memory: 150Mi
         limits:
-          memory: 500Mi
+          memory: 300Mi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
