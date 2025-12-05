@@ -42,17 +42,6 @@ dawarich:
       storageClass: ceph-block-nvme-1
       size: 20Gi
 
-  ingress:
-    enabled: false
-
-  app:
-    resources:
-      requests:
-        cpu: 100m
-        memory: 2000Mi
-      limits:
-        memory: 2000Mi
-
   hostname: dawarich.feddema.dev
   config:
     oidc:
