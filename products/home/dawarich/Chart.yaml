@@ -1,11 +1,11 @@
 apiVersion: v2
 name: dawarich
-version: 1.0.38
+version: 1.0.39
 
 
 dependencies:
   - name: dawarich
-    version: 9.3.2
+    version: 9.3.3
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
