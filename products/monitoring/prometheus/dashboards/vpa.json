@@ -518,7 +518,6 @@
     }
   ],
   "preload": false,
-  "refresh": "10s",
   "schemaVersion": 42,
   "tags": [
     "Autoscaling",
@@ -561,10 +560,6 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "adguard",
-          "value": "adguard"
-        },
         "datasource": {
           "uid": "${DS_PROMETHEUS}"
         },
@@ -582,10 +577,6 @@
         "type": "query"
       },
       {
-        "current": {
-          "text": "adguard-primary",
-          "value": "adguard-primary"
-        },
         "datasource": {
           "uid": "${DS_PROMETHEUS}"
         },
@@ -605,7 +596,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
