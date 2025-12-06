@@ -145,6 +145,11 @@ data:
       - InfraAssessmentReport
       - ClusterInfraAssessmentReport
       - ExposedSecretReport
+    ### Ignore VPA resources to reduce watched events and UI clutter
+    - apiGroups:
+      - autoscaling.k8s.io
+      kinds:
+      - VerticalPodAutoscaler
 
   resource.customizations.ignoreDifferences.argoproj.io_Application: |
     jqPathExpressions:
