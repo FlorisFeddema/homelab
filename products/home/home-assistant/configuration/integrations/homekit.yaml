@@ -9,6 +9,8 @@ homekit:
       - switch.diningroom_switch_1
       - switch.livingroom_switch_1
       - switch.office_switch_1
+      - switch.tv_smartplug
+      - switch.desklamp_office
     exclude_entities:
       - sensor.hacs
     exclude_entity_globs:
