@@ -95,6 +95,11 @@ data:
       - SelfSubjectAccessReview
       - SelfSubjectRulesReview
       - SubjectAccessReview
+    ### History resources excluded reduce the number of watched events and UI Clutter
+    - apiGroups:
+      - apps
+      kinds:
+      - ControllerRevision
     ### Intermediate Certificate Request excluded reduce the number of watched events
     - apiGroups:
       - certificates.k8s.io
