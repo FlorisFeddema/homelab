@@ -191,6 +191,8 @@ kube-prometheus-stack:
 
   kube-state-metrics:
     revisionHistoryLimit: 0
+    metricLabelsAllowlist:
+      - nodes=[topology.kubernetes.io/zone]
     rbac:
       extraRules:
         - apiGroups:
