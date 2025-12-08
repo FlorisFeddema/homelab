@@ -262,6 +262,9 @@ rook-ceph-cluster:
 
     placement:
       mon:
+        tolerations:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
         topologySpreadConstraints:
           - maxSkew: 1
             topologyKey: topology.kubernetes.io/zone
