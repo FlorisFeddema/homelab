@@ -267,13 +267,6 @@ rook-ceph-cluster:
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: DoNotSchedule
         nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: kubernetes.io/arch
-                    operator: In
-                    values:
-                      - amd64
           preferredDuringSchedulingIgnoredDuringExecution:
             - weight: 50
               preference:
@@ -343,7 +336,7 @@ rook-ceph-cluster:
       mon:
         requests:
           cpu: 1000m
-          memory: 1Gi
+          memory: 1300Mi
         limits:
           memory: 2500Mi
       osd:
