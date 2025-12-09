@@ -21,7 +21,10 @@ vpa:
       requests:
         cpu: 10m
         memory: 80Mi
-
+    image:
+      repository: registry.k8s.io/autoscaling/vpa-recommender
+      tag: "1.5.1"
+      
   updater:
     enabled: true
     revisionHistoryLimit: 0
@@ -34,7 +37,10 @@ vpa:
       requests:
         cpu: 10m
         memory: 80Mi
-
+    image:
+      repository: registry.k8s.io/autoscaling/vpa-updater
+      tag: "1.5.1"
+      
   admissionController:
     revisionHistoryLimit: 0
     enabled: true
@@ -49,3 +55,6 @@ vpa:
       requests:
         cpu: 10m
         memory: 80Mi
+    image:
+      repository: registry.k8s.io/autoscaling/vpa-admission-controller
+      tag: "1.5.1"
