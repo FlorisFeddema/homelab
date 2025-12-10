@@ -1,54 +1,60 @@
-vertical-pod-autoscaler:
-  podSecurityContext:
-    runAsNonRoot: true
-    runAsUser: 65534
-    seccompProfile:
-      type: RuntimeDefault
-
-  containerSecurityContext:
-    allowPrivilegeEscalation: false
-    privileged: false
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop:
-      - ALL
-
-  admissionController:
-    resources:
-      limits:
-        cpu: null
-        memory: 100Mi
-      requests:
-        cpu: 20m
-        memory: 50Mi
-
-    tls:
-      existingSecret: vpa-tls-certs
-
+vpa:
   recommender:
+    enabled: true
+    revisionHistoryLimit: 0
     extraArgs:
-    - "--pod-recommendation-min-cpu-millicores=5"
-    - "--pod-recommendation-min-memory-mb=10"
-    - "--prometheus-address=http://http://prometheus-thanos-query.prometheus:9090"
-    - "--storage=prometheus"
-    - "--history-length=7d"
-    - "--history-resolution=15m"
-    - "--round-cpu-millicores=5"
-    - "--round-memory-bytes=10485760" # 10MiB
-
+      v: "4"
+      pod-recommendation-min-cpu-millicores: '10'
+      pod-recommendation-min-memory-mb: '25'
+      round-cpu-millicores: '10'
+      round-memory-bytes: '26214400' # 25MiB
+      prometheus-address: http://prometheus-thanos-query.prometheus:9090
+      storage: prometheus
+      history-length: 5d
+      history-resolution: 30m
+    replicaCount: 2
+    podMonitor:
+      enabled: true
     resources:
       limits:
-        memory: 140Mi
+        memory: 120Mi
       requests:
-        cpu: 20m
-        memory: 70Mi
+        cpu: 10m
+        memory: 80Mi
+    image:
+      repository: registry.k8s.io/autoscaling/vpa-recommender
+      tag: "1.5.1"
 
   updater:
+    enabled: true
+    revisionHistoryLimit: 0
+    replicaCount: 2
+    podMonitor:
+      enabled: true
     resources:
       limits:
-        memory: 100Mi
+        memory: 120Mi
       requests:
-        cpu: 20m
-        memory: 50Mi
+        cpu: 10m
+        memory: 80Mi
+    image:
+      repository: registry.k8s.io/autoscaling/vpa-updater
+      tag: "1.5.1"
 
-
+  admissionController:
+    revisionHistoryLimit: 0
+    enabled: true
+    generateCertificate: true
+    registerWebhook: true
+    replicaCount: 2
+    podMonitor:
+      enabled: true
+    resources:
+      limits:
+        memory: 120Mi
+      requests:
+        cpu: 10m
+        memory: 80Mi
+    image:
+      repository: registry.k8s.io/autoscaling/vpa-admission-controller
+      tag: "1.5.1"
