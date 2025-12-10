@@ -12,4 +12,4 @@ spec:
   issuerRef:
     kind: Issuer
     name: vpa-issuer
-  secretName: vpa-admission-controller-secret
+  secretName: vpa-tls-certs

@@ -23,7 +23,7 @@ vertical-pod-autoscaler:
         memory: 50Mi
 
     tls:
-      existingSecret: vpa-admission-controller-secret
+      existingSecret: vpa-tls-certs
 
   recommender:
     extraArgs:
