@@ -17,10 +17,10 @@ vpa:
       enabled: true
     resources:
       limits:
-        memory: 120Mi
+        memory: 100Mi
       requests:
         cpu: 10m
-        memory: 80Mi
+        memory: 50Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-recommender
       tag: "1.5.1"
@@ -36,7 +36,7 @@ vpa:
         memory: 120Mi
       requests:
         cpu: 10m
-        memory: 80Mi
+        memory: 50Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-updater
       tag: "1.5.1"
@@ -51,10 +51,10 @@ vpa:
       enabled: true
     resources:
       limits:
-        memory: 120Mi
+        memory: 100Mi
       requests:
         cpu: 10m
-        memory: 80Mi
+        memory: 50Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-admission-controller
       tag: "1.5.1"
