@@ -29,8 +29,12 @@ vertical-pod-autoscaler:
     extraArgs:
     - "--pod-recommendation-min-cpu-millicores=5"
     - "--pod-recommendation-min-memory-mb=10"
-    - "--prometheus-address=http://prometheus-prometheus.prometheus.svc.cluster.local:9090"
+    - "--prometheus-address=http://http://prometheus-thanos-query.prometheus:9090"
     - "--storage=prometheus"
+    - "--history-length=7d"
+    - "--history-resolution=15m"
+    - "--round-cpu-millicores=5"
+    - "--round-memory-bytes=10485760" # 10MiB
 
     resources:
       limits:
@@ -46,3 +50,5 @@ vertical-pod-autoscaler:
       requests:
         cpu: 20m
         memory: 50Mi
+
+
