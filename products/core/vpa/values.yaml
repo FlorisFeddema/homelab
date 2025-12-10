@@ -10,8 +10,8 @@ vpa:
       round-memory-bytes: '26214400' # 25MiB
       prometheus-address: http://prometheus-thanos-query.prometheus:9090
       storage: prometheus
-      history-length: 5d
-      history-resolution: 30m
+      history-length: 8d
+      history-resolution: 15m
     replicaCount: 2
     podMonitor:
       enabled: true
