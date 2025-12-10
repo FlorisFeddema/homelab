@@ -1,60 +1,48 @@
-vpa:
-  recommender:
-    enabled: true
-    revisionHistoryLimit: 0
-    extraArgs:
-      v: "4"
-      pod-recommendation-min-cpu-millicores: '10'
-      pod-recommendation-min-memory-mb: '25'
-      round-cpu-millicores: '10'
-      round-memory-bytes: '26214400' # 25MiB
-      prometheus-address: http://prometheus-thanos-query.prometheus:9090
-      storage: prometheus
-      history-length: 5d
-      history-resolution: 30m
-    replicaCount: 2
-    podMonitor:
-      enabled: true
-    resources:
-      limits:
-        memory: 120Mi
-      requests:
-        cpu: 10m
-        memory: 80Mi
-    image:
-      repository: registry.k8s.io/autoscaling/vpa-recommender
-      tag: "1.5.1"
-      
-  updater:
-    enabled: true
-    revisionHistoryLimit: 0
-    replicaCount: 2
-    podMonitor:
-      enabled: true
-    resources:
-      limits:
-        memory: 120Mi
-      requests:
-        cpu: 10m
-        memory: 80Mi
-    image:
-      repository: registry.k8s.io/autoscaling/vpa-updater
-      tag: "1.5.1"
-      
+vertical-pod-autoscaler:
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 65534
+    seccompProfile:
+      type: RuntimeDefault
+
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+      - ALL
+
   admissionController:
-    revisionHistoryLimit: 0
-    enabled: true
-    generateCertificate: true
-    registerWebhook: true
-    replicaCount: 2
-    podMonitor:
-      enabled: true
     resources:
       limits:
-        memory: 120Mi
+        cpu: null
+        memory: 100Mi
       requests:
-        cpu: 10m
-        memory: 80Mi
-    image:
-      repository: registry.k8s.io/autoscaling/vpa-admission-controller
-      tag: "1.5.1"
+        cpu: 20m
+        memory: 50Mi
+
+    tls:
+      existingSecret: vpa-admission-controller-secret
+
+  recommender:
+    extraArgs:
+    - "--pod-recommendation-min-cpu-millicores=5"
+    - "--pod-recommendation-min-memory-mb=10"
+    - "--prometheus-address=http://prometheus-prometheus.prometheus.svc.cluster.local:9090"
+    - "--storage=prometheus"
+
+    resources:
+      limits:
+        memory: 140Mi
+      requests:
+        cpu: 20m
+        memory: 70Mi
+
+  updater:
+    resources:
+      limits:
+        memory: 100Mi
+      requests:
+        cpu: 20m
+        memory: 50Mi
