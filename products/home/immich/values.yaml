@@ -5,7 +5,6 @@ gatus-monitor:
   privateEndpoints:
     - name: immich
 
-
 immich:
   persistence:
     size: 200Gi

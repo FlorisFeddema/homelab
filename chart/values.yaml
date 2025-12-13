@@ -91,6 +91,9 @@ products:
     immich:
       deploy: true
       autoSync: true
+    mealie:
+      deploy: true
+      autoSync: true
     nextcloud:
       deploy: true
       autoSync: true

@@ -1,0 +1,8 @@
+apiVersion: v2
+name: mealie
+version: 1.0.0
+
+dependencies:
+  - name: mealie
+    version: 1.0.0-add-mealie-chart
+    repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
