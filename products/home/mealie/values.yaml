@@ -11,12 +11,12 @@ mealie:
         namespace: envoy-gateway
         sectionName: web-https
 
-config:
-   baseUrl: mealie.feddema.dev
-   oidc:
-     enabled: true
-     configurationUrl: https://authentik.feddema.dev/application/o/mealie/.well-known/openid-configuration
-     clientId: PN9nh2X3931XH3BlVftMzBgECN3jheULqy5hP2E9
-     clientSecretName: mealie-oidc-secret
-     providerName: Authentik
-     userGroup: 'Admins'
+  config:
+    baseUrl: mealie.feddema.dev
+    oidc:
+      enabled: true
+      configurationUrl: https://authentik.feddema.dev/application/o/mealie/.well-known/openid-configuration
+      clientId: PN9nh2X3931XH3BlVftMzBgECN3jheULqy5hP2E9
+      clientSecretName: mealie-oidc-secret
+      providerName: Authentik
+      userGroup: 'Admins'
