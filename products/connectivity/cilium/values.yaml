@@ -113,6 +113,12 @@ cilium:
 
   monitor:
     enabled: true
+    resources:
+      requests:
+        cpu: 50Mi
+        memory: 30Mi
+      limits:
+        memory: 60Mi
   prometheus:
     metricsService: true
     enabled: true
