@@ -41,8 +41,8 @@ external-dns:
     limits:
       memory: 50Mi
     requests:
-      cpu: 10m
-      memory: 30Mi
+      cpu: 20m
+      memory: 25Mi
 
   metrics:
     enabled: true

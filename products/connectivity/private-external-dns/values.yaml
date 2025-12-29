@@ -27,6 +27,12 @@ external-dns:
       ports:
         - containerPort: 8080
           name: metrics
+      resources:
+        limits:
+          memory: 50Mi
+        requests:
+          cpu: 20m
+          memory: 25Mi
       livenessProbe:
         httpGet:
           path: /healthz
@@ -77,8 +83,8 @@ external-dns:
     limits:
       memory: 50Mi
     requests:
-      cpu: 10m
-      memory: 30Mi
+      cpu: 20m
+      memory: 25Mi
 
   metrics:
     enabled: true
