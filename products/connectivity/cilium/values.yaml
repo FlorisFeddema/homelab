@@ -21,12 +21,25 @@ cilium:
   kubeProxyReplacement: true
   rollOutCiliumPods: true
 
+  resources:
+    requests:
+      cpu: 200m
+      memory: 400Mi
+    limits:
+      memory: 600Mi
+
   envoy:
     rollOutPods: true
     prometheus:
       enabled: true
       serviceMonitor:
         enabled: true
+    resources:
+      requests:
+        cpu: 20m
+        memory: 50Mi
+      limits:
+        memory: 100Mi
 
   ipam:
     mode: kubernetes
@@ -67,6 +80,12 @@ cilium:
     relay:
       enabled: true
       rollOutPods: true
+      resources:
+        requests:
+          cpu: 50m
+          memory: 50Mi
+        limits:
+          memory: 100Mi
       prometheus:
         enabled: true
         serviceMonitor:
@@ -74,6 +93,20 @@ cilium:
     ui:
       enabled: true
       rollOutPods: true
+      backend:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 25Mi
+          limits:
+            memory: 50Mi
+      fronend:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 25Mi
+          limits:
+            memory: 50Mi
 
   socketLB:
     hostNamespaceOnly: true
@@ -100,3 +133,9 @@ cilium:
       enabled: true
       annotations:
         argocd.argoproj.io/sync-options: ServerSideApply=true
+    resources:
+      requests:
+        cpu: 100m
+        memory: 80Mi
+      limits:
+        memory: 160Mi
