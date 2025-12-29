@@ -57,6 +57,19 @@ adguard:
     ingress:
       enabled: false
 
+    resources:
+      requests:
+        cpu: 100m
+        memory: 150Mi
+      limits:
+        memory: 300Mi
+    sync:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 150Mi
+        limits:
+          memory: 300Mi
     route:
       enabled: true
       hostnames:
@@ -79,7 +92,7 @@ adguard:
     resources:
       requests:
         cpu: 100m
-        memory: 250Mi
+        memory: 400Mi
       limits:
         memory: 800Mi
     service:
