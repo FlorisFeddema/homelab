@@ -115,7 +115,7 @@ cilium:
     enabled: true
     resources:
       requests:
-        cpu: 50Mi
+        cpu: 50m
         memory: 30Mi
       limits:
         memory: 60Mi
