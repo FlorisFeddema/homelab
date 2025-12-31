@@ -10,7 +10,12 @@ spegel:
         - ALL
     readOnlyRootFilesystem: true
 
-  resources: { }
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      cpu: 75m
+      memory: 50Mi
 
   serviceMonitor:
     enabled: true
