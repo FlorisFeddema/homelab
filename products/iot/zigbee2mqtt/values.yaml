@@ -8,7 +8,7 @@ gatus-monitor:
 image:
   registry: docker.io
   repository: koenkk/zigbee2mqtt
-  tag: 2.7.1
+  tag: 2.7.2
 
 resources:
   limits:
