@@ -3,10 +3,11 @@ descheduler:
   deschedulingInterval: 5m
   resources:
     requests:
-      cpu: 30m
-      memory: 128Mi
+      cpu: 20m
+      memory: 50Mi
     limits:
       cpu: null
+      memory: 100Mi
 
   service:
     enabled: true
