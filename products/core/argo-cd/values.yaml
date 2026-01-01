@@ -38,10 +38,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 2048Mi
+        memory: 2Gi
       requests:
-        cpu: 130m
-        memory: 512Mi
+        cpu: 300m
+        memory: 1Gi
 
     metrics:
       enabled: true
@@ -56,10 +56,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 256Mi
+        memory: 100Mi
       requests:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 30m
+        memory: 50Mi
 
     exporter:
       enabled: false
@@ -78,10 +78,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 512Mi
+        memory: 300Mi
       requests:
-        cpu: 70m
-        memory: 128Mi
+        cpu: 150m
+        memory: 150Mi
 
     metrics:
       enabled: true
@@ -97,10 +97,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 1024Mi
+        memory: 300Mi
       requests:
-        cpu: 50m
-        memory: 256Mi
+        cpu: 100m
+        memory: 150Mi
 
     metrics:
       enabled: true
