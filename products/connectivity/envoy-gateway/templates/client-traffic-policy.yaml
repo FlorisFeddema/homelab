@@ -24,8 +24,8 @@ spec:
       set:
         - name: "strict-transport-security"
           value: "max-age=31536000; includeSubDomains; preload"
-        - name: "content-security-policy"
-          value: "default-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+{{/*        - name: "content-security-policy"*/}}
+{{/*          value: "default-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"*/}}
         - name: "permissions-policy"
           value: "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
         - name: "referrer-policy"
