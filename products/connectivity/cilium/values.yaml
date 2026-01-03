@@ -23,10 +23,10 @@ cilium:
 
   resources:
     requests:
-      cpu: 200m
-      memory: 400Mi
+      cpu: 250m
+      memory: 450Mi
     limits:
-      memory: 600Mi
+      memory: 700Mi
 
   envoy:
     rollOutPods: true
