@@ -1,10 +1,10 @@
 apiVersion: v2
 name: home-assistant
-version: 2.0.92
+version: 2.0.93
 
 dependencies:
   - name: home-assistant
-    version: 2.1.5
+    version: 2.2.0
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
