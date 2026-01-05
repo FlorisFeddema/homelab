@@ -4,7 +4,7 @@ version: 1.0.23
 
 dependencies:
   - name: gatus
-    version: 2.1.0-copilot-add-k8s-probes-to-gatus
+    version: 2.1.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
