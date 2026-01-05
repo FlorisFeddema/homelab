@@ -13,10 +13,12 @@ mealie:
 
   config:
     baseUrl: mealie.feddema.dev
+    allowSignups: false
+    allowPasswordLogin: false
     oidc:
       enabled: true
       configurationUrl: https://authentik.feddema.dev/application/o/mealie/.well-known/openid-configuration
       clientId: PN9nh2X3931XH3BlVftMzBgECN3jheULqy5hP2E9
       clientSecretName: mealie-oidc-secret
       providerName: Authentik
-      userGroup: 'Admins'
+      adminGroup: 'Admins'
