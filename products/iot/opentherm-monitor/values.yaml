@@ -11,6 +11,6 @@ opentherm-monitor:
     hostnames:
       - opentherm-monitor.feddema.dev
     parentRefs:
-      - name: envoy-gateway-public
+      - name: envoy-gateway
         namespace: envoy-gateway
         sectionName: web-https
