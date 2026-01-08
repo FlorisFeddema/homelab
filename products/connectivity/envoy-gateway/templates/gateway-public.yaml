@@ -1,7 +1,7 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: envoy-gateway-public
+  name: envoy-gateway
   annotations:
     'cert-manager.io/revision-history-limit': "1"
     'cert-manager.io/cluster-issuer': letsencrypt-dns
@@ -16,7 +16,7 @@ spec:
     parametersRef:
       group: gateway.envoyproxy.io
       kind: EnvoyProxy
-      name: envoy-gateway-public
+      name: envoy-gateway
   listeners:
    - name: web-https
      protocol: HTTPS
