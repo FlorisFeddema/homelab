@@ -14,11 +14,11 @@ gateway-helm:
       logging:
         level:
           default: warn
-    provider:
-      type: Kubernetes
-      kubernetes:
-        deploy:
-          type: GatewayNamespace
+      provider:
+        type: Kubernetes
+        kubernetes:
+          deploy:
+            type: GatewayNamespace
 
 
 gateway-addons-helm:
