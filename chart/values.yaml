@@ -184,7 +184,7 @@ products:
       autoSync: true
     harbor:
       deploy: true
-      autoSync: false
+      autoSync: true
     rookCeph:
       deploy: true
       autoSync: false
