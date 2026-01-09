@@ -8,19 +8,20 @@
 logger:
   default: warning
 
-  filters:
-    homeassistant:
-      # This can happen during restart having Ingress tabs open.
-      # I really don't care about it.
-      - "Error doing job: Task exception was never retrieved"
+  filters:filters:
+    # NOTE: Cannot filter homeassistant.loader logs as this component loads integrations
+    # (including the logger integration), so logger settings are not yet active when these
+    # logs are generated during startup. We must accept these warning messages.
 
-    homeassistant.loader:
-      # Really? Cool... I know... I installed them...
-      - "We found a custom integration"
-
-    homeassistant.util.yaml.loader:
-      # I use YAML anchors and aliasses, causing duplicate keys in YAML.
-      # For this use-case, that is on purpose, as an alias is used, but
-      # with some overrides.
-      # While a good warning, I'm going to disable it.
-      - "contains duplicate key"
+    homeassistant.components.mqtt.entity:
+      # Suppress MQTT entity deprecated object_id warnings for all entity types
+      - '^The configuration for entity (binary_sensor|button|camera|number|select|sensor|switch|vacuum)\.valetudo_robin(_[A-Za-z0-9_]+)? uses the deprecated option `object_id` to set the default entity id'
+    homeassistant.components.mqtt.light.schema_json:
+      - '^Invalid color mode ''hs'' received for entity light\.[A-Za-z0-9_.-]+$'
+    custom_components.versatile_thermostat.prop_algorithm:
+      - '^.*Thermostat - Proportional algorithm: calculation is not possible cause target_temp \([0-9]+(?:\.[0-9]+)?\) or current_temp \(None\) is null\. Heating/cooling will be disabled\. This could be normal at startup$'
+    custom_components.versatile_thermostat.thermostat_climate:
+      # Suppress startup logs when thermostats come back to life from unknown state
+      - '^VersatileThermostat-.* - underlying .* come back to life\. .* old_state=unknown\.'
+    homeassistant.components.dhcp:
+      - '^The deprecated constant DhcpServiceInfo was used from [A-Za-z0-9_.-]+\. It will be removed in HA Core [0-9]+\.[0-9]+\. Use homeassistant\.helpers\.service_info\.dhcp\.DhcpServiceInfo instead, please report it to the author of the .* custom integration$'

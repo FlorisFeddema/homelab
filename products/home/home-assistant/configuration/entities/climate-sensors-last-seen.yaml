@@ -1,0 +1,66 @@
+sensor:
+  - name: "Office Temperature Last Seen"
+    unique_id: "office_temperature_last_seen"
+    device_class: timestamp
+    state: >
+      {% set s = states('sensor.office_temperature_temperature') %}
+      {% if s not in ['unknown','unavailable','none',''] %}
+        {{ states.sensor.office_temperature.last_updated }}
+      {% else %}
+        {{ none }}
+      {% endif %}
+
+  - name: "Attic Temperature Last Seen"
+    unique_id: "attic_temperature_last_seen"
+    device_class: timestamp
+    state: >
+      {% set s = states('sensor.attic_temperature_temperature') %}
+      {% if s not in ['unknown','unavailable','none',''] %}
+        {{ states.sensor.attic_temperature.last_updated }}
+      {% else %}
+        {{ none }}
+      {% endif %}
+
+  - name: "Bedroom Temperature Last Seen"
+    unique_id: "bedroom_temperature_last_seen"
+    device_class: timestamp
+    state: >
+      {% set s = states('sensor.bedroom_temperature_temperature') %}
+      {% if s not in ['unknown','unavailable','none',''] %}
+        {{ states.sensor.bedroom_temperature.last_updated }}
+      {% else %}
+        {{ none }}
+      {% endif %}
+
+  - name: "Bathroom Temperature Last Seen"
+    unique_id: "bathroom_temperature_last_seen"
+    device_class: timestamp
+    state: >
+      {% set s = states('sensor.bathroom_temperature_temperature') %}
+      {% if s not in ['unknown','unavailable','none',''] %}
+        {{ states.sensor.bathroom_temperature.last_updated }}
+      {% else %}
+        {{ none }}
+      {% endif %}
+
+  - name: "Livingroom Temperature Last Seen"
+    unique_id: "livingroom_temperature_last_seen"
+    device_class: timestamp
+    state: >
+      {% set s = states('sensor.livingroom_temperature_temperature') %}
+      {% if s not in ['unknown','unavailable','none',''] %}
+        {{ states.sensor.livingroom_temperature.last_updated }}
+      {% else %}
+        {{ none }}
+      {% endif %}
+
+  - name: "Serverroom Temperature Last Seen"
+    unique_id: "serverroom_temperature_last_seen"
+    device_class: timestamp
+    state: >
+      {% set s = states('sensor.serverroom_temperature_temperature') %}
+      {% if s not in ['unknown','unavailable','none',''] %}
+        {{ states.sensor.serverroom_temperature.last_updated }}
+      {% else %}
+        {{ none }}
+      {% endif %}
