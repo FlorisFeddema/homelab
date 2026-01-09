@@ -8,7 +8,7 @@
 logger:
   default: warning
 
-  filters:filters:
+  filters:
     # NOTE: Cannot filter homeassistant.loader logs as this component loads integrations
     # (including the logger integration), so logger settings are not yet active when these
     # logs are generated during startup. We must accept these warning messages.
