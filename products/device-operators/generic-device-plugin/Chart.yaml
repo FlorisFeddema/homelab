@@ -1,8 +1,8 @@
 apiVersion: v2
 name: generic-device-plugin
-version: 1.0.24
+version: 1.0.25
 
 dependencies:
   - name: generic-device-plugin
-    version: 1.27.0
+    version: 1.28.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
