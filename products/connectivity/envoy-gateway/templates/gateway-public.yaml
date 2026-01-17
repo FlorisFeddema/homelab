@@ -7,10 +7,10 @@ metadata:
     'cert-manager.io/cluster-issuer': letsencrypt-dns
 spec:
   addresses:
-    - value: 95.98.178.131
-      type: IPAddress
-{{/*    - value: 192.168.102.30*/}}
+{{/*    - value: 95.98.178.131*/}}
 {{/*      type: IPAddress*/}}
+    - value: 192.168.102.30
+      type: IPAddress
   gatewayClassName: envoy-gateway
   infrastructure:
     parametersRef:
