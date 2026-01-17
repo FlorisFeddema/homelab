@@ -7,7 +7,6 @@ metadata:
     policies.kyverno.io/category: GitOps
     policies.kyverno.io/description: Ensure all Deployments, StatefulSets, and DaemonSets have revisionHistoryLimit set to 0 to avoid retaining old ReplicaSets and Pods.
 spec:
-  mutateExistingOnPolicyUpdate: true
   rules:
     - name: set-revisionhistorylimit-zero
       match:
