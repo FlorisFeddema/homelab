@@ -11,15 +11,14 @@ gateway-helm:
 
   config:
     envoyGateway:
+      provider:
+        type: Kubernetes
+        kubernetes:
+          deploy:
+            type: GatewayNamespace
       logging:
         level:
           default: warn
-#      provider:
-#        type: Kubernetes
-#        kubernetes:
-#          deploy:
-#            type: GatewayNamespace
-
 
 gateway-addons-helm:
   grafana:

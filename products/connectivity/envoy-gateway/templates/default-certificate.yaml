@@ -1,17 +1,17 @@
-kind: Certificate
-apiVersion: cert-manager.io/v1
-metadata:
-  name: default-tls-certificate
-spec:
-  secretName: default-tls-certificate
-  dnsNames:
-    - "*.feddema.dev"
-    - "feddema.dev"
-  issuerRef:
-    group: cert-manager.io
-    kind: ClusterIssuer
-    name: letsencrypt-dns
-  revisionHistoryLimit: 1
-  usages:
-    - digital signature
-    - key encipherment
+{{/*kind: Certificate*/}}
+{{/*apiVersion: cert-manager.io/v1*/}}
+{{/*metadata:*/}}
+{{/*  name: default-tls-certificate*/}}
+{{/*spec:*/}}
+{{/*  secretName: default-tls-certificate*/}}
+{{/*  dnsNames:*/}}
+{{/*    - "*.feddema.dev"*/}}
+{{/*    - "feddema.dev"*/}}
+{{/*  issuerRef:*/}}
+{{/*    group: cert-manager.io*/}}
+{{/*    kind: ClusterIssuer*/}}
+{{/*    name: letsencrypt-dns*/}}
+{{/*  revisionHistoryLimit: 1*/}}
+{{/*  usages:*/}}
+{{/*    - digital signature*/}}
+{{/*    - key encipherment*/}}
