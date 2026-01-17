@@ -18,7 +18,7 @@ gateway-helm:
             type: GatewayNamespace
       logging:
         level:
-          default: warn
+          default: info
 
 gateway-addons-helm:
   grafana:
