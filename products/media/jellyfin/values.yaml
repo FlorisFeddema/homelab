@@ -21,7 +21,7 @@ resourceClaims:
 image:
   registry: ghcr.io
   repository: jellyfin/jellyfin
-  tag: 10.11.5
+  tag: 10.11.6
 
 persistence:
   size: 4Gi
