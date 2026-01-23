@@ -16,6 +16,9 @@ gateway-helm:
           default: info
 
 gateway-addons-helm:
+  dashboard:
+    labels:
+      grafana_dashboard: "1"
   grafana:
     enabled: false
   prometheus:
