@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kyverno
-version: 1.0.28
+version: 1.0.29
 
 dependencies:
   - name: kyverno
@@ -10,5 +10,5 @@ dependencies:
     version: 3.7.1
     repository: https://kyverno.github.io/policy-reporter
   - name: kyverno-policies
-    version: 3.6.2
+    version: 3.6.3
     repository: oci://ghcr.io/kyverno/charts
