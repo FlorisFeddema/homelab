@@ -13,6 +13,7 @@ products:
     kyverno:
       deploy: true
       autoSync: true
+      serverSideApply: true
     sealedSecrets:
       deploy: true
       autoSync: true
