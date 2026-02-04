@@ -12,6 +12,11 @@ kyverno-policies:
   podSecuritySeverity: low
 
 kyverno:
+  kyverno-api:
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true
+    labels:
+      app.kubernetes.io/part-of: kyverno
   global:
     resyncPeriod: 15m
 
@@ -26,10 +31,6 @@ kyverno:
       enabled: false # Can enable from 1.34?
     policyExceptions:
       enabled: true
-
-  crds:
-    annotations:
-      argocd.argoproj.io/sync-options: ServerSideApply=true
 
   grafana:
     enabled: true
