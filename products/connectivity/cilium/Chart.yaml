@@ -5,7 +5,7 @@ version: 1.0.36
 dependencies:
   - name: cilium
     version: 1.19.0
-    repository: https://helm.cilium.io/
+    repository: oci://quay.io/cilium/charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0
