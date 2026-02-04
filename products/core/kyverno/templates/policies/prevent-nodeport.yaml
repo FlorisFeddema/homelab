@@ -15,6 +15,7 @@ spec:
   validationFailureAction: Audit
   rules:
     - name: validate-nodeport
+      skipBackgroundRequests: true
       match:
         any:
           - resources:

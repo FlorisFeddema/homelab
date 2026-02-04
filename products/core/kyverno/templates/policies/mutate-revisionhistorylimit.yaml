@@ -9,6 +9,7 @@ metadata:
 spec:
   rules:
     - name: set-revisionhistorylimit-zero
+      skipBackgroundRequests: true
       match:
         any:
           - resources:

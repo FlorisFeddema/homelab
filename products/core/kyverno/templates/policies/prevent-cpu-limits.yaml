@@ -13,6 +13,7 @@ spec:
   validationFailureAction: Audit
   rules:
     - name: check-cpu-limits
+      skipBackgroundRequests: true
       match:
         any:
           - resources:

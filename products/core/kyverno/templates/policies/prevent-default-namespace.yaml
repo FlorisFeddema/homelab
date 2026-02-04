@@ -17,6 +17,7 @@ spec:
   validationFailureAction: Enforce
   rules:
     - name: validate-namespace
+      skipBackgroundRequests: true
       match:
         any:
           - resources:
@@ -31,6 +32,7 @@ spec:
             - expression: "namespaceObject.metadata.name != 'default'"
               message: "Using 'default' namespace is not allowed."
     - name: validate-podcontroller-namespace
+      skipBackgroundRequests: true
       match:
         any:
           - resources:

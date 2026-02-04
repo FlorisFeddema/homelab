@@ -14,6 +14,7 @@ spec:
   generateExisting: true
   rules:
     - name: generate-vpa
+      skipBackgroundRequests: true
       match:
         resources:
           kinds:

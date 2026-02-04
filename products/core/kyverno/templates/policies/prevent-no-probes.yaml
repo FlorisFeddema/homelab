@@ -17,6 +17,7 @@ spec:
   validationFailureAction: Audit
   rules:
   - name: validate-probes
+    skipBackgroundRequests: true
     match:
       any:
       - resources:

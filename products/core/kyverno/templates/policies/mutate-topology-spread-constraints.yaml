@@ -9,6 +9,7 @@ metadata:
 spec:
   rules:
     - name: add-topology-spread-to-workloads
+      skipBackgroundRequests: true
       match:
         any:
           - resources:
