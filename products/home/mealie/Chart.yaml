@@ -1,8 +1,8 @@
 apiVersion: v2
 name: mealie
-version: 1.0.2
+version: 1.0.3
 
 dependencies:
   - name: mealie
-    version: 1.2.0
+    version: 1.2.1
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
