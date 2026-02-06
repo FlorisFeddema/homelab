@@ -224,7 +224,6 @@ rook-ceph-cluster:
     createPrometheusRules: true
 
   cephImage:
-    repository: quay.io/ceph/ceph
     tag: v19.2.3
 
   cephClusterSpec:	
