@@ -14,6 +14,7 @@ products:
       deploy: true
       autoSync: false
       serverSideApply: true
+      serverSideDiff: true
     sealedSecrets:
       deploy: true
       autoSync: true

@@ -8,6 +8,10 @@ metadata:
   namespace: argocd
   labels:
     feddema.dev/group: {{ $groupKey }}
+  {{- if $productValue.serverSideDiff }}
+  annotations:
+    argocd.argoproj.io/compare-options: ServerSideDiff=true
+  {{- end }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
