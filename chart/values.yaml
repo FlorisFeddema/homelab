@@ -58,7 +58,7 @@ products:
       deploy: true
       autoSync: true
     promtail:
-      deploy: true
+      deploy: false
       autoSync: true
     loki:
       deploy: false
