@@ -61,8 +61,8 @@ products:
       deploy: true
       autoSync: true
     loki:
-      deploy: true
-      autoSync: true
+      deploy: false
+      autoSync: false
     gatus:
       deploy: true
       autoSync: true
