@@ -21,7 +21,7 @@ velero:
   kubectl:
     image:
       repository: public.ecr.aws/bitnami/kubectl
-      tag: 1.35.0
+      tag: 1.35.1
 
   configuration:
     backupStorageLocation:
