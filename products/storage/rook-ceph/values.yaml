@@ -27,7 +27,7 @@ rook-ceph:
             memory: 32Mi
           limits:
             memory: 256Mi
-            cpu: nil
+            cpu: null
 
   csi:
     enableMetadata: true
