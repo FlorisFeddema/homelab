@@ -236,11 +236,12 @@ rook-ceph-cluster:
             topologyKey: topology.kubernetes.io/zone
             whenUnsatisfiable: DoNotSchedule
 
-    mon:
-      count: 3
+    crashCollector:
+      daysToRetain: 7
+    logCollector:
+      maxLogSize: 100M
 
     mgr:
-      count: 2
       modules:
         - name: pg_autoscaler
           enabled: true
@@ -291,70 +292,56 @@ rook-ceph-cluster:
     resources:
       mgr:
         requests:
-          cpu: 500m
+          cpu: 100m
           memory: 512Mi
         limits:
-          memory: 2Gi
+          memory: 1Gi
       mon:
         requests:
-          cpu: 1000m
-          memory: 1300Mi
+          cpu: 100m
+          memory: 512Mi
         limits:
-          memory: 2500Mi
+          memory: 1Gi
       osd:
         requests:
-          cpu: 500m
-          memory: 2Gi
+          cpu: 200m
+          memory: 1500Mi
         limits:
-          memory: 4Gi
-      prepareosd:
-        requests:
-          cpu: 500m
-          memory: 50Mi
+          memory: 3Gi
       mgr-sidecar:
         requests:
-          cpu: 100m
-          memory: 40Mi
+          cpu: 30m
+          memory: 32Mi
         limits:
           memory: 100Mi
       crashcollector:
         requests:
-          cpu: 10m
-          memory: 50Mi
+          cpu: 20m
+          memory: 25Mi
         limits:
-          memory: 100Mi
+          memory: 50Mi
       logcollector:
         requests:
           cpu: 10m
-          memory: 10Mi
+          memory: 15Mi
         limits:
-          memory: 100Mi
-      cleanup:
-        requests:
-          cpu: 500m
-          memory: 100Mi
-        limits:
-          memory: 1Gi
+          memory: 50Mi
       exporter:
         requests:
-          cpu: 50m
-          memory: 50Mi
+          cpu: 20m
+          memory: 25Mi
         limits:
-          memory: 128Mi
+          memory: 50Mi
 
   cephBlockPoolsVolumeSnapshotClass:
     enabled: true
-    name: ceph-block
     isDefault: true
-    deletionPolicy: Delete
     labels:
       velero.io/csi-volumesnapshot-class: "true"
 
   cephFileSystemVolumeSnapshotClass:
     enabled: true
-    name: ceph-filesystem
     isDefault: false
-    deletionPolicy: Delete
     labels:
       velero.io/csi-volumesnapshot-class: "true"
 
