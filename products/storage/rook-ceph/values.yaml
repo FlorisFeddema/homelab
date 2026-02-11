@@ -9,17 +9,16 @@ rook-ceph:
   revisionHistoryLimit: "0"
   resources:
     requests:
-      cpu: 1
-      memory: 128Mi
+      cpu: 100m
+      memory: 80Mi
     limits:
-      memory: 1Gi
+      memory: 300Mi
 
   monitoring:
     enabled: true
   obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
   csi:
-    rookUseCsiOperator: true
     enableMetadata: true
     enableOMAPGenerator: true
     enableLiveness: true
@@ -29,179 +28,133 @@ rook-ceph:
     provisionerReplicas: 1
     csiAddons:
       enabled: true
-
     topology:
       enabled: true
       domainLabels:
         - kubernetes.io/hostname
         - topology.kubernetes.io/zone
 
+    ceph-csi-operator:
+      controllerManager:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 32Mi
+          limits:
+            memory: 256Mi
+            cpu: nil
+
     csiRBDProvisionerResource: |
       - name : csi-provisioner
         resource:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 20m
+            memory: 32Mi
           limits:
             memory: 256Mi
       - name : csi-resizer
         resource:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 20m
+            memory: 32Mi
           limits:
             memory: 256Mi
       - name : csi-attacher
         resource:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 20m
+            memory: 32Mi
           limits:
             memory: 256Mi
       - name : csi-snapshotter
         resource:
           requests:
-            cpu: 100m
-            memory: 128Mi
+            cpu: 20m
+            memory: 32Mi
           limits:
             memory: 256Mi
       - name : csi-rbdplugin
         resource:
           requests:
-            memory: 512Mi
+            cpu: 20m
+            memory: 128Mi
           limits:
-            memory: 1Gi
+            memory: 256Mi
       - name : csi-omap-generator
         resource:
           requests:
-            cpu: 250m
-            memory: 512Mi
-          limits:
-            memory: 1Gi
-      - name : liveness-prometheus
-        resource:
-          requests:
-            cpu: 50m
-            memory: 128Mi
+            cpu: 20m
+            memory: 64Mi
           limits:
             memory: 256Mi
-      - name : log-collector
-        resource:
-          requests:
-            cpu: 10m
-            memory: 15Mi
-          limits:
-            memory: 100Mi
     csiRBDPluginResource: |
-      - name : driver-registrar
-        resource:
-          requests:
-            cpu: 10m
-            memory: 30Mi
-          limits:
-            memory: 100Mi
-      - name : csi-rbdplugin
-        resource:
-          requests:
-            cpu: 10m
-            memory: 100Mi
-          limits:
-            memory: 200Mi
-      - name : liveness-prometheus
-        resource:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : log-collector
-        resource:
-          requests:
-            cpu: 10m
-            memory: 15Mi
-          limits:
-            memory: 100Mi
-    csiCephFSProvisionerResource: |
-      - name : csi-cephfsplugin
-        resource:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : csi-provisioner
-        resource:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : csi-resizer
-        resource:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : csi-attacher
-        resource:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : csi-snapshotter
-        resource:
-          requests:
-            cpu: 10m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : liveness-prometheus
-        resource:
-          requests:
-            cpu: 50m
-            memory: 50Mi
-          limits:
-            memory: 100Mi
-      - name : log-collector
-        resource:
-          requests:
-            cpu: 10m
-            memory: 15Mi
-          limits:
-            memory: 100Mi
-    csiCephFSPluginResource: |
-      - name : csi-cephfsplugin
-        resource:
-          requests:
-            cpu: 10m
-            memory: 100Mi
-          limits:
-            memory: 200Mi
       - name : driver-registrar
         resource:
           requests:
             cpu: 10m
             memory: 20Mi
           limits:
-            memory: 100Mi
-      - name : liveness-prometheus
+            memory: 60Mi
+      - name : csi-rbdplugin
         resource:
           requests:
-            cpu: 10m
+            cpu: 20m
+            memory: 80Mi
+          limits:
+            memory: 160Mi
+    csiCephFSProvisionerResource: |
+      - name : csi-cephfsplugin
+        resource:
+          requests:
+            cpu: 20m
             memory: 50Mi
           limits:
-            memory: 100Mi
-      - name : log-collector
+            memory: 256Mi
+      - name : csi-provisioner
+        resource:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            memory: 256Mi
+      - name : csi-resizer
+        resource:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            memory: 256Mi
+      - name : csi-attacher
+        resource:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            memory: 256Mi
+      - name : csi-snapshotter
+        resource:
+          requests:
+            cpu: 20m
+            memory: 50Mi
+          limits:
+            memory: 256Mi
+    csiCephFSPluginResource: |
+      - name : driver-registrar
         resource:
           requests:
             cpu: 10m
-            memory: 15Mi
+            memory: 20Mi
           limits:
-            memory: 100Mi
+            memory: 60Mi
+      - name : csi-cephfsplugin
+        resource:
+          requests:
+            cpu: 20m
+            memory: 80
+          limits:
+            memory: 160Mi
 
-#######################################################
+
 rook-ceph-cluster:
   toolbox:
     enabled: true
