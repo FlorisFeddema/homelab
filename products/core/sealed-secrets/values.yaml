@@ -16,7 +16,7 @@ sealed-secrets:
     runAsNonRoot: true
     runAsUser: 1001
 
-  revisionHistoryLimit: 0
+  revisionHistoryLimit: '0'
 
   service:
     type: ClusterIP
