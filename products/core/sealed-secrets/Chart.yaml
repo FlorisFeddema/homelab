@@ -8,4 +8,4 @@ dependencies:
     repository: https://bitnami-labs.github.io/sealed-secrets
   - name: sealed-secrets-web
     version: 3.2.1
-    repository: oci://ghcr.io/bakito/helm-charts/
+    repository: oci://ghcr.io/bakito/helm-charts
