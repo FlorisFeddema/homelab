@@ -20,13 +20,14 @@ rook-ceph:
 
   ceph-csi-operator:
     controllerManager:
-      resources:
-        requests:
-          cpu: 20m
-          memory: 32Mi
-        limits:
-          memory: 256Mi
-          cpu: nil
+      manager:
+        resources:
+          requests:
+            cpu: 20m
+            memory: 32Mi
+          limits:
+            memory: 256Mi
+            cpu: nil
 
   csi:
     enableMetadata: true
