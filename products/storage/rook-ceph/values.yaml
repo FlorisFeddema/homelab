@@ -524,7 +524,7 @@ rook-ceph-cluster:
               min_size: '1'
         metadataServer:
           activeCount: 1
-          activeStandby: false
+          activeStandby: true
           placement:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
