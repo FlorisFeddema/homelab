@@ -52,6 +52,7 @@ route:
         sectionName: web-https
 
 sealed-secrets-web:
+  fullnameOverride: sealed-secrets-web
   revisionHistoryLimit: 0
   disableLoadSecrets: true
 
