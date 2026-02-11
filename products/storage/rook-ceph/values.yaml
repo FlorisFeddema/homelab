@@ -18,6 +18,16 @@ rook-ceph:
     enabled: true
   obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
+  ceph-csi-operator:
+    controllerManager:
+      resources:
+        requests:
+          cpu: 20m
+          memory: 32Mi
+        limits:
+          memory: 256Mi
+          cpu: nil
+
   csi:
     enableMetadata: true
     enableOMAPGenerator: true
@@ -34,15 +44,6 @@ rook-ceph:
         - kubernetes.io/hostname
         - topology.kubernetes.io/zone
 
-    ceph-csi-operator:
-      controllerManager:
-        resources:
-          requests:
-            cpu: 20m
-            memory: 32Mi
-          limits:
-            memory: 256Mi
-            cpu: nil
 
     csiRBDProvisionerResource: |
       - name : csi-provisioner
