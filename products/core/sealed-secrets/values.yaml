@@ -41,3 +41,22 @@ sealed-secrets:
 
     dashboards:
       create: true
+
+route:
+  web:
+    hostnames:
+      - sealedsecrets.feddema.dev
+    parentRefs:
+      - name: envoy-gateway
+        namespace: envoy-gateway
+        sectionName: web-https
+
+sealed-secrets-web:
+  revisionHistoryLimit: 0
+  disableLoadSecrets: true
+
+  sealedSecrets:
+    serviceName: sealed-secrets-controller
+
+  resources: {}
+

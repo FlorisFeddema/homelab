@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: sealed-secrets-web-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: sealed-secrets-web
+  oidc:
+    clientID: "liDnvkCICXShv1iKXBSxLRg76zhtCnTuv6pKSwIR"
+    clientSecret:
+      name: oidc-secret
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/sealedsecrets/
+    redirectURL: https://sealedsecrets.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+

@@ -1,0 +1,36 @@
+apiVersion: {{ .Values.route.web.apiVersion | default "gateway.networking.k8s.io/v1" }}
+kind: {{ .Values.route.web.kind | default "HTTPRoute" }}
+metadata:
+  {{- with .Values.route.web.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: sealed-secrets-web
+  labels:
+    {{- with .Values.route.web.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  {{- with .Values.route.web.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.route.web.hostnames }}
+  hostnames:
+    {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
+  rules:
+    {{- if .Values.route.web.additionalRules }}
+    {{- tpl (toYaml .Values.route.web.additionalRules) $ | nindent 4 }}
+    {{- end }}
+    - backendRefs:
+        - name: sealed-secrets-web
+          port: 80
+      {{- with .Values.route.web.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.route.web.matches }}
+      matches:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
