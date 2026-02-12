@@ -1,8 +1,8 @@
 apiVersion: v2
 name: kubernetes-replicator
-version: 1.0.8
+version: 1.0.9
 
 dependencies:
   - name: kubernetes-replicator
-    version: 2.12.2
+    version: 2.12.3
     repository: https://helm.mittwald.de
