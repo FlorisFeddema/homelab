@@ -427,10 +427,10 @@ rook-ceph-cluster:
           activeStandby: true
           resources:
             requests:
-              cpu: 10m
-              memory: 1Gi
+              cpu: 30m
+              memory: 512Mi
             limits:
-              memory: 3Gi
+              memory: 1Gi
       storageClass:
         enabled: true
         isDefault: false
@@ -473,21 +473,12 @@ rook-ceph-cluster:
         metadataServer:
           activeCount: 1
           activeStandby: true
-          placement:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: kubernetes.io/hostname
-                        operator: In
-                        values:
-                          - hortek-0
           resources:
             requests:
-              cpu: 10m
-              memory: 512Mi
+              cpu: 50m
+              memory: 256Mi
             limits:
-              memory: 3Gi
+              memory: 1Gi
       storageClass:
         enabled: true
         isDefault: false
