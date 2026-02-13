@@ -47,6 +47,8 @@ loki:
         index: loki-index
 
       use_thanos_objstore: true
+
+    storage_config:
       object_store:
         type: s3
         s3:
