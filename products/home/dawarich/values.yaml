@@ -39,7 +39,7 @@ dawarich:
       country: nl
       updateInterval: '168h'
     persistence:
-      storageClass: ceph-block-nvme-1
+      storageClass: ceph-block-nvme-2
       size: 20Gi
 
   hostname: dawarich.feddema.dev

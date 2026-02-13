@@ -31,7 +31,7 @@ immich:
     monitoring:
       enabled: true
     size: 32Gi
-    storageClass: ceph-block-nvme-1
+    storageClass: ceph-block-nvme-2
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
