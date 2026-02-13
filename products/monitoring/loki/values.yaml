@@ -35,6 +35,10 @@ loki:
       replication_factor: 2
 
     storage:
+      bucketNames:
+        chunks: loki-chunks
+        index: loki-index
+
       use_thanos_objstore: true
       object_store:
         type: s3
