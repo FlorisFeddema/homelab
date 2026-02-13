@@ -8,6 +8,7 @@ coredns:
       cpu: 50m
       memory: 64Mi
 
+  k8sAppLabelOverride: "kube-dns"
   terminationGracePeriodSeconds: 30
   prometheus:
     service:
