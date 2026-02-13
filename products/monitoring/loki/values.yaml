@@ -56,11 +56,11 @@ loki:
   gateway:
     enabled: false
   write:
-    enabled: false
+    replicas: 0
   read:
-    enabled: false
+    replicas: 0
   backend:
-    enabled: false
+    replicas: 0
 
   ingester:
     replicas: 2
