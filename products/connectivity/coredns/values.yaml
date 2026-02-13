@@ -86,5 +86,6 @@ coredns:
         matchLabels:
           k8s-app: kube-dns
 
-  podDisruptionBudget: { }
+  podDisruptionBudget:
+    minAvailable: 2
 
