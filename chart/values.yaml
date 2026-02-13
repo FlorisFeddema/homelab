@@ -40,6 +40,10 @@ products:
         kind: DaemonSet
         jqPathExpressions:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
+    coredns:
+      deploy: true
+      autoSync: false
+      namespace: kube-system
     envoyGateway:
       deploy: true
       autoSync: true
