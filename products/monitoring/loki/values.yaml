@@ -80,6 +80,7 @@ loki:
 
   indexGateway:
     replicas: 2
+    maxUnavailable: 1
 
   ruler:
     enabled: false
