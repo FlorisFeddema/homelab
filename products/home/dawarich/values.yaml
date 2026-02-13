@@ -16,7 +16,7 @@ dawarich:
       azure:
         connectionStringKeyName: 'CONNECTION_STRING'
 
-    storageClass: ceph-block-nvme-1
+    storageClass: ceph-block-nvme-2
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
