@@ -1,4 +1,11 @@
 loki:
+  global:
+    extraArgs:
+      - '-config.expand-env=true'
+    extraEnvFrom:
+      - secretRef:
+          name: rook-ceph-object-user-ceph-object-nvme-2-loki-svc
+
   deploymentMode: Distributed
   loki:
     revisionHistoryLimit: 0
