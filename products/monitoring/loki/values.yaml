@@ -70,7 +70,7 @@ loki:
     replicas: 0
 
   ingester:
-    replicas: 2
+    replicas: 3
 
   querier:
     replicas: 2
