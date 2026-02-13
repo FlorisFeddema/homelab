@@ -10,6 +10,9 @@ cluster:
       service:
         disabled: true
 
+  coreDNS:
+    disabled: true
+
   network:
     cni:
       name: none
