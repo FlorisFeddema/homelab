@@ -39,6 +39,7 @@ coredns:
             lameduck 5s
         - name: ready
         - name: log
+          parameters: .
           configBlock: |-
             class error
         - name: prometheus
@@ -46,7 +47,7 @@ coredns:
         - name: kubernetes
           parameters: cluster.local in-addr.arpa ip6.arpa
           configBlock: |-
-            pods insecure
+            pods insecure 
             fallthrough in-addr.arpa ip6.arpa
             ttl 30
         - name: forward
