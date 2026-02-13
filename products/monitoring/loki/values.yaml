@@ -63,6 +63,7 @@ loki:
 
   querier:
     replicas: 2
+    maxUnavailable: 1
 
   queryFrontend:
     replicas: 2
