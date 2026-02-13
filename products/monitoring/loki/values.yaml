@@ -51,11 +51,15 @@ loki:
 
   test:
     enabled: false
-
   lokiCanary:
     enabled: false
-
   gateway:
+    enabled: false
+  write:
+    enabled: false
+  read:
+    enabled: false
+  backend:
     enabled: false
 
   ingester:
