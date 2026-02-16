@@ -65,6 +65,10 @@ fluent-bit:
         Path /var/log/containers/*.log
         Parser containerd
         Tag kubernetes.*
+        Mem_Buf_Limit 5MB
+        Skip_Long_Lines On
+        Buffer_Chunk_Size 64KB
+        Buffer_Max_Size 128KB
 
       [INPUT]
         Name tail
@@ -87,6 +91,7 @@ fluent-bit:
         K8S-Logging.Exclude On
         Annotations Off
         Labels On
+        Buffer_Size 256KB
       
       [FILTER]
         Name          modify
@@ -130,4 +135,4 @@ fluent-bit:
     - operator: Exists
       effect: NoSchedule
 
-  logLevel: info
+  logLevel: warn
