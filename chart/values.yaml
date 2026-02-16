@@ -61,9 +61,6 @@ products:
     prometheus:
       deploy: true
       autoSync: true
-    promtail:
-      deploy: false
-      autoSync: true
     loki:
       deploy: true
       autoSync: false
