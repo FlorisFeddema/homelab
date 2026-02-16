@@ -58,6 +58,9 @@ products:
       deploy: true
       autoSync: true
   monitoring:
+    fluentBit:
+      deploy: true
+      autoSync: false
     prometheus:
       deploy: true
       autoSync: true
