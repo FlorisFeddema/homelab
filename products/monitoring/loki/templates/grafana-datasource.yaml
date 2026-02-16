@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasource
+  labels:
+    grafana_datasource: '1'
+data:
+  datasource-loki.yaml: |
+    apiVersion: 1
+    datasources:
+    - access: proxy
+      editable: false
+      name: Loki
+      type: loki
+      uid: loki
+      url: http://loki-query-frontend.loki.svc.cluster.local:3100
