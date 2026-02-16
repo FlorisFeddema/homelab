@@ -4,7 +4,7 @@ loki:
       - '-config.expand-env=true'
     extraEnvFrom:
       - secretRef:
-          name: rook-ceph-object-user-ceph-object-nvme-2-loki-svc
+          name: loki-bucket
 
   deploymentMode: Distributed
   loki:
@@ -42,17 +42,13 @@ loki:
       replication_factor: 2
 
     storage:
-      bucketNames:
-        chunks: loki-chunks
-        index: loki-index
-
       use_thanos_objstore: true
       object_store:
-        type: s3
         s3:
-          endpoint: ${Endpoint}
-          secret_access_key: ${SecretKey}
-          access_key_id: ${AccessKey}
+          bucket_name: loki
+          endpoint: rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc
+          secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+          access_key_id: ${AWS_ACCESS_KEY_ID}
           insecure: true
 
   test:
