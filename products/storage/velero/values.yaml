@@ -69,6 +69,7 @@ velero:
         - immich
         - media-server
         - nextcloud
+        - mealie
         - zigbee2mqtt
         resourcePolicy:
           kind: configmap
