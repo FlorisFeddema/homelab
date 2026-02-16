@@ -34,7 +34,7 @@ fluent-bit:
   extraPorts:
     - port: 12345
       containerPort: 12345
-      protocol: TCP
+      protocol: UDP
       name: talos
 
   ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/configuration-file
@@ -53,7 +53,7 @@ fluent-bit:
 
     inputs: |
       [INPUT]
-        Name tcp
+        Name udp
         Listen 0.0.0.0
         Port 12345
         Format json
@@ -90,7 +90,7 @@ fluent-bit:
         K8S-Logging.Parser Off
         K8S-Logging.Exclude On
         Annotations Off
-        Labels On
+        Labels Off
         Buffer_Size 256KB
       
       [FILTER]
@@ -98,6 +98,11 @@ fluent-bit:
         Match         kubernetes.*
         Add           source kubernetes
         Remove        logtag
+    
+      [FILTER]
+        Name record_modifier
+        Match talos.*
+        Record node ${NODE_NAME}
 
     customParsers: |
       [PARSER]
@@ -116,11 +121,15 @@ fluent-bit:
     outputs: |
       [OUTPUT]
         Name loki
-        Match *
+        Match kubernetes.*
         Host loki-distributor.loki.svc.cluster.local
-        Port 3100
-        Labels job=fluent-bit
-        Auto_Kubernetes_Labels on
+        Labels job=fluent-bit,cluster=homelab,namespace=$kubernetes['namespace_name'],pod=$kubernetes['pod_name'],container=$kubernetes['container_name'],node=${NODE_NAME}
+
+      [OUTPUT]
+        Name loki
+        Match talos.*
+        Host loki-distributor.loki.svc.cluster.local
+        Labels job=talos,node=${NODE_NAME},talos_service=$talos-service,talos_level=$talos-level
 
   daemonSetVolumes:
     - name: varlog
