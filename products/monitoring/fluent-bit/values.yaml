@@ -1,0 +1,133 @@
+fluent-bit:
+  rbac:
+    create: true
+    nodeAccess: false
+    eventsAccess: false
+
+  hostNetwork: false
+
+  securityContext:
+     capabilities:
+       drop:
+       - ALL
+     readOnlyRootFilesystem: true
+     runAsNonRoot: true
+     runAsUser: 1000
+
+  serviceMonitor:
+    enabled: true
+
+  dashboards:
+    enabled: true
+
+  resources: { }
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 100m
+  #     memory: 128Mi
+
+  podAnnotations:
+    fluentbit.io/exclude: 'true'
+
+  extraPorts:
+    - port: 12345
+      containerPort: 12345
+      protocol: TCP
+      name: talos
+
+  ## https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/configuration-file
+  config:
+    service: |
+      [SERVICE]
+        Daemon Off
+        Flush {{ .Values.flush }}
+        Log_Level {{ .Values.logLevel }}
+        Parsers_File /fluent-bit/etc/parsers.conf
+        Parsers_File /fluent-bit/etc/conf/custom_parsers.conf
+        HTTP_Server On
+        HTTP_Listen 0.0.0.0
+        HTTP_Port {{ .Values.metricsPort }}
+        Health_Check On
+
+    inputs: |
+      [INPUT]
+        Name tcp
+        Listen 0.0.0.0
+        Port 12345
+        Format json
+        Tag talos.*
+
+      [INPUT]
+        Name tail
+        Alias kubernetes
+        Path /var/log/containers/*.log
+        Parser containerd
+        Tag kubernetes.*
+
+      [INPUT]
+        Name tail
+        Alias audit
+        Path /var/log/audit/kube/*.log
+        Parser audit
+        Tag audit.*
+
+    filters: |
+      [FILTER]
+        Name kubernetes
+        Alias kubernetes
+        Match kubernetes.*
+        Kube_Tag_Prefix kubernetes.var.log.containers.
+        Use_Kubelet Off
+        Merge_Log On
+        Merge_Log_Trim On
+        Keep_Log Off
+        K8S-Logging.Parser Off
+        K8S-Logging.Exclude On
+        Annotations Off
+        Labels On
+      
+      [FILTER]
+        Name          modify
+        Match         kubernetes.*
+        Add           source kubernetes
+        Remove        logtag
+
+    customParsers: |
+      [PARSER]
+        Name audit
+        Format json
+        Time_Key requestReceivedTimestamp
+        Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+  
+      [PARSER]
+        Name containerd
+        Format regex
+        Regex ^(?<time>[^ ]+) (?<stream>stdout|stderr) (?<logtag>[^ ]*) (?<log>.*)$
+        Time_Key time
+        Time_Format %Y-%m-%dT%H:%M:%S.%L%z
+
+    outputs: |
+      [OUTPUT]
+        Name loki
+        Match *
+        Host loki-distributor.loki.svc.cluster.local
+        Port 3100
+        Labels job=fluent-bit
+        Auto_Kubernetes_Labels on
+
+  daemonSetVolumes:
+    - name: varlog
+      hostPath:
+        path: /var/log
+
+  daemonSetVolumeMounts:
+    - name: varlog
+      mountPath: /var/log
+
+  tolerations:
+    - operator: Exists
+      effect: NoSchedule
+
+  logLevel: info
