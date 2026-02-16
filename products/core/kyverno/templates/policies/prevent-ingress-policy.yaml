@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: deny-ingress-resources
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: block-ingress
+      match:
+        any:
+          - resources:
+              kinds:
+                - Ingress
+      validate:
+        message: >-
+          Ingress resources are not allowed in this cluster.
+          Use the Kubernetes Gateway API (Gateway, HTTPRoute, TCPRoute, etc.) instead.
+        deny: {}
