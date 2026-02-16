@@ -68,3 +68,11 @@ machine:
     hostDNS:
       enabled: false
       forwardKubeDNSToHost: false
+
+  logging:
+    destinations:
+      - endpoint: "udp://10.102.209.253:12345"
+        format: "json_lines"
+  install:
+    extraKernelArgs:
+      - talos.logging.kernel=udp://10.102.209.253:12345/

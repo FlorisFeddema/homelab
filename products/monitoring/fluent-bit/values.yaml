@@ -129,7 +129,7 @@ fluent-bit:
         Name loki
         Match kubernetes.*
         Host loki-distributor.loki.svc.cluster.local
-        Labels job=fluent-bit,cluster=homelab,namespace=$kubernetes['namespace_name'],pod=$kubernetes['pod_name'],container=$kubernetes['container_name'],node=${NODE_NAME}
+        Labels job=kubernetes,cluster=homelab,namespace=$kubernetes['namespace_name'],pod=$kubernetes['pod_name'],container=$kubernetes['container_name'],node=${NODE_NAME}
 
       [OUTPUT]
         Name loki
