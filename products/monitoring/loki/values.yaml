@@ -69,6 +69,10 @@ loki:
 
   ingester:
     replicas: 3
+    persistence:
+      enabled: true
+      storageClass: ceph-block-nvme-1
+      size: 10Gi
 
   querier:
     replicas: 2
