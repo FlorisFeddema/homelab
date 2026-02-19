@@ -109,10 +109,18 @@ loki:
 
   compactor:
     replicas: 1
+    persistence:
+      enabled: true
+      storageClass: ceph-block-nvme-1
+      size: 50Gi
 
   indexGateway:
     replicas: 2
     maxUnavailable: 1
+    persistence:
+      enabled: true
+      storageClass: ceph-block-nvme-1
+      size: 10Gi
 
   ruler:
     enabled: false
