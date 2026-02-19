@@ -40,7 +40,11 @@ loki:
       max_global_streams_per_user: 5000
     commonConfig:
       replication_factor: 2
-
+    compactor:
+      delete_request_store: s3
+      compaction_interval: 10m
+      retention_enabled: true
+      retention_delete_delay: 2h
     storage:
       bucketNames:
         chunks: loki # Not used, but required by the chart
