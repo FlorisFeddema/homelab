@@ -43,7 +43,7 @@ loki:
 
     storage:
       bucketNames:
-        chunks: loki-chunks # Not used, but required by the chart
+        chunks: loki # Not used, but required by the chart
 
       use_thanos_objstore: true
       object_store:
