@@ -1,7 +1,7 @@
 cert-manager:
   crds:
     enabled: true
-    keep: false
+    keep: true
 
   global:
     logLevel: 1
