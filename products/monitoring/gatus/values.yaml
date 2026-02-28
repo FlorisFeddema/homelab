@@ -15,7 +15,7 @@ database:
 
 gatus:
   route:
-    enabled: true
+    enabled: false
     hostnames:
       - gatus.feddema.dev
       - status.feddema.dev
