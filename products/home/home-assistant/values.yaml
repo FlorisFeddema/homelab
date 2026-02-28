@@ -40,3 +40,10 @@ home-assistant:
   config:
     securityContext:
       runAsGroup: 0
+
+  resources:
+    limits:
+      memory: 900Mi
+    requests:
+      cpu: 70m
+      memory: 500Mi
