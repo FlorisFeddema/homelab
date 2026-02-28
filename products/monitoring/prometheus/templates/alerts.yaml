@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: feddemadev.rules
+spec:
+  groups:
+    - name: feddemadev.rules
+      rules:
+        - alert: KubernetesContainerOomKiller
+          expr: (kube_pod_container_status_restarts_total - kube_pod_container_status_restarts_total offset 10m >= 1) and ignoring (reason) min_over_time(kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}[10m]) == 1
+          for: 0m
+          labels:
+            severity: critical
+          annotations:
+            summary: Kubernetes Container oom killer (instance {{ `{{ $labels.instance }}` }})
+            description: "Container {{ `{{ $labels.container }}` }} in pod {{ `{{ $labels.namespace }}` }}/{{ `{{ $labels.pod }}` }} has been OOMKilled {{ `{{ $value }}` }} times in the last 10 minutes.\n  VALUE = {{ `{{ $value }}` }}\n  LABELS = {{ `{{ $labels }}` }}"
+    - alert: KubernetesVolumeOutOfDiskSpace
+      expr: kubelet_volume_stats_available_bytes / kubelet_volume_stats_capacity_bytes * 100 < 10
+      for: 2m
+      labels:
+        severity: critical
+      annotations:
+        summary: Kubernetes Volume out of disk space (instance {{ `{{ $labels.instance }}` }})
+        description: "Volume is almost full (< 10% left)\n  VALUE = {{ `{{ $value }}` }}\n  LABELS = {{ `{{ $labels }}` }}"
