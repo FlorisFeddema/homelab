@@ -37,10 +37,22 @@ authentik:
             name: authentik-secret
 
   worker:
-    replicas: 2
+    replicas: 1
+    resources:
+      limits:
+        memory: 800Mi
+      requests:
+        cpu: 50m
+        memory: 400Mi
 
   server:
     replicas: 2
+    resources:
+      limits:
+        memory: 800Mi
+      requests:
+        cpu: 150m
+        memory: 400Mi
 
     metrics:
       serviceMonitor:
