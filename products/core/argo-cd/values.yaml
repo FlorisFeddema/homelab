@@ -75,6 +75,15 @@ argo-cd:
         - name: envoy-gateway
           namespace: envoy-gateway
           sectionName: web-https
+      rules:
+        - matches:
+            - path:
+                type: PathPrefix
+                value: /
+          timeouts:
+            request: 1m
+            backendRequest: 2m
+
 
     resources:
       limits:
