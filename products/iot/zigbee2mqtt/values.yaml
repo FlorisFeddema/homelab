@@ -12,8 +12,11 @@ image:
 
 resources:
   limits:
+    memory: 400Mi
     device.local/zigbee: 1
   requests:
+    cpu: 20m
+    memory: 200Mi
     device.local/zigbee: 1
 
 podSecurityContext:
