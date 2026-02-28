@@ -7,6 +7,7 @@ gatus-monitor:
 
 dawarich:
   database:
+
     backups:
       enabled: true
       destination: 'https://feddemadevbackups.blob.core.windows.net/cnpg'
@@ -25,6 +26,14 @@ dawarich:
         topologyKey: topology.kubernetes.io/zone
         whenUnsatisfiable: ScheduleAnyway
 
+  app:
+    resources:
+      limits:
+        memory: 800Mi
+      requests:
+        cpu: 50m
+        memory: 400Mi
+
   route:
     enabled: true
     hostnames:
@@ -41,6 +50,20 @@ dawarich:
     persistence:
       storageClass: ceph-block-nvme-2
       size: 20Gi
+    resources:
+      limits:
+        memory: 900Mi
+      requests:
+        cpu: 50m
+        memory: 500Mi
+
+    gateway:
+      resources:
+        limits:
+          memory: 120Mi
+        requests:
+          cpu: 20m
+          memory: 40Mi
 
   hostname: dawarich.feddema.dev
   config:
