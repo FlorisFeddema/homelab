@@ -10,7 +10,12 @@ podSecurityContext:
 
 securityContext: {}
 
-resources: {}
+resources:
+  limits:
+    memory: 500Mi
+  requests:
+    cpu: 50m
+    memory: 250Mi
 
 nodeSelector:
   kubernetes.io/arch: amd64
