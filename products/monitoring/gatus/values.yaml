@@ -29,16 +29,17 @@ gatus:
       enabled: true
 
   gatus:
+    gateway:
+      route:
+        enabled: true
+        hostnames:
+          - gatus.feddema.dev
+          - status.feddema.dev
+        parentRefs:
+          - name: envoy-gateway
+            namespace: envoy-gateway
+            sectionName: web-https
 
-    route:
-      enabled: true
-      hostnames:
-        - gatus.feddema.dev
-        - status.feddema.dev
-      parentRefs:
-        - name: envoy-gateway
-          namespace: envoy-gateway
-          sectionName: web-https
     resources:
       limits:
         memory: 100Mi
