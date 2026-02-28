@@ -4,14 +4,16 @@ vpa:
     revisionHistoryLimit: 0
     extraArgs:
       v: "4"
+      min-replicas: '1'
+      recommender-interval: 1m
       pod-recommendation-min-cpu-millicores: '10'
-      pod-recommendation-min-memory-mb: '25'
-      round-cpu-millicores: '10'
-      round-memory-bytes: '26214400' # 25MiB
+      pod-recommendation-min-memory-mb: '10'
+      target-cpu-percentile: '0.9'
+      target-memory-percentile: '0.9'
       prometheus-address: http://prometheus-thanos-query.prometheus:9090
       storage: prometheus
       history-length: 8d
-      history-resolution: 15m
+      history-resolution: 1h
     replicaCount: 2
     podMonitor:
       enabled: true
