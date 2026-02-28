@@ -363,7 +363,7 @@ rook-ceph-cluster:
         enabled: true
         name: ceph-block-nvme-1
         annotations:
-          reclaimspace.csiaddons.openshift.io/schedule: "@midnight"
+          reclaimspace.csiaddons.openshift.io/schedule: "25 12 * * *"
         isDefault: false
         reclaimPolicy: Delete
         allowVolumeExpansion: true
@@ -389,7 +389,7 @@ rook-ceph-cluster:
         enabled: true
         name: ceph-block-nvme-2
         annotations:
-          reclaimspace.csiaddons.openshift.io/schedule: "@midnight"
+          reclaimspace.csiaddons.openshift.io/schedule: "25 13 * * *"
         isDefault: true
         reclaimPolicy: Delete
         allowVolumeExpansion: true
