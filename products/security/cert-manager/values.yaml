@@ -9,6 +9,29 @@ cert-manager:
     leaderElection:
       namespace: cert-manager
 
+  resources:
+    limits:
+      memory: 150Mi
+    requests:
+      cpu: 20m
+      memory: 60Mi
+
+  webhook:
+    resources:
+      limits:
+        memory: 75Mi
+      requests:
+        cpu: 20m
+        memory: 25Mi
+
+  cainjector:
+    resources:
+      limits:
+        memory: 250Mi
+      requests:
+        cpu: 20m
+        memory: 120Mi
+
   prometheus:
     enabled: true
     servicemonitor:
@@ -20,9 +43,17 @@ cert-manager:
     - --enable-gateway-api
 
 trust-manager:
+  revisionHistoryLimit: 0
   crds:
     enabled: true
     keep: false
+
+  resources:
+    limits:
+      memory: 60Mi
+    requests:
+      cpu: 20m
+      memory: 30Mi
 
   app:
     metrics:
