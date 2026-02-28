@@ -12,8 +12,8 @@ mediaPvcName: media-server-media
 
 resources:
   requests:
-    cpu: 2000m
-    memory: 2000Mi
+    cpu: 500m
+    memory: 500Mi
   limits:
     memory: 4000Mi
   claims:
