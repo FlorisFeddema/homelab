@@ -14,16 +14,6 @@ database:
   storageClass: ceph-block-nvme-1
 
 gatus:
-  route:
-    enabled: false
-    hostnames:
-      - gatus.feddema.dev
-      - status.feddema.dev
-    parentRefs:
-      - name: envoy-gateway
-        namespace: envoy-gateway
-        sectionName: web-https
-
   grafana:
     dashboard:
       enabled: true
