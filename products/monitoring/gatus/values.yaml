@@ -22,7 +22,7 @@ gatus:
     gateway:
       route:
         enabled: true
-        hostnames:
+        hosts:
           - gatus.feddema.dev
           - status.feddema.dev
         parentRefs:
