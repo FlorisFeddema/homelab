@@ -2,6 +2,13 @@ mealie:
   ingress:
     enabled: false
 
+  resources:
+    limits:
+      memory: 600Mi
+    requests:
+      cpu: 20m
+      memory: 300Mi
+
   route:
     enabled: true
     hostnames:
