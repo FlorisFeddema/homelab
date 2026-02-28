@@ -81,8 +81,8 @@ argo-cd:
                 type: PathPrefix
                 value: /
           timeouts:
-            request: 3m
-            backendRequest: 2m
+            request: 5m
+            backendRequest: 5m
 
 
     resources:
