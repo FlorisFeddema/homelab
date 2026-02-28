@@ -5,7 +5,7 @@ version: 1.0.54
 
 dependencies:
   - name: dawarich
-    version: 10.3.0
+    version: 11.0.0-renovate-dawarich-ghcr-io-rtuszik-photon-docker-2-x
     repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
