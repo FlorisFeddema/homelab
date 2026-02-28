@@ -26,13 +26,12 @@ fluent-bit:
         fieldRef:
           fieldPath: spec.nodeName
 
-  resources: { }
-  #   limits:
-  #     cpu: 100m
-  #     memory: 128Mi
-  #   requests:
-  #     cpu: 100m
-  #     memory: 128Mi
+  resources:
+     limits:
+       memory: 60Mi
+     requests:
+       cpu: 70m
+       memory: 30Mi
 
   podAnnotations:
     fluentbit.io/exclude: 'true'
