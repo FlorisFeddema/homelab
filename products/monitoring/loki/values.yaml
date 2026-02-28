@@ -73,6 +73,13 @@ loki:
 
   ingester:
     replicas: 3
+    resources:
+      limits:
+        memory: 800Mi
+      requests:
+        cpu: 80m
+        memory: 500Mi
+
     persistence:
       enabled: true
 
@@ -97,28 +104,64 @@ loki:
   querier:
     replicas: 2
     maxUnavailable: 1
+    resources:
+      limits:
+        memory: 250Mi
+      requests:
+        cpu: 25m
+        memory: 80Mi
 
   queryFrontend:
     replicas: 2
     maxUnavailable: 1
+    resources:
+      limits:
+        memory: 120Mi
+      requests:
+        cpu: 20m
+        memory: 60Mi
 
   queryScheduler:
     replicas: 2
+    resources:
+      limits:
+        memory: 120Mi
+      requests:
+        cpu: 20m
+        memory: 60Mi
 
   distributor:
     replicas: 2
     maxUnavailable: 1
+    resources:
+      limits:
+        memory: 180Mi
+      requests:
+        cpu: 180m
+        memory: 90Mi
 
   compactor:
     replicas: 1
     persistence:
       enabled: true
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 20m
+        memory: 100Mi
 
   indexGateway:
     replicas: 2
     maxUnavailable: 1
     persistence:
       enabled: true
+    resources:
+      limits:
+        memory: 120Mi
+      requests:
+        cpu: 20m
+        memory: 40Mi
 
   ruler:
     enabled: false
