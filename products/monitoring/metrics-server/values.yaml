@@ -2,6 +2,16 @@ metrics-server:
   replicas: 2
   revisionHistoryLimit: 0
 
+  apiService:
+    insecureSkipTLSVerify: false
+
+  resources:
+    limits:
+      memory: 150Mi
+    requests:
+      cpu: 20m
+      memory: 80Mi
+
   metrics:
     enabled: true
 
