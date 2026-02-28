@@ -14,3 +14,10 @@ opentherm-monitor:
       - name: envoy-gateway
         namespace: envoy-gateway
         sectionName: web-https
+
+  resources:
+    limits:
+      memory: 50Mi
+    requests:
+      cpu: 20m
+      memory: 25Mi
