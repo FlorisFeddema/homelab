@@ -320,4 +320,4 @@ data:
     clientSecret: $authentik-credentials:clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
     logoutURL: https://authentik.feddema.dev/application/o/argocd/end-session/
-
+    refreshTokenThreshold: 5m
