@@ -60,9 +60,9 @@ adguard:
     resources:
       requests:
         cpu: 50m
-        memory: 200Mi
+        memory: 250Mi
       limits:
-        memory: 300Mi
+        memory: 400Mi
     sync:
       resources:
         requests:
