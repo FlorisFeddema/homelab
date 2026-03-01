@@ -40,10 +40,10 @@ authentik:
     replicas: 1
     resources:
       limits:
-        memory: 900Mi
+        memory: 1Gi
       requests:
-        cpu: 50m
-        memory: 500Mi
+        cpu: 80m
+        memory: 650Mi
 
   server:
     replicas: 2
