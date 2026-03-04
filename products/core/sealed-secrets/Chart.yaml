@@ -1,11 +1,11 @@
 apiVersion: v2
 name: sealed-secrets
-version: 1.0.27
+version: 1.0.28
 
 dependencies:
   - name: sealed-secrets
     version: 2.18.3
     repository: https://bitnami-labs.github.io/sealed-secrets
   - name: sealed-secrets-web
-    version: 3.2.1
+    version: 3.3.0
     repository: oci://ghcr.io/bakito/helm-charts
