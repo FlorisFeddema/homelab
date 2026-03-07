@@ -78,7 +78,7 @@ argo-workflows:
     sso:
       enabled: true
       issuer: https://authentik.feddema.dev/application/o/argo-workflows/
-      redirectUrl: "argoworkflows.feddema.dev/oauth2/callback"
+      redirectUrl: "https://argoworkflows.feddema.dev/oauth2/callback"
 
     livenessProbe:
       enabled: true
