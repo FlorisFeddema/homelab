@@ -10,7 +10,7 @@ argo-workflows:
       artifactGC: true
 
   controller:
-    parallelism: 2
+    parallelism:
     rbac:
       writeConfigMaps: true
 
@@ -28,7 +28,7 @@ argo-workflows:
 
     resources: { }
 
-    replicas: 2
+    replicas: 1
     revisionHistoryLimit: 0
 
     topologySpreadConstraints: [ ]
@@ -52,7 +52,7 @@ argo-workflows:
     enabled: true
 
     resources: { }
-    replicas: 1
+    replicas: 2
     revisionHistoryLimit: 0
     topologySpreadConstraints: [ ]
     # - maxSkew: 1
