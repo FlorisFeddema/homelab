@@ -1,0 +1,106 @@
+argo-workflows:
+  crds:
+    full: true
+
+  workflow:
+    serviceAccount:
+      create: true
+    rbac:
+      agentPermissions: true
+      artifactGC: true
+
+  controller:
+    parallelism: 2
+    rbac:
+      writeConfigMaps: true
+
+    metricsConfig:
+      enabled: true
+
+    persistence: { }
+
+    serviceMonitor:
+      enabled: true
+
+    logging:
+      level: warn
+      format: "json"
+
+    resources: { }
+
+    replicas: 2
+    revisionHistoryLimit: 0
+
+    topologySpreadConstraints: [ ]
+    # - maxSkew: 1
+    #   topologyKey: topology.kubernetes.io/zone
+    #   whenUnsatisfiable: DoNotSchedule
+
+    nodeEvents:
+      enabled: false
+
+    workflowEvents:
+      enabled: false
+
+  mainContainer:
+    resources: { }
+
+  executor:
+    resources: { }
+
+  server:
+    enabled: true
+
+    resources: { }
+    replicas: 1
+    revisionHistoryLimit: 0
+    topologySpreadConstraints: [ ]
+    # - maxSkew: 1
+    #   topologyKey: topology.kubernetes.io/zone
+    #   whenUnsatisfiable: DoNotSchedule
+
+    logging:
+      level: warn
+      format: "json"
+
+    httproute:
+      enabled: false
+      parentRefs: [ ]
+      hostnames:
+        - argoworkflows.feddema.dev
+
+    authModes: sso
+    sso:
+      enabled: true
+      issuer: https://authentik.feddema.dev/application/o/argo-workflows/
+      redirectUrl: "argoworkflows.feddema.dev/oauth2/callback"
+
+    livenessProbe:
+      enabled: true
+
+  useStaticCredentials: true
+  artifactRepository:
+    archiveLogs: true
+    s3: { }
+      # # Note the `key` attribute is not the actual secret, it's the PATH to
+      # # the contents in the associated secret, as defined by the `name` attribute.
+      # accessKeySecret:
+      #   name: "{{ .Release.Name }}-minio"
+      #   key: accesskey
+      # secretKeySecret:
+      #   name: "{{ .Release.Name }}-minio"
+      #   key: secretkey
+      # sessionTokenSecret:
+      #   name: "{{ .Release.Name }}-minio"
+      #   key: sessionToken
+      # # insecure will disable TLS. Primarily used for minio installs not configured with TLS
+      # insecure: false
+      # caSecret:
+      #   name: ca-root
+      #   key: cert.pem
+      # bucket:
+      # endpoint:
+      # region:
+      # roleARN:
+      # useSDKCreds: true
+
