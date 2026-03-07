@@ -57,6 +57,11 @@ products:
     spegel:
       deploy: true
       autoSync: true
+  development:
+    argoWorkflows:
+      deploy: true
+      autoSync: false
+      serverSideApply: true
   monitoring:
     fluentBit:
       deploy: true
