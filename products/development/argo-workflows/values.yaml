@@ -75,17 +75,6 @@ argo-workflows:
       hostnames:
         - argoworkflows.feddema.dev
 
-    secure: true
-    backendTLSPolicy:
-      enabled: true
-      targetRefs:
-        - group: ""
-          kind: Service
-          name: argo-workflows-server
-      validation:
-        hostname: argo-workflows-server.argoworkflows.svc.cluster.local
-        wellKnownCACertificates: System
-
     authModes: ['sso']
     sso:
       enabled: true
