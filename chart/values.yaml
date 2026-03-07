@@ -60,7 +60,7 @@ products:
   development:
     argoWorkflows:
       deploy: true
-      autoSync: false
+      autoSync: true
       serverSideApply: true
   monitoring:
     fluentBit:
