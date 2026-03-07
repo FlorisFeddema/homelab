@@ -51,14 +51,13 @@ argo-workflows:
   server:
     enabled: true
 
-
     resources: { }
     replicas: 2
     revisionHistoryLimit: 0
-    topologySpreadConstraints: [ ]
-    # - maxSkew: 1
-    #   topologyKey: topology.kubernetes.io/zone
-    #   whenUnsatisfiable: DoNotSchedule
+    topologySpreadConstraints:
+     - maxSkew: 1
+       topologyKey: topology.kubernetes.io/zone
+       whenUnsatisfiable: DoNotSchedule
 
     logging:
       level: warn
