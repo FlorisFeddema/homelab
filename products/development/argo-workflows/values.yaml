@@ -69,7 +69,7 @@ argo-workflows:
       hostnames:
         - argoworkflows.feddema.dev
 
-    authModes: sso
+    authModes: [sso]
     sso:
       enabled: true
       issuer: https://authentik.feddema.dev/application/o/argo-workflows/
