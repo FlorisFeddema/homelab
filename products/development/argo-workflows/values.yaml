@@ -64,8 +64,11 @@ argo-workflows:
       format: "json"
 
     httproute:
-      enabled: false
-      parentRefs: [ ]
+      enabled: true
+      parentRefs:
+        - name: envoy-gateway
+          namespace: envoy-gateway
+          sectionName: web-https
       hostnames:
         - argoworkflows.feddema.dev
 

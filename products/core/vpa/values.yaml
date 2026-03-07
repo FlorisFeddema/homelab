@@ -18,10 +18,10 @@ vpa:
       enabled: true
     resources:
       limits:
-        memory: 100Mi
+        memory: 150Mi
       requests:
         cpu: 10m
-        memory: 50Mi
+        memory: 70Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-recommender
       tag: "1.6.0"

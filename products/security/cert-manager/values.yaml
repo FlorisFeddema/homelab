@@ -27,10 +27,10 @@ cert-manager:
   cainjector:
     resources:
       limits:
-        memory: 250Mi
+        memory: 300Mi
       requests:
         cpu: 20m
-        memory: 120Mi
+        memory: 150Mi
 
   prometheus:
     enabled: true
