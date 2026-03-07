@@ -66,13 +66,15 @@ argo-workflows:
     httproute:
       enabled: true
       parentRefs:
-        - name: envoy-gateway
+        - group: gateway.networking.k8s.io
+          kind: Gateway
+          name: envoy-gateway
           namespace: envoy-gateway
           sectionName: web-https
       hostnames:
         - argoworkflows.feddema.dev
 
-    authModes: [sso]
+    authModes: ['sso']
     sso:
       enabled: true
       issuer: https://authentik.feddema.dev/application/o/argo-workflows/
