@@ -2,7 +2,6 @@ machine:
   type: worker
 
   network:
-    hostname: hortek-0
     interfaces:
       - interface: enp1s0f1 # node
         dhcp: true
@@ -18,7 +17,6 @@ machine:
   nodeLabels:
     topology.kubernetes.io/zone: "hortek"
     topology.kubernetes.io/region: "salioca"
-    feddema.dev/talos-configfile: "hortek-0"
 
   install:
     disk: /dev/sda

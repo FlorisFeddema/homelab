@@ -230,6 +230,16 @@ rook-ceph-cluster:
             labelSelector:
               matchLabels:
                 app: rook-ceph-mon
+        affinity:
+          nodeAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                preference:
+                  matchExpressions:
+                    - key: kubernetes.io/arch
+                      operator: In
+                      values:
+                        - amd64
       mgr:
         topologySpreadConstraints:
           - maxSkew: 1

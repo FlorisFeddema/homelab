@@ -1,7 +1,7 @@
 machine:
-  network:
-    hostname: korris-0
+  type: controlplane
 
+  network:
     interfaces:
       - deviceSelector:
           physical: true
@@ -12,7 +12,6 @@ machine:
   nodeLabels:
     topology.kubernetes.io/zone: "korris"
     topology.kubernetes.io/region: "salioca"
-    feddema.dev/talos-configfile: "korris-0"
 
   install:
     disk: /dev/sda

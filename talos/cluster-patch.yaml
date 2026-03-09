@@ -1,0 +1,10 @@
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+  - address: 192.168.4.1
+---
+apiVersion: v1alpha1
+kind: TimeSyncConfig
+ntp:
+  servers:
+    - europe.pool.ntp.org

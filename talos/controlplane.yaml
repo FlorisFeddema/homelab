@@ -4,8 +4,6 @@ cluster:
       listen-metrics-urls: http://0.0.0.0:2381
 
 machine:
-  type: controlplane
-
   features:
     kubernetesTalosAPIAccess:
       enabled: true

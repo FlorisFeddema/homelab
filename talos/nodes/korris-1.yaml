@@ -1,24 +1,22 @@
 machine:
-  network:
-    hostname: korris-1
+  type: worker
 
+  network:
     interfaces:
       - interface: enp1s0 # node
         dhcp: true
-      - interface: enp0s20f0u3 # storage
-        dhcp: false
-        addresses:
-          - 192.168.5.19/24
-        routes:
-          - network: 192.168.5.0/24
-            gateway: 192.168.5.1
-        mtu: 9000
+#      - interface: enp0s20f0u3 # storage
+#        dhcp: false
+#        addresses:
+#          - 192.168.5.19/24
+#        routes:
+#          - network: 192.168.5.0/24
+#            gateway: 192.168.5.1
+#        mtu: 9000
 
   nodeLabels:
     topology.kubernetes.io/zone: "korris"
     topology.kubernetes.io/region: "salioca"
-    feddema.dev/talos-configfile: "korris-1"
 
   install:
     disk: /dev/sda
-

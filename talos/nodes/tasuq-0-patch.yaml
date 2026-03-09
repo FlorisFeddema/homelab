@@ -1,0 +1,9 @@
+apiVersion: v1alpha1
+kind: HostnameConfig
+hostname: tasuq-0
+auto: off
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 10.x.x.x # IP address to be advertised as a Layer 2 VIP.
+link: enp0s2

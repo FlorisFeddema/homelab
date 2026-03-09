@@ -1,6 +1,7 @@
 machine:
+  type: worker
+
   network:
-    hostname: tasuq-1
     interfaces:
       - interface: enp1s0 # node
         dhcp: true
@@ -16,7 +17,6 @@ machine:
   nodeLabels:
     topology.kubernetes.io/zone: "tasuq"
     topology.kubernetes.io/region: "salioca"
-    feddema.dev/talos-configfile: "tasuq-1"
 
   install:
     disk: /dev/sda

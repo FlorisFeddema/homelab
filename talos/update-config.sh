@@ -19,29 +19,34 @@ controlPlane=$(kubectl get node "$nodeName" -o yaml | yq '.metadata.labels | con
 if [ "$controlPlane" = "true" ]; then
   nodeType="controlplane"
 fi
-echo "⚙️ Node is a $nodeType"
+echo "♟️️ Node is a $nodeType"
 
 clusterName="gerador"
-clusterDomain="https://gerador.feddema.dev:6443"
+clusterDomain="https://$clusterName.feddema.dev:6443"
 kubernetesVersion=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
 nodeIP=$(kubectl get node "$nodeName" -o yaml | yq '.status.addresses[] | select(.type == "InternalIP") | .address')
-configFile=$(kubectl get node "$nodeName" -o yaml | yq '.metadata.labels["feddema.dev/talos-configfile"]')
 
 echo "⚙️ Generating Talos config for $nodeName"
 talosctl gen config $clusterName $clusterDomain \
-    --output ./rendered/"$configFile".yaml \
+    --output ./rendered/"$nodeName".yaml \
     --output-types "$nodeType"                       \
     --with-cluster-discovery=false                    \
     --with-secrets ./secrets.yaml                       \
-    --config-patch @"nodes/$configFile".yaml   \
+    --with-docs=false                      \
+    --with-examples=false                      \
+    --config-patch @nodes/"$nodeName".yaml   \
     --config-patch @"$nodeType".yaml   \
     --config-patch @cluster.yaml                      \
+    --config-patch-control-plane @controlplane.yaml                      \
+    --config-patch-worker @worker.yaml                      \
+    --config-patch @cluster-patch.yaml \
+    --config-patch @nodes/"$nodeName-patch".yaml \
     --kubernetes-version "$kubernetesVersion"    \
     --force
 
 if [ -z "$dryRun" ]; then
-  echo "⚙️ Applying Talos config for $nodeName"
-  talosctl apply-config --nodes "$nodeIP" --file ./rendered/"$configFile".yaml
+  echo "🏗️️ Applying Talos config for $nodeName"
+  talosctl apply --nodes "$nodeIP" --file ./rendered/"$nodeName".yaml
 else
-  echo "⚙️ Running in dry-run mode, skipping apply-config"
+  echo "🏗️️ Running in dry-run mode, skipping apply-config"
 fi

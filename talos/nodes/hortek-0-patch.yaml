@@ -1,0 +1,4 @@
+apiVersion: v1alpha1
+kind: HostnameConfig
+hostname: hortek-0
+auto: off
