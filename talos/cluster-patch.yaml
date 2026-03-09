@@ -8,3 +8,8 @@ kind: TimeSyncConfig
 ntp:
   servers:
     - europe.pool.ntp.org
+---
+apiVersion: v1alpha1
+kind: KmsgLogConfig
+name: remote-log
+url: udp://10.102.209.253:12345/
