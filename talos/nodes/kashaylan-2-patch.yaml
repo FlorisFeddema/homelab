@@ -2,3 +2,8 @@ apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: kashaylan-2
 auto: off
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 192.168.4.9
+link: end0

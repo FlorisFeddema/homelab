@@ -2,3 +2,8 @@ apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: korris-0
 auto: off
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 192.168.4.9
+link: enp1s0
