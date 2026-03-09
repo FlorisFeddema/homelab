@@ -10,15 +10,15 @@ rook-ceph:
   resources:
     requests:
       cpu: 100m
-      memory: 80Mi
+      memory: 150Mi
     limits:
-      memory: 300Mi
+      memory: 500Mi
 
   monitoring:
     enabled: true
   obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
-  ceph-csi-operator:
+  ceph-csi-§:
     controllerManager:
       manager:
         resources:
