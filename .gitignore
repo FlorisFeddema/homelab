@@ -391,9 +391,9 @@ $RECYCLE.BIN/
 
 **/secret.yaml
 **/*.secret.yaml
-/secret/
-/talos/secrets.yaml
-/talos/talosconfig
+secret/
+talos/secrets.yaml
+talos/talosconfig
  .idea/**
-/talos/rendered/
-/talos/secret-patch.yaml
+talos/rendered/
+talos/secret-patch.yaml
