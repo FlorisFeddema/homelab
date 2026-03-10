@@ -13,3 +13,16 @@ apiVersion: v1alpha1
 kind: KmsgLogConfig
 name: remote-log
 url: udp://10.102.209.253:12345/
+---
+#apiVersion: v1alpha1
+#kind: RegistryAuthConfig
+#name: harbor.feddema.dev
+#username: ---{HARBOR_REGISTRY_USERNAME}--- #replaced at generation time
+#password: ---{HARBOR_REGISTRY_PASSWORD}--- #replaced at generation time
+#---
+#apiVersion: v1alpha1
+#kind: RegistryMirrorConfig
+#name: registry.k8s.io
+#endpoints:
+#  - url: https://harbor.feddema.dev/v2/proxy-registry.k8s.io/
+#    overridePath: true
