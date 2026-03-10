@@ -396,3 +396,4 @@ $RECYCLE.BIN/
 /talos/talosconfig
  .idea/**
 /talos/rendered/
+/talos/secret-patch.yaml
