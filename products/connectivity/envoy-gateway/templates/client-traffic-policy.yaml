@@ -10,15 +10,21 @@ spec:
   path:
     escapedSlashesAction: KeepUnchanged
   tls:
-    minVersion: '1.3'
+    minVersion: '1.2'
+    maxVersion: '1.3'
+    ciphers:
+      - ECDHE-ECDSA-AES128-GCM-SHA256
+      - ECDHE-RSA-AES128-GCM-SHA256
+      - ECDHE-ECDSA-AES256-GCM-SHA384
+      - ECDHE-RSA-AES256-GCM-SHA384
   headers:
     lateResponseHeaders:
       set:
         - name: "strict-transport-security"
           value: "max-age=31536000; includeSubDomains; preload"
         - name: "permissions-policy"
-          value: "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+          value: "microphone=(), camera=(), payment=(), usb=()"
         - name: "referrer-policy"
-          value: "no-referrer"
+          value: "same-origin"
         - name: "x-content-type-options"
           value: "nosniff"
