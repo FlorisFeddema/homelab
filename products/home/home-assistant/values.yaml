@@ -10,6 +10,14 @@ gatus-monitor:
 home-assistant:
   nodeName: kashaylan-3
 
+  env:
+    - name: TZ
+      value: "Europe/Amsterdam"
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+
   useHostNetworking: true
 
   podSecurityContext:

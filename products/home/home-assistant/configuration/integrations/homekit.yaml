@@ -1,7 +1,7 @@
 homekit:
   name: Homekit Assistant Bridge
   mode: bridge
-  advertise_ip: 192.168.4.14
+  advertise_ip: !env_var POD_IP
   port: 21064
   filter:
     include_entities:
