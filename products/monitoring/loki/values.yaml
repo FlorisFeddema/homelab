@@ -135,10 +135,10 @@ loki:
     maxUnavailable: 1
     resources:
       limits:
-        memory: 250Mi
+        memory: 400Mi
       requests:
         cpu: 180m
-        memory: 100Mi
+        memory: 200Mi
 
   compactor:
     replicas: 1
