@@ -2,7 +2,7 @@ products:
   core:
     argoCd:
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: argocd
     descheduler:
       deploy: true
@@ -34,13 +34,17 @@ products:
       autoSync: true
     cilium:
       deploy: true
-      autoSync: false
+      autoSync: true
       ignoreDifferences:
       - group: apps
         kind: DaemonSet
         jqPathExpressions:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
     coredns:
+      deploy: true
+      autoSync: false
+      namespace: kube-system
+    devices:
       deploy: true
       autoSync: false
       namespace: kube-system
@@ -62,13 +66,13 @@ products:
   monitoring:
     fluentBit:
       deploy: true
-      autoSync: false
+      autoSync: true
     prometheus:
       deploy: true
       autoSync: true
     loki:
       deploy: true
-      autoSync: false
+      autoSync: true
     gatus:
       deploy: true
       autoSync: true
@@ -119,7 +123,7 @@ products:
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true
-      autoSync: false
+      autoSync: true
       namespace: media-server
     jellyfin:
       deploy: true
