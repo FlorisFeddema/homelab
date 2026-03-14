@@ -1,0 +1,5 @@
+dnsRecords:
+  - name: vpn
+    ip: 95.98.178.131
+  - name: gerador
+    ip: 192.168.4.9
