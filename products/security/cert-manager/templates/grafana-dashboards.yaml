@@ -5,7 +5,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ $dashboardName | trunc 63 | trimSuffix "-" }}
+  name: {{ $dashboardName | trunc 63 | trimSuffix "-" }}-dashboard
   labels:
     grafana_dashboard: "1"
 data:
