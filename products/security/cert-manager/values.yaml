@@ -38,15 +38,29 @@ cert-manager:
       enabled: true
 
   enableCertificateOwnerRef: true
-  dns01RecursiveNameservers: 1.1.1.1:53,8.8.8.8:53
-  extraArgs:
-    - --enable-gateway-api
+  config:
+    leaderElectionConfig:
+      namespace: cert-manager
+    acmeDNS01Config:
+      recursiveNameservers:
+        - 1.1.1.1:53
+        - 8.8.8.8:53
+    acmeHTTP01Config:
+      solverNameservers:
+        - 1.1.1.1:53
+        - 8.8.8.8:53
+    enableGatewayAPI: true
+
 
 trust-manager:
   revisionHistoryLimit: 0
   crds:
     enabled: true
     keep: false
+
+  defaultPackageImage:
+    repository: quay.io/jetstack/trust-pkg-debian-bookworm
+    tag: 20230311-deb12u1.0
 
   resources:
     limits:
