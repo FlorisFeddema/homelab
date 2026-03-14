@@ -54,9 +54,6 @@ products:
     privateExternalDns:
       deploy: true
       autoSync: true
-    spegel:
-      deploy: false
-      autoSync: true
   development:
     argoWorkflows:
       deploy: true
