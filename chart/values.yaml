@@ -55,7 +55,7 @@ products:
       deploy: true
       autoSync: true
     spegel:
-      deploy: true
+      deploy: false
       autoSync: true
   development:
     argoWorkflows:
