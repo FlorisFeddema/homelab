@@ -1,14 +1,6 @@
 machine:
   type: controlplane
 
-  network:
-    interfaces:
-      - deviceSelector:
-          physical: true
-        dhcp: true
-        vip:
-          ip: 192.168.4.9
-
   nodeLabels:
     topology.kubernetes.io/zone: "kashaylan"
     topology.kubernetes.io/region: "salioca"

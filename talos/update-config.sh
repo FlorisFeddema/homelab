@@ -24,7 +24,6 @@ echo "♟️️ Node is a $nodeType"
 clusterName="gerador"
 clusterDomain="https://$clusterName.feddema.dev:6443"
 kubernetesVersion=$(kubectl version -o yaml | yq '.serverVersion.gitVersion' | tr -d v)
-nodeIP=$(kubectl get node "$nodeName" -o yaml | yq '.status.addresses[] | select(.type == "InternalIP") | .address')
 
 echo "⚙️ Generating Talos config for $nodeName"
 talosctl gen config $clusterName $clusterDomain \
@@ -40,13 +39,14 @@ talosctl gen config $clusterName $clusterDomain \
     --config-patch-control-plane @controlplane.yaml                      \
     --config-patch-worker @worker.yaml                      \
     --config-patch @cluster-patch.yaml \
+    --config-patch @secret-patch.yaml \
     --config-patch @nodes/"$nodeName-patch".yaml \
     --kubernetes-version "$kubernetesVersion"    \
     --force
 
 if [ -z "$dryRun" ]; then
   echo "🏗️️ Applying Talos config for $nodeName"
-  talosctl apply --nodes "$nodeIP" --file ./rendered/"$nodeName".yaml
+  talosctl apply --nodes "$nodeName" --file ./rendered/"$nodeName".yaml
 else
   echo "🏗️️ Running in dry-run mode, skipping apply-config"
 fi

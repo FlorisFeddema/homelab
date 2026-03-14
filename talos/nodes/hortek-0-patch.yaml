@@ -2,3 +2,21 @@ apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: hortek-0
 auto: off
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: enp1s0f1
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp1s0f1
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp1s0f0
+mtu: 9000
+addresses:
+  - address: 192.168.5.15/24
+routes:
+  - destination: 192.168.5.0/24
+    gateway: 192.168.5.1

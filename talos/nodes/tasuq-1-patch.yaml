@@ -2,3 +2,21 @@ apiVersion: v1alpha1
 kind: HostnameConfig
 hostname: tasuq-1
 auto: off
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: enp1s0
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp1s0
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp0s20f0u3
+mtu: 9000
+addresses:
+  - address: 192.168.5.18/24
+routes:
+  - destination: 192.168.5.0/24
+    gateway: 192.168.5.1
