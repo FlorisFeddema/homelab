@@ -56,6 +56,12 @@ kyverno:
     revisionHistoryLimit: 0
     serviceMonitor:
       enabled: true
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 100Mi
 
 policy-reporter:
   revisionHistoryLimit: 0
