@@ -18,7 +18,7 @@ apiVersion: v1alpha1
 kind: RegistryMirrorConfig
 name: registry.k8s.io
 endpoints:
-  - url: https://harbor.feddema.dev/v2/proxy-registry.k8s.io/
+  - url: https://harbor.feddema.dev/v2/proxy-registry.k8s.io
     overridePath: true
 ---
 apiVersion: v1alpha1
