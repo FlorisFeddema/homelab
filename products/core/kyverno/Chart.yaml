@@ -12,3 +12,6 @@ dependencies:
   - name: kyverno-policies
     version: 3.7.1
     repository: oci://ghcr.io/kyverno/charts
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0

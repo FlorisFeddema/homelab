@@ -1,3 +1,10 @@
+gatus-monitor:
+  appName: kyverno
+  publicEndpoints:
+    - name: kyverno
+  privateEndpoints:
+    - name: kyverno
+
 route:
   enabled: true
   hostnames:
