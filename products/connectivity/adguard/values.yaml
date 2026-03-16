@@ -78,6 +78,12 @@ adguard:
         - name: envoy-gateway
           namespace: envoy-gateway
           sectionName: web-https
+      filters:
+        - type: ExtensionRef
+          extensionRef:
+            group: gateway.envoyproxy.io
+            kind: HTTPRouteFilter
+            name: credential-injection
   secondary:
     persistence:
       labels:
