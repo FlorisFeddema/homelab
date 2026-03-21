@@ -1,5 +1,26 @@
+domain: feddema.dev
+
 dnsRecords:
   - name: vpn
     ip: 95.98.178.131
   - name: gerador
     ip: 192.168.4.9
+
+proxiedRoutes:
+  - name: otgw
+    ip: 192.168.3.10
+    clientID: cu2yb4fSgeWFK3582npkxFlaxIjZDgvXsPMUBSy2
+    clientSecretSealed: AgALQBEk4sPmSzKWNd8J0gSg3Ft6Fo5NHKAvDU0EZkojm0qlT5GX44eTuR73uQvI5SaPuvigyxqWh9ZG+bx+b5oe40t0Etd6dlALFscSxQ5rJGmeRxkGq5fMbU6TPpejn6OzMfFtws/YEOaTFZt59enzHLZr6cOGC8gUOTbfEYhcwskc93N7YCbWOaBhOlgfm6iPRwxCnv+0uLBsrx5iRxyUTqVAnt6zHiaZeviNgNH0UfyW22HmlJdauCjIQMdk7mQO9w+7tkk+ze0rqTQMYx5YPR0cZRv0z2TeKNzTkeelmzRsP1eQceY+rYlcnplvw3gTgIgITxj4LV0dE3VH6QFJqw9uduRRIoLJhFsxHf85VmNVjhPXboIbR7h9jQjVyReQ+88Sr7gixob6tr3NWQP4Nf7uNtcrTRThTjXeAUuhnkwKb0CVEzfeBw6b6WTebGsihwR66V87fnxGTS+4gu9BitZ1R9f/nCMxEVXumGkNhv1Q6CrOsCF0tIBrssl4oXWRHX1h06W8s68Q2YLF4LpG05q5dpLGPtiLmw10cvT74TXbenHRAxIdJgzDOWRxE3L6xMMx2Ud+opAcJxHn9PTza9bAPoBdoKMj0jaml9Km13TPI4YVApvo5aBv2saBwctcDSafkBO3z3keiChCzJu3nWCYBRiScAFbWH2otEdkVxijm6Wf9tA7IKM1LIzG/nMnLmC9vo++uxgRMqtMOmlqY/d5mp5XRKINjpF1ZC4oN0KLnP18kVPZhFGTiXMk4x3qOdtfSHeOSMy6skqr/0ULxbGyyDRJI/ogn8PQH9exWe3NFxVAEhHN3M7D0KDyjSLOBuZy8vjDBuD/c1vR10qbfAncVJl1KICmoTMxoaI8Eg==
+    port: 80
+  - name: smartgateway
+    ip: 192.168.3.42
+    clientID: 3XCD7MTUbgmaFOePyd6jYVJAnOfJGjc5gMjEvpW4
+    clientSecretSealed: AgATPON1aPB0zEe+sKBr7ZbwyqAjWlbW54IJe6dWoD5xQ2+N+KdmzkbKhkVQP8tIbG+K3sYU5EPLxJnfesbVEzEUoX2DHbR/0Wji98jw7YXzhQC24Xv0cPBlsdG0ED33hgoROeJ3ADk/TBN4TLeoZK9kg9f0Ny/C8/MZsjxhBTc34tIb5FGLXb1tC+LUIBJqJ6oMFdMaFtC1IGQN/JzAoTga7TZjxxOv7bPhTQoMnosR4i3y9ivZTWFSV3AyyFL+4lBiDfDjXx8YNLNnnfZzqPYtfRoTaHMmqlct0vb+Lt4Q+1WczZEZ11q3P1RkX1wvLS2w3p30O8swHdyqm0gGIpAt61U4MtOHlMCGrfHUm1738v8Ny5byNhxuDBLby1eTb7s5/Ear2cvue0v0rzg2o4bmFSNxjWKUu48WGFDDsL/IhJhtUGOGtqQbOJ8/JZPZQFG6OlutdlAgo3RhO8WNe7jDf5oVmUGTs2+PrRFG2vjZAJUeSL14qnZvHaWeV+4Bzr6RoapuISjsfn5XpxXwpLB0P1+FRfdFBgkJf56pUrqvJozLSZS7E2kKa3aFpKEZ6D0tqXET7mYXpGDhdKSnQbzziGJg2uh7803IhAEWKI/ItK+BE/G6mf5APi3p37aJARSAoDIAPbSdIeRSAsYFdG36lS6NrVD/eFOMievYrbp4Rsp3FUD5Brp93JlqiFlbNeWaPaz3uCodkJiednXBLA9U4huUV/XzSlWO6X01YLBbd74QV8A5TAWVMD3JUMnk2kVhufr/gx6AMJG8SRuvAsWWLHl92f9FoZqmTpe0twl+7SZ4/dr2P+eiwlDaIXWluKJamm5AY6RlOo9bhFD3/FgEgvNLe+P2HlWQVkbrD47NDw==
+    port: 82
+
+services:
+  - name: talos
+    port: 50000
+    protocol: tcp
+    endpoints:
+      - ip: 192.168

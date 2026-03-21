@@ -5,7 +5,7 @@ metadata:
   name: {{ $endpoint.name }}
 spec:
   endpoints:
-    - dnsName: '{{ $endpoint.name }}.feddema.dev'
+    - dnsName: '{{ $endpoint.name }}.{{ $.Values.domain }}'
       recordType: A
       targets:
         - {{ $endpoint.ip }}

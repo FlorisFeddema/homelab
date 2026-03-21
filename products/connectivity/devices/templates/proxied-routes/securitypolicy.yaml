@@ -1,0 +1,20 @@
+{{- range $route := .Values.proxiedRoutes }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: {{ $route.name }}-proxy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: {{ $route.name }}-proxy
+  oidc:
+    provider:
+      issuer: https://authentik.{{ $.Values.domain }}/application/o/{{ $route.name }}/
+    redirectURL: https://{{ $route.name }}.{{ $.Values.domain }}/oauth2/callback
+    logoutPath: /oauth2/logout
+    clientID: {{ $route.clientID }}
+    clientSecret:
+      name: {{ $route.name }}-proxy
+---
+{{- end }}

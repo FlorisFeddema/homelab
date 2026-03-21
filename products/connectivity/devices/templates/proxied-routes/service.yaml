@@ -1,0 +1,12 @@
+{{- range $route := .Values.proxiedRoutes }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $route.name }}-proxy
+spec:
+  ports:
+    - name: http
+      port: {{ $route.port }}
+      targetPort: {{ $route.port }}
+---
+{{- end }}
