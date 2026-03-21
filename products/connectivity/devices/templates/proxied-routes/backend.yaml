@@ -5,10 +5,10 @@ kind: Backend
 metadata:
   name: {{ $route.name }}-proxy
 spec:
-{{/*  endpoints:*/}}
-{{/*    - fqdn:*/}}
-{{/*        hostname: {{ $route.name }}-proxy.{{ $.Release.Namespace }}.svc.cluster.local*/}}
-{{/*        port: 443*/}}
+  endpoints:
+    - fqdn:
+        hostname: {{ $route.name }}-proxy.{{ $.Release.Namespace }}.svc.cluster.local
+        port: 443
   tls:
     insecureSkipVerify: true
 ---

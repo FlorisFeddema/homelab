@@ -12,7 +12,8 @@ spec:
     - {{ $route.name}}.{{ $.Values.domain }}
   rules:
     - backendRefs:
-        - name: {{ $route.name }}-proxy
-          port: {{ $route.port }}
+        - group: gateway.envoyproxy.io
+          kind: Backend
+          name: {{ $route.name }}-proxy
 ---
 {{- end }}
