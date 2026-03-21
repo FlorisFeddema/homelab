@@ -49,10 +49,10 @@ authentik:
     replicas: 2
     resources:
       limits:
-        memory: 800Mi
+        memory: 1000Mi
       requests:
         cpu: 150m
-        memory: 400Mi
+        memory: 600Mi
 
     metrics:
       serviceMonitor:
