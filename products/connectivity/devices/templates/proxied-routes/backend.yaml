@@ -1,0 +1,16 @@
+{{- range $route := .Values.proxiedRoutes }}
+{{- if $route.insecureSkipVerify }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: Backend
+metadata:
+  name: {{ $route.name }}-proxy
+spec:
+{{/*  endpoints:*/}}
+{{/*    - fqdn:*/}}
+{{/*        hostname: {{ $route.name }}-proxy.{{ $.Release.Namespace }}.svc.cluster.local*/}}
+{{/*        port: 443*/}}
+  tls:
+    insecureSkipVerify: true
+---
+{{- end }}
+{{- end }}
