@@ -1,0 +1,15 @@
+{{- range $route := .Values.proxiedRoutes }}
+{{- if $route.auth }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: HTTPRouteFilter
+metadata:
+  name: {{ $route.name }}-proxy-auth
+spec:
+  credentialInjection:
+    overwrite: true
+    credential:
+      valueRef:
+        name: {{ $route.name }}-proxy-auth
+---
+{{- end }}
+{{- end }}

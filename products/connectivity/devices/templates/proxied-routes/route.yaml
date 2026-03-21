@@ -20,5 +20,13 @@ spec:
         - name: {{ $route.name }}-proxy
           port: {{ $route.port }}
         {{- end }}
+      {{- if $route.auth }}
+      filters:
+      - type: ExtensionRef
+        extensionRef:
+          group: gateway.envoyproxy.io
+          kind: HTTPRouteFilter
+          name: {{ $route.name }}-proxy-auth
+    {{- end }}
 ---
 {{- end }}

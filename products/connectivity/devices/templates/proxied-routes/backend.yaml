@@ -10,7 +10,7 @@ spec:
         hostname: {{ $route.name }}-proxy.{{ $.Release.Namespace }}.svc.cluster.local
         port: 443
   tls:
-    insecureSkipVerify: true
+    insecureSkipVerify: {{ $route.backend.insecureSkipVerify | default false }}
 ---
 {{- end }}
 {{- end }}
