@@ -13,7 +13,9 @@ gateway-helm:
     envoyGateway:
       logging:
         level:
-          default: info
+          default: warn
+      extensionApis:
+        enableBackend: true
 
 gateway-addons-helm:
   dashboard:
