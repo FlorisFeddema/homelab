@@ -39,10 +39,10 @@ external-dns:
 
   resources:
     limits:
-      memory: 50Mi
+      memory: 70Mi
     requests:
       cpu: 20m
-      memory: 25Mi
+      memory: 35Mi
 
   metrics:
     enabled: true
