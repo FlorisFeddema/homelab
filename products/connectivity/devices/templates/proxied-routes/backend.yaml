@@ -1,5 +1,5 @@
 {{- range $route := .Values.proxiedRoutes }}
-{{- if $route.insecureSkipVerify }}
+{{- if $route.backend }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: Backend
 metadata:

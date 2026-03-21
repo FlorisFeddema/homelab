@@ -22,9 +22,10 @@ proxiedRoutes:
     clientID: VOQ2igaI9JhwAnzhdja4c38O77Yc137jrJA5hJfv
     clientSecretSealed: AgAU5t6yX49kxQNSMiDq5HllUpiClnebEAiW3buLfmwTr3cYpeDgXWqkXE22URMM1i7aDw/diRF5MPHf2s106fqOYfH3Jr1Gt9D1U0XkM/siv0k+qSV6zIdUfBqimTWHmmSvpLWCrHF4NG27vcy9U1VzQ1QN9hySzUfzsUnG3c2D1cPqMeOeDfS1SsUYJ2HVuuwb7B1xyDDee8w2JUPIlVMtl+/gWyLDBQ1gc2SVkB1jLLw8MR3lFh0BX9stvFr8k+rTAMZ/Z2nWLHRmjtTbguzadf3EXss/X3hZNUrpJNFU96S4+auYT22fVJsp7zBqRoDWwgACI5Tk4iTGWmo88L9HNJmpQ9QIWBCmjguR8uZvLX8S77EAoUlg9p1riNPqxiXtdU3XnlX+dw5XksM41b9PnFqGoWv0kPwgRuwUS/mr3N/4TPnNCO/jjjUsJBKrsvDUazrh+L+pTaITCkVp22l/3gx4hmk1plsPzcMjkmUC2DfiRqlRsvm9YTnqu5o2YY7YkqbGBOVsQHa3nqUO1QG6fIGGL5rvcOOGpBfSFews6/ochv/2GOvbNQNdfRA1ayX3Copzq9St3uYyNqGowB+w/vAkVWlVNj7qmW4Yn9gHQfLW47VujevoveT5RzQAKNtP+QVLiJJI393RWxFu6wDeNCYLZi+H5mXLXhB4PL/J2fknMb2rLSZgcNzsKxY1jIRvgRzYMGEK9JUSSZv9rCNMttvLCGRd60GsfsCFHwGn6sHCnP3U84wFpIILcYpyiNaALh0HR4fcYJe9Kw4MYl0P+f6Vko86XsGs6JrVAELvxNXX3lfpQs8cF02ghKv833FkVdHfO1gWiuQ+rFA2S0F36g9kIvU8Wj853FkOC4djoA==
     port: 443
-    insecureSkipVerify: true
+    backend:
+      insecureSkipVerify: true
 
-services:
+loadBalancers:
   - name: talos
     port: 50000
     protocol: tcp

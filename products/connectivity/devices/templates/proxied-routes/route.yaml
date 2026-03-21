@@ -12,7 +12,7 @@ spec:
     - {{ $route.name}}.{{ $.Values.domain }}
   rules:
     - backendRefs:
-        {{- if $route.insecureSkipVerify }}
+        {{- if $route.backend }}
         - group: gateway.envoyproxy.io
           kind: Backend
           name: {{ $route.name }}-proxy
