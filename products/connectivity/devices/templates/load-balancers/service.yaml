@@ -11,7 +11,7 @@ spec:
       port: {{ $service.port }}
       protocol: {{ $service.protocol | upper }}
       targetPort: {{ $service.port }}
-{{/*  externalTrafficPolicy: Local*/}}
-{{/*  trafficDistribution: PreferSameNode*/}}
+  externalTrafficPolicy: Local
+{{/*  trafficDistribution:g PreferSameNode*/}}
 ---
 {{- end }}
