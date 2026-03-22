@@ -46,7 +46,7 @@ products:
       namespace: kube-system
     devices:
       deploy: true
-      autoSync: false
+      autoSync: true
     envoyGateway:
       deploy: true
       autoSync: true
