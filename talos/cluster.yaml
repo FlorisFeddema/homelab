@@ -34,6 +34,9 @@ cluster:
       feature-gates: DRAExtendedResource=true,DRAPartitionableDevices=true
 
 machine:
+  certSANs:
+    - 192.168.102.21
+
   files:
     - path: /etc/cri/conf.d/20-customization.part
       op: create
