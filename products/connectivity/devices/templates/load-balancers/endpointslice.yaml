@@ -1,0 +1,20 @@
+{{- range $service := .Values.loadBalancers }}
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: {{ $service.name }}-lb
+  labels:
+    kubernetes.io/service-name: {{ $service.name }}-lb
+addressType: IPv4
+ports:
+  - name: {{ $service.name }}
+    port: {{ $service.port }}
+    protocol: {{ $service.protocol | upper }}
+endpoints:
+  {{- range $endpoint := $service.endpoints }}
+  - addresses:
+      - {{ $endpoint.ip }}
+    conditions: {}
+  {{- end }}
+---
+{{- end }}

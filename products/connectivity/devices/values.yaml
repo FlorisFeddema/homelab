@@ -30,4 +30,6 @@ loadBalancers:
     port: 50000
     protocol: tcp
     endpoints:
-      - ip: 192.168
+      - ip: 192.168.4.55
+      - ip: 192.168.4.44
+      - ip: 192.168.4.204

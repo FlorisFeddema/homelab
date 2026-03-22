@@ -1,0 +1,16 @@
+{{- range $service := .Values.loadBalancers }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $service.name }}-lb
+spec:
+  type: LoadBalancer
+  ports:
+    - name: {{ $service.name }}
+      port: {{ $service.port }}
+      protocol: {{ $service.protocol | upper }}
+      targetPort: {{ $service.port }}
+  externalTrafficPolicy: Local
+  trafficDistribution: PreferSameNode
+---
+{{- end }}
