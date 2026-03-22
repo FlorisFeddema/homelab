@@ -5,12 +5,13 @@ metadata:
   name: {{ $service.name }}-lb
 spec:
   type: LoadBalancer
+  allocateLoadBalancerNodePorts: false
   ports:
     - name: {{ $service.name }}
       port: {{ $service.port }}
       protocol: {{ $service.protocol | upper }}
       targetPort: {{ $service.port }}
   externalTrafficPolicy: Local
-  trafficDistribution: PreferSameNode
+{{/*  trafficDistribution: PreferSameNode*/}}
 ---
 {{- end }}
