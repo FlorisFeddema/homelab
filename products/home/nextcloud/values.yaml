@@ -36,8 +36,8 @@ nextcloud:
     failureThreshold: 50
     successThreshold: 1
 
-  nginx:
-    enabled: true
+#  nginx:
+#    enabled: true
 
   nextcloud:
     host: nextcloud.feddema.dev
@@ -50,13 +50,6 @@ nextcloud:
 
     mail:
       enabled: false
-
-    resources:
-      limits:
-        memory: 256Mi
-      requests:
-        cpu: 50m
-        memory: 128Mi
 
   internalDatabase:
     enabled: false
@@ -88,7 +81,7 @@ nextcloud:
     limits:
       memory: 512Mi
     requests:
-      cpu: 90m
+      cpu: 150m
       memory: 128Mi
 
   metrics:
