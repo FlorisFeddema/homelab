@@ -22,8 +22,8 @@ database:
 nextcloud:
   replicaCount: 1
 
-  image:
-    flavor: fpm
+#  image:
+#    flavor: fpm
 
   phpClientHttpsFix:
     enabled: true
