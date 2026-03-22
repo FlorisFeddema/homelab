@@ -22,12 +22,17 @@ database:
 nextcloud:
   replicaCount: 1
 
-#  image:
-#    flavor: fpm
+  httpRoute:
+    enabled: true
+    hostnames:
+      - nextcloud.feddema.dev
+    parentRefs:
+      - name: envoy-gateway
+        namespace: envoy-gateway
+        sectionName: web-https
 
   phpClientHttpsFix:
     enabled: true
-    protocol: https
 
   startupProbe:
     enabled: true
@@ -35,9 +40,6 @@ nextcloud:
     periodSeconds: 5
     failureThreshold: 50
     successThreshold: 1
-
-#  nginx:
-#    enabled: true
 
   nextcloud:
     host: nextcloud.feddema.dev
@@ -48,8 +50,6 @@ nextcloud:
       usernameKey: username
       passwordKey: password
 
-    mail:
-      enabled: false
 
   internalDatabase:
     enabled: false
@@ -67,14 +67,13 @@ nextcloud:
       passwordKey: postgres-password
 
   redis:
-    enabled: false
+    enabled: true
 
   cronjob:
     enabled: true
 
   persistence:
     enabled: true
-    accessMode: ReadWriteOnce
     size: 50Gi
 
   resources:
@@ -88,11 +87,7 @@ nextcloud:
     enabled: true
     info:
       apps: true
+
+  prometheus:
     serviceMonitor:
       enabled: true
-
-  rbac:
-    enabled: true
-    serviceaccount:
-      create: true
-      name: nextcloud-serviceaccount
