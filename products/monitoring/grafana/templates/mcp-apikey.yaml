@@ -1,0 +1,13 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: mcp-apikey
+  namespace: grafana
+spec:
+  encryptedData:
+    key: AgBrzTrTTZHQ3OyiTaTgemhMZ8jkEGYAbvuqgsah8N+sryn6dedeO7bdpdGqxaU2Ic5HfmaLvACIkLS/Bij4qYF1EAHamiTukKmQO6LO64F3w5hwoBy24I+bxBZIknO0jb14GB4LQBuSyxyJsmOPgEqGaoAUlXdm5965VEP5XfzTj1xLz0UuWGLgnMXouK41chtwbREtcJKGTOXpxGmurXDWPG7B7vd9zlrO/M5w53p8IKdXTSwG9Qz1axHs3Y9ecKfcuSuXc8oeoFdAd98By3anvflrk2afUytAs+ok9BoS8+pJlnbAPmB99AxVgF7JX//PAhopDwMGB/NNQusjuIuohvzy17hSahH/nsmVbbEjIv9tnD91eVwJL1psIJev/KKtpPLeWv4WRwn69cCckWFXscYHFQHWG2HoTXS1XYO8F9eGvHZrOMGyRaXXOxvIERUn9n771l1LpEbvaUPfRSeMuXSm6I8yNAFmDvV2XyVto+0Jv7m+KLukzFBUHyPXMSI4uPmglPqeus6oh2QCAhGCFiHazBjujYtV/4wcUKCzxEGs9UKGl/r1EBnSqEiqWGT06CX+qqqH/PjIx869MsBoJnNV67idFCdUFWvBhr39abbBqOpZjDc9d18yTdgr8ieM74Vl6LMU1D/SvjYwKbIucSvymhiNPYeMscerr98F1CNBAIA571eTC0UDlMLbG2J/tE9Z1mXA1OHYDliIAxhm+BTeam2qJIU32ERK0SqDFXzizoMNgas6y9A8Ob/z
+  template:
+    metadata:
+      name: mcp-apikey
+      namespace: grafana
+    type: Opaque
