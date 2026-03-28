@@ -4,12 +4,11 @@ metadata:
   name: default
   namespace: {{ .Release.Namespace }}
 spec:
-  nats:
-    native:
-      replicas: 3
-      auth: token
-      persistence:
-        volumeSize: 10Gi
+  jetstream:
+    replicas: 3
+    version: latest
+    persistence:
+      volumeSize: 10Gi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
