@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventBus
+metadata:
+  name: default
+  namespace: {{ .Release.Namespace }}
+spec:
+  nats:
+    native:
+      replicas: 3
+      auth: token
+      persistence:
+        volumeSize: 10Gi
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    controller: eventbus-controller
+                    eventbus-name: default
+                topologyKey: kubernetes.io/hostname
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    controller: eventbus-controller
+                    eventbus-name: default
+                topologyKey: kubernetes.io/zone

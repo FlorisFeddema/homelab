@@ -1,0 +1,44 @@
+argo-events:
+  crds:
+    annotations:
+      argocd.argoproj.io/sync-options: ServerSideApply=true
+
+  controller:
+    replicas: 2
+    revisionHistoryLimit: 0
+
+    pdb:
+      enabled: true
+      minAvailable: 1
+
+    env:
+     - name: LOG_LEVEL
+       value: "error"
+
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 20m
+        memory: 64Mi
+
+  webhook:
+    enabled: true
+    revisionHistoryLimit: 0
+    replicas: 2
+
+    pdb:
+      enabled: true
+      minAvailable: 1
+
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 20m
+        memory: 64Mi

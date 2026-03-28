@@ -4,6 +4,10 @@ products:
       deploy: true
       autoSync: true
       namespace: argocd
+    argoEvents:
+      deploy: true
+      autoSync: true
+      serverSideApply: true
     descheduler:
       deploy: true
       autoSync: true
