@@ -19,9 +19,11 @@ spec:
                     controller: eventbus-controller
                     eventbus-name: default
                 topologyKey: kubernetes.io/hostname
+                weight: 100
             - podAffinityTerm:
                 labelSelector:
                   matchLabels:
                     controller: eventbus-controller
                     eventbus-name: default
                 topologyKey: kubernetes.io/zone
+                weight: 50
