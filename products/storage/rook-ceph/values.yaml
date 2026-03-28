@@ -18,7 +18,7 @@ rook-ceph:
     enabled: true
   obcAllowAdditionalConfigFields: "maxObjects,maxSize,bucketOwner"
 
-  ceph-csi-§:
+  ceph-csi-operator:
     controllerManager:
       manager:
         resources:
@@ -183,6 +183,9 @@ rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: true
+    prometheusRuleOverrides:
+      CephMonDownQuorumAtRisk:
+        for: 1m
 
   cephImage:
     tag: v19.2.3
