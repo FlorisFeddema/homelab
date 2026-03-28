@@ -9,20 +9,20 @@ spec:
     version: latest
     persistence:
       volumeSize: 10Gi
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-            - podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    controller: eventbus-controller
-                    eventbus-name: default
-                topologyKey: kubernetes.io/hostname
-                weight: 100
-            - podAffinityTerm:
-                labelSelector:
-                  matchLabels:
-                    controller: eventbus-controller
-                    eventbus-name: default
-                topologyKey: kubernetes.io/zone
-                weight: 50
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  controller: eventbus-controller
+                  eventbus-name: default
+              topologyKey: kubernetes.io/hostname
+              weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  controller: eventbus-controller
+                  eventbus-name: default
+              topologyKey: kubernetes.io/zone
+              weight: 50
