@@ -1,5 +1,8 @@
 metrics-server:
   replicas: 2
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   revisionHistoryLimit: 0
 
   resources:

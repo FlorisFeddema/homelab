@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.database.clusterName }}
 spec:
   instances: {{ .Values.database.replicas }}
+  enablePDB: true
   plugins:
     - name: barman-cloud.cloudnative-pg.io
       isWALArchiver: true
