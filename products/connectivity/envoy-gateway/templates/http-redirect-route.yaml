@@ -5,7 +5,9 @@ metadata:
   name: envoy-gateway-{{ $name }}-http-redirect
 spec:
   parentRefs:
-    - name: envoy-gateway-{{ $name }}
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway-{{ $name }}
       sectionName: web-http
   rules:
     - filters:
@@ -13,5 +15,9 @@ spec:
           requestRedirect:
             scheme: https
             statusCode: {{ $.Values.httpRedirect.statusCode }}
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
 ---
 {{- end }}
