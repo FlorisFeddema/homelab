@@ -1,5 +1,15 @@
 {{- range $endpoint := .Values.dnsRecords }}
-{{- if $endpoint.public }}
+{{- $publicKeySet := hasKey $endpoint "public" }}
+{{- $privateKeySet := hasKey $endpoint "private" }}
+{{- if not (or $publicKeySet $privateKeySet) }}
+{{- fail (printf "dnsRecords[%s] must define at least one of 'public' or 'private'" $endpoint.name) }}
+{{- end }}
+{{- $enablePublic := default false $endpoint.public }}
+{{- $enablePrivate := default false $endpoint.private }}
+{{- if not (or $enablePublic $enablePrivate) }}
+{{- fail (printf "dnsRecords[%s] must enable at least one exposure: 'public' or 'private'" $endpoint.name) }}
+{{- end }}
+{{- if $enablePublic }}
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
@@ -14,7 +24,7 @@ spec:
         - {{ $endpoint.ip }}
 ---
 {{- end }}
-{{- if $endpoint.private }}
+{{- if $enablePrivate }}
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
