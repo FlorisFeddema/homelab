@@ -117,6 +117,7 @@ grafana-mcp:
   extraArgs:
     - -t
     - streamable-http
+    - --disable-write
 
   serviceMonitor:
     enabled: true
