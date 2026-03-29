@@ -95,7 +95,8 @@ grafana:
       memory: 150Mi
 
   persistence:
-    enabled: false
+    enabled: true
+    size: 10Gi
 
   admin:
     existingSecret: "grafana-credentials"
@@ -106,9 +107,9 @@ grafana-mcp:
   grafana:
     url: https://grafana.feddema.dev
 
-  apiKeySecret:
-    name: "mcp-apikey"
-    key: "key"
+    apiKeySecret:
+      name: "mcp-apikey"
+      key: "key"
 
   metrics:
     enabled: true
@@ -116,6 +117,7 @@ grafana-mcp:
   extraArgs:
     - -t
     - streamable-http
+    - --disable-write
 
   serviceMonitor:
     enabled: true
