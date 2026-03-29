@@ -107,9 +107,9 @@ grafana-mcp:
   grafana:
     url: https://grafana.feddema.dev
 
-  apiKeySecret:
-    name: "mcp-apikey"
-    key: "key"
+    apiKeySecret:
+      name: "mcp-apikey"
+      key: "key"
 
   metrics:
     enabled: true
