@@ -4,6 +4,7 @@ metadata:
   name: {{ .Values.database.clusterName }}
 spec:
   instances: {{ .Values.database.replicas }}
+  enablePDB: true
   topologySpreadConstraints:
     - labelSelector:
         matchLabels:

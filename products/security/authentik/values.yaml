@@ -47,6 +47,9 @@ authentik:
 
   server:
     replicas: 2
+    pdb:
+      enabled: true
+      minAvailable: 1
     resources:
       limits:
         memory: 1000Mi
