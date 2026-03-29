@@ -1,8 +1,11 @@
 {{- range $endpoint := .Values.dnsRecords }}
+{{- if $endpoint.public }}
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: {{ $endpoint.name }}
+  name: {{ $endpoint.name }}-public
+  labels:
+    feddema.dev/exposure: public
 spec:
   endpoints:
     - dnsName: '{{ $endpoint.name }}.{{ $.Values.domain }}'
@@ -10,4 +13,20 @@ spec:
       targets:
         - {{ $endpoint.ip }}
 ---
+{{- end }}
+{{- if $endpoint.private }}
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: {{ $endpoint.name }}-private
+  labels:
+    feddema.dev/exposure: private
+spec:
+  endpoints:
+    - dnsName: '{{ $endpoint.name }}.{{ $.Values.domain }}'
+      recordType: A
+      targets:
+        - {{ $endpoint.ip }}
+---
+{{- end }}
 {{- end }}
