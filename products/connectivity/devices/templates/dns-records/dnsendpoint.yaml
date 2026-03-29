@@ -1,8 +1,21 @@
 {{- range $endpoint := .Values.dnsRecords }}
+{{- $publicKeySet := hasKey $endpoint "public" }}
+{{- $privateKeySet := hasKey $endpoint "private" }}
+{{- if not (or $publicKeySet $privateKeySet) }}
+{{- fail (printf "dnsRecords[%s] must define at least one of 'public' or 'private'" $endpoint.name) }}
+{{- end }}
+{{- $enablePublic := default false $endpoint.public }}
+{{- $enablePrivate := default false $endpoint.private }}
+{{- if not (or $enablePublic $enablePrivate) }}
+{{- fail (printf "dnsRecords[%s] must enable at least one exposure: 'public' or 'private'" $endpoint.name) }}
+{{- end }}
+{{- if $enablePublic }}
 apiVersion: externaldns.k8s.io/v1alpha1
 kind: DNSEndpoint
 metadata:
-  name: {{ $endpoint.name }}
+  name: {{ $endpoint.name }}-public
+  labels:
+    feddema.dev/exposure: public
 spec:
   endpoints:
     - dnsName: '{{ $endpoint.name }}.{{ $.Values.domain }}'
@@ -10,4 +23,20 @@ spec:
       targets:
         - {{ $endpoint.ip }}
 ---
+{{- end }}
+{{- if $enablePrivate }}
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: {{ $endpoint.name }}-private
+  labels:
+    feddema.dev/exposure: private
+spec:
+  endpoints:
+    - dnsName: '{{ $endpoint.name }}.{{ $.Values.domain }}'
+      recordType: A
+      targets:
+        - {{ $endpoint.ip }}
+---
+{{- end }}
 {{- end }}
