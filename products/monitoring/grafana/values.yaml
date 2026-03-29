@@ -34,9 +34,12 @@ grafana:
       hostnames:
         - grafana.feddema.dev
       parentRefs:
-      - name: envoy-gateway
-        namespace: envoy-gateway
-        sectionName: web-https
+        - name: envoy-gateway-public
+          namespace: envoy-gateway
+          sectionName: web-https
+        - name: envoy-gateway-private
+          namespace: envoy-gateway
+          sectionName: web-https
 
   extraSecretMounts:
     - name: auth-generic-oauth-secret-mount
@@ -147,6 +150,9 @@ grafana-mcp:
       hostnames:
         - grafana-mcp.feddema.dev
       parentRefs:
-        - name: envoy-gateway
+        - name: envoy-gateway-public
+          namespace: envoy-gateway
+          sectionName: web-https
+        - name: envoy-gateway-private
           namespace: envoy-gateway
           sectionName: web-https

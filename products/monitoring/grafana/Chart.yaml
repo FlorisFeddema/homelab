@@ -5,10 +5,10 @@ version: 1.0.161
 dependencies:
   - name: grafana
     version: 10.5.15
-    repository: https://grafana.github.io/helm-charts
-  - name: grafana-mcp
-    version: 0.9.0
     repository: https://grafana-community.github.io/helm-charts
+#  - name: grafana-mcp
+#    version: 0.9.0
+#    repository: https://grafana-community.github.io/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0
