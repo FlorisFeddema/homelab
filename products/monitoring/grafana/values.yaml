@@ -113,6 +113,10 @@ grafana-mcp:
   metrics:
     enabled: true
 
+  extraArgs:
+    - -t
+    - streamable-http
+
   serviceMonitor:
     enabled: true
 
