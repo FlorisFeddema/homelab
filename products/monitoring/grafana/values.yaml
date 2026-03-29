@@ -95,7 +95,8 @@ grafana:
       memory: 150Mi
 
   persistence:
-    enabled: false
+    enabled: true
+    size: 10Gi
 
   admin:
     existingSecret: "grafana-credentials"
