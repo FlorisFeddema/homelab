@@ -5,8 +5,9 @@ metadata:
 spec:
   secretName: default-tls-certificate
   dnsNames:
-    - "*.feddema.dev"
-    - "feddema.dev"
+    {{- range $domain := .Values.defaultTlsCertificate.domains }}
+    - {{ $domain | quote }}
+    {{- end }}
   issuerRef:
     group: cert-manager.io
     kind: ClusterIssuer

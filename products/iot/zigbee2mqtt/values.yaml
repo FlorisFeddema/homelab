@@ -44,7 +44,10 @@ route:
   hostnames:
     - zigbee.feddema.dev
   parentRefs:
-    - name: envoy-gateway
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+    - name: envoy-gateway-private
       namespace: envoy-gateway
       sectionName: web-https
 
@@ -94,4 +97,3 @@ config:
       network_key: '!secret.yaml advanced_network_key'
       pan_id: 23016
       ext_pan_id: [195, 192, 116, 85, 33, 65, 21, 93]
-

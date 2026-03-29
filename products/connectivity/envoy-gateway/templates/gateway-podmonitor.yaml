@@ -1,7 +1,8 @@
+{{- range $name, $_ := .Values.gateways }}
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: envoy-gateway-podmonitor
+  name: envoy-gateway-{{ $name }}-podmonitor
 spec:
   podMetricsEndpoints:
     - port: metrics
@@ -11,8 +12,22 @@ spec:
     matchNames:
       - envoy-gateway
   selector:
-    matchLabels:
-      app.kubernetes.io/component: proxy
-      app.kubernetes.io/managed-by: envoy-gateway
-      app.kubernetes.io/name: envoy
-      gateway.envoyproxy.io/owning-gateway-name: envoy-gateway
+    matchExpressions:
+      - key: app.kubernetes.io/component
+        operator: In
+        values:
+          - proxy
+      - key: app.kubernetes.io/managed-by
+        operator: In
+        values:
+          - envoy-gateway
+      - key: app.kubernetes.io/name
+        operator: In
+        values:
+          - envoy
+      - key: gateway.envoyproxy.io/owning-gateway-name
+        operator: In
+        values:
+          - envoy-gateway-{{ $name }}
+---
+{{- end }}

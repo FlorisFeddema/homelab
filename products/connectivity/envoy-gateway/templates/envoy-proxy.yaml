@@ -1,7 +1,8 @@
+{{- range $name, $gateway := .Values.gateways }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: EnvoyProxy
 metadata:
-  name: envoy-gateway
+  name: envoy-gateway-{{ $name }}
 spec:
   provider:
     type: Kubernetes
@@ -12,16 +13,14 @@ spec:
           value:
             spec:
               revisionHistoryLimit: 0
-        replicas: 3
+        replicas: {{ $gateway.replicas }}
         container:
           resources:
-            requests:
-              cpu: 150m
-              memory: 300Mi
-            limits:
-              memory: 600Mi
+            {{ toYaml $gateway.resources | nindent 12 }}
       envoyService:
         annotations:
-          'io.cilium/lb-ipam-ips': 192.168.102.30
+          'io.cilium/lb-ipam-ips': {{ $gateway.serviceAddress }}
         externalTrafficPolicy: Local
         allocateLoadBalancerNodePorts: false
+---
+{{- end }}

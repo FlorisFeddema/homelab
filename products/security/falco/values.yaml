@@ -10,7 +10,10 @@ route:
   hostnames:
     - falco.feddema.dev
   parentRefs:
-    - name: envoy-gateway
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+    - name: envoy-gateway-private
       namespace: envoy-gateway
       sectionName: web-https
 
@@ -113,4 +116,3 @@ falco:
           requests:
             cpu: 10m
             memory: 128Mi
-

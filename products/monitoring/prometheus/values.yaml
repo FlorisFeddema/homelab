@@ -20,7 +20,10 @@ route:
       name: prometheus-thanos-query
       port: 9090
     parentRefs:
-      - name: envoy-gateway
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
+      - name: envoy-gateway-private
         namespace: envoy-gateway
         sectionName: web-https
 
@@ -32,7 +35,10 @@ route:
       name: prometheus-thanos-bucketweb
       port: 8080
     parentRefs:
-      - name: envoy-gateway
+      - name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
+      - name: envoy-gateway-private
         namespace: envoy-gateway
         sectionName: web-https
 
@@ -100,7 +106,10 @@ kube-prometheus-stack:
         hostnames:
           - prometheus.feddema.dev
         parentRefs:
-          - name: envoy-gateway
+          - name: envoy-gateway-public
+            namespace: envoy-gateway
+            sectionName: web-https
+          - name: envoy-gateway-private
             namespace: envoy-gateway
             sectionName: web-https
 
@@ -128,7 +137,10 @@ kube-prometheus-stack:
         hostnames:
           - alertmanager.feddema.dev
         parentRefs:
-          - name: envoy-gateway
+          - name: envoy-gateway-public
+            namespace: envoy-gateway
+            sectionName: web-https
+          - name: envoy-gateway-private
             namespace: envoy-gateway
             sectionName: web-https
 
