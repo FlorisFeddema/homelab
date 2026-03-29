@@ -146,7 +146,7 @@ grafana-mcp:
 
   route:
     main:
-      enabled: false
+      enabled: true
       hostnames:
         - grafana-mcp.feddema.dev
       parentRefs:
