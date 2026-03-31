@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kubernetes-mcp-server
+version: 1.0.0
+
+dependencies:
+  - name: kubernetes-mcp-server
+    version: 0.1.0
+    repository: oci://ghcr.io/containers/charts
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
