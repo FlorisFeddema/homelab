@@ -13,6 +13,15 @@ route:
       namespace: envoy-gateway
       sectionName: web-https
 
+oidc:
+  enabled: false
+  clientID: ""
+  clientSecretSealed: ""
+  secretName: oidc-secret
+  issuer: https://authentik.feddema.dev/application/o/kubernetes-mcp-server/
+  redirectURL: https://kubernetes-mcp.feddema.dev/oauth2/callback
+  logoutPath: /oauth2/logout
+
 kubernetes-mcp-server:
   ingress:
     enabled: false
@@ -24,7 +33,41 @@ kubernetes-mcp-server:
   rbac:
     create: false
 
-  replicaCount: 1
+  replicaCount: 2
+
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+          topologyKey: kubernetes.io/hostname
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+          topologyKey: topology.kubernetes.io/zone
+
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: ""
+
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
 
   resources:
     requests:
