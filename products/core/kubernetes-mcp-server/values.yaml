@@ -5,7 +5,7 @@ gatus-monitor:
       url: https://kubernetes-mcp.feddema.dev/healthz
 
 route:
-  enabled: true
+  enabled: false
   hostnames:
     - kubernetes-mcp.feddema.dev
   parentRefs:
