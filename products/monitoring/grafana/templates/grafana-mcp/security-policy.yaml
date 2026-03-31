@@ -1,0 +1,19 @@
+{{- if .Values.grafanaMcpOidc.enabled }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: grafana-mcp-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: {{ include "grafana-mcp.fullname" . }}
+  oidc:
+    clientID: {{ required "grafanaMcpOidc.clientID is required when grafanaMcpOidc.enabled=true" .Values.grafanaMcpOidc.clientID | quote }}
+    clientSecret:
+      name: {{ .Values.grafanaMcpOidc.secretName }}
+    provider:
+      issuer: {{ .Values.grafanaMcpOidc.issuer }}
+    redirectURL: {{ .Values.grafanaMcpOidc.redirectURL }}
+    logoutPath: {{ .Values.grafanaMcpOidc.logoutPath }}
+{{- end }}

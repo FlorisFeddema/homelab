@@ -5,6 +5,15 @@ gatus-monitor:
   privateEndpoints:
     - name: grafana
 
+grafanaMcpOidc:
+  enabled: false
+  clientID: ""
+  clientSecretSealed: ""
+  secretName: grafana-mcp-oidc-secret
+  issuer: https://authentik.feddema.dev/application/o/grafana-mcp/
+  redirectURL: https://grafana-mcp.feddema.dev/oauth2/callback
+  logoutPath: /oauth2/logout
+
 grafana:
   assertNoLeakedSecrets: false
 
