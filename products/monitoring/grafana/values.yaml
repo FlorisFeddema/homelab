@@ -159,3 +159,15 @@ grafana-mcp:
         - name: envoy-gateway-private
           namespace: envoy-gateway
           sectionName: web-https
+
+  oidc:
+    enabled: false
+    clientID: ""
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/grafana-mcp/
+    redirectURL: https://grafana-mcp.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+    clientSecret:
+      existingSecret: grafana-mcp-oidc-secret
+      createSealedSecret: false
+      sealedValue: ""
