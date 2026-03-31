@@ -14,17 +14,8 @@ route:
       sectionName: web-https
 
 kubernetes-mcp-server:
-  fullnameOverride: kubernetes-mcp-server
-
   ingress:
     enabled: false
-
-  image:
-    version: 0.0.59
-
-  service:
-    type: ClusterIP
-    port: 8080
 
   serviceAccount:
     create: true
@@ -40,7 +31,6 @@ kubernetes-mcp-server:
       cpu: 50m
       memory: 128Mi
     limits:
-      cpu: 100m
       memory: 256Mi
 
   metrics:

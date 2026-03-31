@@ -1,9 +1,0 @@
-dependencies:
-- name: kubernetes-mcp-server
-  repository: oci://ghcr.io/containers/charts
-  version: 0.1.0
-- name: gatus-monitor
-  repository: file://../../../templates/gatus-monitor
-  version: 1.0.0
-digest: sha256:7a05ae30770ebfa241e694d33dd5a0ae49dca35fd27ee0e72c7f85f65e6c8536
-generated: "2026-03-31T16:52:13.497185+02:00"
