@@ -26,6 +26,9 @@ kubernetes-mcp-server:
   ingress:
     enabled: false
 
+  image:
+    version: 0.0.59
+
   serviceAccount:
     create: true
     name: kubernetes-mcp-server
