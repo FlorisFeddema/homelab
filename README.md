@@ -4,7 +4,7 @@ This repository manages `gerador`, a Talos-based Kubernetes homelab.
 
 The cluster is deployed GitOps-style with Argo CD. The top-level chart in `chart/` renders Argo CD `Application` objects, and those applications point at the per-product Helm charts under `products/`. Today, `chart/values.yaml` defines 54 deployable products grouped into `core`, `connectivity`, `development`, `deviceOperators` (kebab-cased on disk as `products/device-operators/`), `home`, `iot`, `media`, `monitoring`, `security`, and `storage`.
 
-Talos provides the node and cluster machine configuration. Core platform components such as Cilium, CoreDNS, Argo CD, Sealed Secrets, and the rest of the workload stack are then reconciled from this repo by Argo CD.
+Talos provides the node and cluster machine configuration, `templates/` holds shared Helm dependencies, and `unifi/` contains network-related configuration alongside the cluster manifests. Core platform components such as Cilium, CoreDNS, Argo CD, Sealed Secrets, and the rest of the workload stack are then reconciled from this repo by Argo CD.
 
 ## Overview
 
@@ -25,21 +25,17 @@ The repo is concrete and environment-specific on purpose. Cluster names, domains
 - `products/<group>/<product>/`
   The per-application Helm charts that Argo CD syncs into the cluster.
 - `products/_base/`
-  Shared base chart content used by product charts.
+  Scaffolding used when creating product charts.
 - `templates/`
   Shared dependency charts, such as `templates/gatus-monitor/`.
 - `talos/`
-  Cluster-wide Talos config, node definitions, generated machine configs, and helper scripts for node creation and upgrades.
+  Cluster-wide Talos config, node definitions, and helper scripts for node creation and upgrades.
 - `talos/nodes/<node>.yaml`
   Per-node base machine config, including role, labels, and install disk.
 - `talos/nodes/<node>-patch.yaml`
   Per-node host and network patch data, such as hostname, VIPs, DHCP config, and extra links.
-- `talos/rendered/`
-  Generated Talos machine configs.
 - `unifi/`
   Additional network-related configuration.
-- `serverrack.excalidraw` and `serverrack.png`
-  The rack diagram source and exported image.
 
 ## Deployment Model
 
@@ -63,16 +59,6 @@ Most operations in this repo assume:
 Unless noted otherwise, commands below are run from the repository root.
 
 ## Common Operations
-
-### Render the top-level Argo CD chart
-
-Use this to validate the app-of-apps chart locally:
-
-```shell
-helm template homelab ./chart
-```
-
-This renders the Argo CD `Application` resources generated from `chart/values.yaml`.
 
 ### Create a Sealed Secret
 
@@ -121,6 +107,7 @@ Apply it to the new cluster and restart the controller:
 ```shell
 kubectl apply -f sealed-secrets-key.yaml
 kubectl rollout restart -n sealed-secrets deployment sealed-secrets-controller
+rm sealed-secrets-key.yaml
 ```
 
 ### Remove old ReplicaSets
@@ -154,7 +141,7 @@ cd talos
 sh ./update-config.sh -n korris-0 -d true
 ```
 
-This regenerates `talos/rendered/<node>.yaml` and, unless `-d true` is set, applies it with `talosctl apply`.
+This regenerates the local machine config and, unless `-d true` is set, applies it with `talosctl apply`.
 
 #### Update Talos config for all nodes
 
@@ -192,7 +179,7 @@ sh ./create-node.sh -n new-node-0 -t worker -i 192.168.4.50 -d true
 
 Supported node types are `worker` and `controlplane`.
 
-`create-node.sh` generates the initial rendered config and applies it with `talosctl apply-config --insecure` unless dry-run is enabled.
+`create-node.sh` generates the initial machine config and applies it with `talosctl apply-config --insecure` unless dry-run is enabled.
 
 After the node has joined the cluster, run `update-config.sh -n <node>` to regenerate it with the fuller patch set used by the normal day-2 workflow.
 
@@ -211,5 +198,3 @@ This resolves the node schematic and internal IP from the live cluster, then run
 - Control plane endpoint: `https://gerador.feddema.dev:6443`
 - Talos node definitions live in `talos/nodes/`
 - Current node inventory: 3 control-plane nodes and 6 workers
-
-![Server Rack](serverrack.png)
