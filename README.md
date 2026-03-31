@@ -2,7 +2,7 @@
 
 This repository manages `gerador`, a Talos-based Kubernetes homelab.
 
-The cluster is deployed GitOps-style with Argo CD. The top-level chart in `chart/` renders Argo CD `Application` objects, and those applications point at the per-product Helm charts under `products/`. Today, `chart/values.yaml` defines 54 deployable products grouped into `core`, `connectivity`, `development`, `device-operators`, `home`, `iot`, `media`, `monitoring`, `security`, and `storage`.
+The cluster is deployed GitOps-style with Argo CD. The top-level chart in `chart/` renders Argo CD `Application` objects, and those applications point at the per-product Helm charts under `products/`. Today, `chart/values.yaml` defines 54 deployable products grouped into `core`, `connectivity`, `development`, `deviceOperators` (kebab-cased on disk as `products/device-operators/`), `home`, `iot`, `media`, `monitoring`, `security`, and `storage`.
 
 Talos provides the node and cluster machine configuration. Core platform components such as Cilium, CoreDNS, Argo CD, Sealed Secrets, and the rest of the workload stack are then reconciled from this repo by Argo CD.
 
@@ -45,7 +45,7 @@ The repo is concrete and environment-specific on purpose. Cluster names, domains
 
 Argo CD bootstraps this repo by syncing the top-level `chart/` chart. That chart renders Argo CD `Application` resources from `chart/templates/product-applications.yaml`, and each enabled entry in `chart/values.yaml` maps to a workload chart under `products/<group>/<product>/`.
 
-That means `chart/values.yaml` is the authoritative inventory of what this homelab deploys. A directory existing under `products/` does not automatically mean it is active. For example, `products/core/kubernetes-mcp-server/` exists on disk but is not wired into `chart/values.yaml`, so it is not part of the active app-of-apps model today.
+That means `chart/values.yaml` is the authoritative inventory of what this homelab deploys. A directory existing under `products/` does not automatically mean it is active; only products referenced in `chart/values.yaml` are part of the active app-of-apps model.
 
 ## Prerequisites / Tooling
 
