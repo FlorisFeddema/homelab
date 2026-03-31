@@ -59,6 +59,7 @@ spec:
   coreTemplate:
     spec:
       replicas: {{ .Values.cluster.replicas }}
+      minAvailable: {{ .Values.cluster.pdb.minAvailable }}
       volumeClaimTemplates:
         accessModes:
           - {{ .Values.cluster.persistence.accessMode }}
