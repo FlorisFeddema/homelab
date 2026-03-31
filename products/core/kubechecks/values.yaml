@@ -29,7 +29,7 @@ kubechecks:
       KUBECHECKS_ARGOCD_SEND_FULL_REPOSITORY:  'true'
       KUBECHECKS_SCHEMAS_LOCATION: https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json # Kubeconform schemas
       KUBECHECKS_TIDY_OUTDATED_COMMENTS_MODE: delete
-      KUBECHECKS_MAX_CONCURRENCT_CHECKS: '10'
+      KUBECHECKS_MAX_CONCURRENT_CHECKS: '10'
       KUBECHECKS_LOG_LEVEL: warn
       
       KUBECHECKS_REPLAN_COMMENT_MSG: '/kubechecks retry'
@@ -43,9 +43,9 @@ kubechecks:
   deployment:
     resources:
       limits:
-        memory: 300Mi
+        memory: 400Mi
       requests:
-        memory: 150Mi
+        memory: 200Mi
         cpu: 30m
 
     replicaCount: 1

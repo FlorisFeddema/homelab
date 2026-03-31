@@ -57,6 +57,9 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     revisionHistoryLimit: 0
 
   core:
@@ -64,6 +67,9 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     existingXsrfSecret: "harbor-credentials"
@@ -72,6 +78,9 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     revisionHistoryLimit: 0
     jobLoggers:
       - stdout
@@ -79,6 +88,9 @@ harbor:
 
   registry:
     replicas: 2
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     credentials:
@@ -114,4 +126,7 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     revisionHistoryLimit: 0

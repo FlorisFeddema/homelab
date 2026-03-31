@@ -29,6 +29,8 @@ emqx-operator:
       memory: 100Mi
 cluster:
   replicas: 3
+  pdb:
+    minAvailable: 2
 
   replicant:
     replicas: 0

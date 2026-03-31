@@ -49,6 +49,9 @@ kyverno:
   admissionController:
     replicas: 3
     revisionHistoryLimit: 0
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 2
     serviceMonitor:
       enabled: true
 
