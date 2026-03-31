@@ -1,4 +1,4 @@
-{{- if .Values.oidc.enabled }}
+{{- if .Values.grafanaMcpOidc.enabled }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
@@ -9,11 +9,11 @@ spec:
       kind: HTTPRoute
       name: {{ include "grafana-mcp.fullname" . }}
   oidc:
-    clientID: {{ required "oidc.clientID is required when oidc.enabled=true" .Values.oidc.clientID | quote }}
+    clientID: {{ required "grafanaMcpOidc.clientID is required when grafanaMcpOidc.enabled=true" .Values.grafanaMcpOidc.clientID | quote }}
     clientSecret:
-      name: {{ .Values.oidc.secretName }}
+      name: {{ .Values.grafanaMcpOidc.secretName }}
     provider:
-      issuer: {{ .Values.oidc.issuer }}
-    redirectURL: {{ .Values.oidc.redirectURL }}
-    logoutPath: {{ .Values.oidc.logoutPath }}
+      issuer: {{ .Values.grafanaMcpOidc.issuer }}
+    redirectURL: {{ .Values.grafanaMcpOidc.redirectURL }}
+    logoutPath: {{ .Values.grafanaMcpOidc.logoutPath }}
 {{- end }}

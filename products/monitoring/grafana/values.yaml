@@ -5,7 +5,7 @@ gatus-monitor:
   privateEndpoints:
     - name: grafana
 
-oidc:
+grafanaMcpOidc:
   enabled: false
   clientID: ""
   clientSecretSealed: ""
