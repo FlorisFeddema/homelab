@@ -14,6 +14,10 @@ products:
     kubechecks:
       deploy: true
       autoSync: true
+    kubernetesMcpServer:
+      deploy: true
+      autoSync: true
+      namespace: kubernetes-mcp-server
     kyverno:
       deploy: true
       autoSync: true

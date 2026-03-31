@@ -1,0 +1,59 @@
+gatus-monitor:
+  appName: kubernetes-mcp-server
+  privateEndpoints:
+    - name: kubernetes-mcp-server
+      url: https://kubernetes-mcp.feddema.dev/healthz
+
+route:
+  enabled: true
+  hostnames:
+    - kubernetes-mcp.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+
+kubernetes-mcp-server:
+  fullnameOverride: kubernetes-mcp-server
+
+  ingress:
+    enabled: false
+
+  image:
+    version: 0.0.59
+
+  service:
+    type: ClusterIP
+    port: 8080
+
+  serviceAccount:
+    create: true
+    name: kubernetes-mcp-server
+
+  rbac:
+    create: false
+
+  replicaCount: 1
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 256Mi
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+
+  extraArgs:
+    - --read-only
+    - --disable-multi-cluster
+    - --stateless
+    - --log-level=2
+
+  config:
+    list_output: yaml
+    toolsets:
+      - core
