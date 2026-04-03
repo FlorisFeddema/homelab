@@ -1,0 +1,8 @@
+
+secret/
+talos/secrets.yaml
+talos/talosconfig
+**/secret.yaml
+**/*.secret.yaml
+talos/rendered/
+talos/secret-patch.yaml
