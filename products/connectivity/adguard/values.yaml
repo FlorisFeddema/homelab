@@ -51,6 +51,8 @@ gatus-monitor:
 adguard:
   global:
     persistence:
+      labels:
+        backup.velero.io/include: "true"
       size: 3Gi
 
   primary:
@@ -88,9 +90,6 @@ adguard:
             kind: HTTPRouteFilter
             name: credential-injection
   secondary:
-    persistence:
-      labels:
-        feddema.dev/backup: "false"
     resources:
       requests:
         cpu: 50m
