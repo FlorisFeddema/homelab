@@ -14,6 +14,7 @@ data:
 
     p, role:readonly, applications, get, *, allow
     p, role:readonly, projects, get, *, allow
+    g, argocd-mcp, role:readonly
     g, infro, role:readonly
     g, kubechecks, role:readonly
     

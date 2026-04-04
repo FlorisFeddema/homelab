@@ -8,6 +8,9 @@ products:
       deploy: true
       autoSync: true
       serverSideApply: true
+    argocdMcpServer:
+      deploy: false # enable after sealing the Argo CD API token and OIDC client secret
+      autoSync: true
     descheduler:
       deploy: true
       autoSync: true

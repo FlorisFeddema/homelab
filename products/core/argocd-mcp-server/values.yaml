@@ -1,0 +1,40 @@
+route:
+  enabled: true
+  hostnames:
+    - argocd-mcp.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+
+oidc:
+  enabled: true
+  clientID: ""
+  clientSecretSealed: "" # seal for oidc.secretName in this namespace before enabling the product
+  secretName: oidc-secret
+  issuer: https://authentik.feddema.dev/application/o/argocd-mcp/
+  redirectURL: https://argocd-mcp.feddema.dev/oauth2/callback
+  logoutPath: /oauth2/logout
+
+secret:
+  name: argocd-mcp-server-credentials
+  apiTokenSealed: "" # seal an argocd account token for the argocd-mcp user before enabling the product
+
+image:
+  repository: node
+  tag: 20-slim
+  pullPolicy: IfNotPresent
+
+argocdMcp:
+  packageVersion: 0.3.0
+  baseURL: http://argocd-server.argocd
+  port: 3000
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 256Mi
