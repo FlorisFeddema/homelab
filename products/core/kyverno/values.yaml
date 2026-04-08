@@ -58,12 +58,18 @@ kyverno:
   backgroundController:
     replicas: 3
     revisionHistoryLimit: 0
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     serviceMonitor:
       enabled: true
 
   cleanupController:
     replicas: 3
     revisionHistoryLimit: 0
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
     serviceMonitor:
       enabled: true
 
