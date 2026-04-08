@@ -167,23 +167,47 @@ rook-ceph-cluster:
         cpu: 30m
         memory: 100Mi
 
-  route:
-    dashboard:
-      host:
-        name: ceph.feddema.dev
-        path: "/"
-        pathType: PathPrefix
-      parentRefs:
-        - group: gateway.networking.k8s.io
-          kind: Gateway
-          name: envoy-gateway-public
-          namespace: envoy-gateway
-          sectionName: web-https
-        - group: gateway.networking.k8s.io
-          kind: Gateway
-          name: envoy-gateway-private
-          namespace: envoy-gateway
-          sectionName: web-https
+  dashboardRoute:
+    host:
+      name: ceph.feddema.dev
+      path: "/"
+      pathType: PathPrefix
+    parentRefs:
+      - group: gateway.networking.k8s.io
+        kind: Gateway
+        name: envoy-gateway-public
+        namespace: envoy-gateway
+        sectionName: web-https
+      - group: gateway.networking.k8s.io
+        kind: Gateway
+        name: envoy-gateway-private
+        namespace: envoy-gateway
+        sectionName: web-https
+
+  cephDashboardSSO:
+    enabled: false
+
+    oidc:
+      issuer: https://authentik.feddema.dev/application/o/ceph-dashboard/
+      redirectURL: https://ceph.feddema.dev/oauth2/callback
+      logoutPath: /oauth2/logout
+      jwksURL: https://authentik.feddema.dev/application/o/ceph-dashboard/jwks/
+      clientID: ceph-dashboard-client-id-placeholder
+      usernameClaim: preferred_username
+      emailClaim: email
+      # Optional string claim to forward into both X-User-Groups and X-Forwarded-Groups.
+      # Authentik commonly exposes groups as an array, so add a provider mapper for a
+      # comma-separated string claim before enabling this.
+      groupsClaim: ""
+
+    sealedSecret:
+      # echo -n "client-secret" | kubeseal --cert https://sealed-secrets.feddema.dev/v1/cert.pem --raw --name="ceph-dashboard-oidc-secret" -n rook-ceph
+      clientSecretSealed: replace-with-kubeseal-output
+
+    kubectl:
+      image:
+        repository: public.ecr.aws/bitnami/kubectl
+        tag: 1.35.3
 
   monitoring:
     enabled: true
