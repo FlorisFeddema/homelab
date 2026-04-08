@@ -34,6 +34,9 @@ grafana:
   replicas: 1
   revisionHistoryLimit: 0
 
+  deploymentStrategy:
+    type: Recreate
+
   ingress:
     enabled: false
 
