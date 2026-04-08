@@ -56,11 +56,13 @@ kyverno:
       enabled: true
 
   backgroundController:
+    replicas: 3
     revisionHistoryLimit: 0
     serviceMonitor:
       enabled: true
 
   cleanupController:
+    replicas: 3
     revisionHistoryLimit: 0
     serviceMonitor:
       enabled: true
