@@ -15,8 +15,8 @@ grafanaMcpBearerAuth:
   secretInit:
     enabled: true
     image:
-      repository: public.ecr.aws/bitnami/kubectl
-      tag: 1.35.3
+      repository: alpine/kubectl
+      tag: 1.35.2
     resources: {}
 
 grafana:
