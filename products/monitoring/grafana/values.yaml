@@ -6,14 +6,8 @@ gatus-monitor:
     - name: grafana
 
 grafanaMcpBearerAuth:
-  enabled: false
-  # Pre-install job creates secret automatically when missing.
-  # Generate a raw bearer token locally, for example:
-  #   head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n'
-  # Store only the raw token in the secret, without the "Bearer " prefix.
-  secretName: grafana-mcp-bearer-auth-secret
+  enabled: true
   secretInit:
-    enabled: true
     image:
       repository: alpine/kubectl
       tag: 1.35.2

@@ -12,7 +12,7 @@ spec:
     credentialRefs:
       - group: ""
         kind: Secret
-        name: {{ .Values.grafanaMcpBearerAuth.secretName }}
+        name: grafana-mcp-bearer-auth-secret
     extractFrom:
       - headers:
           - Authorization
