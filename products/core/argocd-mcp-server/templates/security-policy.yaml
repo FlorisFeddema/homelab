@@ -1,4 +1,4 @@
-{{- if .Values.argocdMcpOidc.enabled -}}
+{{- if .Values.argocdMcpBearerAuth.enabled }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
@@ -8,12 +8,13 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       name: argocd-mcp-server
-  oidc:
-    clientID: {{ required "argocdMcpOidc.clientID is required when argocdMcpOidc.enabled=true" .Values.argocdMcpOidc.clientID | quote }}
-    clientSecret:
-      name: {{ .Values.argocdMcpOidc.secretName }}
-    provider:
-      issuer: {{ .Values.argocdMcpOidc.issuer }}
-    redirectURL: {{ .Values.argocdMcpOidc.redirectURL }}
-    logoutPath: {{ .Values.argocdMcpOidc.logoutPath }}
+  apiKeyAuth:
+    credentialRefs:
+      - group: ""
+        kind: Secret
+        name: argocd-mcp-bearer-auth-secret
+    extractFrom:
+      - headers:
+          - Authorization
+    sanitize: true
 {{- end }}

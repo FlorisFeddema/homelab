@@ -1,11 +1,10 @@
-argocdMcpOidc:
-  enabled: false
-  clientID: ""
-  clientSecretSealed: "" # seal for argocdMcpOidc.secretName in this namespace before enabling auth
-  secretName: argocd-mcp-oidc-secret
-  issuer: https://authentik.feddema.dev/application/o/argocd-mcp/
-  redirectURL: https://argocd-mcp.feddema.dev/oauth2/callback
-  logoutPath: /oauth2/logout
+argocdMcpBearerAuth:
+  enabled: true
+  secretInit:
+    image:
+      repository: alpine/kubectl
+      tag: 1.35.3
+    resources: {}
 
 route:
   enabled: true
