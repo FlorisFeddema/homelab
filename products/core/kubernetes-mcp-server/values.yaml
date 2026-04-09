@@ -13,14 +13,13 @@ route:
       namespace: envoy-gateway
       sectionName: web-https
 
-oidc:
-  enabled: false
-  clientID: ""
-  clientSecretSealed: ""
-  secretName: oidc-secret
-  issuer: https://authentik.feddema.dev/application/o/kubernetes-mcp-server/
-  redirectURL: https://kubernetes-mcp.feddema.dev/oauth2/callback
-  logoutPath: /oauth2/logout
+kubernetesMcpBearerAuth:
+  enabled: true
+  secretInit:
+    image:
+      repository: alpine/kubectl
+      tag: 1.35.2
+    resources: {}
 
 kubernetes-mcp-server:
   ingress:
