@@ -1,4 +1,4 @@
-{{- if .Values.oidc.enabled -}}
+{{- if .Values.argocdMcpOidc.enabled -}}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
@@ -9,11 +9,11 @@ spec:
       kind: HTTPRoute
       name: argocd-mcp-server
   oidc:
-    clientID: {{ required "oidc.clientID is required when oidc.enabled=true" .Values.oidc.clientID | quote }}
+    clientID: {{ required "argocdMcpOidc.clientID is required when argocdMcpOidc.enabled=true" .Values.argocdMcpOidc.clientID | quote }}
     clientSecret:
-      name: {{ .Values.oidc.secretName }}
+      name: {{ .Values.argocdMcpOidc.secretName }}
     provider:
-      issuer: {{ .Values.oidc.issuer }}
-    redirectURL: {{ .Values.oidc.redirectURL }}
-    logoutPath: {{ .Values.oidc.logoutPath }}
+      issuer: {{ .Values.argocdMcpOidc.issuer }}
+    redirectURL: {{ .Values.argocdMcpOidc.redirectURL }}
+    logoutPath: {{ .Values.argocdMcpOidc.logoutPath }}
 {{- end }}
