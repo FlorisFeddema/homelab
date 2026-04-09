@@ -5,14 +5,19 @@ gatus-monitor:
   privateEndpoints:
     - name: grafana
 
-grafanaMcpOidc:
+grafanaMcpBearerAuth:
   enabled: false
-  clientID: ""
-  clientSecretSealed: ""
-  secretName: grafana-mcp-oidc-secret
-  issuer: https://authentik.feddema.dev/application/o/grafana-mcp/
-  redirectURL: https://grafana-mcp.feddema.dev/oauth2/callback
-  logoutPath: /oauth2/logout
+  # Pre-install job creates secret automatically when missing.
+  # Generate a raw bearer token locally, for example:
+  #   head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n'
+  # Store only the raw token in the secret, without the "Bearer " prefix.
+  secretName: grafana-mcp-bearer-auth-secret
+  secretInit:
+    enabled: true
+    image:
+      repository: public.ecr.aws/bitnami/kubectl
+      tag: 1.35.3
+    resources: {}
 
 grafana:
   assertNoLeakedSecrets: false
