@@ -1,11 +1,14 @@
+{{- if .Values.argocdMcp.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
   name: argocd-mcp-server
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
     - name: http
-      port: {{ .Values.argocdMcp.port }}
+      port: {{ .Values.argocdMcp.server.port }}
       targetPort: http
   selector:
     app.kubernetes.io/name: argocd-mcp-server
+{{- end }}

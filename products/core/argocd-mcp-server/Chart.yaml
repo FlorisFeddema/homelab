@@ -1,3 +1,0 @@
-apiVersion: v2
-name: argocd-mcp-server
-version: 1.0.0

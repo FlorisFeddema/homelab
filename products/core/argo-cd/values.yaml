@@ -5,7 +5,7 @@ gatus-monitor:
   privateEndpoints:
     - name: argocd
 
-argocd-mcp-server:
+argocdMcp:
   enabled: true
 
   route:
@@ -17,7 +17,7 @@ argocd-mcp-server:
         namespace: envoy-gateway
         sectionName: web-https
 
-  argocdMcpBearerAuth:
+  bearerAuth:
     enabled: true
     secretInit:
       image:
@@ -34,7 +34,7 @@ argocd-mcp-server:
     tag: 20-slim
     pullPolicy: IfNotPresent
 
-  argocdMcp:
+  server:
     packageVersion: 0.3.0
     baseURL: http://argocd-server.argocd
     port: 3000

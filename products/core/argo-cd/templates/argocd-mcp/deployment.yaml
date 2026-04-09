@@ -1,9 +1,11 @@
+{{- if .Values.argocdMcp.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: argocd-mcp-server
+  namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.argocdMcp.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: argocd-mcp-server
@@ -15,20 +17,20 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: argocd-mcp-server
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.argocdMcp.image.repository }}:{{ .Values.argocdMcp.image.tag }}
+          imagePullPolicy: {{ .Values.argocdMcp.image.pullPolicy }}
           command:
             - /bin/sh
             - -c
           args:
-            - exec npx -y argocd-mcp@{{ .Values.argocdMcp.packageVersion }} http --port {{ .Values.argocdMcp.port }}
+            - exec npx -y argocd-mcp@{{ .Values.argocdMcp.server.packageVersion }} http --port {{ .Values.argocdMcp.server.port }}
           env:
             - name: ARGOCD_BASE_URL
-              value: {{ .Values.argocdMcp.baseURL | quote }}
+              value: {{ .Values.argocdMcp.server.baseURL | quote }}
             - name: ARGOCD_API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.secret.name }}
+                  name: {{ .Values.argocdMcp.secret.name }}
                   key: ARGOCD_API_TOKEN
             - name: MCP_READ_ONLY
               value: "true"
@@ -38,7 +40,7 @@ spec:
               value: /tmp/.npm
           ports:
             - name: http
-              containerPort: {{ .Values.argocdMcp.port }}
+              containerPort: {{ .Values.argocdMcp.server.port }}
           startupProbe:
             tcpSocket:
               port: http
@@ -55,7 +57,7 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.argocdMcp.resources | nindent 12 }}
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -72,3 +74,4 @@ spec:
       volumes:
         - name: tmp
           emptyDir: {}
+{{- end }}

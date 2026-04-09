@@ -6,10 +6,6 @@ dependencies:
   - name: argo-cd
     version: 9.5.0
     repository: https://argoproj.github.io/argo-helm
-  - name: argocd-mcp-server
-    repository: file://../argocd-mcp-server
-    version: 1.0.0
-    condition: argocd-mcp-server.enabled
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0
