@@ -1,10 +1,10 @@
 apiVersion: v2
 name: falco
-version: 1.0.76
+version: 1.0.77
 
 dependencies:
   - name: falco
-    version: 8.0.1
+    version: 8.0.2
     repository: https://falcosecurity.github.io/charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
