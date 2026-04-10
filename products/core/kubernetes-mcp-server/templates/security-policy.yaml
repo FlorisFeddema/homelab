@@ -1,4 +1,4 @@
-{{- if .Values.oidc.enabled -}}
+{{- if .Values.kubernetesMcpBearerAuth.enabled -}}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
@@ -8,12 +8,13 @@ spec:
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       name: kubernetes-mcp-server
-  oidc:
-    clientID: {{ required "oidc.clientID is required when oidc.enabled=true" .Values.oidc.clientID | quote }}
-    clientSecret:
-      name: {{ .Values.oidc.secretName }}
-    provider:
-      issuer: {{ .Values.oidc.issuer }}
-    redirectURL: {{ .Values.oidc.redirectURL }}
-    logoutPath: {{ .Values.oidc.logoutPath }}
+  apiKeyAuth:
+    credentialRefs:
+      - group: ""
+        kind: Secret
+        name: kubernetes-mcp-bearer-auth-secret
+    extractFrom:
+      - headers:
+          - Authorization
+    sanitize: true
 {{- end }}
