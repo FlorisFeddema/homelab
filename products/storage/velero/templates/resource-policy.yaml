@@ -8,11 +8,6 @@ data:
     volumePolicies:
       - conditions:
           pvcLabels:
-            feddema.dev/backup: "false"
-        action:
-          type: skip
-      - conditions:
-          pvcLabels:
             cnpg.io/pvcRole: "PG_DATA"
         action:
           type: skip

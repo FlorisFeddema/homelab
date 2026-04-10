@@ -1,4 +1,8 @@
 mealie:
+  persistence:
+    labels:
+      backup.velero.io/include: "true"
+
   ingress:
     enabled: false
 

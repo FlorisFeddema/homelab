@@ -63,14 +63,9 @@ velero:
         ttl: "72h"
         storageLocation: default
         snapshotMoveData: true
-        includedNamespaces:
-        - adguard
-        - home-assistant
-        - immich
-        - media-server
-        - nextcloud
-        - mealie
-        - zigbee2mqtt
+        labelSelector:
+          matchLabels:
+            backup.velero.io/include: "true"
         resourcePolicy:
           kind: configmap
           name: resource-policy
