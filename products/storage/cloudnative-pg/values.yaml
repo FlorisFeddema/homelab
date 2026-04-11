@@ -6,10 +6,10 @@ cloudnative-pg:
 
   resources:
      limits:
-       memory: 128Mi
+       memory: 180Mi
      requests:
        cpu: 20m
-       memory: 64Mi
+       memory: 90Mi
 
 plugin-barman-cloud:
   fullnameOverride: cloudnative-pg-plugin-barman-cloud
