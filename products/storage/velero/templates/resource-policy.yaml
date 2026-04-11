@@ -11,4 +11,3 @@ data:
             cnpg.io/pvcRole: "PG_DATA"
         action:
           type: skip
-      -
