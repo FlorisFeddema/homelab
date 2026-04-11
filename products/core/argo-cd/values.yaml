@@ -31,7 +31,7 @@ argocdMcp:
 
   image:
     repository: quay.io/argoprojlabs/mcp-for-argocd
-    tag: v0.3.0
+    tag: v0.6.0
     pullPolicy: IfNotPresent
 
   server:
