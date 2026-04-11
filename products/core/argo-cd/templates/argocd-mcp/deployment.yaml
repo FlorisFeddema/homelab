@@ -19,6 +19,9 @@ spec:
         - name: argocd-mcp-server
           image: {{ .Values.argocdMcp.image.repository }}:{{ .Values.argocdMcp.image.tag }}
           imagePullPolicy: {{ .Values.argocdMcp.image.pullPolicy }}
+          command:
+            - node
+            - dist/index.js
           args:
             - http
             - --port
