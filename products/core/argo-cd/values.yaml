@@ -27,7 +27,7 @@ argocdMcp:
 
   secret:
     name: argocd-mcp-server-credentials
-    apiTokenSealed: "" # seal argocd account token for argocd-mcp user in argocd namespace
+    apiTokenSealed: "AgDMBbaYVeofC7HP0tNSjJJ4FrhP7JQRbIcdv/qWiI1KAcG1IXRT8B3KmTpwwLH2pdpz4/qib4kvHN/+jfek2TY3WRXwzThLhyZOxNBM+UOCbraNLWnhscqifJI/ldYLt/yIoNEUvlq0Lfvcr93rwE9fC1fJdOkL/prgFWDh7h4xjazpmOVnEDJG6JuoRIlw7j9mf64/Q/JqXgfOkALlIWI+3+9uGHYV8+CNpP9lTduNxACYY664xaFmketWDDEb6DQrS+yhLPV36cyCfjC17/ZBvgLVkZaVOZgNcY3kvwnOgX7zDyTnAbHFheRURTLVLdORgbNuTgaA2DOH9ipq7ofUz6cPtUrZGmJ8PBKwoaj4Pu4yRun3dauhkhSZa9U9gfl0BqBHH4g5dqmHzitqxC4oJP7BVsp6pt3Gry5vHdcL9Omoym6NbO8Aiex3XQYVe8wEozJql/x4SbvT/Gdrth0QHEEGyJR9maKCiM7rB1USM/+nIxW7plOKeDXsbQyU/5awsCqHrwQSXSNS/o0FXUBYIAxVr0pwELuKjOXgY0PkY9D5RH86SB+lM7ptat/AofwP/OxA76LmkLDtYx1GtGYMXgOjQtH7/PQX0T9bCZVz8DBdMo2N804eVcVlUmbvpnSwXn3UmWX3BLdecfIeFDY8/Jonoinis/oxvpFen5rDBxVqfyZdhsORIogxJGYXyUTYOluvbyH3B6/rrQmm7/VBiE36RQ9fDG7nzF/tW4M8oKbBgOQ+a5+0LLBqTrOECvDAILE2n5Gu86FCqLuuYYnE5C9mcuIoCC6BqFQOWv0KjnL2DLxSWZJv+VI9JbvlcCuKOIRuTv8bOCsCIV5PRKbW+jAEIZoDsoXcJLx/EemEYBwi880aTjo69lktvx62OeipoQarzsLpe/pMhJ3C03vCy/RQ0aZmoM2kBCdP+jgTSZr7KLXz1MVv8cNbSSQq2LbE3O7lBMvZj/cEgh24sIHC"
 
   image:
     repository: quay.io/argoprojlabs/mcp-for-argocd
@@ -128,7 +128,6 @@ argo-cd:
           timeouts:
             request: 5m
             backendRequest: 5m
-
 
     resources:
       limits:
