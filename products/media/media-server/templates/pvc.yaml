@@ -4,6 +4,7 @@ metadata:
   name: {{ template "common.fullname" . }}-media
   labels:
     {{- include "common.labels" . | nindent 4 }}
+    velero.io/exclude-from-backup: "true"
 spec:
   storageClassName: {{ .Values.persistence.storageClass }}
   accessModes:
