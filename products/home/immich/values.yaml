@@ -10,6 +10,8 @@ immich:
     size: 200Gi
     storageClass: 'ceph-file-nvme-2'
     accessMode: ReadWriteMany
+    labels:
+      backup.velero.io/include: "true"
 
   ingress:
     enabled: false

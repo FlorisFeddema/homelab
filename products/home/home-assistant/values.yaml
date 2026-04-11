@@ -31,6 +31,8 @@ home-assistant:
 
   persistence:
     size: 10Gi
+    labels:
+      backup.velero.io/include: "true"
 
   route:
     enabled: true
