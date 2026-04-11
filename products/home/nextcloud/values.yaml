@@ -81,6 +81,8 @@ nextcloud:
   persistence:
     enabled: true
     size: 50Gi
+    labels:
+      backup.velero.io/include: "true"
 
   resources:
     limits:
