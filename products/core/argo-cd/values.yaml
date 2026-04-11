@@ -30,12 +30,11 @@ argocdMcp:
     apiTokenSealed: "" # seal argocd account token for argocd-mcp user in argocd namespace
 
   image:
-    repository: node
-    tag: 20-slim
+    repository: quay.io/argoprojlabs/mcp-for-argocd
+    tag: v0.3.0
     pullPolicy: IfNotPresent
 
   server:
-    packageVersion: 0.3.0
     baseURL: http://argocd-server.argocd
     port: 3000
 
