@@ -1,0 +1,66 @@
+{{- if .Values.argocdMcp.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-mcp-server
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.argocdMcp.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: argocd-mcp-server
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: argocd-mcp-server
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: argocd-mcp-server
+          image: {{ .Values.argocdMcp.image.repository }}:{{ .Values.argocdMcp.image.tag }}
+          imagePullPolicy: {{ .Values.argocdMcp.image.pullPolicy }}
+          args:
+            - http
+            - --port
+            - {{ .Values.argocdMcp.server.port | quote }}
+          env:
+            - name: ARGOCD_BASE_URL
+              value: {{ .Values.argocdMcp.server.baseURL | quote }}
+            - name: ARGOCD_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.argocdMcp.secret.name }}
+                  key: ARGOCD_API_TOKEN
+            - name: MCP_READ_ONLY
+              value: "true"
+          ports:
+            - name: http
+              containerPort: {{ .Values.argocdMcp.server.port }}
+          startupProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 30
+            periodSeconds: 2
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.argocdMcp.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsGroup: 1000
+            runAsNonRoot: true
+            runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
+{{- end }}

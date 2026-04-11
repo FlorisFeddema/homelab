@@ -1,0 +1,39 @@
+{{- if and .Values.argocdMcp.enabled .Values.argocdMcp.route.enabled -}}
+apiVersion: {{ .Values.argocdMcp.route.apiVersion | default "gateway.networking.k8s.io/v1" }}
+kind: {{ .Values.argocdMcp.route.kind | default "HTTPRoute" }}
+metadata:
+  {{- with .Values.argocdMcp.route.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: argocd-mcp-server
+  namespace: {{ .Release.Namespace }}
+  {{- with .Values.argocdMcp.route.labels }}
+  labels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.argocdMcp.route.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.argocdMcp.route.hostnames }}
+  hostnames:
+    {{- tpl (toYaml .) $ | nindent 4 }}
+  {{- end }}
+  rules:
+    {{- if .Values.argocdMcp.route.additionalRules }}
+    {{- tpl (toYaml .Values.argocdMcp.route.additionalRules) $ | nindent 4 }}
+    {{- end }}
+    - backendRefs:
+        - name: argocd-mcp-server
+          port: {{ .Values.argocdMcp.server.port }}
+      {{- with .Values.argocdMcp.route.filters }}
+      filters:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.argocdMcp.route.matches }}
+      matches:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
