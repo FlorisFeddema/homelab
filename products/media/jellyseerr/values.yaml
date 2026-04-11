@@ -28,7 +28,7 @@ image:
 persistence:
   size: 1Gi
   labels:
-    feddema.dev/backup: "true"
+    backup.velero.io/include: "true"
 
 route:
   enabled: true
