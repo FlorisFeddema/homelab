@@ -80,10 +80,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 3Gi
+        memory: 4Gi
       requests:
         cpu: 300m
-        memory: 1500Mi
+        memory: 1800Mi
 
     metrics:
       enabled: true
