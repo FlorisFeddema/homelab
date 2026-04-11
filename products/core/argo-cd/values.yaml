@@ -5,6 +5,14 @@ gatus-monitor:
   privateEndpoints:
     - name: argocd
 
+argocdMcpBearerAuth:
+  enabled: true
+  secretInit:
+    image:
+      repository: alpine/kubectl
+      tag: 1.35.3
+    resources: {}
+
 argocdMcp:
   enabled: true
 
@@ -16,14 +24,6 @@ argocdMcp:
       - name: envoy-gateway-private
         namespace: envoy-gateway
         sectionName: web-https
-
-  bearerAuth:
-    enabled: true
-    secretInit:
-      image:
-        repository: alpine/kubectl
-        tag: 1.35.3
-      resources: {}
 
   secret:
     name: argocd-mcp-server-credentials

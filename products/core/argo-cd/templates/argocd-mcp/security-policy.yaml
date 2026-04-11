@@ -1,4 +1,4 @@
-{{- if and .Values.argocdMcp.enabled .Values.argocdMcp.bearerAuth.enabled }}
+{{- if .Values.argocdMcpBearerAuth.enabled }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
