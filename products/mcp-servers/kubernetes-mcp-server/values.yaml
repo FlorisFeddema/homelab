@@ -2,12 +2,12 @@ gatus-monitor:
   appName: kubernetes-mcp-server
   privateEndpoints:
     - name: kubernetes-mcp-server
-      url: https://kubernetes-mcp.feddema.dev/healthz
+      url: https://kubernetes.mcp.feddema.dev/healthz
 
 route:
   enabled: true
   hostnames:
-    - kubernetes-mcp.feddema.dev
+    - kubernetes.mcp.feddema.dev
   parentRefs:
     - name: envoy-gateway-private
       namespace: envoy-gateway
@@ -85,12 +85,12 @@ kubernetes-mcp-server:
       enabled: true
 
   extraArgs:
-    - --read-only
     - --disable-multi-cluster
-    - --stateless
-    - --log-level=2
 
   config:
+    log_level: 2
     list_output: yaml
+    read_only: true
+    stateless: true
     toolsets:
       - core

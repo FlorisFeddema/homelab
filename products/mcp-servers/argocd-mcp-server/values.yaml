@@ -2,7 +2,7 @@ gatus-monitor:
   appName: argocd-mcp-server
   privateEndpoints:
     - name: argocd-mcp-server
-      url: https://argocd-mcp.feddema.dev/healthz
+      url: https://argocd.mcp.feddema.dev/healthz
 
 auth:
   enabled: true
@@ -14,7 +14,7 @@ auth:
 route:
   enabled: true
   hostnames:
-    - argocd-mcp.feddema.dev
+    - argocd.mcp.feddema.dev
   parentRefs:
     - name: envoy-gateway-private
       namespace: envoy-gateway
