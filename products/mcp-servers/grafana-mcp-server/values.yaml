@@ -14,6 +14,8 @@ auth:
       tag: 1.35.3
 
 grafana-mcp:
+  replicas: 2
+
   grafana:
     url: https://grafana.feddema.dev
     apiKeySecret:

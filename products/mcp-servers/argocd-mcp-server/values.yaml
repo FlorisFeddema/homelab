@@ -30,7 +30,7 @@ image:
 server:
   baseURL: http://argocd-server.argocd
 
-replicaCount: 1
+replicaCount: 2
 
 resources:
   requests:
