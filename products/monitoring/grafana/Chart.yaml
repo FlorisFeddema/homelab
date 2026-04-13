@@ -6,9 +6,6 @@ dependencies:
   - name: grafana
     version: 11.6.0
     repository: https://grafana-community.github.io/helm-charts
-  - name: grafana-mcp
-    version: 0.9.2
-    repository: https://grafana-community.github.io/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0

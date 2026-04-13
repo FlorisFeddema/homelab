@@ -127,6 +127,9 @@ products:
     kubernetesMcpServer:
       deploy: true
       autoSync: true
+    grafanaMcpServer:
+      deploy: true
+      autoSync: true
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true
