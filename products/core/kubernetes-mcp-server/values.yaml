@@ -13,13 +13,12 @@ route:
       namespace: envoy-gateway
       sectionName: web-https
 
-kubernetesMcpBearerAuth:
-  enabled: true
-  secretInit:
-    image:
-      repository: alpine/kubectl
-      tag: 1.35.3
-    resources: {}
+  auth:
+    enabled: true
+    secretInit:
+      image:
+        repository: alpine/kubectl
+        tag: 1.35.3
 
 kubernetes-mcp-server:
   ingress:

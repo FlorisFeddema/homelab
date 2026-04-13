@@ -1,8 +1,8 @@
-{{- if .Values.kubernetesMcpBearerAuth.enabled -}}
+{{- if .Values.route.auth.enabled -}}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
-  name: kubernetes-mcp-server-security-policy
+  name: kubernetes-mcp-server
 spec:
   targetRefs:
     - group: gateway.networking.k8s.io
