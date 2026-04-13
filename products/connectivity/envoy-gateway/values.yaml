@@ -24,6 +24,7 @@ defaultTlsCertificate:
   domains:
     - "feddema.dev"
     - "*.feddema.dev"
+    - "*.mcp.feddema.dev"
 
 httpRedirect:
   statusCode: 301
