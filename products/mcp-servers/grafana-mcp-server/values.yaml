@@ -27,7 +27,7 @@ grafana-mcp:
     - clickhouse
     - cloudwatch
     - searchlogs
-    - elaticsearch
+    - elasticsearch
     - oncall
     - sift
     - pyroscope
