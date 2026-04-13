@@ -56,7 +56,6 @@ nextcloud:
       usernameKey: username
       passwordKey: password
 
-
   internalDatabase:
     enabled: false
 
@@ -73,7 +72,7 @@ nextcloud:
       passwordKey: postgres-password
 
   redis:
-    enabled: true
+    enabled: false
 
   cronjob:
     enabled: true
