@@ -1,4 +1,3 @@
-{{- if .Values.argocdMcp.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -7,8 +6,7 @@ metadata:
 spec:
   ports:
     - name: http
-      port: {{ .Values.argocdMcp.server.port }}
+      port: 3000
       targetPort: http
   selector:
     app.kubernetes.io/name: argocd-mcp-server
-{{- end }}

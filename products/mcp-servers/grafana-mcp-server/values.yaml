@@ -20,6 +20,17 @@ grafana-mcp:
       name: "mcp-apikey"
       key: "key"
 
+  disabledCategories:
+    - incident
+    - clickhouse
+    - cloudwatch
+    - searchlogs
+    - elaticsearch
+    - oncall
+    - sift
+    - pyroscope
+    - asserts
+
   metrics:
     enabled: true
 
@@ -44,13 +55,6 @@ grafana-mcp:
       port: mcp-http
     initialDelaySeconds: 15
     periodSeconds: 20
-
-  startupProbe:
-    httpGet:
-      path: /healthz
-      port: mcp-http
-    failureThreshold: 30
-    periodSeconds: 2
 
   resources:
     limits:

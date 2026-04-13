@@ -124,10 +124,13 @@ products:
       nameOverride: zigbee2mqtt
       autoSync: true
   mcpServers:
-    kubernetesMcpServer:
+    argocdMcpServer:
       deploy: true
       autoSync: true
     grafanaMcpServer:
+      deploy: true
+      autoSync: true
+    kubernetesMcpServer:
       deploy: true
       autoSync: true
   media:

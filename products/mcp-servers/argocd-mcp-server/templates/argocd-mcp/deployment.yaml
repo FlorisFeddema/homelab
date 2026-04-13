@@ -1,11 +1,10 @@
-{{- if .Values.argocdMcp.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: argocd-mcp-server
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.argocdMcp.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app.kubernetes.io/name: argocd-mcp-server
@@ -17,28 +16,21 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: argocd-mcp-server
-          image: {{ .Values.argocdMcp.image.repository }}:{{ .Values.argocdMcp.image.tag }}
-          imagePullPolicy: {{ .Values.argocdMcp.image.pullPolicy }}
-          command:
-            - node
-            - dist/index.js
-          args:
-            - http
-            - --port
-            - {{ .Values.argocdMcp.server.port | quote }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: ARGOCD_BASE_URL
-              value: {{ .Values.argocdMcp.server.baseURL | quote }}
+              value: {{ .Values.server.baseURL | quote }}
             - name: ARGOCD_API_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.argocdMcp.secret.name }}
+                  name: argocd-mcp-server-credentials
                   key: ARGOCD_API_TOKEN
             - name: MCP_READ_ONLY
               value: "true"
           ports:
             - name: http
-              containerPort: {{ .Values.argocdMcp.server.port }}
+              containerPort: 3000
           startupProbe:
             tcpSocket:
               port: http
@@ -55,7 +47,7 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
           resources:
-            {{- toYaml .Values.argocdMcp.resources | nindent 12 }}
+            {{- toYaml .Values.resources | nindent 12 }}
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -66,4 +58,3 @@ spec:
             runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
-{{- end }}
