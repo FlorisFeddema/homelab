@@ -1,4 +1,4 @@
-{{- if .Values.grafanaMcpBearerAuth.enabled }}
+{{- if .Values.auth.enabled }}
 apiVersion: gateway.envoyproxy.io/v1alpha1
 kind: SecurityPolicy
 metadata:
