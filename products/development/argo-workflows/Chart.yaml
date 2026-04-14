@@ -1,10 +1,10 @@
 apiVersion: v2
 name: argo-workflows
-version: 1.0.6
+version: 1.0.7
 
 dependencies:
   - name: argo-workflows
-    version: 1.0.7
+    version: 1.0.8
     repository: https://argoproj.github.io/argo-helm
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
