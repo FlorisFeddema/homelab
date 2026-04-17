@@ -29,6 +29,7 @@ argo-cd:
     params:
       server.insecure: true
       hydrator.enabled: "true"
+      controller.sync.timeout.seconds: "900"
 
     rbac:
       create: false
