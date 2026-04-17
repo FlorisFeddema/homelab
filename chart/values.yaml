@@ -116,6 +116,7 @@ products:
     emqx:
       deploy: true
       autoSync: true
+      serverSideApply: trueg
     openthermMonitor:
       deploy: true
       autoSync: true
