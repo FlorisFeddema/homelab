@@ -72,7 +72,8 @@ nextcloud:
       passwordKey: postgres-password
 
   redis:
-    enabled: false
+    enabled: true
+    architecture: standalone
 
   cronjob:
     enabled: true
