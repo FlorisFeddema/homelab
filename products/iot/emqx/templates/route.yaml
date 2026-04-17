@@ -30,6 +30,7 @@ spec:
           kind: Service
           name: emqx-dashboard
           port: 18083
+          weight: 1
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}
