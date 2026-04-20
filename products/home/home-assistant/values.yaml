@@ -8,8 +8,6 @@ gatus-monitor:
     - name: homeassistant
 
 home-assistant:
-#  nodeName: kashaylan-3
-
   env:
     - name: TZ
       value: "Europe/Amsterdam"

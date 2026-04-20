@@ -19,7 +19,7 @@ route:
 
 database:
   clusterName: nextcloud-postgres
-  size: 8Gi
+  size: 16Gi
   replicas: 2
 
 nextcloud:
