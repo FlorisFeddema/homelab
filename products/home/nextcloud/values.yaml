@@ -77,12 +77,16 @@ nextcloud:
   externalRedis:
     enabled: true
     host: nextcloud-redis-ha-haproxy
-    port: "6379"
-    password: changeme
+    port: 6379
+    existingSecret:
+      enabled: true
+      secretName: nextcloud-credentials
+      passwordKey: password
 
 redis-ha:
   auth: true
-  redisPassword: changeme
+  existingSecret: nextcloud-credentials
+  authKey: password
   haproxy:
     enabled: true
 
