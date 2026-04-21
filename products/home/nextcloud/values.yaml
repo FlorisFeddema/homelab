@@ -72,8 +72,19 @@ nextcloud:
       passwordKey: postgres-password
 
   redis:
+    enabled: false
+
+  externalRedis:
     enabled: true
-    architecture: standalone
+    host: nextcloud-redis-ha-haproxy
+    port: "6379"
+    password: changeme
+
+redis-ha:
+  auth: true
+  redisPassword: changeme
+  haproxy:
+    enabled: true
 
   cronjob:
     enabled: true
