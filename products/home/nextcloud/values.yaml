@@ -86,10 +86,10 @@ nextcloud:
 
   resources:
     limits:
-      memory: 700Mi
+      memory: 900Mi
     requests:
-      cpu: 150m
-      memory: 350Mi
+      cpu: 200m
+      memory: 450Mi
 
   metrics:
     enabled: true
