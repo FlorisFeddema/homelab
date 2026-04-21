@@ -1,3 +1,8 @@
+secretInit:
+  image:
+    repository: alpine/kubectl
+    tag: 1.35.4
+
 gatus-monitor:
   appName: nextcloud
   publicEndpoints:
@@ -80,13 +85,13 @@ nextcloud:
     port: 6379
     existingSecret:
       enabled: true
-      secretName: nextcloud-credentials
-      passwordKey: password
+      secretName: nextcloud-redis-credentials
+      passwordKey: redis-password
 
 redis-ha:
   auth: true
-  existingSecret: nextcloud-credentials
-  authKey: password
+  existingSecret: nextcloud-redis-credentials
+  authKey: redis-password
   haproxy:
     enabled: true
 
