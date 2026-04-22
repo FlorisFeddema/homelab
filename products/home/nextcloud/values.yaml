@@ -72,10 +72,10 @@ nextcloud:
 
   resources:
     limits:
-      memory: 7000Mi
+      memory: 1400Mi
     requests:
       cpu: 200m
-      memory: 1400Mi
+      memory: 700Mi
 
   internalDatabase:
     enabled: false
