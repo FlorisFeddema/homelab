@@ -94,6 +94,12 @@ redis-ha:
   authKey: redis-password
   haproxy:
     enabled: true
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
 
   cronjob:
     enabled: true
@@ -110,6 +116,22 @@ redis-ha:
     requests:
       cpu: 200m
       memory: 450Mi
+
+  sentinel:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+
+  exporter:
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
 
   metrics:
     enabled: true
