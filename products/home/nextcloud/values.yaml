@@ -120,6 +120,24 @@ redis-ha:
     serviceMonitor:
       enabled: true
 
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      memory: 1500Mi
+
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
+
   rbac:
     enabled: true
     serviceaccount:
