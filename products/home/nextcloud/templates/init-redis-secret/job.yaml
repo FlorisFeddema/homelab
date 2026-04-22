@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nextcloud-redis-secret-init
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  activeDeadlineSeconds: 120
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+      serviceAccountName: nextcloud-redis-secret-init
+      containers:
+        - name: redis-secret-init
+          image: "{{ .Values.secretInit.image.repository }}:{{ .Values.secretInit.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - |
+              kubectl get secret nextcloud-redis-credentials -n {{ .Release.Namespace }} >/dev/null 2>&1 || \
+              kubectl create secret generic nextcloud-redis-credentials -n {{ .Release.Namespace }} --from-literal=redis-password="$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')"

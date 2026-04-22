@@ -1,3 +1,8 @@
+secretInit:
+  image:
+    repository: alpine/kubectl
+    tag: 1.35.4
+
 gatus-monitor:
   appName: nextcloud
   publicEndpoints:
@@ -56,6 +61,22 @@ nextcloud:
       usernameKey: username
       passwordKey: password
 
+  cronjob:
+    enabled: true
+
+  persistence:
+    enabled: true
+    size: 50Gi
+    labels:
+      backup.velero.io/include: "true"
+
+  resources:
+    limits:
+      memory: 1400Mi
+    requests:
+      cpu: 200m
+      memory: 700Mi
+
   internalDatabase:
     enabled: false
 
@@ -72,24 +93,16 @@ nextcloud:
       passwordKey: postgres-password
 
   redis:
-    enabled: true
-    architecture: standalone
+    enabled: false
 
-  cronjob:
+  externalRedis:
     enabled: true
-
-  persistence:
-    enabled: true
-    size: 50Gi
-    labels:
-      backup.velero.io/include: "true"
-
-  resources:
-    limits:
-      memory: 900Mi
-    requests:
-      cpu: 200m
-      memory: 450Mi
+    host: nextcloud-redis-ha-haproxy
+    port: 6379
+    existingSecret:
+      enabled: true
+      secretName: nextcloud-redis-credentials
+      passwordKey: redis-password
 
   metrics:
     enabled: true
@@ -105,3 +118,39 @@ nextcloud:
     serviceaccount:
       create: true
       name: nextcloud-serviceaccount
+
+redis-ha:
+  auth: true
+  existingSecret: nextcloud-redis-credentials
+  authKey: redis-password
+  haproxy:
+    enabled: true
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+        
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 40m
+      memory: 64Mi
+
+  sentinel:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 40m
+        memory: 64Mi
+
+  exporter:
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
