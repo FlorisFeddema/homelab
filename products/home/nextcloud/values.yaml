@@ -96,10 +96,10 @@ redis-ha:
     enabled: true
     resources:
       limits:
-        memory: 128Mi
+        memory: 32Mi
       requests:
-        cpu: 50m
-        memory: 64Mi
+        cpu: 13m
+        memory: 16Mi
 
   cronjob:
     enabled: true
@@ -112,26 +112,26 @@ redis-ha:
 
   resources:
     limits:
-      memory: 900Mi
+      memory: 225Mi
     requests:
-      cpu: 200m
-      memory: 450Mi
+      cpu: 50m
+      memory: 112Mi
 
   sentinel:
     resources:
       limits:
-        memory: 128Mi
+        memory: 32Mi
       requests:
-        cpu: 50m
-        memory: 64Mi
+        cpu: 13m
+        memory: 16Mi
 
   exporter:
     resources:
       limits:
-        memory: 64Mi
+        memory: 16Mi
       requests:
-        cpu: 10m
-        memory: 32Mi
+        cpu: 3m
+        memory: 8Mi
 
   metrics:
     enabled: true
