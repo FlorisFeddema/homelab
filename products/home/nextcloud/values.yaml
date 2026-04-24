@@ -72,10 +72,10 @@ nextcloud:
 
   resources:
     limits:
-      memory: 1400Mi
+      memory: 1600Mi
     requests:
-      cpu: 200m
-      memory: 700Mi
+      cpu: 300m
+      memory: 800Mi
 
   internalDatabase:
     enabled: false
@@ -91,9 +91,6 @@ nextcloud:
       secretName: nextcloud-credentials
       usernameKey: postgres-username
       passwordKey: postgres-password
-
-  redis:
-    enabled: false
 
   externalRedis:
     enabled: true
