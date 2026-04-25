@@ -1,0 +1,173 @@
+name: Build and Push Images
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "images/**"
+      - ".github/workflows/build-images.yaml"
+  workflow_dispatch:
+    inputs:
+      image:
+        description: "Optional single image path under images/ (example: argo-workflows/go)"
+        required: false
+        type: string
+      push:
+        description: "Push images to Harbor"
+        required: true
+        default: false
+        type: boolean
+      force_push:
+        description: "Allow pushing even when the exact version tag already exists"
+        required: true
+        default: false
+        type: boolean
+
+env:
+  HARBOR_REGISTRY: harbor.feddema.dev
+  HARBOR_PROJECT: argo-workflows
+
+jobs:
+  discover-images:
+    runs-on: ubuntu-24.04
+    outputs:
+      images: ${{ steps.discover.outputs.images }}
+      has_images: ${{ steps.discover.outputs.has_images }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Discover image definitions
+        id: discover
+        env:
+          REQUESTED_IMAGE: ${{ github.event.inputs.image }}
+        shell: bash
+        run: |
+          images=()
+
+          while IFS= read -r -d '' dockerfile; do
+            image_dir="${dockerfile%/Dockerfile}"
+            image_path="${image_dir#images/}"
+
+            if [[ ! -f "${image_dir}/version" ]]; then
+              echo "Missing version file for ${image_path}: ${image_dir}/version" >&2
+              exit 1
+            fi
+
+            if [[ -n "${REQUESTED_IMAGE}" && "${image_path}" != "${REQUESTED_IMAGE}" ]]; then
+              continue
+            fi
+
+            images+=("\"${image_path}\"")
+          done < <(find images -type f -name 'Dockerfile' -print0 | sort -z)
+
+          if [[ -n "${REQUESTED_IMAGE}" && ${#images[@]} -eq 0 ]]; then
+            echo "Requested image not found: ${REQUESTED_IMAGE}" >&2
+            exit 1
+          fi
+
+          if [[ ${#images[@]} -eq 0 ]]; then
+            echo "images=[]" >> "${GITHUB_OUTPUT}"
+            echo "has_images=false" >> "${GITHUB_OUTPUT}"
+            exit 0
+          fi
+
+          echo "images=[$(IFS=,; echo "${images[*]}")]" >> "${GITHUB_OUTPUT}"
+          echo "has_images=true" >> "${GITHUB_OUTPUT}"
+
+  build-and-push:
+    runs-on: ubuntu-24.04
+    needs:
+      - discover-images
+    if: needs.discover-images.outputs.has_images == 'true'
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ${{ fromJson(needs.discover-images.outputs.images) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Read image version
+        id: version
+        shell: bash
+        run: |
+          version_file="images/${{ matrix.image }}/version"
+
+          if [[ ! -f "${version_file}" ]]; then
+            echo "Missing version file: ${version_file}" >&2
+            exit 1
+          fi
+
+          version="$(tr -d '[:space:]' < "${version_file}")"
+
+          if [[ ! "${version}" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            echo "Version in ${version_file} must be semver in the form X.Y.Z" >&2
+            exit 1
+          fi
+
+          echo "version=${version}" >> "${GITHUB_OUTPUT}"
+          echo "major=${BASH_REMATCH[1]}" >> "${GITHUB_OUTPUT}"
+          echo "minor=${BASH_REMATCH[2]}" >> "${GITHUB_OUTPUT}"
+          echo "patch=${BASH_REMATCH[3]}" >> "${GITHUB_OUTPUT}"
+          echo "major_minor=${BASH_REMATCH[1]}.${BASH_REMATCH[2]}" >> "${GITHUB_OUTPUT}"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64,amd64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to Harbor
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.HARBOR_REGISTRY }}
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_PASSWORD }}
+
+      - name: Check version tag does not already exist
+        if: github.event_name != 'workflow_dispatch' || inputs.push == true
+        env:
+          FORCE_PUSH: ${{ inputs.force_push }}
+        shell: bash
+        run: |
+          image_ref="${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${{ matrix.image }}:${{ steps.version.outputs.version }}"
+
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${FORCE_PUSH}" == "true" ]]; then
+            echo "Force push enabled; skipping duplicate version check for ${image_ref}"
+            exit 0
+          fi
+
+          if docker buildx imagetools inspect "${image_ref}" >/dev/null 2>&1; then
+            echo "Version tag already exists in Harbor: ${image_ref}" >&2
+            exit 1
+          fi
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_PROJECT }}/${{ matrix.image }}
+          tags: |
+            type=raw,value=${{ steps.version.outputs.version }},priority=900
+            type=raw,value=${{ steps.version.outputs.major_minor }},priority=800
+            type=raw,value=${{ steps.version.outputs.major }},enable=${{ steps.version.outputs.major != '0' }},priority=700
+            type=sha,prefix=sha-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./images
+          file: ./images/${{ matrix.image }}/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: ${{ github.event_name != 'workflow_dispatch' || inputs.push == true }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
