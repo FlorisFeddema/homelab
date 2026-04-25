@@ -40,10 +40,11 @@ jobs:
 
       - name: Discover image definitions
         id: discover
+        env:
+          REQUESTED_IMAGE: ${{ github.event.inputs.image }}
         shell: bash
         run: |
           images=()
-          requested_image="${{ github.event.inputs.image }}"
 
           while IFS= read -r -d '' dockerfile; do
             image_dir="${dockerfile%/Dockerfile}"
@@ -54,15 +55,15 @@ jobs:
               exit 1
             fi
 
-            if [[ -n "${requested_image}" && "${image_path}" != "${requested_image}" ]]; then
+            if [[ -n "${REQUESTED_IMAGE}" && "${image_path}" != "${REQUESTED_IMAGE}" ]]; then
               continue
             fi
 
             images+=("\"${image_path}\"")
           done < <(find images -type f -name 'Dockerfile' -print0 | sort -z)
 
-          if [[ -n "${requested_image}" && ${#images[@]} -eq 0 ]]; then
-            echo "Requested image not found: ${requested_image}" >&2
+          if [[ -n "${REQUESTED_IMAGE}" && ${#images[@]} -eq 0 ]]; then
+            echo "Requested image not found: ${REQUESTED_IMAGE}" >&2
             exit 1
           fi
 
@@ -88,7 +89,7 @@ jobs:
         image: ${{ fromJson(needs.discover-images.outputs.images) }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Read image version
         id: version
@@ -131,11 +132,13 @@ jobs:
 
       - name: Check version tag does not already exist
         if: github.event_name != 'workflow_dispatch' || inputs.push == true
+        env:
+          FORCE_PUSH: ${{ inputs.force_push }}
         shell: bash
         run: |
           image_ref="${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${{ matrix.image }}:${{ steps.version.outputs.version }}"
 
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ inputs.force_push }}" == "true" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${FORCE_PUSH}" == "true" ]]; then
             echo "Force push enabled; skipping duplicate version check for ${image_ref}"
             exit 0
           fi
