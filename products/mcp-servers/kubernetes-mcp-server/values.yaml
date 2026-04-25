@@ -18,7 +18,7 @@ route:
     secretInit:
       image:
         repository: alpine/kubectl
-        tag: 1.35.4
+        tag: 1.36.0
 
 kubernetes-mcp-server:
   ingress:
