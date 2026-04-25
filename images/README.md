@@ -23,8 +23,13 @@ images/
 The pushed Harbor image name is:
 
 ```text
-<HARBOR_REGISTRY>/<HARBOR_PROJECT>/<path-under-images>
+<HARBOR_REGISTRY>/<HARBOR_PROJECT>/<path-under-images-after-the-first-directory>
 ```
+
+For example:
+
+- `images/argo-workflows/go` pushes to `harbor.feddema.dev/argo-workflows/go`
+- `images/argo-workflows/go-envtest` pushes to `harbor.feddema.dev/argo-workflows/go-envtest`
 
 Published tags include:
 
