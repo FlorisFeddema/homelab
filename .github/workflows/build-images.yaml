@@ -120,10 +120,15 @@ jobs:
         shell: bash
         run: |
           image_path="${{ matrix.image }}"
-          repository_path="${image_path#*/}"
 
-          if [[ -z "${repository_path}" || "${repository_path}" == "${image_path}" ]]; then
-            echo "Image path must include a top-level group directory: ${image_path}" >&2
+          if [[ "${image_path}" == */* ]]; then
+            repository_path="${image_path#*/}"
+          else
+            repository_path="${image_path}"
+          fi
+
+          if [[ -z "${repository_path}" ]]; then
+            echo "Image path must not be empty" >&2
             exit 1
           fi
 
