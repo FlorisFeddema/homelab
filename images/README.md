@@ -20,11 +20,22 @@ images/
       version
 ```
 
-The pushed Harbor image name is:
+The pushed Harbor image name depends on the layout:
 
-```text
-<HARBOR_REGISTRY>/<HARBOR_PROJECT>/<path-under-images>
-```
+- Root-level image (`images/<image-name>/`): the full path is used as-is.
+  ```text
+  <HARBOR_REGISTRY>/<HARBOR_PROJECT>/<image-name>
+  ```
+- Grouped image (`images/<group>/<image-name>/`): the top-level group directory is stripped.
+  ```text
+  <HARBOR_REGISTRY>/<HARBOR_PROJECT>/<image-name>
+  ```
+
+For example:
+
+- `images/my-image` pushes to `harbor.feddema.dev/argo-workflows/my-image`
+- `images/argo-workflows/go` pushes to `harbor.feddema.dev/argo-workflows/go`
+- `images/argo-workflows/go-envtest` pushes to `harbor.feddema.dev/argo-workflows/go-envtest`
 
 Published tags include:
 
