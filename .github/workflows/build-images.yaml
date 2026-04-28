@@ -36,7 +36,7 @@ jobs:
       has_images: ${{ steps.discover.outputs.has_images }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Discover image definitions
         id: discover
@@ -89,7 +89,7 @@ jobs:
         image: ${{ fromJson(needs.discover-images.outputs.images) }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Read image version
         id: version
