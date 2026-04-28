@@ -1,11 +1,10 @@
 node-feature-discovery:
   master:
     revisionHistoryLimit: 0
-  
-  gc: 
+  gc:
     revisionHistoryLimit: 0
-
   worker:
+    revisionHistoryLimit: 0
     config:
       sources:
         usb:
