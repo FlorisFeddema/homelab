@@ -1,0 +1,9 @@
+dependencies:
+- name: harbor
+  repository: https://helm.goharbor.io
+  version: 1.18.3
+- name: redis-ha
+  repository: https://dandydeveloper.github.io/charts
+  version: 4.35.10
+digest: sha256:f74d02da6593b940a87c3525e0442f3e2ceefe5e4ad3e07da51d33ae931362ac
+generated: "2026-04-28T20:08:21.650529+02:00"
