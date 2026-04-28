@@ -36,7 +36,7 @@ jobs:
       has_images: ${{ steps.discover.outputs.has_images }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Discover image definitions
         id: discover
@@ -89,7 +89,7 @@ jobs:
         image: ${{ fromJson(needs.discover-images.outputs.images) }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Read image version
         id: version
@@ -115,8 +115,27 @@ jobs:
           echo "patch=${BASH_REMATCH[3]}" >> "${GITHUB_OUTPUT}"
           echo "major_minor=${BASH_REMATCH[1]}.${BASH_REMATCH[2]}" >> "${GITHUB_OUTPUT}"
 
+      - name: Derive target repository path
+        id: image_name
+        shell: bash
+        run: |
+          image_path="${{ matrix.image }}"
+
+          if [[ "${image_path}" == */* ]]; then
+            repository_path="${image_path#*/}"
+          else
+            repository_path="${image_path}"
+          fi
+
+          if [[ -z "${repository_path}" ]]; then
+            echo "Image path must not be empty" >&2
+            exit 1
+          fi
+
+          echo "repository_path=${repository_path}" >> "${GITHUB_OUTPUT}"
+
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
         with:
           platforms: arm64,amd64
 
@@ -124,7 +143,7 @@ jobs:
         uses: docker/setup-buildx-action@v4
 
       - name: Log in to Harbor
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ${{ env.HARBOR_REGISTRY }}
           username: ${{ secrets.HARBOR_USERNAME }}
@@ -136,7 +155,7 @@ jobs:
           FORCE_PUSH: ${{ inputs.force_push }}
         shell: bash
         run: |
-          image_ref="${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${{ matrix.image }}:${{ steps.version.outputs.version }}"
+          image_ref="${HARBOR_REGISTRY}/${HARBOR_PROJECT}/${{ steps.image_name.outputs.repository_path }}:${{ steps.version.outputs.version }}"
 
           if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${FORCE_PUSH}" == "true" ]]; then
             echo "Force push enabled; skipping duplicate version check for ${image_ref}"
@@ -150,9 +169,9 @@ jobs:
 
       - name: Generate Docker metadata
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         with:
-          images: ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_PROJECT }}/${{ matrix.image }}
+          images: ${{ env.HARBOR_REGISTRY }}/${{ env.HARBOR_PROJECT }}/${{ steps.image_name.outputs.repository_path }}
           tags: |
             type=raw,value=${{ steps.version.outputs.version }},priority=900
             type=raw,value=${{ steps.version.outputs.major_minor }},priority=800
@@ -161,7 +180,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./images
           file: ./images/${{ matrix.image }}/Dockerfile
