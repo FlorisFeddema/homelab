@@ -25,8 +25,6 @@ harbor:
   persistence:
     enabled: true
     persistentVolumeClaim:
-      redis:
-        size: 1Gi
       trivy:
         size: 5Gi
     imageChartStorage:
@@ -57,6 +55,13 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            component: portal
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
@@ -67,6 +72,13 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            component: core
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
@@ -78,6 +90,13 @@ harbor:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            component: jobservice
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
@@ -87,7 +106,14 @@ harbor:
     existingSecret: "harbor-credentials"
 
   registry:
-    replicas: 2
+    replicas: 1
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            component: registry
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
@@ -117,16 +143,44 @@ harbor:
       existingSecret: harbor-credentials
 
   redis:
-    type: internal
-    internal:
-      nodeSelector:
-        kubernetes.io/arch: amd64
+    type: external
+    external:
+      addr: harbor-redis-ha-haproxy:6379
 
   exporter:
     nodeSelector:
       kubernetes.io/arch: amd64
     replicas: 2
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            component: exporter
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
     revisionHistoryLimit: 0
+
+redis-ha:
+  replicas: 3
+  persistentVolume:
+    size: 5Gi
+  haproxy:
+    enabled: true
+    replicas: 3
+  hardAntiAffinity: true
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 40m
+      memory: 64Mi
+  sentinel:
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        cpu: 40m
+        memory: 64Mi
