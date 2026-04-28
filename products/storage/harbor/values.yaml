@@ -165,6 +165,8 @@ harbor:
 
 redis-ha:
   replicas: 3
+  persistentVolume:
+    size: 5Gi
   haproxy:
     enabled: true
     replicas: 3
