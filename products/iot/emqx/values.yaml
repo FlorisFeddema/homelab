@@ -10,12 +10,20 @@ route:
   hostnames:
     - emqx.feddema.dev
   parentRefs:
-    - name: envoy-gateway-public
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway-public
       namespace: envoy-gateway
       sectionName: web-https
-    - name: envoy-gateway-private
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway-private
       namespace: envoy-gateway
       sectionName: web-https
+  matches:
+    - path:
+        type: PathPrefix
+        value: /
 
 emqx-operator:
   revisionHistoryLimit: 0
@@ -29,6 +37,8 @@ emqx-operator:
       memory: 100Mi
 cluster:
   replicas: 3
+  pdb:
+    minAvailable: 2
 
   replicant:
     replicas: 0

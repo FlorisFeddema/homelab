@@ -1,0 +1,12 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: mcp-apikey
+spec:
+  encryptedData:
+    key: {{ .Values.apiKey }}
+  template:
+    metadata:
+      name: mcp-apikey
+      namespace: grafana
+    type: Opaque

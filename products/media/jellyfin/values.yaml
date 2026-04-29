@@ -26,12 +26,12 @@ resourceClaims:
 image:
   registry: ghcr.io
   repository: jellyfin/jellyfin
-  tag: 10.11.6
+  tag: 10.11.8
 
 persistence:
   size: 4Gi
   labels:
-    feddema.dev/backup: "true"
+    backup.velero.io/include: "true"
 
 route:
   enabled: true

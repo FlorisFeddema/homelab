@@ -14,6 +14,8 @@ vpa:
       history-length: 8d
       history-resolution: 1h
     replicaCount: 2
+    podDisruptionBudget:
+      minAvailable: 1
     podMonitor:
       enabled: true
     resources:
@@ -30,6 +32,8 @@ vpa:
     enabled: true
     revisionHistoryLimit: 0
     replicaCount: 2
+    podDisruptionBudget:
+      minAvailable: 1
     podMonitor:
       enabled: true
     resources:
@@ -48,6 +52,8 @@ vpa:
     generateCertificate: true
     registerWebhook: true
     replicaCount: 2
+    podDisruptionBudget:
+      minAvailable: 1
     podMonitor:
       enabled: true
     resources:

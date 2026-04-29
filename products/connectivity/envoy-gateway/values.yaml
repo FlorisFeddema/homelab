@@ -1,4 +1,7 @@
 gateway-helm:
+  podDisruptionBudget:
+    minAvailable: 1
+
   deployment:
     envoyGateway:
       resources:
@@ -21,6 +24,7 @@ defaultTlsCertificate:
   domains:
     - "feddema.dev"
     - "*.feddema.dev"
+    - "*.mcp.feddema.dev"
 
 httpRedirect:
   statusCode: 301
@@ -31,6 +35,8 @@ gateways:
       - 95.98.178.131
     serviceAddress: 192.168.102.30
     replicas: 3
+    pdb:
+      minAvailable: 2
     resources:
       requests:
         cpu: 150m
@@ -43,6 +49,8 @@ gateways:
       - 192.168.102.31
     serviceAddress: 192.168.102.31
     replicas: 3
+    pdb:
+      minAvailable: 2
     resources:
       requests:
         cpu: 150m

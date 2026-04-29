@@ -60,6 +60,9 @@ argo-workflows:
 
     resources: { }
     replicas: 2
+    pdb:
+      enabled: true
+      minAvailable: 1
     revisionHistoryLimit: 0
     topologySpreadConstraints:
      - maxSkew: 1

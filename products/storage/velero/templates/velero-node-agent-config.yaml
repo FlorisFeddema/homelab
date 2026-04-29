@@ -6,6 +6,9 @@ metadata:
 data:
   velero-node-agent-config.json: |
     {
+      "loadConcurrency": {
+        "globalConfig": 4
+      },
       "backupPVC": {
         "ceph-block-hdd-1": {
           "storageClass": "ceph-block-hdd-1",

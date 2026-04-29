@@ -1,0 +1,76 @@
+gatus-monitor:
+  appName: grafana-mcp-server
+  privateEndpoints:
+    - name: grafana-mcp-server
+      url: https://grafana.mcp.feddema.dev/healthz
+
+apiKey: AgAWvSkInaFDh9tFwsfeRnQmpT5YAThveKO1B23+QD1Q9Gkf+q9QUl35hcuspx55HNVa6zV66Q4bgxrWZ0ktkB/MGvpyAglZZKDdTIdqHsPRja/NBCyktA2ZyG0zFiKDxZAPlmhRYjTCjRt+DP/8ZSRdD9ZV19kMSAClkBk+vwEWcvoVc25sMuOUnQejInlB+mrGCN966zMjZ8IUIwPHzcczgkKC7EVeQPoRY+b5rHSHzD26CsThoSKdE6dBf1TSxiv+rgiwvqu6kCMCBlWxqrxM5MKyVWexN49OAUv78huy1YtIXI2AKjnIwsWNF/uM+B7JlwEeAS/kZSqzOZaU6OotCHCTu3f8A/POQaAuiknDXc5KmRUpRPxX0c47gc6R6h9qZsfBKNuYyubz65Brcztdv+wdTCxsb+2VGdLQqDco5hIa/aijHw+0AO+cDG6iH1uUTj80qBvHQK82soyMx0PuN0ws8f/+UapPwmWSZYJMgmSi4KR/DgMLt+FFYPRZeEN8BY6QSA6otmJB+LIjGOAz6Z83CHYupsqs/3bP+tuU+SW+I8OvhhKuSxqQ076a1B+tfqPbL7Dve9On6hiV3bD400+s+Otj0J/XP/7p2nOjBjZhoyYDSgadS7oPsWrL2w9qEnrSDvYj3vdSsnlNf6SEYMPidirtQ0hdpIQ4Ck2KGxsFA6tDbBiVRdGukp1huV90sReKEKuL4Fwin/CvFzNDQ7h/VB0PVjdrzqvR9hRhVmneXA5sLg6vUe4gieDm
+
+auth:
+  enabled: true
+  secretInit:
+    image:
+      repository: alpine/kubectl
+      tag: 1.36.0
+
+grafana-mcp:
+  replicas: 2
+
+  grafana:
+    url: https://grafana.feddema.dev
+    apiKeySecret:
+      name: "mcp-apikey"
+      key: "key"
+
+  disabledCategories:
+    - incident
+    - clickhouse
+    - cloudwatch
+    - searchlogs
+    - elasticsearch
+    - oncall
+    - sift
+    - pyroscope
+    - asserts
+
+  metrics:
+    enabled: true
+
+  extraArgs:
+    - -t
+    - streamable-http
+    - --disable-write
+
+  serviceMonitor:
+    enabled: true
+
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: mcp-http
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: mcp-http
+    initialDelaySeconds: 15
+    periodSeconds: 20
+
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 25m
+      memory: 128Mi
+
+  route:
+    main:
+      enabled: true
+      hostnames:
+        - grafana.mcp.feddema.dev
+      parentRefs:
+        - name: envoy-gateway-private
+          namespace: envoy-gateway
+          sectionName: web-https

@@ -26,8 +26,11 @@ spec:
     {{- tpl (toYaml .Values.route.additionalRules) $ | nindent 4 }}
     {{- end }}
     - backendRefs:
-        - name: emqx-dashboard
+        - group: ''
+          kind: Service
+          name: emqx-dashboard
           port: 18083
+          weight: 1
       {{- with .Values.route.filters }}
       filters:
         {{- toYaml . | nindent 8 }}

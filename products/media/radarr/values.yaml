@@ -21,12 +21,12 @@ resources:
 image:
   registry: ghcr.io
   repository: linuxserver/radarr
-  tag: 6.0.4
+  tag: 6.1.1
 
 persistence:
   size: 1Gi
   labels:
-    feddema.dev/backup: "true"
+    backup.velero.io/include: "true"
 
 route:
   enabled: true

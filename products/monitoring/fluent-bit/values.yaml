@@ -28,10 +28,10 @@ fluent-bit:
 
   resources:
      limits:
-       memory: 60Mi
+       memory: 80Mi
      requests:
-       cpu: 70m
-       memory: 30Mi
+       cpu: 60m
+       memory: 40Mi
 
   podAnnotations:
     fluentbit.io/exclude: 'true'

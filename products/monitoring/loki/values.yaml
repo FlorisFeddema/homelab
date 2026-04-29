@@ -75,10 +75,10 @@ loki:
     replicas: 3
     resources:
       limits:
-        memory: 1000Mi
+        memory: 1200Mi
       requests:
-        cpu: 80m
-        memory: 700Mi
+        cpu: 100m
+        memory: 800Mi
 
     persistence:
       enabled: true

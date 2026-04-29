@@ -20,12 +20,12 @@ resources:
 image:
   registry: ghcr.io
   repository: linuxserver/prowlarr
-  tag: 2.3.0
+  tag: 2.3.5
 
 persistence:
   size: 1Gi
   labels:
-    feddema.dev/backup: "true"
+    backup.velero.io/include: "true"
 
 route:
   enabled: true

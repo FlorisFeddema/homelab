@@ -11,7 +11,7 @@ data:
 
   users.anonymous.enabled: "false"
 
-  accounts.infro: "apiKey"
+  accounts.argocd-mcp: "apiKey"
   accounts.kubechecks: "apiKey"
 
   admin.enabled: "false"

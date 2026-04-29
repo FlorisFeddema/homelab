@@ -8,8 +8,6 @@ gatus-monitor:
     - name: homeassistant
 
 home-assistant:
-#  nodeName: kashaylan-3
-
   env:
     - name: TZ
       value: "Europe/Amsterdam"
@@ -31,6 +29,8 @@ home-assistant:
 
   persistence:
     size: 10Gi
+    labels:
+      backup.velero.io/include: "true"
 
   route:
     enabled: true

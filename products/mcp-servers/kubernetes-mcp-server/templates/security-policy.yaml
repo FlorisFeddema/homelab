@@ -1,0 +1,20 @@
+{{- if and .Values.route.enabled .Values.route.auth.enabled -}}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: kubernetes-mcp-server
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: kubernetes-mcp-server
+  apiKeyAuth:
+    credentialRefs:
+      - group: ""
+        kind: Secret
+        name: kubernetes-mcp-bearer-auth-secret
+    extractFrom:
+      - headers:
+          - Authorization
+    sanitize: true
+{{- end }}

@@ -1,0 +1,40 @@
+gatus-monitor:
+  appName: argocd-mcp-server
+  privateEndpoints:
+    - name: argocd-mcp-server
+      url: https://argocd.mcp.feddema.dev/healthz
+
+auth:
+  enabled: true
+  secretInit:
+    image:
+      repository: alpine/kubectl
+      tag: 1.36.0
+
+route:
+  enabled: true
+  hostnames:
+    - argocd.mcp.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+
+apiTokenSealed: "AgDQdxFCQcj8+2R0T7qUJID52MLSuAnO8TYTkwvUdSP3Hg+cSJt/W0D+lskLWS515CIzdG+ldEYOgceefOJbta6fKp5RjEa28y++qEu6cZZYPURZxT4fN3X7hlXfIFwbUJDWZ2cOQ+RVrLfk64kSm4FX+KpFxArt3NteVzdtriXCWYbefyNO55mPuNa713zX8g/5NxMZRdxJOl38xZhh4PGXaFANF68hXFMO3c1Z1dIUaDDodbnGeOwbxdzPD+B6WVVj1JY8S+MyJx0L82Hn6jdcQmoLpsbp9RsaHx/LcSk84ZGWxsoI+WS9sJrf1jLlAXPIl+3TIoi0SoRG7/EZKnGKe56Y6qHgqiPJ+4BBqNXagQyvh+9y0FIkEir/Ka2e00LjsUfPkOKd54GA/+lxfLeNnRgnp0KvM7tTY17pQXlwlcDjHE0Um634XYdPpomzqAU8HdcEF8lw125qVFIR3yrI5MkglcGWJVUqI38YFDX3sEexxZ1UwAZtHbdsqzIJG7cABzpC1NT3BWZqaYZWZUHbAjRXjES6GF0zKqB2uQKkoVyD+HjfpFRM/JjZS2FrnsPSFq23MHdpNeS+EeDg1RFhjmLz28dcHVcDJ8NiNnNRgLWUgAXvA8gTYCJdrhcoBitACS/BbmQKtf2Cpj+AgMZIN7T8yHKU8bKdW6QQSdGGLABW2Hfx50el5kjZ+vyHBlWpDvJa67MHPcI2c71Gfs4BYRbiA+B8yCHy5fok/gCRgMG4GzJFYFk62Q+KWSIxY2Bs3aVDaL3JJgCGFquL/LV7xCfrVoxARMBK8/c2AMU+u4CC6rRUFwigUH1LQ/GWD5MbNgipHzfYD6xE2kqJJ5zYat4Ay8dMzJx4ZI//N/KW62lk9JvPOlHZJVk/mpj30fAc0H6TUSssoMISVmreEZ7ElNuPWTZ55IIUfYQZGMCrlcm3nY+Ro61sH2r8ZDnLs41slBo8aiuD+89fmhfaVC4n"
+
+image:
+  repository: quay.io/argoprojlabs/mcp-for-argocd
+  tag: v0.6.0
+  pullPolicy: IfNotPresent
+
+server:
+  baseURL: http://argocd-server.argocd
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 256Mi

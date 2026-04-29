@@ -29,6 +29,7 @@ argo-cd:
     params:
       server.insecure: true
       hydrator.enabled: "true"
+      controller.sync.timeout.seconds: "900"
 
     rbac:
       create: false
@@ -38,10 +39,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 3Gi
+        memory: 4Gi
       requests:
         cpu: 300m
-        memory: 1500Mi
+        memory: 1800Mi
 
     metrics:
       enabled: true
@@ -87,7 +88,6 @@ argo-cd:
             request: 5m
             backendRequest: 5m
 
-
     resources:
       limits:
         memory: 300Mi
@@ -109,10 +109,10 @@ argo-cd:
 
     resources:
       limits:
-        memory: 700Mi
+        memory: 900Mi
       requests:
-        cpu: 100m
-        memory: 350Mi
+        cpu: 120m
+        memory: 450Mi
 
     metrics:
       enabled: true

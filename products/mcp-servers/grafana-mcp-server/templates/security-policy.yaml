@@ -1,0 +1,20 @@
+{{- if .Values.auth.enabled }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: grafana-mcp-security-policy
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: {{ include "grafana-mcp.fullname" . }}
+  apiKeyAuth:
+    credentialRefs:
+      - group: ""
+        kind: Secret
+        name: grafana-mcp-bearer-auth-secret
+    extractFrom:
+      - headers:
+          - Authorization
+    sanitize: true
+{{- end }}

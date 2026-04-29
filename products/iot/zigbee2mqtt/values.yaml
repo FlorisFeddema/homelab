@@ -8,7 +8,7 @@ gatus-monitor:
 image:
   registry: docker.io
   repository: koenkk/zigbee2mqtt
-  tag: 2.9.1
+  tag: 2.9.2
 
 resources:
   limits:
@@ -37,7 +37,7 @@ persistence:
   accessMode: ReadWriteOnce
   size: 5Gi
   labels:
-    feddema.dev/backup: "true"
+    backup.velero.io/include: "true"
 
 route:
   enabled: true

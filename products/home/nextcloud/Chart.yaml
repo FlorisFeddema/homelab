@@ -1,12 +1,14 @@
 apiVersion: v2
 name: nextcloud
-version: 1.0.101
+version: 1.0.104
 
 dependencies:
   - name: nextcloud
-    version: 9.0.3
+    version: 9.0.5
     repository: https://nextcloud.github.io/helm
+  - name: redis-ha
+    version: 4.35.10
+    repository: https://dandydeveloper.github.io/charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0
-

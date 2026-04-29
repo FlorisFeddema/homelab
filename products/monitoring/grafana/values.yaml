@@ -25,6 +25,9 @@ grafana:
   replicas: 1
   revisionHistoryLimit: 0
 
+  deploymentStrategy:
+    type: Recreate
+
   ingress:
     enabled: false
 
@@ -95,61 +98,10 @@ grafana:
       memory: 150Mi
 
   persistence:
-    enabled: false
+    enabled: true
+    size: 10Gi
 
   admin:
     existingSecret: "grafana-credentials"
     userKey: admin-user
     passwordKey: admin-password
-
-grafana-mcp:
-  grafana:
-    url: https://grafana.feddema.dev
-
-  apiKeySecret:
-    name: "mcp-apikey"
-    key: "key"
-
-  metrics:
-    enabled: true
-
-  serviceMonitor:
-    enabled: true
-
-  readinessProbe:
-    httpGet:
-      path: /healthz
-      port: mcp-http
-    initialDelaySeconds: 5
-    periodSeconds: 10
-
-  livenessProbe:
-    httpGet:
-      path: /healthz
-      port: mcp-http
-    initialDelaySeconds: 15
-    periodSeconds: 20
-
-  startupProbe:
-    httpGet:
-      path: /healthz
-      port: mcp-http
-    failureThreshold: 30
-    periodSeconds: 2
-
-  resources:
-    limits:
-      memory: 256Mi
-    requests:
-      cpu: 25m
-      memory: 128Mi
-
-  route:
-    main:
-      enabled: false
-      hostnames:
-        - grafana-mcp.feddema.dev
-      parentRefs:
-        - name: envoy-gateway-private
-          namespace: envoy-gateway
-          sectionName: web-https

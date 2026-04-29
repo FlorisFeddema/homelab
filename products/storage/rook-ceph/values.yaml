@@ -168,10 +168,10 @@ rook-ceph-cluster:
     enabled: true
     resources:
       limits:
-        memory: 256Mi
+        memory: 4Gi
       requests:
-        cpu: 20m
-        memory: 32Mi
+        cpu: 30m
+        memory: 100Mi
 
   monitoring:
     enabled: true
@@ -552,9 +552,9 @@ rook-ceph-cluster:
           resources:
             requests:
               cpu: 10m
-              memory: 200Mi
+              memory: 300Mi
             limits:
-              memory: 500Mi
+              memory: 700Mi
           instances: 2
           opsLogSidecar:
             resources:

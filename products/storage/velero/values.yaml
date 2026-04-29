@@ -21,7 +21,7 @@ velero:
   kubectl:
     image:
       repository: public.ecr.aws/bitnami/kubectl
-      tag: 1.35.3
+      tag: 1.36.0
 
   configuration:
     backupStorageLocation:
@@ -58,19 +58,14 @@ velero:
       - --node-agent-configmap=velero-node-agent-config
   schedules:
     backup:
-      schedule: "23 3 * * *"
+      schedule: "23 */4 * * *"
       template:
         ttl: "72h"
         storageLocation: default
         snapshotMoveData: true
-        includedNamespaces:
-        - adguard
-        - home-assistant
-        - immich
-        - media-server
-        - nextcloud
-        - mealie
-        - zigbee2mqtt
+        labelSelector:
+          matchLabels:
+            backup.velero.io/include: "true"
         resourcePolicy:
           kind: configmap
           name: resource-policy

@@ -3,7 +3,7 @@ kind: PodDisruptionBudget
 metadata:
   name: eventbus-pdb
 spec:
-  maxUnavailable: 1
+  minAvailable: 2
   selector:
     matchLabels:
       controller: eventbus-controller

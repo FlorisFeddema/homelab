@@ -1,0 +1,96 @@
+gatus-monitor:
+  appName: kubernetes-mcp-server
+  privateEndpoints:
+    - name: kubernetes-mcp-server
+      url: https://kubernetes.mcp.feddema.dev/healthz
+
+route:
+  enabled: true
+  hostnames:
+    - kubernetes.mcp.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+
+  auth:
+    enabled: true
+    secretInit:
+      image:
+        repository: alpine/kubectl
+        tag: 1.36.0
+
+kubernetes-mcp-server:
+  ingress:
+    enabled: false
+
+  image:
+    registry: quay.io
+    repository: containers/kubernetes_mcp_server
+    version: v0.0.61
+
+  serviceAccount:
+    create: true
+    name: kubernetes-mcp-server
+
+  rbac:
+    create: false
+
+  replicaCount: 2
+
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+          topologyKey: kubernetes.io/hostname
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+              - key: app.kubernetes.io/instance
+                operator: In
+                values:
+                  - kubernetes-mcp-server
+          topologyKey: topology.kubernetes.io/zone
+
+  nodeSelector:
+    node-role.kubernetes.io/control-plane: ""
+
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: null
+      memory: 256Mi
+
+  metrics:
+    serviceMonitor:
+      enabled: true
+
+  extraArgs:
+    - --disable-multi-cluster
+
+  config:
+    log_level: 2
+    list_output: yaml
+    read_only: true
+    stateless: true
+    toolsets:
+      - core
