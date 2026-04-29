@@ -14,9 +14,9 @@ mediaPvcName: media-server-media
 resources:
   requests:
     cpu: 100m
-    memory: 1400Mi
+    memory: 1600Mi
   limits:
-    memory: 2500Mi
+    memory: 3000Mi
 
 image:
   registry: ghcr.io
