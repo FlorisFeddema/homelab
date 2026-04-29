@@ -5,6 +5,12 @@ gatus-monitor:
   privateEndpoints:
     - name: ceph
 
+cephDashboardSSO:
+  kubectl:
+    image:
+      repository: alpine/kubectl
+      tag: 1.36.0
+
 rook-ceph:
   revisionHistoryLimit: "0"
   resources:
@@ -44,7 +50,6 @@ rook-ceph:
       domainLabels:
         - kubernetes.io/hostname
         - topology.kubernetes.io/zone
-
 
     csiRBDProvisionerResource: |
       - name : csi-provisioner
@@ -156,7 +161,6 @@ rook-ceph:
           limits:
             memory: 160Mi
 
-
 rook-ceph-cluster:
   toolbox:
     enabled: true
@@ -167,12 +171,23 @@ rook-ceph-cluster:
         cpu: 30m
         memory: 100Mi
 
+  monitoring:
+    enabled: true
+    createPrometheusRules: true
+    prometheusRuleOverrides:
+      CephMonDownQuorumAtRisk:
+        for: 1m
+
+  cephImage:
+    tag: v20.2.1
+    repository: quay.io/ceph/ceph
+
   route:
     dashboard:
       host:
         name: ceph.feddema.dev
-        path: "/"
         pathType: PathPrefix
+        path: /
       parentRefs:
         - group: gateway.networking.k8s.io
           kind: Gateway
@@ -185,17 +200,7 @@ rook-ceph-cluster:
           namespace: envoy-gateway
           sectionName: web-https
 
-  monitoring:
-    enabled: true
-    createPrometheusRules: true
-    prometheusRuleOverrides:
-      CephMonDownQuorumAtRisk:
-        for: 1m
-
-  cephImage:
-    tag: v20.2.1
-
-  cephClusterSpec:	
+  cephClusterSpec:
     network:
       connections:
         encryption:
