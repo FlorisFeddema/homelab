@@ -16,6 +16,6 @@ spec:
     clientSecret:
       name: ceph-dashboard-route-oidc-secret
     scopes: ["openid", "profile", "email", "groups"]
-    disableTokenEncryption: true
+{{/*    disableTokenEncryption: true*/}}
     cookieNames:
       idToken: "token"
