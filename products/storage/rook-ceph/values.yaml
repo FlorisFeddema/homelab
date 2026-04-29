@@ -51,7 +51,6 @@ rook-ceph:
         - kubernetes.io/hostname
         - topology.kubernetes.io/zone
 
-
     csiRBDProvisionerResource: |
       - name : csi-provisioner
         resource:
@@ -162,7 +161,6 @@ rook-ceph:
           limits:
             memory: 160Mi
 
-
 rook-ceph-cluster:
   toolbox:
     enabled: true
@@ -181,7 +179,7 @@ rook-ceph-cluster:
         for: 1m
 
   cephImage:
-    tag: v19.2.3
+    tag: v20.2.1
     repository: quay.io/ceph/ceph
 
   route:
