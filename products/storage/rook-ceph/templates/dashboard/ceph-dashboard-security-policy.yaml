@@ -1,0 +1,18 @@
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: ceph-dashboard-route-oidc
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: rook-ceph-dashboard
+  oidc:
+    provider:
+      issuer: https://authentik.feddema.dev/application/o/ceph/
+    redirectURL: https://ceph.feddema.dev/oauth2/callback
+    logoutPath: /oauth2/logout
+    clientID: 6Zp0sXld7UwJsqF50KeNffI1FB6QcQkKUxDmEyMg
+    clientSecret:
+      name: ceph-dashboard-route-oidc-secret
+    forwardAccessToken: true
