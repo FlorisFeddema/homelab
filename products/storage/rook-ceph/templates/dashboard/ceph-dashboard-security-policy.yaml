@@ -15,4 +15,7 @@ spec:
     clientID: 6Zp0sXld7UwJsqF50KeNffI1FB6QcQkKUxDmEyMg
     clientSecret:
       name: ceph-dashboard-route-oidc-secret
-    forwardAccessToken: true
+    scopes: ["openid", "profile", "email", "groups"]
+    disableTokenEncryption: true
+    cookieNames:
+      idToken: "token"
