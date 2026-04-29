@@ -15,7 +15,7 @@ spec:
     clientID: 6Zp0sXld7UwJsqF50KeNffI1FB6QcQkKUxDmEyMg
     clientSecret:
       name: ceph-dashboard-route-oidc-secret
-    scopes: ["openid", "profile", "email", "groups"]
+    scopes: ["openid", "profile", "email", "groups", "roles"]
     disableTokenEncryption: true
     cookieNames:
       idToken: "token"
