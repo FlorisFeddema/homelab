@@ -10,7 +10,7 @@ dependencies:
     version: 3.7.4
     repository: https://kyverno.github.io/policy-reporter
   - name: kyverno-policies
-    version: 3.7.2
+    version: 3.8.0
     repository: oci://ghcr.io/kyverno/charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
