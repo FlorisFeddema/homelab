@@ -21,7 +21,7 @@ resources:
 image:
   registry: ghcr.io
   repository: linuxserver/sabnzbd
-  tag: 4.5.5
+  tag: 5.0.0
 
 persistence:
   size: 1Gi
