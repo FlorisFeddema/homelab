@@ -220,6 +220,11 @@ rook-ceph-cluster:
         mon_data_avail_warn: '15'
       osd:
         osd_mclock_profile: "high_recovery_ops"
+      "class:hdd":
+        bdev_stalled_read_warn_lifetime: '600'
+        bdev_stalled_read_warn_threshold: '5'
+        bluestore_slow_ops_warn_lifetime: '600'
+        bluestore_slow_ops_warn_threshold: '10'
       mgr:
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
