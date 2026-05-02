@@ -24,7 +24,7 @@ apiTokenSealed: "AgDQdxFCQcj8+2R0T7qUJID52MLSuAnO8TYTkwvUdSP3Hg+cSJt/W0D+lskLWS5
 
 image:
   repository: quay.io/argoprojlabs/mcp-for-argocd
-  tag: v0.6.0
+  tag: 0.7.0
   pullPolicy: IfNotPresent
 
 server:
