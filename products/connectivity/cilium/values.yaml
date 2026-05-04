@@ -29,7 +29,7 @@ cilium:
       cpu: 250m
       memory: 450Mi
     limits:
-      cpu: 0
+      cpu: null
       memory: 700Mi
 
   envoy:
