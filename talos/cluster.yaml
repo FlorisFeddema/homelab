@@ -23,15 +23,27 @@ cluster:
   apiServer:
     extraArgs:
       feature-gates: DRAExtendedResource=true,DRAPartitionableDevices=true,ResourceHealthStatus=true
+    resources:
+      requests:
+        cpu: 800m
+        memory: 5Gi
 
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0
+    resources:
+      requests:
+        cpu: 100m
+        memory: 300Mi
 
   scheduler:
     extraArgs:
       bind-address: 0.0.0.0
       feature-gates: DRAExtendedResource=true,DRAPartitionableDevices=true
+    resources:
+      requests:
+        cpu: 50m
+        memory: 100Mi
 
 machine:
   certSANs:

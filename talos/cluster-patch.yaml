@@ -20,6 +20,7 @@ name: registry.k8s.io
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-registry.k8s.io
     overridePath: true
+skipFallback: false
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
@@ -27,6 +28,7 @@ name: ghcr.io
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-ghcr.io
     overridePath: true
+skipFallback: false
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
@@ -34,6 +36,7 @@ name: mirror.gcr.io
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-mirror.gcr.io
     overridePath: true
+skipFallback: false
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
@@ -41,6 +44,7 @@ name: docker.io
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-docker.io
     overridePath: true
+skipFallback: false
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
@@ -48,6 +52,7 @@ name: public.ecr.aws
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-public.ecr.aws
     overridePath: true
+skipFallback: false
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
@@ -55,6 +60,7 @@ name: quay.io
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-quay.io
     overridePath: true
+skipFallback: false
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
@@ -62,3 +68,4 @@ name: reg.kyverno.io
 endpoints:
   - url: https://harbor.feddema.dev/v2/proxy-reg.kyverno.io
     overridePath: true
+skipFallback: false
