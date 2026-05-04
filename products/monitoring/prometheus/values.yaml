@@ -402,7 +402,6 @@ thanos:
         cpu: 100m
         memory: 250Mi
       limits:
-        cpu: null
         memory: 500Mi
 
   queryFrontend:
@@ -423,7 +422,6 @@ thanos:
         cpu: 100m
         memory: 250Mi
       limits:
-        cpu: null
         memory: 500Mi
 
   compactor:
@@ -474,7 +472,6 @@ thanos:
         cpu: 100m
         memory: 250Mi
       memory:
-        cpu: null
         limit: 500Mi
 
 
