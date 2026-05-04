@@ -1,13 +1,13 @@
 apiVersion: v2
 name: sealed-secrets
-version: 1.0.30
+version: 1.0.31
 
 dependencies:
   - name: sealed-secrets
     version: 2.18.5
     repository: https://bitnami-labs.github.io/sealed-secrets
   - name: sealed-secrets-web
-    version: 3.3.0
+    version: 3.3.1
     repository: oci://ghcr.io/bakito/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
