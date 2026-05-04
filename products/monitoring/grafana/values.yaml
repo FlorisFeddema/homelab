@@ -92,10 +92,10 @@ grafana:
 
   resources:
     limits:
-      memory: 300Mi
+      memory: 600Mi
     requests:
-      cpu: 50m
-      memory: 150Mi
+      cpu: 100m
+      memory: 300Mi
 
   persistence:
     enabled: true
