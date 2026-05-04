@@ -60,6 +60,12 @@ kube-prometheus-stack:
     admissionWebhooks:
       patch:
         ttlSecondsAfterFinished: 15
+    resources:
+      requests:
+        cpu: 10m
+        memory: 50Mi
+      limits:
+        memory: 100Mi
 
   prometheus:
     podDisruptionBudget:
@@ -77,6 +83,13 @@ kube-prometheus-stack:
       podMonitorSelectorNilUsesHelmValues: false
       serviceMonitorSelectorNilUsesHelmValues: false
       scrapeConfigSelectorNilUsesHelmValues: false
+
+      resources:
+        requests:
+          cpu: 250m
+          memory: 2500Mi
+        limits:
+          memory: 4000Mi
 
       containers:
         - name: thanos-sidecar
@@ -124,6 +137,13 @@ kube-prometheus-stack:
       useExistingSecret: true
       configSecret: 'alertmanager-config'
       externalUrl: https://alertmanager.feddema.dev
+
+      resources:
+        requests:
+          cpu: 20m
+          memory: 50Mi
+        limits:
+          memory: 100Mi
 
       storage:
        volumeClaimTemplate:
@@ -206,6 +226,12 @@ kube-prometheus-stack:
 
   kube-state-metrics:
     revisionHistoryLimit: 0
+    resources:
+      requests:
+        cpu: 50m
+        memory: 250Mi
+      limits:
+        memory: 500Mi
     metricLabelsAllowlist:
       - nodes=[topology.kubernetes.io/zone]
     rbac:
@@ -336,6 +362,12 @@ kube-prometheus-stack:
   prometheus-node-exporter:
     revisionHistoryLimit: 0
     namespaceOverride: "prometheus-node-exporter"
+    resources:
+      requests:
+        cpu: 15m
+        memory: 20Mi
+      limits:
+        memory: 40Mi
 
 thanos:
   existingObjstoreSecret: "thanos-objstore"
@@ -365,6 +397,13 @@ thanos:
     pdb:
       create: true
       minAvailable: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+      limits:
+        cpu: null
+        memory: 500Mi
 
   queryFrontend:
     enabled: false
@@ -379,6 +418,13 @@ thanos:
     pdb:
       create: true
       minAvailable: 1
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+      limits:
+        cpu: null
+        memory: 500Mi
 
   compactor:
     enabled: true
@@ -423,6 +469,14 @@ thanos:
       minAvailable: 1
     persistence:
       storageClass: "ceph-block-nvme-1"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+      memory:
+        cpu: null
+        limit: 500Mi
+
 
   metrics:
     enabled: true
