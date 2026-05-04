@@ -471,7 +471,7 @@ thanos:
       requests:
         cpu: 100m
         memory: 250Mi
-      limit:
+      limits:
         memory: 500Mi
 
 
