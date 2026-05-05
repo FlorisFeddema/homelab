@@ -21,6 +21,7 @@ trivy-operator:
       resources:
         limits:
           memory: 80Mi
+          cpu: null
         requests:
           cpu: 20m
           memory: 40Mi
