@@ -147,12 +147,20 @@ harbor:
       existingSecret: "harbor-credentials"
     nodeSelector:
       kubernetes.io/arch: amd64
-    resources:
-      limits:
-        memory: 200Mi
-      requests:
-        cpu: 100m
-        memory: 100Mi
+    registry:
+      resources:
+        limits:
+          memory: 200Mi
+        requests:
+          cpu: 70m
+          memory: 40Mi
+    controller:
+      resources:
+        limits:
+          memory: 60Mi
+        requests:
+          cpu: 20m
+          memory: 30Mi
 
   trivy:
     enabled: true
