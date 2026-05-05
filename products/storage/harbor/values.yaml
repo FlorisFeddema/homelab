@@ -3,6 +3,12 @@ database:
   replicas: 2
   storageClass: ceph-block-nvme-1
   size: 5Gi
+  resources:
+    limits:
+      memory: 1400Mi
+    requests:
+      cpu: 70m
+      memory: 700Mi
 
 harbor:
   expose:
@@ -66,6 +72,12 @@ harbor:
       enabled: true
       minAvailable: 1
     revisionHistoryLimit: 0
+    resources:
+      limits:
+        memory: 40Mi
+      requests:
+        cpu: 20m
+        memory: 20Mi
 
   core:
     secretName: "root-ca-tls"
@@ -85,6 +97,12 @@ harbor:
     revisionHistoryLimit: 0
     existingSecret: "harbor-credentials"
     existingXsrfSecret: "harbor-credentials"
+    resources:
+      limits:
+        memory: 100Mi
+      requests:
+        cpu: 20m
+        memory: 50Mi
 
   jobservice:
     nodeSelector:
@@ -104,6 +122,12 @@ harbor:
     jobLoggers:
       - stdout
     existingSecret: "harbor-credentials"
+    resources:
+      limits:
+        memory: 60Mi
+      requests:
+        cpu: 20m
+        memory: 30Mi
 
   registry:
     replicas: 1
@@ -123,6 +147,12 @@ harbor:
       existingSecret: "harbor-credentials"
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
 
   trivy:
     enabled: true
@@ -132,6 +162,13 @@ harbor:
     insecure: true
     nodeSelector:
       kubernetes.io/arch: amd64
+    resources:
+      limits:
+        cpu: null
+        memory: 500Mi
+      requests:
+        cpu: 200m
+        memory: 50Mi
 
   database:
     type: external
@@ -162,6 +199,12 @@ harbor:
       enabled: true
       minAvailable: 1
     revisionHistoryLimit: 0
+    resources:
+      limits:
+        memory: 30Mi
+      requests:
+        cpu: 20m
+        memory: 15Mi
 
 redis-ha:
   replicas: 3
@@ -170,17 +213,23 @@ redis-ha:
   haproxy:
     enabled: true
     replicas: 3
-  hardAntiAffinity: true
-  resources:
-    limits:
-      memory: 128Mi
-    requests:
-      cpu: 40m
-      memory: 64Mi
-  sentinel:
     resources:
       limits:
         memory: 128Mi
       requests:
-        cpu: 40m
+        cpu: 20m
         memory: 64Mi
+  hardAntiAffinity: true
+  resources:
+    limits:
+      memory: 80Mi
+    requests:
+      cpu: 20m
+      memory: 40Mi
+  sentinel:
+    resources:
+      limits:
+        memory: 40Mi
+      requests:
+        cpu: 30m
+        memory: 20Mi
