@@ -16,14 +16,14 @@ trivy-operator:
       cpu: 30m
       memory: 400Mi
 
-  server:
-    resources:
-      limits:
-        memory: 800Mi
-        cpu: null
-      requests:
-        cpu: 20m
-        memory: 40Mi
+  trivy:
+    server:
+      resources:
+        limits:
+          memory: 80Mi
+        requests:
+          cpu: 20m
+          memory: 40Mi
 
   serviceMonitor:
     enabled: true
