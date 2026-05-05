@@ -2,13 +2,27 @@ trivy-operator:
   operator:
     builtInTrivyServer: true
     clusterSbomCacheEnabled: true
-
     rbacAssessmentScannerEnabled: true
     infraAssessmentScannerEnabled: true
     clusterComplianceEnabled: true
     exposedSecretScannerEnabled: true
-
     configAuditScannerEnabled: false # We use Kyverno for this purpose
+    revisionHistoryLimit: 0
+
+  resources:
+    limits:
+      memory: 800Mi
+    requests:
+      cpu: 30m
+      memory: 400Mi
+
+  server:
+    resources:
+      limits:
+        memory: 800Mi
+      requests:
+        cpu: 20m
+        memory: 40Mi
 
   serviceMonitor:
     enabled: true
@@ -33,3 +47,9 @@ trivy-operator-polr-adapter:
       enabled: true
     clusterInfraAssessmentReports:
       enabled: true
+  resources:
+    limits:
+      memory: 120Mi
+    requests:
+      cpu: 20m
+      memory: 60Mi
