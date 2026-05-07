@@ -1,4 +1,4 @@
-FROM golang:1.26.2-bookworm
+FROM golang:1.26.3-bookworm
 
 LABEL org.opencontainers.image.title="argo-workflows/go" \
       org.opencontainers.image.description="Go-based utility image for Argo Workflows tasks" \
