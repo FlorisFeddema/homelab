@@ -1,4 +1,4 @@
-FROM golang:1.26.2-bookworm
+FROM golang:1.26.3-bookworm
 
 ARG SETUP_ENVTEST_VERSION=release-0.22
 ARG ENVTEST_K8S_VERSION=1.34.1
