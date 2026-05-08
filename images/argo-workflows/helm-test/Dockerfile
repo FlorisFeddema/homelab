@@ -1,4 +1,4 @@
-FROM golang:1.26.2-bookworm
+FROM golang:1.26.3-bookworm
 
 ARG HELM_VERSION=v3.20.2
 ARG CT_VERSION=v3.14.0
