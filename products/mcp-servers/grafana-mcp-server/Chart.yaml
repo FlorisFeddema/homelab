@@ -1,11 +1,11 @@
 apiVersion: v2
 name: grafana-mcp-server
-version: 1.0.6
+version: 1.0.7
 
 dependencies:
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0
   - name: grafana-mcp
-    version: 0.14.0
+    version: 0.15.0
     repository: https://grafana-community.github.io/helm-charts
