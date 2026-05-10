@@ -99,10 +99,10 @@ harbor:
     existingXsrfSecret: "harbor-credentials"
     resources:
       limits:
-        memory: 100Mi
+        memory: 140Mi
       requests:
         cpu: 20m
-        memory: 50Mi
+        memory: 70Mi
 
   jobservice:
     nodeSelector:
