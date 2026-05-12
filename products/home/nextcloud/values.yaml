@@ -10,18 +10,6 @@ gatus-monitor:
   privateEndpoints:
     - name: nextcloud
 
-route:
-  enabled: true
-  hostnames:
-    - nextcloud.feddema.dev
-  parentRefs:
-    - name: envoy-gateway-public
-      namespace: envoy-gateway
-      sectionName: web-https
-    - name: envoy-gateway-private
-      namespace: envoy-gateway
-      sectionName: web-https
-
 database:
   clusterName: nextcloud-postgres
   size: 16Gi
@@ -41,6 +29,9 @@ nextcloud:
       - name: envoy-gateway-private
         namespace: envoy-gateway
         sectionName: web-https
+    rules:
+      - timeouts:
+          request: "300s"
 
   phpClientHttpsFix:
     enabled: true
