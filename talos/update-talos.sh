@@ -23,6 +23,6 @@ nodeIP=$(kubectl get node "$nodeName" -o yaml | yq '.status.addresses[] | select
 installerImage="factory.talos.dev/metal-installer/$schematic:v$version"
 
 echo "⚙️ Updating Talos on node $nodeName"
-talosctl upgrade --nodes "$nodeIP" --image "$installerImage" --preserve --wait
+talosctl upgrade --nodes "$nodeIP" --image "$installerImage" --wait
 
 echo "⚙️ Upgraded node $nodeName successfully"
