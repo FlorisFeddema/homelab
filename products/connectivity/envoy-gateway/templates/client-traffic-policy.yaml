@@ -9,6 +9,7 @@ spec:
       kind: Gateway
       name: envoy-gateway-{{ $name }}
     {{- end }}
+  http3: {}
   path:
     escapedSlashesAction: KeepUnchanged
   tls:
