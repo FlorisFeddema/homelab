@@ -42,6 +42,7 @@ gateway-helm:
 
 aiTlsCertificate:
   domains:
+    - "ai.feddema.dev"
     - "*.ai.feddema.dev"
 defaultTlsCertificate:
   domains:
