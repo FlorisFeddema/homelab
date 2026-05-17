@@ -41,8 +41,7 @@ gateway-helm:
             port: 1063
 
 aiTlsCertificate:
-  domains:
-    - "*.ai.feddema.dev"
+  domain: "*.ai.feddema.dev"
 defaultTlsCertificate:
   domains:
     - "feddema.dev"
