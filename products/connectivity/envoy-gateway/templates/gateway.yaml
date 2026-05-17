@@ -38,7 +38,7 @@ spec:
             name: default-tls-certificate
     - name: web-ai
       protocol: HTTPS
-      hostname: {{ $.Values.aiTlsCertificate.domain }}
+      hostname: {{ $.Values.aiTlsCertificate.domain | squote }}
       port: 443
       allowedRoutes:
         namespaces:
