@@ -40,6 +40,9 @@ gateway-helm:
             hostname: ai-gateway-controller.envoy-ai-gateway.svc.cluster.local
             port: 1063
 
+aiTlsCertificate:
+  domains:
+    - "*.ai.feddema.dev"
 defaultTlsCertificate:
   domains:
     - "feddema.dev"

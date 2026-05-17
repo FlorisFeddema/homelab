@@ -1,0 +1,16 @@
+kind: Certificate
+apiVersion: cert-manager.io/v1
+metadata:
+  name: ai-tls-certificate
+spec:
+  secretName: ai-tls-certificate
+  dnsNames:
+    - {{ .Values.aiTlsCertificate.domains | quote }}
+  issuerRef:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: letsencrypt-dns
+  revisionHistoryLimit: 1
+  usages:
+    - digital signature
+    - key encipherment
