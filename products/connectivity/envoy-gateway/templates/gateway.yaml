@@ -36,6 +36,7 @@ spec:
           - group: ''
             kind: Secret
             name: default-tls-certificate
+    {{ if eq $name "private" }}
     - name: web-ai
       protocol: HTTPS
       hostname: {{ $.Values.aiTlsCertificate.domain | squote }}
@@ -52,5 +53,6 @@ spec:
           - group: ''
             kind: Secret
             name: ai-tls-certificate
+    {{- end }}
 ---
 {{- end }}

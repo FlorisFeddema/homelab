@@ -4,12 +4,10 @@ metadata:
   name: ai-envoy-gateway
 spec:
   targetRefs:
-    {{- range $name, $_ := .Values.gateways }}
     - group: gateway.networking.k8s.io
       kind: Gateway
-      name: envoy-gateway-{{ $name }}
+      name: envoy-gateway-private
       sectionName: ai-web
-    {{- end }}
   http3: {}
   path:
     escapedSlashesAction: KeepUnchanged
