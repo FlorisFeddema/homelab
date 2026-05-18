@@ -51,10 +51,6 @@ products:
     devices:
       deploy: true
       autoSync: true
-    envoyAiGateway:
-      deploy: true
-      autoSync: false
-      serverSideApply: true
     envoyGateway:
       deploy: true
       autoSync: true
