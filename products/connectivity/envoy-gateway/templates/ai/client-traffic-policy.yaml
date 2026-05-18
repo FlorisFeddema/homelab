@@ -8,7 +8,7 @@ spec:
     - group: gateway.networking.k8s.io
       kind: Gateway
       name: envoy-gateway-{{ $name }}
-      section: ai-web
+      sectionName: ai-web
     {{- end }}
   http3: {}
   path:
