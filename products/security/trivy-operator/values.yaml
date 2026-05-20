@@ -20,11 +20,11 @@ trivy-operator:
     server:
       resources:
         limits:
-          memory: 240Mi
+          memory: 400Mi
           cpu: null
         requests:
           cpu: 20m
-          memory: 120Mi
+          memory: 200Mi
 
   serviceMonitor:
     enabled: true
