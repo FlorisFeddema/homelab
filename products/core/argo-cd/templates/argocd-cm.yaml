@@ -312,12 +312,13 @@ data:
   exec.enabled: "true"
   exec.shells: "bash,sh,powershell,cmd"
 
-  cliClientID: 7uRmOU7Cho0KwDa7SIODe0ugmQ5djIvDuN3wUeux
+
   oidc.tls.insecure.skip.verify: "false"
   oidc.config: |
     name: Authentik
     issuer: https://authentik.feddema.dev/application/o/argocd/
     clientID: 7uRmOU7Cho0KwDa7SIODe0ugmQ5djIvDuN3wUeux
+    cliClientID: 7uRmOU7Cho0KwDa7SIODe0ugmQ5djIvDuN3wUeux
     clientSecret: $authentik-credentials:clientSecret
     requestedScopes: ["openid", "profile", "email", "groups"]
     logoutURL: https://authentik.feddema.dev/application/o/argocd/end-session/
