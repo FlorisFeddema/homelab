@@ -1,4 +1,8 @@
 fluent-bit:
+  image:
+    repository: cr.fluentbit.io/fluent/fluent-bit
+    tag: v5.0.5 #https://github.com/fluent/fluent-bit/issues/11846
+
   rbac:
     create: true
     nodeAccess: false
