@@ -75,12 +75,12 @@ fluent-bit:
         Buffer_Chunk_Size 64KB
         Buffer_Max_Size 128KB
 
-      [INPUT]
-        Name tail
-        Alias audit
-        Path /var/log/audit/kube/*.log
-        Parser audit
-        Tag audit.*
+#      [INPUT]
+#        Name tail
+#        Alias audit
+#        Path /var/log/audit/kube/*.log
+#        Parser audit
+#        Tag audit.*
 
     filters: |
       [FILTER]
