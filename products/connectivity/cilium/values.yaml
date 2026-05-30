@@ -18,7 +18,11 @@ route:
       sectionName: web-https
 
 cilium:
-  MTU: 1450
+  MTU: 0
+  routingMode: native
+  ipv4NativeRoutingCIDR: 10.244.0.0/16
+  autoDirectNodeRoutes: true
+
   k8sServiceHost: localhost
   k8sServicePort: 7445
   kubeProxyReplacement: true
