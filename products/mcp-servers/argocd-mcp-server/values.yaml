@@ -1,9 +1,3 @@
-gatus-monitor:
-  appName: argocd-mcp-server
-  privateEndpoints:
-    - name: argocd-mcp-server
-      url: https://argocd.mcp.feddema.dev/healthz
-
 auth:
   enabled: true
   secretInit:

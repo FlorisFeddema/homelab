@@ -1,9 +1,3 @@
-gatus-monitor:
-  appName: kubernetes-mcp-server
-  privateEndpoints:
-    - name: kubernetes-mcp-server
-      url: https://kubernetes.mcp.feddema.dev/healthz
-
 route:
   enabled: true
   hostnames:
