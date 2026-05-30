@@ -1,0 +1,9 @@
+dependencies:
+- name: cilium
+  repository: oci://quay.io/cilium/charts
+  version: 1.19.4
+- name: gatus-monitor
+  repository: file://../../../templates/gatus-monitor
+  version: 1.0.0
+digest: sha256:5ca1cd12780217872bb871a01e20334850138b7c2e4c8448f801c23e77580b76
+generated: "2026-05-30T16:29:25.170544+02:00"

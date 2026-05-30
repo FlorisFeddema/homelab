@@ -128,6 +128,7 @@ cilium:
     enabled: true
     serviceMonitor:
       enabled: true
+      trustCRDsExist: true
   dashboards:
     enabled: true
     annotations:
