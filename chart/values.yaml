@@ -32,6 +32,16 @@ products:
     kubernetesReplicator:
       deploy: true
       autoSync: true
+  ai:
+    argocdMcpServer:
+      deploy: true
+      autoSync: true
+    grafanaMcpServer:
+      deploy: true
+      autoSync: true
+    kubernetesMcpServer:
+      deploy: true
+      autoSync: true
   connectivity:
     adguard:
       deploy: true
@@ -123,16 +133,6 @@ products:
     zigbee2mqtt:
       deploy: true
       nameOverride: zigbee2mqtt
-      autoSync: true
-  mcpServers:
-    argocdMcpServer:
-      deploy: true
-      autoSync: true
-    grafanaMcpServer:
-      deploy: true
-      autoSync: true
-    kubernetesMcpServer:
-      deploy: true
       autoSync: true
   media:
     mediaServer: # only deploys namespace and pvc
