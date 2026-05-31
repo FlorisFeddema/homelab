@@ -56,8 +56,7 @@ products:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
     coredns:
       deploy: true
-      autoSync: false
-      namespace: kube-system
+      autoSync: true
     devices:
       deploy: true
       autoSync: true
