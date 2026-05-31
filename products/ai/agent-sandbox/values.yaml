@@ -1,0 +1,55 @@
+image:
+  repository: registry.k8s.io/agent-sandbox/agent-sandbox-controller
+  tag: v0.4.6
+  pullPolicy: IfNotPresent
+
+replicaCount: 2
+
+controller:
+  ##### Unset flags are omitted
+  # clusterDomain: "cluster.local"
+  leaderElect: true
+  # leaderElectionNamespace: ""
+  extensions: false
+  # enableTracing: false
+  # enablePprof: false
+  # enablePprofDebug: false
+  # pprofBlockProfileRate: 1000000
+  # pprofMutexProfileFraction: 10
+  # kubeApiQps: -1.0
+  ##### The following workers are only active when controller.extensions=true.
+  # sandboxClaimConcurrentWorkers: 1
+  # sandboxWarmPoolConcurrentWorkers: 1
+  # sandboxTemplateConcurrentWorkers: 1
+  ##### extraArgs passes additional flags not listed above (e.g. zap logging flags).
+  extraArgs: []
+  kubeApiBurst: 20
+  sandboxConcurrentWorkers: 2
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 256Mi
+
+nodeSelector:
+  node-role.kubernetes.io/control-plane: ""
+
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+
+affinity: {}
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: ScheduleAnyway
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+
+serviceMonitor:
+  enabled: true
