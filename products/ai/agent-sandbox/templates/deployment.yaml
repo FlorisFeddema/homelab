@@ -2,26 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: agent-sandbox-controller
-  namespace: {{ include "agent-sandbox.namespace" . }}
-  labels:
-    {{- include "agent-sandbox.labels" . | nindent 4 }}
+  namespace: {{ .Release.Namespace }}
+  labels: {{- include "agent-sandbox.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
-    matchLabels:
-      {{- include "agent-sandbox.selectorLabels" . | nindent 6 }}
+    matchLabels: {{- include "agent-sandbox.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      labels:
-        {{- include "agent-sandbox.selectorLabels" . | nindent 8 }}
+      labels: {{- include "agent-sandbox.selectorLabels" . | nindent 8 }}
     spec:
       serviceAccountName: agent-sandbox-controller
       containers:
       - name: agent-sandbox-controller
         image: {{ include "agent-sandbox.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args:
-        {{- include "agent-sandbox.controllerArgs" . | nindent 8 }}
+        args: {{- include "agent-sandbox.controllerArgs" . | nindent 8 }}
         ports:
         - name: metrics
           containerPort: 8080
@@ -42,18 +38,14 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         {{- with .Values.resources }}
-        resources:
-          {{- toYaml . | nindent 10 }}
+        resources: {{- toYaml . | nindent 10 }}
         {{- end }}
       {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
+      nodeSelector: {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
+      affinity: {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
+      tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}

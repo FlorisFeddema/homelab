@@ -36,7 +36,6 @@ products:
     agentSandbox:
       deploy: true
       autoSync: false
-      namespace: agent-sandbox
       serverSideApply: true
     argocdMcpServer:
       deploy: true

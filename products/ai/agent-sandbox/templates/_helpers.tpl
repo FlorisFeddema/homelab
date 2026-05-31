@@ -6,13 +6,6 @@ Expand the name of the chart.
 {{- end }}
 
 {{/*
-The namespace to deploy into.
-*/}}
-{{- define "agent-sandbox.namespace" -}}
-{{- default .Release.Namespace .Values.namespace.name }}
-{{- end }}
-
-{{/*
 Common labels.
 */}}
 {{- define "agent-sandbox.labels" -}}
