@@ -41,7 +41,7 @@ products:
       autoSync: true
     kubernetesMcpServer:
       deploy: true
-      autoSync: true
+      autoSync: true§
   connectivity:
     adguard:
       deploy: true
