@@ -49,3 +49,13 @@ spec:
       {{- with .Values.tolerations }}
       tolerations: {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- range . }}
+        {{- $constraint := deepCopy . }}
+        {{- if not (hasKey $constraint "labelSelector") }}
+        {{- $_ := set $constraint "labelSelector" (dict "matchLabels" (include "agent-sandbox.selectorLabels" $ | fromYaml)) }}
+        {{- end }}
+{{ toYaml (list $constraint) | indent 8 }}
+        {{- end }}
+      {{- end }}
