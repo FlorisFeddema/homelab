@@ -1,8 +1,3 @@
 apiVersion: v2
 name: kubernetes-mcp-server
 version: 1.0.0
-
-dependencies:
-  - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
-    version: 1.0.0
