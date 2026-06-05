@@ -16,6 +16,14 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
 
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      name: kyverno
+      namespace: argocd
+      jsonPointers:
+        - /metadata/finalizers
+
   revisionHistoryLimit: 2
   syncPolicy:
     automated:
