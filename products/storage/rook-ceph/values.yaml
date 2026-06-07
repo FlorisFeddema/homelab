@@ -17,14 +17,14 @@ ceph-csi-drivers:
     driverSpecDefaults:
       deployCsiAddons: true
       generateOMapInfo: true
-    controllerPlugin:
-      hostNetwork: true
-      priorityClassName: system-cluster-critical
-      replicas: 2
-    imageSet:
-      name: rook-csi-operator-image-set-configmap
-    nodePlugin:
-      priorityClassName: system-node-critical
+      controllerPlugin:
+        hostNetwork: true
+        priorityClassName: system-cluster-critical
+        replicas: 2
+      imageSet:
+        name: rook-csi-operator-image-set-configmap
+      nodePlugin:
+        priorityClassName: system-node-critical
 
 drivers:
   rbd:
