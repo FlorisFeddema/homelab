@@ -16,7 +16,9 @@ ceph-csi-drivers:
   operatorConfig:
     driverSpecDefaults:
       deployCsiAddons: true
+      generateOMapInfo: true
     controllerPlugin:
+      hostNetwork: true
       priorityClassName: system-cluster-critical
       replicas: 2
     imageSet:
