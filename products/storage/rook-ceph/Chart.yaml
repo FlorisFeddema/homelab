@@ -13,5 +13,5 @@ dependencies:
     repository: file://../../../templates/gatus-monitor
     version: 1.0.0
   - name: ceph-csi-drivers
-    repository: https://ceph.github.io/ceph-csi-operator
+    repository: https://ceph.github.io/ceph-csi-operator-charts
     version: 0.2.0
