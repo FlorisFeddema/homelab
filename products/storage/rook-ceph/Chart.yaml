@@ -1,6 +1,6 @@
 apiVersion: v2
 name: rook-ceph
-version: 1.0.44
+version: 1.0.45
 
 dependencies:
   - name: rook-ceph
@@ -14,4 +14,4 @@ dependencies:
     version: 1.0.0
   - name: ceph-csi-drivers
     repository: https://ceph.github.io/ceph-csi-operator
-    version: 0.2.0
+    version: 1.0.1
