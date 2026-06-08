@@ -11,6 +11,38 @@ cephDashboardSSO:
       repository: alpine/kubectl
       tag: 1.36.1
 
+extended-ceph-exporter:
+  podSecurityContext:
+    fsGroup: 2000
+
+  securityContext:
+    capabilities:
+      drop:
+      - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+
+    resources:
+      limits:
+        cpu: null
+        memory: 150Mi
+      requests:
+        cpu: 25m
+        memory: 750Mi
+
+  serviceMonitor:
+    enabled: true
+
+  prometheusRule:
+    enabled: true
+
+
+  postInstallJob:
+    image:
+      repository: quay.io/ceph/ceph
+      tag: v20.2.1
+
 ceph-csi-drivers:
   namespace: rook-ceph # namespace:operator
   operatorConfig:
