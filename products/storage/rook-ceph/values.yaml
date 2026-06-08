@@ -34,10 +34,6 @@ extended-ceph-exporter:
   serviceMonitor:
     enabled: true
 
-  prometheusRule:
-    enabled: true
-
-
   postInstallJob:
     image:
       repository: quay.io/ceph/ceph
