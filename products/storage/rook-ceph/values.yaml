@@ -23,13 +23,13 @@ extended-ceph-exporter:
     runAsNonRoot: true
     runAsUser: 1000
 
-    resources:
-      limits:
-        cpu: null
-        memory: 150Mi
-      requests:
-        cpu: 25m
-        memory: 750Mi
+  resources:
+    limits:
+      cpu: null
+      memory: 150Mi
+    requests:
+      cpu: 25m
+      memory: 750Mi
 
   serviceMonitor:
     enabled: true
