@@ -15,6 +15,3 @@ dependencies:
   - name: ceph-csi-drivers
     repository: https://ceph.github.io/ceph-csi-operator
     version: 1.0.1
-  - name: extended-ceph-exporter
-    repository: https://galexrt.github.io/extended-ceph-exporter
-    version: 1.9.2
