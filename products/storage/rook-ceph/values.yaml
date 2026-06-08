@@ -29,7 +29,7 @@ extended-ceph-exporter:
       memory: 150Mi
     requests:
       cpu: 25m
-      memory: 750Mi
+      memory: 75Mi
 
   serviceMonitor:
     enabled: true
