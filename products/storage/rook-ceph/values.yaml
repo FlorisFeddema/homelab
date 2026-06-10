@@ -41,6 +41,7 @@ ceph-csi-drivers:
 
 rook-ceph:
   revisionHistoryLimit: "0"
+  logLevel: WARNING
   resources:
     requests:
       cpu: 100m
@@ -246,6 +247,14 @@ rook-ceph-cluster:
         osd_pool_default_size: '3'
         osd_pool_default_min_size: '2'
         mon_data_avail_warn: '15'
+        debug_mon: '0/5'
+        debug_mgr: '0/5'
+        debug_mds: '0/5'
+        debug_ms: '0/5'
+        debug_osd: '0/5'
+        debug_rados: '0/5'
+        debug_rbd: '0/5'
+        debug_rgw: '0/5'
       osd:
         osd_mclock_profile: "high_recovery_ops"
       "class:hdd":
