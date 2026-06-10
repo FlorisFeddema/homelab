@@ -204,7 +204,7 @@ rook-ceph-cluster:
     createPrometheusRules: true
     prometheusRuleOverrides:
       CephMonDownQuorumAtRisk:
-        for: 1m
+        for: 3m
 
   cephImage:
     tag: v20.2.1
@@ -359,7 +359,7 @@ rook-ceph-cluster:
           memory: 1600Mi
       mon:
         requests:
-          cpu: 100m
+          cpu: 150m
           memory: 512Mi
         limits:
           memory: 1Gi
