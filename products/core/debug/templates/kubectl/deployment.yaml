@@ -23,5 +23,11 @@ spec:
           command:
             - sleep
             - infinity
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           resources:
             {{- toYaml .Values.kubectl.resources | nindent 12 }}
+      volumes:
+        - name: tmp
+          emptyDir: {}

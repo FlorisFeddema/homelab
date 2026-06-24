@@ -31,15 +31,21 @@ spec:
             - name: talosconfig
               mountPath: /talos
               readOnly: true
+            - name: tmp
+              mountPath: /tmp
           {{- else }}
           volumeMounts:
             - name: talos-serviceaccount-token
               mountPath: /var/run/secrets/talos.dev
               readOnly: true
+            - name: tmp
+              mountPath: /tmp
           {{- end }}
           resources:
             {{- toYaml .Values.talosctl.resources | nindent 12 }}
       volumes:
+        - name: tmp
+          emptyDir: {}
         {{- if .Values.talosctl.talosconfig }}
         - name: talosconfig
           secret:
