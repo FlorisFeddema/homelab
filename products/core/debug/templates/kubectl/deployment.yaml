@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubectl
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubectl
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kubectl
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: kubectl
+      containers:
+        - name: kubectl
+          image: "{{ .Values.kubectl.image.repository }}:{{ .Values.kubectl.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - sleep
+            - infinity
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            {{- toYaml .Values.kubectl.resources | nindent 12 }}
+      volumes:
+        - name: tmp
+          emptyDir: {}

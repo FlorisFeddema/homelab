@@ -1,0 +1,11 @@
+.DS_Store
+# Common backup files
+*.bak
+*.tmp
+*.orig
+*~
+# Various IDEs
+.project
+.idea/
+*.tmproj
+.vscode/
