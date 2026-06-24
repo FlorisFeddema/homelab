@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: talosctl
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: talosctl
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: talosctl
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      serviceAccountName: talosctl
+      containers:
+        - name: talosctl
+          image: "{{ .Values.talosctl.image.repository }}:{{ .Values.talosctl.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - sleep
+            - infinity
+          env:
+            - name: TALOSCONFIG
+              value: /talos/config
+          volumeMounts:
+            - name: talosconfig
+              mountPath: /talos
+              readOnly: true
+          resources:
+            {{- toYaml .Values.talosctl.resources | nindent 12 }}
+      volumes:
+        - name: talosconfig
+          secret:
+            secretName: talosconfig

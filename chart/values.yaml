@@ -32,6 +32,9 @@ products:
     kubernetesReplicator:
       deploy: true
       autoSync: true
+    debug:
+      deploy: true
+      autoSync: true
   ai:
     agentSandbox:
       deploy: true

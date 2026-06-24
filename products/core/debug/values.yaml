@@ -1,0 +1,27 @@
+kubectl:
+  image:
+    repository: alpine/kubectl
+    tag: 1.32.4
+
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+talosctl:
+  image:
+    repository: ghcr.io/siderolabs/talosctl
+    tag: v1.10.3
+
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+  # Sealed talosconfig value.
+  # Seal with: kubeseal --raw --from-file=config=<talosconfig file> --namespace debug --name talosconfig
+  talosconfig: ""
