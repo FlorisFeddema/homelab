@@ -16,6 +16,9 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       serviceAccountName: talosctl
+      {{- if not .Values.talosctl.talosconfig }}
+      automountServiceAccountToken: false
+      {{- end }}
       containers:
         - name: talosctl
           image: "{{ .Values.talosctl.image.repository }}:{{ .Values.talosctl.image.tag }}"
@@ -23,6 +26,7 @@ spec:
           command:
             - sleep
             - infinity
+          {{- if .Values.talosctl.talosconfig }}
           env:
             - name: TALOSCONFIG
               value: /talos/config
@@ -30,9 +34,25 @@ spec:
             - name: talosconfig
               mountPath: /talos
               readOnly: true
+          {{- else }}
+          volumeMounts:
+            - name: talos-serviceaccount-token
+              mountPath: /var/run/secrets/talos.dev
+              readOnly: true
+          {{- end }}
           resources:
             {{- toYaml .Values.talosctl.resources | nindent 12 }}
       volumes:
+        {{- if .Values.talosctl.talosconfig }}
         - name: talosconfig
           secret:
             secretName: talosconfig
+        {{- else }}
+        - name: talos-serviceaccount-token
+          projected:
+            sources:
+              - serviceAccountToken:
+                  audience: talos
+                  expirationSeconds: 3600
+                  path: token
+        {{- end }}

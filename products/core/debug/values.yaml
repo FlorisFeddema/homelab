@@ -22,6 +22,10 @@ talosctl:
       cpu: 10m
       memory: 32Mi
 
-  # Sealed talosconfig value.
-  # Seal with: kubeseal --raw --from-file=config=<talosconfig file> --namespace debug --name talosconfig
+  # Sealed talosconfig value for explicit cert-based auth.
+  # When set: mounts the sealed secret as /talos/config and sets TALOSCONFIG.
+  # When empty: uses a projected ServiceAccount token (audience: talos) for
+  #   Talos API access from Kubernetes (requires kubernetesTalosAPIAccess
+  #   enabled in the Talos machine config for the debug namespace).
+  #   Seal with: kubeseal --raw --from-file=config=<talosconfig file> --namespace debug --name talosconfig
   talosconfig: ""
