@@ -23,18 +23,36 @@ spec:
           command:
             - sleep
             - infinity
+          {{- if .Values.talosctl.talosconfig }}
+          env:
+            - name: TALOSCONFIG
+              value: /talos/config
+          volumeMounts:
+            - name: talosconfig
+              mountPath: /talos
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+          {{- else }}
           volumeMounts:
             - name: talos-secrets
               mountPath: /var/run/secrets/talos.dev
               readOnly: true
             - name: tmp
               mountPath: /tmp
+          {{- end }}
           resources:
             {{- toYaml .Values.talosctl.resources | nindent 12 }}
       volumes:
+        {{- if .Values.talosctl.talosconfig }}
+        - name: talosconfig
+          secret:
+            secretName: talosconfig
+        {{- else }}
         - name: talos-secrets
           secret:
             secretName: talosctl-talos-secrets
             defaultMode: 416 # 0640
+        {{- end }}
         - name: tmp
           emptyDir: {}
