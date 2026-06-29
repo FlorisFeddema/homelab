@@ -137,6 +137,7 @@ kube-prometheus-stack:
       useExistingSecret: true
       configSecret: 'alertmanager-config'
       externalUrl: https://alertmanager.feddema.dev
+      replicas: 2
 
       resources:
         requests:
