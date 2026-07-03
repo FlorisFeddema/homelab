@@ -1,10 +1,10 @@
 apiVersion: v2
 name: sealed-secrets
-version: 1.0.33
+version: 1.0.34
 
 dependencies:
   - name: sealed-secrets
-    version: 2.19.0
+    version: 2.19.1
     repository: https://bitnami.github.io/sealed-secrets
   - name: sealed-secrets-web
     version: 3.3.1
