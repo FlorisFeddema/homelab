@@ -31,7 +31,7 @@ httpRedirect:
 gateways:
   public:
     addresses:
-      - 95.98.178.131
+      - 84.106.137.76
     serviceAddress: 192.168.102.30
     replicas: 3
     pdb:
