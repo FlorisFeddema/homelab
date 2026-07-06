@@ -1,3 +1,4 @@
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -34,6 +35,19 @@ rules:
   resources:
   - sandboxes/finalizers
   - sandboxes/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - apiextensions.k8s.io
+  resourceNames:
+  - sandboxclaims.extensions.agents.x-k8s.io
+  - sandboxes.agents.x-k8s.io
+  - sandboxtemplates.extensions.agents.x-k8s.io
+  - sandboxwarmpools.extensions.agents.x-k8s.io
+  resources:
+  - customresourcedefinitions
   verbs:
   - get
   - patch

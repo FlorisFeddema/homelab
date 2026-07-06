@@ -1,9 +1,18 @@
+namespace:
+  create: true
+  # Match the default namespace set by chart/templates/product-applications.yaml.
+  name: agent-sandbox
+
 image:
   repository: registry.k8s.io/agent-sandbox/agent-sandbox-controller
   tag: v0.5.0
   pullPolicy: IfNotPresent
 
 replicaCount: 2
+
+podAnnotations: {}
+
+podLabels: {}
 
 controller:
   ##### Unset flags are omitted
@@ -17,8 +26,10 @@ controller:
   # pprofBlockProfileRate: 1000000
   # pprofMutexProfileFraction: 10
   # kubeApiQps: -1.0
+  # kubeApiBurst: 10
+  # sandboxConcurrentWorkers: 1
   ##### The following workers are only active when controller.extensions=true.
-  # sandboxClaimConcurrentWorkers: 1
+  # sandboxClaimConcurrentWorkers: 50
   # sandboxWarmPoolConcurrentWorkers: 1
   # sandboxTemplateConcurrentWorkers: 1
   ##### extraArgs passes additional flags not listed above (e.g. zap logging flags).
@@ -50,6 +61,12 @@ topologySpreadConstraints:
   - maxSkew: 1
     topologyKey: topology.kubernetes.io/zone
     whenUnsatisfiable: ScheduleAnyway
+
+podSecurityContext: null
+
+containerSecurityContext: null
+
+webhookServiceName: agent-sandbox-webhook-service
 
 serviceMonitor:
   enabled: true

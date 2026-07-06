@@ -1,8 +1,8 @@
-{{- if .Values.controller.extensions }}
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
-  name: agent-sandbox-controller-extensions
+  name: agent-sandbox-controller
+  namespace: {{ include "agent-sandbox.namespace" . }}
   labels:
     {{- include "agent-sandbox.labels" . | nindent 4 }}
 subjects:
@@ -10,7 +10,6 @@ subjects:
   name: agent-sandbox-controller
   namespace: {{ include "agent-sandbox.namespace" . }}
 roleRef:
-  kind: ClusterRole
-  name: agent-sandbox-controller-extensions
+  kind: Role
+  name: agent-sandbox-controller
   apiGroup: rbac.authorization.k8s.io
-{{- end }}
