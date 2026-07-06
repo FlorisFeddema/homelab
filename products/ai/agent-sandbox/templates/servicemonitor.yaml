@@ -1,3 +1,4 @@
+{{/* Local overlay: upstream does not ship a ServiceMonitor template. */}}
 {{- if .Values.serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor

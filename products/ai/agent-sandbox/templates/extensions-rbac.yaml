@@ -1,3 +1,4 @@
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -66,7 +67,6 @@ rules:
   - sandboxclaims/finalizers
   - sandboxclaims/status
   - sandboxtemplates/finalizers
-  - sandboxtemplates/status
   - sandboxwarmpools/finalizers
   - sandboxwarmpools/status
   verbs:

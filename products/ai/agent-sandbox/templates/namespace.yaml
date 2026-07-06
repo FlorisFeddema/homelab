@@ -1,4 +1,8 @@
-kind: Namespace
+{{- if .Values.namespace.create }}
 apiVersion: v1
+kind: Namespace
 metadata:
-  name: {{ .Release.Namespace }}
+  name: {{ include "agent-sandbox.namespace" . }}
+  labels:
+    {{- include "agent-sandbox.labels" . | nindent 4 }}
+{{- end }}

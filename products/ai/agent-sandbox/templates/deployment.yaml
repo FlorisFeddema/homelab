@@ -2,22 +2,35 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: agent-sandbox-controller
-  namespace: {{ .Release.Namespace }}
-  labels: {{- include "agent-sandbox.labels" . | nindent 4 }}
+  namespace: {{ include "agent-sandbox.namespace" . }}
+  labels:
+    {{- include "agent-sandbox.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
-    matchLabels: {{- include "agent-sandbox.selectorLabels" . | nindent 6 }}
+    matchLabels:
+      {{- include "agent-sandbox.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      labels: {{- include "agent-sandbox.selectorLabels" . | nindent 8 }}
+      {{- $selectorLabels := include "agent-sandbox.selectorLabels" . | fromYaml }}
+      labels:
+        {{- toYaml (merge (dict) $selectorLabels .Values.podLabels) | nindent 8 }}
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
       serviceAccountName: agent-sandbox-controller
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: agent-sandbox-controller
         image: {{ include "agent-sandbox.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        args: {{- include "agent-sandbox.controllerArgs" . | nindent 8 }}
+        args:
+        {{- include "agent-sandbox.controllerArgs" . | nindent 8 }}
         ports:
         - name: metrics
           containerPort: 8080
@@ -25,6 +38,10 @@ spec:
         - name: healthz
           containerPort: 8081
           protocol: TCP
+        - name: webhook
+          containerPort: 9443
+          protocol: TCP
+
         livenessProbe:
           httpGet:
             path: /healthz
@@ -38,24 +55,32 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         {{- with .Values.resources }}
-        resources: {{- toYaml . | nindent 10 }}
+        resources:
+          {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .Values.containerSecurityContext }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/sandbox-config
+          readOnly: true
       {{- with .Values.nodeSelector }}
-      nodeSelector: {{- toYaml . | nindent 8 }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.affinity }}
-      affinity: {{- toYaml . | nindent 8 }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.tolerations }}
-      tolerations: {{- toYaml . | nindent 8 }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.topologySpreadConstraints }}
-      topologySpreadConstraints:
-        {{- range . }}
-        {{- $constraint := deepCopy . }}
-        {{- if not (hasKey $constraint "labelSelector") }}
-        {{- $_ := set $constraint "labelSelector" (dict "matchLabels" (include "agent-sandbox.selectorLabels" $ | fromYaml)) }}
-        {{- end }}
-{{ toYaml (list $constraint) | indent 8 }}
-        {{- end }}
-      {{- end }}
+      volumes:
+      - name: config-volume
+        configMap:
+          name: agent-sandbox-config
+          optional: true
+
