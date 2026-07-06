@@ -1,10 +1,10 @@
 apiVersion: v2
 name: immich
-version: 1.0.133
+version: 1.0.134
 
 dependencies:
   - name: immich
-    version: 11.0.1
+    version: 12.0.0
     repository:  oci://ghcr.io/k8s-at-our-homes/helm-charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
