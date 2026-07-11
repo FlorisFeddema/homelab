@@ -13,6 +13,8 @@ kubernetes-replicator:
     runAsNonRoot: true
     runAsUser: 1000
 
+  revisionHistoryLimit: 0
+
   resources:
     limits:
       memory: 100Mi
