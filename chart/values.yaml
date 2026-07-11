@@ -43,9 +43,6 @@ products:
     grafanaMcpServer:
       deploy: true
       autoSync: true
-    kubernetesMcpServer:
-      deploy: true
-      autoSync: true§
   connectivity:
     adguard:
       deploy: true
