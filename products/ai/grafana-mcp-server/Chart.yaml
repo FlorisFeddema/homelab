@@ -4,5 +4,5 @@ version: 1.0.12
 
 dependencies:
   - name: grafana-mcp
-    version: 0.18.1
+    version: 0.18.0
     repository: https://grafana-community.github.io/helm-charts
