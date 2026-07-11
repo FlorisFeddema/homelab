@@ -7,9 +7,9 @@ snapshot-controller:
     resources:
       requests:
         cpu: 10m
-        memory: 40Mi
+        memory: 60Mi
       limits:
-        memory: 80Mi
+        memory: 120Mi
 
     serviceMonitor:
       create: true
