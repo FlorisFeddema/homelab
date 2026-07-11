@@ -150,17 +150,17 @@ harbor:
     registry:
       resources:
         limits:
-          memory: 300Mi
+          memory: 500Mi
         requests:
           cpu: 70m
-          memory: 100Mi
+          memory: 250Mi
     controller:
       resources:
         limits:
-          memory: 60Mi
+          memory: 80Mi
         requests:
           cpu: 20m
-          memory: 30Mi
+          memory: 40Mi
 
   trivy:
     enabled: true
