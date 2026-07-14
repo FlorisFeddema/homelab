@@ -1,10 +1,10 @@
 apiVersion: v2
 name: nextcloud
-version: 1.0.112
+version: 1.0.113
 
 dependencies:
   - name: nextcloud
-    version: 9.2.0
+    version: 9.2.1
     repository: https://nextcloud.github.io/helm
   - name: redis-ha
     version: 4.39.0
