@@ -613,7 +613,7 @@ extended-ceph-exporter:
   replicaCount: 1
 
   image:
-    repository: extended-ceph-exporter
+    repository: ghcr.io/florisfeddema/extended-ceph-exporter
     tag: 0.0.1
 
   rgw:
