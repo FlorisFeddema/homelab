@@ -614,7 +614,6 @@ extended-ceph-exporter:
 
   image:
     repository: ghcr.io/florisfeddema/extended-ceph-exporter
-    tag: 0.0.2
 
   rgw:
     adminEndpoint: "http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc:80"
