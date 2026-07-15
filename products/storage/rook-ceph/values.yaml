@@ -620,7 +620,7 @@ extended-ceph-exporter:
     adminEndpoint: "http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc:80"
     credentials:
       existingSecret:
-        name: "extended-ceph-exporter-secret"
+        name: "rook-ceph-object-user-ceph-object-nvme-2-extended-ceph-exporter"
         accessKeyKey: AccessKey
         secretKeyKey: SecretKey
 
