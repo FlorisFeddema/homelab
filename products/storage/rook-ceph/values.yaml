@@ -608,3 +608,33 @@ rook-ceph-cluster:
         name: ceph-object-nvme-2
         reclaimPolicy: Delete
         volumeBindingMode: Immediate
+
+extended-ceph-exporter:
+  replicaCount: 1
+
+  image:
+    repository: extended-ceph-exporter
+    tag: 0.0.1
+
+  rgw:
+    adminEndpoint: "http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc:80"
+    credentials:
+      existingSecret:
+        name: "extended-ceph-exporter-secret"
+        accessKeyKey: AccessKey
+        secretKeyKey: SecretKey
+
+  serviceMonitor:
+    enabled: true
+
+  grafanaDashboard:
+    enabled: true
+
+  rook:
+    clusterNamespace: rook-ceph
+    objectStoreUser:
+      enabled: true
+      name: extended-ceph-exporter
+      store: ceph-object-nvme-2
+      displayName: extended-ceph-exporter
+      secretName: extended-ceph-exporter-secret

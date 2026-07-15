@@ -15,3 +15,6 @@ dependencies:
   - name: ceph-csi-drivers
     repository: https://ceph.github.io/ceph-csi-operator
     version: 1.0.4
+  - name: extended-ceph-exporter
+    version: 0.0.1
+    repository: oci://ghcr.io/florisfeddema/charts/
