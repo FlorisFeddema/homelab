@@ -1,10 +1,10 @@
 apiVersion: v2
 name: cilium
-version: 1.0.41
+version: 1.0.42
 
 dependencies:
   - name: cilium
-    version: 1.19.5
+    version: 1.19.6
     repository: oci://quay.io/cilium/charts
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
