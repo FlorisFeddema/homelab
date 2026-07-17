@@ -380,7 +380,7 @@ thanos:
   image:
     registry: quay.io
     repository: thanos/thanos
-    tag: v0.42.0
+    tag: v0.42.2
 
   query:
     enabled: true
