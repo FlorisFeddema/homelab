@@ -350,11 +350,11 @@ rook-ceph-cluster:
             - name: /dev/disk/by-id/ata-OOS20000G_0004BB80
               config:
                 deviceClass: hdd
-#        - name: kashaylan-3
-#          devices:
-#            - name: /dev/disk/by-id/nvme-eui.e8238fa6bf530001001b448b4aeeb60d
-#              config:
-#                deviceClass: nvme
+        - name: kashaylan-3
+          devices:
+            - name: /dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S467NX0MA11257Z
+              config:
+                deviceClass: nvme
 
     resources:
       mgr:
