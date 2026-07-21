@@ -33,6 +33,8 @@ grafana-mcp:
     - -t
     - streamable-http
     - --disable-write
+    - --allowed-hosts=*
+    - --allowed-origins=*
 
   serviceMonitor:
     enabled: true
