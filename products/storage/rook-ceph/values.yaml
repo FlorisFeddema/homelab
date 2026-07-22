@@ -360,9 +360,9 @@ rook-ceph-cluster:
       mgr:
         requests:
           cpu: 100m
-          memory: 1000Mi
+          memory: 1300Mi
         limits:
-          memory: 3000Mi
+          memory: 3500Mi
       mon:
         requests:
           cpu: 150m
@@ -378,9 +378,9 @@ rook-ceph-cluster:
       mgr-sidecar:
         requests:
           cpu: 30m
-          memory: 32Mi
+          memory: 50Mi
         limits:
-          memory: 100Mi
+          memory: 150Mi
       crashcollector:
         requests:
           cpu: 20m
