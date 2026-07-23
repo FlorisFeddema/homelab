@@ -3,7 +3,8 @@ snapshot-controller:
     revisionHistoryLimit: 0
     args:
       automaxprocs: true
-      feature-gates: CSIVolumeGroupSnapshot=false
+      kube-api-qps: 15
+      kube-api-burst: 30
     resources:
       requests:
         cpu: 10m
