@@ -5,7 +5,7 @@ namespace:
 
 image:
   repository: registry.k8s.io/agent-sandbox/agent-sandbox-controller
-  tag: v0.5.2
+  tag: v0.5.3
   pullPolicy: IfNotPresent
 
 replicaCount: 2
