@@ -26,6 +26,8 @@ grafana-mcp:
     - pyroscope
     - asserts
 
+  debug: true
+
   metrics:
     enabled: true
 
