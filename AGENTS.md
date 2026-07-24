@@ -73,6 +73,19 @@ Useful CLIs:
 - `kubeseal`
 - `yq`
 
+## MCP Servers Available To Copilot
+
+These MCP servers are deployed in-cluster and intended for Copilot agent usage:
+
+- Argo CD MCP server
+  - Route: `https://argocd.mcp.feddema.dev`
+  - Mode: read-only (`MCP_READ_ONLY=true`)
+- Grafana MCP server
+  - Route: `https://grafana.mcp.feddema.dev`
+  - Mode: write actions disabled (`--disable-write`)
+
+Both servers are enabled in `chart/values.yaml` under `products.ai`.
+
 ## Operating Conventions
 
 - Treat `chart/values.yaml` as authoritative inventory.
