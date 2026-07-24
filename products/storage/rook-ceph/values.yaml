@@ -607,7 +607,7 @@ rook-ceph-cluster:
         volumeBindingMode: Immediate
 
 extended-ceph-exporter:
-  replicaCount: 1
+  replicaCount: 2
 
   image:
     repository: ghcr.io/florisfeddema/extended-ceph-exporter
