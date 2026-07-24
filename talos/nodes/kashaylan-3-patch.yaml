@@ -13,7 +13,7 @@ name: end0
 ---
 apiVersion: v1alpha1
 kind: LinkConfig
-name: enP1p49s0u2
+name: enP1p49s0u1
 mtu: 9000
 addresses:
   - address: 192.168.5.14/24
