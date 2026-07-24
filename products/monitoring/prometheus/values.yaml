@@ -167,6 +167,13 @@ kube-prometheus-stack:
         enabled: true
         hostnames:
           - alertmanager.feddema.dev
+        sessionPersistence:
+          sessionName: alertmanager-affinity
+          type: Cookie
+          absoluteTimeout: 1h
+          idleTimeout: 10m
+          cookieConfig:
+            lifetimeType: Session
         parentRefs:
           - name: envoy-gateway-public
             namespace: envoy-gateway
