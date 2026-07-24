@@ -132,12 +132,19 @@ kube-prometheus-stack:
   alertmanager:
     forceDeployDashboards: true
 
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 1
+
     alertmanagerSpec:
       logLevel: warn
       useExistingSecret: true
       configSecret: 'alertmanager-config'
       externalUrl: https://alertmanager.feddema.dev
       replicas: 2
+
+      podAntiAffinity: "soft"
+      podAntiAffinityTopologyKey: kubernetes.io/hostname
 
       resources:
         requests:
