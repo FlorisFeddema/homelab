@@ -9,7 +9,7 @@ cephDashboardSSO:
   kubectl:
     image:
       repository: alpine/kubectl
-      tag: 1.36.2
+      tag: 1.36.3
 
 ceph-csi-drivers:
   namespace: rook-ceph # namespace:operator
