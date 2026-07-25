@@ -171,7 +171,6 @@ kube-prometheus-stack:
           sessionName: alertmanager-affinity
           type: Cookie
           absoluteTimeout: 1h
-          idleTimeout: 10m
           cookieConfig:
             lifetimeType: Session
         parentRefs:
