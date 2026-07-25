@@ -44,7 +44,7 @@ vpa:
         memory: 50Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-updater
-      tag: "1.7.0"
+      tag: "1.7.1"
 
   admissionController:
     revisionHistoryLimit: 0
