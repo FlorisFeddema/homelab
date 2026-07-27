@@ -115,6 +115,12 @@ policy-reporter:
     trivy:
       enabled: true
       revisionHistoryLimit: 0
+      envVars:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-token
+              key: GITHUB_TOKEN
 
   monitoring:
     enabled: true
