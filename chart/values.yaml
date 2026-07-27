@@ -179,7 +179,7 @@ products:
       autoSync: true
     falco:
       deploy: true
-      autoSync: true
+      autoSync: false
     trivyOperator:
       deploy: true
       autoSync: true
