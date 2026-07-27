@@ -177,9 +177,6 @@ products:
     certManager:
       deploy: true
       autoSync: true
-    falco:
-      deploy: true
-      autoSync: false
     trivyOperator:
       deploy: true
       autoSync: true
