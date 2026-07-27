@@ -17,11 +17,10 @@ ceph-csi-drivers:
     driverSpecDefaults:
       deployCsiAddons: true
       generateOMapInfo: true
-      controllerPlugin:
-        hostNetwork: true
-        priorityClassName: system-cluster-critical
       imageSet:
         name: rook-csi-operator-image-set-configmap
+      controllerPlugin:
+        priorityClassName: system-cluster-critical
       nodePlugin:
         priorityClassName: system-node-critical
 
@@ -29,9 +28,11 @@ ceph-csi-drivers:
     rbd:
       enabled: true
       name: rook-ceph.rbd.csi.ceph.com
+      snapshotPolicy: volumeGroupSnapshot
     cephfs:
       enabled: true
       name: rook-ceph.cephfs.csi.ceph.com
+      snapshotPolicy: volumeGroupSnapshot
     nfs:
       enabled: false
       name: rook-ceph.nfs.csi.ceph.com
