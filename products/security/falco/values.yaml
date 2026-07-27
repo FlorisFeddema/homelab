@@ -49,7 +49,7 @@ falco:
     priority: info
     json_output: false
     buffered_outputs: true
-    log_level: debug
+    log_level: error
 
     metrics:
       enabled: true
