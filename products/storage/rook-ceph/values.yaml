@@ -264,6 +264,7 @@ rook-ceph-cluster:
         bluestore_slow_ops_warn_lifetime: '600'
         bluestore_slow_ops_warn_threshold: '10'
       mgr:
+        log_max_recent: "100" # quote
         mgr/dashboard/standby_behaviour: 'error'
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
         mgr/dashboard/FEATURE_TOGGLE_ISCSI: 'false'
@@ -313,12 +314,16 @@ rook-ceph-cluster:
       modules:
         - name: pg_autoscaler
           enabled: true
-        - name: insights
-          enabled: true
         - name: rgw
           enabled: true
         - name: rook
           enabled: true
+        - name: insights
+          enabled: false
+        - name: nfs
+          enabled: false
+        - name: restful
+          enabled: false
 
     storage:
       useAllNodes: false
