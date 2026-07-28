@@ -135,6 +135,18 @@ cilium:
       argocd.argoproj.io/sync-options: ServerSideApply=true
 
   operator:
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+    affinity:
+      nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            preference:
+              matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: Exists
     prometheus:
       metricsService: true
       serviceMonitor:
