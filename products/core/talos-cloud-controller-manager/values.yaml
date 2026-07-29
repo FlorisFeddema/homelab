@@ -3,6 +3,8 @@ talos-cloud-controller-manager:
     - cloud-node
     - node-csr-approval
 
+  replicaCount: 2
+
   resources:
     requests:
       cpu: 10m
