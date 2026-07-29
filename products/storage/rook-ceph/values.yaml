@@ -35,10 +35,8 @@ ceph-csi-drivers:
       snapshotPolicy: volumeGroupSnapshot
     nfs:
       enabled: false
-      name: rook-ceph.nfs.csi.ceph.com
     nvmeof:
       enabled: false
-      name: rook-ceph.nvmeof.csi.ceph.com
 
 rook-ceph:
   revisionHistoryLimit: "0"
@@ -324,7 +322,7 @@ rook-ceph-cluster:
         - name: rook
           enabled: true
         - name: insights
-          enabled: false
+          enabled: true
         - name: nfs
           enabled: false
         - name: restful
