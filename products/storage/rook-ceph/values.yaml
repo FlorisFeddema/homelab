@@ -325,8 +325,6 @@ rook-ceph-cluster:
           enabled: true
         - name: nfs
           enabled: false
-        - name: restful
-          enabled: true
 
     storage:
       useAllNodes: false
