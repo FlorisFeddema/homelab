@@ -1,10 +1,10 @@
 apiVersion: v2
 name: harbor
-version: 1.0.6
+version: 1.0.7
 
 dependencies:
   - name: harbor
-    version: 1.19.1
+    version: 1.19.2
     repository: https://helm.goharbor.io
   - name: redis-ha
     version: 4.39.0
