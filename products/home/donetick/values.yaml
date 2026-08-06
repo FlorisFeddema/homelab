@@ -136,8 +136,8 @@ oidc:
   providerName: Authentik
   baseUrl: https://authentik.feddema.dev/application/o/donetick
   redirectUrl: ""
-  secretName: donetick-oidc-credentials
-  clientIdKey: client-id
+  secretName: oidc-credentials
+  clientId: q5jWWvsH8z9XHK75iPqpa4ZwsDOdO35uwmPwx3So
   clientSecretKey: client-secret
   scopes:
     - openid

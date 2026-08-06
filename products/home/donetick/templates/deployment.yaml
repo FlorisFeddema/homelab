@@ -35,10 +35,7 @@ spec:
                   name: {{ include "donetick.fullname" . }}-jwt
                   key: jwt-secret
             - name: DT_OAUTH2_CLIENT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: {{ required "oidc.secretName is required" .Values.oidc.secretName }}
-                  key: {{ required "oidc.clientIdKey is required" .Values.oidc.clientIdKey }}
+              value: {{ required "oidc.clientId is required" .Values.oidc.clientId | quote }}
             - name: DT_OAUTH2_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
