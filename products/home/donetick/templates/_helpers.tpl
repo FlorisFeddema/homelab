@@ -44,3 +44,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 donetick
 {{- end -}}
 {{- end -}}
+
+{{- define "donetick.configHash" -}}
+{{- include (print $.Template.BasePath "/configmap.yaml") . | sha256sum -}}
+{{- end -}}
+
+{{- define "donetick.envHash" -}}
+{{- dict "oidc" .Values.oidc "storage" .Values.storage | toJson | sha256sum -}}
+{{- end -}}

@@ -5,6 +5,8 @@ gatus-monitor:
   privateEndpoints:
     - name: donetick
 
+name: Donetick
+
 image:
   repository: donetick/donetick
   tag: v0.1.76
@@ -39,12 +41,6 @@ securityContext:
   runAsGroup: 65532
   runAsNonRoot: true
   runAsUser: 65532
-
-persistence:
-  enabled: false
-  size: 5Gi
-  labels:
-    backup.velero.io/include: "true"
 
 route:
   hostnames:
@@ -102,6 +98,7 @@ realtime:
 database:
   clusterName: donetick-postgres
   databaseName: donetick
+  logger: 1
   owner: donetick
   replicas: 2
   size: 8Gi
@@ -116,7 +113,7 @@ database:
     connectionStringKey: AZURE_CONNECTION_STRING
 
 storage:
-  # Set to local to use the optional PVC instead of S3.
+  # Set to local to use ephemeral local storage instead of S3.
   type: s3
   bucketName: donetick
   region: eu

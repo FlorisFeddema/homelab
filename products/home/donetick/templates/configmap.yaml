@@ -5,9 +5,9 @@ metadata:
   labels: {{- include "donetick.labels" . | nindent 4 }}
 data:
   selfhosted.yaml: |
-    name: selfhosted
+    name: {{ .Values.name | quote }}
     is_done_tick_dot_com: false
-    is_user_creation_disabled: false
+    is_user_creation_disabled: true
     database:
       type: {{ .Values.database.type | default "postgres" | quote }}
       migration: true
@@ -15,6 +15,7 @@ data:
       port: 5432
       user: {{ .Values.database.owner | quote }}
       name: {{ .Values.database.databaseName | quote }}
+      logger: {{ .Values.database.logger }}
     jwt:
       session_time: 168h
       max_refresh: 1440h

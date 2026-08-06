@@ -11,6 +11,9 @@ spec:
   template:
     metadata:
       labels: {{- include "donetick.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/config: {{ include "donetick.configHash" . }}
+        checksum/env: {{ include "donetick.envHash" . }}
     spec:
       securityContext: {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -83,9 +86,4 @@ spec:
           configMap:
             name: {{ include "donetick.fullname" . }}-config
         - name: data
-          {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim:
-            claimName: {{ include "donetick.fullname" . }}-data
-          {{- else }}
           emptyDir: {}
-          {{- end }}
