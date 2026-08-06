@@ -1,0 +1,19 @@
+{{- if .Values.database.backup.enabled }}
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: {{ .Values.database.backup.objectStoreName }}
+  labels: {{- include "donetick.labels" . | nindent 4 }}
+spec:
+  retentionPolicy: {{ .Values.database.backup.retentionPolicy | quote }}
+  configuration:
+    destinationPath: {{ .Values.database.backup.destinationPath | quote }}
+    azureCredentials:
+      connectionString:
+        name: {{ required "database.backup.secretName is required" .Values.database.backup.secretName }}
+        key: {{ required "database.backup.connectionStringKey is required" .Values.database.backup.connectionStringKey }}
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
+{{- end }}

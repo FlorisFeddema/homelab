@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "donetick.fullname" . }}-config
+  labels: {{- include "donetick.labels" . | nindent 4 }}
+data:
+  selfhosted.yaml: |
+    name: selfhosted
+    is_done_tick_dot_com: false
+    is_user_creation_disabled: false
+    database:
+      type: {{ .Values.database.type | default "postgres" | quote }}
+      migration: true
+      host: {{ printf "%s-rw" .Values.database.clusterName | quote }}
+      port: 5432
+      user: {{ .Values.database.owner | quote }}
+      name: {{ .Values.database.databaseName | quote }}
+    jwt:
+      session_time: 168h
+      max_refresh: 1440h
+    server:
+      port: 2021
+      read_timeout: {{ .Values.server.readTimeout | quote }}
+      write_timeout: {{ .Values.server.writeTimeout | quote }}
+      webhook_timeout: {{ .Values.server.webhookTimeout | quote }}
+      rate_period: {{ .Values.server.ratePeriod | quote }}
+      rate_limit: {{ .Values.server.rateLimit }}
+      cors_allow_origins:
+        - {{ include "donetick.publicHost" . | quote }}
+        {{- toYaml .Values.server.corsAllowOrigins | nindent 8 }}
+      public_host: {{ include "donetick.publicHost" . | quote }}
+      serve_frontend: true
+      serve_swagger: false
+    oauth2:
+      name: {{ .Values.oidc.providerName | quote }}
+      auth_url: {{ printf "%s/authorize/" (trimSuffix "/" .Values.oidc.baseUrl) | quote }}
+      token_url: {{ printf "%s/token/" (trimSuffix "/" .Values.oidc.baseUrl) | quote }}
+      user_info_url: {{ printf "%s/userinfo/" (trimSuffix "/" .Values.oidc.baseUrl) | quote }}
+      redirect_url: {{ include "donetick.oidcRedirectUrl" . | quote }}
+      scopes: {{- toYaml .Values.oidc.scopes | nindent 8 }}
+      admin_groups: {{- toYaml .Values.oidc.adminGroups | nindent 8 }}
+      manager_groups: {{- toYaml .Values.oidc.managerGroups | nindent 8 }}
+    logging:
+      level: {{ .Values.logging.level | quote }}
+      encoding: {{ .Values.logging.encoding | quote }}
+      development: false
+    scheduler_jobs:
+      due_job: {{ .Values.schedulerJobs.dueJob | quote }}
+      overdue_job: {{ .Values.schedulerJobs.overdueJob | quote }}
+      pre_due_job: {{ .Values.schedulerJobs.preDueJob | quote }}
+    single_circle_instance: true
+    disable_password_auth: true
+    realtime:
+      enabled: {{ .Values.realtime.enabled }}
+      websocket_enabled: {{ .Values.realtime.websocketEnabled }}
+      sse_enabled: {{ .Values.realtime.sseEnabled }}
+      heartbeat_interval: {{ .Values.realtime.heartbeatInterval | quote }}
+      connection_timeout: {{ .Values.realtime.connectionTimeout | quote }}
+      min_connection_interval: {{ .Values.realtime.minConnectionInterval | quote }}
+      max_connections: {{ .Values.realtime.maxConnections }}
+      max_connections_per_user: {{ .Values.realtime.maxConnectionsPerUser }}
+      event_queue_size: {{ .Values.realtime.eventQueueSize }}
+      cleanup_interval: {{ .Values.realtime.cleanupInterval | quote }}
+      stale_threshold: {{ .Values.realtime.staleThreshold | quote }}
+      enable_compression: {{ .Values.realtime.enableCompression }}
+      enable_stats: {{ .Values.realtime.enableStats }}
+      max_sse_tickets: {{ .Values.realtime.maxSseTickets }}
+      allowed_origins: {{- toYaml .Values.realtime.allowedOrigins | nindent 8 }}
+    storage:
+      storage_type: {{ .Values.storage.type | quote }}
+      bucket_name: {{ .Values.storage.bucketName | quote }}
+      region: {{ .Values.storage.region | quote }}
+      base_path: {{ include "donetick.storageBasePath" . | quote }}
+      endpoint: {{ .Values.storage.endpoint | quote }}
+      path_style: {{ .Values.storage.pathStyle }}
+      public_host: {{ .Values.storage.publicHost | quote }}
+      public_read: {{ .Values.storage.publicRead }}

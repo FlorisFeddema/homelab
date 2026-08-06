@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "donetick.fullname" . }}
+  labels: {{- include "donetick.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels: {{- include "donetick.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels: {{- include "donetick.selectorLabels" . | nindent 8 }}
+    spec:
+      securityContext: {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: donetick
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 2021
+              protocol: TCP
+          env:
+            - name: DT_ENV
+              value: selfhosted
+            - name: DT_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "%s-app" .Values.database.clusterName }}
+                  key: password
+            - name: DT_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "donetick.fullname" . }}-jwt
+                  key: jwt-secret
+            - name: DT_OAUTH2_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "oidc.secretName is required" .Values.oidc.secretName }}
+                  key: {{ required "oidc.clientIdKey is required" .Values.oidc.clientIdKey }}
+            - name: DT_OAUTH2_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "oidc.secretName is required" .Values.oidc.secretName }}
+                  key: {{ required "oidc.clientSecretKey is required" .Values.oidc.clientSecretKey }}
+            {{- if eq .Values.storage.type "s3" }}
+            - name: DT_STORAGE_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "storage.secretName is required for S3 storage" .Values.storage.secretName }}
+                  key: {{ required "storage.accessKeyKey is required for S3 storage" .Values.storage.accessKeyKey }}
+            - name: DT_STORAGE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "storage.secretName is required for S3 storage" .Values.storage.secretName }}
+                  key: {{ required "storage.secretKeyKey is required for S3 storage" .Values.storage.secretKeyKey }}
+            {{- end }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          securityContext: {{- toYaml .Values.securityContext | nindent 12 }}
+          startupProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            failureThreshold: 30
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            periodSeconds: 30
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: http
+            periodSeconds: 30
+          volumeMounts:
+            - name: config
+              mountPath: /config/selfhosted.yaml
+              subPath: selfhosted.yaml
+              readOnly: true
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "donetick.fullname" . }}-config
+        - name: data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "donetick.fullname" . }}-data
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

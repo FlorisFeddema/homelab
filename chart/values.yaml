@@ -122,6 +122,9 @@ products:
     nextcloud:
       deploy: true
       autoSync: true
+    donetick:
+      deploy: true
+      autoSync: true
   iot:
     emqx:
       deploy: true

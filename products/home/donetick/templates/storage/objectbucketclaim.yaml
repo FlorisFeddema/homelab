@@ -1,0 +1,9 @@
+{{- if and (eq .Values.storage.type "s3") .Values.storage.objectBucket.enabled }}
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: {{ .Values.storage.secretName }}
+spec:
+  bucketName: {{ .Values.storage.bucketName }}
+  storageClassName: {{ required "storage.objectBucket.storageClassName is required when using an ObjectBucketClaim" .Values.storage.objectBucket.storageClassName }}
+{{- end }}

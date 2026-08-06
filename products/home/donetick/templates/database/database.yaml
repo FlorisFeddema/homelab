@@ -1,0 +1,39 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Values.database.clusterName }}
+  labels: {{- include "donetick.labels" . | nindent 4 }}
+spec:
+  instances: {{ .Values.database.replicas }}
+  enablePDB: true
+  bootstrap:
+    initdb:
+      database: {{ .Values.database.databaseName }}
+      owner: {{ .Values.database.owner }}
+  topologySpreadConstraints:
+    - labelSelector:
+        matchLabels:
+          cnpg.io/cluster: {{ .Values.database.clusterName }}
+          cnpg.io/podRole: instance
+      maxSkew: 1
+      topologyKey: kubernetes.io/hostname
+      whenUnsatisfiable: ScheduleAnyway
+    - labelSelector:
+        matchLabels:
+          cnpg.io/cluster: {{ .Values.database.clusterName }}
+          cnpg.io/podRole: instance
+      maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+  {{- if .Values.database.backup.enabled }}
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: {{ .Values.database.backup.objectStoreName }}
+  {{- end }}
+  storage:
+    {{- with .Values.database.storageClass }}
+    storageClass: {{ . | quote }}
+    {{- end }}
+    size: {{ .Values.database.size }}

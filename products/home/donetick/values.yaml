@@ -1,0 +1,150 @@
+gatus-monitor:
+  appName: donetick
+  publicEndpoints:
+    - name: donetick
+  privateEndpoints:
+    - name: donetick
+
+image:
+  repository: donetick/donetick
+  tag: v0.1.76
+  pullPolicy: IfNotPresent
+
+replicas: 1
+
+secretInit:
+  image:
+    repository: alpine/kubectl
+    tag: 1.36.3
+
+resources:
+  limits:
+    memory: 512Mi
+  requests:
+    cpu: 50m
+    memory: 256Mi
+
+podSecurityContext:
+  fsGroup: 65532
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
+
+persistence:
+  enabled: false
+  size: 5Gi
+  labels:
+    backup.velero.io/include: "true"
+
+route:
+  hostnames:
+    - donetick.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+
+server:
+  # Overrides the first HTTPRoute hostname when set.
+  publicHost: ""
+  readTimeout: 10s
+  writeTimeout: 10s
+  webhookTimeout: 5s
+  ratePeriod: 60s
+  rateLimit: 300
+  corsAllowOrigins:
+    - http://localhost:5173
+    - http://localhost:7926
+    - https://localhost
+    - http://localhost
+    - capacitor://localhost
+
+logging:
+  level: info
+  encoding: json
+
+schedulerJobs:
+  dueJob: 30m
+  overdueJob: 3h
+  preDueJob: 3h
+
+realtime:
+  enabled: true
+  websocketEnabled: true
+  sseEnabled: true
+  heartbeatInterval: 60s
+  connectionTimeout: 120s
+  minConnectionInterval: 5s
+  maxConnections: 1000
+  maxConnectionsPerUser: 5
+  eventQueueSize: 2048
+  cleanupInterval: 2m
+  staleThreshold: 5m
+  enableCompression: true
+  enableStats: true
+  maxSseTickets: 10000
+  allowedOrigins:
+    - "*"
+
+database:
+  clusterName: donetick-postgres
+  databaseName: donetick
+  owner: donetick
+  replicas: 2
+  size: 8Gi
+  # storageClass: ceph-block-nvme-2
+  backup:
+    enabled: false
+    objectStoreName: azure-db-store
+    destinationPath: https://feddemadevbackups.blob.core.windows.net/cnpg
+    retentionPolicy: 14d
+    schedule: '0 23 4 * * *'
+    secretName: azure-db-store
+    connectionStringKey: AZURE_CONNECTION_STRING
+
+storage:
+  # Set to local to use the optional PVC instead of S3.
+  type: s3
+  bucketName: donetick
+  region: eu
+  basePath: ""
+  endpoint: http://rook-ceph-rgw-ceph-object-nvme-2.rook-ceph.svc:80
+  pathStyle: true
+  publicHost: ""
+  publicRead: false
+  secretName: donetick-bucket
+  accessKeyKey: AWS_ACCESS_KEY_ID
+  secretKeyKey: AWS_SECRET_ACCESS_KEY
+  objectBucket:
+    enabled: true
+    storageClassName: ceph-object-nvme-2
+
+oidc:
+  providerName: Authentik
+  baseUrl: https://authentik.feddema.dev/application/o/donetick
+  redirectUrl: ""
+  secretName: donetick-oidc-credentials
+  clientIdKey: client-id
+  clientSecretKey: client-secret
+  scopes:
+    - openid
+    - profile
+    - email
+    - groups
+  adminGroups:
+    - donetick-admins
+  managerGroups:
+    - donetick-managers
