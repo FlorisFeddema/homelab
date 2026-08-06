@@ -134,7 +134,7 @@ storage:
 
 oidc:
   providerName: Authentik
-  baseUrl: https://authentik.feddema.dev/application/o/donetick
+  baseUrl: https://authentik.feddema.dev/application/o/
   redirectUrl: ""
   secretName: oidc-credentials
   clientId: q5jWWvsH8z9XHK75iPqpa4ZwsDOdO35uwmPwx3So
