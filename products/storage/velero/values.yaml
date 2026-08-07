@@ -18,11 +18,6 @@ velero:
     nodeAgentPodMonitor:
       enabled: true
 
-  kubectl:
-    image:
-      repository: public.ecr.aws/bitnami/kubectl
-      tag: 1.36.1
-
   configuration:
     backupStorageLocation:
       - name: default
