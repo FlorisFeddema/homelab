@@ -144,4 +144,4 @@ oidc:
   adminGroups:
     - donetick-admins
   managerGroups:
-    - donetick-managers
+    - donetick-admins
