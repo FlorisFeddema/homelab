@@ -26,6 +26,10 @@ products:
       deploy: true
       autoSync: true
       namespace: kube-system
+    tuppr:
+      deploy: true
+      autoSync: false
+      serverSideApply: true
     vpa:
       deploy: true
       autoSync: true

@@ -1,0 +1,19 @@
+tuppr:
+  monitoring:
+    serviceMonitor:
+      enabled: true
+    prometheusRule:
+      enabled: true
+    dashboards:
+      enabled: true
+
+  resources: {}
+  # limits:
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 10m
+  #   memory: 64Mi
+
+  controller:
+    logLevel: info
+

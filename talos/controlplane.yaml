@@ -33,8 +33,8 @@ machine:
     kubernetesTalosAPIAccess:
       enabled: true
       allowedRoles:
-        - os:etcd:backup
         - os:reader
+        - os:admin
       allowedKubernetesNamespaces:
-        - talos-backup
         - kube-system
+        - tuppr

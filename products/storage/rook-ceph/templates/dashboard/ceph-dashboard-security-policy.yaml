@@ -12,11 +12,11 @@ spec:
       issuer: https://authentik.feddema.dev/application/o/ceph/
     redirectURL: https://ceph.feddema.dev/oauth2/callback
     logoutPath: /oauth2/sign_out
-    clientID: 6Zp0sXld7UwJsqF50KeNffI1FB6QcQkKUxDmEyMg
+    clientID: 6AJIw6vr82M8m280SM6uZ1KMp9Vg2hvJ6XCMoiXd
     clientSecret:
       name: ceph-dashboard-route-oidc-secret
-    scopes: ["openid", "profile", "email", "groups", "roles"]
+    scopes: ["profile", "email", "roles"]
     disableTokenEncryption: true
     cookieNames:
-      idToken: "token"
+      idToken: token
     forwardAccessToken: true
