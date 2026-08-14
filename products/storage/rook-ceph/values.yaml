@@ -204,7 +204,10 @@ rook-ceph-cluster:
     createPrometheusRules: true
     prometheusRuleOverrides:
       CephMonDownQuorumAtRisk:
-        for: 3m
+        for: 5m
+      CephOSDDownHigh:
+        for: 5m
+      
 
   cephImage:
     tag: v20.2.3
