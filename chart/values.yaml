@@ -37,10 +37,6 @@ products:
       deploy: true
       autoSync: true
   ai:
-    agentSandbox:
-      deploy: true
-      autoSync: false
-      serverSideApply: true
     argocdMcpServer:
       deploy: true
       autoSync: true
