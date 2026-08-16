@@ -18,6 +18,8 @@ spec:
         - name: argocd-mcp-server
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - --allow-unauthenticated
           env:
             - name: ARGOCD_BASE_URL
               value: {{ .Values.server.baseURL | quote }}
