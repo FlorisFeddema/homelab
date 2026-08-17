@@ -14,6 +14,11 @@ gateway-helm:
 
   config:
     envoyGateway:
+      provider:
+        type: Kubernetes
+        kubernetes:
+          deploy:
+            type: GatewayNamespace
       logging:
         level:
           default: warn
@@ -33,9 +38,9 @@ gateways:
     addresses:
       - 84.106.137.76
     serviceAddress: 192.168.102.30
-    replicas: 3
+    replicas: 2
     pdb:
-      minAvailable: 2
+      minAvailable: 1
     resources:
       requests:
         cpu: 150m
@@ -47,9 +52,9 @@ gateways:
     addresses:
       - 192.168.102.31
     serviceAddress: 192.168.102.31
-    replicas: 3
+    replicas: 2
     pdb:
-      minAvailable: 2
+      minAvailable: 1
     resources:
       requests:
         cpu: 150m
@@ -58,16 +63,20 @@ gateways:
         memory: 600Mi
 
 gateway-addons-helm:
-  dashboard:
-    labels:
-      grafana_dashboard: "1"
-  grafana:
-    enabled: false
-  prometheus:
-    enabled: false
-  fluent-bit:
+  alloy:
     enabled: false
   loki:
     enabled: false
   tempo:
     enabled: false
+  fluent-bit:
+    enabled: false
+  opentelemetry-collector:
+    enabled: false
+  grafana:
+    enabled: false
+  prometheus:
+    enabled: false
+  dashboard:
+    labels:
+      grafana_dashboard: '1'
