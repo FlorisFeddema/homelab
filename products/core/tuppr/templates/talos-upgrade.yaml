@@ -1,0 +1,21 @@
+apiVersion: tuppr.home-operations.com/v1alpha1
+kind: TalosUpgrade
+metadata:
+  name: gerador
+spec:
+  parallelism: 1
+  talos:
+    # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
+    version: v1.13.8
+  policy:
+    waitForVolumeDetach: true
+  healthChecks:
+    - apiVersion: ceph.rook.io/v1
+      kind: CephCluster
+      expr: |-
+        status.ceph.health in ['HEALTH_OK']
+    - apiVersion: v1
+      kind: Node
+      expr: status.conditions.filter(c, c.type == "Ready").all(c, c.status == "True")
+      timeout: 10m
+

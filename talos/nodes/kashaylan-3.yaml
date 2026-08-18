@@ -7,3 +7,4 @@ machine:
 
   install:
     disk: /dev/mmcblk0
+    image: factory.talos.dev/metal-installer/85430930745cd63086b9f882522009defa03d25134fcc7a7d2ddb991b127188c:v1.13.3
