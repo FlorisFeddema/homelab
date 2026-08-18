@@ -17,5 +17,5 @@ spec:
     - apiVersion: v1
       kind: Node
       expr: status.conditions.filter(c, c.type == "Ready").all(c, c.status == "True")
-      timeout: 10m
+      timeout: 10m0s
 
