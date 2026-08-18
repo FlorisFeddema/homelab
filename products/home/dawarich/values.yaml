@@ -48,17 +48,17 @@ dawarich:
 
   photon:
     config:
-      country: nl
-      updateInterval: '168h'
+      reverseOnly: true
+      languages: [ 'en', 'nl' ]
     persistence:
       storageClass: ceph-block-nvme-2
-      size: 20Gi
+      size: 100Gi
     resources:
       limits:
-        memory: 900Mi
+        memory: 11Gi
       requests:
         cpu: 50m
-        memory: 500Mi
+        memory: 3Gi
 
     gateway:
       resources:
