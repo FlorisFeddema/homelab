@@ -9,7 +9,7 @@ name: Donetick
 
 image:
   repository: donetick/donetick
-  tag: v0.1.76
+  tag: v0.1.79
   pullPolicy: IfNotPresent
 
 replicas: 1
