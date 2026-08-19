@@ -52,13 +52,13 @@ dawarich:
       languages: [ 'en', 'nl' ]
     persistence:
       storageClass: ceph-block-nvme-2
-      size: 100Gi
-    resources:
-      limits:
-        memory: 11Gi
-      requests:
-        cpu: 50m
-        memory: 3Gi
+    #   size: 100Gi
+    # resources:
+    #   limits:
+    #     memory: 11Gi
+    #   requests:
+    #     cpu: 50m
+    #     memory: 3Gi
 
     gateway:
       resources:
