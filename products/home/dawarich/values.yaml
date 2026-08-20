@@ -55,7 +55,7 @@ dawarich:
       size: 100Gi
     resources:
       limits:
-        memory: 11Gi
+        memory: 20Gi
       requests:
         cpu: 50m
         memory: 3Gi
