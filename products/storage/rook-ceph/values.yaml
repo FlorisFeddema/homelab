@@ -323,7 +323,7 @@ rook-ceph-cluster:
         - name: rgw
           enabled: true
         - name: rook
-          enabled: false
+          enabled: true
         - name: insights
           enabled: true
         - name: nfs
