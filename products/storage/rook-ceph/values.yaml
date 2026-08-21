@@ -244,6 +244,11 @@ rook-ceph-cluster:
         public: ['192.168.4.0/24']
         cluster: ['192.168.5.0/24']
 
+    auth:
+      daemon:
+        keyRotationPolicy: KeyGeneration
+        keyGeneration: 2
+
     cephConfig:
       global:
         osd_pool_default_size: '3'
