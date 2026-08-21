@@ -250,7 +250,6 @@ rook-ceph-cluster:
         daemon:
           keyRotationPolicy: KeyGeneration
           keyGeneration: 3
-      cephx:
         allowedCiphers:
         - aes
         - aes256k
