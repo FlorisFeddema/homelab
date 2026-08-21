@@ -643,7 +643,7 @@ rook-ceph-cluster:
       storageClass:
         enabled: true
         name: ceph-object-nvme-2
-        reclaimPolicy: Delete
+        reclaimPolicy: Retain
         volumeBindingMode: Immediate
 
 extended-ceph-exporter:
