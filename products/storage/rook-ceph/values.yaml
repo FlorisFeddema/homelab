@@ -245,16 +245,30 @@ rook-ceph-cluster:
         cluster: ['192.168.5.0/24']
 
     security:
+      # https://rook.io/docs/rook/latest-release/Storage-Configuration/Advanced/cephx-key-rotation/
       cephx:
         daemon:
           keyRotationPolicy: KeyGeneration
           keyGeneration: 3
+      cephx:
+        allowedCiphers:
+        - aes
+        - aes256k
+      csi:
+        keyRotationPolicy: KeyGeneration
+        keyGeneration: 2
+        keepPriorKeyCountMax: 1  # keep one prior key also
+        keyType: aes # aes256k from linux kernel 7
+      rbdMirrorPeer:
+        keyRotationPolicy: KeyGeneration
+        keyGeneration: 2
+        keyType: aes # aes256k from linux kernel 7
 
     cephConfig:
       global:
         osd_pool_default_size: '3'
         osd_pool_default_min_size: '2'
-        mon_data_avail_warn: '15'
+        mon_data_avail_warn: '10'
         debug_mon: '0/5'
         debug_mgr: '0/5'
         debug_mds: '0/5'
@@ -265,11 +279,18 @@ rook-ceph-cluster:
         debug_rgw: '0/5'
       osd:
         osd_mclock_profile: "high_recovery_ops"
+        osd_op_complaint_time: "60"
+        osd_op_log_threshold: "60"
+        bluestore_slow_ops_warn_lifetime: '0'
+        bluestore_slow_ops_warn_threshold: '0'
+      "class:nvme":
+        bdev_enable_discard: 'true'
+        bdev_async_discard_threads: '1'
+      "class:ssd":
+        bdev_enable_discard: 'true'
+        bdev_async_discard_threads: '1'
       "class:hdd":
-        bdev_stalled_read_warn_lifetime: '600'
-        bdev_stalled_read_warn_threshold: '5'
-        bluestore_slow_ops_warn_lifetime: '600'
-        bluestore_slow_ops_warn_threshold: '10'
+        bdev_enable_discard: 'false'
       mgr:
         log_max_recent: "100" # quote
         mgr/dashboard/standby_behaviour: 'error'
