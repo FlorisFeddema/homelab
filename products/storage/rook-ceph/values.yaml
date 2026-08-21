@@ -253,15 +253,15 @@ rook-ceph-cluster:
         allowedCiphers:
         - aes
         - aes256k
-      csi:
-        keyRotationPolicy: KeyGeneration
-        keyGeneration: 2
-        keepPriorKeyCountMax: 1  # keep one prior key also
-        keyType: aes # aes256k from linux kernel 7
-      rbdMirrorPeer:
-        keyRotationPolicy: KeyGeneration
-        keyGeneration: 2
-        keyType: aes # aes256k from linux kernel 7
+        csi:
+          keyRotationPolicy: KeyGeneration
+          keyGeneration: 2
+          keepPriorKeyCountMax: 1  # keep one prior key also
+          keyType: aes # aes256k from linux kernel 7
+        rbdMirrorPeer:
+          keyRotationPolicy: KeyGeneration
+          keyGeneration: 2
+          keyType: aes # aes256k from linux kernel 7
 
     cephConfig:
       global:
