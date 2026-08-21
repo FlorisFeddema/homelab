@@ -248,7 +248,7 @@ rook-ceph-cluster:
       cephx:
         daemon:
           keyRotationPolicy: KeyGeneration
-          keyGeneration: 2
+          keyGeneration: 3
 
     cephConfig:
       global:
