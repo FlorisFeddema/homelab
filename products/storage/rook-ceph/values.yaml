@@ -276,6 +276,8 @@ rook-ceph-cluster:
         debug_rados: '0/5'
         debug_rbd: '0/5'
         debug_rgw: '0/5'
+        # Required because Loki and Thanos do not sign Content-Type in SigV4 requests.
+        rgw_sigv4_insecure: 'true'
       osd:
         osd_mclock_profile: "high_recovery_ops"
         osd_op_complaint_time: "60"
