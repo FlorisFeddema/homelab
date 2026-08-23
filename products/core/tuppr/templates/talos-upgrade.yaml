@@ -1,12 +1,16 @@
+{{- range $zone := .Values.talosUpgrade.zones }}
+---
 apiVersion: tuppr.home-operations.com/v1alpha1
 kind: TalosUpgrade
 metadata:
-  name: gerador
+  name: gerador-{{ $zone }}
 spec:
+  nodeSelector:
+    matchLabels:
+      topology.kubernetes.io/zone: {{ $zone | quote }}
   parallelism: 1
   talos:
-    # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-    version: v1.13.8
+    version: {{ $.Values.talos.image.tag }}
   policy:
     waitForVolumeDetach: true
   healthChecks:
@@ -18,4 +22,4 @@ spec:
       kind: Node
       expr: status.conditions.filter(c, c.type == "Ready").all(c, c.status == "True")
       timeout: 10m0s
-
+{{- end }}
