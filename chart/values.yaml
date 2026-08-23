@@ -37,9 +37,6 @@ products:
       deploy: true
       autoSync: true
   ai:
-    argocdMcpServer:
-      deploy: true
-      autoSync: true
     grafanaMcpServer:
       deploy: true
       autoSync: true
