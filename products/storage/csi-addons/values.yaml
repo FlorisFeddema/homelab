@@ -1,0 +1,8 @@
+csi-addons:
+  replicas: 2
+
+  config:
+    reclaimSpaceTimeout: 10m
+    maxConcurrentReconciles: 1
+    maxGroupPvcs: 1
+    schedulePrecedence: pvc
