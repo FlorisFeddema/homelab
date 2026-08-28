@@ -32,7 +32,7 @@ loki:
     limits_config:
       allow_structured_metadata: true
       volume_enabled: true
-      retention_period: 168h
+      retention_period: 72h
       ingestion_rate_mb: 6
       ingestion_burst_size_mb: 12
       per_stream_rate_limit: 3MB
