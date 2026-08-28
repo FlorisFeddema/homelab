@@ -22,7 +22,7 @@ loki:
     analytics:
       reporting_enabled: false
     ingester:
-      chunk_encoding: snappy
+      chunk_encoding: zstd
       wal:
         enabled: true
     pattern_ingester:
@@ -32,9 +32,9 @@ loki:
     limits_config:
       allow_structured_metadata: true
       volume_enabled: true
-      retention_period: 168h
-      ingestion_rate_mb: 4
-      ingestion_burst_size_mb: 8
+      retention_period: 72h
+      ingestion_rate_mb: 6
+      ingestion_burst_size_mb: 12
       per_stream_rate_limit: 3MB
       per_stream_rate_limit_burst: 6MB
       max_global_streams_per_user: 5000
@@ -61,7 +61,14 @@ loki:
   test:
     enabled: false
   lokiCanary:
-    enabled: false
+    enabled: true
+    lokiurl: loki-distributor.loki.svc.cluster.local:3100
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
   gateway:
     enabled: false
   write:
@@ -144,6 +151,10 @@ loki:
     replicas: 1
     persistence:
       enabled: true
+      storageClass: ceph-block-nvme-2
+      accessModes:
+        - ReadWriteOnce
+      size: 10Gi
     resources:
       limits:
         memory: 200Mi
