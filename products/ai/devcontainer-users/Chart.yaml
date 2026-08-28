@@ -1,0 +1,4 @@
+apiVersion: v2
+name: devcontainer-users
+description: Read-only credentials for homelab development container users
+version: 1.0.0

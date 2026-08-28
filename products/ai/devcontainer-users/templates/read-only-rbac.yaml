@@ -1,0 +1,82 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: homelab-devcontainer-cluster-reader
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - nodes
+      - persistentvolumes
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - csidrivers
+      - csinodes
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: homelab-devcontainer-users-reader-view
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+{{- range $user := .Values.users }}
+  - kind: ServiceAccount
+    name: {{ $user }}
+    namespace: {{ $.Release.Namespace }}
+{{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: homelab-devcontainer-users-reader-cluster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: homelab-devcontainer-cluster-reader
+subjects:
+{{- range $user := .Values.users }}
+  - kind: ServiceAccount
+    name: {{ $user }}
+    namespace: {{ $.Release.Namespace }}
+{{- end }}
+---
+{{- range $user := .Values.users }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $user }}
+  namespace: {{ $.Release.Namespace }}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ $user }}-token
+  namespace: {{ $.Release.Namespace }}
+  annotations:
+    kubernetes.io/service-account.name: {{ $user }}
+type: kubernetes.io/service-account-token
+---
+{{- end }}

@@ -50,8 +50,12 @@ Most operations in this repo assume:
 - A working kubeconfig for the `gerador` cluster
 - A working Talos config for the same cluster
 - These CLIs installed locally:
+  - `argocd`
   - `helm`
+  - `jq`
   - `kubectl`
+  - `kubens`
+  - `stern`
   - `talosctl`
   - `kubeseal`
   - `yq`

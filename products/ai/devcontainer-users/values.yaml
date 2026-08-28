@@ -1,0 +1,3 @@
+# Each user receives the same read-only Kubernetes and Talos permissions.
+users:
+  - mba-floris-devcontainer
