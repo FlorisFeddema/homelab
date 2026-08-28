@@ -66,11 +66,17 @@ Network and edge:
 - AdGuard
 
 Useful CLIs:
-- `kubectl`
-- `talosctl`
+- `argocd`
 - `helm`
+- `jq`
+- `kubectl`
+- `kubens`
 - `kubeseal`
+- `stern`
+- `talosctl`
 - `yq`
+
+The devcontainer installs all of these CLIs.
 
 ## MCP Servers Available To Copilot
 

@@ -37,6 +37,10 @@ products:
       deploy: true
       autoSync: true
   ai:
+    devcontainerUsers:
+      deploy: true
+      autoSync: true
+      namespace: homelab-devcontainer
     grafanaMcpServer:
       deploy: true
       autoSync: true

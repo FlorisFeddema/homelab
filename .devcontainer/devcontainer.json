@@ -1,0 +1,15 @@
+{
+  "name": "Homelab",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "KUBECONFIG": "/home/vscode/.config/homelab-devcontainer/kubeconfig",
+    "TALOSCONFIG": "/home/vscode/.config/homelab-devcontainer/talosconfig"
+  },
+  "mounts": [
+    "source=${localEnv:HOME}/.config/homelab-devcontainer,target=/home/vscode/.config/homelab-devcontainer,type=bind,readonly"
+  ]
+}

@@ -35,6 +35,16 @@
       "matchPackageNames": ["ghcr.io/siderolabs/installer"],
       "separateMajorMinor": true,
       "separateMinorPatch": true
+    },
+    {
+      "description": "Group devcontainer CLI tool updates",
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": [".devcontainer/Dockerfile"],
+      "groupName": "Devcontainer CLI tools",
+      "groupSlug": "devcontainer-cli-tools",
+      "separateMajorMinor": false,
+      "separateMinorPatch": false,
+      "separateMultipleMajor": false
     }
   ],
   "customManagers": [
@@ -47,6 +57,17 @@
         "name:\\s*(?<depName>ghcr\\.io/zapier/kubechecks)\\s*tag:\\s*(?<currentValue>v?[\\d\\.]+)"
       ],
       "datasourceTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Manage pinned devcontainer CLI versions",
+      "managerFilePatterns": [
+        "/^\\.devcontainer\\/Dockerfile$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>github-releases) depName=(?<depName>[^\\s]+)\\s+ARG [A-Z_]+_VERSION=(?<currentValue>[^\\s]+)"
+      ],
+      "versioningTemplate": "semver"
     }
   ]
 }
