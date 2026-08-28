@@ -4,9 +4,9 @@ ARG TARGETARCH
 # renovate: datasource=github-releases depName=mikefarah/yq
 ARG YQ_VERSION=v4.53.6
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
-ARG KUBECTL_VERSION=v1.36.4
+ARG KUBECTL_VERSION=v1.37.0
 # renovate: datasource=github-releases depName=argoproj/argo-cd
-ARG ARGOCD_VERSION=v3.5.1
+ARG ARGOCD_VERSION=v3.5.2
 # renovate: datasource=github-releases depName=siderolabs/talos
 ARG TALOS_VERSION=v1.13.9
 # renovate: datasource=github-releases depName=helm/helm
