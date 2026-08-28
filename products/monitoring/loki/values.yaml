@@ -62,7 +62,6 @@ loki:
     enabled: false
   lokiCanary:
     enabled: true
-    lokiurl: loki-distributor.loki.svc.cluster.local:3100
     resources:
       limits:
         memory: 64Mi
@@ -70,7 +69,13 @@ loki:
         cpu: 10m
         memory: 32Mi
   gateway:
-    enabled: false
+    enabled: true
+    resources:
+      limits:
+        memory: 64Mi
+      requests:
+        cpu: 10m
+        memory: 32Mi
   write:
     replicas: 0
   read:
