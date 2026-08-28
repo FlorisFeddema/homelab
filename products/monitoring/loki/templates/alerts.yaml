@@ -1,0 +1,48 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: loki.rules
+spec:
+  groups:
+    - name: loki.rules
+      rules:
+        - alert: LokiRateLimitedIngestion
+          expr: sum(increase(loki_discarded_samples_total{namespace="loki",reason=~"rate_limited|per_stream_rate_limit"}[15m])) > 0
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Loki is discarding rate-limited log samples
+            description: Loki discarded {{ `{{ $value }}` }} log samples in the last 15 minutes because of ingestion rate limits.
+        - alert: LokiWritePathUnavailable
+          expr: sum(up{namespace="loki",job="loki/loki-distributor"}) < 2 or sum(up{namespace="loki",job="loki/loki-ingester"}) < 3
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Loki write path is unavailable
+            description: Loki has fewer healthy distributors or ingesters than its configured replica count.
+        - alert: LokiReadPathUnavailable
+          expr: sum(up{namespace="loki",job="loki/loki-query-frontend"}) < 2 or sum(up{namespace="loki",job="loki/loki-querier"}) < 2
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Loki read path is unavailable
+            description: Loki has fewer healthy query frontends or queriers than its configured replica count.
+        - alert: LokiCompactorStalled
+          expr: time() - max(loki_compactor_apply_retention_last_successful_run_timestamp_seconds{namespace="loki"}) > 21600
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: Loki retention compactor is stalled
+            description: Loki has not completed a retention run for more than six hours.
+        - alert: LokiRetentionDeletionBacklog
+          expr: sum(loki_boltdb_shipper_retention_sweeper_marker_files_current{namespace="loki"}) > 0
+          for: 4h
+          labels:
+            severity: warning
+          annotations:
+            summary: Loki retention deletion backlog is growing
+            description: Loki has retention marker files awaiting deletion for more than four hours.
