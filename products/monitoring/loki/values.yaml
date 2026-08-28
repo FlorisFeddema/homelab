@@ -25,6 +25,8 @@ loki:
       chunk_encoding: zstd
       wal:
         enabled: true
+    server:
+      log_level: warn
     pattern_ingester:
       enabled: true
     querier:
