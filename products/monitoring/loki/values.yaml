@@ -71,7 +71,7 @@ loki:
   gateway:
     enabled: true
     nginxConfig:
-      resolver: 10.96.0.9
+      resolver: 10.96.0.10
     resources:
       limits:
         memory: 64Mi
