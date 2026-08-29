@@ -114,7 +114,8 @@ kube-prometheus-stack:
             storageClassName: "ceph-block-nvme-1"
             resources:
               requests:
-                storage: 20Gi
+               # Existing claims must be recreated one replica at a time; PVCs cannot shrink.
+               storage: 5Gi
 
     route:
       main:
@@ -462,11 +463,13 @@ thanos:
       requests:
         cpu: 300m
         memory: 4500Mi
+      limits:
+        memory: 8Gi
 
     persistence:
       ephemeral: true
       storageClass: "ceph-block-nvme-1"
-      size: 100Gi
+      size: 50Gi
 
   storegateway:
     enabled: true
