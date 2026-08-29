@@ -4,6 +4,9 @@ set -euo pipefail
 
 readonly credentials_dir="${DEVCONTAINER_CREDENTIALS_DIR:-"${HOME}/.config/homelab-devcontainer"}"
 readonly service_account_namespace="homelab-devcontainer"
+readonly grafana_mcp_namespace="grafana-mcp-server"
+readonly grafana_mcp_secret_name="grafana-mcp-bearer-auth-secret"
+readonly grafana_mcp_url="https://grafana.mcp.feddema.dev/mcp"
 
 if [[ $# -ne 1 ]]; then
     echo "Usage: $0 <devcontainer-user>" >&2
@@ -51,10 +54,21 @@ if [[ -z "${token}" ]]; then
     exit 1
 fi
 
+grafana_mcp_key="$(
+    kubectl --namespace "${grafana_mcp_namespace}" get secret "${grafana_mcp_secret_name}" \
+        --output "jsonpath={.data.${service_account_name}}" 2>/dev/null
+)"
+if [[ -z "${grafana_mcp_key}" ]]; then
+    echo "No Grafana MCP credential exists for ${service_account_name}. Wait for Argo CD to sync the grafana-mcp-server app." >&2
+    exit 1
+fi
+
 if base64 --decode </dev/null >/dev/null 2>&1; then
     token="$(printf '%s' "${token}" | base64 --decode)"
+    grafana_mcp_key="$(printf '%s' "${grafana_mcp_key}" | base64 --decode)"
 else
     token="$(printf '%s' "${token}" | base64 -D)"
+    grafana_mcp_key="$(printf '%s' "${grafana_mcp_key}" | base64 -D)"
 fi
 
 cluster_server="$(kubectl config view --minify --raw --output jsonpath='{.clusters[0].cluster.server}')"
@@ -89,6 +103,21 @@ users:
       token: ${token}
 EOF
 
+cat > "${credentials_dir}/mcp-config.json" <<EOF
+{
+  "mcpServers": {
+    "grafana": {
+      "type": "http",
+      "url": "${grafana_mcp_url}",
+      "headers": {
+        "Authorization": "Bearer ${grafana_mcp_key}"
+      },
+      "tools": ["*"]
+    }
+  }
+}
+EOF
+
 talosctl config new --roles=os:reader "${credentials_dir}/talosconfig"
 
-echo "Read-only Kubernetes and Talos credentials written to ${credentials_dir}."
+echo "Read-only Kubernetes, Talos, and Grafana MCP credentials written to ${credentials_dir}."
