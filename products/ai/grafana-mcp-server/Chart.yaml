@@ -1,8 +1,8 @@
 apiVersion: v2
 name: grafana-mcp-server
-version: 1.0.16
+version: 1.0.17
 
 dependencies:
   - name: grafana-mcp
-    version: 0.21.0
+    version: 0.22.0
     repository: https://grafana-community.github.io/helm-charts
