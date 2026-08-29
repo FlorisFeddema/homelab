@@ -1,6 +1,6 @@
 apiVersion: v2
 name: grafana-mcp-server
-version: 1.0.16
+version: 1.0.17
 
 dependencies:
   - name: grafana-mcp

@@ -2,6 +2,8 @@ apiKey: AgAWvSkInaFDh9tFwsfeRnQmpT5YAThveKO1B23+QD1Q9Gkf+q9QUl35hcuspx55HNVa6zV6
 
 auth:
   enabled: true
+  clients:
+    - mba-floris-devcontainer
   secretInit:
     image:
       repository: alpine/kubectl

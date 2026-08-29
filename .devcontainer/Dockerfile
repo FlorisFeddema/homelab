@@ -22,6 +22,11 @@ RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
     && rm -rf /var/lib/apt/lists/*
 
+COPY .devcontainer/argocd /usr/local/bin/argocd
+
+RUN install -d --owner=vscode --group=vscode /home/vscode/.copilot \
+    && ln -s /home/vscode/.config/homelab-devcontainer/mcp-config.json /home/vscode/.copilot/mcp-config.json
+
 RUN case "${TARGETARCH}" in \
         amd64) arch="amd64"; kubectx_arch="x86_64" ;; \
         arm64) arch="arm64"; kubectx_arch="arm64" ;; \
@@ -35,7 +40,7 @@ RUN case "${TARGETARCH}" in \
         --output /usr/local/bin/kubectl \
         "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/${arch}/kubectl" \
     && curl --fail --location --silent --show-error \
-        --output /usr/local/bin/argocd \
+        --output /usr/local/bin/argocd-real \
         "https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-${arch}" \
     && curl --fail --location --silent --show-error \
         --output /usr/local/bin/talosctl \
@@ -61,4 +66,4 @@ RUN case "${TARGETARCH}" in \
     && tar --extract --gzip --file "${temp_dir}/stern.tar.gz" --directory "${temp_dir}" \
     && install "${temp_dir}/stern" /usr/local/bin/stern \
     && rm -rf "${temp_dir}" \
-    && chmod +x /usr/local/bin/yq /usr/local/bin/kubectl /usr/local/bin/argocd /usr/local/bin/talosctl
+    && chmod +x /usr/local/bin/argocd /usr/local/bin/yq /usr/local/bin/kubectl /usr/local/bin/argocd-real /usr/local/bin/talosctl
