@@ -22,3 +22,77 @@ spec:
           annotations:
             summary: Kubernetes Volume out of disk space (instance {{ `{{ $labels.instance }}` }})
             description: "Volume is almost full (< 10% left)\n  VALUE = {{ `{{ $value }}` }}\n  LABELS = {{ `{{ $labels }}` }}"
+    - name: thanos.rules
+      rules:
+        - alert: ThanosSidecarUploadStalled
+          expr: time() - thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery"} > 10800
+          for: 15m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos sidecar block uploads are stalled
+            description: Thanos sidecar {{ `{{ $labels.pod }}` }} has not uploaded a block in more than three hours.
+        - alert: ThanosSidecarUploadFailed
+          expr: increase(thanos_shipper_upload_failures_total{job="prometheus-thanos-discovery"}[15m]) > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos sidecar block upload failed
+            description: Thanos sidecar {{ `{{ $labels.pod }}` }} failed to upload a Prometheus block.
+        - alert: ThanosStoreGatewaySyncFailed
+          expr: increase(thanos_blocks_meta_sync_failures_total{job="prometheus-thanos-storegateway"}[15m]) > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos Store Gateway metadata sync failed
+            description: Thanos Store Gateway {{ `{{ $labels.pod }}` }} cannot synchronize object-store metadata.
+        - alert: ThanosQueryMissingSidecar
+          expr: count by (pod) (thanos_store_nodes_grpc_connections{job="prometheus-thanos-query",store_type="sidecar"} == 1) < 2 or (up{job="prometheus-thanos-query"} == 1 unless on (pod) thanos_store_nodes_grpc_connections{job="prometheus-thanos-query",store_type="sidecar"} == 1)
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos Query is missing a Prometheus sidecar
+            description: Thanos Query {{ `{{ $labels.pod }}` }} is connected to fewer than two Prometheus sidecars.
+        - alert: ThanosQueryMissingStoreGateway
+          expr: up{job="prometheus-thanos-query"} == 1 unless on (pod) thanos_store_nodes_grpc_connections{job="prometheus-thanos-query",store_type="store"} == 1
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos Query is missing its Store Gateway
+            description: Thanos Query {{ `{{ $labels.pod }}` }} cannot query historical object-store blocks.
+        - alert: ThanosCompactorFailed
+          expr: kube_job_status_failed{namespace="prometheus",job_name=~"prometheus-thanos-compactor-.*"} > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos Compactor job failed
+            description: Thanos Compactor job {{ `{{ $labels.job_name }}` }} failed.
+        - alert: ThanosCompactorStalled
+          expr: time() - kube_cronjob_status_last_successful_time{namespace="prometheus",cronjob="prometheus-thanos-compactor"} > 108000
+          for: 15m
+          labels:
+            severity: critical
+          annotations:
+            summary: Thanos Compactor is stalled
+            description: Thanos Compactor has not completed successfully in more than 30 hours.
+        - alert: ThanosCompactorMemoryHigh
+          expr: container_memory_working_set_bytes{namespace="prometheus",pod=~"prometheus-thanos-compactor-.*",container="compactor"} / on (namespace, pod, container) kube_pod_container_resource_limits{resource="memory"} > 0.9
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Thanos Compactor memory usage is high
+            description: Thanos Compactor {{ `{{ $labels.pod }}` }} is using more than 90% of its memory limit.
+        - alert: ThanosCompactorVolumeFilling
+          expr: kubelet_volume_stats_used_bytes{namespace="prometheus",persistentvolumeclaim=~"prometheus-thanos-compactor-.*"} / kubelet_volume_stats_capacity_bytes{namespace="prometheus",persistentvolumeclaim=~"prometheus-thanos-compactor-.*"} > 0.8
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Thanos Compactor volume is filling
+            description: Thanos Compactor volume {{ `{{ $labels.persistentvolumeclaim }}` }} is more than 80% full.
