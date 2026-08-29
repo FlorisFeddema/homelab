@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: descheduler.rules
+spec:
+  groups:
+    - name: descheduler.rules
+      rules:
+        - alert: DeschedulerDown
+          expr: absent(up{namespace="descheduler",job="descheduler"}) or max(up{namespace="descheduler",job="descheduler"}) == 0
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: Descheduler metrics target is unavailable
+            description: Prometheus has been unable to scrape the descheduler for at least 10 minutes.
+        - alert: DeschedulerLoopStalled
+          expr: increase(descheduler_descheduler_loop_duration_seconds_count{namespace="descheduler"}[15m]) < 1
+          for: 10m
+          labels:
+            severity: critical
+          annotations:
+            summary: Descheduler loop is stalled
+            description: The descheduler has not completed a policy cycle in the last 15 minutes.
+        - alert: DeschedulerLoopSlow
+          expr: histogram_quantile(0.99, sum by (le) (rate(descheduler_descheduler_loop_duration_seconds_bucket{namespace="descheduler"}[15m]))) > 60
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: Descheduler policy cycles are slow
+            description: The descheduler p99 policy-cycle duration has exceeded 60 seconds for 15 minutes.
+        - alert: DeschedulerRestarting
+          expr: increase(kube_pod_container_status_restarts_total{namespace="descheduler",container="descheduler"}[15m]) > 2
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: Descheduler is restarting repeatedly
+            description: The descheduler container restarted more than twice in the last 15 minutes.
