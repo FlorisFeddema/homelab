@@ -9,7 +9,7 @@ cluster:
     resources:
       requests:
         cpu: 700m
-        memory: 5Gi
+        memory: 7Gi
 
   controllerManager:
     extraArgs:
