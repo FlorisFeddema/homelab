@@ -303,8 +303,8 @@
     },
     {
       "datasource": {
-        "type": "loki",
-        "uid": "loki"
+        "type": "prometheus",
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -354,17 +354,18 @@
       "targets": [
         {
           "datasource": {
-            "type": "loki",
-            "uid": "loki"
+            "type": "prometheus",
+            "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum by (strategy) (count_over_time({namespace=\"descheduler\",container=\"descheduler\"} | json | line_format \"{{.log}}\" |= \"Evicted pod in dry run mode\" | logfmt [5m]))",
+          "expr": "sum by (strategy) (increase(descheduler_pods_evicted_total{result=\"success\"}[$__rate_interval]))",
           "legendFormat": "{{strategy}}",
-          "queryType": "range",
+          "range": true,
           "refId": "A"
         }
       ],
-      "title": "Dry-run eviction candidates by strategy",
+      "description": "Successful eviction decisions grouped by strategy. While dry-run is enabled these are candidates; afterward they are actual evictions.",
+      "title": "Evictions by strategy",
       "type": "timeseries"
     }
   ],
