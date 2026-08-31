@@ -1,6 +1,8 @@
 descheduler:
   kind: Deployment
   deschedulingInterval: 5m
+  cmdOptions:
+    dry-run: true
   resources:
     requests:
       cpu: 20m
@@ -17,51 +19,75 @@ descheduler:
 
   deschedulerPolicyAPIVersion: descheduler/v1alpha2
   deschedulerPolicy:
-    strategies: null
+    maxNoOfPodsToEvictPerNode: 2
+    maxNoOfPodsToEvictPerNamespace: 2
+    maxNoOfPodsToEvictTotal: 5
+    evictionFailureEventNotification: true
+    metricsProviders:
+      - source: KubernetesMetrics
     profiles:
-      - name: DefaultEvictor
-        nodeFit: true
-        evictLocalStoragePods: true
-        evictFailedBarePods: true
-      - name: RemovePodsHavingTooManyRestarts
-        args:
-          podRestartThreshold: 10
-          includingInitContainers: true
-      - name: LowNodeUtilization
-        args:
-          thresholds:
-            cpu : 20
-            memory: 20
-          targetThresholds:
-            cpu : 50
-            memory: 50
-          metricsUtilization:
-            metricsServer: true
-      - name: RemovePodsViolatingNodeAffinity
-        args:
-          nodeAffinityType:
-            - requiredDuringSchedulingIgnoredDuringExecution
-            - preferreddDuringSchedulingIgnoredDuringExecution
-      - name: RemovePodsViolatingInterPodAntiAffinity
-      - name: RemovePodsViolatingTopologySpreadConstraint
-        args:
-          topologyBalanceNodeFit: true
-          constraints:
-            - DoNotSchedule
-            - ScheduleAnyway
-      - name: RemovePodsViolatingNodeTaints
-        args:
-          includePreferNoSchedule: true
-          excludedTains:
-            - node.kubernetes.io/unschedulable
-    plugins:
-      deschedule:
-        enabled:
-          - RemovePodsHavingTooManyRestarts
-          - RemovePodsViolatingInterPodAntiAffinity
-          - RemovePodsViolatingNodeAffinity
-          - RemovePodsViolatingNodeTaints
-      balance:
-        enabled:
-          - LowNodeUtilization
-          - RemovePodsViolatingTopologySpreadConstraint
+      - name: default
+        pluginConfig:
+          - name: DefaultEvictor
+            args:
+              nodeFit: true
+              minPodAge: 10m
+              podProtections:
+                extraEnabled:
+                  - PodsWithPVC
+                  - PodsWithoutPDB
+          - name: RemovePodsHavingTooManyRestarts
+            args:
+              podRestartThreshold: 10
+              includingInitContainers: true
+          - name: RemoveFailedPods
+            args:
+              reasons:
+                - Evicted
+              excludeOwnerKinds:
+                - Job
+              minPodLifetimeSeconds: 3600
+              includingInitContainers: true
+          - name: RemoveDuplicates
+          - name: LowNodeUtilization
+            args:
+              thresholds:
+                cpu: 20
+                memory: 20
+                pods: 20
+              targetThresholds:
+                cpu: 50
+                memory: 50
+                pods: 50
+              metricsUtilization:
+                source: KubernetesMetrics
+          - name: RemovePodsViolatingNodeAffinity
+            args:
+              nodeAffinityType:
+                - requiredDuringSchedulingIgnoredDuringExecution
+                - preferredDuringSchedulingIgnoredDuringExecution
+          - name: RemovePodsViolatingInterPodAntiAffinity
+          - name: RemovePodsViolatingTopologySpreadConstraint
+            args:
+              topologyBalanceNodeFit: true
+              constraints:
+                - DoNotSchedule
+                - ScheduleAnyway
+          - name: RemovePodsViolatingNodeTaints
+            args:
+              includePreferNoSchedule: true
+              excludedTaints:
+                - node.kubernetes.io/unschedulable
+        plugins:
+          deschedule:
+            enabled:
+              - RemovePodsHavingTooManyRestarts
+              - RemoveFailedPods
+              - RemovePodsViolatingInterPodAntiAffinity
+              - RemovePodsViolatingNodeAffinity
+              - RemovePodsViolatingNodeTaints
+          balance:
+            enabled:
+              - RemoveDuplicates
+              - LowNodeUtilization
+              - RemovePodsViolatingTopologySpreadConstraint
