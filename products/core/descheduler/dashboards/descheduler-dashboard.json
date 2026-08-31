@@ -300,6 +300,72 @@
       ],
       "title": "Eviction cycle summaries",
       "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "editorMode": "code",
+          "expr": "sum by (strategy) (count_over_time({namespace=\"descheduler\",container=\"descheduler\"} | json | line_format \"{{.log}}\" |= \"Evicted pod in dry run mode\" | logfmt [5m]))",
+          "legendFormat": "{{strategy}}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Dry-run eviction candidates by strategy",
+      "type": "timeseries"
     }
   ],
   "refresh": "1m",
@@ -318,5 +384,5 @@
   "timezone": "browser",
   "title": "Kubernetes Descheduler",
   "uid": "kubernetes-descheduler",
-  "version": 1
+  "version": 2
 }
