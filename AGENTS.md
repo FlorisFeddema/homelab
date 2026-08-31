@@ -14,6 +14,13 @@ Primary model:
 
 Detailed Helm chart management guidance is scoped to chart files in `.github/instructions/helm-chart-management.instructions.md`.
 
+## GitOps-Only Changes
+
+- Make every cluster configuration change in this repository and deploy it through the GitOps workflow.
+- Never mutate the live cluster directly. Do not use commands such as `kubectl apply`, `kubectl edit`, `kubectl patch`, `kubectl delete`, `kubectl scale`, `kubectl rollout restart`, `helm install`, `helm upgrade`, or direct Argo CD changes.
+- Cluster access is read-only and may only be used for investigation and verification, such as `kubectl get`, `kubectl describe`, and `kubectl logs`.
+- Do not make temporary, emergency, or recovery changes directly in the cluster. Prepare the required Git change instead.
+
 ## Folder Structure
 
 - `chart/`
