@@ -49,7 +49,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 1,
       "options": {
@@ -114,7 +114,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 0
+        "y": 8
       },
       "id": 2,
       "options": {
@@ -171,7 +171,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 8
       },
       "id": 3,
       "options": {
@@ -227,7 +227,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 4,
       "options": {
@@ -273,7 +273,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 16
       },
       "id": 5,
       "options": {
@@ -312,6 +312,8 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "barAlignment": 0,
+            "barWidthFactor": 0.9,
             "drawStyle": "bars",
             "fillOpacity": 80,
             "lineInterpolation": "stepAfter",
@@ -334,7 +336,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 0
       },
       "id": 6,
       "options": {
