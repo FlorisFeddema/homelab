@@ -12,13 +12,11 @@ data:
       "backupPVC": {
         "ceph-block-nvme-1": {
           "storageClass": "ceph-block-nvme-1",
-          "readOnly": true,
-          "spcNoRelabeling": true
+          "readOnly": false
         },
         "ceph-block-nvme-2": {
           "storageClass": "ceph-block-nvme-2",
-          "readOnly": true,
-          "spcNoRelabeling": true
+          "readOnly": false
         },
         "ceph-file-hdd": {
           "storageClass": "ceph-file-hdd",
