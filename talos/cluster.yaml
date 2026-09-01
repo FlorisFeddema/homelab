@@ -55,5 +55,5 @@ machine:
 
   logging:
     destinations:
-      - endpoint: "udp://10.102.209.253:12345"
+      - endpoint: "tcp://127.0.0.1:12346"
         format: "json_lines"

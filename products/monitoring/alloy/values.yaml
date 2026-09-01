@@ -1,0 +1,329 @@
+alloy:
+  crds:
+    create: false
+
+  global:
+    podSecurityContext:
+      seccompProfile:
+        type: RuntimeDefault
+
+  alloy:
+    clustering:
+      enabled: true
+      name: gerador-logs
+    enableReporting: false
+    stabilityLevel: experimental
+    storagePath: /var/lib/alloy
+    mounts:
+      varlog: true
+      extra:
+        - name: storage
+          mountPath: /var/lib/alloy
+    extraEnv:
+      - name: NODE_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: spec.nodeName
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        add:
+          - DAC_READ_SEARCH
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+    resources:
+      limits:
+        memory: 256Mi
+      requests:
+        cpu: 60m
+        memory: 96Mi
+    configMap:
+      content: |-
+        discovery.kubernetes "pods" {
+          role = "pod"
+
+          selectors {
+            role  = "pod"
+            field = "spec.nodeName=" + sys.env("NODE_NAME")
+          }
+        }
+
+        discovery.relabel "pod_logs" {
+          targets = discovery.kubernetes.pods.targets
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_node_name"]
+            regex         = sys.env("NODE_NAME")
+            action        = "keep"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_annotation_fluentbit_io_exclude"]
+            regex         = "true"
+            action        = "drop"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_annotation_logs_grafana_com_scrape"]
+            regex         = "false"
+            action        = "drop"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+            separator     = "/"
+            regex         = "(.+)/(.+)"
+            replacement   = "/var/log/pods/*$1/$2/*.log"
+            target_label  = "__path__"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_namespace"]
+            target_label  = "namespace"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_name"]
+            target_label  = "pod"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_container_name"]
+            target_label  = "container"
+          }
+
+          rule {
+            source_labels = ["__meta_kubernetes_pod_node_name"]
+            target_label  = "node"
+          }
+
+          rule {
+            target_label = "job"
+            replacement  = "kubernetes"
+          }
+
+          rule {
+            target_label = "cluster"
+            replacement  = "homelab"
+          }
+        }
+
+        loki.source.file "pod_logs" {
+          targets       = discovery.relabel.pod_logs.output
+          tail_from_end = true
+          forward_to    = [loki.process.pod_logs.receiver]
+        }
+
+        loki.process "pod_logs" {
+          stage.cri {}
+          forward_to = [loki.write.local.receiver]
+        }
+
+        otelcol.receiver.tcplog "talos" {
+          listen_address = "127.0.0.1:12346"
+
+          output {
+            logs = [otelcol.exporter.loki.talos.input]
+          }
+        }
+
+        otelcol.exporter.loki "talos" {
+          forward_to = [loki.process.talos.receiver]
+        }
+
+        loki.process "talos" {
+          stage.json {
+            expressions = {
+              body = "body",
+            }
+          }
+
+          stage.json {
+            source = "body"
+            expressions = {
+              facility = "facility",
+              level    = "\"talos-level\"",
+              priority = "priority",
+              service  = "\"talos-service\"",
+              time     = "\"talos-time\"",
+            }
+          }
+
+          stage.timestamp {
+            source = "time"
+            format = "RFC3339Nano"
+          }
+
+          stage.static_labels {
+            values = {
+              cluster = "homelab",
+              job     = "talos",
+              node    = sys.env("NODE_NAME"),
+            }
+          }
+
+          stage.labels {
+            values = {
+              facility      = "facility",
+              priority      = "priority",
+              talos_level   = "level",
+              talos_service = "service",
+            }
+          }
+
+          stage.match {
+            selector = "{priority=~\"emerg|alert|crit|err\"}"
+
+            stage.metrics {
+              metric.counter {
+                name        = "talos_kernel_error_total"
+                description = "Talos kernel messages at error severity or higher."
+                match_all   = true
+                action      = "inc"
+              }
+            }
+          }
+
+          stage.output {
+            source = "body"
+          }
+
+          forward_to = [loki.write.local.receiver]
+        }
+
+        loki.source.file "kube_audit" {
+          targets = [{
+            __path__ = "/var/log/audit/kube/kube-apiserver*.log",
+            cluster  = "homelab",
+            job      = "kube-audit",
+            node     = sys.env("NODE_NAME"),
+          }]
+          tail_from_end = true
+
+          file_match {
+            enabled = true
+          }
+
+          forward_to = [loki.process.kube_audit.receiver]
+        }
+
+        loki.process "kube_audit" {
+          stage.json {
+            expressions = {
+              timestamp = "stageTimestamp",
+            }
+          }
+
+          stage.timestamp {
+            source = "timestamp"
+            format = "RFC3339Nano"
+          }
+
+          forward_to = [loki.write.local.receiver]
+        }
+
+        loki.source.kubernetes_events "cluster" {
+          job_name   = "kubernetes-events"
+          log_format = "json"
+
+          clustering {
+            enabled = true
+          }
+
+          forward_to = [loki.process.kubernetes_events.receiver]
+        }
+
+        loki.process "kubernetes_events" {
+          stage.json {
+            expressions = {
+              event_type = "type",
+            }
+          }
+
+          stage.labels {
+            values = {
+              event_type = "event_type",
+            }
+          }
+
+          stage.static_labels {
+            values = {
+              cluster = "homelab",
+            }
+          }
+
+          stage.match {
+            selector = "{event_type=\"Warning\"}"
+
+            stage.metrics {
+              metric.counter {
+                name        = "kubernetes_warning_event_total"
+                description = "Kubernetes Warning events collected by Alloy."
+                match_all   = true
+                action      = "inc"
+              }
+            }
+          }
+
+          forward_to = [loki.write.local.receiver]
+        }
+
+        loki.write "local" {
+          endpoint {
+            name                = "loki"
+            url                 = "http://loki-distributor.loki.svc.cluster.local:3100/loki/api/v1/push"
+            remote_timeout      = "10s"
+            min_backoff_period  = "500ms"
+            max_backoff_period  = "5m"
+            max_backoff_retries = 10
+            retry_on_http_429   = true
+          }
+        }
+
+  controller:
+    type: daemonset
+    hostNetwork: true
+    dnsPolicy: ClusterFirstWithHostNet
+    revisionHistoryLimit: 1
+    podAnnotations:
+      fluentbit.io/exclude: "true"
+      logs.grafana.com/scrape: "false"
+    tolerations:
+      - operator: Exists
+        effect: NoSchedule
+    volumes:
+      extra:
+        - name: storage
+          hostPath:
+            path: /var/lib/alloy
+            type: DirectoryOrCreate
+
+  rbac:
+    create: true
+    rules:
+      - apiGroups:
+          - ""
+        resources:
+          - pods
+          - events
+        verbs:
+          - get
+          - list
+          - watch
+    clusterRules:
+      - apiGroups:
+          - ""
+        resources:
+          - nodes
+        verbs:
+          - get
+          - list
+          - watch
+
+  serviceMonitor:
+    enabled: true
+    relabelings:
+      - sourceLabels:
+          - __meta_kubernetes_pod_node_name
+        targetLabel: node

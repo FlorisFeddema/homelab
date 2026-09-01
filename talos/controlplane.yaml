@@ -4,6 +4,34 @@ cluster:
       listen-metrics-urls: http://0.0.0.0:2381
 
   apiServer:
+    auditPolicy:
+      apiVersion: audit.k8s.io/v1
+      kind: Policy
+      omitStages:
+        - RequestReceived
+      rules:
+        - level: None
+          nonResourceURLs:
+            - /healthz*
+            - /livez*
+            - /readyz*
+            - /metrics
+        - level: None
+          users:
+            - system:kube-proxy
+          verbs:
+            - watch
+        - level: None
+          userGroups:
+            - system:nodes
+          verbs:
+            - get
+          resources:
+            - group: ""
+              resources:
+                - nodes
+                - nodes/status
+        - level: Metadata
     extraArgs:
       feature-gates: DRAExtendedResource=true,DRAPartitionableDevices=true,ResourceHealthStatus=true
     resources:
