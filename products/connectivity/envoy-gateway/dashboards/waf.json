@@ -169,7 +169,7 @@
       },
       "targets": [
         {
-          "expr": "{namespace=\"envoy-gateway\"} | json | line_format \"{{.msg}}\" |~ \"Coraza:\"",
+          "expr": "{namespace=\"envoy-gateway\"} | json | line_format \"{{.level}} {{.msg}}\" |~ \"Coraza:\"",
           "queryType": "range",
           "refId": "A"
         }
