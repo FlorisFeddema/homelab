@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+log() {
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >&2
+}
+
 readonly credentials_dir="${DEVCONTAINER_CREDENTIALS_DIR:-"${HOME}/.config/homelab-devcontainer"}"
 readonly service_account_namespace="homelab-devcontainer"
 readonly grafana_mcp_namespace="grafana-mcp-server"
@@ -31,20 +35,29 @@ if [[ -z "${TALOSCONFIG:-}" ]]; then
     exit 1
 fi
 
+log "Bootstrapping read-only credentials for ${service_account_name}."
+log "Using credentials directory: ${credentials_dir}"
+
 if [[ ! -f "${TALOSCONFIG}" ]]; then
     echo "TALOSCONFIG does not exist: ${TALOSCONFIG}" >&2
     exit 1
 fi
 
+log "Checking for the ${service_account_namespace} namespace."
 if ! kubectl get namespace "${service_account_namespace}" >/dev/null; then
     echo "The ${service_account_namespace} namespace is not available. Wait for Argo CD to sync the devcontainer-users app." >&2
     exit 1
 fi
 
 token=""
-for _ in $(seq 1 30); do
+log "Waiting for the ${token_secret_name} service account token secret."
+for attempt in $(seq 1 30); do
     if token="$(kubectl --namespace "${service_account_namespace}" get secret "${token_secret_name}" --output jsonpath='{.data.token}' 2>/dev/null)" && [[ -n "${token}" ]]; then
+        log "Service account token secret is available."
         break
+    fi
+    if (( attempt % 5 == 0 )); then
+        log "Still waiting for the service account token secret (${attempt}/30)."
     fi
     sleep 1
 done
@@ -54,6 +67,7 @@ if [[ -z "${token}" ]]; then
     exit 1
 fi
 
+log "Reading the Grafana MCP credential."
 grafana_mcp_key="$(
     kubectl --namespace "${grafana_mcp_namespace}" get secret "${grafana_mcp_secret_name}" \
         --output "jsonpath={.data.${service_account_name}}" 2>/dev/null
@@ -63,6 +77,7 @@ if [[ -z "${grafana_mcp_key}" ]]; then
     exit 1
 fi
 
+log "Decoding the Kubernetes and Grafana MCP credentials."
 if base64 --decode </dev/null >/dev/null 2>&1; then
     token="$(printf '%s' "${token}" | base64 --decode)"
     grafana_mcp_key="$(printf '%s' "${grafana_mcp_key}" | base64 --decode)"
@@ -71,6 +86,7 @@ else
     grafana_mcp_key="$(printf '%s' "${grafana_mcp_key}" | base64 -D)"
 fi
 
+log "Reading the active Kubernetes server and certificate authority."
 cluster_server="$(kubectl config view --minify --raw --output jsonpath='{.clusters[0].cluster.server}')"
 cluster_ca_data="$(kubectl config view --minify --raw --output jsonpath='{.clusters[0].cluster.certificate-authority-data}')"
 
@@ -82,6 +98,7 @@ fi
 umask 077
 mkdir -p "${credentials_dir}"
 
+log "Writing the read-only kubeconfig."
 cat > "${credentials_dir}/kubeconfig" <<EOF
 apiVersion: v1
 kind: Config
@@ -103,6 +120,7 @@ users:
       token: ${token}
 EOF
 
+log "Writing the Grafana MCP configuration."
 cat > "${credentials_dir}/mcp-config.json" <<EOF
 {
   "mcpServers": {
@@ -118,6 +136,7 @@ cat > "${credentials_dir}/mcp-config.json" <<EOF
 }
 EOF
 
+log "Generating the read-only Talos configuration."
 talosctl config new --roles=os:reader "${credentials_dir}/talosconfig"
 
-echo "Read-only Kubernetes, Talos, and Grafana MCP credentials written to ${credentials_dir}."
+log "Read-only Kubernetes, Talos, and Grafana MCP credentials written to ${credentials_dir}."
