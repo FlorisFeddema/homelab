@@ -4,6 +4,14 @@ The devcontainer uses dedicated read-only Kubernetes and Talos credentials from
 `~/.config/homelab-devcontainer`. It never mounts the administrator kubeconfig or
 Talos configuration.
 
+## GoLand and GitHub Copilot
+
+The container includes Go 1.27 and the JetBrains GitHub Copilot plugin. Open the
+repository in GoLand using **Remote Development** > **Dev Containers**, then
+select this devcontainer configuration. GoLand installs the Copilot plugin
+automatically; sign in through the Copilot tool window after the remote IDE
+starts.
+
 ## Argo CD
 
 Use the `--core` flag with the `argocd` command to use the mounted read-only
