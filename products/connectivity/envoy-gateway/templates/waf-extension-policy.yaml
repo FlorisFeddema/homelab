@@ -9,6 +9,7 @@ spec:
   dynamicModule:
     - name: {{ .Values.waf.dynamicModule.name }}
       filterName: coraza-waf
+      terminalFilter: false
       config:
         mode: {{ .Values.wafPolicy.mode }}
         directives:
