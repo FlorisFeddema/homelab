@@ -30,6 +30,11 @@ if ! command -v talosctl >/dev/null; then
     exit 1
 fi
 
+if ! command -v jq >/dev/null; then
+    echo "jq is required to read the active Talos configuration." >&2
+    exit 1
+fi
+
 if [[ -z "${TALOSCONFIG:-}" ]]; then
     echo "Set TALOSCONFIG to an administrator Talos configuration before running this script." >&2
     exit 1
@@ -40,6 +45,12 @@ log "Using credentials directory: ${credentials_dir}"
 
 if [[ ! -f "${TALOSCONFIG}" ]]; then
     echo "TALOSCONFIG does not exist: ${TALOSCONFIG}" >&2
+    exit 1
+fi
+
+talos_nodes="$(talosctl config info --output json | jq -r '.endpoints | join(",")')"
+if [[ -z "${talos_nodes}" ]]; then
+    echo "The active Talos configuration must include at least one endpoint to use as a node." >&2
     exit 1
 fi
 
@@ -137,6 +148,6 @@ cat > "${credentials_dir}/mcp-config.json" <<EOF
 EOF
 
 log "Generating the read-only Talos configuration."
-talosctl config new --roles=os:reader "${credentials_dir}/talosconfig"
+talosctl config new --roles=os:reader --nodes "${talos_nodes}" "${credentials_dir}/talosconfig"
 
 log "Read-only Kubernetes, Talos, and Grafana MCP credentials written to ${credentials_dir}."
