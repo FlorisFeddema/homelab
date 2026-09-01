@@ -6,18 +6,16 @@ Talos configuration.
 
 ## Argo CD
 
-The `argocd` command runs in core mode using the mounted read-only Kubernetes
-credentials. This lets it inspect Argo CD Applications without an Argo CD API
-token:
+Use the `--core` flag with the `argocd` command to use the mounted read-only
+Kubernetes credentials. This lets it inspect Argo CD Applications without an
+Argo CD API token:
 
 ```shell
-argocd app list
-argocd app get <application>
+argocd --core app list
+argocd --core app get <application>
 ```
 
 Write operations, including application syncs, remain denied by Kubernetes RBAC.
-To authenticate to the Argo CD API directly, use
-`/usr/local/bin/argocd-real`.
 
 ## Grafana MCP
 
