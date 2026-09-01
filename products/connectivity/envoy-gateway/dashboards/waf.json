@@ -72,7 +72,7 @@
           "refId": "A"
         }
       ],
-      "title": "Blocked transactions",
+      "title": "Blocked transactions (enforcement off)",
       "type": "stat"
     },
     {
@@ -95,12 +95,12 @@
       "id": 3,
       "targets": [
         {
-          "expr": "sum by (pod) (rate(count_over_time({namespace=\"envoy-gateway\"} |= \"Coraza:\" [5m])))",
+          "expr": "sum by (pod) (rate({namespace=\"envoy-gateway\"} |= \"Coraza:\" [5m]))",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
-      "title": "Detection rate by gateway pod",
+      "title": "Detection event rate by gateway pod",
       "type": "timeseries"
     },
     {
@@ -129,7 +129,7 @@
           "refId": "A"
         }
       ],
-      "title": "Detections by gateway pod",
+      "title": "Detection events by gateway pod",
       "type": "table"
     },
     {
