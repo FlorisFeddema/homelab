@@ -4,6 +4,16 @@ kind: EnvoyProxy
 metadata:
   name: envoy-gateway-{{ $name }}
 spec:
+  {{- if $.Values.waf.enabled }}
+  dynamicModules:
+    - name: {{ $.Values.waf.dynamicModule.name }}
+      source:
+        type: Local
+        local:
+          path: {{ $.Values.waf.dynamicModule.libraryPath }}
+      doNotClose: true
+      loadGlobally: false
+  {{- end }}
   telemetry:
     accessLog:
       settings:
@@ -30,6 +40,14 @@ spec:
       envoyPDB:
 {{ toYaml $gateway.pdb | nindent 8 }}
       envoyDeployment:
+        {{- if $.Values.waf.enabled }}
+        pod:
+          volumes:
+            - name: {{ $.Values.waf.dynamicModule.volumeName }}
+              image:
+                reference: {{ $.Values.waf.dynamicModule.image }}
+                pullPolicy: IfNotPresent
+        {{- end }}
         patch:
           type: StrategicMerge
           value:
@@ -52,6 +70,15 @@ spec:
                           mountPath: /tmp
         replicas: {{ $gateway.replicas }}
         container:
+          {{- if $.Values.waf.enabled }}
+          env:
+            - name: GODEBUG
+              value: cgocheck=0
+          volumeMounts:
+            - name: {{ $.Values.waf.dynamicModule.volumeName }}
+              mountPath: {{ $.Values.waf.dynamicModule.mountPath }}
+              readOnly: true
+          {{- end }}
           resources:
             {{ toYaml $gateway.resources | nindent 12 }}
       envoyService:
