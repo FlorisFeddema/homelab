@@ -5,6 +5,7 @@
     "context": ".."
   },
   "remoteUser": "vscode",
+  "initializeCommand": "mkdir -p ${localEnv:HOME}/.config/homelab-devcontainer",
   "containerEnv": {
     "KUBECONFIG": "/home/vscode/.config/homelab-devcontainer/kubeconfig",
     "TALOSCONFIG": "/home/vscode/.config/homelab-devcontainer/talosconfig"
