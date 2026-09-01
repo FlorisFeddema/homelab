@@ -22,6 +22,53 @@ rules:
       - list
       - watch
   - apiGroups:
+      - acme.cert-manager.io
+      - apps.emqx.io
+      - agents.x-k8s.io
+      - argoproj.io
+      - aquasecurity.github.io
+      - autoscaling.k8s.io
+      - barmancloud.cnpg.io
+      - bitnami.com
+      - cert-manager.io
+      - ceph.rook.io
+      - cilium.io
+      - csi.ceph.io
+      - csiaddons.openshift.io
+      - deviceplugin.intel.com
+      - extensions.agents.x-k8s.io
+      - externaldns.k8s.io
+      - feddema.dev
+      - fpga.intel.com
+      - gateway.envoyproxy.io
+      - gateway.networking.k8s.io
+      - gateway.networking.x-k8s.io
+      - groupsnapshot.storage.k8s.io
+      - kyverno.io
+      - monitoring.coreos.com
+      - nfd.k8s-sigs.io
+      - objectbucket.io
+      - openreports.io
+      - opentelemetry.io
+      - policies.kyverno.io
+      - postgresql.cnpg.io
+      - promoter.argoproj.io
+      - replication.storage.openshift.io
+      - reports.kyverno.io
+      - snapshot.storage.k8s.io
+      - resource.k8s.io
+      - talos.dev
+      - trust.cert-manager.io
+      - tuppr.home-operations.com
+      - velero.io
+      - wgpolicyk8s.io
+    resources:
+      - "*"
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
       - storage.k8s.io
     resources:
       - csidrivers
