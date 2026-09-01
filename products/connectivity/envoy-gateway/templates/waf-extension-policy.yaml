@@ -1,0 +1,16 @@
+{{- if and .Values.waf.enabled .Values.wafPolicy.enabled }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: EnvoyExtensionPolicy
+metadata:
+  name: {{ .Values.wafPolicy.name }}
+spec:
+  targetRefs:
+{{ toYaml .Values.wafPolicy.targetRefs | nindent 4 }}
+  dynamicModule:
+    - name: {{ .Values.waf.dynamicModule.name }}
+      filterName: coraza-waf
+      config:
+        mode: {{ .Values.wafPolicy.mode }}
+        directives:
+{{ toYaml .Values.wafPolicy.directives | nindent 10 }}
+{{- end }}
