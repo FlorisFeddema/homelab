@@ -33,6 +33,35 @@ defaultTlsCertificate:
 httpRedirect:
   statusCode: 301
 
+waf:
+  enabled: true
+  dynamicModule:
+    name: composer
+    # Composer 0.11.0 uses the Envoy 1.39-dev SDK. Revalidate ABI compatibility
+    # before changing either the Envoy Gateway or Composer version.
+    image: ghcr.io/tetratelabs/built-on-envoy/composer:0.11.0@sha256:982d971b55c5223ac0c97e7bc8b47d600149a6fbb162b9d251fc5b263cfeb5b8
+    volumeName: dynamic-modules
+    mountPath: /etc/envoy/dynamic-modules
+    libraryPath: /etc/envoy/dynamic-modules/libcomposer.so
+
+wafPolicy:
+  enabled: true
+  name: coraza-waf
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway-public
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-gateway-private
+  mode: REQUEST_ONLY
+  directives:
+    - Include @coraza.conf
+    - SecRuleEngine DetectionOnly
+    - SecResponseBodyAccess Off
+    - Include @crs-setup.conf
+    - Include @owasp_crs/*.conf
+
 gateways:
   public:
     addresses:
