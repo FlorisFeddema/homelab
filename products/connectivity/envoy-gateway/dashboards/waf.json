@@ -77,12 +77,12 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
+        "type": "loki",
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
-          "unit": "reqps"
+          "unit": "ops"
         },
         "overrides": []
       },
@@ -95,18 +95,18 @@
       "id": 3,
       "targets": [
         {
-          "expr": "sum by (pod) (rate(envoy_dynamicmodulescustom_waf_tx_total[5m]))",
+          "expr": "sum by (pod) (rate(count_over_time({namespace=\"envoy-gateway\"} |= \"Coraza:\" [5m])))",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
-      "title": "Transaction rate by gateway pod",
+      "title": "Detection rate by gateway pod",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
+        "type": "loki",
+        "uid": "loki"
       },
       "fieldConfig": {
         "defaults": {
@@ -123,13 +123,13 @@
       "id": 4,
       "targets": [
         {
-          "expr": "sum by (pod) (increase(envoy_dynamicmodulescustom_waf_tx_total[$__range]))",
+          "expr": "sum by (pod) (count_over_time({namespace=\"envoy-gateway\"} |= \"Coraza:\" [$__range]))",
           "format": "table",
           "instant": true,
           "refId": "A"
         }
       ],
-      "title": "Transactions by gateway pod",
+      "title": "Detections by gateway pod",
       "type": "table"
     },
     {
