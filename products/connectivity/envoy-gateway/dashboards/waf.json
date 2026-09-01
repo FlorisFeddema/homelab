@@ -39,8 +39,8 @@
       "id": 1,
       "targets": [
         {
-          "expr": "sum(increase(waf_tx_total[$__range]))",
-          "legendFormat": "detections",
+          "expr": "sum(increase(envoy_dynamicmodulescustom_waf_tx_total[$__range]))",
+          "legendFormat": "transactions",
           "refId": "A"
         }
       ],
@@ -67,7 +67,7 @@
       "id": 2,
       "targets": [
         {
-          "expr": "sum(increase(waf_tx_blocked[$__range]))",
+          "expr": "sum(increase(envoy_dynamicmodulescustom_waf_tx_blocked[$__range]))",
           "legendFormat": "blocked",
           "refId": "A"
         }
@@ -95,12 +95,12 @@
       "id": 3,
       "targets": [
         {
-          "expr": "sum by (pod) (rate(waf_tx_total[5m]))",
+          "expr": "sum by (pod) (rate(envoy_dynamicmodulescustom_waf_tx_total[5m]))",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
       ],
-      "title": "Detection rate by gateway pod",
+      "title": "Transaction rate by gateway pod",
       "type": "timeseries"
     },
     {
@@ -123,13 +123,13 @@
       "id": 4,
       "targets": [
         {
-          "expr": "sum by (pod) (increase(waf_tx_total[$__range]))",
+          "expr": "sum by (pod) (increase(envoy_dynamicmodulescustom_waf_tx_total[$__range]))",
           "format": "table",
           "instant": true,
           "refId": "A"
         }
       ],
-      "title": "Detections by gateway pod",
+      "title": "Transactions by gateway pod",
       "type": "table"
     },
     {
