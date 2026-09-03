@@ -1,8 +1,6 @@
 descheduler:
   kind: Deployment
   deschedulingInterval: 5m
-  cmdOptions:
-    dry-run: true
   resources:
     requests:
       cpu: 20m
