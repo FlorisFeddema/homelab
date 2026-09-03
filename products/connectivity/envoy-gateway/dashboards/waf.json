@@ -82,6 +82,9 @@
       },
       "fieldConfig": {
         "defaults": {
+          "custom": {
+            "spanNulls": true
+          },
           "unit": "ops"
         },
         "overrides": []
@@ -95,7 +98,7 @@
       "id": 3,
       "targets": [
         {
-          "expr": "sum by (pod) (rate({namespace=\"envoy-gateway\"} |= \"Coraza:\" [5m]))",
+          "expr": "sum by (pod) (rate({namespace=\"envoy-gateway\"} |= \"Coraza:\" [5m])) or vector(0)",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
@@ -121,6 +124,16 @@
         "y": 8
       },
       "id": 4,
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            }
+          }
+        }
+      ],
       "targets": [
         {
           "expr": "sum by (pod) (count_over_time({namespace=\"envoy-gateway\"} |= \"Coraza:\" [$__range]))",
@@ -156,7 +169,7 @@
       },
       "targets": [
         {
-          "expr": "{namespace=\"envoy-gateway\"} |= \"Coraza:\"",
+          "expr": "{namespace=\"envoy-gateway\"} | json | line_format \"{{.level}} {{.msg}}\" |~ \"Coraza:\"",
           "queryType": "range",
           "refId": "A"
         }
