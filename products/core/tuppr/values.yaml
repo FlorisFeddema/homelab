@@ -8,7 +8,7 @@ talosUpgrade:
 talos:
   image:
     repository: ghcr.io/siderolabs/talos
-    tag: v1.13.10
+    tag: v1.14.0
 
 kubernetes:
   image:
