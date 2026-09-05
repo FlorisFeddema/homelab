@@ -1,0 +1,163 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "graphTooltip": 1,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "targets": [
+        {
+          "expr": "sum by (node) (rate(loki_write_sent_entries_total{namespace=\"alloy\"}[$__rate_interval]))",
+          "legendFormat": "{{node}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Logs sent to Loki",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "targets": [
+        {
+          "expr": "sum by (node) (increase(loki_write_batch_retries_total{namespace=\"alloy\"}[$__rate_interval]))",
+          "legendFormat": "{{node}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (node) (increase(loki_write_dropped_entries_total{namespace=\"alloy\"}[$__rate_interval]))",
+          "legendFormat": "{{node}} dropped",
+          "refId": "B"
+        }
+      ],
+      "title": "Loki write retries and drops",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "showTime": true,
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "expr": "{job=\"talos\"} | json | talos_level=~\"warn|error|fatal\"",
+          "refId": "A"
+        }
+      ],
+      "title": "Talos warnings and errors",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "showTime": true,
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "expr": "{job=\"kubernetes-events\", event_type=\"Warning\"} | json",
+          "refId": "A"
+        }
+      ],
+      "title": "Kubernetes Warning events",
+      "type": "logs"
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 5,
+      "options": {
+        "showTime": true,
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "expr": "{job=\"kube-audit\"} | json",
+          "refId": "A"
+        }
+      ],
+      "title": "Kubernetes API audit log",
+      "type": "logs"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 41,
+  "tags": [
+    "Alloy",
+    "Loki",
+    "Talos"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timezone": "browser",
+  "title": "Alloy logging",
+  "uid": "alloy-logging",
+  "version": 1
+}

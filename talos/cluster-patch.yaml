@@ -12,7 +12,7 @@ ntp:
 apiVersion: v1alpha1
 kind: KmsgLogConfig
 name: remote-log
-url: udp://10.102.209.253:12345/
+url: tcp://127.0.0.1:12346/
 ---
 apiVersion: v1alpha1
 kind: RegistryMirrorConfig
