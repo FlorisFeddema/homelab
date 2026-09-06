@@ -16,6 +16,8 @@ kubernetes:
     tag: v1.37.0
 
 tuppr:
+  revisionHistoryLimit: 0
+
   monitoring:
     serviceMonitor:
       enabled: true
