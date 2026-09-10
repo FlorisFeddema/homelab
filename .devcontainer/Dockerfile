@@ -10,7 +10,7 @@ ARG ARGOCD_VERSION=v3.5.2
 # renovate: datasource=github-releases depName=siderolabs/talos
 ARG TALOS_VERSION=v1.14.0
 # renovate: datasource=github-releases depName=helm/helm
-ARG HELM_VERSION=v4.2.4
+ARG HELM_VERSION=v4.3.0
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
 ARG KUBESEAL_VERSION=v0.39.1
 # renovate: datasource=github-releases depName=ahmetb/kubectx
