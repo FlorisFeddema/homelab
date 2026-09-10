@@ -12,7 +12,7 @@ ARG TALOS_VERSION=v1.14.0
 # renovate: datasource=github-releases depName=helm/helm
 ARG HELM_VERSION=v4.3.0
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
-ARG KUBESEAL_VERSION=v0.39.1
+ARG KUBESEAL_VERSION=v0.40.0
 # renovate: datasource=github-releases depName=ahmetb/kubectx
 ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
