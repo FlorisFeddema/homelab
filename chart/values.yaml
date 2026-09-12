@@ -79,8 +79,11 @@ products:
       serverSideApply: true
   monitoring:
     fluentBit:
+      deploy: false
+      autoSync: false
+    alloy:
       deploy: true
-      autoSync: true
+      autoSync: false
     prometheus:
       deploy: true
       autoSync: true
