@@ -1,0 +1,62 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: garage
+  labels:
+    {{- include "garage.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: garage
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: admin
+  namespaceSelector:
+    matchNames:
+      - {{ .Release.Namespace }}
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 30s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: garage
+  labels:
+    {{- include "garage.labels" . | nindent 4 }}
+spec:
+  groups:
+    - name: garage.rules
+      rules:
+        - alert: GarageUnavailable
+          expr: absent(up{namespace="garage",service="garage-admin"}) or up{namespace="garage",service="garage-admin"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Garage S3 is unavailable
+            description: Prometheus cannot scrape the Garage admin health and metrics service.
+        - alert: GarageDataVolumeFilling
+          expr: kubelet_volume_stats_used_bytes{namespace="garage",persistentvolumeclaim="garage-data"} / kubelet_volume_stats_capacity_bytes{namespace="garage",persistentvolumeclaim="garage-data"} > 0.8
+          for: 15m
+          labels:
+            severity: warning
+          annotations:
+            summary: Garage data volume is over 80% full
+            description: The coworker backup volume is approaching its 90% bucket quota.
+        - alert: GarageDataVolumeCritical
+          expr: kubelet_volume_stats_used_bytes{namespace="garage",persistentvolumeclaim="garage-data"} / kubelet_volume_stats_capacity_bytes{namespace="garage",persistentvolumeclaim="garage-data"} > 0.9
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Garage data volume is over 90% full
+            description: The Garage data disk has exceeded the intended safety margin.
+        - alert: GarageRestartLoop
+          expr: increase(kube_pod_container_status_restarts_total{namespace="garage",container="garage"}[15m]) > 3
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Garage is repeatedly restarting
+            description: Garage restarted more than three times in 15 minutes.

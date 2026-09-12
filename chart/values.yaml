@@ -209,6 +209,10 @@ products:
     harbor:
       deploy: true
       autoSync: true
+    garage:
+      # Enable only after the garage-data Talos volume is ready on hortek-0.
+      deploy: false
+      autoSync: false
     rookCeph:
       deploy: true
       autoSync: false

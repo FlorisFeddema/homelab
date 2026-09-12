@@ -1,0 +1,51 @@
+image:
+  repository: dxflrs/garage
+  tag: v2.3.0
+
+kubectlImage:
+  repository: alpine/kubectl
+  tag: 1.37.0
+
+initImage:
+  repository: busybox
+  tag: 1.37.0
+
+nodeName: hortek-0
+
+storage:
+  data:
+    capacity: 3T
+    path: /var/mnt/garage-data
+  metadata:
+    size: 10Gi
+    storageClass: ceph-block-nvme-2
+
+s3:
+  hostname: s3.feddema.dev
+  region: garage
+  bucket: coworker-backup
+  quota: 2700GB
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    memory: 1Gi
+
+gatus-monitor:
+  appName: garage
+  extraEndpoints:
+    - name: garage-s3
+      group: http-external
+      url: https://s3.feddema.dev
+      interval: 3m
+      conditions:
+        - '[STATUS] == 403'
+      client:
+        dns-resolver: udp://1.1.1.1:53
+      alerts:
+        - type: telegram
+          send-on-resolved: true
+          failure-threshold: 6
+          success-threshold: 1
