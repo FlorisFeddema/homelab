@@ -10,3 +10,5 @@ spec:
     - backendRefs:
         - name: {{ include "donetick.fullname" . }}
           port: 2021
+      timeouts:
+        request: {{ .Values.route.timeout | quote }}

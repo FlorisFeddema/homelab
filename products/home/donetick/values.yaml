@@ -45,6 +45,7 @@ securityContext:
 route:
   hostnames:
     - donetick.feddema.dev
+  timeout: 1m
   parentRefs:
     - name: envoy-gateway-public
       namespace: envoy-gateway
