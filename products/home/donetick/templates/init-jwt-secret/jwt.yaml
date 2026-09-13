@@ -4,3 +4,4 @@ metadata:
   name: {{ include "donetick.fullname" . }}-jwt
   namespace: {{ .Release.Namespace }}
 type: Opaque
+# data is filled by the job that initializes the JWT secret
