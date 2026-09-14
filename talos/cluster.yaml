@@ -1,59 +1,54 @@
-cluster:
-  controlPlane:
-    endpoint: https://gerador.feddema.dev:6443
-  clusterName: gerador
-  allowSchedulingOnControlPlanes: false
-
-  discovery:
-    enabled: true
-    registries:
-      service:
-        disabled: true
-
-  coreDNS:
-    disabled: true
-
-  network:
-    cni:
-      name: none
-
-  proxy:
-    disabled: true
-
 machine:
   certSANs:
     - 192.168.102.21
-
-  files:
-    - path: /etc/cri/conf.d/20-customization.part
-      op: create
-      content: |
-        [plugins."io.containerd.cri.v1.images"]
-          discard_unpacked_layers = false
-        # Set cdi dirs to /var/ because default locations are not writeable in talos
-        [plugins."io.containerd.cri.v1.runtime"]
-          cdi_spec_dirs = ["/var/cdi/static", "/var/cdi/dynamic"]      
-
-  kubelet:
-    clusterDNS: [10.96.0.10]
-    nodeIP:
-      validSubnets: ['192.168.4.0/24'] # Make sure nodes subnet IP is picked
-    extraArgs:
-      cloud-provider: external
-      rotate-server-certificates: true
-      feature-gates: DRAExtendedResource=true,ResourceHealthStatus=true
-
-  features:
-    diskQuotaSupport: true
-    kubePrism:
-      enabled: true
-      port: 7445
-
-    hostDNS:
-      enabled: false
-      forwardKubeDNSToHost: false
 
   logging:
     destinations:
       - endpoint: "udp://10.102.209.253:12345"
         format: "json_lines"
+
+  features:
+    diskQuotaSupport: true
+
+---
+apiVersion: v1alpha1
+kind: KubeClusterConfig
+clusterName: gerador
+endpoint: https://gerador.feddema.dev:6443
+---
+apiVersion: v1alpha1
+kind: DiscoveryServiceConfig
+name: default
+endpoint: https://discovery.talos.dev/
+---
+apiVersion: v1alpha1
+kind: KubeNetworkConfig
+dnsDomain: cluster.local
+podSubnets:
+  - 10.244.0.0/16
+serviceSubnets:
+  - 10.96.0.0/12
+---
+apiVersion: v1alpha1
+kind: KubeletConfig
+clusterDNS:
+  - 10.96.0.10
+extraArgs:
+  cloud-provider: external
+  rotate-server-certificates: true
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+nodeIP:
+  validSubnets:
+    - 192.168.4.0/24
+---
+apiVersion: v1alpha1
+kind: KubePrismConfig
+port: 7445
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+hostDNS:
+  enabled: false
+  forwardKubeDNSToHost: false

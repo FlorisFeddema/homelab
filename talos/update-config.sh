@@ -34,7 +34,6 @@ talosctl gen config $clusterName $clusterDomain \
     --with-docs=false                      \
     --with-examples=false                      \
     --config-patch @nodes/"$nodeName".yaml   \
-    --config-patch @"$nodeType".yaml   \
     --config-patch @cluster.yaml                      \
     --config-patch-control-plane @controlplane.yaml                      \
     --config-patch-worker @worker.yaml                      \
