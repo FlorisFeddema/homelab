@@ -131,6 +131,8 @@ The helper scripts in `talos/` use relative paths such as `./rendered/` and `./s
 
 The scripts also inspect live cluster state with `kubectl`, so they expect the node to exist in the cluster unless the command is specifically part of first-node bootstrap.
 
+The Talos source patches are organized as multi-document configuration. Cluster-wide node settings are in `cluster.yaml`, control-plane-only Kubernetes bootstrap settings are in `controlplane.yaml`, and each `nodes/<node>.yaml` holds its role, Kubernetes labels, and unattended installer configuration. Node network patches remain in `nodes/<node>-patch.yaml`.
+
 #### Update Talos config for one node
 
 ```shell
@@ -146,6 +148,14 @@ sh ./update-config.sh -n korris-0 -d true
 ```
 
 This regenerates the local machine config and, unless `-d true` is set, applies it with `talosctl apply`.
+
+Validate regenerated configurations before applying them:
+
+```shell
+for config in rendered/*.yaml; do
+  talosctl validate --mode metal --config "$config"
+done
+```
 
 #### Update Talos config for all nodes
 

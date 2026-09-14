@@ -41,9 +41,15 @@ talosctl gen config $clusterName $clusterDomain \
     --output-types "$nodeType"                       \
     --with-cluster-discovery=false                    \
     --with-secrets ./secrets.yaml                       \
-    --config-patch @"nodes/$nodeName".yaml   \
-    --config-patch @"$nodeType".yaml   \
+    --with-docs=false                      \
+    --with-examples=false                      \
+    --config-patch @nodes/"$nodeName".yaml   \
     --config-patch @cluster.yaml                      \
+    --config-patch-control-plane @controlplane.yaml                      \
+    --config-patch-worker @worker.yaml                      \
+    --config-patch @cluster-patch.yaml \
+    --config-patch @secret-patch.yaml \
+    --config-patch @nodes/"$nodeName"-patch.yaml \
     --kubernetes-version "$kubernetesVersion"    \
     --force
 
