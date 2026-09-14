@@ -12,23 +12,19 @@ data:
       "backupPVC": {
         "ceph-block-nvme-1": {
           "storageClass": "velero-ceph-block-nvme-1",
-          "readOnly": true,
-          "spcNoRelabeling": true
+          "readOnly": true
         },
         "ceph-block-nvme-2": {
           "storageClass": "velero-ceph-block-nvme-2",
-          "readOnly": true,
-          "spcNoRelabeling": true
+          "readOnly": true
         },
         "ceph-file-hdd": {
           "storageClass": "ceph-file-hdd",
-          "readOnly": true,
-          "spcNoRelabeling": true
+          "readOnly": true
         },
         "ceph-file-nvme-2": {
           "storageClass": "ceph-file-nvme-2",
-          "readOnly": true,
-          "spcNoRelabeling": true
+          "readOnly": true
         }
       }
     }
