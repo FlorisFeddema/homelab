@@ -1,10 +1,17 @@
 machine:
   type: worker
-
-  nodeLabels:
-    topology.kubernetes.io/zone: "kashaylan"
-    topology.kubernetes.io/region: "salioca"
-
-  install:
-    disk: /dev/mmcblk0
-    image: factory.talos.dev/metal-installer/85430930745cd63086b9f882522009defa03d25134fcc7a7d2ddb991b127188c:v1.13.3
+---
+apiVersion: v1alpha1
+kind: KubeNodeConfig
+labels:
+  topology.kubernetes.io/zone: kashaylan
+  topology.kubernetes.io/region: salioca
+---
+apiVersion: v1alpha1
+kind: UnattendedInstallConfig
+installer:
+  image: factory.talos.dev/metal-installer/85430930745cd63086b9f882522009defa03d25134fcc7a7d2ddb991b127188c:v1.14.0
+provisioning:
+  diskSelector:
+    match: disk.serial == "0x5edae82c"
+  wipe: false
