@@ -39,6 +39,30 @@ The API key is unique to the configured devcontainer user. Removing that user
 from `auth.clients` in `products/ai/grafana-mcp-server/values.yaml` revokes its
 Grafana MCP access after Argo CD syncs the change.
 
+## GitHub Copilot CLI
+
+The devcontainer includes the GitHub Copilot CLI. Start it with:
+
+```shell
+copilot
+```
+
+Authenticate with `/login` when prompted. This stores your GitHub credentials
+in the container user’s home directory; credentials are intentionally not
+baked into the image or mounted from the host. For non-interactive use, set
+`GH_TOKEN` or `GITHUB_TOKEN` to a fine-grained token with the **Copilot
+Requests** permission.
+
+After the credential bootstrap has run, verify that Copilot can see Grafana:
+
+```shell
+copilot mcp get grafana
+```
+
+The bootstrap writes the generated read-only Grafana API key to
+`~/.config/homelab-devcontainer/mcp-config.json`, which the container exposes
+as `~/.copilot/mcp-config.json`.
+
 ## Credential bootstrap
 
 After Argo CD has synced the `devcontainer-users` and `grafana-mcp-server`

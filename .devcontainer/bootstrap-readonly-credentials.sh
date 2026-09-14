@@ -147,6 +147,12 @@ cat > "${credentials_dir}/mcp-config.json" <<EOF
 }
 EOF
 
+jq \
+    --arg auth "${grafana_mcp_key}" \
+    '.mcpServers.grafana.headers.Authorization = $auth' \
+    "${credentials_dir}/mcp-config.json" > "${credentials_dir}/mcp-config.json.tmp"
+mv "${credentials_dir}/mcp-config.json.tmp" "${credentials_dir}/mcp-config.json"
+
 log "Generating the read-only Talos configuration."
 talosctl config new --roles=os:reader --nodes "${talos_nodes}" "${credentials_dir}/talosconfig"
 
