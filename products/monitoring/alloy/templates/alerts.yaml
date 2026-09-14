@@ -1,0 +1,54 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: alloy.rules
+spec:
+  groups:
+    - name: alloy.rules
+      rules:
+        - alert: AlloyUnavailableOnNode
+          expr: kube_daemonset_status_number_unavailable{namespace="alloy",daemonset="alloy"} > 0
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Alloy is unavailable on a node
+            description: The Alloy DaemonSet has {{ `{{ $value }}` }} unavailable pods.
+        - alert: AlloyLokiWriteFailures
+          expr: sum(increase(loki_write_dropped_entries_total{namespace="alloy"}[10m])) > 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Alloy is dropping logs
+            description: Alloy dropped {{ `{{ $value }}` }} log entries after exhausting Loki retries.
+        - alert: AlloyLokiWriteRetries
+          expr: sum(increase(loki_write_batch_retries_total{namespace="alloy"}[15m])) > 20
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Alloy is repeatedly retrying Loki writes
+            description: Alloy retried Loki writes {{ `{{ $value }}` }} times in the last 15 minutes.
+        - alert: TalosKernelErrors
+          expr: sum(increase(loki_process_custom_talos_kernel_error_total{namespace="alloy"}[10m])) > 0
+          labels:
+            severity: warning
+          annotations:
+            summary: Talos reported kernel errors
+            description: Talos emitted {{ `{{ $value }}` }} kernel messages at error severity or higher.
+        - alert: KubernetesAuditExportErrors
+          expr: sum(increase(apiserver_audit_error_total[10m])) > 0
+          labels:
+            severity: critical
+          annotations:
+            summary: Kubernetes API audit events failed to export
+            description: The API server failed to export {{ `{{ $value }}` }} audit events.
+        - alert: KubernetesWarningEvents
+          expr: sum(increase(loki_process_custom_kubernetes_warning_event_total{namespace="alloy"}[15m])) > 10
+          for: 10m
+          labels:
+            severity: warning
+          annotations:
+            summary: Kubernetes Warning events are elevated
+            description: Kubernetes emitted {{ `{{ $value }}` }} Warning events in the last 15 minutes.
