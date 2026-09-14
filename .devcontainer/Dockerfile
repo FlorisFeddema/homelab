@@ -17,6 +17,8 @@ ARG KUBESEAL_VERSION=v0.39.1
 ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
 ARG STERN_VERSION=v1.34.0
+# renovate: datasource=github-releases depName=github/copilot-cli
+ARG COPILOT_VERSION=v1.0.83
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
@@ -24,6 +26,13 @@ RUN apt-get update \
 
 RUN install -d --owner=vscode --group=vscode /home/vscode/.copilot \
     && ln -s /home/vscode/.config/homelab-devcontainer/mcp-config.json /home/vscode/.copilot/mcp-config.json
+
+RUN install_script="$(mktemp)" \
+    && curl --fail --location --silent --show-error \
+        --output "${install_script}" \
+        https://gh.io/copilot-install \
+    && VERSION="${COPILOT_VERSION}" bash "${install_script}" \
+    && rm -f "${install_script}"
 
 RUN case "${TARGETARCH}" in \
         amd64) arch="amd64"; kubectx_arch="x86_64" ;; \
