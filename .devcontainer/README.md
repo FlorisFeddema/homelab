@@ -4,6 +4,46 @@ The devcontainer uses dedicated read-only Kubernetes and Talos credentials from
 `~/.config/homelab-devcontainer`. It never mounts the administrator kubeconfig or
 Talos configuration.
 
+## Starting the devcontainer
+
+The devcontainer is intended for repository work that needs the homelab command
+line tools, Kubernetes read access, Talos read access, or GitHub Copilot. Before
+starting it, make sure you have:
+
+- Docker Desktop (or another Docker-compatible container runtime) running.
+- This repository cloned locally.
+- The repository's GitHub credentials available to your IDE if you need to
+  push changes.
+- Read-only credentials bootstrapped as described in
+  [Credential bootstrap](#credential-bootstrap).
+
+### VS Code
+
+Install the **Dev Containers** extension, open this repository, and run
+**Dev Containers: Reopen in Container** from the Command Palette. Select the
+repository's `.devcontainer/devcontainer.json` configuration if prompted. VS
+Code builds the image the first time and reuses it for subsequent sessions.
+
+### GoLand
+
+Open the repository in **Remote Development** > **Dev Containers**, select the
+repository's `.devcontainer/devcontainer.json` configuration, and start the
+remote backend. GoLand builds the image the first time and reuses it for
+subsequent sessions.
+
+After the container starts, open a terminal in the container and verify the
+mounted credentials and tools:
+
+```shell
+test -f "${KUBECONFIG}" && test -f "${TALOSCONFIG}"
+kubectl auth can-i get pods --all-namespaces
+talosctl version --client
+helm version --short
+```
+
+The Kubernetes and Talos credentials are deliberately read-only. Do not mount
+your administrator kubeconfig or Talos configuration into the container.
+
 ## GoLand and GitHub Copilot
 
 The container includes Go 1.27 and the JetBrains GitHub Copilot plugin. Open the
@@ -65,13 +105,23 @@ as `~/.copilot/mcp-config.json`.
 
 ## Credential bootstrap
 
+The bootstrap script must be run on the host, not inside the devcontainer. It
+requires administrator `kubectl` and `talosctl` configuration because it reads
+the cluster credentials and creates the read-only files mounted into the
+container.
+
 After Argo CD has synced the `devcontainer-users` and `grafana-mcp-server`
-apps, create or rotate the credentials from a trusted host shell that has
-administrator `kubectl` and `talosctl` configuration:
+apps, run this from a trusted host shell:
 
 ```shell
 TALOSCONFIG=~/.talos/config ./.devcontainer/bootstrap-readonly-credentials.sh mba-floris-devcontainer
 ```
+
+Replace `mba-floris-devcontainer` with the user configured for your
+devcontainer. The script writes `kubeconfig`, `talosconfig`, and
+`mcp-config.json` to `~/.config/homelab-devcontainer`. Re-run it after rotating
+the Kubernetes or Grafana credentials, then restart the devcontainer so the
+updated read-only files are mounted.
 
 The Argo CD apps create the `homelab-devcontainer` namespace, a Kubernetes
 service account for each `users` entry in
