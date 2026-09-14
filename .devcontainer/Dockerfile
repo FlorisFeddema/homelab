@@ -19,6 +19,8 @@ ARG KUBENS_VERSION=v0.11.0
 ARG STERN_VERSION=v1.34.0
 # renovate: datasource=github-releases depName=github/copilot-cli
 ARG COPILOT_VERSION=v1.0.83
+# renovate: datasource=github-releases depName=cli/cli
+ARG GH_VERSION=v2.82.1
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
@@ -72,5 +74,10 @@ RUN case "${TARGETARCH}" in \
         "https://github.com/stern/stern/releases/download/${STERN_VERSION}/stern_${STERN_VERSION#v}_linux_${arch}.tar.gz" \
     && tar --extract --gzip --file "${temp_dir}/stern.tar.gz" --directory "${temp_dir}" \
     && install "${temp_dir}/stern" /usr/local/bin/stern \
+    && curl --fail --location --silent --show-error \
+        --output "${temp_dir}/gh.tar.gz" \
+        "https://github.com/cli/cli/releases/download/${GH_VERSION}/gh_${GH_VERSION#v}_linux_${arch}.tar.gz" \
+    && tar --extract --gzip --file "${temp_dir}/gh.tar.gz" --directory "${temp_dir}" \
+    && install "${temp_dir}/gh_${GH_VERSION#v}_linux_${arch}/bin/gh" /usr/local/bin/gh \
     && rm -rf "${temp_dir}" \
     && chmod +x /usr/local/bin/argocd /usr/local/bin/yq /usr/local/bin/kubectl /usr/local/bin/talosctl
