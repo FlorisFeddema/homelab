@@ -2,29 +2,22 @@ products:
   core:
     argoCd:
       deploy: true
-      autoSync: true
       namespace: argocd
     argoEvents:
       deploy: true
-      autoSync: true
       serverSideApply: true
     descheduler:
       deploy: true
-      autoSync: true
     kubechecks:
       deploy: true
-      autoSync: true
     kyverno:
       deploy: true
-      autoSync: true
       serverSideApply: true
       serverSideDiff: true
     sealedSecrets:
       deploy: true
-      autoSync: true
     talosCloudControllerManager:
       deploy: true
-      autoSync: true
       namespace: kube-system
     tuppr:
       deploy: true
@@ -32,25 +25,19 @@ products:
       serverSideApply: true
     vpa:
       deploy: true
-      autoSync: true
     kubernetesReplicator:
       deploy: true
-      autoSync: true
   ai:
     devcontainerUsers:
       deploy: true
-      autoSync: true
       namespace: homelab-devcontainer
     grafanaMcpServer:
       deploy: true
-      autoSync: true
   connectivity:
     adguard:
       deploy: true
-      autoSync: true
     cilium:
       deploy: true
-      autoSync: true
       ignoreDifferences:
       - group: apps
         kind: DaemonSet
@@ -58,24 +45,18 @@ products:
         - .spec.template.spec.containers[].volumeMounts[].readOnly? | select(. == false)
     coredns:
       deploy: true
-      autoSync: true
     devices:
       deploy: true
-      autoSync: true
     envoyGateway:
       deploy: true
-      autoSync: true
       serverSideApply: true
     publicExternalDns:
       deploy: true
-      autoSync: true
     privateExternalDns:
       deploy: true
-      autoSync: true
   development:
     argoWorkflows:
       deploy: true
-      autoSync: true
       serverSideApply: true
   monitoring:
     fluentBit:
@@ -86,111 +67,81 @@ products:
       autoSync: false
     prometheus:
       deploy: true
-      autoSync: true
     loki:
       deploy: true
-      autoSync: true
     gatus:
       deploy: true
-      autoSync: true
     grafana:
       deploy: true
-      autoSync: true
     prometheusCrd:
       deploy: true
-      autoSync: true
       namespace: default
       serverSideApply: true
     metricsServer:
       deploy: true
-      autoSync: true
     nodeProblemDetector:
       deploy: true
-      autoSync: true
   home:
     cyberchef:
       deploy: true
-      autoSync: true
     dawarich:
       deploy: true
-      autoSync: true
     homeAssistant:
       deploy: true
-      autoSync: true
     immich:
       deploy: true
-      autoSync: true
     mealie:
       deploy: true
-      autoSync: true
     nextcloud:
       deploy: true
-      autoSync: true
     donetick:
       deploy: true
-      autoSync: true
   iot:
     emqx:
       deploy: true
-      autoSync: true
-      serverSideApply: trueg
+      serverSideApply: true
     zigbee2mqtt:
       deploy: true
       nameOverride: zigbee2mqtt
-      autoSync: true
   media:
     mediaServer: # only deploys namespace and pvc
       deploy: true
-      autoSync: true
       namespace: media-server
     jellyfin:
       deploy: true
-      autoSync: true
       namespace: media-server
     jellyseerr:
       deploy: true
-      autoSync: true
       namespace: media-server
     prowlarr:
       deploy: true
-      autoSync: true
       namespace: media-server
     radarr:
       deploy: true
-      autoSync: true
       namespace: media-server
     sabnzbd:
       deploy: true
-      autoSync: true
       namespace: media-server
     sonarr:
       deploy: true
-      autoSync: true
       namespace: media-server
   deviceOperators:
     genericDevicePlugin:
       deploy: true
-      autoSync: true
     intelGpuResourceDriver:
       deploy: true
-      autoSync: true
     nodeFeatureDiscovery:
       deploy: true
-      autoSync: true
   security:
     authentik:
       deploy: true
-      autoSync: true
     certManager:
       deploy: true
-      autoSync: true
     trivyOperator:
       deploy: true
-      autoSync: true
   storage:
     cloudnativePg:
       deploy: true
-      autoSync: true
       serverSideApply: true
       ignoreDifferences:
         - group: admissionregistration.k8s.io
@@ -208,10 +159,8 @@ products:
             - /webhooks/3/clientConfig/caBundle
     csiAddons:
       deploy: true
-      autoSync: true
     harbor:
       deploy: true
-      autoSync: true
     rookCeph:
       deploy: true
       autoSync: false
@@ -225,7 +174,5 @@ products:
             - /spec/rules/0/backendRefs/0/kind
     snapshotController:
       deploy: true
-      autoSync: true
     velero:
       deploy: true
-      autoSync: true
