@@ -33,7 +33,7 @@ spec:
               file:
                 path: /dev/stdout
   shutdown:
-    drainTimeout: 240s
+    drainTimeout: 120s
   provider:
     type: Kubernetes
     kubernetes:
