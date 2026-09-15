@@ -11,6 +11,16 @@ gatus-monitor:
     - name: thanos-query
     - name: thanos-bucket
 
+etcdExporter:
+  kubectl:
+    image:
+      repository: alpine/kubectl
+      tag: 1.37.0
+  talosctl:
+    image:
+      repository: ghcr.io/siderolabs/talosctl
+      tag: v1.14.0
+
 route:
   thanos-query:
     enabled: true
@@ -192,7 +202,24 @@ kube-prometheus-stack:
     service:
       selector:
         k8s-app: kube-controller-manager
+      port: 2383
+      targetPort: 2383
     serviceMonitor:
+      scheme: https
+      tlsConfig:
+        serverName: localhost
+        insecureSkipVerify: false
+        ca:
+          secret:
+            name: etcd-client-cert
+            key: etcd-ca.crt
+        cert:
+          secret:
+            name: etcd-client-cert
+            key: etcd-client.crt
+        keySecret:
+          name: etcd-client-cert
+          key: etcd-client.key
       relabelings:   # Add nodename label
         - sourceLabels: [__meta_kubernetes_pod_node_name]
           separator: ;
