@@ -28,10 +28,6 @@ products:
     kubernetesReplicator:
       deploy: true
   ai:
-    devcontainerUsers:
-      deploy: true
-      finalizers: false
-      namespace: homelab-devcontainer
     grafanaMcpServer:
       deploy: true
   connectivity:
@@ -59,6 +55,9 @@ products:
     argoWorkflows:
       deploy: true
       serverSideApply: true
+    devcontainerUsers:
+      deploy: true
+      namespace: homelab-devcontainer
   monitoring:
     fluentBit:
       deploy: true
