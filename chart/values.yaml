@@ -30,6 +30,7 @@ products:
   ai:
     devcontainerUsers:
       deploy: true
+      finalizers: false
       namespace: homelab-devcontainer
     grafanaMcpServer:
       deploy: true
