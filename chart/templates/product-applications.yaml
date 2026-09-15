@@ -12,10 +12,12 @@ metadata:
   annotations:
     argocd.argoproj.io/compare-options: ServerSideDiff=true
   {{- end }}
+  {{- if or (not (hasKey $productValue "finalizers")) $productValue.finalizers }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  {{- end }}
 spec:
-  {{- if $productValue.autoSync }}
+  {{- if or (not (hasKey $productValue "autoSync")) $productValue.autoSync }}
   project: always-sync
   {{- else }}
   project: no-sync
