@@ -8,8 +8,6 @@ products:
       serverSideApply: true
     descheduler:
       deploy: true
-    kubechecks:
-      deploy: true
     kyverno:
       deploy: true
       serverSideApply: true
