@@ -30,7 +30,7 @@ env:
 
 jobs:
   discover-images:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       images: ${{ steps.discover.outputs.images }}
       has_images: ${{ steps.discover.outputs.has_images }}
@@ -77,7 +77,7 @@ jobs:
           echo "has_images=true" >> "${GITHUB_OUTPUT}"
 
   build-and-push:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs:
       - discover-images
     if: needs.discover-images.outputs.has_images == 'true'
