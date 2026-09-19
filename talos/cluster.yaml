@@ -52,3 +52,7 @@ kind: ResolverConfig
 hostDNS:
   enabled: false
   forwardKubeDNSToHost: false
+---
+apiVersion: v1alpha1
+kind: SecurityProfileConfig
+workloadIsolation: true
