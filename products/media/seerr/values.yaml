@@ -1,0 +1,57 @@
+gatus-monitor:
+  appName: seerr
+  publicEndpoints:
+    - name: seerr
+  privateEndpoints:
+    - name: seerr
+
+podSecurityContext:
+  fsGroup: 1000
+  fsGroupChangePolicy: OnRootMismatch
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: false
+  runAsNonRoot: true
+  privileged: false
+  runAsUser: 1000
+  runAsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+
+
+resources:
+  limits:
+    memory: 500Mi
+  requests:
+    cpu: 50m
+    memory: 250Mi
+
+nodeSelector:
+  kubernetes.io/arch: amd64
+
+image:
+  registry: docker.io
+  repository:  seerr-team/seerr
+  tag: preview-new-oidc
+
+persistence:
+  size: 1Gi
+  labels:
+    backup.velero.io/include: "true"
+
+route:
+  enabled: true
+  hostnames:
+    - seerr.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
