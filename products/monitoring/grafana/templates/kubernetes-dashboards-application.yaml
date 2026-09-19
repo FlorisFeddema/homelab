@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-dashboards-kubernetes
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: no-sync
+  revisionHistoryLimit: 1
+  source:
+    path: ./
+    repoURL: https://github.com/dotdc/grafana-dashboards-kubernetes
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: grafana
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - FailOnSharedResource=true
+      - ServerSideApply=true
