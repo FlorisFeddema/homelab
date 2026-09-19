@@ -107,11 +107,6 @@ products:
     seerr:
       deploy: true
       namespace: media-server
-      autoSync: false
-    jellyseerr:
-      deploy: true
-      namespace: media-server
-      autoSync: false
     prowlarr:
       deploy: true
       namespace: media-server
