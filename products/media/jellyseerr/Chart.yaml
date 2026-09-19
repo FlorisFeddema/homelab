@@ -1,8 +1,0 @@
-apiVersion: v2
-name: jellyseerr
-version: 1.0.0
-
-dependencies:
-  - name: gatus-monitor
-    repository: file://../../../templates/gatus-monitor
-    version: 1.0.0
