@@ -1,6 +1,6 @@
 dependencies:
 - name: mealie
   repository: oci://ghcr.io/k8s-at-our-homes/helm-charts
-  version: 2.6.0
-digest: sha256:64b8f2349174090bef982a3a5cafcbab814530bf8ce649d16382f90b52a9a43f
-generated: "2026-09-14T17:32:46.566104954Z"
+  version: 2.7.0
+digest: sha256:c9e95998f916576e6d64ebd187c784a91dd14154f6fe256a91cf4ca5cbfc97fe
+generated: "2026-09-19T08:26:31.970960048Z"
