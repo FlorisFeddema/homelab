@@ -35,7 +35,7 @@ nodeSelector:
   kubernetes.io/arch: amd64
 
 image:
-  registry: docker.io
+  registry: ghcr.io
   repository:  seerr-team/seerr
   tag: preview-new-oidc
 
