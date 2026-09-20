@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: garage-config
+  labels:
+    {{- include "garage.labels" . | nindent 4 }}
+data:
+  garage.toml: |
+    metadata_dir = "/mnt/meta"
+    metadata_snapshots_dir = "/mnt/meta/snapshots"
+    metadata_auto_snapshot_interval = "6h"
+    metadata_fsync = true
+    data_dir = "/mnt/data"
+    db_engine = "sqlite"
+    replication_factor = 1
+    consistency_mode = "consistent"
+    compression_level = 1
+    rpc_bind_addr = "[::]:3901"
+    rpc_public_addr = "garage-0.garage-headless.{{ .Release.Namespace }}.svc.cluster.local:3901"
+    rpc_secret = "__RPC_SECRET_REPLACE__"
+
+    [s3_api]
+    api_bind_addr = "[::]:3900"
+    s3_region = {{ .Values.s3.region | quote }}
+    root_domain = ".s3.feddema.dev"
+
+    [admin]
+    api_bind_addr = "[::]:3903"
