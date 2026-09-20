@@ -31,7 +31,7 @@ spec:
             summary: Alloy is repeatedly retrying Loki writes
             description: Alloy retried Loki writes {{ `{{ $value }}` }} times in the last 15 minutes.
         - alert: TalosKernelErrors
-          expr: sum(increase(loki_process_custom_talos_kernel_error_total{namespace="alloy"}[10m])) > 0
+          expr: sum(max_over_time(loki_process_custom_talos_kernel_error_total{namespace="alloy"}[10m])) > 0
           labels:
             severity: warning
           annotations:
@@ -45,7 +45,7 @@ spec:
             summary: Kubernetes API audit events failed to export
             description: The API server failed to export {{ `{{ $value }}` }} audit events.
         - alert: KubernetesWarningEvents
-          expr: sum(increase(loki_process_custom_kubernetes_warning_event_total{namespace="alloy"}[15m])) > 10
+          expr: sum(max_over_time(loki_process_custom_kubernetes_warning_event_total{namespace="alloy"}[15m])) > 10
           for: 10m
           labels:
             severity: warning

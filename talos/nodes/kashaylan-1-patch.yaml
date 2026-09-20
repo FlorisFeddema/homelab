@@ -10,4 +10,9 @@ name: end0
 apiVersion: v1alpha1
 kind: LinkConfig
 name: end0
+---
+apiVersion: v1alpha1
+kind: KmsgLogConfig
+name: remote-log
+url: tcp://192.168.4.123:12346/
 

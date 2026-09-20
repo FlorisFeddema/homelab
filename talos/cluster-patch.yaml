@@ -10,11 +10,6 @@ ntp:
     - europe.pool.ntp.org
 ---
 apiVersion: v1alpha1
-kind: KmsgLogConfig
-name: remote-log
-url: tcp://127.0.0.1:12346/
----
-apiVersion: v1alpha1
 kind: RegistryMirrorConfig
 name: registry.k8s.io
 endpoints:

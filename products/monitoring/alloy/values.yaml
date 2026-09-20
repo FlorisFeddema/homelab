@@ -12,6 +12,12 @@ alloy:
       enabled: true
       name: gerador-logs
     enableReporting: false
+    listenAddr: 127.0.0.1
+    extraPorts:
+      - name: talos
+        port: 12346
+        targetPort: 12346
+        hostPort: 12346
     stabilityLevel: experimental
     storagePath: /var/lib/alloy
     mounts:
@@ -121,7 +127,7 @@ alloy:
         }
 
         otelcol.receiver.tcplog "talos" {
-          listen_address = "127.0.0.1:12346"
+          listen_address = "0.0.0.0:12346"
 
           output {
             logs = [otelcol.exporter.loki.talos.input]
@@ -181,6 +187,7 @@ alloy:
                 description = "Talos kernel messages at error severity or higher."
                 match_all   = true
                 action      = "inc"
+                max_idle_duration = "15m"
               }
             }
           }
@@ -262,6 +269,7 @@ alloy:
                 description = "Kubernetes Warning events collected by Alloy."
                 match_all   = true
                 action      = "inc"
+                max_idle_duration = "15m"
               }
             }
           }
@@ -283,8 +291,6 @@ alloy:
 
   controller:
     type: daemonset
-    hostNetwork: true
-    dnsPolicy: ClusterFirstWithHostNet
     revisionHistoryLimit: 1
     podAnnotations:
       fluentbit.io/exclude: "true"

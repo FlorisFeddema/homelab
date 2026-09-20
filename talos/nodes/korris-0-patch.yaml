@@ -15,3 +15,8 @@ name: enp1s0
 apiVersion: v1alpha1
 kind: LinkConfig
 name: enp1s0
+---
+apiVersion: v1alpha1
+kind: KmsgLogConfig
+name: remote-log
+url: tcp://192.168.4.44:12346/
