@@ -120,7 +120,7 @@ harbor:
       minAvailable: 1
     revisionHistoryLimit: 0
     jobLoggers:
-      - stdout
+      - database
     existingSecret: "harbor-credentials"
     resources:
       limits:
@@ -130,7 +130,7 @@ harbor:
         memory: 200Mi
 
   registry:
-    replicas: 1
+    replicas: 2
     topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
@@ -216,11 +216,15 @@ harbor:
 
 redis-ha:
   replicas: 3
+  podDisruptionBudget:
+    minAvailable: 2
   persistentVolume:
     size: 5Gi
   haproxy:
     enabled: true
     replicas: 3
+    podDisruptionBudget:
+      minAvailable: 2
     resources:
       limits:
         memory: 128Mi
