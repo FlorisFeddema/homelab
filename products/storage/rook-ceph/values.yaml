@@ -256,8 +256,9 @@ rook-ceph-cluster:
         - aes256k
         csi:
           keyRotationPolicy: KeyGeneration
-          keyGeneration: 3
+          keyGeneration: 4
           keepPriorKeyCountMax: 1  # keep one prior key also
+          keyType: aes256k
         rbdMirrorPeer:
           keyRotationPolicy: KeyGeneration
           keyGeneration: 3
