@@ -252,7 +252,6 @@ rook-ceph-cluster:
           keyRotationPolicy: KeyGeneration
           keyGeneration: 3
         allowedCiphers:
-        - aes
         - aes256k
         csi:
           keyRotationPolicy: KeyGeneration
@@ -298,15 +297,6 @@ rook-ceph-cluster:
         mgr/dashboard/FEATURE_TOGGLE_NFS: 'false'
         mgr/dashboard/FEATURE_TOGGLE_ISCSI: 'false'
         mgr/dashboard/FEATURE_TOGGLE_MIRRORING: 'false'
-    
-    healthCheck:
-      muteHealthWarning:
-        AUTH_INSECURE_CLIENT_KEY_TYPE:
-          policy: mute
-        AUTH_INSECURE_KEYS_ALLOWED:
-          policy: mute
-        AUTH_INSECURE_KEYS_CREATABLE:
-          policy: mute
 
     dashboard:
       ssl: false
