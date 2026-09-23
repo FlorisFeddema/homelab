@@ -7,6 +7,21 @@
   "features": {
     "ghcr.io/devcontainers/features/go:1": {
       "version": "1.27"
+    },
+    "ghcr.io/postfinance/devcontainer-features/kubectl:1.1.0": {
+      "version": "1.37.0",
+      "helmVersion": "3.21.4",
+      "kubectxVersion": "none",
+      "kubensVersion": "none"
+    },
+    "ghcr.io/devcontainers-extra/features/talosctl:1.0.1": {
+      "version": "v1.14.1"
+    },
+    "ghcr.io/jsburckhardt/devcontainer-features/rtk:1.0.0": {
+      "version": "v0.45.0"
+    },
+    "ghcr.io/devcontainer-community/devcontainer-features/ripgrep:1.0.3": {
+      "version": "15.2.0"
     }
   },
   "customizations": {
