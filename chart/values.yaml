@@ -58,7 +58,11 @@ products:
       namespace: homelab-devcontainer
   monitoring:
     fluentBit:
+      deploy: false
+      autoSync: false
+    alloy:
       deploy: true
+      autoSync: false
     prometheus:
       deploy: true
     loki:

@@ -17,6 +17,11 @@ kind: LinkConfig
 name: enp1s0
 ---
 apiVersion: v1alpha1
+kind: KmsgLogConfig
+name: remote-log
+url: tcp://192.168.4.204:12346/
+---
+apiVersion: v1alpha1
 kind: LinkConfig
 name: enp0s20f0u4
 mtu: 9000
