@@ -1,0 +1,42 @@
+llmkube:
+  namespace: llmkube
+
+  crds:
+    install: true
+    keep: false
+
+  webhook:
+    certManager:
+      enabled: true
+
+  controllerManager:
+    leaderElection:
+      enabled: false
+    resources:
+      limits:
+        cpu: null 
+        memory: 256Mi
+      requests:
+        cpu: 10m
+        memory: 128Mi
+    
+  metrics:
+    emitScrapeAnnotations: true
+  
+  prometheus:
+    serviceMonitor:
+      enabled: true
+    inferencePodMonitor:
+      enabled: false
+
+  grafana:
+    dashboards:
+      enabled: true
+      additionalLabels:
+        grafana_dashboard: "1"
+      # only:
+
+  modelCache:
+    enabled: false
+    
+      

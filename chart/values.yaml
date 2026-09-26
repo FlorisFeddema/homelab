@@ -28,6 +28,9 @@ products:
   ai:
     grafanaMcpServer:
       deploy: true
+    llmkube:
+      deploy: true
+      serverSideApply: true
   connectivity:
     adguard:
       deploy: true
