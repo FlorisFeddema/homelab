@@ -30,7 +30,6 @@ products:
       deploy: true
     llmkube:
       deploy: true
-      serverSideApply: true
       skipSchemaValidation: true
   connectivity:
     adguard:
