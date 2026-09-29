@@ -50,8 +50,8 @@ jobs:
             image_dir="${dockerfile%/Dockerfile}"
             image_path="${image_dir#images/}"
 
-            if [[ ! -f "${image_dir}/version" ]]; then
-              echo "Missing version file for ${image_path}: ${image_dir}/version" >&2
+            if [[ ! -f "${image_dir}/image.yaml" ]]; then
+              echo "Missing image definition for ${image_path}: ${image_dir}/image.yaml" >&2
               exit 1
             fi
 
@@ -95,17 +95,17 @@ jobs:
         id: version
         shell: bash
         run: |
-          version_file="images/${{ matrix.image }}/version"
+          image_file="images/${{ matrix.image }}/image.yaml"
 
-          if [[ ! -f "${version_file}" ]]; then
-            echo "Missing version file: ${version_file}" >&2
+          if [[ ! -f "${image_file}" ]]; then
+            echo "Missing image definition: ${image_file}" >&2
             exit 1
           fi
 
-          version="$(tr -d '[:space:]' < "${version_file}")"
+          version="$(yq -r '.version' "${image_file}")"
 
           if [[ ! "${version}" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            echo "Version in ${version_file} must be semver in the form X.Y.Z" >&2
+            echo "Version in ${image_file} must be semver in the form X.Y.Z" >&2
             exit 1
           fi
 

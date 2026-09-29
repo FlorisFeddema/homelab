@@ -4,8 +4,8 @@ This directory contains Docker build definitions for images used by Argo Workflo
 
 ## Layout
 
-Each directory under `images/` that contains both a `Dockerfile` and a `version` file is treated as a standalone image build when the GitHub Actions workflow runs.
-Each image directory must contain a `version` file with a semantic version such as `1.0.0`.
+Each directory under `images/` that contains both a `Dockerfile` and an `image.yaml` file is treated as a standalone image build when the GitHub Actions workflow runs.
+Each image directory must contain an `image.yaml` file with a `version` field set to a semantic version such as `"1.0.0"`.
 
 Minimum structure:
 
@@ -13,12 +13,18 @@ Minimum structure:
 images/
   <image-name>/
     Dockerfile
-    version
+    image.yaml
   <group>/
     <image-name>/
       Dockerfile
-      version
+      image.yaml
 ```
+
+  Example `image.yaml`:
+
+  ```yaml
+  version: "1.0.0"
+  ```
 
 The pushed Harbor image name depends on the layout:
 
