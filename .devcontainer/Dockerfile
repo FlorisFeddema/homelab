@@ -2,13 +2,13 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=mikefarah/yq
-ARG YQ_VERSION=v4.53.6
+ARG YQ_VERSION=v4.54.1
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ARG KUBECTL_VERSION=v1.37.1
 # renovate: datasource=github-releases depName=argoproj/argo-cd
 ARG ARGOCD_VERSION=v3.5.3
 # renovate: datasource=github-releases depName=siderolabs/talos
-ARG TALOS_VERSION=v1.14.1
+ARG TALOS_VERSION=v1.14.2
 # renovate: datasource=github-releases depName=helm/helm
 ARG HELM_VERSION=v4.3.0
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
@@ -20,7 +20,7 @@ ARG STERN_VERSION=v1.34.0
 # renovate: datasource=github-releases depName=github/copilot-cli
 ARG COPILOT_VERSION=v1.0.89
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.101.0
+ARG GH_VERSION=v2.102.0
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
