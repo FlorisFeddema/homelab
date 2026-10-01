@@ -1,0 +1,52 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: garage-quota
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation,HookSucceeded
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  activeDeadlineSeconds: 300
+  backoffLimit: 5
+  template:
+    spec:
+      serviceAccountName: garage-bootstrap
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: quota
+          image: "{{ .Values.kubectlImage.repository }}:{{ .Values.kubectlImage.tag }}"
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -ec
+            - |
+              until kubectl exec -n {{ .Release.Namespace }} garage-0 -- /garage bucket info {{ .Values.s3.bucket }} >/tmp/bucket-info; do
+                sleep 5
+              done
+
+              expected_key="$(kubectl get secret garage-credentials -n {{ .Release.Namespace }} -o jsonpath='{.data.accessKeyId}' | base64 -d)"
+              if ! grep -F "${expected_key}" /tmp/bucket-info >/dev/null; then
+                echo "Garage access key does not match garage-credentials" >&2
+                exit 1
+              fi
+
+              kubectl exec -n {{ .Release.Namespace }} garage-0 -- \
+                /garage bucket set-quotas {{ .Values.s3.bucket }} --max-size {{ .Values.s3.quota }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

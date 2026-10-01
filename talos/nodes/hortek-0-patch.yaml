@@ -20,3 +20,17 @@ addresses:
 routes:
   - destination: 192.168.5.0/24
     gateway: 192.168.5.1
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: garage-data
+volumeType: partition
+provisioning:
+  diskSelector:
+    match: disk.size > 2900u * GB && disk.size < 3100u * GB && !system_disk
+  minSize: 2.9TB
+  grow: true
+filesystem:
+  type: xfs
+mount:
+  disableAccessTime: true
