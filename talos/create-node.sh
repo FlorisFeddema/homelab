@@ -49,7 +49,6 @@ talosctl gen config $clusterName $clusterDomain \
     --config-patch-worker @worker.yaml                      \
     --config-patch @cluster-patch.yaml \
     --config-patch @secret-patch.yaml \
-    --config-patch @nodes/"$nodeName"-patch.yaml \
     --kubernetes-version "$kubernetesVersion"    \
     --force
 

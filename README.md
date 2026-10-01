@@ -31,9 +31,7 @@ The repo is concrete and environment-specific on purpose. Cluster names, domains
 - `talos/`
   Cluster-wide Talos config, node definitions, and helper scripts for node creation and upgrades.
 - `talos/nodes/<node>.yaml`
-  Per-node base machine config, including role, labels, and install disk.
-- `talos/nodes/<node>-patch.yaml`
-  Per-node host and network patch data, such as hostname, VIPs, DHCP config, and extra links.
+  Per-node machine config, including role, labels, install disk, hostname, and network settings.
 - `unifi/`
   Additional network-related configuration.
 
@@ -131,7 +129,7 @@ The helper scripts in `talos/` use relative paths such as `./rendered/` and `./s
 
 The scripts also inspect live cluster state with `kubectl`, so they expect the node to exist in the cluster unless the command is specifically part of first-node bootstrap.
 
-The Talos source patches are organized as multi-document configuration. Cluster-wide node settings are in `cluster.yaml`, control-plane-only Kubernetes bootstrap settings are in `controlplane.yaml`, and each `nodes/<node>.yaml` holds its role, Kubernetes labels, and unattended installer configuration. Node network patches remain in `nodes/<node>-patch.yaml`.
+The Talos source configs use multi-document YAML. Cluster-wide node settings are in `cluster.yaml`, control-plane-only Kubernetes bootstrap settings are in `controlplane.yaml`, and each `nodes/<node>.yaml` holds that node's role, Kubernetes labels, unattended installer configuration, hostname, and network settings.
 
 #### Update Talos config for one node
 
@@ -175,7 +173,7 @@ This walks every Kubernetes node returned by `kubectl get nodes`, regenerates it
 
 #### Create a new Talos node config
 
-For a permanent node definition, add `talos/nodes/<node>.yaml`. In practice you will usually also add `talos/nodes/<node>-patch.yaml`, because the regular update workflow uses that patch file for host- and network-specific settings.
+For a permanent node definition, add `talos/nodes/<node>.yaml` with its role, labels, installer configuration, hostname, and network settings. The same file is used by both the initial creation and regular update workflows.
 
 Then generate and optionally apply the initial config:
 
