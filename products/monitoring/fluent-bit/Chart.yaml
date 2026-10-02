@@ -1,8 +1,8 @@
 apiVersion: v2
 name: fluent-bit
-version: 1.0.13
+version: 1.0.14
 
 dependencies:
   - name: fluent-bit
-    version: 0.58.2
+    version: 0.58.3
     repository: oci://ghcr.io/fluent/helm-charts
