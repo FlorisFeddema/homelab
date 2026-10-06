@@ -11,6 +11,7 @@ auth:
 
 grafana-mcp:
   replicas: 2
+  revisionHistoryLimit: 0
 
   grafana:
     url: https://grafana.feddema.dev
