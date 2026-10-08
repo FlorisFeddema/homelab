@@ -18,7 +18,7 @@ ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
 ARG STERN_VERSION=v1.34.0
 # renovate: datasource=github-releases depName=github/copilot-cli
-ARG COPILOT_VERSION=v1.0.93
+ARG COPILOT_VERSION=v1.0.94
 # renovate: datasource=github-releases depName=cli/cli
 ARG GH_VERSION=v2.102.0
 
