@@ -37,6 +37,26 @@ spec:
                 exit 1
               fi
 
+              if ! kubectl get secret garage-s3-credentials -n {{ .Release.Namespace }} >/dev/null 2>&1; then
+                client_access_key="GK$(head -c 16 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+                client_secret_key="$(head -c 32 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+                kubectl create secret generic garage-s3-credentials \
+                  -n {{ .Release.Namespace }} \
+                  --from-literal=accessKeyId="${client_access_key}" \
+                  --from-literal=secretAccessKey="${client_secret_key}"
+              fi
+
+              client_access_key="$(kubectl get secret garage-s3-credentials -n {{ .Release.Namespace }} -o jsonpath='{.data.accessKeyId}' | base64 -d)"
+              client_secret_key="$(kubectl get secret garage-s3-credentials -n {{ .Release.Namespace }} -o jsonpath='{.data.secretAccessKey}' | base64 -d)"
+
+              if ! kubectl exec -n {{ .Release.Namespace }} garage-0 -- /garage key info "${client_access_key}" >/dev/null 2>&1; then
+                kubectl exec -n {{ .Release.Namespace }} garage-0 -- \
+                  /garage key import --yes --name coworker-backup "${client_access_key}" "${client_secret_key}"
+              fi
+
+              kubectl exec -n {{ .Release.Namespace }} garage-0 -- \
+                /garage bucket allow --read --write {{ .Values.s3.bucket }} --key "${client_access_key}"
+
               kubectl exec -n {{ .Release.Namespace }} garage-0 -- \
                 /garage bucket set-quotas {{ .Values.s3.bucket }} --max-size {{ .Values.s3.quota }}
           securityContext:

@@ -15,3 +15,5 @@ spec:
     - backendRefs:
         - name: garage
           port: 3900
+      timeouts:
+        request: "0s"

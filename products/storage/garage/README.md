@@ -9,7 +9,8 @@ loses this copy, so the coworker must retain another copy.
 
 ## Rollout
 
-1. Confirm the new disk is the only unclaimed 2.9-3.1 TB disk on `hortek-0`.
+1. Confirm `hortek-0` reports the intended 3 TB disk as WWID
+  `naa.5000c5007cf099c8` before applying Talos config.
 2. Render and apply the Talos config with `talos/update-config.sh -n hortek-0`.
 3. Confirm `u-garage-data` is ready and mounted at `/var/mnt/garage-data`.
 4. Set `products.storage.garage.deploy` to `true` in `chart/values.yaml`.
@@ -25,11 +26,14 @@ loses this copy, so the coworker must retain another copy.
 Retrieve the generated credentials for one-time secure delivery:
 
 ```sh
-kubectl get secret garage-credentials -n garage \
+kubectl get secret garage-s3-credentials -n garage \
   -o jsonpath='{.data.accessKeyId}' | base64 -d; echo
-kubectl get secret garage-credentials -n garage \
+kubectl get secret garage-s3-credentials -n garage \
   -o jsonpath='{.data.secretAccessKey}' | base64 -d; echo
 ```
+
+This client key has read/write access to `coworker-backup`; the internal Garage
+bootstrap key is not for client use.
 
 For rclone, set `provider = Other`, `region = garage`, the endpoint above, and
 `force_path_style = true`.
@@ -37,7 +41,8 @@ For rclone, set `provider = Other`, `region = garage`, the endpoint above, and
 ## Operations
 
 - Change `s3.quota` to adjust the bucket limit; the sync hook reapplies it.
-- Rotate credentials by creating a replacement Garage key and Kubernetes Secret
+- Rotate client credentials by creating a replacement Garage key, granting it
+  read/write access to `coworker-backup`, and updating `garage-s3-credentials`
   in a planned maintenance window. Never delete `garage-credentials` while the
   existing Garage metadata remains.
 - Before replacing the HDD, copy all objects to another S3 target. A retained PV

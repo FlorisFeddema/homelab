@@ -46,10 +46,10 @@ name: garage-data
 volumeType: partition
 provisioning:
   diskSelector:
-    match: disk.size > 2900u * GB && disk.size < 3100u * GB && !system_disk
-  minSize: 2.9TB
-  grow: true
+    match: disk.wwid == "naa.5000c5007cf099c8"
 filesystem:
   type: xfs
 mount:
   disableAccessTime: true
+trim:
+  enabled: false

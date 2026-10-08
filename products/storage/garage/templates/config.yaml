@@ -22,7 +22,7 @@ data:
     [s3_api]
     api_bind_addr = "[::]:3900"
     s3_region = {{ .Values.s3.region | quote }}
-    root_domain = ".s3.feddema.dev"
+    root_domain = ".{{ .Values.s3.hostname }}"
 
     [admin]
     api_bind_addr = "[::]:3903"
