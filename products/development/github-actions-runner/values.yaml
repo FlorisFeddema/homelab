@@ -20,7 +20,6 @@ gha-runner-scale-set-controller:
     limits:
       memory: 128Mi
 
-  healthProbeBindAddress: ":8081"
   metrics:
     controllerManagerAddr: ":8080"
     listenerAddr: ":8080"
@@ -30,3 +29,4 @@ gha-runner-scale-set-controller:
     logLevel: warn
     logFormat: json
     terminatedRunnerPodGracePeriodSeconds: 10
+    healthProbeBindAddress: ":8081"
