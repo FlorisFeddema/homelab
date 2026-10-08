@@ -19,6 +19,7 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
     spec:
+      automountServiceAccountToken: false
       nodeSelector:
         kubernetes.io/hostname: {{ .Values.nodeName }}
       securityContext:

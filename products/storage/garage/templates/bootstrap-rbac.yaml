@@ -14,12 +14,18 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["secrets"]
-    verbs: ["get", "create"]
+    resourceNames: ["garage-credentials", "garage-s3-credentials"]
+    verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create"]
   - apiGroups: [""]
     resources: ["pods"]
+    resourceNames: ["garage-0"]
     verbs: ["get"]
   - apiGroups: [""]
     resources: ["pods/exec"]
+    resourceNames: ["garage-0"]
     verbs: ["create"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
