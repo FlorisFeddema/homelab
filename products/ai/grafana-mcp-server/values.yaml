@@ -7,10 +7,11 @@ auth:
   secretInit:
     image:
       repository: alpine/kubectl
-      tag: 1.37.0
+      tag: 1.37.1
 
 grafana-mcp:
   replicas: 2
+  revisionHistoryLimit: 0
 
   grafana:
     url: https://grafana.feddema.dev
@@ -24,7 +25,6 @@ grafana-mcp:
     - cloudwatch
     - elasticsearch
     - oncall
-    - sift
     - pyroscope
     - asserts
 

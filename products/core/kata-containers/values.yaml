@@ -1,0 +1,24 @@
+runtimeClasses:
+  nodeSelector:
+    runtime.feddema.dev/kata: "true"
+  kata:
+    overhead:
+      cpu: 250m
+      memory: 130Mi
+  kataQemu:
+    overhead:
+      cpu: 250m
+      memory: 160Mi
+
+monitor:
+  image:
+    repository: quay.io/kata-containers/kata-monitor
+    tag: 3.32.0
+  resources:
+    requests:
+      cpu: 20m
+      memory: 64Mi
+    limits:
+      memory: 256Mi
+  serviceMonitor:
+    interval: 30s

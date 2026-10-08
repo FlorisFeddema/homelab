@@ -10,8 +10,36 @@ labels:
 apiVersion: v1alpha1
 kind: UnattendedInstallConfig
 installer:
-  image: factory.talos.dev/metal-installer/ee827ee541fb06e742e6d183f4e3c1a62a2d63d945cbbd0b1e76da9221af9d27:v1.14.0
+  image: factory.talos.dev/metal-installer/ee827ee541fb06e742e6d183f4e3c1a62a2d63d945cbbd0b1e76da9221af9d27:v1.14.2
 provisioning:
   diskSelector:
     match: disk.wwid == "naa.50025388a0818d36"
   wipe: false
+---
+apiVersion: v1alpha1
+kind: HostnameConfig
+hostname: tasuq-0
+auto: off
+---
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: 192.168.4.9
+link: enp1s0
+---
+apiVersion: v1alpha1
+kind: DHCPv4Config
+name: enp1s0
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp1s0
+---
+apiVersion: v1alpha1
+kind: LinkConfig
+name: enp0s20f0u4
+mtu: 9000
+addresses:
+  - address: 192.168.5.20/24
+routes:
+  - destination: 192.168.5.0/24
+    gateway: 192.168.5.1

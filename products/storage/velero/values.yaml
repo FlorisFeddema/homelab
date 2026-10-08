@@ -6,7 +6,7 @@ velero:
 
   initContainers:
    - name: velero-plugin-for-microsoft-azure
-     image: velero/velero-plugin-for-microsoft-azure:v1.14.2
+     image: velero/velero-plugin-for-microsoft-azure:v1.14.4
      imagePullPolicy: IfNotPresent
      volumeMounts:
        - mountPath: /target
@@ -53,7 +53,7 @@ velero:
       - --node-agent-configmap=velero-node-agent-config
   schedules:
     backup:
-      schedule: "23 */4 * * 1" #TODO: FIX
+      schedule: "23 */2 * * *"
       template:
         ttl: "72h"
         storageLocation: default

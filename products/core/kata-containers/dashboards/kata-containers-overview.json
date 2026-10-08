@@ -1,0 +1,93 @@
+{
+  "id": null,
+  "uid": "kata-containers-overview",
+  "title": "Kata Containers / Overview",
+  "description": "Kata monitor health and per-sandbox guest/runtime resources. Metric reference: https://github.com/kata-containers/kata-containers/blob/3.32.0/docs/design/kata-2-0-metrics.md",
+  "tags": ["kubernetes", "kata-containers"],
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": false,
+  "refresh": "30s",
+  "timezone": "browser",
+  "time": {"from": "now-1h", "to": "now"},
+  "links": [{"title": "Upstream Kata dashboard", "type": "link", "url": "https://github.com/kata-containers/kata-containers/blob/3.32.0/docs/how-to/data/dashboard.json", "targetBlank": true}],
+  "templating": {
+    "list": [
+      {"name": "datasource", "label": "Datasource", "type": "datasource", "query": "prometheus", "refresh": 1},
+      {"name": "node", "label": "Node", "type": "query", "datasource": {"type": "prometheus", "uid": "$datasource"}, "query": "label_values(kata_monitor_running_shim_count, node)", "refresh": 1, "multi": true, "includeAll": true, "allValue": ".*", "current": {"text": "All", "value": "$__all"}},
+      {"name": "namespace", "label": "Namespace", "type": "query", "datasource": {"type": "prometheus", "uid": "$datasource"}, "query": "label_values(kata_shim_process_resident_memory_bytes{node=~\"$node\"}, cri_namespace)", "refresh": 1, "multi": true, "includeAll": true, "allValue": ".*", "current": {"text": "All", "value": "$__all"}},
+      {"name": "pod", "label": "Pod", "type": "query", "datasource": {"type": "prometheus", "uid": "$datasource"}, "query": "label_values(kata_shim_process_resident_memory_bytes{node=~\"$node\",cri_namespace=~\"$namespace\"}, cri_name)", "refresh": 1, "multi": true, "includeAll": true, "allValue": ".*", "current": {"text": "All", "value": "$__all"}}
+    ]
+  },
+  "panels": [
+    {
+      "id": 1, "title": "Monitor Health", "type": "row", "collapsed": false, "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0}, "panels": []
+    },
+    {
+      "id": 2, "title": "Monitor Target Availability", "type": "timeseries", "gridPos": {"h": 7, "w": 8, "x": 0, "y": 1},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "short", "min": 0, "max": 1}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "up{job=\"kata-monitor\",node=~\"$node\"}", "legendFormat": "{{node}}"}]
+    },
+    {
+      "id": 3, "title": "Running VMs per Node", "type": "timeseries", "gridPos": {"h": 7, "w": 8, "x": 8, "y": 1},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "short", "min": 0, "decimals": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "kata_monitor_running_shim_count{node=~\"$node\"}", "legendFormat": "{{node}}"}]
+    },
+    {
+      "id": 4, "title": "Failed Sandbox Scrapes / Second", "type": "timeseries", "gridPos": {"h": 7, "w": 8, "x": 16, "y": 1},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "ops", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "rate(kata_monitor_scrape_failed_count{node=~\"$node\"}[$__rate_interval])", "legendFormat": "{{node}}"}]
+    },
+    {
+      "id": 5, "title": "Monitor CPU", "type": "timeseries", "gridPos": {"h": 7, "w": 8, "x": 0, "y": 8},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "cores", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "rate(kata_monitor_process_cpu_seconds_total{node=~\"$node\"}[$__rate_interval])", "legendFormat": "{{node}}"}]
+    },
+    {
+      "id": 6, "title": "Monitor Resident Memory", "type": "timeseries", "gridPos": {"h": 7, "w": 8, "x": 8, "y": 8},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "kata_monitor_process_resident_memory_bytes{node=~\"$node\"}", "legendFormat": "{{node}}"}]
+    },
+    {
+      "id": 7, "title": "Sandbox Scrape Duration p99", "type": "timeseries", "gridPos": {"h": 7, "w": 8, "x": 16, "y": 8},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "ms", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "histogram_quantile(0.99, sum by (node, le) (rate(kata_monitor_scrape_durations_histogram_milliseconds_bucket{node=~\"$node\"}[$__rate_interval])))", "legendFormat": "{{node}}"}]
+    },
+    {
+      "id": 8, "title": "VM and Runtime Resources", "type": "row", "collapsed": false, "gridPos": {"h": 1, "w": 24, "x": 0, "y": 15}, "panels": []
+    },
+    {
+      "id": 9, "title": "Guest Memory", "type": "timeseries", "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "kata_guest_meminfo{node=~\"$node\",cri_namespace=~\"$namespace\",cri_name=~\"$pod\",item=~\"mem_total|mem_available\"} * 1024", "legendFormat": "{{cri_namespace}}/{{cri_name}} {{item}}"}]
+    },
+    {
+      "id": 10, "title": "Hypervisor Resident Memory", "type": "timeseries", "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "kata_hypervisor_proc_status{node=~\"$node\",cri_namespace=~\"$namespace\",cri_name=~\"$pod\",item=\"vmrss\"} * 1024", "legendFormat": "{{cri_namespace}}/{{cri_name}}"}]
+    },
+    {
+      "id": 11, "title": "Shim and Agent Resident Memory", "type": "timeseries", "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "bytes", "min": 0}, "overrides": []},
+      "targets": [
+        {"refId": "A", "expr": "kata_shim_process_resident_memory_bytes{node=~\"$node\",cri_namespace=~\"$namespace\",cri_name=~\"$pod\"}", "legendFormat": "{{cri_namespace}}/{{cri_name}} shim"},
+        {"refId": "B", "expr": "kata_agent_process_resident_memory_bytes{node=~\"$node\",cri_namespace=~\"$namespace\",cri_name=~\"$pod\"}", "legendFormat": "{{cri_namespace}}/{{cri_name}} agent"}
+      ]
+    },
+    {
+      "id": 12, "title": "Guest Network Throughput", "type": "timeseries", "gridPos": {"h": 8, "w": 12, "x": 12, "y": 24},
+      "datasource": {"type": "prometheus", "uid": "$datasource"},
+      "fieldConfig": {"defaults": {"unit": "Bps", "min": 0}, "overrides": []},
+      "targets": [{"refId": "A", "expr": "rate(kata_guest_netdev_stat{node=~\"$node\",cri_namespace=~\"$namespace\",cri_name=~\"$pod\",interface!=\"lo\",item=~\"recv_bytes|sent_bytes\"}[$__rate_interval])", "legendFormat": "{{cri_namespace}}/{{cri_name}} {{interface}} {{item}}"}]
+    }
+  ]
+}

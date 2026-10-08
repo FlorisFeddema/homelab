@@ -26,7 +26,7 @@ vpa:
         memory: 70Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-recommender
-      tag: "1.7.1"
+      tag: "1.8.0"
 
   updater:
     enabled: true
@@ -44,7 +44,7 @@ vpa:
         memory: 50Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-updater
-      tag: "1.7.1"
+      tag: "1.8.0"
 
   admissionController:
     revisionHistoryLimit: 0
@@ -64,4 +64,4 @@ vpa:
         memory: 50Mi
     image:
       repository: registry.k8s.io/autoscaling/vpa-admission-controller
-      tag: "1.7.1"
+      tag: "1.8.0"

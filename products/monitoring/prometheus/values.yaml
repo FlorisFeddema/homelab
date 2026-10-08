@@ -15,11 +15,11 @@ etcdExporter:
   kubectl:
     image:
       repository: alpine/kubectl
-      tag: 1.37.0
+      tag: 1.37.1
   talosctl:
     image:
       repository: ghcr.io/siderolabs/talosctl
-      tag: v1.14.1
+      tag: v1.14.2
 
 route:
   thanos-query:

@@ -46,6 +46,12 @@ descheduler:
                 - Job
               minPodLifetimeSeconds: 3600
               includingInitContainers: true
+          - name: PodLifeTime
+            args:
+              maxPodLifeTimeSeconds: 3600
+              states:
+                - Failed
+                - Succeeded
           - name: RemoveDuplicates
           - name: LowNodeUtilization
             args:
@@ -81,6 +87,7 @@ descheduler:
             enabled:
               - RemovePodsHavingTooManyRestarts
               - RemoveFailedPods
+              - PodLifeTime
               - RemovePodsViolatingInterPodAntiAffinity
               - RemovePodsViolatingNodeAffinity
               - RemovePodsViolatingNodeTaints

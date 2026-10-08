@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kata-monitor
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/name: kata-monitor
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kata-monitor
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kata-monitor
+    spec:
+      automountServiceAccountToken: false
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: extensions.talos.dev/kata-containers
+                    operator: Exists
+      containers:
+        - name: kata-monitor
+          image: {{ .Values.monitor.image.repository }}:{{ .Values.monitor.image.tag }}
+          imagePullPolicy: IfNotPresent
+          args:
+            - -listen-address=0.0.0.0:8090
+            - -runtime-endpoint=unix:///run/containerd/containerd.sock
+            - -log-level=info
+          ports:
+            - name: metrics
+              containerPort: 8090
+              protocol: TCP
+          startupProbe:
+            httpGet:
+              path: /sandboxes
+              port: metrics
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /sandboxes
+              port: metrics
+            periodSeconds: 10
+            timeoutSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /sandboxes
+              port: metrics
+            periodSeconds: 30
+            timeoutSeconds: 5
+          resources: {{ toYaml .Values.monitor.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - name: containerd
+              mountPath: /run/containerd
+              readOnly: true
+            - name: go-runtime-sandboxes
+              mountPath: /run/vc/sbs
+              readOnly: true
+            - name: runtime-rs-sandboxes
+              mountPath: /run/kata
+              readOnly: true
+      tolerations:
+        - operator: Exists
+      volumes:
+        - name: containerd
+          hostPath:
+            path: /run/containerd
+            type: Directory
+        - name: go-runtime-sandboxes
+          hostPath:
+            path: /run/vc/sbs
+            type: DirectoryOrCreate
+        - name: runtime-rs-sandboxes
+          hostPath:
+            path: /run/kata
+            type: DirectoryOrCreate
