@@ -47,6 +47,7 @@ volumeType: partition
 provisioning:
   diskSelector:
     match: disk.wwid == "naa.5000c5007cf099c8"
+  minSize: 2.7Ti
 filesystem:
   type: xfs
 mount:
