@@ -55,7 +55,7 @@ products:
     devcontainerUsers:
       deploy: true
       namespace: homelab-devcontainer
-    githubActionsRunner:
+    githubActionsRunners:
       deploy: true
       serverSideApply: true
   monitoring:
