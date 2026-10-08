@@ -8,6 +8,8 @@ products:
       serverSideApply: true
     descheduler:
       deploy: true
+    kataContainers:
+      deploy: true
     kyverno:
       deploy: true
       serverSideApply: true

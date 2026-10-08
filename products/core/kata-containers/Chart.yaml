@@ -1,0 +1,3 @@
+apiVersion: v2
+name: kata-containers
+version: 1.0.0

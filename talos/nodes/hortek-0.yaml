@@ -4,13 +4,14 @@ machine:
 apiVersion: v1alpha1
 kind: KubeNodeConfig
 labels:
+  runtime.feddema.dev/kata: "true"
   topology.kubernetes.io/zone: hortek
   topology.kubernetes.io/region: salioca
 ---
 apiVersion: v1alpha1
 kind: UnattendedInstallConfig
 installer:
-  image: factory.talos.dev/metal-installer/ee827ee541fb06e742e6d183f4e3c1a62a2d63d945cbbd0b1e76da9221af9d27:v1.14.0
+  image: factory.talos.dev/metal-installer/882fc2311afd7c635b793e27fb91c65825791df79dd505a6db58ba500968efab:v1.14.2
 provisioning:
   diskSelector:
     match: disk.wwid == "naa.5002538e4089b4e1"
