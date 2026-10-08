@@ -13,7 +13,7 @@ runtimeClasses:
 monitor:
   image:
     repository: quay.io/kata-containers/kata-monitor
-    tag: 3.32.0
+    tag: 4.2.0
   resources:
     requests:
       cpu: 20m
