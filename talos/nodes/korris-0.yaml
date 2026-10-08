@@ -10,7 +10,7 @@ labels:
 apiVersion: v1alpha1
 kind: UnattendedInstallConfig
 installer:
-  image: factory.talos.dev/metal-installer/ee827ee541fb06e742e6d183f4e3c1a62a2d63d945cbbd0b1e76da9221af9d27:v1.14.0
+  image: factory.talos.dev/metal-installer/ee827ee541fb06e742e6d183f4e3c1a62a2d63d945cbbd0b1e76da9221af9d27:v1.14.2
 provisioning:
   diskSelector:
     match: disk.wwid == "naa.50025388a03df6ad"

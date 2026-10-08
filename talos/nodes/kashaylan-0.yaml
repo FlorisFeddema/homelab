@@ -4,13 +4,14 @@ machine:
 apiVersion: v1alpha1
 kind: KubeNodeConfig
 labels:
+  runtime.feddema.dev/kata: "true"
   topology.kubernetes.io/zone: kashaylan
   topology.kubernetes.io/region: salioca
 ---
 apiVersion: v1alpha1
 kind: UnattendedInstallConfig
 installer:
-  image: factory.talos.dev/metal-installer/85430930745cd63086b9f882522009defa03d25134fcc7a7d2ddb991b127188c:v1.14.0
+  image: factory.talos.dev/metal-installer/8b68daecde55a895bf457a225b4a0d1da86618f31e61b3cc2c704b85b10d70bd:v1.14.2
 provisioning:
   diskSelector:
     match: disk.serial == "0x5edae82c"
