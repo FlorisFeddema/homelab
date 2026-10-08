@@ -1,0 +1,32 @@
+gha-runner-scale-set-controller:
+  replicaCount: 2
+
+  podSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      memory: 128Mi
+
+  healthProbeBindAddress: ":8081"
+  metrics:
+    controllerManagerAddr: ":8080"
+    listenerAddr: ":8080"
+    listenerEndpoint: "/metrics"
+
+  flags:
+    logLevel: warn
+    logFormat: json
+    terminatedRunnerPodGracePeriodSeconds: 10
