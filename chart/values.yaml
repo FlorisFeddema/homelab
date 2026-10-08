@@ -3,9 +3,6 @@ products:
     argoCd:
       deploy: true
       namespace: argocd
-    argoEvents:
-      deploy: true
-      serverSideApply: true
     descheduler:
       deploy: true
     kataContainers:
@@ -55,9 +52,6 @@ products:
     privateExternalDns:
       deploy: true
   development:
-    argoWorkflows:
-      deploy: true
-      serverSideApply: true
     devcontainerUsers:
       deploy: true
       namespace: homelab-devcontainer
