@@ -34,6 +34,10 @@ gha-runner-scale-set-controller:
 gha-runner-scale-set:
   githubConfigUrl: https://github.com/FlorisFeddema
   githubConfigSecret: github-actions-runners-secret
+
+  controllerServiceAccount:
+    namespace: github-actions-runners
+    name: github-actions-runners-gha-rs-controller
   
   maxRunners: 3
   minRunners: 1
