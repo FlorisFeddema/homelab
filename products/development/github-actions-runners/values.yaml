@@ -30,3 +30,27 @@ gha-runner-scale-set-controller:
     logFormat: json
     terminatedRunnerPodGracePeriodSeconds: 10
     healthProbeBindAddress: ":8081"
+
+gha-runner-scale-set:
+  githubConfigUrl: https://github.com/FlorisFeddema
+  githubConfigSecret: github-actions-runners-secret
+  
+  maxRunners: 3
+  minRunners: 1
+
+  runnerScaleSetName: feddemadev-runners
+  containerMode:
+    type: dind
+  
+  template:
+    spec:
+      resources:
+        requests:
+          cpu: 2
+          memory: 2Gi
+        limits:
+          cpu: 2
+          memory: 2Gi
+      runtimeClassName: kata
+      containers:
+        - name: runner
