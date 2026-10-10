@@ -55,9 +55,6 @@ products:
     devcontainerUsers:
       deploy: true
       namespace: homelab-devcontainer
-    githubActionsRunners:
-      deploy: true
-      serverSideApply: true
   monitoring:
     fluentBit:
       deploy: true
