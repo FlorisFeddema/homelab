@@ -56,5 +56,3 @@ gha-runner-scale-set:
           cpu: 2
           memory: 2Gi
       runtimeClassName: kata
-      containers:
-        - name: runner
