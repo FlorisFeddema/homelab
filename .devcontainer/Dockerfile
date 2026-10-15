@@ -8,7 +8,7 @@ ARG KUBECTL_VERSION=v1.37.1
 # renovate: datasource=github-releases depName=argoproj/argo-cd
 ARG ARGOCD_VERSION=v3.5.5
 # renovate: datasource=github-releases depName=siderolabs/talos
-ARG TALOS_VERSION=v1.14.2
+ARG TALOS_VERSION=v1.14.3
 # renovate: datasource=github-releases depName=helm/helm
 ARG HELM_VERSION=v4.3.1
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
