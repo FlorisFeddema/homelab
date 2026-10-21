@@ -5,8 +5,8 @@ secretInit:
 
 gatus-monitor:
   appName: nextcloud
-  publicEndpoints:
-    - name: nextcloud
+  # publicEndpoints:
+  #   - name: nextcloud
   privateEndpoints:
     - name: nextcloud
 
@@ -23,9 +23,9 @@ nextcloud:
     hostnames:
       - nextcloud.feddema.dev
     parentRefs:
-      - name: envoy-gateway-public
-        namespace: envoy-gateway
-        sectionName: web-https
+      # - name: envoy-gateway-public
+      #   namespace: envoy-gateway
+      #   sectionName: web-https
       - name: envoy-gateway-private
         namespace: envoy-gateway
         sectionName: web-https
