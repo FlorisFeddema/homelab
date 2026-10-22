@@ -17,6 +17,8 @@ database:
 
 nextcloud:
   replicaCount: 1
+  nodeSelector:
+    kubernetes.io/arch: amd64
 
   httpRoute:
     enabled: true
