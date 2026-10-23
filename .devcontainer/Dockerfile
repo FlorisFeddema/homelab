@@ -16,11 +16,11 @@ ARG KUBESEAL_VERSION=v0.40.0
 # renovate: datasource=github-releases depName=ahmetb/kubectx
 ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
-ARG STERN_VERSION=v1.34.0
+ARG STERN_VERSION=v1.35.0
 # renovate: datasource=github-releases depName=github/copilot-cli
-ARG COPILOT_VERSION=v1.0.101
+ARG COPILOT_VERSION=v1.0.103
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.102.1
+ARG GH_VERSION=v2.103.0
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
