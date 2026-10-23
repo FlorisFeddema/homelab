@@ -1,0 +1,11 @@
+apiVersion: v2
+name: garage
+description: Single-node S3 backup storage on the dedicated hortek-0 HDD
+type: application
+version: 1.0.0
+appVersion: "v2.3.0"
+
+dependencies:
+  - name: gatus-monitor
+    repository: file://../../../templates/gatus-monitor
+    version: 1.0.0
