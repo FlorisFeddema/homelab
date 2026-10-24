@@ -12,7 +12,7 @@ ARG TALOS_VERSION=v1.14.4
 # renovate: datasource=github-releases depName=helm/helm
 ARG HELM_VERSION=v4.3.1
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
-ARG KUBESEAL_VERSION=v0.40.0
+ARG KUBESEAL_VERSION=v0.41.1
 # renovate: datasource=github-releases depName=ahmetb/kubectx
 ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
@@ -20,7 +20,7 @@ ARG STERN_VERSION=v1.35.0
 # renovate: datasource=github-releases depName=github/copilot-cli
 ARG COPILOT_VERSION=v1.0.103
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.103.0
+ARG GH_VERSION=v2.103.2
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
