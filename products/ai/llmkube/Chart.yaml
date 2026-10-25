@@ -1,8 +1,8 @@
 apiVersion: v2
 name: llmkube
-version: 1.0.9
+version: 1.0.10
 
 dependencies:
   - name: llmkube
-    version: 0.10.10
+    version: 0.10.11
     repository: oci://ghcr.io/defilantech/charts
