@@ -6,7 +6,6 @@ coredns:
   replicaCount: 3
   resources:
     limits:
-      # Remove the dependency's default CPU limit; zero is not valid with a CPU request.
       cpu: null
       memory: 128Mi
     requests:
