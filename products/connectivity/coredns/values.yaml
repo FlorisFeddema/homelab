@@ -6,7 +6,8 @@ coredns:
   replicaCount: 3
   resources:
     limits:
-      cpu: null
+      # Zero means unlimited and explicitly overrides the dependency's CPU limit.
+      cpu: "0"
       memory: 128Mi
     requests:
       cpu: 50m
@@ -51,8 +52,10 @@ coredns:
             fallthrough in-addr.arpa ip6.arpa
             ttl 30
         - name: forward
-          parameters: . /etc/resolv.conf
+          parameters: . 192.168.102.20 /etc/resolv.conf
           configBlock: |-
+            policy sequential
+            failover SERVFAIL REFUSED
             max_concurrent 1000
         - name: cache
           parameters: 30
@@ -77,11 +80,10 @@ coredns:
           k8s-app: kube-dns
     - maxSkew: 1
       topologyKey: kubernetes.io/hostname
-      whenUnsatisfiable: ScheduleAnyway
+      whenUnsatisfiable: DoNotSchedule
       labelSelector:
         matchLabels:
           k8s-app: kube-dns
 
   podDisruptionBudget:
     minAvailable: 2
-
