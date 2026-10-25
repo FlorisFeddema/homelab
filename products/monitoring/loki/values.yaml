@@ -190,7 +190,7 @@ loki:
   memcached:
     enabled: false
 
-  memchachedExporter:
+  memcachedExporter:
     enabled: false
 
   resultsCache:
