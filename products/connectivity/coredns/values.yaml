@@ -6,8 +6,8 @@ coredns:
   replicaCount: 3
   resources:
     limits:
-      # Zero means unlimited and explicitly overrides the dependency's CPU limit.
-      cpu: "0"
+      # Remove the dependency's default CPU limit; zero is not valid with a CPU request.
+      cpu: null
       memory: 128Mi
     requests:
       cpu: 50m
