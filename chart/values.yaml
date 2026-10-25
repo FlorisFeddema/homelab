@@ -56,7 +56,7 @@ products:
       deploy: true
       namespace: homelab-devcontainer
     tekton:
-      deploy: false
+      deploy: true
       autoSync: false
       serverSideApply: true
   monitoring:
