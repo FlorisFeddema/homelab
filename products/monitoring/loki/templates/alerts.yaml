@@ -31,13 +31,13 @@ spec:
             summary: Loki read path is unavailable
             description: Loki has fewer healthy query frontends or queriers than its configured replica count.
         - alert: LokiCompactorStalled
-          expr: time() - max(loki_compactor_apply_retention_last_successful_run_timestamp_seconds{namespace="loki"}) > 21600
-          for: 10m
+          expr: time() - max(loki_compactor_apply_retention_last_successful_run_timestamp_seconds{namespace="loki"}) > 86400
+          for: 1h
           labels:
             severity: critical
           annotations:
             summary: Loki retention compactor is stalled
-            description: Loki has not completed a retention run for more than six hours.
+            description: Loki has not completed a retention run for more than 24 hours.
         - alert: LokiRetentionDeletionBacklog
           expr: sum(loki_boltdb_shipper_retention_sweeper_marker_files_current{namespace="loki"}) > 0
           for: 4h
