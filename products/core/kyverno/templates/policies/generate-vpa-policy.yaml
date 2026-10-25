@@ -74,6 +74,7 @@ rules:
       - get
       - delete
       - update
+      - patch
       - create
       - list
 ---
