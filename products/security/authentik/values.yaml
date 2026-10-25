@@ -47,6 +47,9 @@ authentik:
 
   server:
     replicas: 2
+    env:
+      - name: AUTHENTIK_LISTEN__TRUSTED_PROXY_CIDRS
+        value: '10.96.0.0/12,192.168.102.0/24'
     pdb:
       enabled: true
       minAvailable: 1
