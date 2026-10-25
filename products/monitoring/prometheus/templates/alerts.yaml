@@ -33,13 +33,13 @@ spec:
             summary: Thanos sidecar block uploads are stalled
             description: Thanos sidecar {{ `{{ $labels.pod }}` }} has not uploaded a block in more than three hours.
         - alert: ThanosSidecarUploadFailed
-          expr: increase(thanos_shipper_upload_failures_total{job="prometheus-thanos-discovery"}[15m]) > 0
+          expr: increase(thanos_shipper_upload_failures_total{job="prometheus-thanos-discovery"}[15m]) > 1
           for: 5m
           labels:
             severity: critical
           annotations:
-            summary: Thanos sidecar block upload failed
-            description: Thanos sidecar {{ `{{ $labels.pod }}` }} failed to upload a Prometheus block.
+            summary: Thanos sidecar block uploads are repeatedly failing
+            description: Thanos sidecar {{ `{{ $labels.pod }}` }} had multiple Prometheus block upload failures in the last 15 minutes.
         - alert: ThanosStoreGatewaySyncFailed
           expr: increase(thanos_blocks_meta_sync_failures_total{job="prometheus-thanos-storegateway"}[15m]) > 0
           for: 5m
