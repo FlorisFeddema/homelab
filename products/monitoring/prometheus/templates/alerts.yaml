@@ -34,7 +34,7 @@ spec:
             description: Thanos sidecar {{ `{{ $labels.pod }}` }} has not uploaded a block in more than three hours.
         - alert: ThanosSidecarUploadFailed
           expr: increase(thanos_shipper_upload_failures_total{job="prometheus-thanos-discovery"}[15m]) > 1
-          for: 5m
+          for: 1h
           labels:
             severity: critical
           annotations:
