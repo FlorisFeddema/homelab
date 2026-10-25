@@ -1,0 +1,12 @@
+apiVersion: v2
+name: tekton
+version: 1.0.0
+
+dependencies:
+  - name: tekton-operator
+    version: 0.81.2
+    repository: oci://ghcr.io/tektoncd/operator/charts
+  - name: gatus-monitor
+    version: 1.0.0
+    repository: file://../../../templates/gatus-monitor
+    condition: components.enabled

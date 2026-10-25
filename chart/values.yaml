@@ -55,6 +55,10 @@ products:
     devcontainerUsers:
       deploy: true
       namespace: homelab-devcontainer
+    tekton:
+      deploy: false
+      autoSync: false
+      serverSideApply: true
   monitoring:
     fluentBit:
       deploy: true

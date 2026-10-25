@@ -1,0 +1,45 @@
+gatus-monitor:
+  appName: tekton
+  publicEndpoints:
+    - name: tekton
+  privateEndpoints:
+    - name: tekton
+
+tekton-operator:
+  fullnameOverride: tekton-operator
+  installCRDs: true
+  controllers: tektonconfig,tektonpipeline,tektontrigger,tektondashboard,tektonpruner
+  operator:
+    replicas: 2
+    autoInstallComponents: false
+    defaultTargetNamespace: tekton-operator
+    logLevel: warn
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        memory: 128Mi
+  webhook:
+    replicas: 2
+    logLevel: warn
+    resources:
+      requests:
+        cpu: 20m
+        memory: 32Mi
+      limits:
+        memory: 64Mi
+  service:
+    createServiceMonitor: true
+  podSecurityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    runAsGroup: 65532
+    seccompProfile:
+      type: RuntimeDefault
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
