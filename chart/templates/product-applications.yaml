@@ -26,10 +26,12 @@ spec:
     repoURL: https://github.com/FlorisFeddema/homelab.git
     targetRevision: HEAD
     path: products/{{ ( kebabcase $groupKey ) }}/{{ include "base.productName" (dict "key" $productKey "value" $productValue) }}
-    {{- if $productValue.skipSchemaValidation }}
     helm:
+      valueFiles:
+        - values.yaml
+      {{- if $productValue.skipSchemaValidation }}
       skipSchemaValidation: true
-    {{- end }}
+      {{- end }}
   destination:
     server: https://kubernetes.default.svc
     namespace: {{ default (include "base.productName" (dict "key" $productKey "value" $productValue)) $productValue.namespace }}
