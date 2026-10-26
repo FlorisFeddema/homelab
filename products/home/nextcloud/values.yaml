@@ -3,12 +3,12 @@ secretInit:
     repository: alpine/kubectl
     tag: 1.37.1
 
-# gatus-monitor:
-#   appName: nextcloud
-#   publicEndpoints:
-#     - name: nextcloud
-#   privateEndpoints:
-#     - name: nextcloud
+gatus-monitor:
+  appName: nextcloud
+  publicEndpoints:
+    - name: nextcloud
+  privateEndpoints:
+    - name: nextcloud
 
 database:
   clusterName: nextcloud-postgres
