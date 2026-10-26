@@ -1,10 +1,10 @@
 apiVersion: v2
 name: argo-cd
-version: 1.0.317
+version: 1.0.318
 
 dependencies:
   - name: argo-cd
-    version: 10.11.3
+    version: 10.11.6
     repository: https://argoproj.github.io/argo-helm
   - name: gatus-monitor
     repository: file://../../../templates/gatus-monitor
