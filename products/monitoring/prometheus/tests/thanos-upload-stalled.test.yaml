@@ -1,0 +1,175 @@
+rule_files:
+  - rules.yaml
+
+evaluation_interval: 1m
+
+tests:
+  # Start at t=4h so a zero timestamp is already older than three hours.
+  - name: No uploads ever after startup has bounded grace
+    interval: 1m
+    input_series:
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '_x239 0+0x240'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '_x239 14400+0x240'
+    alert_rule_test:
+      - eval_time: 4h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 6h59m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h15m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts:
+          - &stalled
+            exp_labels:
+              job: prometheus-thanos-discovery
+              instance: 10.0.0.1:10902
+              namespace: prometheus
+              pod: prometheus-prometheus-0
+              service: prometheus-thanos-discovery
+              endpoint: http
+              container: thanos-sidecar
+              bucket: thanos
+              severity: critical
+            exp_annotations:
+              summary: Thanos sidecar block uploads are stalled
+              description: Thanos sidecar prometheus-prometheus-0 has not uploaded a block in more than three hours and has been running for more than three hours.
+
+  - name: A sidecar restart resets the zero-timestamp grace period
+    interval: 1m
+    input_series:
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '3600+0x239 0+0x240'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '-7200+0x239 14400+0x240'
+    alert_rule_test:
+      - eval_time: 3h59m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 4h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h15m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: [*stalled]
+
+  - name: A restart also grants grace for an old nonzero upload timestamp
+    interval: 1m
+    input_series:
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '3600+0x480'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '-7200+0x239 14400+0x240'
+    alert_rule_test:
+      - eval_time: 4h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h15m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: [*stalled]
+
+  - name: Uploading the next two-hour block clears restart grace without alerting
+    interval: 1m
+    input_series:
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '3600+0x239 0+0x118 21540+0x200'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '-7200+0x239 14400+0x320'
+    alert_rule_test:
+      - eval_time: 4h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 5h58m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 7h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 8h59m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 9h14m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 9h15m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: [*stalled]
+
+  - name: A genuine stall after a previous success retains threshold and pending period
+    interval: 1m
+    input_series:
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '3600+0x300'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '-14400+0x300'
+    alert_rule_test:
+      - eval_time: 3h59m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 4h
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 4h15m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 4h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: [*stalled]
+
+  - name: Sidecar replicas match their own process not Prometheus or another target
+    interval: 1m
+    input_series:
+      # Replica 0 has restarted; replica 1 is genuinely stalled.
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '_x239 0+0x60'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.1:10902",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '_x239 14400+0x60'
+      - series: 'thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery",instance="10.0.0.2:10902",namespace="prometheus",pod="prometheus-prometheus-1",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar",bucket="thanos"}'
+        values: '3600+0x300'
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.2:10902",namespace="prometheus",pod="prometheus-prometheus-1",service="prometheus-thanos-discovery",endpoint="http",container="thanos-sidecar"}'
+        values: '-14400+0x300'
+      # Prometheus itself is old on replica 0 and freshly restarted on replica 1.
+      - series: 'process_start_time_seconds{job="prometheus-prometheus",instance="10.0.0.1:9090",namespace="prometheus",pod="prometheus-prometheus-0",service="prometheus-prometheus",endpoint="http-web",container="prometheus"}'
+        values: '-14400+0x300'
+      - series: 'process_start_time_seconds{job="prometheus-prometheus",instance="10.0.0.2:9090",namespace="prometheus",pod="prometheus-prometheus-1",service="prometheus-prometheus",endpoint="http-web",container="prometheus"}'
+        values: '_x239 14400+0x60'
+      # Even within the discovery job, a different endpoint must not grant grace.
+      - series: 'process_start_time_seconds{job="prometheus-thanos-discovery",instance="10.0.0.2:19090",namespace="prometheus",pod="prometheus-prometheus-1"}'
+        values: '_x239 14400+0x60'
+    alert_rule_test:
+      - eval_time: 4h15m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts: []
+      - eval_time: 4h16m
+        alertname: ThanosSidecarUploadStalled
+        exp_alerts:
+          - exp_labels:
+              job: prometheus-thanos-discovery
+              instance: 10.0.0.2:10902
+              namespace: prometheus
+              pod: prometheus-prometheus-1
+              service: prometheus-thanos-discovery
+              endpoint: http
+              container: thanos-sidecar
+              bucket: thanos
+              severity: critical
+            exp_annotations:
+              summary: Thanos sidecar block uploads are stalled
+              description: Thanos sidecar prometheus-prometheus-1 has not uploaded a block in more than three hours and has been running for more than three hours.
