@@ -3,12 +3,6 @@ coredns:
     repository: coredns/coredns
     tag: 1.15.0
 
-  securityContext:
-    capabilities:
-      add: []
-      drop:
-        - ALL
-
   replicaCount: 3
   resources:
     limits:
