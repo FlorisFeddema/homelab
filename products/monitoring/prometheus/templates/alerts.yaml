@@ -25,18 +25,13 @@ spec:
     - name: thanos.rules
       rules:
         - alert: ThanosSidecarUploadStalled
-          # The upload gauge resets to zero on restart; allow the next two-hour block.
-          # Match the sidecar's own scrape target, not the Prometheus process in the same pod.
-          expr: |
-            (time() - thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery"} > 10800)
-            and on (job, instance)
-            (time() - process_start_time_seconds{job="prometheus-thanos-discovery"} > 10800)
+          expr: time() - thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery"} > 21600
           for: 15m
           labels:
             severity: critical
           annotations:
             summary: Thanos sidecar block uploads are stalled
-            description: Thanos sidecar {{ `{{ $labels.pod }}` }} has not uploaded a block in more than three hours and has been running for more than three hours.
+            description: Thanos sidecar {{ `{{ $labels.pod }}` }} has not uploaded a block in more than six hours.
         - alert: ThanosSidecarUploadFailed
           expr: increase(thanos_shipper_upload_failures_total{job="prometheus-thanos-discovery"}[15m]) > 1
           for: 1h
