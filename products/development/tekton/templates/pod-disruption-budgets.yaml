@@ -1,0 +1,13 @@
+{{- range $name, $workload := include "tekton.workloads" . | fromYaml }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $name }}
+  namespace: {{ $workload.namespace }}
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      {{- toYaml $workload.selectorLabels | nindent 6 }}
+{{- end }}
