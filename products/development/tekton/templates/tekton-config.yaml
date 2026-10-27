@@ -5,6 +5,39 @@ metadata:
 spec:
   profile: all
   targetNamespace: tekton-operator
+  dashboard:
+    options:
+      deployments:
+        tekton-dashboard:
+          spec:
+            replicas: 2
+  pipeline:
+    performance:
+      disable-ha: false
+      replicas: 2
+    options:
+      deployments:
+        tekton-events-controller:
+          spec:
+            replicas: 2
+        tekton-operator-proxy-webhook:
+          spec:
+            replicas: 2
+        tekton-pipelines-webhook:
+          spec:
+            replicas: 2
+  trigger:
+    options:
+      deployments:
+        tekton-triggers-controller:
+          spec:
+            replicas: 2
+        tekton-triggers-core-interceptors:
+          spec:
+            replicas: 2
+        tekton-triggers-webhook:
+          spec:
+            replicas: 2
   chain:
     disabled: true
   result:
