@@ -20,7 +20,7 @@ ARG STERN_VERSION=v1.35.0
 # renovate: datasource=github-releases depName=github/copilot-cli
 ARG COPILOT_VERSION=v1.0.103
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.103.2
+ARG GH_VERSION=v2.103.3
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
