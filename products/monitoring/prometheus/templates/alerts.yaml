@@ -25,13 +25,13 @@ spec:
     - name: thanos.rules
       rules:
         - alert: ThanosSidecarUploadStalled
-          expr: time() - thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery"} > 21600
+          expr: (time() - thanos_objstore_bucket_last_successful_upload_time{job="prometheus-thanos-discovery"} > 10800) and on (job, instance) (time() - process_start_time_seconds{job="prometheus-thanos-discovery"} > 10800)
           for: 15m
           labels:
             severity: critical
           annotations:
             summary: Thanos sidecar block uploads are stalled
-            description: Thanos sidecar {{ `{{ $labels.pod }}` }} has not uploaded a block in more than six hours.
+            description: Thanos sidecar {{ `{{ $labels.pod }}` }} has been running for more than three hours and has not uploaded a block in more than three hours.
         - alert: ThanosSidecarUploadFailed
           expr: increase(thanos_shipper_upload_failures_total{job="prometheus-thanos-discovery"}[15m]) > 1
           for: 1h
