@@ -5,6 +5,14 @@ metadata:
 spec:
   profile: all
   targetNamespace: tekton-operator
+  chain:
+    disabled: true
+  result:
+    disabled: true
+  platforms:
+    kubernetes:
+      pipelinesAsCode:
+        enable: false
   pruner:
     resources:
     - pipelinerun

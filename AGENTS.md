@@ -14,6 +14,12 @@ Primary model:
 
 Detailed Helm chart management guidance is scoped to chart files in `.github/instructions/helm-chart-management.instructions.md`.
 
+## Documentation
+
+- Keep the root README focused on the repository overview and shared workflows.
+- Do not add product-specific configuration recaps, implementation notes, or routine verification commands to the README merely because a chart changed. Treat manifests and values as the source of truth.
+- Update documentation only when a change affects a documented user-facing workflow or the user explicitly requests it.
+
 ## GitOps-Only Changes
 
 - Make every cluster configuration change in this repository and deploy it through the GitOps workflow.
