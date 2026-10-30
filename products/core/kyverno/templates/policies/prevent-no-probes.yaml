@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
 metadata:
   name: require-pod-probes
   annotations:
@@ -14,24 +14,17 @@ metadata:
       This policy validates that all containers have one of livenessProbe, readinessProbe,
       or startupProbe defined.
 spec:
-  validationFailureAction: Audit
-  rules:
-  - name: validate-probes
-    skipBackgroundRequests: true
-    match:
-      any:
-      - resources:
-          kinds:
-          - Pod
-          operations:
-          - CREATE
-          - UPDATE
-    validate:
-      cel:
-        expressions:
-          - expression: >-
-              object.spec.containers.all(container,
-              has(container.livenessProbe) ||
-              has(container.startupProbe) ||
-              has(container.readinessProbe))
-            message: "Liveness, readiness, or startup probes are required for all containers."
+  validationActions: [Audit]
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["pods"]
+  validations:
+    - expression: >-
+        object.spec.containers.all(container,
+        has(container.livenessProbe) ||
+        has(container.startupProbe) ||
+        has(container.readinessProbe))
+      message: "Liveness, readiness, or startup probes are required for all containers."

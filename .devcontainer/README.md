@@ -65,6 +65,19 @@ argocd --core app get <application>
 
 Write operations, including application syncs, remain denied by Kubernetes RBAC.
 
+## Kyverno policy tests
+
+The container includes the Kyverno CLI for offline policy testing. From the
+repository root, run the [policy regression tests](../products/core/kyverno/tests/test-policies.sh):
+
+```shell
+kyverno version
+bash products/core/kyverno/tests/test-policies.sh
+```
+
+These tests render the Helm chart and evaluate sample resources locally; they
+do not change the live cluster.
+
 ## Grafana MCP
 
 The credential bootstrap generates Copilot CLI configuration for the read-only
