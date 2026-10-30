@@ -10,6 +10,7 @@ llmkube:
       enabled: true
 
   controllerManager:
+    revisionHistoryLimit: 0
     leaderElection:
       enabled: false
     resources:
