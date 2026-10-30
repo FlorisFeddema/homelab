@@ -115,6 +115,10 @@ policy-reporter:
     trivy:
       enabled: true
       revisionHistoryLimit: 0
+      github:
+        disable: true
+      cveawg:
+        disable: true
       envVars:
         - name: GITHUB_TOKEN
           valueFrom:
