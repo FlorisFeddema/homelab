@@ -25,7 +25,15 @@ helm template kyverno "$chart_dir" --namespace kyverno |
     else . end |
     if any(.[]; .metadata.name == "cleanup-empty-replicasets" or
                 .metadata.name == "kyverno:cleanup-replicasets") then
-      error("ReplicaSet cleanup policy and its RBAC must not be rendered")
+      error("Retired ReplicaSet cleanup policy and its original RBAC must not be rendered")
+    else . end |
+    if [.[] | select(.kind == "ClusterRole" and
+                     .metadata.name == "kyverno:cleanup-controller:additional") |
+        {component:.metadata.labels["app.kubernetes.io/component"],
+         instance:.metadata.labels["app.kubernetes.io/instance"], rules}] !=
+       [{component:"cleanup-controller", instance:"kyverno",
+         rules:[{apiGroups:["apps"], resources:["replicasets"], verbs:["get", "list", "watch", "delete"]}]}] then
+      error("Temporary ReplicaSet permissions must be aggregated into the cleanup controller role to unblock policy deletion")
     else . end |
     if any(.[]; .kind == "ClusterRole" and .metadata.name == "kyverno:generate-vpa-policy" and
        any(.rules[]; .apiGroups == ["autoscaling.k8s.io"] and .resources == ["verticalpodautoscalers"] and

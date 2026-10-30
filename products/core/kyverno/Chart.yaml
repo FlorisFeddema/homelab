@@ -1,6 +1,6 @@
 apiVersion: v2
 name: kyverno
-version: 1.0.52
+version: 1.0.53
 
 dependencies:
   - name: kyverno
