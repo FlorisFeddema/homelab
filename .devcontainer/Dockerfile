@@ -13,6 +13,8 @@ ARG TALOS_VERSION=v1.14.5
 ARG HELM_VERSION=v4.3.1
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
 ARG KUBESEAL_VERSION=v0.41.2
+# renovate: datasource=github-releases depName=kyverno/kyverno
+ARG KYVERNO_VERSION=v1.19.2
 # renovate: datasource=github-releases depName=ahmetb/kubectx
 ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
@@ -37,11 +39,12 @@ RUN install_script="$(mktemp)" \
     && rm -f "${install_script}"
 
 RUN case "${TARGETARCH}" in \
-        amd64) arch="amd64"; kubectx_arch="x86_64" ;; \
-        arm64) arch="arm64"; kubectx_arch="arm64" ;; \
+        amd64) arch="amd64"; archive_arch="x86_64" ;; \
+        arm64) arch="arm64"; archive_arch="arm64" ;; \
         *) echo "Unsupported architecture: ${TARGETARCH}" >&2; exit 1 ;; \
     esac \
     && temp_dir="$(mktemp -d)" \
+    && kyverno_archive="kyverno-cli_${KYVERNO_VERSION}_linux_${archive_arch}.tar.gz" \
     && curl --fail --location --silent --show-error \
         --output /usr/local/bin/yq \
         "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_${arch}" \
@@ -65,8 +68,17 @@ RUN case "${TARGETARCH}" in \
     && tar --extract --gzip --file "${temp_dir}/kubeseal.tar.gz" --directory "${temp_dir}" \
     && install "${temp_dir}/kubeseal" /usr/local/bin/kubeseal \
     && curl --fail --location --silent --show-error \
+        --output "${temp_dir}/${kyverno_archive}" \
+        "https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/${kyverno_archive}" \
+    && curl --fail --location --silent --show-error \
+        --output "${temp_dir}/kyverno-checksums.txt" \
+        "https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/checksums.txt" \
+    && (cd "${temp_dir}" && grep " ${kyverno_archive}$" kyverno-checksums.txt | sha256sum --check) \
+    && tar --extract --gzip --file "${temp_dir}/${kyverno_archive}" --directory "${temp_dir}" kyverno \
+    && install "${temp_dir}/kyverno" /usr/local/bin/kyverno \
+    && curl --fail --location --silent --show-error \
         --output "${temp_dir}/kubens.tar.gz" \
-        "https://github.com/ahmetb/kubectx/releases/download/${KUBENS_VERSION}/kubens_${KUBENS_VERSION}_linux_${kubectx_arch}.tar.gz" \
+        "https://github.com/ahmetb/kubectx/releases/download/${KUBENS_VERSION}/kubens_${KUBENS_VERSION}_linux_${archive_arch}.tar.gz" \
     && tar --extract --gzip --file "${temp_dir}/kubens.tar.gz" --directory "${temp_dir}" \
     && install "${temp_dir}/kubens" /usr/local/bin/kubens \
     && curl --fail --location --silent --show-error \

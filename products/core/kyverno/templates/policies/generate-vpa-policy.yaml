@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+apiVersion: policies.kyverno.io/v1
+kind: GeneratingPolicy
 metadata:
   name: generate-vpa-for-workloads
   annotations:
@@ -11,51 +11,57 @@ metadata:
         Namespaces such as kube-system, kyverno, longhorn-system, kube-public, and kube-node-lease are excluded from this policy.
         Additionally, workloads labeled with 'feddema.dev/vpa-autogen: "false"' will not have a VPA generated.
 spec:
-  generateExisting: true
-  rules:
-    - name: generate-vpa
-      skipBackgroundRequests: true
-      match:
-        resources:
-          kinds:
-            - Deployment
-            - StatefulSet
-            - DaemonSet
-      exclude:
-        resources:
-          namespaces:
-            - kube-system
-            - kyverno
-            - longhorn-system
-            - kube-public
-            - kube-node-lease
-          selector:
-            matchLabels:
-              feddema.dev/vpa-autogen: "false"
-      generate:
-        apiVersion: autoscaling.k8s.io/v1
-        kind: VerticalPodAutoscaler
-        name: "{{`{{request.object.metadata.name}}`}}"
-        namespace: "{{`{{request.object.metadata.namespace}}`}}"
-        synchronize: true
-        data:
-          metadata:
-            labels:
-              generated-by: kyverno
-            ownerReferences:
-              - apiVersion: "{{`{{request.object.apiVersion}}`}}"
-                kind: "{{`{{request.object.kind}}`}}"
-                name: "{{`{{request.object.metadata.name}}`}}"
-                uid: "{{`{{request.object.metadata.uid}}`}}"
-                controller: true
-                blockOwnerDeletion: true
-          spec:
-            targetRef:
-              apiVersion: "{{`{{request.object.apiVersion}}`}}"
-              kind: "{{`{{request.object.kind}}`}}"
-              name: "{{`{{request.object.metadata.name}}`}}"
-            updatePolicy:
-              updateMode: "Off"
+  evaluation:
+    generateExisting:
+      enabled: true
+    synchronize:
+      enabled: true
+  matchConstraints:
+    resourceRules:
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["deployments", "statefulsets", "daemonsets"]
+  matchConditions:
+    - name: allowed-namespace
+      expression: >-
+        !(object.metadata.namespace in
+        ['kube-system', 'kyverno', 'longhorn-system', 'kube-public', 'kube-node-lease'])
+    - name: not-opted-out
+      expression: >-
+        !has(object.metadata.labels) ||
+        !('feddema.dev/vpa-autogen' in object.metadata.labels) ||
+        object.metadata.labels['feddema.dev/vpa-autogen'] != 'false'
+  variables:
+    - name: vpa
+      expression: >-
+        {
+          "apiVersion": dyn("autoscaling.k8s.io/v1"),
+          "kind": dyn("VerticalPodAutoscaler"),
+          "metadata": dyn({
+            "name": dyn(object.metadata.name),
+            "namespace": dyn(object.metadata.namespace),
+            "labels": dyn({"generated-by": "kyverno"}),
+            "ownerReferences": dyn([{
+              "apiVersion": dyn(object.apiVersion),
+              "kind": dyn(object.kind),
+              "name": dyn(object.metadata.name),
+              "uid": dyn(object.metadata.uid),
+              "controller": dyn(true),
+              "blockOwnerDeletion": dyn(true)
+            }])
+          }),
+          "spec": dyn({
+            "targetRef": {
+              "apiVersion": object.apiVersion,
+              "kind": object.kind,
+              "name": object.metadata.name
+            },
+            "updatePolicy": {"updateMode": "Off"}
+          })
+        }
+  generate:
+    - expression: generator.Apply(object.metadata.namespace, [variables.vpa])
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -77,6 +83,7 @@ rules:
       - patch
       - create
       - list
+      - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

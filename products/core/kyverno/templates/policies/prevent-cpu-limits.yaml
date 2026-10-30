@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
 metadata:
   name: prevent-cpu-limits
   annotations:
@@ -10,22 +10,35 @@ metadata:
       applications of much-needed CPU cycles even when they are available. Ensuring that CPU limits are not
       set may ensure apps run more effectively. This policy forbids any container in a Pod from defining CPU limits.
 spec:
-  validationFailureAction: Audit
-  rules:
-    - name: check-cpu-limits
-      skipBackgroundRequests: true
-      match:
-        any:
-          - resources:
-              kinds:
-                - Pod
-              operations:
-                - CREATE
-                - UPDATE
-      validate:
-        cel:
-          expressions:
-            - expression: >-
-                !object.spec.containers.exists(container,
-                container.?resources.?limits.?cpu.hasValue())
-              message: Containers may not define CPU limits.
+  validationActions: [Audit]
+  # Pod subresources disable automatic controller rule generation.
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["pods", "pods/ephemeralcontainers", "replicationcontrollers"]
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
+      - apiGroups: ["batch"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["jobs", "cronjobs"]
+  variables:
+    - name: podSpec
+      expression: >-
+        object.kind == 'Pod' ? object.spec :
+        (object.kind == 'CronJob' ? object.spec.jobTemplate.spec.template.spec : object.spec.template.spec)
+  validations:
+    - expression: >-
+        !variables.podSpec.containers.exists(container,
+        container.?resources.?limits.?cpu.hasValue()) &&
+        (!has(variables.podSpec.initContainers) ||
+        !variables.podSpec.initContainers.exists(container,
+        container.?resources.?limits.?cpu.hasValue())) &&
+        (!has(variables.podSpec.ephemeralContainers) ||
+        !variables.podSpec.ephemeralContainers.exists(container,
+        container.?resources.?limits.?cpu.hasValue()))
+      message: Containers may not define CPU limits.

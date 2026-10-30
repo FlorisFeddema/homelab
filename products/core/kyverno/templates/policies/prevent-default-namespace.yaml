@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
 metadata:
   name: prevent-default-namespace
   annotations:
@@ -10,42 +10,24 @@ metadata:
       isolate cluster resources across multiple applications and users. As a best
       practice, workloads should be isolated with Namespaces. Namespaces should be required
       and the default (empty) Namespace should not be used. This policy validates that Pods
-      specify a Namespace name other than `default`. Rule auto-generation is disabled here
-      due to Pod controllers need to specify the `namespace` field under the top-level `metadata`
-      object and not at the Pod template level.
+      specify a Namespace name other than `default`. Pod controllers are matched explicitly
+      so the namespace check applies to their top-level metadata.
 spec:
-  validationFailureAction: Enforce
-  rules:
-    - name: validate-namespace
-      skipBackgroundRequests: true
-      match:
-        any:
-          - resources:
-              kinds:
-                - Pod
-              operations:
-                - CREATE
-                - UPDATE
-      validate:
-        cel:
-          expressions:
-            - expression: "namespaceObject.metadata.name != 'default'"
-              message: "Using 'default' namespace is not allowed."
-    - name: validate-podcontroller-namespace
-      skipBackgroundRequests: true
-      match:
-        any:
-          - resources:
-              kinds:
-                - DaemonSet
-                - Deployment
-                - Job
-                - StatefulSet
-              operations:
-                - CREATE
-                - UPDATE
-      validate:
-        cel:
-          expressions:
-            - expression: "namespaceObject.metadata.name != 'default'"
-              message: "Using 'default' namespace is not allowed for pod controllers."
+  validationActions: [Deny]
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["pods", "replicationcontrollers"]
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
+      - apiGroups: ["batch"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["jobs", "cronjobs"]
+  validations:
+    - expression: "object.metadata.namespace != 'default'"
+      message: "Using 'default' namespace is not allowed for Pods or pod controllers."

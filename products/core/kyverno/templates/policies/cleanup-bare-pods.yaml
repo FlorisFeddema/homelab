@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v2beta1
-kind: ClusterCleanupPolicy
+apiVersion: policies.kyverno.io/v1
+kind: DeletingPolicy
 metadata:
   name: clean-bare-pods
   annotations:
@@ -12,17 +12,15 @@ metadata:
       risk. Bare Pods can be cleaned up periodically through use of a policy. This policy finds
       and removes all bare Pods across the cluster.
 spec:
-  match:
-    any:
-      - resources:
-          kinds:
-            - Pod
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
   conditions:
-    all:
-      - key: {{`"{{ target.metadata.ownerReferences[] || '[]' }}"`}}
-        operator: Equals
-        value: []
-  schedule: "* */5 * * *"
+    - name: bare-pod
+      expression: "!has(object.metadata.ownerReferences) || size(object.metadata.ownerReferences) == 0"
+  schedule: "5 * * * *"
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole

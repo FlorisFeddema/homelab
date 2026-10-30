@@ -1,5 +1,5 @@
-apiVersion: kyverno.io/v1
-kind: ClusterPolicy
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
 metadata:
   name: imagepullpolicy-always
   annotations:
@@ -9,22 +9,42 @@ metadata:
       If the `latest` tag is allowed for images, it is a good idea to have the
       imagePullPolicy field set to `Always` to ensure should that tag be overwritten that future
       pulls will get the updated image. This policy validates the imagePullPolicy is set to `Always`
-      when the `latest` tag is specified explicitly or where a tag is not defined at all.
+      when the `latest` tag is specified explicitly or where a tag is not defined at all,
+      including init and ephemeral containers. Digest-pinned images are exempt.
 spec:
-  validationFailureAction: Enforce
-  rules:
-    - name: imagepullpolicy-always
-      skipBackgroundRequests: true
-      match:
-        any:
-          - resources:
-              kinds:
-                - Pod
-      validate:
-        message: >-
-          The imagePullPolicy must be set to `Always` when the tag `latest` is used.
-        pattern:
-          spec:
-            containers:
-              - (image): "*:latest | !*:*"
-                imagePullPolicy: "Always"
+  validationActions: [Deny]
+  # Pod subresources disable automatic controller rule generation.
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["pods", "pods/ephemeralcontainers", "replicationcontrollers"]
+      - apiGroups: ["apps"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
+      - apiGroups: ["batch"]
+        apiVersions: ["v1"]
+        operations: [CREATE, UPDATE]
+        resources: ["jobs", "cronjobs"]
+  variables:
+    - name: podSpec
+      expression: >-
+        object.kind == 'Pod' ? object.spec :
+        (object.kind == 'CronJob' ? object.spec.jobTemplate.spec.template.spec : object.spec.template.spec)
+  validations:
+    - expression: >-
+        variables.podSpec.containers.all(container,
+        !container.image.matches('(^|/)[^/:@]+(:latest)?$') ||
+        container.?imagePullPolicy.orValue('') == 'Always') &&
+        (!has(variables.podSpec.initContainers) ||
+        variables.podSpec.initContainers.all(container,
+        !container.image.matches('(^|/)[^/:@]+(:latest)?$') ||
+        container.?imagePullPolicy.orValue('') == 'Always')) &&
+        (!has(variables.podSpec.ephemeralContainers) ||
+        variables.podSpec.ephemeralContainers.all(container,
+        !container.image.matches('(^|/)[^/:@]+(:latest)?$') ||
+        container.?imagePullPolicy.orValue('') == 'Always'))
+      message: >-
+        The imagePullPolicy must be set to `Always` for latest or untagged images.
