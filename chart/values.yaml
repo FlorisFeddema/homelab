@@ -27,8 +27,17 @@ products:
   ai:
     grafanaMcpServer:
       deploy: true
+      ignoreDifferences:
+        # Upstream defaults 0 to 10; Kyverno enforces 0.
+        - group: apps
+          kind: Deployment
+          name: grafana-mcp-server
+          namespace: grafana-mcp-server
+          jsonPointers:
+            - /spec/revisionHistoryLimit
     llmkube:
       deploy: true
+      serverSideApply: true
       skipSchemaValidation: true
   connectivity:
     adguard:
