@@ -65,13 +65,6 @@ kyverno:
       enabled: true
 
   cleanupController:
-    rbac:
-      clusterRole:
-        # Remove after cleanup-empty-replicasets finishes deleting; its webhook validates finalizer updates.
-        extraResources:
-          - apiGroups: ["apps"]
-            resources: ["replicasets"]
-            verbs: ["get", "list", "watch", "delete"]
     replicas: 3
     revisionHistoryLimit: 0
     podDisruptionBudget:
