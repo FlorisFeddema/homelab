@@ -1,7 +1,7 @@
 secretInit:
   image:
     repository: alpine/kubectl
-    tag: 1.37.1
+    tag: 1.37.2
 
 gatus-monitor:
   appName: nextcloud
