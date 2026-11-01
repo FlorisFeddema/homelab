@@ -6,6 +6,7 @@ spec:
   profile: all
   targetNamespace: tekton-operator
   dashboard:
+    readonly: false
     options:
       deployments:
         tekton-dashboard:
