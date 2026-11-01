@@ -1,0 +1,20 @@
+{{- if .Values.route.enabled }}
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: tekton-dashboard-security-policy
+  namespace: tekton-operator
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: HTTPRoute
+      name: tekton-dashboard
+  oidc:
+    clientID: {{ required "oidc.clientID is required when route.enabled is true" .Values.oidc.clientID | quote }}
+    clientSecret:
+      name: {{ required "oidc.secretName is required when route.enabled is true" .Values.oidc.secretName | quote }}
+    provider:
+      issuer: {{ required "oidc.issuer is required when route.enabled is true" .Values.oidc.issuer | quote }}
+    redirectURL: {{ required "oidc.redirectURL is required when route.enabled is true" .Values.oidc.redirectURL | quote }}
+    logoutPath: {{ required "oidc.logoutPath is required when route.enabled is true" .Values.oidc.logoutPath | quote }}
+{{- end }}

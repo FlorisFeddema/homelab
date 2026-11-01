@@ -1,0 +1,26 @@
+{{- if .Values.route.enabled }}
+{{- if not .Values.route.parentRefs }}
+{{- fail "route.parentRefs is required when route.enabled is true" }}
+{{- end }}
+{{- if not .Values.route.hostnames }}
+{{- fail "route.hostnames is required when route.enabled is true" }}
+{{- end }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: tekton-dashboard
+  namespace: tekton-operator
+spec:
+  parentRefs:
+    {{- toYaml .Values.route.parentRefs | nindent 4 }}
+  hostnames:
+    {{- toYaml .Values.route.hostnames | nindent 4 }}
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: tekton-dashboard
+          port: 9097
+{{- end }}

@@ -5,6 +5,26 @@ gatus-monitor:
   privateEndpoints:
     - name: tekton
 
+route:
+  enabled: true
+  hostnames:
+    - tekton.feddema.dev
+  parentRefs:
+    # - name: envoy-gateway-public
+    #   namespace: envoy-gateway
+    #   sectionName: web-https
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+
+oidc:
+  clientID: "Hbuz3HMYWFRY9nipYRM5GbKwLyxZOjoT4l2zUaPb"
+  issuer: https://authentik.feddema.dev/application/o/tekton/
+  redirectURL: https://tekton.feddema.dev/oauth2/callback
+  logoutPath: /oauth2/logout
+  secretName: tekton-dashboard-oidc
+  clientSecretSealed: "AgC3czeR3IspLcGuqwUlh0KM/iSu+svefq+v1CxBcVjzzbD84HAKoxn3tc2Nj7kfOSF4PUQlpewtdYR7LoeC/V6o3xvMCttnf8mPwcyvl/Oh+fVek0dNyqioiDO3Ec8Ub0fX2hBHwl57vmby59eox/K439Y2WlQ8J6m42d1DxzV0r8RT960Zq/D55Tsq7ZzvJzCafiq4UWHNbUsWIYI7OmGP0KCqgcewKCJkKopKHJWVQtyrzccZT23DMAS1gG+cDLO8Kss55O8WP0cIcn04oyRXC7/pFof6oohSd2pqKYu+Bla4Fdypg9ta3MoepL38Mkr2GkU+Wjzz6PccivIdZxij6haUWvjXEbK1jUtn1LVTHdBQYAY0CHZlVFpflcPE2mYAG3WEwOfaILiqLk8GpKnpv3jqZEprluyJMpWjJePdduXJ43tLJroSRU9ToOdQsoAYW/HfS4UPv2dDBQUbgSA7Bs6gtdFjwaGGXMq3ZBfIsyxTwWTa6RiNahG0CQZo+moRyr17xw0BccCKUvi3UFU4jGRvb3812/ateq2kJ34CZTrnEnNidTTjy5RGUN9FEeGkH4UMVu+lkj6BVMK7za/0/4tg7vrL7ySuCgYUQEwMdWU/C3vQk3/9VtwmyfqLOLV8hfTSiJQS1PfZJzeulNH2mKyBq7vmTqV5zVzcZw6Wj7Bu0JdRza+IFhwmNsondWQX2kfQmmscBNInqaB6+fMJ/7aC/8dEffFyiksDkL63GGi+XVKW/LEFSptRVsX7mQqmLiryeuzbOFI8JWihPmRkH6CQdfkiRduzgNI6gou/cIzxtGCysKatIIIYeoUuqjkk9wu75jGyecIGQbY8UIernv7FxuStY36n+lCRPKQHtQ=="
+
 tekton-operator:
   fullnameOverride: tekton-operator
   installCRDs: true
