@@ -12,7 +12,9 @@ metadata:
   namespace: tekton-operator
 spec:
   parentRefs:
-    {{- toYaml .Values.route.parentRefs | nindent 4 }}
+    {{- range .Values.route.parentRefs }}
+    {{- list (mergeOverwrite (dict "group" "gateway.networking.k8s.io" "kind" "Gateway") .) | toYaml | nindent 4 }}
+    {{- end }}
   hostnames:
     {{- toYaml .Values.route.hostnames | nindent 4 }}
   rules:
@@ -21,6 +23,9 @@ spec:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: tekton-dashboard
+        - group: ''
+          kind: Service
+          name: tekton-dashboard
           port: 9097
+          weight: 1
 {{- end }}
