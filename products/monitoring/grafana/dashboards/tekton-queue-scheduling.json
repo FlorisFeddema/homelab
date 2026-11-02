@@ -1,0 +1,608 @@
+{
+  "uid": "tekton-queue-scheduling",
+  "title": "Tekton / Queue & Scheduling",
+  "tags": [
+    "tekton",
+    "ci",
+    "community"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "editable": false,
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "refresh": "1m",
+  "templating": {
+    "list": [
+      {
+        "name": "namespace",
+        "type": "query",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
+        "query": "label_values(tekton_pipelines_controller_pipelinerun_duration_seconds_count, exported_namespace)",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true,
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "allValue": ".*",
+        "label": "Build namespace"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "stat",
+      "title": "Pending task pods now",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(kube_pod_status_phase{namespace=~\"${namespace:regex}\",phase=\"Pending\"} and on(namespace,pod) kube_pod_owner{owner_kind=\"TaskRun\",owner_is_controller=\"true\"})",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "graphMode": "none",
+        "colorMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "description": "Pending Tekton TaskRun pods in the selected build namespaces, selected by their controller owner without a kube-state-metrics label allowlist."
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "Throttled by ResourceQuota",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "(max(tekton_pipelines_controller_running_taskruns_throttled_by_quota{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"}) or (0 * max(tekton_pipelines_controller_running_taskruns{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})))",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "graphMode": "none",
+        "colorMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "description": "Cluster-wide current counts. Max across controller replicas avoids counting the same cached runs twice. Throttling is zero when no throttle observations exist but TaskRun telemetry is present."
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "Throttled by node capacity",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "(max(tekton_pipelines_controller_running_taskruns_throttled_by_node{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"}) or (0 * max(tekton_pipelines_controller_running_taskruns{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})))",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "graphMode": "none",
+        "colorMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "description": "Cluster-wide current counts. Max across controller replicas avoids counting the same cached runs twice. Throttling is zero when no throttle observations exist but TaskRun telemetry is present."
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Waiting on resolution",
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 0
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "max(tekton_pipelines_controller_running_pipelineruns_waiting_on_pipeline_resolution{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"}) + max(tekton_pipelines_controller_running_pipelineruns_waiting_on_task_resolution{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})",
+          "instant": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 1
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "graphMode": "none",
+        "colorMode": "value",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        }
+      },
+      "description": "Cluster-wide current counts. Max across controller replicas avoids counting the same cached runs twice. Throttling is zero when no throttle observations exist but TaskRun telemetry is present."
+    },
+    {
+      "id": 5,
+      "type": "timeseries",
+      "title": "Pending task pods",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "sum(kube_pod_status_phase{namespace=~\"${namespace:regex}\",phase=\"Pending\"} and on(namespace,pod) kube_pod_owner{owner_kind=\"TaskRun\",owner_is_controller=\"true\"})",
+          "legendFormat": "pending task pods"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "spanNulls": false,
+            "pointSize": 5
+          },
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "description": "Pending Tekton TaskRun pods in the selected build namespaces, selected by their controller owner without a kube-state-metrics label allowlist."
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "Running PipelineRuns / TaskRuns",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "max(tekton_pipelines_controller_running_pipelineruns{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\",exported_namespace=\"\"})",
+          "legendFormat": "pipelineruns"
+        },
+        {
+          "refId": "B",
+          "expr": "max(tekton_pipelines_controller_running_taskruns{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})",
+          "legendFormat": "taskruns"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "spanNulls": false,
+            "pointSize": 5
+          },
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "description": "Cluster-wide current counts. Max across controller replicas avoids counting the same cached runs twice. Throttling is zero when no throttle observations exist but TaskRun telemetry is present."
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "TaskRuns throttled",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "(max(tekton_pipelines_controller_running_taskruns_throttled_by_quota{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"}) or (0 * max(tekton_pipelines_controller_running_taskruns{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})))",
+          "legendFormat": "by ResourceQuota"
+        },
+        {
+          "refId": "B",
+          "expr": "(max(tekton_pipelines_controller_running_taskruns_throttled_by_node{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"}) or (0 * max(tekton_pipelines_controller_running_taskruns{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})))",
+          "legendFormat": "by node capacity"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20,
+            "spanNulls": false,
+            "pointSize": 5
+          },
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "description": "Cluster-wide current counts. Max across controller replicas avoids counting the same cached runs twice. Throttling is zero when no throttle observations exist but TaskRun telemetry is present."
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "PipelineRuns waiting on resolution",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "max(tekton_pipelines_controller_running_pipelineruns_waiting_on_pipeline_resolution{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})",
+          "legendFormat": "pipeline ref"
+        },
+        {
+          "refId": "B",
+          "expr": "max(tekton_pipelines_controller_running_pipelineruns_waiting_on_task_resolution{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"})",
+          "legendFormat": "task refs"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "spanNulls": false,
+            "pointSize": 5
+          },
+          "decimals": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "description": "Cluster-wide current counts. Max across controller replicas avoids counting the same cached runs twice. Throttling is zero when no throttle observations exist but TaskRun telemetry is present."
+    },
+    {
+      "id": 9,
+      "type": "table",
+      "title": "Pod scheduling latency p95 by task (range, top 15)",
+      "gridPos": {
+        "h": 8,
+        "w": 14,
+        "x": 0,
+        "y": 20
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "topk(15, histogram_quantile(0.95, sum by (exported_namespace,task,le) (increase(tekton_pipelines_controller_taskruns_pod_latency_milliseconds_bucket{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\",exported_namespace=~\"${namespace:regex}\"}[$__range]))) and on(exported_namespace,task) (sum by (exported_namespace,task)(increase(tekton_pipelines_controller_taskruns_pod_latency_milliseconds_count{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\",exported_namespace=~\"${namespace:regex}\"}[$__range])) > 0))",
+          "instant": true,
+          "format": "table"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true,
+              "Time 3": true,
+              "__name__": true,
+              "endpoint": true,
+              "instance": true,
+              "container": true,
+              "service": true,
+              "job": true,
+              "reason": true
+            },
+            "renameByName": {
+              "Value": "Latency",
+              "namespace": "namespace",
+              "task": "task",
+              "pod": "pod",
+              "exported_namespace": "namespace"
+            }
+          }
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "decimals": 0
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Latency"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "sortBy": [
+          {
+            "displayName": "Latency",
+            "desc": true
+          }
+        ]
+      },
+      "description": "Tekton v1.15 records scheduling latency as a histogram, not a per-pod gauge. Shows the highest task p95 values among observations in the selected range."
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Controller workqueue latency p95",
+      "gridPos": {
+        "h": 8,
+        "w": 10,
+        "x": 14,
+        "y": 20
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "histogram_quantile(0.95, sum by (name,le) (rate(kn_workqueue_queue_duration_seconds_bucket{namespace=\"tekton-operator\",job=\"tekton-pipelines-controller\"}[$__rate_interval])))",
+          "legendFormat": "{{name}}"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "min": 0,
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 0,
+            "spanNulls": false,
+            "pointSize": 5
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "description": "How long reconcile work waits in the controller queue — controller saturation signal."
+    }
+  ],
+  "description": "Adapted from KubeRocketCI / epam/edp-cluster-add-ons at b6892097eca7f0087806f22843f7bddc1d220c07 (Apache-2.0; see tekton-dashboards.LICENSE). Source: https://github.com/epam/edp-cluster-add-ons/blob/b6892097eca7f0087806f22843f7bddc1d220c07/clusters/core/addons/tekton-monitoring/files/tekton-queue-scheduling.json. Modified for gerador / Tekton v1.15: scrape-label collisions, HA-safe current counts, current workqueue and scheduling histograms, Prometheus datasource, and disabled Results. Workload history appears after builds run; missing telemetry is not a successful build. Build namespace filters apply to pod panels; running, throttling, resolution and controller queue panels are cluster-wide.",
+  "links": [
+    {
+      "type": "link",
+      "title": "Pinned upstream source",
+      "url": "https://github.com/epam/edp-cluster-add-ons/blob/b6892097eca7f0087806f22843f7bddc1d220c07/clusters/core/addons/tekton-monitoring/files/tekton-queue-scheduling.json",
+      "targetBlank": true
+    }
+  ]
+}

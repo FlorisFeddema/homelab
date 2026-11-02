@@ -1,0 +1,52 @@
+{{- $workloads := include "tekton.workloads" . | fromYaml -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tekton-pipelines
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - tekton-operator
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: tekton-pipelines
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: tekton-triggers
+  namespace: {{ .Release.Namespace }}
+spec:
+  endpoints:
+    - port: http-metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - tekton-operator
+  selector:
+    matchLabels:
+      {{- with index $workloads "tekton-triggers-controller" }}
+      {{- toYaml .selectorLabels | nindent 6 }}
+      {{- end }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: tekton-triggers-webhook
+  namespace: {{ .Release.Namespace }}
+spec:
+  podMetricsEndpoints:
+    - port: metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - tekton-operator
+  selector:
+    matchLabels:
+      {{- with index $workloads "tekton-triggers-webhook" }}
+      {{- toYaml .selectorLabels | nindent 6 }}
+      {{- end }}
