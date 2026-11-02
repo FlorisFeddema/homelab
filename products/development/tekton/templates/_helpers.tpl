@@ -46,3 +46,11 @@
 ) -}}
 {{- toYaml $workloads -}}
 {{- end -}}
+
+{{- define "tekton.deploymentOptions" -}}
+{{- range $name := keys . | sortAlpha }}
+{{ $name }}:
+  spec:
+    replicas: 2
+{{- end }}
+{{- end -}}

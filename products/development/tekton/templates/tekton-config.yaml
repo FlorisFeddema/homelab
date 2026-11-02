@@ -1,3 +1,4 @@
+{{- $workloads := include "tekton.workloads" . | fromYaml -}}
 apiVersion: operator.tekton.dev/v1alpha1
 kind: TektonConfig
 metadata:
@@ -9,36 +10,39 @@ spec:
     readonly: false
     options:
       deployments:
-        tekton-dashboard:
-          spec:
-            replicas: 2
+        {{- include "tekton.deploymentOptions" (pick $workloads "tekton-dashboard") | nindent 8 }}
   pipeline:
+    metrics.count.enable-reason: true
+    metrics.pipelinerun.level: pipeline
+    metrics.pipelinerun.duration-type: histogram
+    metrics.taskrun.level: task
+    metrics.taskrun.duration-type: histogram
     performance:
       disable-ha: false
       replicas: 2
     options:
+      configMaps:
+        config-observability:
+          data:
+            metrics.running-pipelinerun.level: pipeline
       deployments:
-        tekton-events-controller:
+        {{- include "tekton.deploymentOptions" (pick $workloads "tekton-events-controller" "tekton-operator-proxy-webhook" "tekton-pipelines-controller" "tekton-pipelines-remote-resolvers" "tekton-pipelines-webhook") | nindent 8 }}
+      # Pin the operator-managed HPAs to disable autoscaling.
+      horizontalPodAutoscalers:
+        {{- range $name := list "tekton-operator-proxy-webhook" "tekton-pipelines-webhook" }}
+        {{ $name }}:
           spec:
-            replicas: 2
-        tekton-operator-proxy-webhook:
-          spec:
-            replicas: 2
-        tekton-pipelines-webhook:
-          spec:
-            replicas: 2
+            minReplicas: 2
+            maxReplicas: 2
+            scaleTargetRef:
+              apiVersion: apps/v1
+              kind: Deployment
+              name: {{ $name }}
+        {{- end }}
   trigger:
     options:
       deployments:
-        tekton-triggers-controller:
-          spec:
-            replicas: 2
-        tekton-triggers-core-interceptors:
-          spec:
-            replicas: 2
-        tekton-triggers-webhook:
-          spec:
-            replicas: 2
+        {{- include "tekton.deploymentOptions" (pick $workloads "tekton-triggers-controller" "tekton-triggers-core-interceptors" "tekton-triggers-webhook") | nindent 8 }}
   chain:
     disabled: true
   result:
