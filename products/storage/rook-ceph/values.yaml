@@ -211,7 +211,7 @@ rook-ceph-cluster:
       
 
   cephImage:
-    tag: v20.2.4
+    tag: v21.2.0
     repository: quay.io/ceph/ceph
 
   route:
