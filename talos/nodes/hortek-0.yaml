@@ -39,3 +39,18 @@ addresses:
 routes:
   - destination: 192.168.5.0/24
     gateway: 192.168.5.1
+---
+apiVersion: v1alpha1
+kind: UserVolumeConfig
+name: garage-data
+volumeType: partition
+provisioning:
+  diskSelector:
+    match: disk.wwid == "naa.5000c5007cf099c8"
+  minSize: 2.7Ti
+filesystem:
+  type: xfs
+mount:
+  disableAccessTime: true
+trim:
+  enabled: false
