@@ -36,6 +36,7 @@ argo-cd:
 
   controller:
     replicas: 1
+    revisionHistoryLimit: 0
 
     resources:
       limits:
