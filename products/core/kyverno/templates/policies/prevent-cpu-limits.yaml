@@ -1,7 +1,11 @@
+{{- range $ephemeral := list false true }}
+{{- if $ephemeral }}
+---
+{{- end }}
 apiVersion: policies.kyverno.io/v1
 kind: ValidatingPolicy
 metadata:
-  name: prevent-cpu-limits
+  name: prevent-cpu-limits{{ if $ephemeral }}-ephemeralcontainers{{ end }}
   annotations:
     policies.kyverno.io/title: Prevent CPU Limits
     policies.kyverno.io/category: Best Practices
@@ -11,13 +15,21 @@ metadata:
       set may ensure apps run more effectively. This policy forbids any container in a Pod from defining CPU limits.
 spec:
   validationActions: [Audit]
-  # Pod subresources disable automatic controller rule generation.
+{{- if $ephemeral }}
+  # Subresources cannot be listed or watched for background scans.
+  evaluation:
+    background:
+      enabled: false
+{{- end }}
   matchConstraints:
     resourceRules:
       - apiGroups: [""]
         apiVersions: ["v1"]
         operations: [CREATE, UPDATE]
-        resources: ["pods", "pods/ephemeralcontainers", "replicationcontrollers"]
+{{- if $ephemeral }}
+        resources: ["pods/ephemeralcontainers"]
+{{- else }}
+        resources: ["pods", "replicationcontrollers"]
       - apiGroups: ["apps"]
         apiVersions: ["v1"]
         operations: [CREATE, UPDATE]
@@ -26,6 +38,7 @@ spec:
         apiVersions: ["v1"]
         operations: [CREATE, UPDATE]
         resources: ["jobs", "cronjobs"]
+{{- end }}
   variables:
     - name: podSpec
       expression: >-
@@ -42,3 +55,4 @@ spec:
         !variables.podSpec.ephemeralContainers.exists(container,
         container.?resources.?limits.?cpu.hasValue()))
       message: Containers may not define CPU limits.
+{{- end }}

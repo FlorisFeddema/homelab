@@ -20,6 +20,11 @@ Detailed Helm chart management guidance is scoped to chart files in `.github/ins
 - Do not add product-specific configuration recaps, implementation notes, or routine verification commands to the README merely because a chart changed. Treat manifests and values as the source of truth.
 - Update documentation only when a change affects a documented user-facing workflow or the user explicitly requests it.
 
+## Scripts
+
+- Do not add new scripts to the repository, including test, helper, or validation scripts, unless the user explicitly requests or confirms them.
+- Prefer existing tools and tests or one-off commands for validation.
+
 ## GitOps-Only Changes
 
 - Make every cluster configuration change in this repository and deploy it through the GitOps workflow.
