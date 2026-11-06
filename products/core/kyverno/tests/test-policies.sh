@@ -36,20 +36,44 @@ helm template kyverno "$chart_dir" --namespace kyverno |
     map(select(.apiVersion == "policies.kyverno.io/v1")) |
     if (map(.metadata.name) | sort) !=
        (["generate-vpa-for-workloads", "clean-bare-pods", "imagepullpolicy-always",
-         "prevent-cpu-limits", "add-topology-spread-to-workloads", "set-revisionhistorylimit-zero",
+         "imagepullpolicy-always-ephemeralcontainers", "prevent-cpu-limits",
+         "prevent-cpu-limits-ephemeralcontainers", "add-topology-spread-to-workloads", "set-revisionhistorylimit-zero",
          "prevent-default-namespace", "deny-ingress-resources", "require-pod-probes",
          "prevent-nodeport"] | sort) then
-      error("All ten custom policies must use the stable CEL APIs")
+      error("All custom policies must use the stable CEL APIs")
     else . end |
     if any(.[]; .metadata.name == "generate-vpa-for-workloads" and
        (.spec.evaluation.generateExisting.enabled != true or .spec.evaluation.synchronize.enabled != true)) then
       error("VPA generation must retain existing-resource generation and synchronization")
     else . end |
     if (map(select(.spec.validationActions == ["Audit"]) | .metadata.name) | sort) !=
-       ["prevent-cpu-limits", "prevent-nodeport", "require-pod-probes"] or
+       ["prevent-cpu-limits", "prevent-cpu-limits-ephemeralcontainers", "prevent-nodeport", "require-pod-probes"] or
        (map(select(.spec.validationActions == ["Deny"]) | .metadata.name) | sort) !=
-       ["deny-ingress-resources", "imagepullpolicy-always", "prevent-default-namespace"] then
+       ["deny-ingress-resources", "imagepullpolicy-always", "imagepullpolicy-always-ephemeralcontainers", "prevent-default-namespace"] then
       error("Validation enforcement modes must be preserved")
+    else . end |
+    . as $policies |
+    if any(["prevent-cpu-limits", "imagepullpolicy-always"][];
+       . as $name |
+       ($policies | map(select(.metadata.name == $name)) | first) as $main |
+       ($policies | map(select(.metadata.name == ($name + "-ephemeralcontainers"))) | first) as $ephemeral |
+       $main.spec.evaluation.background.enabled == false or
+       $ephemeral.spec.evaluation.background.enabled != false or
+       $main.spec.matchConstraints.resourceRules != [
+         {apiGroups:[""], apiVersions:["v1"], operations:["CREATE", "UPDATE"],
+          resources:["pods", "replicationcontrollers"]},
+         {apiGroups:["apps"], apiVersions:["v1"], operations:["CREATE", "UPDATE"],
+          resources:["daemonsets", "deployments", "replicasets", "statefulsets"]},
+         {apiGroups:["batch"], apiVersions:["v1"], operations:["CREATE", "UPDATE"],
+          resources:["jobs", "cronjobs"]}
+       ] or
+       $ephemeral.spec.matchConstraints.resourceRules != [
+         {apiGroups:[""], apiVersions:["v1"], operations:["CREATE", "UPDATE"],
+          resources:["pods/ephemeralcontainers"]}
+       ] or
+       ($main.spec | {validationActions, variables, validations}) !=
+       ($ephemeral.spec | {validationActions, variables, validations})) then
+      error("Workload and ephemeral-container policies must preserve coverage, validation, and background scanning")
     else . end |
     if [.[] | select(.metadata.name == "deny-ingress-resources") |
         .spec.matchConstraints.resourceRules] !=
@@ -107,6 +131,7 @@ jq -n '
     {name:"cpu-absent", field:"containers", cpu:false, result:"pass"},
     {name:"cpu-main", field:"containers", cpu:true, result:"fail"},
     {name:"cpu-init", field:"initContainers", cpu:true, result:"fail"},
+    {name:"cpu-ephemeral-absent", field:"ephemeralContainers", cpu:false, result:"pass"},
     {name:"cpu-ephemeral", field:"ephemeralContainers", cpu:true, result:"fail"},
     {name:"cpu-sidecar", field:"initContainers", cpu:true, sidecar:true, result:"fail"}
   ] as $cpu_cases |
@@ -223,8 +248,14 @@ jq -n '
     results: (
       [$image_cases[] | result("Validating"; "imagepullpolicy-always";
         .name; "Pod"; .result)] +
+      [$image_cases[] | select(.field == "ephemeralContainers") |
+        result("Validating"; "imagepullpolicy-always-ephemeralcontainers";
+          .name; "Pod"; .result) + {operation:"UPDATE"}] +
       [$cpu_cases[] | result("Validating"; "prevent-cpu-limits";
         .name; "Pod"; .result)] +
+      [$cpu_cases[] | select(.field == "ephemeralContainers") |
+        result("Validating"; "prevent-cpu-limits-ephemeralcontainers";
+          .name; "Pod"; .result) + {operation:"UPDATE"}] +
       [$workloads[] | select(.metadata.name == "opt-out" or (.metadata.name | startswith("excluded-"))) |
         result("Generating"; "generate-vpa-for-workloads";
           .metadata.name; "Deployment"; "skip")] +
@@ -310,6 +341,10 @@ policy_names="$(jq -er '.results | map(.policy) | unique[]' "$test_dir/cases.jso
 failed_policies=0
 while IFS= read -r name; do
   policy_name="$name" yq 'select(.metadata.name == strenv(policy_name))' "$test_dir/policies.yaml" > "$test_dir/policy.yaml"
+  if [[ "$name" == *-ephemeralcontainers ]]; then
+    # The CLI evaluates Pod manifests, not actual pods/ephemeralcontainers admission requests.
+    yq -i '.spec.matchConstraints.resourceRules[0].resources = ["pods"]' "$test_dir/policy.yaml"
+  fi
   jq --arg policy "$name" '{
     apiVersion:"cli.kyverno.io/v1alpha1", kind:"Test", metadata:{name:$policy},
     policies:["policy.yaml"], resources:["resources.yaml"],

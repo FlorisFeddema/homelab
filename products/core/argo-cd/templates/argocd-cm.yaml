@@ -159,7 +159,32 @@ data:
     jqPathExpressions:
     - .metadata.finalizers[]? | select(. == "post-delete-finalizer.argocd.argoproj.io" or . == "post-delete-finalizer.argocd.argoproj.io/cleanup")
     - if (.metadata.finalizers | length) == 0 then .metadata.finalizers else empty end
-  
+
+  resource.customizations.health.policies.kyverno.io_DeletingPolicy: |
+    local status = obj.status or {}
+    local cs = status.conditionStatus or {}
+    for _, condition in ipairs(cs.conditions or {}) do
+      if condition.observedGeneration ~= nil and obj.metadata.generation ~= nil and
+          condition.observedGeneration < obj.metadata.generation then
+        return {status = "Progressing", message = "Waiting for policy status to reflect the latest generation"}
+      end
+    end
+    for _, condition in ipairs(cs.conditions or {}) do
+      if condition.status == "False" then
+        return {status = "Degraded", message = (condition.type or "Condition") .. ": " .. (condition.message or "")}
+      end
+    end
+    if cs.ready == false then
+      return {status = "Degraded", message = (cs.message ~= nil and cs.message ~= "") and cs.message or "Policy is not ready"}
+    end
+    if cs.ready == true then
+      return {status = "Healthy", message = (cs.message ~= nil and cs.message ~= "") and cs.message or "Policy is ready"}
+    end
+    if status.lastExecutionTime ~= nil then
+      return {status = "Healthy", message = "Last executed at " .. status.lastExecutionTime}
+    end
+    return {status = "Progressing", message = "Waiting for policy status or first execution"}
+
   resource.customizations.health.ceph.rook.io_CephCluster: |
     hs = {}
 

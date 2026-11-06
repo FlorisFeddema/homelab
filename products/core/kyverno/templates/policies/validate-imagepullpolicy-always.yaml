@@ -1,7 +1,11 @@
+{{- range $ephemeral := list false true }}
+{{- if $ephemeral }}
+---
+{{- end }}
 apiVersion: policies.kyverno.io/v1
 kind: ValidatingPolicy
 metadata:
-  name: imagepullpolicy-always
+  name: imagepullpolicy-always{{ if $ephemeral }}-ephemeralcontainers{{ end }}
   annotations:
     policies.kyverno.io/title: Validate imagePullPolicy Always
     policies.kyverno.io/category: Best Practices
@@ -13,13 +17,21 @@ metadata:
       including init and ephemeral containers. Digest-pinned images are exempt.
 spec:
   validationActions: [Deny]
-  # Pod subresources disable automatic controller rule generation.
+{{- if $ephemeral }}
+  # Subresources cannot be listed or watched for background scans.
+  evaluation:
+    background:
+      enabled: false
+{{- end }}
   matchConstraints:
     resourceRules:
       - apiGroups: [""]
         apiVersions: ["v1"]
         operations: [CREATE, UPDATE]
-        resources: ["pods", "pods/ephemeralcontainers", "replicationcontrollers"]
+{{- if $ephemeral }}
+        resources: ["pods/ephemeralcontainers"]
+{{- else }}
+        resources: ["pods", "replicationcontrollers"]
       - apiGroups: ["apps"]
         apiVersions: ["v1"]
         operations: [CREATE, UPDATE]
@@ -28,6 +40,7 @@ spec:
         apiVersions: ["v1"]
         operations: [CREATE, UPDATE]
         resources: ["jobs", "cronjobs"]
+{{- end }}
   variables:
     - name: podSpec
       expression: >-
@@ -48,3 +61,4 @@ spec:
         container.?imagePullPolicy.orValue('') == 'Always'))
       message: >-
         The imagePullPolicy must be set to `Always` for latest or untagged images.
+{{- end }}

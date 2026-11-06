@@ -15,6 +15,8 @@ ARG HELM_VERSION=v4.3.1
 ARG KUBESEAL_VERSION=v0.41.2
 # renovate: datasource=github-releases depName=kyverno/kyverno
 ARG KYVERNO_VERSION=v1.19.2
+# renovate: datasource=github-releases depName=cilium/cilium-cli
+ARG CILIUM_VERSION=v0.20.2
 # renovate: datasource=github-releases depName=ahmetb/kubectx
 ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
@@ -45,6 +47,7 @@ RUN case "${TARGETARCH}" in \
     esac \
     && temp_dir="$(mktemp -d)" \
     && kyverno_archive="kyverno-cli_${KYVERNO_VERSION}_linux_${archive_arch}.tar.gz" \
+    && cilium_archive="cilium-linux-${arch}.tar.gz" \
     && curl --fail --location --silent --show-error \
         --output /usr/local/bin/yq \
         "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_${arch}" \
@@ -76,6 +79,15 @@ RUN case "${TARGETARCH}" in \
     && (cd "${temp_dir}" && grep " ${kyverno_archive}$" kyverno-checksums.txt | sha256sum --check) \
     && tar --extract --gzip --file "${temp_dir}/${kyverno_archive}" --directory "${temp_dir}" kyverno \
     && install "${temp_dir}/kyverno" /usr/local/bin/kyverno \
+    && curl --fail --location --silent --show-error \
+        --output "${temp_dir}/${cilium_archive}" \
+        "https://github.com/cilium/cilium-cli/releases/download/${CILIUM_VERSION}/${cilium_archive}" \
+    && curl --fail --location --silent --show-error \
+        --output "${temp_dir}/${cilium_archive}.sha256sum" \
+        "https://github.com/cilium/cilium-cli/releases/download/${CILIUM_VERSION}/${cilium_archive}.sha256sum" \
+    && (cd "${temp_dir}" && sha256sum --check "${cilium_archive}.sha256sum") \
+    && tar --extract --gzip --file "${temp_dir}/${cilium_archive}" --directory "${temp_dir}" cilium \
+    && install "${temp_dir}/cilium" /usr/local/bin/cilium \
     && curl --fail --location --silent --show-error \
         --output "${temp_dir}/kubens.tar.gz" \
         "https://github.com/ahmetb/kubectx/releases/download/${KUBENS_VERSION}/kubens_${KUBENS_VERSION}_linux_${archive_arch}.tar.gz" \
