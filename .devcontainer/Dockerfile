@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=mikefarah/yq
-ARG YQ_VERSION=v4.54.1
+ARG YQ_VERSION=v4.54.2
 # renovate: datasource=github-releases depName=kubernetes/kubernetes
 ARG KUBECTL_VERSION=v1.37.2
 # renovate: datasource=github-releases depName=argoproj/argo-cd
@@ -20,7 +20,7 @@ ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
 ARG STERN_VERSION=v1.35.0
 # renovate: datasource=github-releases depName=github/copilot-cli
-ARG COPILOT_VERSION=v1.0.105
+ARG COPILOT_VERSION=v1.0.106
 # renovate: datasource=github-releases depName=cli/cli
 ARG GH_VERSION=v2.103.3
 
