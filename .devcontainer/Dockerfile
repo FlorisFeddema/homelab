@@ -14,7 +14,7 @@ ARG HELM_VERSION=v4.3.1
 # renovate: datasource=github-releases depName=bitnami-labs/sealed-secrets
 ARG KUBESEAL_VERSION=v0.41.2
 # renovate: datasource=github-releases depName=kyverno/kyverno
-ARG KYVERNO_VERSION=v1.19.2
+ARG KYVERNO_VERSION=v1.20.0
 # renovate: datasource=github-releases depName=cilium/cilium-cli
 ARG CILIUM_VERSION=v0.20.2
 # renovate: datasource=github-releases depName=ahmetb/kubectx
