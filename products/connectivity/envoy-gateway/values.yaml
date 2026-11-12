@@ -39,7 +39,7 @@ waf:
     name: composer
     # Composer 0.11.0 uses the Envoy 1.39-dev SDK. Revalidate ABI compatibility
     # before changing either the Envoy Gateway or Composer version.
-    image: ghcr.io/tetratelabs/built-on-envoy/composer:0.13.0@sha256:14962aad43553b1f4f2c1d92cd255423f35c05b3f5c80d255bda714eac32d9a2
+    image: ghcr.io/tetratelabs/built-on-envoy/composer:0.14.0@sha256:8fc9a191df744b3974226906a898bfc68208e7382b10ae61300d7913adbaf851
     volumeName: dynamic-modules
     mountPath: /etc/envoy/dynamic-modules
     libraryPath: /etc/envoy/dynamic-modules/libcomposer.so
