@@ -1,0 +1,62 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: garage-local
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: garage-data
+  labels:
+    app.kubernetes.io/name: garage
+spec:
+  capacity:
+    storage: {{ .Values.storage.data.capacity }}
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: garage-local
+  volumeMode: Filesystem
+  local:
+    path: {{ .Values.storage.data.path }}
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - {{ .Values.nodeName }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: garage-data
+  labels:
+    {{- include "garage.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: garage-local
+  volumeName: garage-data
+  resources:
+    requests:
+      storage: {{ .Values.storage.data.capacity }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: garage-metadata
+  labels:
+    {{- include "garage.labels" . | nindent 4 }}
+    backup.velero.io/include: "true"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.storage.metadata.storageClass }}
+  resources:
+    requests:
+      storage: {{ .Values.storage.metadata.size }}
