@@ -40,7 +40,7 @@ external-dns:
 
   resources:
     limits:
-      memory: 70Mi
+      memory: 100Mi
     requests:
       cpu: 20m
       memory: 35Mi
