@@ -2,7 +2,9 @@
   "extends": [
     "github>florisfeddema/renovate-config:default.json"
   ],
-  "dependencyDashboard": true,
+  "dependencyDashboard": {
+    "enabled": true
+  },
   "prConcurrentLimit": 0,
   "separateMinorPatch": true,
   "separateMajorMinor": true,
