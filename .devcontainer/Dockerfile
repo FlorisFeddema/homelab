@@ -22,9 +22,9 @@ ARG KUBENS_VERSION=v0.11.0
 # renovate: datasource=github-releases depName=stern/stern
 ARG STERN_VERSION=v1.35.0
 # renovate: datasource=github-releases depName=github/copilot-cli
-ARG COPILOT_VERSION=v1.0.113
+ARG COPILOT_VERSION=v1.0.114
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.104.0
+ARG GH_VERSION=v2.105.0
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends ca-certificates curl jq \
