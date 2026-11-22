@@ -32,7 +32,7 @@ harbor:
     enabled: true
     persistentVolumeClaim:
       trivy:
-        size: 5Gi
+        size: 10Gi
     imageChartStorage:
       disableredirect: true
       type: s3
