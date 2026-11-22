@@ -6,10 +6,6 @@ kubectlImage:
   repository: alpine/kubectl
   tag: 1.37.0
 
-initImage:
-  repository: busybox
-  tag: 1.37.0
-
 nodeName: hortek-0
 
 storage:
@@ -21,14 +17,23 @@ storage:
     storageClass: ceph-block-nvme-2
 
 s3:
-  hostname: s3.feddema.dev
   region: garage
   bucket: coworker-backup
-  quota: 2700GB
+
+route:
+  hostname: backup.feddema.dev
+  parentRefs:
+    - name: envoy-gateway-public
+      namespace: envoy-gateway
+      sectionName: web-https
+    - name: envoy-gateway-private
+      namespace: envoy-gateway
+      sectionName: web-https
+  timeout: 5m
 
 resources:
   requests:
-    cpu: 100m
+    cpu: 50m
     memory: 256Mi
   limits:
     memory: 1Gi

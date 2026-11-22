@@ -52,7 +52,6 @@ metadata:
   name: garage-metadata
   labels:
     {{- include "garage.labels" . | nindent 4 }}
-    backup.velero.io/include: "true"
 spec:
   accessModes:
     - ReadWriteOnce

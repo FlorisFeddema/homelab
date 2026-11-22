@@ -30,33 +30,6 @@ spec:
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile:
           type: RuntimeDefault
-      initContainers:
-        - name: config
-          image: "{{ .Values.initImage.repository }}:{{ .Values.initImage.tag }}"
-          imagePullPolicy: IfNotPresent
-          command:
-            - sh
-            - -ec
-            - |
-              sed "s/__RPC_SECRET_REPLACE__/${RPC_SECRET}/" /input/garage.toml > /output/garage.toml
-              chmod 0400 /output/garage.toml
-          env:
-            - name: RPC_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: garage-credentials
-                  key: rpcSecret
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop: ["ALL"]
-            readOnlyRootFilesystem: true
-          volumeMounts:
-            - name: config-source
-              mountPath: /input
-              readOnly: true
-            - name: config
-              mountPath: /output
       containers:
         - name: garage
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -66,6 +39,11 @@ spec:
             - --single-node
             - --default-bucket
           env:
+            - name: GARAGE_RPC_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: garage-credentials
+                  key: rpcSecret
             - name: GARAGE_DEFAULT_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
@@ -114,11 +92,9 @@ spec:
             - name: metadata
               mountPath: /mnt/meta
       volumes:
-        - name: config-source
+        - name: config
           configMap:
             name: garage-config
-        - name: config
-          emptyDir: {}
         - name: data
           persistentVolumeClaim:
             claimName: garage-data

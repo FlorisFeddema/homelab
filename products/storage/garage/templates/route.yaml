@@ -5,15 +5,15 @@ metadata:
   labels:
     {{- include "garage.labels" . | nindent 4 }}
 spec:
+  {{- with .Values.route.parentRefs }}
   parentRefs:
-    - name: envoy-gateway-public
-      namespace: envoy-gateway
-      sectionName: web-https
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   hostnames:
-    - {{ .Values.s3.hostname | quote }}
+    - {{ .Values.route.hostname | quote }}
   rules:
     - backendRefs:
         - name: garage
           port: 3900
       timeouts:
-        request: "0s"
+        request: {{ .Values.route.timeout | quote }}

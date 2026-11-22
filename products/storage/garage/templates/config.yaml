@@ -17,12 +17,11 @@ data:
     compression_level = 1
     rpc_bind_addr = "[::]:3901"
     rpc_public_addr = "garage-0.garage-headless.{{ .Release.Namespace }}.svc.cluster.local:3901"
-    rpc_secret = "__RPC_SECRET_REPLACE__"
 
     [s3_api]
     api_bind_addr = "[::]:3900"
     s3_region = {{ .Values.s3.region | quote }}
-    root_domain = ".{{ .Values.s3.hostname }}"
+    root_domain = ".{{ .Values.route.hostname }}"
 
     [admin]
     api_bind_addr = "[::]:3903"
