@@ -124,10 +124,10 @@ harbor:
     existingSecret: "harbor-credentials"
     resources:
       limits:
-        memory: 400Mi
+        memory: 500Mi
       requests:
         cpu: 20m
-        memory: 200Mi
+        memory: 250Mi
 
   registry:
     replicas: 2
